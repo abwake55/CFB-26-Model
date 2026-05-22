@@ -1,0 +1,230 @@
+year,team,rank,points
+2018,Georgia,1,323.31
+2018,Ohio State,2,317.06
+2018,Texas,3,300.06
+2018,USC,4,291.2
+2018,Alabama,5,289.94
+2018,Penn State,6,285.92
+2018,Clemson,7,283.67
+2018,Miami,8,280.87
+2018,Oklahoma,9,276.62
+2018,Notre Dame,10,268.86
+2018,Florida State,11,265.42
+2018,Auburn,12,262.77
+2018,Oregon,13,260.22
+2018,Florida,14,259.56
+2018,LSU,15,254.38
+2018,Washington,16,253.23
+2018,Texas A&M,17,251.2
+2018,South Carolina,18,242.04
+2018,UCLA,19,237.77
+2018,North Carolina,20,232.27
+2018,Tennessee,21,231.34
+2018,Michigan,22,230.56
+2018,Nebraska,23,227.95
+2018,Virginia Tech,24,226.01
+2018,TCU,25,224.13
+2018,NC State,26,220.57
+2018,Mississippi State,27,218.47
+2018,Maryland,28,218.34
+2018,Baylor,29,215.02
+2018,Louisville,30,213.58
+2018,Michigan State,31,212.21
+2018,Ole Miss,32,211.49
+2018,Utah,33,209.95
+2018,Oklahoma State,34,209.93
+2018,West Virginia,35,208.32
+2018,Arizona State,36,207.26
+2018,Kentucky,37,206.91
+2018,Minnesota,38,206.66
+2018,Iowa,39,203.34
+2018,Stanford,40,202.29
+2018,Vanderbilt,41,202.04
+2018,California,42,197.41
+2018,Missouri,43,197.38
+2018,Georgia Tech,44,196.94
+2018,Wisconsin,45,195.04
+2018,Washington State,46,194.84
+2018,Pittsburgh,47,193.19
+2018,Cincinnati,48,192.64
+2018,Arkansas,49,192.11
+2018,Indiana,50,190.77
+2018,Syracuse,51,189.14
+2018,Purdue,52,188.31
+2018,Colorado,53,187.11
+2018,Illinois,54,185.83
+2018,Iowa State,55,185.19
+2018,Rutgers,56,184.28
+2018,Boise State,57,183.46
+2018,Northwestern,58,180.18
+2018,Virginia,59,178.6
+2018,Kansas,60,178.59
+2018,Arizona,61,178.03
+2018,UCF,62,177.05
+2018,Duke,63,176.85
+2018,Wake Forest,64,176.31
+2018,South Florida,65,176.25
+2018,Kansas State,66,175.65
+2018,Toledo,67,174.0
+2018,Tulane,68,173.75
+2018,Florida International,69,173.58
+2018,Oregon State,70,173.14
+2018,Boston College,71,172.47
+2018,Texas Tech,72,169.87
+2018,Houston,73,166.86
+2018,Marshall,74,165.85
+2018,Florida Atlantic,75,163.9
+2018,Western Michigan,76,163.69
+2018,Louisiana Tech,77,162.18
+2018,BYU,78,160.52
+2018,San Diego State,79,159.56
+2018,Southern Miss,80,157.89
+2018,Memphis,81,157.28
+2018,Nevada,82,155.96
+2018,Temple,83,155.39
+2018,Western Kentucky,84,154.77
+2018,UTSA,85,152.98
+2018,Colorado State,86,152.79
+2018,SMU,87,151.67
+2018,Arkansas State,88,148.03
+2018,East Carolina,89,147.43
+2018,Georgia Southern,90,146.64
+2018,Bowling Green,91,144.03
+2018,Fresno State,92,141.73
+2018,Northern Illinois,93,141.69
+2018,San José State,94,140.86
+2018,Georgia State,95,140.45
+2018,Hawai'i,96,138.46
+2018,Tulsa,97,137.25
+2018,Troy,98,136.65
+2018,UNLV,99,131.08
+2018,Kent State,100,127.72
+2018,North Texas,101,127.14
+2018,UConn,102,125.87
+2018,UAB,103,125.49
+2018,Middle Tennessee,104,125.31
+2018,Louisiana,105,124.91
+2018,Navy,106,124.71
+2018,Texas State,107,124.24
+2018,Massachusetts,108,123.66
+2018,Utah State,109,123.61
+2018,Eastern Michigan,110,121.54
+2018,Charlotte,111,120.43
+2018,Rice,112,120.42
+2018,App State,113,120.2
+2018,Coastal Carolina,114,120.13
+2018,South Alabama,115,120.03
+2018,Princeton,116,119.03
+2018,Army,117,118.69
+2018,UL Monroe,118,116.57
+2018,Ball State,119,115.57
+2018,Central Michigan,120,111.22
+2018,Ohio,121,110.94
+2018,Air Force,122,110.51
+2018,Yale,123,110.5
+2018,New Mexico,124,110.31
+2018,New Mexico State,125,109.3
+2018,Wyoming,126,109.14
+2018,Akron,127,108.81
+2018,Old Dominion,128,108.27
+2018,UTEP,129,105.24
+2018,Miami (OH),130,103.16
+2018,Montana State,131,95.13
+2018,Idaho,132,90.2
+2018,Austin Peay,133,88.36
+2018,North Dakota State,134,86.92
+2018,Harvard,135,82.06
+2018,Buffalo,136,81.31
+2018,Liberty,137,80.33
+2018,Mercer,138,80.23
+2018,Chattanooga,139,80.04
+2018,Eastern Washington,140,75.03
+2018,Eastern Kentucky,141,73.04
+2018,Jacksonville State,142,72.9
+2018,Southern Illinois,143,69.52
+2018,Tennessee Tech,144,60.57
+2018,UT Martin,145,58.52
+2018,Pennsylvania,146,57.03
+2018,Kennesaw State,147,52.74
+2018,Stephen F. Austin,148,50.86
+2018,Grambling,149,44.91
+2018,Southern Utah,150,44.53
+2018,Columbia,151,42.38
+2018,Lamar,152,41.65
+2018,UC Davis,153,39.09
+2018,Alcorn State,154,38.0
+2018,Central Arkansas,155,37.36
+2018,Howard,156,34.71
+2018,Tennessee State,157,34.68
+2018,Furman,158,34.46
+2018,Sacramento State,159,33.19
+2018,Weber State,160,31.5
+2018,Stony Brook,161,31.48
+2018,Montana,162,30.84
+2018,Illinois State,163,30.7
+2018,North Dakota,164,30.23
+2018,Western Carolina,165,28.54
+2018,Murray State,166,28.3
+2018,Fordham,168,27.25
+2018,Grand Valley State University,169,27.19
+2018,James Madison,171,26.73
+2018,Dartmouth,172,25.43
+2018,Sam Houston,173,25.16
+2018,Youngstown State,174,25.11
+2018,The Citadel,175,24.53
+2018,Houston Christian,176,24.06
+2018,Gardner-Webb,177,23.2
+2018,Prairie View A&M,178,22.85
+2018,Idaho State,179,21.73
+2018,Lafayette,180,20.12
+2018,Sacred Heart,182,19.08
+2018,Missouri State,183,17.93
+2018,South Dakota,184,17.69
+2018,Campbell,185,17.51
+2018,Western Illinois,186,16.91
+2018,Villanova,187,16.91
+2018,Bethune-Cookman,188,16.91
+2018,Northern Iowa,189,16.88
+2018,Portland State,190,16.74
+2018,Duquesne,191,16.59
+2018,Texas Southern,192,16.3
+2018,Holy Cross,193,16.26
+2018,Alabama State,194,15.57
+2018,Samford,195,15.4
+2018,Charleston Southern,196,15.0
+2018,Northwestern State,197,14.69
+2018,Northern Arizona,198,14.61
+2018,McNeese,199,14.46
+2018,North Carolina A&T,200,14.16
+2018,Rhode Island,203,12.15
+2018,Lehigh,204,11.91
+2018,Elon,206,11.15
+2018,Butler,207,11.15
+2018,William & Mary,208,11.15
+2018,SE Louisiana,209,11.11
+2018,Towson,210,10.92
+2018,Savannah St,211,10.04
+2018,Mississippi Valley State,213,9.53
+2018,Florida A&M,214,9.03
+2018,Morgan State,215,8.95
+2018,Wofford,217,8.91
+2018,Jacksonville,218,8.89
+2018,East Tennessee State,219,8.53
+2018,Richmond,221,8.42
+2018,Southeast Missouri State,222,8.02
+2018,Monmouth,223,7.98
+2018,New Hampshire,224,7.98
+2018,Delaware,225,7.98
+2018,Alabama A&M,226,7.98
+2018,VMI,227,7.98
+2018,Colgate,229,6.98
+2018,Brown,232,6.41
+2018,Cal Poly,233,5.97
+2018,Morehead State,235,5.8
+2018,South Dakota State,237,4.97
+2018,Wagner,238,4.97
+2018,Indiana State,239,4.93
+2018,Eastern Illinois,240,3.97
+2018,South Carolina State,241,3.97
+2018,Drake,245,0.97
+2018,Cornell,278,-0.04

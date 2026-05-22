@@ -1,0 +1,195 @@
+year,team,rank,points
+2024,Georgia,1,317.05
+2024,Alabama,2,310.75
+2024,Oregon,3,293.22
+2024,Miami,4,291.54
+2024,Ohio State,5,289.13
+2024,Texas,6,286.92
+2024,LSU,7,278.75
+2024,Oklahoma,8,275.64
+2024,Notre Dame,9,275.57
+2024,Auburn,10,275.39
+2024,Clemson,11,272.19
+2024,Florida State,12,271.76
+2024,Florida,13,268.25
+2024,Tennessee,14,267.26
+2024,Penn State,15,265.61
+2024,Michigan,16,261.94
+2024,USC,17,253.78
+2024,Nebraska,18,247.5
+2024,Texas A&M,19,245.18
+2024,Missouri,20,241.93
+2024,Ole Miss,21,240.2
+2024,South Carolina,22,239.75
+2024,Wisconsin,23,239.1
+2024,Kentucky,24,236.86
+2024,Texas Tech,25,236.09
+2024,North Carolina,26,228.83
+2024,NC State,27,225.02
+2024,Mississippi State,28,223.21
+2024,Purdue,29,217.71
+2024,Stanford,30,217.17
+2024,Arkansas,31,216.66
+2024,Iowa,32,215.41
+2024,Georgia Tech,33,214.0
+2024,TCU,34,213.87
+2024,UCF,35,212.83
+2024,Rutgers,36,211.78
+2024,Minnesota,37,211.62
+2024,Syracuse,38,210.55
+2024,Maryland,39,209.92
+2024,Vanderbilt,40,207.79
+2024,Pittsburgh,41,204.1
+2024,Michigan State,42,203.52
+2024,Kansas,43,203.0
+2024,BYU,44,202.7
+2024,Virginia Tech,45,202.61
+2024,West Virginia,46,202.08
+2024,Washington,47,201.79
+2024,Arizona State,48,199.47
+2024,Illinois,49,198.84
+2024,South Florida,50,197.92
+2024,Cincinnati,51,196.87
+2024,Wake Forest,52,196.48
+2024,Iowa State,53,192.29
+2024,Tulsa,54,191.84
+2024,California,55,190.2
+2024,Oklahoma State,56,189.96
+2024,Kansas State,57,187.58
+2024,Louisville,58,186.52
+2024,Utah,59,184.77
+2024,Houston,60,184.0
+2024,Duke,61,183.9
+2024,Washington State,62,181.7
+2024,Tulane,63,181.26
+2024,Boise State,64,181.19
+2024,Indiana,65,179.89
+2024,Toledo,66,179.4
+2024,Baylor,67,179.04
+2024,Memphis,68,176.2
+2024,Colorado State,69,172.05
+2024,North Texas,70,172.01
+2024,Western Michigan,71,171.51
+2024,San Diego State,72,171.46
+2024,East Carolina,73,171.38
+2024,Charlotte,74,169.59
+2024,Coastal Carolina,75,169.22
+2024,UNLV,76,168.14
+2024,Southern Miss,77,167.67
+2024,Arkansas State,78,167.29
+2024,Florida Atlantic,79,166.84
+2024,Northwestern,80,165.73
+2024,Colorado,81,165.05
+2024,Miami (OH),82,164.93
+2024,UTEP,83,163.05
+2024,South Alabama,84,162.93
+2024,Arizona,85,162.29
+2024,Fresno State,86,160.65
+2024,Oregon State,87,159.84
+2024,Virginia,88,159.74
+2024,Troy,89,159.41
+2024,UCLA,90,157.07
+2024,Georgia Southern,91,156.6
+2024,Ohio,92,156.49
+2024,Eastern Michigan,93,156.11
+2024,App State,94,155.02
+2024,Boston College,95,153.23
+2024,Texas State,96,152.53
+2024,Kent State,97,151.54
+2024,UAB,98,150.94
+2024,Northern Illinois,99,149.96
+2024,Bowling Green,100,149.29
+2024,Akron,101,146.65
+2024,Wyoming,102,146.14
+2024,Marshall,103,145.69
+2024,San José State,104,145.06
+2024,Liberty,105,142.69
+2024,Central Michigan,106,142.13
+2024,SMU,107,142.05
+2024,James Madison,108,141.41
+2024,Florida International,109,141.29
+2024,Buffalo,110,140.65
+2024,Western Kentucky,111,140.12
+2024,Ball State,112,140.08
+2024,Louisiana Tech,113,139.16
+2024,UL Monroe,114,138.75
+2024,Temple,115,138.09
+2024,Hawai'i,116,137.6
+2024,Louisiana,117,137.49
+2024,UConn,118,133.58
+2024,Middle Tennessee,119,131.88
+2024,Georgia State,120,126.1
+2024,Utah State,121,125.72
+2024,Rice,122,121.73
+2024,UTSA,123,121.57
+2024,Sam Houston,124,121.16
+2024,Old Dominion,125,119.46
+2024,Massachusetts,126,119.41
+2024,Nevada,127,113.08
+2024,Jacksonville State,128,110.7
+2024,Houston Christian,129,94.44
+2024,Kennesaw State,130,83.66
+2024,Sacramento State,131,71.51
+2024,Jackson State,132,70.19
+2024,Central Arkansas,133,68.48
+2024,New Mexico State,134,67.75
+2024,Cal Poly,135,58.35
+2024,Campbell,136,57.27
+2024,Grambling,137,56.69
+2024,Utah Tech,138,56.67
+2024,Bethune-Cookman,139,56.37
+2024,Montana State,140,55.79
+2024,Eastern Kentucky,141,55.24
+2024,North Dakota State,142,52.42
+2024,Princeton,144,44.95
+2024,Murray State,145,43.72
+2024,Stephen F. Austin,146,41.92
+2024,Austin Peay,147,41.01
+2024,Portland State,149,40.91
+2024,Eastern Washington,150,40.13
+2024,Stony Brook,151,38.82
+2024,Army,152,37.76
+2024,Navy,153,37.64
+2024,Delaware,155,36.17
+2024,Nicholls,156,34.4
+2024,Western Carolina,157,33.74
+2024,Idaho,158,32.43
+2024,Monmouth,159,32.38
+2024,Hampton,160,30.66
+2024,Mississippi Valley State,161,30.33
+2024,Holy Cross,162,29.39
+2024,New Hampshire,163,29.33
+2024,Tennessee State,164,29.23
+2024,Weber State,165,28.8
+2024,Pennsylvania,166,28.51
+2024,Georgetown,167,27.92
+2024,McNeese,168,27.89
+2024,UC Davis,169,27.25
+2024,SE Louisiana,170,26.92
+2024,Wofford,171,24.65
+2024,Air Force,172,23.21
+2024,South Dakota,173,18.0
+2024,Southern Illinois,174,17.14
+2024,Duquesne,175,16.86
+2024,Northern Iowa,176,16.22
+2024,Brown,177,16.14
+2024,Bryant,178,16.0
+2024,Norfolk State,180,15.83
+2024,Lamar,181,15.52
+2024,Northern Arizona,181,15.52
+2024,Towson,183,15.5
+2024,Lehigh,184,15.25
+2024,Yale,187,14.81
+2024,North Carolina A&T,188,14.78
+2024,Rhode Island,188,14.78
+2024,Fordham,190,14.52
+2024,South Dakota State,191,14.44
+2024,North Carolina Central,192,14.22
+2024,Alabama State,193,14.19
+2024,Colgate,194,13.7
+2024,Sacred Heart,195,13.67
+2024,Harvard,196,13.44
+2024,Villanova,197,12.5
+2024,Grand Valley State University,198,11.7
+2024,Northern Colorado,200,11.06
+2024,New Mexico,201,10.22

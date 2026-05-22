@@ -1,0 +1,192 @@
+year,team,rank,points
+2021,Alabama,1,327.91
+2021,Ohio State,2,309.49
+2021,Georgia,3,294.55
+2021,LSU,4,291.37
+2021,Clemson,5,291.2
+2021,Oregon,6,287.38
+2021,Texas A&M,7,285.35
+2021,USC,8,280.72
+2021,Notre Dame,9,269.15
+2021,Michigan,10,268.77
+2021,Oklahoma,11,267.92
+2021,Miami,12,263.12
+2021,Florida,13,261.62
+2021,North Carolina,14,253.91
+2021,Wisconsin,15,240.8
+2021,Tennessee,16,240.4
+2021,Texas,17,237.09
+2021,Ole Miss,18,234.56
+2021,Maryland,19,230.29
+2021,Nebraska,20,216.5
+2021,Penn State,21,216.43
+2021,Florida State,22,214.97
+2021,Iowa,23,213.89
+2021,Arkansas,24,213.19
+2021,Mississippi State,25,210.6
+2021,Pittsburgh,26,210.45
+2021,Missouri,27,210.28
+2021,California,28,209.2
+2021,UCLA,29,206.5
+2021,Auburn,30,205.63
+2021,Virginia,31,205.33
+2021,Kentucky,32,205.02
+2021,Utah,33,203.23
+2021,NC State,34,202.42
+2021,Washington,35,201.78
+2021,Boston College,36,201.66
+2021,Minnesota,37,199.4
+2021,Louisville,38,198.01
+2021,Oklahoma State,39,196.26
+2021,West Virginia,40,195.07
+2021,Rutgers,41,191.67
+2021,Cincinnati,42,190.66
+2021,Michigan State,43,190.6
+2021,Baylor,44,190.18
+2021,Virginia Tech,45,189.84
+2021,Memphis,46,187.31
+2021,Georgia Tech,47,186.82
+2021,Arizona State,48,185.98
+2021,Vanderbilt,49,184.46
+2021,Northwestern,50,184.3
+2021,Stanford,51,183.58
+2021,Kansas,52,183.13
+2021,SMU,53,181.61
+2021,Indiana,54,177.78
+2021,UCF,55,177.69
+2021,Kansas State,56,176.98
+2021,Syracuse,57,176.5
+2021,Duke,58,176.16
+2021,Iowa State,59,175.58
+2021,Washington State,60,172.58
+2021,TCU,61,171.83
+2021,San Diego State,62,169.98
+2021,South Florida,63,167.63
+2021,Texas Tech,64,167.13
+2021,Colorado,65,167.11
+2021,Wake Forest,66,165.75
+2021,Toledo,67,163.18
+2021,UNLV,68,161.89
+2021,App State,69,161.14
+2021,Boise State,70,161.13
+2021,BYU,71,159.77
+2021,Purdue,72,159.72
+2021,Illinois,73,159.12
+2021,Fresno State,74,159.11
+2021,Arizona,75,157.25
+2021,South Carolina,76,157.05
+2021,Tulane,77,156.56
+2021,UTSA,78,154.8
+2021,Louisiana,79,154.78
+2021,North Texas,80,153.89
+2021,Houston,81,153.47
+2021,Florida Atlantic,82,153.21
+2021,Florida International,83,152.13
+2021,Coastal Carolina,84,150.67
+2021,Jackson State,85,147.9
+2021,Nevada,86,146.32
+2021,Central Michigan,87,146.12
+2021,Miami (OH),88,146.03
+2021,Colorado State,89,144.67
+2021,Air Force,90,144.16
+2021,Northern Illinois,91,142.59
+2021,Georgia Southern,92,141.76
+2021,Rice,93,141.39
+2021,New Mexico,94,140.75
+2021,Ball State,95,140.07
+2021,East Carolina,96,139.28
+2021,Western Michigan,97,139.11
+2021,Buffalo,98,137.78
+2021,Ohio,99,137.6
+2021,Old Dominion,100,135.74
+2021,Charlotte,101,134.83
+2021,Georgia State,102,134.55
+2021,Bowling Green,103,133.73
+2021,Troy,104,133.65
+2021,Temple,105,132.83
+2021,Arkansas State,106,132.61
+2021,Navy,107,131.51
+2021,Oregon State,108,131.45
+2021,Army,109,131.27
+2021,Wyoming,110,130.41
+2021,Liberty,111,129.14
+2021,Eastern Michigan,112,128.54
+2021,UL Monroe,113,127.64
+2021,New Mexico State,114,126.9
+2021,UConn,115,125.11
+2021,UAB,116,123.44
+2021,Massachusetts,117,121.74
+2021,Kent State,118,119.36
+2021,Akron,119,113.25
+2021,San José State,120,112.81
+2021,Louisiana Tech,121,108.45
+2021,South Alabama,122,107.68
+2021,Middle Tennessee,123,107.22
+2021,Southern Miss,124,104.36
+2021,Marshall,125,101.55
+2021,Tulsa,126,97.89
+2021,Hawai'i,127,90.15
+2021,Northern Arizona,128,80.92
+2021,Harvard,129,70.08
+2021,Princeton,130,69.11
+2021,Cal Poly,131,62.42
+2021,Idaho,132,62.38
+2021,Yale,133,61.37
+2021,UTEP,134,60.62
+2021,Utah State,135,55.32
+2021,Western Kentucky,136,49.62
+2021,Eastern Washington,138,48.13
+2021,Pennsylvania,139,47.87
+2021,James Madison,140,46.14
+2021,Lamar,141,39.38
+2021,North Carolina A&T,142,38.9
+2021,Northern Iowa,143,37.22
+2021,Stephen F. Austin,144,36.77
+2021,UC Davis,145,31.22
+2021,Central Arkansas,146,30.3
+2021,Georgetown,147,29.42
+2021,Samford,148,28.48
+2021,Howard,149,27.3
+2021,Morgan State,150,26.96
+2021,South Dakota,151,25.25
+2021,Montana State,152,24.7
+2021,Southern Utah,153,24.64
+2021,Grambling,154,24.49
+2021,Austin Peay,155,24.23
+2021,Tennessee Tech,156,21.96
+2021,Kennesaw State,157,20.61
+2021,Charleston Southern,158,19.5
+2021,Columbia,159,18.29
+2021,Jacksonville State,160,16.83
+2021,Sacramento State,161,16.08
+2021,Brown,162,15.57
+2021,Alabama A&M,163,15.36
+2021,Lehigh,164,14.77
+2021,Prairie View A&M,165,14.18
+2021,North Dakota,166,13.76
+2021,Sam Houston,167,13.67
+2021,William & Mary,168,13.3
+2021,McNeese,169,13.17
+2021,Tennessee State,170,13.15
+2021,Southern Illinois,172,12.65
+2021,Western Carolina,173,12.61
+2021,Maine,174,12.51
+2021,Chattanooga,175,12.15
+2021,Duquesne,176,12.14
+2021,Texas Southern,177,11.04
+2021,Towson,178,10.54
+2021,Villanova,179,10.53
+2021,Northwestern State,180,10.53
+2021,Holy Cross,181,10.14
+2021,Lafayette,182,10.14
+2021,Texas State,183,9.46
+2021,San Diego,184,9.32
+2021,Gardner-Webb,185,8.92
+2021,Rhode Island,186,8.92
+2021,Fordham,187,8.69
+2021,Northern Colorado,188,8.31
+2021,UAlbany,189,7.31
+2021,Montana,190,7.3
+2021,Portland State,191,7.3
+2021,Campbell,192,6.8
+2021,Wofford,193,5.8

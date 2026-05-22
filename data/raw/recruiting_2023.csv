@@ -1,0 +1,178 @@
+year,team,rank,points
+2023,Alabama,1,328.0
+2023,Georgia,2,315.68
+2023,Texas,3,306.31
+2023,Oklahoma,4,289.03
+2023,Ohio State,5,288.98
+2023,LSU,6,288.7
+2023,Miami,7,284.64
+2023,USC,8,280.44
+2023,Oregon,9,278.44
+2023,Tennessee,10,277.0
+2023,Clemson,11,273.39
+2023,Notre Dame,12,272.74
+2023,Florida,13,271.43
+2023,Penn State,14,270.1
+2023,Texas A&M,15,268.85
+2023,South Carolina,16,256.14
+2023,Michigan,17,245.13
+2023,Auburn,18,242.9
+2023,Florida State,19,237.15
+2023,Utah,20,236.08
+2023,TCU,21,235.07
+2023,Arkansas,22,228.3
+2023,Ole Miss,23,227.96
+2023,Michigan State,24,224.87
+2023,Nebraska,25,224.12
+2023,Washington,26,223.92
+2023,Mississippi State,27,222.92
+2023,Texas Tech,28,222.02
+2023,Colorado,29,219.75
+2023,North Carolina,30,219.35
+2023,Louisville,31,217.99
+2023,Kentucky,32,212.42
+2023,Kansas State,33,212.31
+2023,Missouri,34,211.13
+2023,Baylor,35,210.79
+2023,Maryland,36,206.46
+2023,UCLA,37,206.15
+2023,Illinois,38,205.64
+2023,Virginia Tech,39,205.58
+2023,Arizona,40,204.72
+2023,Iowa,41,204.36
+2023,Iowa State,42,204.14
+2023,NC State,43,204.08
+2023,Arizona State,44,201.23
+2023,Minnesota,45,201.22
+2023,Stanford,46,200.94
+2023,Northwestern,47,200.11
+2023,West Virginia,48,199.09
+2023,Oregon State,49,198.88
+2023,UCF,50,196.98
+2023,Pittsburgh,51,196.32
+2023,Vanderbilt,52,195.39
+2023,Wake Forest,53,193.23
+2023,Oklahoma State,54,193.19
+2023,Houston,55,191.97
+2023,Duke,56,191.8
+2023,Rutgers,57,190.36
+2023,Wisconsin,58,188.21
+2023,UTSA,59,187.6
+2023,Memphis,60,186.18
+2023,Boston College,61,185.3
+2023,Georgia Tech,62,185.2
+2023,Washington State,63,184.96
+2023,Virginia,64,180.69
+2023,East Carolina,65,180.54
+2023,BYU,66,179.88
+2023,Boise State,67,179.7
+2023,Purdue,68,179.36
+2023,Indiana,69,177.6
+2023,Colorado State,70,176.09
+2023,Tulane,71,172.87
+2023,SMU,72,171.15
+2023,Kansas,73,169.88
+2023,Arkansas State,74,168.05
+2023,Cincinnati,75,167.89
+2023,South Florida,76,165.19
+2023,Louisiana Tech,77,163.34
+2023,San Diego State,78,163.05
+2023,California,79,162.74
+2023,App State,80,161.99
+2023,Southern Miss,81,161.48
+2023,Florida Atlantic,82,161.44
+2023,Fresno State,83,161.0
+2023,Buffalo,84,160.65
+2023,Temple,85,160.16
+2023,Rice,86,159.14
+2023,Eastern Michigan,87,158.7
+2023,Syracuse,88,156.73
+2023,Louisiana,89,155.69
+2023,South Alabama,90,154.95
+2023,Central Michigan,91,153.75
+2023,UAB,92,149.23
+2023,Campbell,93,148.06
+2023,Troy,94,147.8
+2023,Florida International,95,147.71
+2023,Sam Houston,96,141.34
+2023,Ohio,97,140.79
+2023,Texas State,98,139.15
+2023,North Texas,99,137.98
+2023,Utah State,100,133.96
+2023,Georgia Southern,101,131.86
+2023,Toledo,102,131.66
+2023,Northern Illinois,103,131.18
+2023,Air Force,104,130.58
+2023,Miami (OH),105,129.81
+2023,Western Michigan,106,129.14
+2023,Nevada,107,126.82
+2023,Ball State,108,126.78
+2023,Akron,109,121.18
+2023,Wyoming,110,120.69
+2023,Liberty,111,120.52
+2023,San José State,112,118.01
+2023,New Mexico State,113,116.57
+2023,Coastal Carolina,114,113.66
+2023,Tulsa,115,113.39
+2023,Georgia State,116,111.43
+2023,Hawai'i,117,111.34
+2023,Army,118,110.02
+2023,Bowling Green,119,103.84
+2023,Middle Tennessee,120,100.8
+2023,UTEP,121,100.59
+2023,Old Dominion,122,95.13
+2023,Kent State,123,81.64
+2023,UConn,124,80.21
+2023,Marshall,125,77.8
+2023,UL Monroe,126,73.66
+2023,Massachusetts,127,72.64
+2023,New Mexico,128,72.37
+2023,Charlotte,129,69.14
+2023,Jackson State,130,68.09
+2023,Navy,131,67.03
+2023,Western Carolina,132,63.24
+2023,Portland State,133,61.03
+2023,Western Kentucky,134,58.4
+2023,Austin Peay,135,58.34
+2023,UNLV,136,55.31
+2023,Princeton,137,54.68
+2023,Florida A&M,138,53.84
+2023,Cal Poly,139,44.17
+2023,Harvard,140,43.43
+2023,Houston Christian,141,41.23
+2023,Sacramento State,142,39.88
+2023,Idaho,143,35.94
+2023,Incarnate Word,144,31.55
+2023,Howard,145,29.98
+2023,Stephen F. Austin,146,27.45
+2023,Weber State,147,27.27
+2023,James Madison,149,25.85
+2023,Utah Tech,150,24.55
+2023,Yale,151,23.67
+2023,South Dakota,152,23.49
+2023,McNeese,153,17.03
+2023,Arkansas-Pine Bluff,154,16.22
+2023,Grand Valley State University,155,16.0
+2023,Northern Colorado,156,15.97
+2023,Texas Southern,157,15.11
+2023,Murray State,159,14.78
+2023,The Citadel,160,14.37
+2023,Montana,161,14.33
+2023,Eastern Washington,162,14.17
+2023,Jacksonville State,163,13.85
+2023,Southeast Missouri State,164,13.83
+2023,Eastern Illinois,165,13.78
+2023,Central Arkansas,166,13.61
+2023,Dartmouth,167,13.17
+2023,Mississippi Valley State,167,13.17
+2023,North Dakota State,167,13.17
+2023,Duquesne,170,13.0
+2023,Eastern Kentucky,171,12.78
+2023,Southern,171,12.78
+2023,Pennsylvania,173,12.75
+2023,Southern Illinois,174,12.5
+2023,Kennesaw State,175,12.37
+2023,East Tennessee State,176,12.0
+2023,Chattanooga,177,11.7
+2023,Northern Iowa,178,9.0
+2023,Illinois State,179,7.33

@@ -1,0 +1,224 @@
+year,team,rank,points
+2019,Alabama,1,317.5
+2019,Georgia,2,309.12
+2019,Texas,3,287.69
+2019,Texas A&M,4,285.46
+2019,LSU,5,284.06
+2019,Oklahoma,6,279.28
+2019,Oregon,7,277.98
+2019,Michigan,8,277.15
+2019,Florida,9,276.85
+2019,Clemson,10,275.55
+2019,Auburn,11,271.94
+2019,Penn State,12,270.67
+2019,Tennessee,13,269.07
+2019,Ohio State,14,261.18
+2019,Washington,15,259.19
+2019,Notre Dame,16,258.56
+2019,South Carolina,17,247.26
+2019,Nebraska,18,245.1
+2019,Florida State,19,244.31
+2019,USC,20,243.51
+2019,Stanford,21,242.58
+2019,Ole Miss,22,238.11
+2019,Arkansas,23,237.17
+2019,Mississippi State,24,236.6
+2019,Purdue,25,224.72
+2019,Virginia Tech,26,224.01
+2019,Miami,27,222.07
+2019,Arizona State,28,219.76
+2019,Wisconsin,29,219.51
+2019,North Carolina,30,218.57
+2019,NC State,31,217.29
+2019,Michigan State,32,215.21
+2019,TCU,33,210.62
+2019,Kentucky,34,203.49
+2019,Baylor,35,203.39
+2019,Indiana,36,202.63
+2019,Missouri,37,202.13
+2019,Oklahoma State,38,202.09
+2019,Virginia,39,200.89
+2019,UCLA,40,199.61
+2019,Iowa,41,199.36
+2019,Utah,42,196.61
+2019,California,43,196.48
+2019,Colorado,44,194.55
+2019,Minnesota,45,194.48
+2019,Iowa State,46,192.25
+2019,Maryland,47,192.18
+2019,West Virginia,48,191.83
+2019,Duke,49,191.38
+2019,Boise State,50,189.93
+2019,Georgia Tech,51,188.28
+2019,Northwestern,52,188.14
+2019,Illinois,53,184.37
+2019,Arizona,54,182.67
+2019,Syracuse,55,182.67
+2019,Vanderbilt,56,182.42
+2019,Wake Forest,57,182.26
+2019,Pittsburgh,58,181.53
+2019,UCF,59,179.69
+2019,Florida Atlantic,60,178.99
+2019,Texas Tech,61,177.69
+2019,Kansas State,62,177.4
+2019,Boston College,63,177.26
+2019,Rutgers,64,174.33
+2019,Washington State,65,174.14
+2019,Oregon State,66,172.88
+2019,Memphis,67,172.4
+2019,SMU,68,167.28
+2019,Louisville,69,165.93
+2019,Kansas,70,165.84
+2019,Marshall,71,165.42
+2019,Houston,72,165.39
+2019,Toledo,73,162.01
+2019,UAB,74,160.48
+2019,North Texas,75,158.78
+2019,Louisiana,76,158.45
+2019,South Florida,77,158.44
+2019,East Carolina,78,158.4
+2019,Cincinnati,79,158.17
+2019,Troy,80,157.59
+2019,BYU,81,156.76
+2019,Southern Miss,82,156.39
+2019,Louisiana Tech,83,155.46
+2019,Colorado State,84,155.22
+2019,Middle Tennessee,85,154.43
+2019,Western Kentucky,86,153.89
+2019,Fresno State,87,153.5
+2019,Florida International,88,152.57
+2019,Miami (OH),89,151.13
+2019,Utah State,90,149.92
+2019,San Diego State,91,149.19
+2019,Western Michigan,92,148.7
+2019,Nevada,93,145.27
+2019,Tulane,94,144.82
+2019,Arkansas State,95,143.36
+2019,UTSA,96,142.31
+2019,Wyoming,97,140.75
+2019,Georgia State,98,140.37
+2019,Army,99,139.75
+2019,UNLV,100,139.57
+2019,App State,101,139.0
+2019,Kent State,102,138.12
+2019,Ohio,103,138.11
+2019,Central Michigan,104,137.96
+2019,Temple,105,136.56
+2019,Buffalo,106,134.64
+2019,Air Force,107,134.5
+2019,Northern Illinois,108,134.16
+2019,Tulsa,109,133.88
+2019,Portland State,110,132.85
+2019,Rice,111,132.03
+2019,UTEP,112,131.98
+2019,Massachusetts,113,130.79
+2019,Akron,114,130.23
+2019,Hawai'i,115,129.53
+2019,Old Dominion,116,128.31
+2019,UConn,117,127.68
+2019,San José State,118,127.53
+2019,New Mexico,119,126.28
+2019,New Mexico State,120,125.55
+2019,Georgia Southern,121,125.24
+2019,Coastal Carolina,122,125.06
+2019,Eastern Michigan,123,124.99
+2019,Navy,124,124.39
+2019,Ball State,125,122.89
+2019,South Alabama,126,122.8
+2019,Harvard,127,121.09
+2019,UL Monroe,128,119.38
+2019,Bowling Green,129,115.37
+2019,Princeton,130,115.29
+2019,Stephen F. Austin,131,113.58
+2019,Charlotte,132,112.69
+2019,Texas State,133,111.1
+2019,Yale,134,110.17
+2019,Liberty,135,108.39
+2019,Central Arkansas,136,106.84
+2019,Idaho,137,99.19
+2019,Eastern Washington,138,94.76
+2019,Mercer,139,92.53
+2019,Eastern Kentucky,140,90.32
+2019,UC Davis,141,90.14
+2019,North Dakota State,142,86.93
+2019,Northern Arizona,144,84.4
+2019,Jacksonville State,145,79.23
+2019,Idaho State,146,72.23
+2019,James Madison,147,70.12
+2019,Montana,148,69.85
+2019,Illinois State,149,69.17
+2019,Kennesaw State,150,69.12
+2019,Montana State,151,66.92
+2019,Western Carolina,152,65.38
+2019,Northern Iowa,153,62.42
+2019,Southern Utah,155,58.28
+2019,Texas Southern,156,56.43
+2019,UT Martin,157,55.08
+2019,Pennsylvania,158,54.99
+2019,Murray State,159,54.92
+2019,Dartmouth,160,54.85
+2019,Holy Cross,161,51.84
+2019,Southern,162,51.2
+2019,Sam Houston,163,48.49
+2019,Houston Christian,164,47.53
+2019,Austin Peay,165,46.22
+2019,Georgetown,166,45.58
+2019,Howard,168,43.12
+2019,Grand Valley State University,169,41.63
+2019,McNeese,170,39.93
+2019,Weber State,171,39.26
+2019,Eastern Illinois,173,37.39
+2019,Lamar,175,35.77
+2019,Delaware,176,35.61
+2019,Richmond,177,35.42
+2019,Chattanooga,178,34.93
+2019,Cal Poly,179,34.79
+2019,Furman,180,34.69
+2019,Nicholls,181,33.85
+2019,Tennessee State,183,33.09
+2019,East Tennessee State,184,32.91
+2019,New Hampshire,185,32.54
+2019,Fordham,186,32.49
+2019,Indiana State,187,32.33
+2019,Morgan State,188,31.01
+2019,Villanova,189,30.97
+2019,Wofford,190,30.95
+2019,Prairie View A&M,191,30.85
+2019,SE Louisiana,192,30.71
+2019,Sacramento State,193,29.38
+2019,Southern Illinois,194,29.2
+2019,North Dakota,196,27.5
+2019,Northern Colorado,197,27.42
+2019,San Diego,198,27.37
+2019,North Carolina Central,199,24.99
+2019,South Dakota,200,24.59
+2019,Southeast Missouri State,201,24.44
+2019,Stony Brook,202,24.3
+2019,Maine,205,22.07
+2019,Alcorn State,206,21.58
+2019,Missouri State,207,21.02
+2019,Rhode Island,210,20.03
+2019,North Carolina A&T,211,19.69
+2019,Northwestern State,212,19.61
+2019,Samford,213,18.9
+2019,South Dakota State,214,17.82
+2019,The Citadel,216,17.36
+2019,Arkansas-Pine Bluff,218,16.4
+2019,Elon,220,16.08
+2019,William & Mary,221,15.95
+2019,Bucknell,222,14.96
+2019,Youngstown State,225,13.33
+2019,Colgate,226,13.03
+2019,Monmouth,228,11.98
+2019,Alabama A&M,229,11.61
+2019,Bethune-Cookman,230,11.54
+2019,Hampton,231,11.0
+2019,Grambling,232,10.64
+2019,Florida A&M,234,9.93
+2019,Charleston Southern,235,9.03
+2019,UAlbany,236,8.92
+2019,Lafayette,237,8.42
+2019,Alabama State,238,7.97
+2019,Duquesne,240,7.52
+2019,Gardner-Webb,241,6.3
+2019,Tennessee Tech,247,4.96

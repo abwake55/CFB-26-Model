@@ -1,0 +1,1661 @@
+game_id,season,week,team,conference,opponent,off_epa,off_epa_pass,off_epa_rush,def_epa,def_epa_pass,def_epa_rush
+401117494,2019,1,Air Force,Mountain West,Colgate,0.45,3.75,0.4,-0.01,0.1,-0.09
+401112145,2019,1,Akron,Mid-American,Illinois,-0.16,-0.2,-0.19,0.29,0.4,0.23
+401110720,2019,1,Alabama,SEC,Duke,0.42,0.84,0.02,-0.24,-0.21,-0.24
+401121934,2019,1,App State,Sun Belt,East Tennessee State,0.47,0.6,0.39,-0.02,0.16,-0.16
+401114164,2019,1,Arizona,Pac-12,Hawai'i,0.35,0.44,0.14,0.29,0.45,0.06
+401114153,2019,1,Arizona State,Pac-12,Kent State,0.23,0.7,-0.08,-0.14,-0.08,-0.17
+401110721,2019,1,Arkansas,SEC,Portland State,0.13,0.08,0.22,0.03,-0.06,0.14
+401117858,2019,1,Arkansas State,Sun Belt,SMU,0.12,0.16,0.04,0.11,0.21,0.09
+401114238,2019,1,Army,FBS Independents,Rice,0.14,0.39,0.11,0.02,-0.29,0.17
+401110722,2019,1,Auburn,SEC,Oregon,0.05,-0.12,0.19,0.12,0.23,-0.04
+401112157,2019,1,Ball State,Mid-American,Indiana,0.1,0.19,0.03,0.22,0.23,0.2
+401112073,2019,1,Baylor,Big 12,Stephen F. Austin,0.44,0.46,0.43,0.1,0.05,0.16
+401112431,2019,1,Boise State,Mountain West,Florida State,0.15,0.28,0.01,0.23,0.45,-0.13
+401112435,2019,1,Boston College,ACC,Virginia Tech,0.16,0.53,-0.06,0.16,0.33,-0.06
+401119254,2019,1,Bowling Green,Mid-American,Morgan State,0.26,0.41,0.18,-0.33,-0.49,-0.17
+401119255,2019,1,Buffalo,Mid-American,Robert Morris,0.41,0.32,0.4,-0.02,0.52,-0.15
+401114223,2019,1,BYU,FBS Independents,Utah,-0.19,-0.3,-0.04,0.24,0.27,0.24
+401114174,2019,1,California,Pac-12,UC Davis,0.1,0.41,-0.09,-0.06,-0.11,0.0
+401119253,2019,1,Central Michigan,Mid-American,UAlbany,0.32,0.55,0.11,-0.05,0.34,-0.56
+401135910,2019,1,Charlotte,Conference USA,Gardner-Webb,0.39,0.42,0.38,0.0,-0.24,0.18
+401117854,2019,1,Cincinnati,American Athletic,UCLA,0.16,0.78,-0.19,0.05,0.01,0.09
+401111653,2019,1,Clemson,ACC,Georgia Tech,0.43,0.21,0.55,-0.04,-0.17,0.03
+401119256,2019,1,Coastal Carolina,Sun Belt,Eastern Michigan,0.15,0.32,-0.17,0.23,0.75,-0.07
+401114184,2019,1,Colorado,Pac-12,Colorado State,0.46,0.8,0.29,0.2,0.38,-0.11
+401114184,2019,1,Colorado State,Mountain West,Colorado,0.2,0.38,-0.11,0.46,0.8,0.29
+401110720,2019,1,Duke,ACC,Alabama,-0.24,-0.21,-0.24,0.42,0.84,0.02
+401112432,2019,1,East Carolina,American Athletic,NC State,-0.11,0.05,-0.44,0.29,0.34,0.28
+401119256,2019,1,Eastern Michigan,Mid-American,Coastal Carolina,0.23,0.75,-0.07,0.15,0.32,-0.17
+401110723,2019,1,Florida,SEC,Miami,0.06,0.41,-0.28,-0.04,-0.05,-0.03
+401112251,2019,1,Florida Atlantic,Conference USA,Ohio State,0.0,0.11,-0.11,0.32,0.55,0.15
+401114236,2019,1,Florida International,Conference USA,Tulane,0.06,0.15,-0.08,0.42,0.33,0.46
+401112431,2019,1,Florida State,ACC,Boise State,0.23,0.45,-0.13,0.15,0.28,0.01
+401114218,2019,1,Fresno State,Mountain West,USC,0.09,0.09,0.12,0.11,0.02,0.21
+401110732,2019,1,Georgia,SEC,Vanderbilt,0.23,0.19,0.28,0.03,-0.16,0.36
+401110725,2019,1,Georgia Southern,Sun Belt,LSU,-0.09,0.06,-0.17,0.38,0.66,0.06
+401110730,2019,1,Georgia State,Sun Belt,Tennessee,0.15,0.15,0.14,0.18,0.24,0.15
+401111653,2019,1,Georgia Tech,ACC,Clemson,-0.04,-0.17,0.03,0.43,0.21,0.55
+401114164,2019,1,Hawai'i,Mountain West,Arizona,0.29,0.45,0.06,0.35,0.44,0.14
+401112114,2019,1,Houston,American Athletic,Oklahoma,0.24,0.23,0.26,0.67,1.03,0.43
+401112145,2019,1,Illinois,Big Ten,Akron,0.29,0.4,0.23,-0.16,-0.2,-0.19
+401112157,2019,1,Indiana,Big Ten,Ball State,0.22,0.23,0.2,0.1,0.19,0.03
+401112191,2019,1,Iowa,Big Ten,Miami (OH),0.32,0.41,0.28,0.08,0.32,-0.21
+401112085,2019,1,Iowa State,Big 12,Northern Iowa,0.14,0.31,0.0,-0.03,0.12,-0.34
+401112096,2019,1,Kansas,Big 12,Indiana State,0.08,0.5,-0.33,-0.09,-0.19,0.06
+401112106,2019,1,Kansas State,Big 12,Nicholls,0.45,0.84,0.3,0.2,0.08,0.29
+401114153,2019,1,Kent State,Mid-American,Arizona State,-0.14,-0.08,-0.17,0.23,0.7,-0.08
+401110724,2019,1,Kentucky,SEC,Toledo,0.2,0.53,0.0,0.17,0.0,0.29
+401112434,2019,1,Liberty,FBS Independents,Syracuse,-0.27,-0.09,-0.62,0.07,-0.07,0.21
+401110727,2019,1,Louisiana,Sun Belt,Mississippi State,0.16,0.28,0.02,0.39,0.37,0.41
+401112135,2019,1,Louisiana Tech,Conference USA,Texas,0.11,0.29,-0.31,0.34,0.29,0.41
+401112436,2019,1,Louisville,ACC,Notre Dame,0.13,-0.04,0.25,0.25,0.25,0.25
+401110725,2019,1,LSU,SEC,Georgia Southern,0.38,0.66,0.06,-0.09,0.06,-0.17
+401114240,2019,1,Marshall,Conference USA,VMI,0.45,0.63,0.3,0.0,-0.07,0.14
+401112201,2019,1,Maryland,Big Ten,Howard,0.4,0.57,0.3,-0.23,-0.24,-0.22
+401112264,2019,1,Massachusetts,FBS Independents,Rutgers,0.06,-0.18,0.36,0.3,0.53,0.18
+401110726,2019,1,Memphis,American Athletic,Ole Miss,0.07,-0.06,0.15,-0.07,0.03,-0.06
+401110723,2019,1,Miami,ACC,Florida,-0.04,-0.05,-0.03,0.06,0.41,-0.28
+401112191,2019,1,Miami (OH),Mid-American,Iowa,0.08,0.32,-0.21,0.32,0.41,0.28
+401112222,2019,1,Michigan,Big Ten,Middle Tennessee,0.13,0.1,0.18,0.04,0.12,-0.08
+401112212,2019,1,Michigan State,Big Ten,Tulsa,-0.11,-0.01,-0.28,-0.14,0.19,-0.72
+401112222,2019,1,Middle Tennessee,Conference USA,Michigan,0.04,0.12,-0.08,0.13,0.1,0.18
+401112229,2019,1,Minnesota,Big Ten,South Dakota State,0.2,0.47,0.06,0.06,-0.12,0.21
+401110727,2019,1,Mississippi State,SEC,Louisiana,0.39,0.37,0.41,0.16,0.28,0.02
+401110728,2019,1,Missouri,SEC,Wyoming,0.17,0.28,0.07,0.26,0.12,0.32
+401117857,2019,1,Navy,American Athletic,Holy Cross,0.45,-0.02,0.51,0.0,0.13,-0.18
+401112432,2019,1,NC State,ACC,East Carolina,0.29,0.34,0.28,-0.11,0.05,-0.44
+401112238,2019,1,Nebraska,Big Ten,South Alabama,-0.02,0.12,-0.1,-0.25,-0.17,-0.16
+401112262,2019,1,Nevada,Mountain West,Purdue,0.24,0.33,0.1,0.26,0.47,-0.09
+401117495,2019,1,New Mexico,Mountain West,Sam Houston,0.11,0.23,-0.04,0.17,0.28,-0.07
+401114228,2019,1,New Mexico State,FBS Independents,Washington State,0.02,0.04,-0.01,0.45,0.53,0.18
+401110729,2019,1,North Carolina,ACC,South Carolina,0.16,0.43,0.08,-0.1,-0.17,-0.01
+401119257,2019,1,Northern Illinois,Mid-American,Illinois State,-0.01,0.34,-0.36,-0.22,-0.08,-0.37
+401114241,2019,1,North Texas,Conference USA,Abilene Christian,0.32,0.63,0.06,0.27,0.29,0.24
+401112245,2019,1,Northwestern,Big Ten,Stanford,-0.08,0.0,-0.15,0.02,0.13,-0.08
+401112436,2019,1,Notre Dame,FBS Independents,Louisville,0.25,0.25,0.25,0.13,-0.04,0.25
+401119259,2019,1,Ohio,Mid-American,Rhode Island,0.46,0.46,0.45,0.14,0.06,0.36
+401112251,2019,1,Ohio State,Big Ten,Florida Atlantic,0.32,0.55,0.15,0.0,0.11,-0.11
+401112114,2019,1,Oklahoma,Big 12,Houston,0.67,1.03,0.43,0.24,0.23,0.26
+401112122,2019,1,Oklahoma State,Big 12,Oregon State,0.46,0.62,0.42,0.3,0.28,0.35
+401114242,2019,1,Old Dominion,Conference USA,Norfolk State,0.1,0.14,0.09,0.12,0.38,-0.16
+401110726,2019,1,Ole Miss,SEC,Memphis,-0.07,0.03,-0.06,0.07,-0.06,0.15
+401110722,2019,1,Oregon,Pac-12,Auburn,0.12,0.23,-0.04,0.05,-0.12,0.19
+401112122,2019,1,Oregon State,Pac-12,Oklahoma State,0.3,0.28,0.35,0.46,0.62,0.42
+401112257,2019,1,Penn State,Big Ten,Idaho,0.51,0.43,0.59,-0.2,-0.17,-0.23
+401112433,2019,1,Pittsburgh,ACC,Virginia,0.02,-0.08,0.17,0.17,0.07,0.24
+401112262,2019,1,Purdue,Big Ten,Nevada,0.26,0.47,-0.09,0.24,0.33,0.1
+401114238,2019,1,Rice,Conference USA,Army,0.02,-0.29,0.17,0.14,0.39,0.11
+401112264,2019,1,Rutgers,Big Ten,Massachusetts,0.3,0.53,0.18,0.06,-0.18,0.36
+401117496,2019,1,San Diego State,Mountain West,Weber State,-0.2,-0.06,-0.29,-0.22,-0.07,-0.49
+401117493,2019,1,San José State,Mountain West,Northern Colorado,0.25,0.45,0.12,0.0,-0.22,0.26
+401117858,2019,1,SMU,American Athletic,Arkansas State,0.11,0.21,0.09,0.12,0.16,0.04
+401112238,2019,1,South Alabama,Sun Belt,Nebraska,-0.25,-0.17,-0.16,-0.02,0.12,-0.1
+401110729,2019,1,South Carolina,SEC,North Carolina,-0.1,-0.17,-0.01,0.16,0.43,0.08
+401114243,2019,1,Southern Miss,Conference USA,Alcorn State,0.04,0.29,-0.08,0.02,0.06,-0.04
+401117856,2019,1,South Florida,American Athletic,Wisconsin,-0.27,-0.19,-0.41,0.17,0.25,0.12
+401112245,2019,1,Stanford,Pac-12,Northwestern,0.02,0.13,-0.08,-0.08,0.0,-0.15
+401112434,2019,1,Syracuse,ACC,Liberty,0.07,-0.07,0.21,-0.27,-0.09,-0.62
+401112129,2019,1,TCU,Big 12,Arkansas-Pine Bluff,0.07,0.03,0.25,-0.06,-0.04,-0.08
+401117859,2019,1,Temple,American Athletic,Bucknell,0.49,0.61,0.33,-0.08,-0.09,-0.04
+401110730,2019,1,Tennessee,SEC,Georgia State,0.18,0.24,0.15,0.15,0.15,0.14
+401112135,2019,1,Texas,Big 12,Louisiana Tech,0.34,0.29,0.41,0.11,0.29,-0.31
+401110731,2019,1,Texas A&M,SEC,Texas State,0.17,0.26,0.14,-0.05,0.03,-0.4
+401110731,2019,1,Texas State,Sun Belt,Texas A&M,-0.05,0.03,-0.4,0.17,0.26,0.14
+401112139,2019,1,Texas Tech,Big 12,Montana State,0.32,0.31,0.35,0.0,0.25,-0.18
+401110724,2019,1,Toledo,Mid-American,Kentucky,0.17,0.0,0.29,0.2,0.53,0.0
+401121935,2019,1,Troy,Sun Belt,Campbell,0.37,0.55,0.27,-0.02,-0.01,0.02
+401114236,2019,1,Tulane,American Athletic,Florida International,0.42,0.33,0.46,0.06,0.15,-0.08
+401112212,2019,1,Tulsa,American Athletic,Michigan State,-0.14,0.19,-0.72,-0.11,-0.01,-0.28
+401114237,2019,1,UAB,Conference USA,Alabama State,-0.09,-0.05,-0.13,-0.05,-0.04,-0.05
+401117853,2019,1,UCF,American Athletic,Florida A&M,0.45,0.72,0.29,-0.21,-0.06,-0.46
+401117854,2019,1,UCLA,Pac-12,Cincinnati,0.05,0.01,0.09,0.16,0.78,-0.19
+401117855,2019,1,UConn,American Athletic,Wagner,0.03,-0.16,0.12,0.07,-0.11,0.33
+401128468,2019,1,UL Monroe,Sun Belt,Grambling,0.31,0.03,0.48,0.09,0.06,0.1
+401117497,2019,1,UNLV,Mountain West,Southern Utah,0.44,0.29,0.54,0.06,0.2,-0.13
+401114218,2019,1,USC,Pac-12,Fresno State,0.11,0.02,0.21,0.09,0.09,0.12
+401114223,2019,1,Utah,Pac-12,BYU,0.24,0.27,0.24,-0.19,-0.3,-0.04
+401112430,2019,1,Utah State,Mountain West,Wake Forest,0.24,0.32,0.11,0.12,0.51,-0.19
+401114244,2019,1,UTEP,Conference USA,Houston Christian,0.22,0.37,0.27,0.26,0.49,0.01
+401114245,2019,1,UTSA,Conference USA,Incarnate Word,0.22,-0.01,0.41,-0.13,-0.12,-0.14
+401110732,2019,1,Vanderbilt,SEC,Georgia,0.03,-0.16,0.36,0.23,0.19,0.28
+401112433,2019,1,Virginia,ACC,Pittsburgh,0.17,0.07,0.24,0.02,-0.08,0.17
+401112435,2019,1,Virginia Tech,ACC,Boston College,0.16,0.33,-0.06,0.16,0.53,-0.06
+401112430,2019,1,Wake Forest,ACC,Utah State,0.12,0.51,-0.19,0.24,0.32,0.11
+401114233,2019,1,Washington,Pac-12,Eastern Washington,0.83,1.26,0.39,-0.17,-0.31,0.06
+401114228,2019,1,Washington State,Pac-12,New Mexico State,0.45,0.53,0.18,0.02,0.04,-0.01
+401114246,2019,1,Western Kentucky,Conference USA,Central Arkansas,0.22,0.31,0.11,0.36,0.85,-0.25
+401119258,2019,1,Western Michigan,Mid-American,Monmouth,0.5,1.27,-0.08,0.1,0.09,0.12
+401112143,2019,1,West Virginia,Big 12,James Madison,0.09,0.34,-0.42,0.06,0.04,0.09
+401117856,2019,1,Wisconsin,Big Ten,South Florida,0.17,0.25,0.12,-0.27,-0.19,-0.41
+401110728,2019,1,Wyoming,Mountain West,Missouri,0.26,0.12,0.32,0.17,0.28,0.07
+401114254,2019,2,Akron,Mid-American,UAB,0.07,0.21,-0.23,-0.15,0.15,-0.33
+401110773,2019,2,Alabama,SEC,New Mexico State,0.6,0.54,0.66,-0.06,-0.08,-0.04
+401114247,2019,2,App State,Sun Belt,Charlotte,0.48,0.66,0.36,0.28,0.29,0.27
+401114165,2019,2,Arizona,Pac-12,Northern Arizona,0.73,0.93,0.6,0.24,0.33,0.21
+401114154,2019,2,Arizona State,Pac-12,Sacramento State,-0.03,0.56,-0.39,-0.05,-0.02,-0.11
+401110779,2019,2,Arkansas,SEC,Ole Miss,0.03,0.15,-0.2,0.16,0.86,-0.18
+401117502,2019,2,Arkansas State,Sun Belt,UNLV,0.22,0.33,0.17,-0.09,-0.5,0.3
+401112223,2019,2,Army,FBS Independents,Michigan,-0.05,-0.92,0.07,0.1,0.24,-0.04
+401110774,2019,2,Auburn,SEC,Tulane,0.09,0.36,-0.1,-0.26,-0.28,-0.24
+401119260,2019,2,Ball State,Mid-American,Fordham,0.39,0.67,0.05,0.16,0.24,0.14
+401112074,2019,2,Baylor,Big 12,UTSA,0.61,0.57,0.64,0.12,0.0,0.23
+401114251,2019,2,Boise State,Mountain West,Marshall,0.06,0.15,-0.01,-0.12,-0.39,0.14
+401112438,2019,2,Boston College,ACC,Richmond,0.46,1.01,0.32,0.05,0.14,0.0
+401112107,2019,2,Bowling Green,Mid-American,Kansas State,-0.21,-0.27,-0.12,0.45,0.82,0.33
+401112258,2019,2,Buffalo,Mid-American,Penn State,-0.06,0.14,-0.16,0.28,0.81,-0.32
+401110783,2019,2,BYU,FBS Independents,Tennessee,0.19,0.21,0.23,0.11,0.37,-0.02
+401114175,2019,2,California,Pac-12,Washington,0.16,0.03,0.3,0.01,-0.2,0.2
+401112268,2019,2,Central Michigan,Mid-American,Wisconsin,-0.33,-0.33,-0.27,0.5,0.74,0.3
+401114247,2019,2,Charlotte,Conference USA,App State,0.28,0.29,0.27,0.48,0.66,0.36
+401112252,2019,2,Cincinnati,American Athletic,Ohio State,-0.11,-0.09,-0.13,0.37,0.47,0.32
+401110784,2019,2,Clemson,ACC,Texas A&M,0.23,0.3,0.18,0.03,0.22,-0.31
+401112097,2019,2,Coastal Carolina,Sun Belt,Kansas,0.15,0.44,0.06,-0.04,-0.07,-0.03
+401112239,2019,2,Colorado,Pac-12,Nebraska,0.21,0.35,0.07,0.19,0.33,0.12
+401117498,2019,2,Colorado State,Mountain West,Western Illinois,0.5,0.91,0.17,-0.17,-0.23,-0.07
+401112439,2019,2,Duke,ACC,North Carolina A&T,0.29,0.42,0.15,-0.1,-0.24,0.01
+401117860,2019,2,East Carolina,American Athletic,Gardner-Webb,0.34,0.13,0.56,-0.05,0.04,-0.13
+401110777,2019,2,Eastern Michigan,Mid-American,Kentucky,0.18,0.31,-0.09,0.24,0.13,0.3
+401110775,2019,2,Florida,SEC,UT Martin,0.43,0.55,0.34,-0.15,-0.11,-0.19
+401114249,2019,2,Florida Atlantic,Conference USA,UCF,-0.05,-0.06,-0.08,0.44,0.52,0.4
+401114248,2019,2,Florida International,Conference USA,Western Kentucky,-0.05,-0.25,0.03,-0.03,-0.02,-0.04
+401112440,2019,2,Florida State,ACC,UL Monroe,0.15,0.17,0.14,0.14,0.24,0.07
+401112230,2019,2,Fresno State,Mountain West,Minnesota,0.23,0.34,0.03,0.23,0.82,-0.08
+401110776,2019,2,Georgia,SEC,Murray State,0.39,0.46,0.35,0.03,0.17,-0.16
+401121936,2019,2,Georgia Southern,Sun Belt,Maine,0.21,0.02,0.29,0.02,0.24,-0.48
+401121937,2019,2,Georgia State,Sun Belt,Furman,0.46,0.86,0.1,0.55,0.86,0.33
+401112441,2019,2,Georgia Tech,ACC,South Florida,-0.03,-0.25,0.07,0.02,0.27,-0.2
+401114200,2019,2,Hawai'i,Mountain West,Oregon State,0.22,0.3,0.06,0.23,0.15,0.3
+401117861,2019,2,Houston,American Athletic,Prairie View A&M,0.04,-0.12,0.2,0.09,0.26,-0.11
+401112146,2019,2,Illinois,Big Ten,UConn,-0.09,0.18,-0.38,0.0,0.13,-0.17
+401112158,2019,2,Indiana,Big Ten,Eastern Illinois,0.34,0.53,0.1,-0.19,-0.15,-0.23
+401112192,2019,2,Iowa,Big Ten,Rutgers,0.14,0.2,0.15,-0.24,-0.51,0.09
+401112097,2019,2,Kansas,Big 12,Coastal Carolina,-0.04,-0.07,-0.03,0.15,0.44,0.06
+401112107,2019,2,Kansas State,Big 12,Bowling Green,0.45,0.82,0.33,-0.21,-0.27,-0.12
+401119261,2019,2,Kent State,Mid-American,Kennesaw State,0.17,0.36,0.02,0.08,0.09,0.11
+401110777,2019,2,Kentucky,SEC,Eastern Michigan,0.24,0.13,0.3,0.18,0.31,-0.09
+401114347,2019,2,Liberty,FBS Independents,Louisiana,0.09,-0.04,0.31,0.27,0.15,0.35
+401114347,2019,2,Louisiana,Sun Belt,Liberty,0.27,0.15,0.35,0.09,-0.04,0.31
+401114250,2019,2,Louisiana Tech,Conference USA,Grambling,0.09,0.5,-0.18,0.06,0.22,-0.09
+401112442,2019,2,Louisville,ACC,Eastern Kentucky,0.53,0.84,0.37,-0.12,-0.36,0.01
+401110778,2019,2,LSU,SEC,Texas,0.48,0.71,0.17,0.25,0.35,0.07
+401114251,2019,2,Marshall,Conference USA,Boise State,-0.12,-0.39,0.14,0.06,0.15,-0.01
+401112202,2019,2,Maryland,Big Ten,Syracuse,0.55,0.43,0.65,0.06,0.05,0.06
+401114354,2019,2,Massachusetts,FBS Independents,Southern Illinois,0.06,0.22,-0.05,0.32,0.62,0.13
+401117862,2019,2,Memphis,American Athletic,Southern,0.53,1.05,0.19,0.14,0.22,0.09
+401112443,2019,2,Miami,ACC,North Carolina,0.21,0.45,-0.1,0.26,0.66,-0.1
+401119262,2019,2,Miami (OH),Mid-American,Tennessee Tech,0.21,0.18,0.28,-0.08,-0.02,-0.15
+401112223,2019,2,Michigan,Big Ten,Army,0.1,0.24,-0.04,-0.05,-0.92,0.07
+401112213,2019,2,Michigan State,Big Ten,Western Michigan,0.46,0.77,0.29,0.08,0.2,-0.13
+401114252,2019,2,Middle Tennessee,Conference USA,Tennessee State,0.55,0.77,0.35,0.21,0.19,0.22
+401112230,2019,2,Minnesota,Big Ten,Fresno State,0.23,0.82,-0.08,0.23,0.34,0.03
+401110780,2019,2,Mississippi State,SEC,Southern Miss,0.28,0.44,0.21,0.2,0.26,0.12
+401110781,2019,2,Missouri,SEC,West Virginia,0.17,0.23,0.14,-0.23,-0.31,-0.15
+401112444,2019,2,NC State,ACC,Western Carolina,0.31,0.34,0.32,-0.2,-0.24,-0.13
+401112239,2019,2,Nebraska,Big Ten,Colorado,0.19,0.33,0.12,0.21,0.35,0.07
+401114193,2019,2,Nevada,Mountain West,Oregon,-0.1,-0.18,-0.03,0.63,0.96,0.32
+401110773,2019,2,New Mexico State,FBS Independents,Alabama,-0.06,-0.08,-0.04,0.6,0.54,0.66
+401112443,2019,2,North Carolina,ACC,Miami,0.26,0.66,-0.1,0.21,0.45,-0.1
+401114224,2019,2,Northern Illinois,Mid-American,Utah,0.18,0.16,0.14,0.36,0.78,0.15
+401114253,2019,2,North Texas,Conference USA,SMU,0.13,0.11,0.2,0.36,0.71,0.07
+401112445,2019,2,Ohio,Mid-American,Pittsburgh,-0.06,-0.11,0.04,0.13,0.21,0.05
+401112252,2019,2,Ohio State,Big Ten,Cincinnati,0.37,0.47,0.32,-0.11,-0.09,-0.13
+401112115,2019,2,Oklahoma,Big 12,South Dakota,0.76,1.06,0.54,-0.05,0.1,-0.31
+401112123,2019,2,Oklahoma State,Big 12,McNeese,0.5,0.99,0.15,-0.27,-0.57,-0.1
+401112446,2019,2,Old Dominion,Conference USA,Virginia Tech,0.03,-0.32,0.36,0.25,0.79,-0.14
+401110779,2019,2,Ole Miss,SEC,Arkansas,0.16,0.86,-0.18,0.03,0.15,-0.2
+401114193,2019,2,Oregon,Pac-12,Nevada,0.63,0.96,0.32,-0.1,-0.18,-0.03
+401114200,2019,2,Oregon State,Pac-12,Hawai'i,0.23,0.15,0.3,0.22,0.3,0.06
+401112258,2019,2,Penn State,Big Ten,Buffalo,0.28,0.81,-0.32,-0.06,0.14,-0.16
+401112445,2019,2,Pittsburgh,ACC,Ohio,0.13,0.21,0.05,-0.06,-0.11,0.04
+401110785,2019,2,Purdue,Big Ten,Vanderbilt,0.33,0.5,-0.14,0.21,0.29,0.03
+401112447,2019,2,Rice,Conference USA,Wake Forest,0.05,0.19,-0.12,0.39,0.8,0.14
+401112192,2019,2,Rutgers,Big Ten,Iowa,-0.24,-0.51,0.09,0.14,0.2,0.15
+401114214,2019,2,San Diego State,Mountain West,UCLA,0.05,0.64,-0.35,-0.02,0.17,-0.24
+401117501,2019,2,San José State,Mountain West,Tulsa,0.04,0.25,-0.2,0.35,0.65,0.23
+401114253,2019,2,SMU,American Athletic,North Texas,0.36,0.71,0.07,0.13,0.11,0.2
+401121938,2019,2,South Alabama,Sun Belt,Jackson State,0.24,0.1,0.28,0.09,0.16,0.1
+401110782,2019,2,South Carolina,SEC,Charleston Southern,0.75,0.43,0.98,-0.11,-0.1,-0.15
+401110780,2019,2,Southern Miss,Conference USA,Mississippi State,0.2,0.26,0.12,0.28,0.44,0.21
+401112441,2019,2,South Florida,American Athletic,Georgia Tech,0.02,0.27,-0.2,-0.03,-0.25,0.07
+401114207,2019,2,Stanford,Pac-12,USC,0.17,0.28,0.05,0.5,0.84,0.12
+401112202,2019,2,Syracuse,ACC,Maryland,0.06,0.05,0.06,0.55,0.43,0.65
+401110783,2019,2,Tennessee,SEC,BYU,0.11,0.37,-0.02,0.19,0.21,0.23
+401110778,2019,2,Texas,Big 12,LSU,0.25,0.35,0.07,0.48,0.71,0.17
+401110784,2019,2,Texas A&M,SEC,Clemson,0.03,0.22,-0.31,0.23,0.3,0.18
+401117500,2019,2,Texas State,Sun Belt,Wyoming,0.01,-0.05,0.19,0.0,-0.13,0.06
+401112140,2019,2,Texas Tech,Big 12,UTEP,0.22,0.16,0.32,-0.2,-0.41,-0.14
+401110774,2019,2,Tulane,American Athletic,Auburn,-0.26,-0.28,-0.24,0.09,0.36,-0.1
+401117501,2019,2,Tulsa,American Athletic,San José State,0.35,0.65,0.23,0.04,0.25,-0.2
+401114254,2019,2,UAB,Conference USA,Akron,-0.15,0.15,-0.33,0.07,0.21,-0.23
+401114249,2019,2,UCF,American Athletic,Florida Atlantic,0.44,0.52,0.4,-0.05,-0.06,-0.08
+401114214,2019,2,UCLA,Pac-12,San Diego State,-0.02,0.17,-0.24,0.05,0.64,-0.35
+401112146,2019,2,UConn,American Athletic,Illinois,0.0,0.13,-0.17,-0.09,0.18,-0.38
+401112440,2019,2,UL Monroe,Sun Belt,Florida State,0.14,0.24,0.07,0.15,0.17,0.14
+401117502,2019,2,UNLV,Mountain West,Arkansas State,-0.09,-0.5,0.3,0.22,0.33,0.17
+401114207,2019,2,USC,Pac-12,Stanford,0.5,0.84,0.12,0.17,0.28,0.05
+401114224,2019,2,Utah,Pac-12,Northern Illinois,0.36,0.78,0.15,0.18,0.16,0.14
+401117499,2019,2,Utah State,Mountain West,Stony Brook,0.42,0.68,0.16,-0.02,0.04,-0.1
+401112140,2019,2,UTEP,Conference USA,Texas Tech,-0.2,-0.41,-0.14,0.22,0.16,0.32
+401112074,2019,2,UTSA,Conference USA,Baylor,0.12,0.0,0.23,0.61,0.57,0.64
+401110785,2019,2,Vanderbilt,SEC,Purdue,0.21,0.29,0.03,0.33,0.5,-0.14
+401112437,2019,2,Virginia,ACC,William & Mary,0.25,0.16,0.34,-0.29,-0.69,-0.11
+401112446,2019,2,Virginia Tech,ACC,Old Dominion,0.25,0.79,-0.14,0.03,-0.32,0.36
+401112447,2019,2,Wake Forest,ACC,Rice,0.39,0.8,0.14,0.05,0.19,-0.12
+401114175,2019,2,Washington,Pac-12,California,0.01,-0.2,0.2,0.16,0.03,0.3
+401114229,2019,2,Washington State,Pac-12,Northern Colorado,0.34,0.3,0.67,0.06,0.21,0.0
+401114248,2019,2,Western Kentucky,Conference USA,Florida International,-0.03,-0.02,-0.04,-0.05,-0.25,0.03
+401112213,2019,2,Western Michigan,Mid-American,Michigan State,0.08,0.2,-0.13,0.46,0.77,0.29
+401110781,2019,2,West Virginia,Big 12,Missouri,-0.23,-0.31,-0.15,0.17,0.23,0.14
+401112268,2019,2,Wisconsin,Big Ten,Central Michigan,0.5,0.74,0.3,-0.33,-0.33,-0.27
+401117500,2019,2,Wyoming,Mountain West,Texas State,0.0,-0.13,0.06,0.01,-0.05,0.19
+401114185,2019,3,Air Force,Mountain West,Colorado,0.3,0.92,0.14,0.11,0.11,0.12
+401119263,2019,3,Akron,Mid-American,Central Michigan,0.06,0.21,-0.33,0.31,0.72,-0.01
+401110794,2019,3,Alabama,SEC,South Carolina,0.52,0.89,0.01,0.06,0.07,0.0
+401112141,2019,3,Arizona,Pac-12,Texas Tech,0.25,0.46,0.17,-0.02,-0.07,0.1
+401112214,2019,3,Arizona State,Pac-12,Michigan State,-0.02,-0.09,0.02,0.09,0.31,-0.16
+401110786,2019,3,Arkansas,SEC,Colorado State,0.35,0.44,0.26,0.26,0.22,0.32
+401110788,2019,3,Arkansas State,Sun Belt,Georgia,-0.15,-0.12,-0.21,0.57,0.72,0.48
+401114261,2019,3,Army,FBS Independents,UTSA,0.25,0.3,0.25,0.01,0.11,-0.13
+401110787,2019,3,Auburn,SEC,Kent State,0.5,0.33,0.55,0.1,0.2,-0.02
+401114257,2019,3,Ball State,Mid-American,Florida Atlantic,0.13,0.32,-0.1,0.2,0.62,-0.16
+401117503,2019,3,Boise State,Mountain West,Portland State,0.23,0.45,-0.05,-0.03,0.06,-0.09
+401112098,2019,3,Boston College,ACC,Kansas,0.13,0.22,0.06,0.38,0.74,0.2
+401114258,2019,3,Bowling Green,Mid-American,Louisiana Tech,-0.27,-0.38,-0.17,0.24,0.47,-0.05
+401114348,2019,3,Buffalo,Mid-American,Liberty,0.12,-0.06,0.23,0.42,0.69,0.08
+401114219,2019,3,BYU,FBS Independents,USC,0.14,0.28,0.04,0.18,0.39,0.02
+401114176,2019,3,California,Pac-12,North Texas,0.05,-0.13,0.18,0.06,0.13,-0.03
+401119263,2019,3,Central Michigan,Mid-American,Akron,0.31,0.72,-0.01,0.06,0.21,-0.33
+401114255,2019,3,Charlotte,Conference USA,Massachusetts,0.53,0.76,0.47,-0.09,-0.31,0.15
+401117863,2019,3,Cincinnati,American Athletic,Miami (OH),0.18,0.19,0.17,0.0,0.0,0.0
+401112449,2019,3,Clemson,ACC,Syracuse,0.34,0.3,0.41,-0.25,-0.23,-0.24
+401121939,2019,3,Coastal Carolina,Sun Belt,Norfolk State,0.35,0.03,0.52,-0.1,0.08,-0.31
+401114185,2019,3,Colorado,Pac-12,Air Force,0.11,0.11,0.12,0.3,0.92,0.14
+401110786,2019,3,Colorado State,Mountain West,Arkansas,0.26,0.22,0.32,0.35,0.44,0.26
+401112450,2019,3,Duke,ACC,Middle Tennessee,0.37,1.0,0.02,0.2,0.24,0.15
+401117864,2019,3,East Carolina,American Athletic,Navy,0.01,0.32,-0.21,0.42,0.77,0.36
+401112147,2019,3,Eastern Michigan,Mid-American,Illinois,0.19,0.49,-0.09,0.32,0.28,0.33
+401110789,2019,3,Florida,SEC,Kentucky,0.32,0.52,0.11,0.12,0.37,-0.09
+401114257,2019,3,Florida Atlantic,Conference USA,Ball State,0.2,0.62,-0.16,0.13,0.32,-0.1
+401114256,2019,3,Florida International,Conference USA,New Hampshire,0.21,0.26,0.22,0.08,0.04,0.39
+401112451,2019,3,Florida State,ACC,Virginia,0.14,0.16,0.06,0.28,0.27,0.27
+401110788,2019,3,Georgia,SEC,Arkansas State,0.57,0.72,0.48,-0.15,-0.12,-0.21
+401112231,2019,3,Georgia Southern,Sun Belt,Minnesota,0.15,0.43,0.11,0.31,0.59,0.11
+401119264,2019,3,Georgia State,Sun Belt,Western Michigan,-0.03,-0.29,0.18,0.63,0.75,0.6
+401112452,2019,3,Georgia Tech,ACC,The Citadel,0.07,-0.09,0.2,0.17,0.93,0.12
+401114234,2019,3,Hawai'i,Mountain West,Washington,0.17,0.17,0.18,0.49,0.64,0.41
+401114230,2019,3,Houston,American Athletic,Washington State,0.13,-0.04,0.23,0.3,0.42,0.02
+401112147,2019,3,Illinois,Big Ten,Eastern Michigan,0.32,0.28,0.33,0.19,0.49,-0.09
+401112159,2019,3,Indiana,Big Ten,Ohio State,-0.2,-0.24,-0.14,0.44,0.35,0.52
+401112086,2019,3,Iowa,Big Ten,Iowa State,0.1,0.24,0.02,0.32,0.51,-0.02
+401112086,2019,3,Iowa State,Big 12,Iowa,0.32,0.51,-0.02,0.1,0.24,0.02
+401112098,2019,3,Kansas,Big 12,Boston College,0.38,0.74,0.2,0.13,0.22,0.06
+401110792,2019,3,Kansas State,Big 12,Mississippi State,0.09,0.53,-0.11,0.14,0.11,0.15
+401110787,2019,3,Kent State,Mid-American,Auburn,0.1,0.2,-0.02,0.5,0.33,0.55
+401110789,2019,3,Kentucky,SEC,Florida,0.12,0.37,-0.09,0.32,0.52,0.11
+401114348,2019,3,Liberty,FBS Independents,Buffalo,0.42,0.69,0.08,0.12,-0.06,0.23
+401121940,2019,3,Louisiana,Sun Belt,Texas Southern,0.76,0.77,0.75,-0.1,-0.17,-0.02
+401114258,2019,3,Louisiana Tech,Conference USA,Bowling Green,0.24,0.47,-0.05,-0.27,-0.38,-0.17
+401112453,2019,3,Louisville,ACC,Western Kentucky,0.24,0.61,0.09,-0.12,-0.05,-0.26
+401110790,2019,3,LSU,SEC,Northwestern State,0.6,0.96,0.29,0.02,0.13,-0.2
+401114259,2019,3,Marshall,Conference USA,Ohio,0.33,0.42,0.29,0.4,0.57,0.26
+401112203,2019,3,Maryland,Big Ten,Temple,-0.16,-0.13,-0.19,0.06,0.21,-0.01
+401114255,2019,3,Massachusetts,FBS Independents,Charlotte,-0.09,-0.31,0.15,0.53,0.76,0.47
+401117865,2019,3,Memphis,American Athletic,South Alabama,0.26,0.54,0.15,-0.21,-0.33,-0.11
+401112454,2019,3,Miami,ACC,Bethune-Cookman,0.47,0.68,0.27,-0.13,-0.02,-0.24
+401117863,2019,3,Miami (OH),Mid-American,Cincinnati,0.0,0.0,0.0,0.18,0.19,0.17
+401112214,2019,3,Michigan State,Big Ten,Arizona State,0.09,0.31,-0.16,-0.02,-0.09,0.02
+401112450,2019,3,Middle Tennessee,Conference USA,Duke,0.2,0.24,0.15,0.37,1.0,0.02
+401112231,2019,3,Minnesota,Big Ten,Georgia Southern,0.31,0.59,0.11,0.15,0.43,0.11
+401110792,2019,3,Mississippi State,SEC,Kansas State,0.14,0.11,0.15,0.09,0.53,-0.11
+401110793,2019,3,Missouri,SEC,Southeast Missouri State,0.25,0.22,0.21,-0.37,-0.47,-0.24
+401117864,2019,3,Navy,American Athletic,East Carolina,0.42,0.77,0.36,0.01,0.32,-0.21
+401112144,2019,3,NC State,ACC,West Virginia,0.11,0.04,0.2,0.31,0.32,0.34
+401112240,2019,3,Nebraska,Big Ten,Northern Illinois,0.33,0.48,0.26,-0.03,0.03,-0.11
+401117505,2019,3,Nevada,Mountain West,Weber State,0.09,0.13,0.06,-0.14,-0.02,-0.33
+401114336,2019,3,New Mexico,Mountain West,Notre Dame,-0.12,-0.35,0.02,0.55,0.85,0.37
+401114339,2019,3,New Mexico State,FBS Independents,San Diego State,0.08,0.17,-0.15,0.18,-0.04,0.33
+401112448,2019,3,North Carolina,ACC,Wake Forest,0.12,0.09,0.07,0.13,0.36,0.01
+401112240,2019,3,Northern Illinois,Mid-American,Nebraska,-0.03,0.03,-0.11,0.33,0.48,0.26
+401114176,2019,3,North Texas,Conference USA,California,0.06,0.13,-0.03,0.05,-0.13,0.18
+401112246,2019,3,Northwestern,Big Ten,UNLV,0.14,0.1,0.18,0.02,-0.17,0.19
+401114336,2019,3,Notre Dame,FBS Independents,New Mexico,0.55,0.85,0.37,-0.12,-0.35,0.02
+401114259,2019,3,Ohio,Mid-American,Marshall,0.4,0.57,0.26,0.33,0.42,0.29
+401112159,2019,3,Ohio State,Big Ten,Indiana,0.44,0.35,0.52,-0.2,-0.24,-0.14
+401112116,2019,3,Oklahoma,Big 12,UCLA,0.59,0.9,0.47,0.16,0.33,0.02
+401112124,2019,3,Oklahoma State,Big 12,Tulsa,0.34,0.27,0.41,0.11,0.11,0.11
+401110791,2019,3,Ole Miss,SEC,SE Louisiana,0.24,0.64,0.01,0.16,0.29,-0.03
+401114194,2019,3,Oregon,Pac-12,Montana,0.35,0.49,0.2,-0.13,-0.04,-0.34
+401114201,2019,3,Oregon State,Pac-12,Cal Poly,0.54,0.75,0.4,0.12,0.36,0.07
+401112259,2019,3,Penn State,Big Ten,Pittsburgh,0.2,0.16,0.17,0.14,0.27,-0.13
+401112259,2019,3,Pittsburgh,ACC,Penn State,0.14,0.27,-0.13,0.2,0.16,0.17
+401112130,2019,3,Purdue,Big Ten,TCU,-0.05,0.07,-0.23,0.08,-0.45,0.33
+401112136,2019,3,Rice,Conference USA,Texas,0.16,0.2,0.12,0.47,0.66,0.2
+401114339,2019,3,San Diego State,Mountain West,New Mexico State,0.18,-0.04,0.33,0.08,0.17,-0.15
+401117867,2019,3,SMU,American Athletic,Texas State,0.35,0.7,0.22,-0.09,-0.07,-0.1
+401117865,2019,3,South Alabama,Sun Belt,Memphis,-0.21,-0.33,-0.11,0.26,0.54,0.15
+401110794,2019,3,South Carolina,SEC,Alabama,0.06,0.07,0.0,0.52,0.89,0.01
+401114260,2019,3,Southern Miss,Conference USA,Troy,0.44,0.92,0.01,0.43,0.59,-0.15
+401117866,2019,3,South Florida,American Athletic,South Carolina State,0.24,0.39,0.16,-0.01,0.28,-0.32
+401114208,2019,3,Stanford,Pac-12,UCF,0.07,0.03,0.16,0.37,1.06,-0.06
+401112449,2019,3,Syracuse,ACC,Clemson,-0.25,-0.23,-0.24,0.34,0.3,0.41
+401112130,2019,3,TCU,Big 12,Purdue,0.08,-0.45,0.33,-0.05,0.07,-0.23
+401112203,2019,3,Temple,American Athletic,Maryland,0.06,0.21,-0.01,-0.16,-0.13,-0.19
+401110795,2019,3,Tennessee,SEC,Chattanooga,0.29,0.51,0.19,-0.27,-0.4,-0.19
+401112136,2019,3,Texas,Big 12,Rice,0.47,0.66,0.2,0.16,0.2,0.12
+401110796,2019,3,Texas A&M,SEC,Lamar,0.57,0.66,0.53,-0.13,-0.09,-0.14
+401117867,2019,3,Texas State,Sun Belt,SMU,-0.09,-0.07,-0.1,0.35,0.7,0.22
+401112141,2019,3,Texas Tech,Big 12,Arizona,-0.02,-0.07,0.1,0.25,0.46,0.17
+401119265,2019,3,Toledo,Mid-American,Murray State,0.41,0.61,0.22,-0.01,-0.11,0.11
+401114260,2019,3,Troy,Sun Belt,Southern Miss,0.43,0.59,-0.15,0.44,0.92,0.01
+401117868,2019,3,Tulane,American Athletic,Missouri State,0.37,0.46,0.36,-0.25,-0.24,-0.26
+401112124,2019,3,Tulsa,American Athletic,Oklahoma State,0.11,0.11,0.11,0.34,0.27,0.41
+401114208,2019,3,UCF,American Athletic,Stanford,0.37,1.06,-0.06,0.07,0.03,0.16
+401112116,2019,3,UCLA,Pac-12,Oklahoma,0.16,0.33,0.02,0.59,0.9,0.47
+401112246,2019,3,UNLV,Mountain West,Northwestern,0.02,-0.17,0.19,0.14,0.1,0.18
+401114219,2019,3,USC,Pac-12,BYU,0.18,0.39,0.02,0.14,0.28,0.04
+401114225,2019,3,Utah,Pac-12,Idaho State,0.38,0.76,0.15,-0.25,-0.25,-0.25
+401114261,2019,3,UTSA,Conference USA,Army,0.01,0.11,-0.13,0.25,0.3,0.25
+401112451,2019,3,Virginia,ACC,Florida State,0.28,0.27,0.27,0.14,0.16,0.06
+401112455,2019,3,Virginia Tech,ACC,Furman,0.15,0.1,0.2,-0.01,-0.21,0.12
+401112448,2019,3,Wake Forest,ACC,North Carolina,0.13,0.36,0.01,0.12,0.09,0.07
+401114234,2019,3,Washington,Pac-12,Hawai'i,0.49,0.64,0.41,0.17,0.17,0.18
+401114230,2019,3,Washington State,Pac-12,Houston,0.3,0.42,0.02,0.13,-0.04,0.23
+401112453,2019,3,Western Kentucky,Conference USA,Louisville,-0.12,-0.05,-0.26,0.24,0.61,0.09
+401119264,2019,3,Western Michigan,Mid-American,Georgia State,0.63,0.75,0.6,-0.03,-0.29,0.18
+401112144,2019,3,West Virginia,Big 12,NC State,0.31,0.32,0.34,0.11,0.04,0.2
+401117504,2019,3,Wyoming,Mountain West,Idaho,0.17,-0.22,0.27,-0.02,0.03,-0.04
+401117506,2019,4,Air Force,Mountain West,Boise State,0.15,0.16,0.17,0.36,0.73,-0.01
+401119269,2019,4,Akron,Mid-American,Troy,-0.14,-0.08,-0.28,0.25,0.25,0.25
+401110797,2019,4,Alabama,SEC,Southern Miss,0.55,0.89,0.29,-0.12,0.13,-0.36
+401112459,2019,4,App State,Sun Belt,North Carolina,0.25,0.27,0.19,0.29,0.4,0.19
+401114155,2019,4,Arizona State,Pac-12,Colorado,0.32,0.42,0.23,0.33,0.77,0.04
+401110798,2019,4,Arkansas,SEC,San José State,0.07,0.25,-0.21,0.28,0.4,0.0
+401121941,2019,4,Arkansas State,Sun Belt,Southern Illinois,0.44,0.45,0.39,0.11,-0.01,0.2
+401114327,2019,4,Army,FBS Independents,Morgan State,0.42,-0.1,0.49,0.15,0.58,-0.23
+401110804,2019,4,Auburn,SEC,Texas A&M,0.2,0.39,0.1,0.07,0.31,-0.5
+401112460,2019,4,Ball State,Mid-American,NC State,0.06,-0.01,0.22,0.17,0.08,0.24
+401112075,2019,4,Baylor,Big 12,Rice,0.31,0.69,-0.03,-0.07,0.0,-0.09
+401117506,2019,4,Boise State,Mountain West,Air Force,0.36,0.73,-0.01,0.15,0.16,0.17
+401112265,2019,4,Boston College,ACC,Rutgers,0.26,0.37,0.21,0.13,0.47,-0.34
+401119266,2019,4,Bowling Green,Mid-American,Kent State,0.08,-0.03,0.19,0.48,0.67,0.36
+401117870,2019,4,Buffalo,Mid-American,Temple,0.11,0.0,0.12,-0.17,-0.21,-0.07
+401114235,2019,4,BYU,FBS Independents,Washington,-0.04,0.14,-0.46,0.2,0.77,-0.18
+401110801,2019,4,California,Pac-12,Ole Miss,0.31,0.7,-0.22,0.16,0.2,0.14
+401112458,2019,4,Central Michigan,Mid-American,Miami,-0.11,-0.16,-0.05,-0.04,0.16,-0.14
+401112456,2019,4,Charlotte,Conference USA,Clemson,-0.21,-0.66,0.06,0.4,0.4,0.43
+401112456,2019,4,Clemson,ACC,Charlotte,0.4,0.4,0.43,-0.21,-0.66,0.06
+401114355,2019,4,Coastal Carolina,Sun Belt,Massachusetts,0.63,0.7,0.58,0.07,0.07,0.06
+401114155,2019,4,Colorado,Pac-12,Arizona State,0.33,0.77,0.04,0.32,0.42,0.23
+401117507,2019,4,Colorado State,Mountain West,Toledo,0.43,0.48,0.42,0.47,0.13,0.62
+401116697,2019,4,East Carolina,American Athletic,William & Mary,0.14,0.11,0.2,-0.06,0.01,-0.12
+401119267,2019,4,Eastern Michigan,Mid-American,Central Connecticut,0.19,0.55,-0.29,0.21,0.5,0.0
+401110799,2019,4,Florida,SEC,Tennessee,0.21,0.34,0.13,-0.1,-0.16,-0.04
+401114263,2019,4,Florida Atlantic,Conference USA,Wagner,0.44,0.82,-0.06,-0.15,0.19,-0.72
+401114262,2019,4,Florida International,Conference USA,Louisiana Tech,0.32,0.4,0.2,0.26,0.23,0.4
+401112457,2019,4,Florida State,ACC,Louisville,0.27,0.53,0.04,0.15,0.3,0.05
+401117510,2019,4,Fresno State,Mountain West,Sacramento State,0.21,0.28,0.13,0.04,0.25,-0.56
+401110800,2019,4,Georgia,SEC,Notre Dame,0.21,0.46,0.05,0.09,0.14,0.01
+401117511,2019,4,Hawai'i,Mountain West,Central Arkansas,0.27,0.61,-0.22,-0.13,-0.3,0.23
+401117869,2019,4,Houston,American Athletic,Tulane,0.3,0.06,0.54,0.39,0.15,0.5
+401112148,2019,4,Illinois,Big Ten,Nebraska,0.16,-0.05,0.27,0.31,0.54,0.18
+401112160,2019,4,Indiana,Big Ten,UConn,0.31,0.51,0.2,-0.33,-0.41,-0.22
+401112087,2019,4,Iowa State,Big 12,UL Monroe,0.63,1.1,0.36,0.01,-0.31,0.32
+401112099,2019,4,Kansas,Big 12,West Virginia,0.28,0.51,0.09,0.11,0.18,0.1
+401119266,2019,4,Kent State,Mid-American,Bowling Green,0.48,0.67,0.36,0.08,-0.03,0.19
+401110802,2019,4,Kentucky,SEC,Mississippi State,-0.03,-0.19,0.27,0.28,0.16,0.36
+401114349,2019,4,Liberty,FBS Independents,Hampton,0.69,1.07,0.49,0.06,0.4,-0.21
+401119268,2019,4,Louisiana,Sun Belt,Ohio,0.3,0.22,0.39,0.09,-0.1,0.32
+401114262,2019,4,Louisiana Tech,Conference USA,Florida International,0.26,0.23,0.4,0.32,0.4,0.2
+401112457,2019,4,Louisville,ACC,Florida State,0.15,0.3,0.05,0.27,0.53,0.04
+401110805,2019,4,LSU,SEC,Vanderbilt,0.29,0.47,0.11,0.03,0.19,-0.01
+401114355,2019,4,Massachusetts,FBS Independents,Coastal Carolina,0.07,0.07,0.06,0.63,0.7,0.58
+401112458,2019,4,Miami,ACC,Central Michigan,-0.04,0.16,-0.14,-0.11,-0.16,-0.05
+401112253,2019,4,Miami (OH),Mid-American,Ohio State,-0.17,-0.21,-0.12,0.57,0.98,0.32
+401112224,2019,4,Michigan,Big Ten,Wisconsin,0.05,0.19,-0.3,0.37,0.17,0.42
+401112215,2019,4,Michigan State,Big Ten,Northwestern,0.18,0.39,0.01,-0.11,-0.09,-0.14
+401110802,2019,4,Mississippi State,SEC,Kentucky,0.28,0.16,0.36,-0.03,-0.19,0.27
+401110803,2019,4,Missouri,SEC,South Carolina,0.13,0.48,-0.08,-0.17,-0.18,-0.16
+401112460,2019,4,NC State,ACC,Ball State,0.17,0.08,0.24,0.06,-0.01,0.22
+401112148,2019,4,Nebraska,Big Ten,Illinois,0.31,0.54,0.18,0.16,-0.05,0.27
+401114266,2019,4,Nevada,Mountain West,UTEP,0.28,0.58,0.15,0.18,0.32,0.11
+401114340,2019,4,New Mexico,Mountain West,New Mexico State,0.45,0.71,0.29,0.32,0.28,0.39
+401114340,2019,4,New Mexico State,FBS Independents,New Mexico,0.32,0.28,0.39,0.45,0.71,0.29
+401112459,2019,4,North Carolina,ACC,App State,0.29,0.4,0.19,0.25,0.27,0.19
+401114264,2019,4,North Texas,Conference USA,UTSA,0.28,0.42,0.24,-0.09,-0.26,0.11
+401112215,2019,4,Northwestern,Big Ten,Michigan State,-0.11,-0.09,-0.14,0.18,0.39,0.01
+401110800,2019,4,Notre Dame,FBS Independents,Georgia,0.09,0.14,0.01,0.21,0.46,0.05
+401119268,2019,4,Ohio,Mid-American,Louisiana,0.09,-0.1,0.32,0.3,0.22,0.39
+401112253,2019,4,Ohio State,Big Ten,Miami (OH),0.57,0.98,0.32,-0.17,-0.21,-0.12
+401112125,2019,4,Oklahoma State,Big 12,Texas,0.13,0.24,0.09,0.33,0.77,0.05
+401112463,2019,4,Old Dominion,Conference USA,Virginia,-0.06,-0.15,0.04,-0.02,0.14,-0.18
+401110801,2019,4,Ole Miss,SEC,California,0.16,0.2,0.14,0.31,0.7,-0.22
+401114195,2019,4,Oregon,Pac-12,Stanford,0.19,0.61,-0.23,0.02,-0.05,0.09
+401112461,2019,4,Pittsburgh,ACC,UCF,0.2,0.23,0.16,0.07,0.1,0.01
+401112075,2019,4,Rice,Conference USA,Baylor,-0.07,0.0,-0.09,0.31,0.69,-0.03
+401112265,2019,4,Rutgers,Big Ten,Boston College,0.13,0.47,-0.34,0.26,0.37,0.21
+401117508,2019,4,San Diego State,Mountain West,Utah State,0.04,0.12,-0.01,0.13,0.34,-0.17
+401110798,2019,4,San José State,Mountain West,Arkansas,0.28,0.4,0.0,0.07,0.25,-0.21
+401112131,2019,4,SMU,American Athletic,TCU,0.14,0.34,0.01,0.13,-0.06,0.34
+401114265,2019,4,South Alabama,Sun Belt,UAB,-0.05,-0.24,0.13,0.3,0.54,0.14
+401110803,2019,4,South Carolina,SEC,Missouri,-0.17,-0.18,-0.16,0.13,0.48,-0.08
+401110797,2019,4,Southern Miss,Conference USA,Alabama,-0.12,0.13,-0.36,0.55,0.89,0.29
+401114195,2019,4,Stanford,Pac-12,Oregon,0.02,-0.05,0.09,0.19,0.61,-0.23
+401112462,2019,4,Syracuse,ACC,Western Michigan,0.3,0.42,0.22,0.19,0.24,0.1
+401112131,2019,4,TCU,Big 12,SMU,0.13,-0.06,0.34,0.14,0.34,0.01
+401117870,2019,4,Temple,American Athletic,Buffalo,-0.17,-0.21,-0.07,0.11,0.0,0.12
+401110799,2019,4,Tennessee,SEC,Florida,-0.1,-0.16,-0.04,0.21,0.34,0.13
+401112125,2019,4,Texas,Big 12,Oklahoma State,0.33,0.77,0.05,0.13,0.24,0.09
+401110804,2019,4,Texas A&M,SEC,Auburn,0.07,0.31,-0.5,0.2,0.39,0.1
+401117507,2019,4,Toledo,Mid-American,Colorado State,0.47,0.13,0.62,0.43,0.48,0.42
+401119269,2019,4,Troy,Sun Belt,Akron,0.25,0.25,0.25,-0.14,-0.08,-0.28
+401117869,2019,4,Tulane,American Athletic,Houston,0.39,0.15,0.5,0.3,0.06,0.54
+401117509,2019,4,Tulsa,American Athletic,Wyoming,0.04,0.09,-0.03,0.11,0.21,0.0
+401114265,2019,4,UAB,Conference USA,South Alabama,0.3,0.54,0.14,-0.05,-0.24,0.13
+401112461,2019,4,UCF,American Athletic,Pittsburgh,0.07,0.1,0.01,0.2,0.23,0.16
+401114215,2019,4,UCLA,Pac-12,Washington State,0.38,0.71,0.07,0.49,0.55,0.33
+401112160,2019,4,UConn,American Athletic,Indiana,-0.33,-0.41,-0.22,0.31,0.51,0.2
+401112087,2019,4,UL Monroe,Sun Belt,Iowa State,0.01,-0.31,0.32,0.63,1.1,0.36
+401114220,2019,4,USC,Pac-12,Utah,0.31,0.75,-0.38,0.16,0.27,0.12
+401114220,2019,4,Utah,Pac-12,USC,0.16,0.27,0.12,0.31,0.75,-0.38
+401117508,2019,4,Utah State,Mountain West,San Diego State,0.13,0.34,-0.17,0.04,0.12,-0.01
+401114266,2019,4,UTEP,Conference USA,Nevada,0.18,0.32,0.11,0.28,0.58,0.15
+401114264,2019,4,UTSA,Conference USA,North Texas,-0.09,-0.26,0.11,0.28,0.42,0.24
+401110805,2019,4,Vanderbilt,SEC,LSU,0.03,0.19,-0.01,0.29,0.47,0.11
+401112463,2019,4,Virginia,ACC,Old Dominion,-0.02,0.14,-0.18,-0.06,-0.15,0.04
+401112464,2019,4,Wake Forest,ACC,Elon,0.41,0.67,0.16,-0.01,-0.06,0.03
+401114235,2019,4,Washington,Pac-12,BYU,0.2,0.77,-0.18,-0.04,0.14,-0.46
+401114215,2019,4,Washington State,Pac-12,UCLA,0.49,0.55,0.33,0.38,0.71,0.07
+401112462,2019,4,Western Michigan,Mid-American,Syracuse,0.19,0.24,0.1,0.3,0.42,0.22
+401112099,2019,4,West Virginia,Big 12,Kansas,0.11,0.18,0.1,0.28,0.51,0.09
+401112224,2019,4,Wisconsin,Big Ten,Michigan,0.37,0.17,0.42,0.05,0.19,-0.3
+401117509,2019,4,Wyoming,Mountain West,Tulsa,0.11,0.21,0.0,0.04,0.09,-0.03
+401117512,2019,5,Air Force,Mountain West,San José State,0.32,0.98,0.23,0.08,0.2,-0.07
+401114356,2019,5,Akron,Mid-American,Massachusetts,0.06,0.19,-0.18,0.21,0.34,0.15
+401110806,2019,5,Alabama,SEC,Ole Miss,0.43,0.6,0.24,0.06,0.11,0.15
+401121943,2019,5,App State,Sun Belt,Coastal Carolina,0.39,0.51,0.31,0.3,0.42,0.21
+401114166,2019,5,Arizona,Pac-12,UCLA,0.26,0.25,0.24,0.17,0.11,0.23
+401114156,2019,5,Arizona State,Pac-12,California,0.18,0.3,0.12,0.07,0.06,0.05
+401110807,2019,5,Arkansas,SEC,Texas A&M,0.15,0.21,0.02,0.18,0.21,0.12
+401121944,2019,5,Arkansas State,Sun Belt,Troy,0.32,0.66,-0.07,0.05,0.29,-0.25
+401110808,2019,5,Auburn,SEC,Mississippi State,0.47,1.13,0.12,0.04,0.19,-0.05
+401112076,2019,5,Baylor,Big 12,Iowa State,0.17,0.24,0.09,0.19,0.33,-0.07
+401112466,2019,5,Boston College,ACC,Wake Forest,0.28,0.6,0.08,0.16,0.43,0.02
+401119270,2019,5,Buffalo,Mid-American,Miami (OH),0.06,-0.44,0.29,-0.07,-0.07,-0.08
+401117213,2019,5,BYU,FBS Independents,Toledo,0.14,0.24,-0.05,0.1,0.15,0.08
+401114156,2019,5,California,Pac-12,Arizona State,0.07,0.06,0.05,0.18,0.3,0.12
+401119271,2019,5,Central Michigan,Mid-American,Western Michigan,0.01,0.21,-0.3,0.21,0.43,0.06
+401114267,2019,5,Charlotte,Conference USA,Florida Atlantic,0.03,0.13,-0.12,0.38,0.61,0.24
+401114269,2019,5,Cincinnati,American Athletic,Marshall,0.43,0.89,0.2,0.06,-0.14,0.3
+401112467,2019,5,Clemson,ACC,North Carolina,0.17,0.18,0.16,0.11,0.16,0.07
+401121943,2019,5,Coastal Carolina,Sun Belt,App State,0.3,0.42,0.21,0.39,0.51,0.31
+401117513,2019,5,Colorado State,Mountain West,Utah State,-0.13,0.05,-0.31,-0.02,-0.14,0.03
+401112465,2019,5,Duke,ACC,Virginia Tech,0.37,0.63,0.23,-0.01,-0.07,0.04
+401114271,2019,5,East Carolina,American Athletic,Old Dominion,0.04,0.56,-0.26,-0.02,0.22,-0.24
+401110809,2019,5,Florida,SEC,Towson,0.38,0.7,0.05,0.1,0.1,0.11
+401114267,2019,5,Florida Atlantic,Conference USA,Charlotte,0.38,0.61,0.24,0.03,0.13,-0.12
+401112468,2019,5,Florida State,ACC,NC State,0.11,0.17,0.03,0.01,0.15,-0.23
+401114341,2019,5,Fresno State,Mountain West,New Mexico State,0.14,0.23,0.14,-0.12,-0.32,0.38
+401121945,2019,5,Georgia Southern,Sun Belt,Louisiana,0.16,-0.08,0.25,0.42,0.48,0.42
+401112469,2019,5,Georgia Tech,ACC,Temple,-0.21,-0.18,-0.25,0.09,-0.04,0.2
+401117515,2019,5,Hawai'i,Mountain West,Nevada,0.39,0.6,0.14,-0.17,-0.26,-0.06
+401114270,2019,5,Houston,American Athletic,North Texas,0.26,0.29,0.27,0.14,0.24,-0.11
+401112161,2019,5,Indiana,Big Ten,Michigan State,0.22,0.36,0.02,0.2,0.45,-0.03
+401112193,2019,5,Iowa,Big Ten,Middle Tennessee,0.58,0.56,0.6,0.01,0.11,-0.17
+401112076,2019,5,Iowa State,Big 12,Baylor,0.19,0.33,-0.07,0.17,0.24,0.09
+401112100,2019,5,Kansas,Big 12,TCU,-0.12,-0.2,0.03,0.39,0.79,0.23
+401112108,2019,5,Kansas State,Big 12,Oklahoma State,0.0,-0.03,0.02,0.16,-0.05,0.38
+401110810,2019,5,Kentucky,SEC,South Carolina,-0.14,-0.3,0.1,0.08,-0.08,0.22
+401114350,2019,5,Liberty,FBS Independents,New Mexico,0.17,0.49,-0.17,-0.03,-0.17,0.03
+401121945,2019,5,Louisiana,Sun Belt,Georgia Southern,0.42,0.48,0.42,0.16,-0.08,0.25
+401114268,2019,5,Louisiana Tech,Conference USA,Rice,0.11,0.11,0.13,0.05,0.33,-0.07
+401114269,2019,5,Marshall,Conference USA,Cincinnati,0.06,-0.14,0.3,0.43,0.89,0.2
+401112204,2019,5,Maryland,Big Ten,Penn State,-0.29,-0.33,-0.25,0.44,0.72,0.23
+401114356,2019,5,Massachusetts,FBS Independents,Akron,0.21,0.34,0.15,0.06,0.19,-0.18
+401117871,2019,5,Memphis,American Athletic,Navy,0.31,0.62,0.01,0.16,0.09,0.16
+401119270,2019,5,Miami (OH),Mid-American,Buffalo,-0.07,-0.07,-0.08,0.06,-0.44,0.29
+401112225,2019,5,Michigan,Big Ten,Rutgers,0.44,0.79,0.21,-0.18,0.04,-0.38
+401112161,2019,5,Michigan State,Big Ten,Indiana,0.2,0.45,-0.03,0.22,0.36,0.02
+401112193,2019,5,Middle Tennessee,Conference USA,Iowa,0.01,0.11,-0.17,0.58,0.56,0.6
+401112232,2019,5,Minnesota,Big Ten,Purdue,0.44,0.95,0.03,0.16,0.17,0.18
+401110808,2019,5,Mississippi State,SEC,Auburn,0.04,0.19,-0.05,0.47,1.13,0.12
+401117871,2019,5,Navy,American Athletic,Memphis,0.16,0.09,0.16,0.31,0.62,0.01
+401112468,2019,5,NC State,ACC,Florida State,0.01,0.15,-0.23,0.11,0.17,0.03
+401112241,2019,5,Nebraska,Big Ten,Ohio State,-0.01,-0.57,0.3,0.44,0.54,0.41
+401117515,2019,5,Nevada,Mountain West,Hawai'i,-0.17,-0.26,-0.06,0.39,0.6,0.14
+401114350,2019,5,New Mexico,Mountain West,Liberty,-0.03,-0.17,0.03,0.17,0.49,-0.17
+401114341,2019,5,New Mexico State,FBS Independents,Fresno State,-0.12,-0.32,0.38,0.14,0.23,0.14
+401112467,2019,5,North Carolina,ACC,Clemson,0.11,0.16,0.07,0.17,0.18,0.16
+401110811,2019,5,Northern Illinois,Mid-American,Vanderbilt,0.25,0.25,0.26,0.19,0.03,0.44
+401114270,2019,5,North Texas,Conference USA,Houston,0.14,0.24,-0.11,0.26,0.29,0.27
+401112247,2019,5,Northwestern,Big Ten,Wisconsin,-0.13,-0.29,0.08,-0.07,-0.11,-0.02
+401112472,2019,5,Notre Dame,FBS Independents,Virginia,0.31,0.16,0.44,0.07,0.18,-0.15
+401112241,2019,5,Ohio State,Big Ten,Nebraska,0.44,0.54,0.41,-0.01,-0.57,0.3
+401112117,2019,5,Oklahoma,Big 12,Texas Tech,0.48,0.61,0.43,-0.01,-0.15,0.11
+401112108,2019,5,Oklahoma State,Big 12,Kansas State,0.16,-0.05,0.38,0.0,-0.03,0.02
+401114271,2019,5,Old Dominion,Conference USA,East Carolina,-0.02,0.22,-0.24,0.04,0.56,-0.26
+401110806,2019,5,Ole Miss,SEC,Alabama,0.06,0.11,0.15,0.43,0.6,0.24
+401114202,2019,5,Oregon State,Pac-12,Stanford,0.34,0.42,0.22,0.28,0.57,-0.04
+401112204,2019,5,Penn State,Big Ten,Maryland,0.44,0.72,0.23,-0.29,-0.33,-0.25
+401112470,2019,5,Pittsburgh,ACC,Delaware,0.11,0.35,-0.06,-0.11,-0.09,-0.14
+401112232,2019,5,Purdue,Big Ten,Minnesota,0.16,0.17,0.18,0.44,0.95,0.03
+401114268,2019,5,Rice,Conference USA,Louisiana Tech,0.05,0.33,-0.07,0.11,0.11,0.13
+401112225,2019,5,Rutgers,Big Ten,Michigan,-0.18,0.04,-0.38,0.44,0.79,0.21
+401117512,2019,5,San José State,Mountain West,Air Force,0.08,0.2,-0.07,0.32,0.98,0.23
+401117873,2019,5,SMU,American Athletic,South Florida,0.39,0.61,0.26,0.13,0.1,0.2
+401121946,2019,5,South Alabama,Sun Belt,UL Monroe,0.12,-0.05,0.25,0.3,0.76,-0.08
+401110810,2019,5,South Carolina,SEC,Kentucky,0.08,-0.08,0.22,-0.14,-0.3,0.1
+401114272,2019,5,Southern Miss,Conference USA,UTEP,0.38,0.92,-0.01,0.12,-0.07,0.39
+401117873,2019,5,South Florida,American Athletic,SMU,0.13,0.1,0.2,0.39,0.61,0.26
+401114202,2019,5,Stanford,Pac-12,Oregon State,0.28,0.57,-0.04,0.34,0.42,0.22
+401112471,2019,5,Syracuse,ACC,Holy Cross,0.18,0.38,-0.03,-0.22,-0.13,-0.38
+401112100,2019,5,TCU,Big 12,Kansas,0.39,0.79,0.23,-0.12,-0.2,0.03
+401112469,2019,5,Temple,American Athletic,Georgia Tech,0.09,-0.04,0.2,-0.21,-0.18,-0.25
+401110807,2019,5,Texas A&M,SEC,Arkansas,0.18,0.21,0.12,0.15,0.21,0.02
+401121947,2019,5,Texas State,Sun Belt,Nicholls,0.18,0.52,-0.13,-0.05,0.21,-0.31
+401112117,2019,5,Texas Tech,Big 12,Oklahoma,-0.01,-0.15,0.11,0.48,0.61,0.43
+401117213,2019,5,Toledo,Mid-American,BYU,0.1,0.15,0.08,0.14,0.24,-0.05
+401121944,2019,5,Troy,Sun Belt,Arkansas State,0.05,0.29,-0.25,0.32,0.66,-0.07
+401114273,2019,5,UAB,Conference USA,Western Kentucky,0.01,-0.09,0.11,0.01,0.3,-0.22
+401117872,2019,5,UCF,American Athletic,UConn,0.51,0.59,0.43,0.09,0.14,0.04
+401114166,2019,5,UCLA,Pac-12,Arizona,0.17,0.11,0.23,0.26,0.25,0.24
+401117872,2019,5,UConn,American Athletic,UCF,0.09,0.14,0.04,0.51,0.59,0.43
+401121946,2019,5,UL Monroe,Sun Belt,South Alabama,0.3,0.76,-0.08,0.12,-0.05,0.25
+401117514,2019,5,UNLV,Mountain West,Wyoming,0.07,0.08,0.06,0.46,0.54,0.47
+401114221,2019,5,USC,Pac-12,Washington,0.09,-0.07,0.25,0.2,0.11,0.32
+401114226,2019,5,Utah,Pac-12,Washington State,0.42,0.7,0.22,0.09,0.07,0.13
+401117513,2019,5,Utah State,Mountain West,Colorado State,-0.02,-0.14,0.03,-0.13,0.05,-0.31
+401114272,2019,5,UTEP,Conference USA,Southern Miss,0.12,-0.07,0.39,0.38,0.92,-0.01
+401110811,2019,5,Vanderbilt,SEC,Northern Illinois,0.19,0.03,0.44,0.25,0.25,0.26
+401112472,2019,5,Virginia,ACC,Notre Dame,0.07,0.18,-0.15,0.31,0.16,0.44
+401112465,2019,5,Virginia Tech,ACC,Duke,-0.01,-0.07,0.04,0.37,0.63,0.23
+401112466,2019,5,Wake Forest,ACC,Boston College,0.16,0.43,0.02,0.28,0.6,0.08
+401114221,2019,5,Washington,Pac-12,USC,0.2,0.11,0.32,0.09,-0.07,0.25
+401114226,2019,5,Washington State,Pac-12,Utah,0.09,0.07,0.13,0.42,0.7,0.22
+401114273,2019,5,Western Kentucky,Conference USA,UAB,0.01,0.3,-0.22,0.01,-0.09,0.11
+401119271,2019,5,Western Michigan,Mid-American,Central Michigan,0.21,0.43,0.06,0.01,0.21,-0.3
+401112247,2019,5,Wisconsin,Big Ten,Northwestern,-0.07,-0.11,-0.02,-0.13,-0.29,0.08
+401117514,2019,5,Wyoming,Mountain West,UNLV,0.46,0.54,0.47,0.07,0.08,0.06
+401117516,2019,6,Air Force,Mountain West,Navy,-0.05,0.26,-0.29,0.32,1.78,0.09
+401114167,2019,6,Arizona,Pac-12,Colorado,0.42,0.58,0.17,0.25,0.43,0.09
+401121949,2019,6,Arkansas State,Sun Belt,Georgia State,0.42,0.38,0.44,0.46,0.6,0.35
+401114328,2019,6,Army,FBS Independents,Tulane,0.14,0.01,0.21,0.42,0.71,0.3
+401110812,2019,6,Auburn,SEC,Florida,-0.1,-0.26,0.05,0.11,0.24,-0.1
+401119272,2019,6,Ball State,Mid-American,Northern Illinois,-0.22,-0.2,-0.21,0.05,0.15,-0.06
+401112077,2019,6,Baylor,Big 12,Kansas State,0.36,0.56,0.21,0.01,0.09,-0.04
+401117517,2019,6,Boise State,Mountain West,UNLV,0.29,0.48,0.08,-0.07,-0.14,0.07
+401112473,2019,6,Boston College,ACC,Louisville,0.3,0.56,0.1,0.46,0.96,0.08
+401114337,2019,6,Bowling Green,Mid-American,Notre Dame,-0.03,0.0,-0.06,0.64,1.07,0.33
+401119274,2019,6,Buffalo,Mid-American,Ohio,0.19,0.45,0.05,0.06,-0.39,0.3
+401114177,2019,6,California,Pac-12,Oregon,0.04,0.03,0.04,0.05,0.06,0.07
+401119273,2019,6,Central Michigan,Mid-American,Eastern Michigan,0.49,0.66,0.4,0.02,-0.1,0.19
+401117875,2019,6,Cincinnati,American Athletic,UCF,-0.01,0.06,-0.05,-0.04,-0.1,0.07
+401114167,2019,6,Colorado,Pac-12,Arizona,0.25,0.43,0.09,0.42,0.58,0.17
+401117518,2019,6,Colorado State,Mountain West,San Diego State,-0.15,0.02,-0.46,-0.05,0.31,-0.24
+401112474,2019,6,Duke,ACC,Pittsburgh,-0.09,-0.24,0.1,-0.12,-0.14,-0.12
+401117874,2019,6,East Carolina,American Athletic,Temple,0.07,0.15,-0.05,0.18,0.26,0.15
+401119273,2019,6,Eastern Michigan,Mid-American,Central Michigan,0.02,-0.1,0.19,0.49,0.66,0.4
+401110812,2019,6,Florida,SEC,Auburn,0.11,0.24,-0.1,-0.1,-0.26,0.05
+401114274,2019,6,Florida International,Conference USA,Massachusetts,0.28,0.3,0.3,-0.35,-0.52,-0.15
+401110816,2019,6,Georgia,SEC,Tennessee,0.43,0.73,0.22,0.14,0.27,-0.04
+401121948,2019,6,Georgia Southern,Sun Belt,South Alabama,0.03,-0.19,0.09,0.08,0.51,-0.24
+401121949,2019,6,Georgia State,Sun Belt,Arkansas State,0.46,0.6,0.35,0.42,0.38,0.44
+401112475,2019,6,Georgia Tech,ACC,North Carolina,0.15,0.22,0.08,0.29,0.55,0.02
+401112149,2019,6,Illinois,Big Ten,Minnesota,-0.05,-0.06,-0.05,0.23,0.27,0.26
+401112194,2019,6,Iowa,Big Ten,Michigan,-0.18,-0.11,-0.29,-0.01,-0.02,0.04
+401112088,2019,6,Iowa State,Big 12,TCU,0.27,0.59,0.06,0.23,0.28,0.18
+401112101,2019,6,Kansas,Big 12,Oklahoma,0.15,0.27,0.02,0.53,0.65,0.46
+401112077,2019,6,Kansas State,Big 12,Baylor,0.01,0.09,-0.04,0.36,0.56,0.21
+401112269,2019,6,Kent State,Mid-American,Wisconsin,-0.1,-0.3,0.19,0.47,0.71,0.38
+401114342,2019,6,Liberty,FBS Independents,New Mexico State,0.06,-0.02,0.14,0.08,0.2,-0.06
+401112473,2019,6,Louisville,ACC,Boston College,0.46,0.96,0.08,0.3,0.56,0.1
+401110813,2019,6,LSU,SEC,Utah State,0.33,0.7,0.04,-0.23,-0.12,-0.49
+401114275,2019,6,Marshall,Conference USA,Middle Tennessee,0.07,0.16,0.03,0.18,0.36,0.06
+401112205,2019,6,Maryland,Big Ten,Rutgers,0.34,0.33,0.36,-0.1,-0.04,-0.15
+401114274,2019,6,Massachusetts,FBS Independents,Florida International,-0.35,-0.52,-0.15,0.28,0.3,0.3
+401117877,2019,6,Memphis,American Athletic,UL Monroe,0.48,0.68,0.3,0.16,-0.04,0.39
+401112476,2019,6,Miami,ACC,Virginia Tech,0.28,0.28,0.26,0.26,0.51,0.12
+401112194,2019,6,Michigan,Big Ten,Iowa,-0.01,-0.02,0.04,-0.18,-0.11,-0.29
+401112216,2019,6,Michigan State,Big Ten,Ohio State,-0.1,-0.09,-0.12,0.33,0.25,0.38
+401114275,2019,6,Middle Tennessee,Conference USA,Marshall,0.18,0.36,0.06,0.07,0.16,0.03
+401112149,2019,6,Minnesota,Big Ten,Illinois,0.23,0.27,0.26,-0.05,-0.06,-0.05
+401110815,2019,6,Missouri,SEC,Troy,0.32,0.53,0.13,-0.12,-0.15,-0.15
+401117516,2019,6,Navy,American Athletic,Air Force,0.32,1.78,0.09,-0.05,0.26,-0.29
+401112242,2019,6,Nebraska,Big Ten,Northwestern,0.04,0.26,-0.06,-0.01,-0.08,0.04
+401117519,2019,6,New Mexico,Mountain West,San José State,0.15,0.21,0.12,0.14,0.42,-0.19
+401114342,2019,6,New Mexico State,FBS Independents,Liberty,0.08,0.2,-0.06,0.06,-0.02,0.14
+401112475,2019,6,North Carolina,ACC,Georgia Tech,0.29,0.55,0.02,0.15,0.22,0.08
+401119272,2019,6,Northern Illinois,Mid-American,Ball State,0.05,0.15,-0.06,-0.22,-0.2,-0.21
+401112242,2019,6,Northwestern,Big Ten,Nebraska,-0.01,-0.08,0.04,0.04,0.26,-0.06
+401114337,2019,6,Notre Dame,FBS Independents,Bowling Green,0.64,1.07,0.33,-0.03,0.0,-0.06
+401119274,2019,6,Ohio,Mid-American,Buffalo,0.06,-0.39,0.3,0.19,0.45,0.05
+401112216,2019,6,Ohio State,Big Ten,Michigan State,0.33,0.25,0.38,-0.1,-0.09,-0.12
+401112101,2019,6,Oklahoma,Big 12,Kansas,0.53,0.65,0.46,0.15,0.27,0.02
+401112126,2019,6,Oklahoma State,Big 12,Texas Tech,0.16,0.21,0.12,0.19,0.5,-0.17
+401114276,2019,6,Old Dominion,Conference USA,Western Kentucky,-0.24,-0.28,-0.16,0.07,0.34,-0.09
+401110814,2019,6,Ole Miss,SEC,Vanderbilt,0.26,-0.26,0.51,-0.08,-0.11,0.03
+401114177,2019,6,Oregon,Pac-12,California,0.05,0.06,0.07,0.04,0.03,0.04
+401114203,2019,6,Oregon State,Pac-12,UCLA,0.56,0.99,0.18,0.24,0.15,0.32
+401112260,2019,6,Penn State,Big Ten,Purdue,0.23,0.58,0.0,-0.22,-0.21,-0.24
+401112474,2019,6,Pittsburgh,ACC,Duke,-0.12,-0.14,-0.12,-0.09,-0.24,0.1
+401112260,2019,6,Purdue,Big Ten,Penn State,-0.22,-0.21,-0.24,0.23,0.58,0.0
+401114277,2019,6,Rice,Conference USA,UAB,-0.12,-0.04,-0.2,0.18,0.47,-0.04
+401112205,2019,6,Rutgers,Big Ten,Maryland,-0.1,-0.04,-0.15,0.34,0.33,0.36
+401117518,2019,6,San Diego State,Mountain West,Colorado State,-0.05,0.31,-0.24,-0.15,0.02,-0.46
+401117519,2019,6,San José State,Mountain West,New Mexico,0.14,0.42,-0.19,0.15,0.21,0.12
+401117878,2019,6,SMU,American Athletic,Tulsa,0.04,0.26,-0.16,0.06,0.15,-0.04
+401121948,2019,6,South Alabama,Sun Belt,Georgia Southern,0.08,0.51,-0.24,0.03,-0.19,0.09
+401117876,2019,6,South Florida,American Athletic,UConn,0.47,0.12,0.7,0.07,0.18,-0.03
+401114209,2019,6,Stanford,Pac-12,Washington,0.21,0.43,0.13,0.08,0.07,0.15
+401112088,2019,6,TCU,Big 12,Iowa State,0.23,0.28,0.18,0.27,0.59,0.06
+401117874,2019,6,Temple,American Athletic,East Carolina,0.18,0.26,0.15,0.07,0.15,-0.05
+401110816,2019,6,Tennessee,SEC,Georgia,0.14,0.27,-0.04,0.43,0.73,0.22
+401112137,2019,6,Texas,Big 12,West Virginia,0.26,0.25,0.26,0.26,0.35,0.13
+401112126,2019,6,Texas Tech,Big 12,Oklahoma State,0.19,0.5,-0.17,0.16,0.21,0.12
+401119275,2019,6,Toledo,Mid-American,Western Michigan,0.26,0.48,0.18,0.05,-0.02,0.23
+401110815,2019,6,Troy,Sun Belt,Missouri,-0.12,-0.15,-0.15,0.32,0.53,0.13
+401114328,2019,6,Tulane,American Athletic,Army,0.42,0.71,0.3,0.14,0.01,0.21
+401117878,2019,6,Tulsa,American Athletic,SMU,0.06,0.15,-0.04,0.04,0.26,-0.16
+401114277,2019,6,UAB,Conference USA,Rice,0.18,0.47,-0.04,-0.12,-0.04,-0.2
+401117875,2019,6,UCF,American Athletic,Cincinnati,-0.04,-0.1,0.07,-0.01,0.06,-0.05
+401114203,2019,6,UCLA,Pac-12,Oregon State,0.24,0.15,0.32,0.56,0.99,0.18
+401117876,2019,6,UConn,American Athletic,South Florida,0.07,0.18,-0.03,0.47,0.12,0.7
+401117877,2019,6,UL Monroe,Sun Belt,Memphis,0.16,-0.04,0.39,0.48,0.68,0.3
+401117517,2019,6,UNLV,Mountain West,Boise State,-0.07,-0.14,0.07,0.29,0.48,0.08
+401110813,2019,6,Utah State,Mountain West,LSU,-0.23,-0.12,-0.49,0.33,0.7,0.04
+401114278,2019,6,UTEP,Conference USA,UTSA,0.06,0.07,0.07,0.22,-0.1,0.34
+401114278,2019,6,UTSA,Conference USA,UTEP,0.22,-0.1,0.34,0.06,0.07,0.07
+401110814,2019,6,Vanderbilt,SEC,Ole Miss,-0.08,-0.11,0.03,0.26,-0.26,0.51
+401112476,2019,6,Virginia Tech,ACC,Miami,0.26,0.51,0.12,0.28,0.28,0.26
+401114209,2019,6,Washington,Pac-12,Stanford,0.08,0.07,0.15,0.21,0.43,0.13
+401114276,2019,6,Western Kentucky,Conference USA,Old Dominion,0.07,0.34,-0.09,-0.24,-0.28,-0.16
+401119275,2019,6,Western Michigan,Mid-American,Toledo,0.05,-0.02,0.23,0.26,0.48,0.18
+401112137,2019,6,West Virginia,Big 12,Texas,0.26,0.35,0.13,0.26,0.25,0.26
+401112269,2019,6,Wisconsin,Big Ten,Kent State,0.47,0.71,0.38,-0.1,-0.3,0.19
+401117520,2019,7,Air Force,Mountain West,Fresno State,0.4,2.02,0.33,0.16,0.19,-0.01
+401119277,2019,7,Akron,Mid-American,Kent State,0.02,0.07,-0.01,0.24,0.16,0.25
+401110822,2019,7,Alabama,SEC,Texas A&M,0.29,0.45,0.17,0.14,0.18,0.43
+401121950,2019,7,App State,Sun Belt,Louisiana,0.15,0.28,0.1,-0.13,-0.1,-0.16
+401114168,2019,7,Arizona,Pac-12,Washington,0.04,0.05,0.02,0.22,0.53,0.12
+401114157,2019,7,Arizona State,Pac-12,Washington State,0.44,0.51,0.4,0.33,0.36,0.26
+401110818,2019,7,Arkansas,SEC,Kentucky,0.1,-0.05,0.25,0.32,0.51,0.23
+401114285,2019,7,Army,FBS Independents,Western Kentucky,0.12,0.36,0.04,0.16,0.08,0.24
+401119276,2019,7,Ball State,Mid-American,Eastern Michigan,0.29,0.38,0.22,0.09,0.14,-0.02
+401112078,2019,7,Baylor,Big 12,Texas Tech,0.15,0.15,0.23,0.09,0.2,-0.01
+401117521,2019,7,Boise State,Mountain West,Hawai'i,0.32,0.52,0.12,0.27,0.24,0.36
+401119280,2019,7,Bowling Green,Mid-American,Toledo,0.12,0.09,0.17,0.06,0.25,-0.14
+401117214,2019,7,BYU,FBS Independents,South Florida,0.1,0.02,0.16,0.18,-0.26,0.32
+401114343,2019,7,Central Michigan,Mid-American,New Mexico State,0.15,-0.08,0.22,0.16,0.24,0.04
+401114279,2019,7,Charlotte,Conference USA,Florida International,0.35,0.38,0.36,0.52,0.89,0.41
+401117879,2019,7,Cincinnati,American Athletic,Houston,0.32,0.63,0.11,0.05,-0.04,0.14
+401112479,2019,7,Clemson,ACC,Florida State,0.15,0.25,0.09,-0.11,-0.28,0.2
+401121952,2019,7,Coastal Carolina,Sun Belt,Georgia State,0.05,0.47,-0.39,0.26,-0.06,0.42
+401114186,2019,7,Colorado,Pac-12,Oregon,-0.08,-0.28,0.14,0.37,0.38,0.38
+401117522,2019,7,Colorado State,Mountain West,New Mexico,0.28,0.61,-0.07,0.07,-0.08,0.13
+401112480,2019,7,Duke,ACC,Georgia Tech,0.23,0.16,0.27,0.22,0.15,0.27
+401119276,2019,7,Eastern Michigan,Mid-American,Ball State,0.09,0.14,-0.02,0.29,0.38,0.22
+401110819,2019,7,Florida,SEC,LSU,0.21,0.45,-0.08,0.74,1.02,0.45
+401114280,2019,7,Florida Atlantic,Conference USA,Middle Tennessee,0.14,0.19,0.14,0.18,0.17,0.18
+401114279,2019,7,Florida International,Conference USA,Charlotte,0.52,0.89,0.41,0.35,0.38,0.36
+401112479,2019,7,Florida State,ACC,Clemson,-0.11,-0.28,0.2,0.15,0.25,0.09
+401117520,2019,7,Fresno State,Mountain West,Air Force,0.16,0.19,-0.01,0.4,2.02,0.33
+401110817,2019,7,Georgia,SEC,South Carolina,-0.04,-0.08,-0.02,0.07,0.22,-0.05
+401121952,2019,7,Georgia State,Sun Belt,Coastal Carolina,0.26,-0.06,0.42,0.05,0.47,-0.39
+401112480,2019,7,Georgia Tech,ACC,Duke,0.22,0.15,0.27,0.23,0.16,0.27
+401117521,2019,7,Hawai'i,Mountain West,Boise State,0.27,0.24,0.36,0.32,0.52,0.12
+401117879,2019,7,Houston,American Athletic,Cincinnati,0.05,-0.04,0.14,0.32,0.63,0.11
+401112150,2019,7,Illinois,Big Ten,Michigan,0.07,0.24,-0.14,0.3,0.58,0.18
+401112162,2019,7,Indiana,Big Ten,Rutgers,0.2,0.24,0.17,-0.28,-0.6,-0.07
+401112195,2019,7,Iowa,Big Ten,Penn State,0.12,0.23,-0.07,0.06,0.03,0.08
+401112089,2019,7,Iowa State,Big 12,West Virginia,0.12,0.15,0.1,-0.01,0.28,-0.29
+401119277,2019,7,Kent State,Mid-American,Akron,0.24,0.16,0.25,0.02,0.07,-0.01
+401110818,2019,7,Kentucky,SEC,Arkansas,0.32,0.51,0.23,0.1,-0.05,0.25
+401121950,2019,7,Louisiana,Sun Belt,App State,-0.13,-0.1,-0.16,0.15,0.28,0.1
+401114281,2019,7,Louisiana Tech,Conference USA,Massachusetts,0.51,0.59,0.52,-0.11,-0.21,0.01
+401112481,2019,7,Louisville,ACC,Wake Forest,0.36,0.93,0.04,0.34,0.36,0.35
+401110819,2019,7,LSU,SEC,Florida,0.74,1.02,0.45,0.21,0.45,-0.08
+401114283,2019,7,Marshall,Conference USA,Old Dominion,0.27,0.2,0.29,-0.01,-0.03,0.06
+401112206,2019,7,Maryland,Big Ten,Purdue,-0.09,-0.41,0.41,0.32,0.7,-0.06
+401114281,2019,7,Massachusetts,FBS Independents,Louisiana Tech,-0.11,-0.21,0.01,0.51,0.59,0.52
+401117881,2019,7,Memphis,American Athletic,Temple,0.21,0.42,-0.11,0.1,0.43,-0.13
+401112478,2019,7,Miami,ACC,Virginia,0.19,0.22,0.2,-0.06,0.04,-0.24
+401119278,2019,7,Miami (OH),Mid-American,Western Michigan,-0.19,-0.3,-0.05,0.02,-0.01,0.07
+401112150,2019,7,Michigan,Big Ten,Illinois,0.3,0.58,0.18,0.07,0.24,-0.14
+401112217,2019,7,Michigan State,Big Ten,Wisconsin,-0.28,-0.4,-0.09,0.28,0.84,0.05
+401114280,2019,7,Middle Tennessee,Conference USA,Florida Atlantic,0.18,0.17,0.18,0.14,0.19,0.14
+401112233,2019,7,Minnesota,Big Ten,Nebraska,0.36,0.43,0.34,-0.05,-0.26,0.13
+401110821,2019,7,Mississippi State,SEC,Tennessee,0.12,-0.01,0.18,0.01,0.3,-0.08
+401110820,2019,7,Missouri,SEC,Ole Miss,0.35,0.42,0.31,0.18,0.39,0.03
+401117882,2019,7,Navy,American Athletic,Tulsa,0.32,0.23,0.34,0.09,0.09,0.07
+401112477,2019,7,NC State,ACC,Syracuse,0.1,0.3,-0.09,0.03,0.07,-0.02
+401112233,2019,7,Nebraska,Big Ten,Minnesota,-0.05,-0.26,0.13,0.36,0.43,0.34
+401117524,2019,7,Nevada,Mountain West,San José State,0.14,0.35,0.01,0.22,0.32,-0.09
+401117522,2019,7,New Mexico,Mountain West,Colorado State,0.07,-0.08,0.13,0.28,0.61,-0.07
+401114343,2019,7,New Mexico State,FBS Independents,Central Michigan,0.16,0.24,0.04,0.15,-0.08,0.22
+401119279,2019,7,Northern Illinois,Mid-American,Ohio,0.42,0.52,0.31,0.34,0.32,0.36
+401114282,2019,7,North Texas,Conference USA,Southern Miss,0.23,0.56,-0.11,0.41,1.04,-0.18
+401114222,2019,7,Notre Dame,FBS Independents,USC,0.2,0.1,0.24,0.24,0.17,0.34
+401119279,2019,7,Ohio,Mid-American,Northern Illinois,0.34,0.32,0.36,0.42,0.52,0.31
+401112118,2019,7,Oklahoma,Big 12,Texas,0.16,0.3,0.11,0.19,0.15,0.31
+401114283,2019,7,Old Dominion,Conference USA,Marshall,-0.01,-0.03,0.06,0.27,0.2,0.29
+401110820,2019,7,Ole Miss,SEC,Missouri,0.18,0.39,0.03,0.35,0.42,0.31
+401114186,2019,7,Oregon,Pac-12,Colorado,0.37,0.38,0.38,-0.08,-0.28,0.14
+401114204,2019,7,Oregon State,Pac-12,Utah,-0.16,-0.15,-0.19,0.52,0.93,0.33
+401112195,2019,7,Penn State,Big Ten,Iowa,0.06,0.03,0.08,0.12,0.23,-0.07
+401112206,2019,7,Purdue,Big Ten,Maryland,0.32,0.7,-0.06,-0.09,-0.41,0.41
+401112162,2019,7,Rutgers,Big Ten,Indiana,-0.28,-0.6,-0.07,0.2,0.24,0.17
+401117523,2019,7,San Diego State,Mountain West,Wyoming,0.18,0.5,-0.09,0.22,0.23,0.22
+401117524,2019,7,San José State,Mountain West,Nevada,0.22,0.32,-0.09,0.14,0.35,0.01
+401110817,2019,7,South Carolina,SEC,Georgia,0.07,0.22,-0.05,-0.04,-0.08,-0.02
+401114282,2019,7,Southern Miss,Conference USA,North Texas,0.41,1.04,-0.18,0.23,0.56,-0.11
+401117214,2019,7,South Florida,American Athletic,BYU,0.18,-0.26,0.32,0.1,0.02,0.16
+401112477,2019,7,Syracuse,ACC,NC State,0.03,0.07,-0.02,0.1,0.3,-0.09
+401117881,2019,7,Temple,American Athletic,Memphis,0.1,0.43,-0.13,0.21,0.42,-0.11
+401110821,2019,7,Tennessee,SEC,Mississippi State,0.01,0.3,-0.08,0.12,-0.01,0.18
+401112118,2019,7,Texas,Big 12,Oklahoma,0.19,0.15,0.31,0.16,0.3,0.11
+401110822,2019,7,Texas A&M,SEC,Alabama,0.14,0.18,0.43,0.29,0.45,0.17
+401121951,2019,7,Texas State,Sun Belt,UL Monroe,0.03,0.13,-0.15,0.13,0.34,-0.02
+401112078,2019,7,Texas Tech,Big 12,Baylor,0.09,0.2,-0.01,0.15,0.15,0.23
+401119280,2019,7,Toledo,Mid-American,Bowling Green,0.06,0.25,-0.14,0.12,0.09,0.17
+401117880,2019,7,Tulane,American Athletic,UConn,0.35,0.3,0.39,-0.16,-0.28,-0.03
+401117882,2019,7,Tulsa,American Athletic,Navy,0.09,0.09,0.07,0.32,0.23,0.34
+401114284,2019,7,UAB,Conference USA,UTSA,0.13,0.71,-0.19,-0.03,0.0,-0.05
+401117880,2019,7,UConn,American Athletic,Tulane,-0.16,-0.28,-0.03,0.35,0.3,0.39
+401121951,2019,7,UL Monroe,Sun Belt,Texas State,0.13,0.34,-0.02,0.03,0.13,-0.15
+401110823,2019,7,UNLV,Mountain West,Vanderbilt,0.15,0.98,-0.09,0.04,-0.23,0.57
+401114222,2019,7,USC,Pac-12,Notre Dame,0.24,0.17,0.34,0.2,0.1,0.24
+401114204,2019,7,Utah,Pac-12,Oregon State,0.52,0.93,0.33,-0.16,-0.15,-0.19
+401114284,2019,7,UTSA,Conference USA,UAB,-0.03,0.0,-0.05,0.13,0.71,-0.19
+401110823,2019,7,Vanderbilt,SEC,UNLV,0.04,-0.23,0.57,0.15,0.98,-0.09
+401112478,2019,7,Virginia,ACC,Miami,-0.06,0.04,-0.24,0.19,0.22,0.2
+401112482,2019,7,Virginia Tech,ACC,Rhode Island,0.32,0.44,0.29,0.12,0.17,-0.06
+401112481,2019,7,Wake Forest,ACC,Louisville,0.34,0.36,0.35,0.36,0.93,0.04
+401114168,2019,7,Washington,Pac-12,Arizona,0.22,0.53,0.12,0.04,0.05,0.02
+401114157,2019,7,Washington State,Pac-12,Arizona State,0.33,0.36,0.26,0.44,0.51,0.4
+401114285,2019,7,Western Kentucky,Conference USA,Army,0.16,0.08,0.24,0.12,0.36,0.04
+401119278,2019,7,Western Michigan,Mid-American,Miami (OH),0.02,-0.01,0.07,-0.19,-0.3,-0.05
+401112089,2019,7,West Virginia,Big 12,Iowa State,-0.01,0.28,-0.29,0.12,0.15,0.1
+401112217,2019,7,Wisconsin,Big Ten,Michigan State,0.28,0.84,0.05,-0.28,-0.4,-0.09
+401117523,2019,7,Wyoming,Mountain West,San Diego State,0.22,0.23,0.22,0.18,0.5,-0.09
+401117525,2019,8,Air Force,Mountain West,Hawai'i,0.65,1.89,0.48,0.08,0.07,0.17
+401119281,2019,8,Akron,Mid-American,Buffalo,0.03,0.18,-0.32,0.05,-0.1,0.13
+401110824,2019,8,Alabama,SEC,Tennessee,0.2,0.18,0.21,0.0,-0.07,0.05
+401121955,2019,8,App State,Sun Belt,UL Monroe,0.34,0.63,0.19,-0.08,-0.21,0.06
+401114169,2019,8,Arizona,Pac-12,USC,0.05,-0.05,0.2,0.22,0.56,-0.04
+401114158,2019,8,Arizona State,Pac-12,Utah,-0.22,-0.64,0.04,0.12,0.44,-0.07
+401110825,2019,8,Arkansas,SEC,Auburn,-0.08,0.05,-0.29,0.37,0.8,0.2
+401121954,2019,8,Arkansas State,Sun Belt,Louisiana,0.13,0.26,0.01,0.29,0.32,0.3
+401114329,2019,8,Army,FBS Independents,Georgia State,0.19,0.19,0.18,0.27,0.66,-0.07
+401110825,2019,8,Auburn,SEC,Arkansas,0.37,0.8,0.2,-0.08,0.05,-0.29
+401119285,2019,8,Ball State,Mid-American,Toledo,0.52,0.41,0.53,0.05,-0.04,0.15
+401112079,2019,8,Baylor,Big 12,Oklahoma State,0.35,0.74,0.13,0.08,0.11,0.06
+401117215,2019,8,Boise State,Mountain West,BYU,0.15,0.19,0.11,0.19,0.43,-0.04
+401112484,2019,8,Boston College,ACC,NC State,0.36,0.2,0.41,-0.07,-0.01,-0.17
+401119282,2019,8,Bowling Green,Mid-American,Central Michigan,0.07,0.05,0.08,0.32,0.27,0.4
+401119281,2019,8,Buffalo,Mid-American,Akron,0.05,-0.1,0.13,0.03,0.18,-0.32
+401117215,2019,8,BYU,FBS Independents,Boise State,0.19,0.43,-0.04,0.15,0.19,0.11
+401114178,2019,8,California,Pac-12,Oregon State,-0.05,-0.16,0.04,0.04,0.04,0.04
+401119282,2019,8,Central Michigan,Mid-American,Bowling Green,0.32,0.27,0.4,0.07,0.05,0.08
+401114286,2019,8,Charlotte,Conference USA,Western Kentucky,0.11,0.21,-0.01,0.22,0.53,-0.12
+401117885,2019,8,Cincinnati,American Athletic,Tulsa,0.05,0.21,-0.08,0.05,-0.03,0.21
+401112485,2019,8,Clemson,ACC,Louisville,0.33,0.18,0.43,0.01,-0.07,0.09
+401121956,2019,8,Coastal Carolina,Sun Belt,Georgia Southern,0.04,0.38,-0.09,0.09,0.29,0.06
+401114187,2019,8,Colorado,Pac-12,Washington State,0.0,-0.17,0.21,0.21,0.28,0.09
+401112486,2019,8,Duke,ACC,Virginia,-0.08,-0.07,-0.08,0.03,-0.24,0.27
+401117884,2019,8,East Carolina,American Athletic,UCF,0.07,0.21,-0.02,0.3,0.49,0.13
+401119286,2019,8,Eastern Michigan,Mid-American,Western Michigan,0.37,0.69,0.01,0.36,0.5,0.26
+401110829,2019,8,Florida,SEC,South Carolina,0.2,0.33,0.04,0.1,-0.1,0.28
+401114288,2019,8,Florida Atlantic,Conference USA,Marshall,0.14,0.24,0.09,0.21,0.4,0.15
+401114287,2019,8,Florida International,Conference USA,UTEP,0.32,0.58,0.24,0.12,0.08,0.22
+401112487,2019,8,Florida State,ACC,Wake Forest,0.11,0.33,-0.11,0.06,0.31,-0.05
+401117528,2019,8,Fresno State,Mountain West,UNLV,0.46,0.52,0.42,0.16,0.33,0.09
+401110826,2019,8,Georgia,SEC,Kentucky,0.19,-0.02,0.25,-0.22,-0.73,0.04
+401121956,2019,8,Georgia Southern,Sun Belt,Coastal Carolina,0.09,0.29,0.06,0.04,0.38,-0.09
+401114329,2019,8,Georgia State,Sun Belt,Army,0.27,0.66,-0.07,0.19,0.19,0.18
+401112488,2019,8,Georgia Tech,ACC,Miami,0.23,0.3,0.19,0.14,0.04,0.25
+401117525,2019,8,Hawai'i,Mountain West,Air Force,0.08,0.07,0.17,0.65,1.89,0.48
+401117886,2019,8,Houston,American Athletic,UConn,0.18,0.15,0.17,0.17,0.28,0.03
+401112151,2019,8,Illinois,Big Ten,Wisconsin,0.16,0.24,0.11,0.11,0.52,-0.19
+401112163,2019,8,Indiana,Big Ten,Maryland,0.24,0.24,0.31,0.29,0.19,0.36
+401112196,2019,8,Iowa,Big Ten,Purdue,0.14,0.38,-0.09,0.12,0.35,-0.48
+401112090,2019,8,Iowa State,Big 12,Texas Tech,0.58,0.85,0.23,0.12,0.04,0.29
+401112102,2019,8,Kansas,Big 12,Texas,0.38,0.43,0.35,0.45,0.43,0.56
+401112109,2019,8,Kansas State,Big 12,TCU,0.09,0.37,-0.09,0.16,-0.12,0.41
+401119283,2019,8,Kent State,Mid-American,Ohio,0.43,0.37,0.52,0.41,0.75,0.21
+401110826,2019,8,Kentucky,SEC,Georgia,-0.22,-0.73,0.04,0.19,-0.02,0.25
+401114351,2019,8,Liberty,FBS Independents,Maine,0.49,0.8,0.09,0.34,0.55,0.08
+401121954,2019,8,Louisiana,Sun Belt,Arkansas State,0.29,0.32,0.3,0.13,0.26,0.01
+401114289,2019,8,Louisiana Tech,Conference USA,Southern Miss,0.33,0.82,0.04,0.03,0.04,-0.03
+401112485,2019,8,Louisville,ACC,Clemson,0.01,-0.07,0.09,0.33,0.18,0.43
+401110828,2019,8,LSU,SEC,Mississippi State,0.22,0.44,-0.02,0.11,0.33,-0.07
+401114288,2019,8,Marshall,Conference USA,Florida Atlantic,0.21,0.4,0.15,0.14,0.24,0.09
+401112163,2019,8,Maryland,Big Ten,Indiana,0.29,0.19,0.36,0.24,0.24,0.31
+401117888,2019,8,Memphis,American Athletic,Tulane,0.38,1.03,-0.15,0.13,0.17,0.08
+401112488,2019,8,Miami,ACC,Georgia Tech,0.14,0.04,0.25,0.23,0.3,0.19
+401119284,2019,8,Miami (OH),Mid-American,Northern Illinois,0.18,0.54,-0.09,0.09,0.07,0.14
+401112226,2019,8,Michigan,Big Ten,Penn State,0.12,0.15,0.08,0.13,0.32,-0.06
+401114290,2019,8,Middle Tennessee,Conference USA,North Texas,0.15,0.1,0.3,0.1,0.41,-0.23
+401112234,2019,8,Minnesota,Big Ten,Rutgers,0.3,0.59,0.11,-0.22,-0.88,0.14
+401110828,2019,8,Mississippi State,SEC,LSU,0.11,0.33,-0.07,0.22,0.44,-0.02
+401110830,2019,8,Missouri,SEC,Vanderbilt,-0.02,-0.2,0.11,0.1,0.12,0.09
+401117883,2019,8,Navy,American Athletic,South Florida,0.45,-0.21,0.5,-0.12,-0.35,0.14
+401112484,2019,8,NC State,ACC,Boston College,-0.07,-0.01,-0.17,0.36,0.2,0.41
+401117527,2019,8,Nevada,Mountain West,Utah State,-0.08,-0.09,0.02,0.04,-0.09,0.17
+401117526,2019,8,New Mexico,Mountain West,Wyoming,0.07,0.29,-0.08,0.23,0.13,0.25
+401112489,2019,8,North Carolina,ACC,Virginia Tech,0.14,0.22,0.04,0.16,0.52,0.04
+401119284,2019,8,Northern Illinois,Mid-American,Miami (OH),0.09,0.07,0.14,0.18,0.54,-0.09
+401114290,2019,8,North Texas,Conference USA,Middle Tennessee,0.1,0.41,-0.23,0.15,0.1,0.3
+401112248,2019,8,Northwestern,Big Ten,Ohio State,-0.14,-0.32,-0.04,0.46,0.69,0.27
+401119283,2019,8,Ohio,Mid-American,Kent State,0.41,0.75,0.21,0.43,0.37,0.52
+401112248,2019,8,Ohio State,Big Ten,Northwestern,0.46,0.69,0.27,-0.14,-0.32,-0.04
+401112119,2019,8,Oklahoma,Big 12,West Virginia,0.54,1.27,0.13,0.0,0.2,-0.23
+401112079,2019,8,Oklahoma State,Big 12,Baylor,0.08,0.11,0.06,0.35,0.74,0.13
+401114291,2019,8,Old Dominion,Conference USA,UAB,-0.13,-0.03,-0.22,0.19,0.59,-0.02
+401110827,2019,8,Ole Miss,SEC,Texas A&M,-0.08,-0.08,-0.06,0.08,0.02,0.17
+401114196,2019,8,Oregon,Pac-12,Washington,0.34,0.58,0.09,0.28,0.44,0.15
+401114178,2019,8,Oregon State,Pac-12,California,0.04,0.04,0.04,-0.05,-0.16,0.04
+401112226,2019,8,Penn State,Big Ten,Michigan,0.13,0.32,-0.06,0.12,0.15,0.08
+401112483,2019,8,Pittsburgh,ACC,Syracuse,0.13,0.35,-0.08,0.0,-0.09,0.24
+401112196,2019,8,Purdue,Big Ten,Iowa,0.12,0.35,-0.48,0.14,0.38,-0.09
+401114292,2019,8,Rice,Conference USA,UTSA,0.04,0.35,-0.21,0.32,0.5,0.15
+401112234,2019,8,Rutgers,Big Ten,Minnesota,-0.22,-0.88,0.14,0.3,0.59,0.11
+401117529,2019,8,San Diego State,Mountain West,San José State,0.16,0.16,0.18,0.09,0.18,-0.06
+401117529,2019,8,San José State,Mountain West,San Diego State,0.09,0.18,-0.06,0.16,0.16,0.18
+401117887,2019,8,SMU,American Athletic,Temple,0.26,0.5,0.03,0.06,0.12,0.0
+401121953,2019,8,South Alabama,Sun Belt,Troy,-0.24,-0.3,-0.13,0.2,0.27,0.21
+401110829,2019,8,South Carolina,SEC,Florida,0.1,-0.1,0.28,0.2,0.33,0.04
+401114289,2019,8,Southern Miss,Conference USA,Louisiana Tech,0.03,0.04,-0.03,0.33,0.82,0.04
+401117883,2019,8,South Florida,American Athletic,Navy,-0.12,-0.35,0.14,0.45,-0.21,0.5
+401114210,2019,8,Stanford,Pac-12,UCLA,-0.02,-0.14,0.2,0.09,-0.07,0.22
+401112483,2019,8,Syracuse,ACC,Pittsburgh,0.0,-0.09,0.24,0.13,0.35,-0.08
+401112109,2019,8,TCU,Big 12,Kansas State,0.16,-0.12,0.41,0.09,0.37,-0.09
+401117887,2019,8,Temple,American Athletic,SMU,0.06,0.12,0.0,0.26,0.5,0.03
+401110824,2019,8,Tennessee,SEC,Alabama,0.0,-0.07,0.05,0.2,0.18,0.21
+401112102,2019,8,Texas,Big 12,Kansas,0.45,0.43,0.56,0.38,0.43,0.35
+401110827,2019,8,Texas A&M,SEC,Ole Miss,0.08,0.02,0.17,-0.08,-0.08,-0.06
+401112090,2019,8,Texas Tech,Big 12,Iowa State,0.12,0.04,0.29,0.58,0.85,0.23
+401119285,2019,8,Toledo,Mid-American,Ball State,0.05,-0.04,0.15,0.52,0.41,0.53
+401121953,2019,8,Troy,Sun Belt,South Alabama,0.2,0.27,0.21,-0.24,-0.3,-0.13
+401117888,2019,8,Tulane,American Athletic,Memphis,0.13,0.17,0.08,0.38,1.03,-0.15
+401117885,2019,8,Tulsa,American Athletic,Cincinnati,0.05,-0.03,0.21,0.05,0.21,-0.08
+401114291,2019,8,UAB,Conference USA,Old Dominion,0.19,0.59,-0.02,-0.13,-0.03,-0.22
+401117884,2019,8,UCF,American Athletic,East Carolina,0.3,0.49,0.13,0.07,0.21,-0.02
+401114210,2019,8,UCLA,Pac-12,Stanford,0.09,-0.07,0.22,-0.02,-0.14,0.2
+401117886,2019,8,UConn,American Athletic,Houston,0.17,0.28,0.03,0.18,0.15,0.17
+401121955,2019,8,UL Monroe,Sun Belt,App State,-0.08,-0.21,0.06,0.34,0.63,0.19
+401117528,2019,8,UNLV,Mountain West,Fresno State,0.16,0.33,0.09,0.46,0.52,0.42
+401114169,2019,8,USC,Pac-12,Arizona,0.22,0.56,-0.04,0.05,-0.05,0.2
+401114158,2019,8,Utah,Pac-12,Arizona State,0.12,0.44,-0.07,-0.22,-0.64,0.04
+401117527,2019,8,Utah State,Mountain West,Nevada,0.04,-0.09,0.17,-0.08,-0.09,0.02
+401114287,2019,8,UTEP,Conference USA,Florida International,0.12,0.08,0.22,0.32,0.58,0.24
+401114292,2019,8,UTSA,Conference USA,Rice,0.32,0.5,0.15,0.04,0.35,-0.21
+401110830,2019,8,Vanderbilt,SEC,Missouri,0.1,0.12,0.09,-0.02,-0.2,0.11
+401112486,2019,8,Virginia,ACC,Duke,0.03,-0.24,0.27,-0.08,-0.07,-0.08
+401112489,2019,8,Virginia Tech,ACC,North Carolina,0.16,0.52,0.04,0.14,0.22,0.04
+401112487,2019,8,Wake Forest,ACC,Florida State,0.06,0.31,-0.05,0.11,0.33,-0.11
+401114196,2019,8,Washington,Pac-12,Oregon,0.28,0.44,0.15,0.34,0.58,0.09
+401114187,2019,8,Washington State,Pac-12,Colorado,0.21,0.28,0.09,0.0,-0.17,0.21
+401114286,2019,8,Western Kentucky,Conference USA,Charlotte,0.22,0.53,-0.12,0.11,0.21,-0.01
+401119286,2019,8,Western Michigan,Mid-American,Eastern Michigan,0.36,0.5,0.26,0.37,0.69,0.01
+401112119,2019,8,West Virginia,Big 12,Oklahoma,0.0,0.2,-0.23,0.54,1.27,0.13
+401112151,2019,8,Wisconsin,Big Ten,Illinois,0.11,0.52,-0.19,0.16,0.24,0.11
+401117526,2019,8,Wyoming,Mountain West,New Mexico,0.23,0.13,0.25,0.07,0.29,-0.08
+401117530,2019,9,Air Force,Mountain West,Utah State,0.28,-0.13,0.29,-0.09,-0.01,-0.25
+401119287,2019,9,Akron,Mid-American,Northern Illinois,-0.35,-0.69,0.06,0.2,1.04,0.06
+401110831,2019,9,Alabama,SEC,Arkansas,0.28,0.5,0.14,-0.26,-0.44,-0.09
+401121957,2019,9,App State,Sun Belt,South Alabama,0.28,-0.04,0.49,-0.18,-0.39,-0.06
+401114170,2019,9,Arizona,Pac-12,Stanford,0.24,0.21,0.29,0.32,0.44,0.21
+401114159,2019,9,Arizona State,Pac-12,UCLA,0.25,0.49,-0.01,0.23,0.47,0.13
+401110831,2019,9,Arkansas,SEC,Alabama,-0.26,-0.44,-0.09,0.28,0.5,0.14
+401121958,2019,9,Arkansas State,Sun Belt,Texas State,0.14,0.11,0.18,0.01,-0.03,0.06
+401114330,2019,9,Army,FBS Independents,San José State,0.32,0.1,0.36,0.24,0.55,-0.09
+401110833,2019,9,Auburn,SEC,LSU,0.0,0.01,0.03,0.12,0.14,0.12
+401119292,2019,9,Ball State,Mid-American,Ohio,0.29,0.15,0.39,0.21,0.24,0.25
+401112490,2019,9,Boston College,ACC,Clemson,-0.08,0.15,-0.19,0.53,0.7,0.42
+401119288,2019,9,Bowling Green,Mid-American,Western Michigan,0.06,-0.11,0.27,0.4,0.31,0.44
+401119289,2019,9,Buffalo,Mid-American,Central Michigan,0.04,0.2,-0.01,0.04,0.06,0.01
+401114179,2019,9,California,Pac-12,Utah,-0.21,-0.29,-0.11,0.36,0.74,0.19
+401119289,2019,9,Central Michigan,Mid-American,Buffalo,0.04,0.06,0.01,0.04,0.2,-0.01
+401114293,2019,9,Charlotte,Conference USA,North Texas,0.45,0.69,0.26,0.36,0.5,0.15
+401112490,2019,9,Clemson,ACC,Boston College,0.53,0.7,0.42,-0.08,0.15,-0.19
+401114188,2019,9,Colorado,Pac-12,USC,0.37,0.46,0.3,0.41,0.57,0.13
+401117531,2019,9,Colorado State,Mountain West,Fresno State,0.24,0.3,0.21,0.22,0.07,0.43
+401112491,2019,9,Duke,ACC,North Carolina,-0.04,-0.11,0.1,0.12,0.39,-0.02
+401117892,2019,9,East Carolina,American Athletic,South Florida,-0.09,0.35,-0.41,0.55,0.55,0.59
+401119290,2019,9,Eastern Michigan,Mid-American,Toledo,0.22,0.41,0.09,0.26,0.46,0.21
+401114295,2019,9,Florida Atlantic,Conference USA,Old Dominion,0.17,0.32,0.06,-0.08,-0.14,-0.01
+401114294,2019,9,Florida International,Conference USA,Middle Tennessee,0.02,0.24,-0.15,0.37,-0.12,0.49
+401112492,2019,9,Florida State,ACC,Syracuse,0.33,0.29,0.36,0.03,-0.18,0.19
+401117531,2019,9,Fresno State,Mountain West,Colorado State,0.22,0.07,0.43,0.24,0.3,0.21
+401114344,2019,9,Georgia Southern,Sun Belt,New Mexico State,0.13,-0.92,0.2,-0.24,-0.64,-0.05
+401121959,2019,9,Georgia State,Sun Belt,Troy,0.4,0.41,0.4,0.4,0.3,0.66
+401117532,2019,9,Hawai'i,Mountain West,New Mexico,0.37,0.25,0.57,0.08,-0.12,0.34
+401117889,2019,9,Houston,American Athletic,SMU,0.12,0.32,-0.06,-0.02,-0.01,0.01
+401112152,2019,9,Illinois,Big Ten,Purdue,0.04,-0.09,0.07,-0.21,-0.28,-0.16
+401112164,2019,9,Indiana,Big Ten,Nebraska,0.28,0.38,0.19,0.34,0.78,0.18
+401112197,2019,9,Iowa,Big Ten,Northwestern,-0.03,0.08,-0.08,-0.2,-0.09,-0.33
+401112091,2019,9,Iowa State,Big 12,Oklahoma State,0.07,0.04,0.21,0.16,0.58,-0.18
+401112103,2019,9,Kansas,Big 12,Texas Tech,0.4,0.83,-0.06,0.25,0.44,0.17
+401112110,2019,9,Kansas State,Big 12,Oklahoma,0.26,0.46,0.16,0.49,0.73,0.3
+401119291,2019,9,Kent State,Mid-American,Miami (OH),-0.05,0.02,-0.11,0.07,0.23,0.0
+401110832,2019,9,Kentucky,SEC,Missouri,0.18,0.23,0.17,0.03,0.0,0.06
+401112266,2019,9,Liberty,FBS Independents,Rutgers,0.38,0.35,0.45,0.34,0.69,0.26
+401114296,2019,9,Louisiana Tech,Conference USA,UTEP,0.41,0.59,0.2,0.12,0.37,-0.15
+401112493,2019,9,Louisville,ACC,Virginia,0.23,0.24,0.23,0.03,0.04,0.02
+401110833,2019,9,LSU,SEC,Auburn,0.12,0.14,0.12,0.0,0.01,0.03
+401114297,2019,9,Marshall,Conference USA,Western Kentucky,0.15,0.11,0.15,0.17,0.09,0.41
+401112207,2019,9,Maryland,Big Ten,Minnesota,-0.22,-0.36,-0.08,0.41,0.46,0.41
+401114357,2019,9,Massachusetts,FBS Independents,UConn,0.2,0.17,0.23,0.47,0.4,0.52
+401117893,2019,9,Memphis,American Athletic,Tulsa,0.53,0.89,0.25,0.27,0.37,0.23
+401112494,2019,9,Miami,ACC,Pittsburgh,-0.08,0.03,-0.21,0.03,0.02,0.05
+401119291,2019,9,Miami (OH),Mid-American,Kent State,0.07,0.23,0.0,-0.05,0.02,-0.11
+401112227,2019,9,Michigan,Big Ten,Notre Dame,0.25,0.66,0.17,-0.2,-0.06,-0.33
+401112218,2019,9,Michigan State,Big Ten,Penn State,-0.04,0.0,-0.11,0.05,0.13,-0.03
+401114294,2019,9,Middle Tennessee,Conference USA,Florida International,0.37,-0.12,0.49,0.02,0.24,-0.15
+401112207,2019,9,Minnesota,Big Ten,Maryland,0.41,0.46,0.41,-0.22,-0.36,-0.08
+401110835,2019,9,Mississippi State,SEC,Texas A&M,0.35,0.16,0.52,0.46,0.87,0.21
+401110832,2019,9,Missouri,SEC,Kentucky,0.03,0.0,0.06,0.18,0.23,0.17
+401117890,2019,9,Navy,American Athletic,Tulane,0.35,0.0,0.45,0.27,0.23,0.29
+401112164,2019,9,Nebraska,Big Ten,Indiana,0.34,0.78,0.18,0.28,0.38,0.19
+401117533,2019,9,Nevada,Mountain West,Wyoming,-0.06,-0.01,-0.11,0.24,0.42,0.2
+401117532,2019,9,New Mexico,Mountain West,Hawai'i,0.08,-0.12,0.34,0.37,0.25,0.57
+401114344,2019,9,New Mexico State,FBS Independents,Georgia Southern,-0.24,-0.64,-0.05,0.13,-0.92,0.2
+401112491,2019,9,North Carolina,ACC,Duke,0.12,0.39,-0.02,-0.04,-0.11,0.1
+401119287,2019,9,Northern Illinois,Mid-American,Akron,0.2,1.04,0.06,-0.35,-0.69,0.06
+401114293,2019,9,North Texas,Conference USA,Charlotte,0.36,0.5,0.15,0.45,0.69,0.26
+401112197,2019,9,Northwestern,Big Ten,Iowa,-0.2,-0.09,-0.33,-0.03,0.08,-0.08
+401112227,2019,9,Notre Dame,FBS Independents,Michigan,-0.2,-0.06,-0.33,0.25,0.66,0.17
+401119292,2019,9,Ohio,Mid-American,Ball State,0.21,0.24,0.25,0.29,0.15,0.39
+401112254,2019,9,Ohio State,Big Ten,Wisconsin,0.36,0.42,0.28,-0.05,-0.06,-0.05
+401112110,2019,9,Oklahoma,Big 12,Kansas State,0.49,0.73,0.3,0.26,0.46,0.16
+401112091,2019,9,Oklahoma State,Big 12,Iowa State,0.16,0.58,-0.18,0.07,0.04,0.21
+401114295,2019,9,Old Dominion,Conference USA,Florida Atlantic,-0.08,-0.14,-0.01,0.17,0.32,0.06
+401114197,2019,9,Oregon,Pac-12,Washington State,0.29,0.18,0.43,0.18,0.24,0.06
+401112218,2019,9,Penn State,Big Ten,Michigan State,0.05,0.13,-0.03,-0.04,0.0,-0.11
+401112494,2019,9,Pittsburgh,ACC,Miami,0.03,0.02,0.05,-0.08,0.03,-0.21
+401112152,2019,9,Purdue,Big Ten,Illinois,-0.21,-0.28,-0.16,0.04,-0.09,0.07
+401114298,2019,9,Rice,Conference USA,Southern Miss,-0.24,-0.21,-0.29,0.15,0.36,-0.01
+401112266,2019,9,Rutgers,Big Ten,Liberty,0.34,0.69,0.26,0.38,0.35,0.45
+401117534,2019,9,San Diego State,Mountain West,UNLV,0.01,0.16,-0.07,0.16,0.21,0.13
+401114330,2019,9,San José State,Mountain West,Army,0.24,0.55,-0.09,0.32,0.1,0.36
+401117889,2019,9,SMU,American Athletic,Houston,-0.02,-0.01,0.01,0.12,0.32,-0.06
+401121957,2019,9,South Alabama,Sun Belt,App State,-0.18,-0.39,-0.06,0.28,-0.04,0.49
+401110834,2019,9,South Carolina,SEC,Tennessee,0.12,0.14,0.08,0.28,0.78,-0.11
+401114298,2019,9,Southern Miss,Conference USA,Rice,0.15,0.36,-0.01,-0.24,-0.21,-0.29
+401117892,2019,9,South Florida,American Athletic,East Carolina,0.55,0.55,0.59,-0.09,0.35,-0.41
+401114170,2019,9,Stanford,Pac-12,Arizona,0.32,0.44,0.21,0.24,0.21,0.29
+401112492,2019,9,Syracuse,ACC,Florida State,0.03,-0.18,0.19,0.33,0.29,0.36
+401112132,2019,9,TCU,Big 12,Texas,0.21,0.49,0.07,0.19,0.29,0.08
+401117891,2019,9,Temple,American Athletic,UCF,0.02,0.28,-0.24,0.51,0.61,0.45
+401110834,2019,9,Tennessee,SEC,South Carolina,0.28,0.78,-0.11,0.12,0.14,0.08
+401112132,2019,9,Texas,Big 12,TCU,0.19,0.29,0.08,0.21,0.49,0.07
+401110835,2019,9,Texas A&M,SEC,Mississippi State,0.46,0.87,0.21,0.35,0.16,0.52
+401121958,2019,9,Texas State,Sun Belt,Arkansas State,0.01,-0.03,0.06,0.14,0.11,0.18
+401112103,2019,9,Texas Tech,Big 12,Kansas,0.25,0.44,0.17,0.4,0.83,-0.06
+401119290,2019,9,Toledo,Mid-American,Eastern Michigan,0.26,0.46,0.21,0.22,0.41,0.09
+401121959,2019,9,Troy,Sun Belt,Georgia State,0.4,0.3,0.66,0.4,0.41,0.4
+401117890,2019,9,Tulane,American Athletic,Navy,0.27,0.23,0.29,0.35,0.0,0.45
+401117893,2019,9,Tulsa,American Athletic,Memphis,0.27,0.37,0.23,0.53,0.89,0.25
+401117891,2019,9,UCF,American Athletic,Temple,0.51,0.61,0.45,0.02,0.28,-0.24
+401114159,2019,9,UCLA,Pac-12,Arizona State,0.23,0.47,0.13,0.25,0.49,-0.01
+401114357,2019,9,UConn,American Athletic,Massachusetts,0.47,0.4,0.52,0.2,0.17,0.23
+401117534,2019,9,UNLV,Mountain West,San Diego State,0.16,0.21,0.13,0.01,0.16,-0.07
+401114188,2019,9,USC,Pac-12,Colorado,0.41,0.57,0.13,0.37,0.46,0.3
+401114179,2019,9,Utah,Pac-12,California,0.36,0.74,0.19,-0.21,-0.29,-0.11
+401117530,2019,9,Utah State,Mountain West,Air Force,-0.09,-0.01,-0.25,0.28,-0.13,0.29
+401114296,2019,9,UTEP,Conference USA,Louisiana Tech,0.12,0.37,-0.15,0.41,0.59,0.2
+401112493,2019,9,Virginia,ACC,Louisville,0.03,0.04,0.02,0.23,0.24,0.23
+401114197,2019,9,Washington State,Pac-12,Oregon,0.18,0.24,0.06,0.29,0.18,0.43
+401114297,2019,9,Western Kentucky,Conference USA,Marshall,0.17,0.09,0.41,0.15,0.11,0.15
+401119288,2019,9,Western Michigan,Mid-American,Bowling Green,0.4,0.31,0.44,0.06,-0.11,0.27
+401112254,2019,9,Wisconsin,Big Ten,Ohio State,-0.05,-0.06,-0.05,0.36,0.42,0.28
+401117533,2019,9,Wyoming,Mountain West,Nevada,0.24,0.42,0.2,-0.06,-0.01,-0.11
+401114331,2019,10,Air Force,Mountain West,Army,0.18,-0.52,0.3,0.14,0.79,-0.09
+401119293,2019,10,Akron,Mid-American,Bowling Green,-0.34,-0.43,-0.26,0.07,0.22,0.01
+401121960,2019,10,App State,Sun Belt,Georgia Southern,0.15,0.23,0.0,0.12,-0.3,0.15
+401114171,2019,10,Arizona,Pac-12,Oregon State,0.29,0.36,0.26,0.6,0.7,0.53
+401110836,2019,10,Arkansas,SEC,Mississippi State,-0.06,-0.35,0.21,0.54,0.75,0.49
+401121961,2019,10,Arkansas State,Sun Belt,UL Monroe,0.29,0.5,0.14,0.3,0.24,0.37
+401114331,2019,10,Army,FBS Independents,Air Force,0.14,0.79,-0.09,0.18,-0.52,0.3
+401110837,2019,10,Auburn,SEC,Ole Miss,0.19,0.41,0.01,0.03,-0.04,0.08
+401112080,2019,10,Baylor,Big 12,West Virginia,0.06,0.31,-0.1,-0.1,0.13,-0.47
+401117535,2019,10,Boise State,Mountain West,San José State,0.41,0.18,0.57,0.37,0.51,0.11
+401112495,2019,10,Boston College,ACC,Syracuse,0.58,1.83,0.43,0.08,0.29,-0.13
+401119293,2019,10,Bowling Green,Mid-American,Akron,0.07,0.22,0.01,-0.34,-0.43,-0.26
+401119294,2019,10,Buffalo,Mid-American,Eastern Michigan,0.3,0.48,0.23,0.02,0.02,0.13
+401117216,2019,10,BYU,FBS Independents,Utah State,0.43,0.74,0.19,0.12,0.13,0.12
+401119295,2019,10,Central Michigan,Mid-American,Northern Illinois,0.37,0.72,0.24,-0.04,0.16,-0.27
+401114299,2019,10,Charlotte,Conference USA,Middle Tennessee,0.26,0.41,0.21,0.29,0.28,0.29
+401117896,2019,10,Cincinnati,American Athletic,East Carolina,0.41,0.12,0.65,0.21,0.58,-0.23
+401112496,2019,10,Clemson,ACC,Wofford,0.75,0.65,0.85,0.07,0.72,-0.07
+401121962,2019,10,Coastal Carolina,Sun Belt,Troy,0.21,0.29,0.16,0.38,0.52,0.19
+401114189,2019,10,Colorado,Pac-12,UCLA,0.13,0.07,0.24,0.22,0.43,0.1
+401117538,2019,10,Colorado State,Mountain West,UNLV,0.31,0.72,-0.01,0.17,0.18,0.13
+401117896,2019,10,East Carolina,American Athletic,Cincinnati,0.21,0.58,-0.23,0.41,0.12,0.65
+401119294,2019,10,Eastern Michigan,Mid-American,Buffalo,0.02,0.02,0.13,0.3,0.48,0.23
+401110838,2019,10,Florida,SEC,Georgia,0.16,0.35,-0.23,0.22,0.83,-0.22
+401114301,2019,10,Florida Atlantic,Conference USA,Western Kentucky,0.2,0.27,0.14,0.13,0.18,0.06
+401114300,2019,10,Florida International,Conference USA,Old Dominion,0.12,0.26,0.01,-0.01,-0.04,0.1
+401112497,2019,10,Florida State,ACC,Miami,-0.05,0.06,-0.22,0.08,0.23,-0.15
+401117537,2019,10,Fresno State,Mountain West,Hawai'i,0.38,0.43,0.43,0.24,-0.06,0.74
+401110838,2019,10,Georgia,SEC,Florida,0.22,0.83,-0.22,0.16,0.35,-0.23
+401121960,2019,10,Georgia Southern,Sun Belt,App State,0.12,-0.3,0.15,0.15,0.23,0.0
+401112498,2019,10,Georgia Tech,ACC,Pittsburgh,-0.13,0.08,-0.31,0.03,0.1,-0.09
+401117537,2019,10,Hawai'i,Mountain West,Fresno State,0.24,-0.06,0.74,0.38,0.43,0.43
+401117895,2019,10,Houston,American Athletic,UCF,0.13,-0.07,0.3,0.29,0.55,-0.02
+401112153,2019,10,Illinois,Big Ten,Rutgers,0.24,0.6,0.12,-0.25,-0.54,-0.17
+401112165,2019,10,Indiana,Big Ten,Northwestern,0.1,0.53,-0.1,-0.1,-0.01,-0.17
+401112104,2019,10,Kansas,Big 12,Kansas State,0.02,-0.04,0.12,0.3,0.35,0.3
+401112104,2019,10,Kansas State,Big 12,Kansas,0.3,0.35,0.3,0.02,-0.04,0.12
+401114352,2019,10,Liberty,FBS Independents,Massachusetts,0.52,0.96,0.2,-0.01,0.09,-0.1
+401121963,2019,10,Louisiana,Sun Belt,Texas State,0.34,0.69,0.23,-0.2,-0.28,-0.06
+401114302,2019,10,Marshall,Conference USA,Rice,0.2,0.63,-0.04,0.0,-0.09,0.08
+401112208,2019,10,Maryland,Big Ten,Michigan,-0.09,-0.34,0.07,0.25,0.1,0.39
+401114352,2019,10,Massachusetts,FBS Independents,Liberty,-0.01,0.09,-0.1,0.52,0.96,0.2
+401117897,2019,10,Memphis,American Athletic,SMU,0.23,0.32,0.06,0.33,0.35,0.34
+401112497,2019,10,Miami,ACC,Florida State,0.08,0.23,-0.15,-0.05,0.06,-0.22
+401112208,2019,10,Michigan,Big Ten,Maryland,0.25,0.1,0.39,-0.09,-0.34,0.07
+401114299,2019,10,Middle Tennessee,Conference USA,Charlotte,0.29,0.28,0.29,0.26,0.41,0.21
+401110836,2019,10,Mississippi State,SEC,Arkansas,0.54,0.75,0.49,-0.06,-0.35,0.21
+401117894,2019,10,Navy,American Athletic,UConn,0.72,0.94,0.69,-0.08,-0.14,-0.02
+401112500,2019,10,NC State,ACC,Wake Forest,0.02,-0.1,0.24,0.14,0.37,-0.04
+401112243,2019,10,Nebraska,Big Ten,Purdue,0.04,0.12,0.01,0.3,0.46,0.06
+401117536,2019,10,Nevada,Mountain West,New Mexico,0.12,0.16,0.06,0.04,-0.07,0.09
+401117536,2019,10,New Mexico,Mountain West,Nevada,0.04,-0.07,0.09,0.12,0.16,0.06
+401112499,2019,10,North Carolina,ACC,Virginia,0.3,0.41,0.22,0.36,0.66,-0.04
+401119295,2019,10,Northern Illinois,Mid-American,Central Michigan,-0.04,0.16,-0.27,0.37,0.72,0.24
+401114303,2019,10,North Texas,Conference USA,UTEP,0.33,0.71,-0.11,0.14,-0.06,0.36
+401112165,2019,10,Northwestern,Big Ten,Indiana,-0.1,-0.01,-0.17,0.1,0.53,-0.1
+401112501,2019,10,Notre Dame,FBS Independents,Virginia Tech,-0.01,0.18,-0.28,-0.03,0.27,-0.26
+401112127,2019,10,Oklahoma State,Big 12,TCU,0.27,0.32,0.26,0.12,-0.06,0.34
+401114300,2019,10,Old Dominion,Conference USA,Florida International,-0.01,-0.04,0.1,0.12,0.26,0.01
+401110837,2019,10,Ole Miss,SEC,Auburn,0.03,-0.04,0.08,0.19,0.41,0.01
+401114198,2019,10,Oregon,Pac-12,USC,0.49,0.68,0.3,0.04,0.02,0.12
+401114171,2019,10,Oregon State,Pac-12,Arizona,0.6,0.7,0.53,0.29,0.36,0.26
+401112498,2019,10,Pittsburgh,ACC,Georgia Tech,0.03,0.1,-0.09,-0.13,0.08,-0.31
+401112243,2019,10,Purdue,Big Ten,Nebraska,0.3,0.46,0.06,0.04,0.12,0.01
+401114302,2019,10,Rice,Conference USA,Marshall,0.0,-0.09,0.08,0.2,0.63,-0.04
+401112153,2019,10,Rutgers,Big Ten,Illinois,-0.25,-0.54,-0.17,0.24,0.6,0.12
+401117535,2019,10,San José State,Mountain West,Boise State,0.37,0.51,0.11,0.41,0.18,0.57
+401117897,2019,10,SMU,American Athletic,Memphis,0.33,0.35,0.34,0.23,0.32,0.06
+401110839,2019,10,South Carolina,SEC,Vanderbilt,0.06,0.46,-0.17,-0.03,-0.16,0.07
+401112495,2019,10,Syracuse,ACC,Boston College,0.08,0.29,-0.13,0.58,1.83,0.43
+401112127,2019,10,TCU,Big 12,Oklahoma State,0.12,-0.06,0.34,0.27,0.32,0.26
+401110840,2019,10,Tennessee,SEC,UAB,0.08,-0.04,0.1,-0.03,0.03,-0.11
+401110841,2019,10,Texas A&M,SEC,UTSA,0.29,0.02,0.48,0.0,-0.15,0.12
+401121963,2019,10,Texas State,Sun Belt,Louisiana,-0.2,-0.28,-0.06,0.34,0.69,0.23
+401121962,2019,10,Troy,Sun Belt,Coastal Carolina,0.38,0.52,0.19,0.21,0.29,0.16
+401117898,2019,10,Tulane,American Athletic,Tulsa,0.45,0.88,0.31,0.11,0.3,-0.13
+401117898,2019,10,Tulsa,American Athletic,Tulane,0.11,0.3,-0.13,0.45,0.88,0.31
+401110840,2019,10,UAB,Conference USA,Tennessee,-0.03,0.03,-0.11,0.08,-0.04,0.1
+401117895,2019,10,UCF,American Athletic,Houston,0.29,0.55,-0.02,0.13,-0.07,0.3
+401114189,2019,10,UCLA,Pac-12,Colorado,0.22,0.43,0.1,0.13,0.07,0.24
+401117894,2019,10,UConn,American Athletic,Navy,-0.08,-0.14,-0.02,0.72,0.94,0.69
+401121961,2019,10,UL Monroe,Sun Belt,Arkansas State,0.3,0.24,0.37,0.29,0.5,0.14
+401117538,2019,10,UNLV,Mountain West,Colorado State,0.17,0.18,0.13,0.31,0.72,-0.01
+401114198,2019,10,USC,Pac-12,Oregon,0.04,0.02,0.12,0.49,0.68,0.3
+401114227,2019,10,Utah,Pac-12,Washington,0.22,0.58,0.03,0.03,0.04,-0.02
+401117216,2019,10,Utah State,Mountain West,BYU,0.12,0.13,0.12,0.43,0.74,0.19
+401114303,2019,10,UTEP,Conference USA,North Texas,0.14,-0.06,0.36,0.33,0.71,-0.11
+401110841,2019,10,UTSA,Conference USA,Texas A&M,0.0,-0.15,0.12,0.29,0.02,0.48
+401110839,2019,10,Vanderbilt,SEC,South Carolina,-0.03,-0.16,0.07,0.06,0.46,-0.17
+401112499,2019,10,Virginia,ACC,North Carolina,0.36,0.66,-0.04,0.3,0.41,0.22
+401112501,2019,10,Virginia Tech,ACC,Notre Dame,-0.03,0.27,-0.26,-0.01,0.18,-0.28
+401112500,2019,10,Wake Forest,ACC,NC State,0.14,0.37,-0.04,0.02,-0.1,0.24
+401114227,2019,10,Washington,Pac-12,Utah,0.03,0.04,-0.02,0.22,0.58,0.03
+401114301,2019,10,Western Kentucky,Conference USA,Florida Atlantic,0.13,0.18,0.06,0.2,0.27,0.14
+401112080,2019,10,West Virginia,Big 12,Baylor,-0.1,0.13,-0.47,0.06,0.31,-0.1
+401110842,2019,11,Alabama,SEC,LSU,0.38,0.6,0.05,0.28,0.42,0.29
+401110848,2019,11,App State,Sun Belt,South Carolina,0.01,0.07,-0.09,-0.02,0.1,-0.33
+401114160,2019,11,Arizona State,Pac-12,USC,0.08,0.24,-0.25,0.31,0.6,-0.17
+401110843,2019,11,Arkansas,SEC,Western Kentucky,0.12,-0.5,0.79,0.32,0.34,0.33
+401114332,2019,11,Army,FBS Independents,Massachusetts,0.46,0.18,0.48,-0.17,-0.15,-0.2
+401119296,2019,11,Ball State,Mid-American,Western Michigan,0.32,0.29,0.34,0.36,-0.06,0.57
+401112081,2019,11,Baylor,Big 12,TCU,0.11,0.08,0.11,-0.06,-0.13,0.0
+401117541,2019,11,Boise State,Mountain West,Wyoming,0.07,0.13,-0.04,-0.02,0.11,-0.13
+401112502,2019,11,Boston College,ACC,Florida State,0.29,0.57,0.17,0.53,1.08,0.12
+401114353,2019,11,BYU,FBS Independents,Liberty,0.25,0.66,-0.12,0.25,0.35,0.12
+401114180,2019,11,California,Pac-12,Washington State,0.28,0.38,0.22,-0.08,0.03,-0.52
+401114304,2019,11,Charlotte,Conference USA,UTEP,0.24,0.55,-0.07,0.23,0.67,-0.03
+401117901,2019,11,Cincinnati,American Athletic,UConn,0.45,0.38,0.51,-0.16,-0.4,0.02
+401112503,2019,11,Clemson,ACC,NC State,0.52,0.5,0.53,-0.1,-0.06,-0.15
+401121964,2019,11,Coastal Carolina,Sun Belt,Louisiana,-0.06,-0.03,-0.09,0.49,0.67,0.36
+401114190,2019,11,Colorado,Pac-12,Stanford,0.1,0.11,0.17,0.15,0.18,0.11
+401111654,2019,11,Duke,ACC,Notre Dame,-0.24,-0.32,-0.16,0.18,0.27,0.1
+401117902,2019,11,East Carolina,American Athletic,SMU,0.47,0.82,0.07,0.47,0.74,0.15
+401110844,2019,11,Florida,SEC,Vanderbilt,0.31,0.3,0.31,-0.36,-0.27,-0.42
+401114305,2019,11,Florida Atlantic,Conference USA,Florida International,0.23,0.21,0.3,-0.1,-0.02,-0.19
+401114305,2019,11,Florida International,Conference USA,Florida Atlantic,-0.1,-0.02,-0.19,0.23,0.21,0.3
+401112502,2019,11,Florida State,ACC,Boston College,0.53,1.08,0.12,0.29,0.57,0.17
+401117540,2019,11,Fresno State,Mountain West,Utah State,0.47,0.77,0.28,0.33,0.58,0.12
+401110845,2019,11,Georgia,SEC,Missouri,0.12,0.28,-0.04,-0.18,-0.09,-0.34
+401121965,2019,11,Georgia Southern,Sun Belt,Troy,0.14,0.13,0.15,0.38,0.45,0.39
+401121966,2019,11,Georgia State,Sun Belt,UL Monroe,0.25,-0.13,0.46,0.42,0.46,0.41
+401112504,2019,11,Georgia Tech,ACC,Virginia,0.39,0.77,0.13,0.17,0.19,0.19
+401117543,2019,11,Hawai'i,Mountain West,San José State,0.51,0.72,0.31,0.41,0.44,0.42
+401112154,2019,11,Illinois,Big Ten,Michigan State,0.11,0.27,-0.18,0.06,-0.07,0.17
+401112198,2019,11,Iowa,Big Ten,Wisconsin,0.13,0.28,0.01,0.34,0.4,0.33
+401112092,2019,11,Iowa State,Big 12,Oklahoma,0.3,0.53,0.11,0.46,0.65,0.32
+401112111,2019,11,Kansas State,Big 12,Texas,0.1,0.58,-0.5,0.32,0.34,0.34
+401119297,2019,11,Kent State,Mid-American,Toledo,0.27,0.96,-0.04,0.33,0.32,0.34
+401110846,2019,11,Kentucky,SEC,Tennessee,0.02,-0.94,0.16,0.19,0.44,-0.07
+401114353,2019,11,Liberty,FBS Independents,BYU,0.25,0.35,0.12,0.25,0.66,-0.12
+401121964,2019,11,Louisiana,Sun Belt,Coastal Carolina,0.49,0.67,0.36,-0.06,-0.03,-0.09
+401114306,2019,11,Louisiana Tech,Conference USA,North Texas,0.28,0.2,0.38,-0.11,-0.05,-0.21
+401112505,2019,11,Louisville,ACC,Miami,0.3,0.4,0.2,0.5,0.89,0.25
+401110842,2019,11,LSU,SEC,Alabama,0.28,0.42,0.29,0.38,0.6,0.05
+401112209,2019,11,Maryland,Big Ten,Ohio State,-0.05,-0.16,0.04,0.47,0.55,0.44
+401114332,2019,11,Massachusetts,FBS Independents,Army,-0.17,-0.15,-0.2,0.46,0.18,0.48
+401112505,2019,11,Miami,ACC,Louisville,0.5,0.89,0.25,0.3,0.4,0.2
+401119298,2019,11,Miami (OH),Mid-American,Ohio,0.15,0.1,0.15,0.17,0.19,0.16
+401112154,2019,11,Michigan State,Big Ten,Illinois,0.06,-0.07,0.17,0.11,0.27,-0.18
+401112235,2019,11,Minnesota,Big Ten,Penn State,0.37,1.31,-0.07,0.2,0.13,0.37
+401110845,2019,11,Missouri,SEC,Georgia,-0.18,-0.09,-0.34,0.12,0.28,-0.04
+401112503,2019,11,NC State,ACC,Clemson,-0.1,-0.06,-0.15,0.52,0.5,0.53
+401117542,2019,11,Nevada,Mountain West,San Diego State,-0.05,0.12,-0.23,0.05,0.04,0.08
+401110847,2019,11,New Mexico State,FBS Independents,Ole Miss,-0.03,-0.02,-0.01,0.38,0.86,0.27
+401114306,2019,11,North Texas,Conference USA,Louisiana Tech,-0.11,-0.05,-0.21,0.28,0.2,0.38
+401112249,2019,11,Northwestern,Big Ten,Purdue,0.2,0.43,0.04,0.05,0.1,0.02
+401111654,2019,11,Notre Dame,FBS Independents,Duke,0.18,0.27,0.1,-0.24,-0.32,-0.16
+401119298,2019,11,Ohio,Mid-American,Miami (OH),0.17,0.19,0.16,0.15,0.1,0.15
+401112209,2019,11,Ohio State,Big Ten,Maryland,0.47,0.55,0.44,-0.05,-0.16,0.04
+401112092,2019,11,Oklahoma,Big 12,Iowa State,0.46,0.65,0.32,0.3,0.53,0.11
+401114307,2019,11,Old Dominion,Conference USA,UTSA,0.16,0.44,-0.16,0.17,0.33,0.09
+401110847,2019,11,Ole Miss,SEC,New Mexico State,0.38,0.86,0.27,-0.03,-0.02,-0.01
+401114205,2019,11,Oregon State,Pac-12,Washington,-0.29,-0.34,-0.2,-0.01,-0.32,0.19
+401112235,2019,11,Penn State,Big Ten,Minnesota,0.2,0.13,0.37,0.37,1.31,-0.07
+401112249,2019,11,Purdue,Big Ten,Northwestern,0.05,0.1,0.02,0.2,0.43,0.04
+401117542,2019,11,San Diego State,Mountain West,Nevada,0.05,0.04,0.08,-0.05,0.12,-0.23
+401117543,2019,11,San José State,Mountain West,Hawai'i,0.41,0.44,0.42,0.51,0.72,0.31
+401117902,2019,11,SMU,American Athletic,East Carolina,0.47,0.74,0.15,0.47,0.82,0.07
+401121967,2019,11,South Alabama,Sun Belt,Texas State,0.27,0.68,0.12,0.21,0.65,-0.18
+401110848,2019,11,South Carolina,SEC,App State,-0.02,0.1,-0.33,0.01,0.07,-0.09
+401114308,2019,11,Southern Miss,Conference USA,UAB,0.17,0.25,0.22,-0.35,-0.55,-0.16
+401117899,2019,11,South Florida,American Athletic,Temple,-0.12,-0.06,-0.22,-0.03,0.04,-0.07
+401114190,2019,11,Stanford,Pac-12,Colorado,0.15,0.18,0.11,0.1,0.11,0.17
+401112081,2019,11,TCU,Big 12,Baylor,-0.06,-0.13,0.0,0.11,0.08,0.11
+401117899,2019,11,Temple,American Athletic,South Florida,-0.03,0.04,-0.07,-0.12,-0.06,-0.22
+401110846,2019,11,Tennessee,SEC,Kentucky,0.19,0.44,-0.07,0.02,-0.94,0.16
+401112111,2019,11,Texas,Big 12,Kansas State,0.32,0.34,0.34,0.1,0.58,-0.5
+401121967,2019,11,Texas State,Sun Belt,South Alabama,0.21,0.65,-0.18,0.27,0.68,0.12
+401112142,2019,11,Texas Tech,Big 12,West Virginia,0.22,0.36,0.14,0.05,0.08,-0.06
+401119297,2019,11,Toledo,Mid-American,Kent State,0.33,0.32,0.34,0.27,0.96,-0.04
+401121965,2019,11,Troy,Sun Belt,Georgia Southern,0.38,0.45,0.39,0.14,0.13,0.15
+401117900,2019,11,Tulsa,American Athletic,UCF,0.09,0.71,-0.16,0.26,0.31,0.2
+401114308,2019,11,UAB,Conference USA,Southern Miss,-0.35,-0.55,-0.16,0.17,0.25,0.22
+401117900,2019,11,UCF,American Athletic,Tulsa,0.26,0.31,0.2,0.09,0.71,-0.16
+401117901,2019,11,UConn,American Athletic,Cincinnati,-0.16,-0.4,0.02,0.45,0.38,0.51
+401121966,2019,11,UL Monroe,Sun Belt,Georgia State,0.42,0.46,0.41,0.25,-0.13,0.46
+401114160,2019,11,USC,Pac-12,Arizona State,0.31,0.6,-0.17,0.08,0.24,-0.25
+401117540,2019,11,Utah State,Mountain West,Fresno State,0.33,0.58,0.12,0.47,0.77,0.28
+401114304,2019,11,UTEP,Conference USA,Charlotte,0.23,0.67,-0.03,0.24,0.55,-0.07
+401114307,2019,11,UTSA,Conference USA,Old Dominion,0.17,0.33,0.09,0.16,0.44,-0.16
+401110844,2019,11,Vanderbilt,SEC,Florida,-0.36,-0.27,-0.42,0.31,0.3,0.31
+401112504,2019,11,Virginia,ACC,Georgia Tech,0.17,0.19,0.19,0.39,0.77,0.13
+401112506,2019,11,Virginia Tech,ACC,Wake Forest,0.16,0.35,0.08,0.04,0.17,-0.16
+401112506,2019,11,Wake Forest,ACC,Virginia Tech,0.04,0.17,-0.16,0.16,0.35,0.08
+401114205,2019,11,Washington,Pac-12,Oregon State,-0.01,-0.32,0.19,-0.29,-0.34,-0.2
+401114180,2019,11,Washington State,Pac-12,California,-0.08,0.03,-0.52,0.28,0.38,0.22
+401110843,2019,11,Western Kentucky,Conference USA,Arkansas,0.32,0.34,0.33,0.12,-0.5,0.79
+401119296,2019,11,Western Michigan,Mid-American,Ball State,0.36,-0.06,0.57,0.32,0.29,0.34
+401112142,2019,11,West Virginia,Big 12,Texas Tech,0.05,0.08,-0.06,0.22,0.36,0.14
+401112198,2019,11,Wisconsin,Big Ten,Iowa,0.34,0.4,0.33,0.13,0.28,0.01
+401117541,2019,11,Wyoming,Mountain West,Boise State,-0.02,0.11,-0.13,0.07,0.13,-0.04
+401117544,2019,12,Air Force,Mountain West,Colorado State,0.17,0.81,0.05,-0.01,0.03,-0.09
+401119299,2019,12,Akron,Mid-American,Eastern Michigan,0.03,0.25,-0.37,0.45,0.35,0.5
+401110851,2019,12,Alabama,SEC,Mississippi State,0.43,0.68,0.23,-0.07,-0.16,-0.02
+401121968,2019,12,App State,Sun Belt,Georgia State,0.26,0.32,0.21,-0.03,-0.24,0.2
+401114172,2019,12,Arizona,Pac-12,Oregon,-0.17,-0.3,0.03,0.33,0.66,0.04
+401114161,2019,12,Arizona State,Pac-12,Oregon State,0.19,0.33,-0.07,0.24,0.55,-0.08
+401121969,2019,12,Arkansas State,Sun Belt,Coastal Carolina,0.14,0.39,-0.29,-0.02,-0.32,0.16
+401114333,2019,12,Army,FBS Independents,VMI,0.55,-0.58,0.69,0.03,0.07,-0.08
+401110849,2019,12,Auburn,SEC,Georgia,0.05,0.09,-0.03,0.0,0.01,-0.01
+401119304,2019,12,Ball State,Mid-American,Central Michigan,0.3,0.78,0.06,0.4,0.51,0.32
+401112082,2019,12,Baylor,Big 12,Oklahoma,0.19,0.22,0.18,0.25,0.42,0.11
+401117545,2019,12,Boise State,Mountain West,New Mexico,0.39,0.42,0.37,-0.03,0.23,-0.2
+401119301,2019,12,Bowling Green,Mid-American,Miami (OH),-0.29,-0.55,-0.11,0.38,1.04,0.09
+401119303,2019,12,Buffalo,Mid-American,Kent State,0.16,0.24,0.16,0.04,0.12,0.09
+401117217,2019,12,BYU,FBS Independents,Idaho State,0.3,0.25,0.35,-0.2,-0.19,-0.18
+401114181,2019,12,California,Pac-12,USC,-0.02,-0.23,0.31,0.39,0.65,-0.02
+401119304,2019,12,Central Michigan,Mid-American,Ball State,0.4,0.51,0.32,0.3,0.78,0.06
+401117903,2019,12,Cincinnati,American Athletic,South Florida,0.02,-0.06,0.06,0.17,0.55,-0.04
+401112508,2019,12,Clemson,ACC,Wake Forest,0.4,0.67,0.11,-0.29,-0.4,-0.24
+401121969,2019,12,Coastal Carolina,Sun Belt,Arkansas State,-0.02,-0.32,0.16,0.14,0.39,-0.29
+401117544,2019,12,Colorado State,Mountain West,Air Force,-0.01,0.03,-0.09,0.17,0.81,0.05
+401112509,2019,12,Duke,ACC,Syracuse,-0.21,-0.32,-0.13,0.38,0.32,0.41
+401119299,2019,12,Eastern Michigan,Mid-American,Akron,0.45,0.35,0.5,0.03,0.25,-0.37
+401110852,2019,12,Florida,SEC,Missouri,0.14,0.27,-0.1,-0.11,-0.1,-0.11
+401112510,2019,12,Florida State,ACC,Alabama State,0.55,0.65,0.43,-0.1,-0.06,-0.12
+401117547,2019,12,Fresno State,Mountain West,San Diego State,-0.05,-0.05,-0.05,-0.01,0.4,-0.51
+401110849,2019,12,Georgia,SEC,Auburn,0.0,0.01,-0.01,0.05,0.09,-0.03
+401121970,2019,12,Georgia Southern,Sun Belt,UL Monroe,0.23,0.39,0.22,0.12,0.19,0.02
+401121968,2019,12,Georgia State,Sun Belt,App State,-0.03,-0.24,0.2,0.26,0.32,0.21
+401112511,2019,12,Georgia Tech,ACC,Virginia Tech,-0.31,-0.49,-0.12,0.23,0.56,0.14
+401117548,2019,12,Hawai'i,Mountain West,UNLV,0.17,0.15,0.18,-0.2,-0.36,-0.06
+401117904,2019,12,Houston,American Athletic,Memphis,0.1,0.23,-0.03,0.47,0.94,0.05
+401112166,2019,12,Indiana,Big Ten,Penn State,0.29,0.49,0.07,0.25,0.24,0.28
+401112199,2019,12,Iowa,Big Ten,Minnesota,0.16,0.36,0.02,0.17,0.48,-0.21
+401112093,2019,12,Iowa State,Big 12,Texas,0.1,0.21,-0.11,0.11,0.4,-0.42
+401112105,2019,12,Kansas,Big 12,Oklahoma State,0.05,0.17,-0.23,0.29,0.39,0.24
+401112112,2019,12,Kansas State,Big 12,West Virginia,0.19,0.31,0.12,0.21,0.39,-0.12
+401119303,2019,12,Kent State,Mid-American,Buffalo,0.04,0.12,0.09,0.16,0.24,0.16
+401110854,2019,12,Kentucky,SEC,Vanderbilt,0.37,0.49,0.36,-0.12,-0.26,0.02
+401121971,2019,12,Louisiana,Sun Belt,South Alabama,0.14,0.17,0.2,0.31,-0.2,0.48
+401114309,2019,12,Louisiana Tech,Conference USA,Marshall,-0.07,-0.14,0.0,0.2,0.18,0.21
+401112512,2019,12,Louisville,ACC,NC State,0.23,0.86,-0.19,0.04,0.12,-0.03
+401110850,2019,12,LSU,SEC,Ole Miss,0.49,0.56,0.43,0.39,0.43,0.37
+401114309,2019,12,Marshall,Conference USA,Louisiana Tech,0.2,0.18,0.21,-0.07,-0.14,0.0
+401112250,2019,12,Massachusetts,FBS Independents,Northwestern,-0.1,-0.04,-0.18,0.21,-0.03,0.27
+401117904,2019,12,Memphis,American Athletic,Houston,0.47,0.94,0.05,0.1,0.23,-0.03
+401119301,2019,12,Miami (OH),Mid-American,Bowling Green,0.38,1.04,0.09,-0.29,-0.55,-0.11
+401112219,2019,12,Michigan,Big Ten,Michigan State,0.29,0.52,-0.01,-0.1,-0.04,-0.16
+401112219,2019,12,Michigan State,Big Ten,Michigan,-0.1,-0.04,-0.16,0.29,0.52,-0.01
+401114310,2019,12,Middle Tennessee,Conference USA,Rice,0.18,0.51,-0.13,0.2,0.54,-0.03
+401112199,2019,12,Minnesota,Big Ten,Iowa,0.17,0.48,-0.21,0.16,0.36,0.02
+401110851,2019,12,Mississippi State,SEC,Alabama,-0.07,-0.16,-0.02,0.43,0.68,0.23
+401110852,2019,12,Missouri,SEC,Florida,-0.11,-0.1,-0.11,0.14,0.27,-0.1
+401114338,2019,12,Navy,American Athletic,Notre Dame,0.01,-0.12,0.06,0.46,1.11,0.04
+401112512,2019,12,NC State,ACC,Louisville,0.04,0.12,-0.03,0.23,0.86,-0.19
+401112244,2019,12,Nebraska,Big Ten,Wisconsin,0.22,0.0,0.4,0.29,0.49,0.27
+401117545,2019,12,New Mexico,Mountain West,Boise State,-0.03,0.23,-0.2,0.39,0.42,0.37
+401114345,2019,12,New Mexico State,FBS Independents,Incarnate Word,0.18,0.38,0.07,-0.04,-0.11,0.14
+401112507,2019,12,North Carolina,ACC,Pittsburgh,0.12,0.18,0.08,0.27,0.37,0.21
+401119302,2019,12,Northern Illinois,Mid-American,Toledo,0.3,0.44,0.24,0.22,0.46,-0.05
+401112250,2019,12,Northwestern,Big Ten,Massachusetts,0.21,-0.03,0.27,-0.1,-0.04,-0.18
+401114338,2019,12,Notre Dame,FBS Independents,Navy,0.46,1.11,0.04,0.01,-0.12,0.06
+401119300,2019,12,Ohio,Mid-American,Western Michigan,0.22,0.33,0.17,0.31,0.68,0.07
+401112255,2019,12,Ohio State,Big Ten,Rutgers,0.45,0.9,0.08,0.0,-0.01,0.0
+401112082,2019,12,Oklahoma,Big 12,Baylor,0.25,0.42,0.11,0.19,0.22,0.18
+401112105,2019,12,Oklahoma State,Big 12,Kansas,0.29,0.39,0.24,0.05,0.17,-0.23
+401110850,2019,12,Ole Miss,SEC,LSU,0.39,0.43,0.37,0.49,0.56,0.43
+401114172,2019,12,Oregon,Pac-12,Arizona,0.33,0.66,0.04,-0.17,-0.3,0.03
+401114161,2019,12,Oregon State,Pac-12,Arizona State,0.24,0.55,-0.08,0.19,0.33,-0.07
+401112166,2019,12,Penn State,Big Ten,Indiana,0.25,0.24,0.28,0.29,0.49,0.07
+401112507,2019,12,Pittsburgh,ACC,North Carolina,0.27,0.37,0.21,0.12,0.18,0.08
+401114310,2019,12,Rice,Conference USA,Middle Tennessee,0.2,0.54,-0.03,0.18,0.51,-0.13
+401112255,2019,12,Rutgers,Big Ten,Ohio State,0.0,-0.01,0.0,0.45,0.9,0.08
+401117547,2019,12,San Diego State,Mountain West,Fresno State,-0.01,0.4,-0.51,-0.05,-0.05,-0.05
+401121971,2019,12,South Alabama,Sun Belt,Louisiana,0.31,-0.2,0.48,0.14,0.17,0.2
+401110853,2019,12,South Carolina,SEC,Texas A&M,-0.11,-0.08,-0.3,0.29,0.17,0.38
+401114311,2019,12,Southern Miss,Conference USA,UTSA,0.12,0.26,0.02,0.07,0.18,-0.07
+401117903,2019,12,South Florida,American Athletic,Cincinnati,0.17,0.55,-0.04,0.02,-0.06,0.06
+401114231,2019,12,Stanford,Pac-12,Washington State,0.32,0.38,-0.08,0.18,0.2,0.16
+401112509,2019,12,Syracuse,ACC,Duke,0.38,0.32,0.41,-0.21,-0.32,-0.13
+401112133,2019,12,TCU,Big 12,Texas Tech,0.2,0.34,0.16,0.36,0.57,0.07
+401117905,2019,12,Temple,American Athletic,Tulane,0.21,0.43,-0.09,0.02,-0.07,0.07
+401112093,2019,12,Texas,Big 12,Iowa State,0.11,0.4,-0.42,0.1,0.21,-0.11
+401110853,2019,12,Texas A&M,SEC,South Carolina,0.29,0.17,0.38,-0.11,-0.08,-0.3
+401121972,2019,12,Texas State,Sun Belt,Troy,0.0,-0.13,0.25,0.31,0.58,-0.06
+401112133,2019,12,Texas Tech,Big 12,TCU,0.36,0.57,0.07,0.2,0.34,0.16
+401119302,2019,12,Toledo,Mid-American,Northern Illinois,0.22,0.46,-0.05,0.3,0.44,0.24
+401121972,2019,12,Troy,Sun Belt,Texas State,0.31,0.58,-0.06,0.0,-0.13,0.25
+401117905,2019,12,Tulane,American Athletic,Temple,0.02,-0.07,0.07,0.21,0.43,-0.09
+401114312,2019,12,UAB,Conference USA,UTEP,0.34,0.09,0.45,-0.01,-0.07,0.04
+401114216,2019,12,UCLA,Pac-12,Utah,-0.21,-0.01,-0.53,0.66,1.02,0.43
+401121970,2019,12,UL Monroe,Sun Belt,Georgia Southern,0.12,0.19,0.02,0.23,0.39,0.22
+401117548,2019,12,UNLV,Mountain West,Hawai'i,-0.2,-0.36,-0.06,0.17,0.15,0.18
+401114181,2019,12,USC,Pac-12,California,0.39,0.65,-0.02,-0.02,-0.23,0.31
+401114216,2019,12,Utah,Pac-12,UCLA,0.66,1.02,0.43,-0.21,-0.01,-0.53
+401117546,2019,12,Utah State,Mountain West,Wyoming,-0.02,0.29,-0.31,0.0,-0.13,0.12
+401114312,2019,12,UTEP,Conference USA,UAB,-0.01,-0.07,0.04,0.34,0.09,0.45
+401114311,2019,12,UTSA,Conference USA,Southern Miss,0.07,0.18,-0.07,0.12,0.26,0.02
+401110854,2019,12,Vanderbilt,SEC,Kentucky,-0.12,-0.26,0.02,0.37,0.49,0.36
+401112511,2019,12,Virginia Tech,ACC,Georgia Tech,0.23,0.56,0.14,-0.31,-0.49,-0.12
+401112508,2019,12,Wake Forest,ACC,Clemson,-0.29,-0.4,-0.24,0.4,0.67,0.11
+401114231,2019,12,Washington State,Pac-12,Stanford,0.18,0.2,0.16,0.32,0.38,-0.08
+401119300,2019,12,Western Michigan,Mid-American,Ohio,0.31,0.68,0.07,0.22,0.33,0.17
+401112112,2019,12,West Virginia,Big 12,Kansas State,0.21,0.39,-0.12,0.19,0.31,0.12
+401112244,2019,12,Wisconsin,Big Ten,Nebraska,0.29,0.49,0.27,0.22,0.0,0.4
+401117546,2019,12,Wyoming,Mountain West,Utah State,0.0,-0.13,0.12,-0.02,0.29,-0.31
+401183793,2019,13,Air Force,Mountain West,New Mexico,0.62,2.89,0.12,0.25,-0.14,0.39
+401119307,2019,13,Akron,Mid-American,Miami (OH),0.03,0.04,0.0,-0.06,-0.45,0.14
+401110855,2019,13,Alabama,SEC,Western Carolina,0.55,1.64,0.19,-0.35,-0.47,-0.28
+401121973,2019,13,App State,Sun Belt,Texas State,0.31,0.63,0.21,-0.04,-0.12,0.02
+401114173,2019,13,Arizona,Pac-12,Utah,-0.07,-0.13,0.0,0.34,0.46,0.27
+401114162,2019,13,Arizona State,Pac-12,Oregon,0.2,0.61,-0.08,0.26,0.2,0.33
+401110859,2019,13,Arkansas,SEC,LSU,-0.02,0.1,-0.14,0.8,0.75,0.88
+401121974,2019,13,Arkansas State,Sun Belt,Georgia Southern,0.38,0.91,0.0,0.15,0.18,0.15
+401110856,2019,13,Auburn,SEC,Samford,0.36,0.59,0.25,-0.26,-0.27,-0.24
+401119309,2019,13,Ball State,Mid-American,Kent State,0.34,0.44,0.3,0.44,0.86,0.24
+401112083,2019,13,Baylor,Big 12,Texas,0.13,0.24,0.08,0.04,-0.16,0.4
+401117549,2019,13,Boise State,Mountain West,Utah State,0.4,0.4,0.4,0.1,0.05,0.18
+401112514,2019,13,Boston College,ACC,Notre Dame,-0.07,-0.36,0.09,0.22,0.48,0.02
+401119306,2019,13,Bowling Green,Mid-American,Ohio,0.1,0.23,0.02,0.52,0.85,0.36
+401119308,2019,13,Buffalo,Mid-American,Toledo,0.5,0.57,0.47,0.06,-0.03,0.25
+401114358,2019,13,BYU,FBS Independents,Massachusetts,0.58,0.68,0.51,0.01,0.21,-0.14
+401114182,2019,13,California,Pac-12,Stanford,0.31,0.5,0.08,0.18,0.23,0.05
+401114313,2019,13,Charlotte,Conference USA,Marshall,0.09,0.14,0.09,-0.11,-0.19,-0.03
+401117907,2019,13,Cincinnati,American Athletic,Temple,-0.07,-0.44,0.13,0.04,0.14,-0.12
+401121975,2019,13,Coastal Carolina,Sun Belt,UL Monroe,0.34,0.35,0.34,0.44,0.46,0.43
+401114191,2019,13,Colorado,Pac-12,Washington,0.11,0.23,0.08,0.01,0.08,-0.09
+401117550,2019,13,Colorado State,Mountain West,Wyoming,0.0,0.35,-0.37,0.13,-0.19,0.23
+401112515,2019,13,Duke,ACC,Wake Forest,0.03,-0.01,0.07,0.26,0.51,0.19
+401117908,2019,13,East Carolina,American Athletic,UConn,0.25,0.37,0.13,0.18,0.41,-0.15
+401119305,2019,13,Eastern Michigan,Mid-American,Northern Illinois,0.48,0.71,0.34,0.08,-0.11,0.19
+401114314,2019,13,Florida Atlantic,Conference USA,UTSA,0.28,0.39,0.2,0.14,0.25,0.04
+401112517,2019,13,Florida International,Conference USA,Miami,0.19,0.32,0.03,0.1,0.22,0.0
+401117551,2019,13,Fresno State,Mountain West,Nevada,0.26,0.36,0.06,0.34,0.17,0.5
+401110857,2019,13,Georgia,SEC,Texas A&M,0.0,0.16,-0.12,0.05,0.22,-0.36
+401121974,2019,13,Georgia Southern,Sun Belt,Arkansas State,0.15,0.18,0.15,0.38,0.91,0.0
+401121976,2019,13,Georgia State,Sun Belt,South Alabama,0.18,0.71,-0.11,-0.11,0.33,-0.42
+401112513,2019,13,Georgia Tech,ACC,NC State,0.35,0.58,0.26,0.24,0.35,0.21
+401117552,2019,13,Hawai'i,Mountain West,San Diego State,0.2,0.16,0.26,0.14,0.27,-0.02
+401117910,2019,13,Houston,American Athletic,Tulsa,-0.11,0.13,-0.17,-0.06,0.12,-0.45
+401112155,2019,13,Illinois,Big Ten,Iowa,0.0,-0.1,0.12,-0.05,0.29,-0.29
+401112167,2019,13,Indiana,Big Ten,Michigan,0.06,0.05,0.07,0.38,0.67,0.06
+401112155,2019,13,Iowa,Big Ten,Illinois,-0.05,0.29,-0.29,0.0,-0.1,0.12
+401112094,2019,13,Iowa State,Big 12,Kansas,0.32,0.58,0.01,0.28,0.3,0.3
+401112094,2019,13,Kansas,Big 12,Iowa State,0.28,0.3,0.3,0.32,0.58,0.01
+401112113,2019,13,Kansas State,Big 12,Texas Tech,0.15,0.4,-0.1,0.18,0.12,0.29
+401119309,2019,13,Kent State,Mid-American,Ball State,0.44,0.86,0.24,0.34,0.44,0.3
+401110858,2019,13,Kentucky,SEC,UT Martin,0.4,-0.46,0.61,-0.18,-0.06,-0.25
+401112520,2019,13,Liberty,FBS Independents,Virginia,0.14,0.17,0.06,0.31,0.46,0.23
+401121977,2019,13,Louisiana,Sun Belt,Troy,0.45,0.37,0.53,-0.11,-0.36,0.29
+401114315,2019,13,Louisiana Tech,Conference USA,UAB,0.01,0.08,-0.08,0.09,0.28,0.02
+401112516,2019,13,Louisville,ACC,Syracuse,0.68,0.71,0.67,0.25,0.34,0.19
+401110859,2019,13,LSU,SEC,Arkansas,0.8,0.75,0.88,-0.02,0.1,-0.14
+401114313,2019,13,Marshall,Conference USA,Charlotte,-0.11,-0.19,-0.03,0.09,0.14,0.09
+401112210,2019,13,Maryland,Big Ten,Nebraska,-0.15,-0.23,-0.07,0.17,0.18,0.22
+401114358,2019,13,Massachusetts,FBS Independents,BYU,0.01,0.21,-0.14,0.58,0.68,0.51
+401117909,2019,13,Memphis,American Athletic,South Florida,0.37,0.34,0.39,-0.04,-0.17,0.07
+401112517,2019,13,Miami,ACC,Florida International,0.1,0.22,0.0,0.19,0.32,0.03
+401119307,2019,13,Miami (OH),Mid-American,Akron,-0.06,-0.45,0.14,0.03,0.04,0.0
+401112167,2019,13,Michigan,Big Ten,Indiana,0.38,0.67,0.06,0.06,0.05,0.07
+401112220,2019,13,Michigan State,Big Ten,Rutgers,0.14,0.45,-0.08,-0.23,-0.38,-0.1
+401114316,2019,13,Middle Tennessee,Conference USA,Old Dominion,0.27,0.57,0.04,-0.09,-0.09,-0.05
+401112236,2019,13,Minnesota,Big Ten,Northwestern,0.36,0.7,0.22,0.13,0.57,0.0
+401110860,2019,13,Mississippi State,SEC,Abilene Christian,0.45,0.14,0.71,-0.12,0.02,-0.36
+401110861,2019,13,Missouri,SEC,Tennessee,0.08,0.16,0.06,0.24,0.65,-0.27
+401117911,2019,13,Navy,American Athletic,SMU,0.26,0.61,0.18,0.1,0.32,-0.12
+401112513,2019,13,NC State,ACC,Georgia Tech,0.24,0.35,0.21,0.35,0.58,0.26
+401112210,2019,13,Nebraska,Big Ten,Maryland,0.17,0.18,0.22,-0.15,-0.23,-0.07
+401117551,2019,13,Nevada,Mountain West,Fresno State,0.34,0.17,0.5,0.26,0.36,0.06
+401183793,2019,13,New Mexico,Mountain West,Air Force,0.25,-0.14,0.39,0.62,2.89,0.12
+401114319,2019,13,New Mexico State,FBS Independents,UTEP,0.43,0.27,0.63,0.36,0.56,0.24
+401112518,2019,13,North Carolina,ACC,Mercer,0.64,0.88,0.55,-0.07,0.12,-0.28
+401119305,2019,13,Northern Illinois,Mid-American,Eastern Michigan,0.08,-0.11,0.19,0.48,0.71,0.34
+401114317,2019,13,North Texas,Conference USA,Rice,-0.01,-0.03,0.01,0.06,0.21,-0.04
+401112236,2019,13,Northwestern,Big Ten,Minnesota,0.13,0.57,0.0,0.36,0.7,0.22
+401112514,2019,13,Notre Dame,FBS Independents,Boston College,0.22,0.48,0.02,-0.07,-0.36,0.09
+401119306,2019,13,Ohio,Mid-American,Bowling Green,0.52,0.85,0.36,0.1,0.23,0.02
+401112256,2019,13,Ohio State,Big Ten,Penn State,0.13,0.4,0.02,0.11,0.07,0.08
+401112120,2019,13,Oklahoma,Big 12,TCU,0.07,0.0,0.09,-0.03,-0.27,0.26
+401112128,2019,13,Oklahoma State,Big 12,West Virginia,0.1,0.26,-0.05,0.13,0.31,-0.17
+401114316,2019,13,Old Dominion,Conference USA,Middle Tennessee,-0.09,-0.09,-0.05,0.27,0.57,0.04
+401114162,2019,13,Oregon,Pac-12,Arizona State,0.26,0.2,0.33,0.2,0.61,-0.08
+401114206,2019,13,Oregon State,Pac-12,Washington State,0.36,0.56,0.09,0.45,0.53,-0.03
+401112256,2019,13,Penn State,Big Ten,Ohio State,0.11,0.07,0.08,0.13,0.4,0.02
+401112519,2019,13,Pittsburgh,ACC,Virginia Tech,-0.2,-0.25,-0.15,0.02,0.56,-0.19
+401112263,2019,13,Purdue,Big Ten,Wisconsin,0.11,0.31,-0.33,0.4,0.69,0.3
+401114317,2019,13,Rice,Conference USA,North Texas,0.06,0.21,-0.04,-0.01,-0.03,0.01
+401112220,2019,13,Rutgers,Big Ten,Michigan State,-0.23,-0.38,-0.1,0.14,0.45,-0.08
+401117552,2019,13,San Diego State,Mountain West,Hawai'i,0.14,0.27,-0.02,0.2,0.16,0.26
+401117553,2019,13,San José State,Mountain West,UNLV,0.26,0.31,0.11,0.26,0.08,0.41
+401117911,2019,13,SMU,American Athletic,Navy,0.1,0.32,-0.12,0.26,0.61,0.18
+401121976,2019,13,South Alabama,Sun Belt,Georgia State,-0.11,0.33,-0.42,0.18,0.71,-0.11
+401114318,2019,13,Southern Miss,Conference USA,Western Kentucky,-0.02,0.23,-0.31,0.16,0.45,-0.11
+401117909,2019,13,South Florida,American Athletic,Memphis,-0.04,-0.17,0.07,0.37,0.34,0.39
+401114182,2019,13,Stanford,Pac-12,California,0.18,0.23,0.05,0.31,0.5,0.08
+401112516,2019,13,Syracuse,ACC,Louisville,0.25,0.34,0.19,0.68,0.71,0.67
+401112120,2019,13,TCU,Big 12,Oklahoma,-0.03,-0.27,0.26,0.07,0.0,0.09
+401117907,2019,13,Temple,American Athletic,Cincinnati,0.04,0.14,-0.12,-0.07,-0.44,0.13
+401110861,2019,13,Tennessee,SEC,Missouri,0.24,0.65,-0.27,0.08,0.16,0.06
+401112083,2019,13,Texas,Big 12,Baylor,0.04,-0.16,0.4,0.13,0.24,0.08
+401110857,2019,13,Texas A&M,SEC,Georgia,0.05,0.22,-0.36,0.0,0.16,-0.12
+401121973,2019,13,Texas State,Sun Belt,App State,-0.04,-0.12,0.02,0.31,0.63,0.21
+401112113,2019,13,Texas Tech,Big 12,Kansas State,0.18,0.12,0.29,0.15,0.4,-0.1
+401119308,2019,13,Toledo,Mid-American,Buffalo,0.06,-0.03,0.25,0.5,0.57,0.47
+401121977,2019,13,Troy,Sun Belt,Louisiana,-0.11,-0.36,0.29,0.45,0.37,0.53
+401117906,2019,13,Tulane,American Athletic,UCF,0.12,0.25,0.07,0.19,0.31,0.09
+401117910,2019,13,Tulsa,American Athletic,Houston,-0.06,0.12,-0.45,-0.11,0.13,-0.17
+401114315,2019,13,UAB,Conference USA,Louisiana Tech,0.09,0.28,0.02,0.01,0.08,-0.08
+401117906,2019,13,UCF,American Athletic,Tulane,0.19,0.31,0.09,0.12,0.25,0.07
+401114217,2019,13,UCLA,Pac-12,USC,0.22,0.26,0.16,0.5,0.66,0.29
+401117908,2019,13,UConn,American Athletic,East Carolina,0.18,0.41,-0.15,0.25,0.37,0.13
+401121975,2019,13,UL Monroe,Sun Belt,Coastal Carolina,0.44,0.46,0.43,0.34,0.35,0.34
+401117553,2019,13,UNLV,Mountain West,San José State,0.26,0.08,0.41,0.26,0.31,0.11
+401114217,2019,13,USC,Pac-12,UCLA,0.5,0.66,0.29,0.22,0.26,0.16
+401114173,2019,13,Utah,Pac-12,Arizona,0.34,0.46,0.27,-0.07,-0.13,0.0
+401117549,2019,13,Utah State,Mountain West,Boise State,0.1,0.05,0.18,0.4,0.4,0.4
+401114319,2019,13,UTEP,Conference USA,New Mexico State,0.36,0.56,0.24,0.43,0.27,0.63
+401114314,2019,13,UTSA,Conference USA,Florida Atlantic,0.14,0.25,0.04,0.28,0.39,0.2
+401110862,2019,13,Vanderbilt,SEC,East Tennessee State,0.39,0.36,0.44,-0.12,-0.16,-0.09
+401112520,2019,13,Virginia,ACC,Liberty,0.31,0.46,0.23,0.14,0.17,0.06
+401112519,2019,13,Virginia Tech,ACC,Pittsburgh,0.02,0.56,-0.19,-0.2,-0.25,-0.15
+401112515,2019,13,Wake Forest,ACC,Duke,0.26,0.51,0.19,0.03,-0.01,0.07
+401114191,2019,13,Washington,Pac-12,Colorado,0.01,0.08,-0.09,0.11,0.23,0.08
+401114206,2019,13,Washington State,Pac-12,Oregon State,0.45,0.53,-0.03,0.36,0.56,0.09
+401114318,2019,13,Western Kentucky,Conference USA,Southern Miss,0.16,0.45,-0.11,-0.02,0.23,-0.31
+401112128,2019,13,West Virginia,Big 12,Oklahoma State,0.13,0.31,-0.17,0.1,0.26,-0.05
+401112263,2019,13,Wisconsin,Big Ten,Purdue,0.4,0.69,0.3,0.11,0.31,-0.33
+401117550,2019,13,Wyoming,Mountain West,Colorado State,0.13,-0.19,0.23,0.0,0.35,-0.37
+401117556,2019,14,Air Force,Mountain West,Wyoming,0.09,1.72,-0.09,-0.13,-0.08,-0.11
+401119310,2019,14,Akron,Mid-American,Ohio,-0.33,-0.56,0.01,0.46,0.77,0.25
+401110865,2019,14,Alabama,SEC,Auburn,0.14,0.01,0.27,0.16,0.3,0.04
+401121978,2019,14,App State,Sun Belt,Troy,0.47,0.71,0.24,0.05,0.15,-0.21
+401114163,2019,14,Arizona,Pac-12,Arizona State,0.12,0.16,0.08,0.04,-0.15,0.18
+401114163,2019,14,Arizona State,Pac-12,Arizona,0.04,-0.15,0.18,0.12,0.16,0.08
+401110864,2019,14,Arkansas,SEC,Missouri,-0.07,-0.25,0.11,0.05,0.46,-0.16
+401121979,2019,14,Arkansas State,Sun Belt,South Alabama,0.1,0.28,-0.05,0.28,0.65,0.03
+401114334,2019,14,Army,FBS Independents,Hawai'i,0.23,-0.6,0.42,0.5,0.54,0.4
+401110865,2019,14,Auburn,SEC,Alabama,0.16,0.3,0.04,0.14,0.01,0.27
+401119314,2019,14,Ball State,Mid-American,Miami (OH),0.33,0.33,0.33,0.11,0.43,-0.08
+401112084,2019,14,Baylor,Big 12,Kansas,0.37,0.42,0.33,-0.04,-0.14,0.05
+401117554,2019,14,Boise State,Mountain West,Colorado State,0.19,0.35,0.02,0.32,0.4,0.17
+401112522,2019,14,Boston College,ACC,Pittsburgh,0.13,0.57,0.02,0.08,0.32,-0.29
+401119312,2019,14,Bowling Green,Mid-American,Buffalo,-0.09,-0.17,-0.05,0.56,0.72,0.52
+401119312,2019,14,Buffalo,Mid-American,Bowling Green,0.56,0.72,0.52,-0.09,-0.17,-0.05
+401117218,2019,14,BYU,FBS Independents,San Diego State,0.02,0.11,-0.14,-0.02,0.25,-0.24
+401114183,2019,14,California,Pac-12,UCLA,0.26,0.22,0.29,0.07,0.16,-0.06
+401119315,2019,14,Central Michigan,Mid-American,Toledo,0.48,0.72,0.37,-0.02,0.23,-0.31
+401114320,2019,14,Charlotte,Conference USA,Old Dominion,0.29,0.82,0.18,0.08,-0.26,0.49
+401117913,2019,14,Cincinnati,American Athletic,Memphis,0.16,0.32,0.01,0.18,0.42,0.04
+401110870,2019,14,Clemson,ACC,South Carolina,0.32,0.46,0.19,-0.07,-0.04,-0.1
+401121980,2019,14,Coastal Carolina,Sun Belt,Texas State,0.24,0.39,0.15,0.26,0.39,-0.08
+401114192,2019,14,Colorado,Pac-12,Utah,0.07,0.25,-0.15,0.32,0.52,0.27
+401117554,2019,14,Colorado State,Mountain West,Boise State,0.32,0.4,0.17,0.19,0.35,0.02
+401112523,2019,14,Duke,ACC,Miami,-0.08,-0.04,-0.11,-0.01,-0.2,0.25
+401117915,2019,14,East Carolina,American Athletic,Tulsa,0.07,0.31,-0.38,0.5,0.88,0.23
+401119313,2019,14,Eastern Michigan,Mid-American,Kent State,0.24,0.53,-0.1,0.22,0.19,0.25
+401110866,2019,14,Florida,SEC,Florida State,0.38,0.58,0.03,0.16,0.05,0.22
+401114322,2019,14,Florida Atlantic,Conference USA,Southern Miss,0.14,0.09,0.19,-0.09,-0.07,-0.08
+401114321,2019,14,Florida International,Conference USA,Marshall,0.18,0.2,0.18,0.02,-0.01,0.03
+401110866,2019,14,Florida State,ACC,Florida,0.16,0.05,0.22,0.38,0.58,0.03
+401117557,2019,14,Fresno State,Mountain West,San José State,-0.05,0.06,-0.12,0.02,0.34,-0.27
+401110867,2019,14,Georgia,SEC,Georgia Tech,0.25,0.42,0.09,-0.11,-0.16,-0.09
+401121981,2019,14,Georgia Southern,Sun Belt,Georgia State,0.31,0.2,0.33,0.02,0.02,0.01
+401121981,2019,14,Georgia State,Sun Belt,Georgia Southern,0.02,0.02,0.01,0.31,0.2,0.33
+401110867,2019,14,Georgia Tech,ACC,Georgia,-0.11,-0.16,-0.09,0.25,0.42,0.09
+401114334,2019,14,Hawai'i,Mountain West,Army,0.5,0.54,0.4,0.23,-0.6,0.42
+401117916,2019,14,Houston,American Athletic,Navy,0.39,0.64,0.15,0.64,0.55,0.65
+401112156,2019,14,Illinois,Big Ten,Northwestern,-0.06,-0.01,-0.19,0.27,0.02,0.31
+401112168,2019,14,Indiana,Big Ten,Purdue,0.26,0.25,0.25,0.16,0.3,0.02
+401112200,2019,14,Iowa,Big Ten,Nebraska,-0.07,-0.39,0.12,-0.03,-0.14,0.0
+401112095,2019,14,Iowa State,Big 12,Kansas State,0.0,0.12,-0.17,0.11,-0.07,0.17
+401112084,2019,14,Kansas,Big 12,Baylor,-0.04,-0.14,0.05,0.37,0.42,0.33
+401112095,2019,14,Kansas State,Big 12,Iowa State,0.11,-0.07,0.17,0.0,0.12,-0.17
+401119313,2019,14,Kent State,Mid-American,Eastern Michigan,0.22,0.19,0.25,0.24,0.53,-0.1
+401110868,2019,14,Kentucky,SEC,Louisville,0.77,-0.55,0.85,0.07,-0.07,0.15
+401114346,2019,14,Liberty,FBS Independents,New Mexico State,0.3,0.3,0.35,0.18,0.21,0.14
+401121982,2019,14,Louisiana,Sun Belt,UL Monroe,0.39,0.64,0.27,0.34,0.38,0.33
+401114323,2019,14,Louisiana Tech,Conference USA,UTSA,0.16,0.33,-0.01,0.0,-0.06,0.13
+401110868,2019,14,Louisville,ACC,Kentucky,0.07,-0.07,0.15,0.77,-0.55,0.85
+401110869,2019,14,LSU,SEC,Texas A&M,0.42,0.63,0.11,-0.2,-0.5,0.5
+401114321,2019,14,Marshall,Conference USA,Florida International,0.02,-0.01,0.03,0.18,0.2,0.18
+401112221,2019,14,Maryland,Big Ten,Michigan State,-0.01,-0.26,0.29,0.03,0.27,-0.2
+401117913,2019,14,Memphis,American Athletic,Cincinnati,0.18,0.42,0.04,0.16,0.32,0.01
+401112523,2019,14,Miami,ACC,Duke,-0.01,-0.2,0.25,-0.08,-0.04,-0.11
+401119314,2019,14,Miami (OH),Mid-American,Ball State,0.11,0.43,-0.08,0.33,0.33,0.33
+401112228,2019,14,Michigan,Big Ten,Ohio State,0.08,0.16,-0.05,0.46,0.66,0.35
+401112221,2019,14,Michigan State,Big Ten,Maryland,0.03,0.27,-0.2,-0.01,-0.26,0.29
+401114324,2019,14,Middle Tennessee,Conference USA,Western Kentucky,0.22,0.55,0.01,0.39,0.44,0.38
+401112237,2019,14,Minnesota,Big Ten,Wisconsin,0.1,0.26,-0.15,0.33,0.77,0.09
+401110863,2019,14,Mississippi State,SEC,Ole Miss,0.13,0.16,0.12,0.17,0.44,-0.03
+401110864,2019,14,Missouri,SEC,Arkansas,0.05,0.46,-0.16,-0.07,-0.25,0.11
+401117916,2019,14,Navy,American Athletic,Houston,0.64,0.55,0.65,0.39,0.64,0.15
+401112524,2019,14,NC State,ACC,North Carolina,-0.08,-0.26,0.16,0.4,0.61,0.25
+401112200,2019,14,Nebraska,Big Ten,Iowa,-0.03,-0.14,0.0,-0.07,-0.39,0.12
+401117558,2019,14,Nevada,Mountain West,UNLV,0.18,0.23,0.13,0.28,0.57,0.06
+401117555,2019,14,New Mexico,Mountain West,Utah State,0.11,-0.15,0.23,0.15,0.04,0.23
+401114346,2019,14,New Mexico State,FBS Independents,Liberty,0.18,0.21,0.14,0.3,0.3,0.35
+401112524,2019,14,North Carolina,ACC,NC State,0.4,0.61,0.25,-0.08,-0.26,0.16
+401119311,2019,14,Northern Illinois,Mid-American,Western Michigan,-0.18,0.35,-0.32,0.14,0.14,0.15
+401114325,2019,14,North Texas,Conference USA,UAB,-0.18,-0.07,-0.33,0.12,0.16,0.12
+401112156,2019,14,Northwestern,Big Ten,Illinois,0.27,0.02,0.31,-0.06,-0.01,-0.19
+401114212,2019,14,Notre Dame,FBS Independents,Stanford,0.34,0.58,0.14,0.17,0.18,0.2
+401119310,2019,14,Ohio,Mid-American,Akron,0.46,0.77,0.25,-0.33,-0.56,0.01
+401112228,2019,14,Ohio State,Big Ten,Michigan,0.46,0.66,0.35,0.08,0.16,-0.05
+401112121,2019,14,Oklahoma,Big 12,Oklahoma State,0.36,0.56,0.29,0.04,-0.07,0.18
+401112121,2019,14,Oklahoma State,Big 12,Oklahoma,0.04,-0.07,0.18,0.36,0.56,0.29
+401114320,2019,14,Old Dominion,Conference USA,Charlotte,0.08,-0.26,0.49,0.29,0.82,0.18
+401110863,2019,14,Ole Miss,SEC,Mississippi State,0.17,0.44,-0.03,0.13,0.16,0.12
+401114199,2019,14,Oregon,Pac-12,Oregon State,0.05,0.08,0.03,0.11,0.18,-0.01
+401114199,2019,14,Oregon State,Pac-12,Oregon,0.11,0.18,-0.01,0.05,0.08,0.03
+401112261,2019,14,Penn State,Big Ten,Rutgers,0.16,-0.42,0.41,0.1,0.02,0.19
+401112522,2019,14,Pittsburgh,ACC,Boston College,0.08,0.32,-0.29,0.13,0.57,0.02
+401112168,2019,14,Purdue,Big Ten,Indiana,0.16,0.3,0.02,0.26,0.25,0.25
+401114326,2019,14,Rice,Conference USA,UTEP,0.33,-0.06,0.58,0.09,0.14,0.02
+401112261,2019,14,Rutgers,Big Ten,Penn State,0.1,0.02,0.19,0.16,-0.42,0.41
+401117218,2019,14,San Diego State,Mountain West,BYU,-0.02,0.25,-0.24,0.02,0.11,-0.14
+401117557,2019,14,San José State,Mountain West,Fresno State,0.02,0.34,-0.27,-0.05,0.06,-0.12
+401117917,2019,14,SMU,American Athletic,Tulane,0.18,0.09,0.28,0.15,0.09,0.19
+401121979,2019,14,South Alabama,Sun Belt,Arkansas State,0.28,0.65,0.03,0.1,0.28,-0.05
+401110870,2019,14,South Carolina,SEC,Clemson,-0.07,-0.04,-0.1,0.32,0.46,0.19
+401114322,2019,14,Southern Miss,Conference USA,Florida Atlantic,-0.09,-0.07,-0.08,0.14,0.09,0.19
+401117912,2019,14,South Florida,American Athletic,UCF,0.01,-0.09,0.08,0.35,0.32,0.38
+401114212,2019,14,Stanford,Pac-12,Notre Dame,0.17,0.18,0.2,0.34,0.58,0.14
+401112525,2019,14,Syracuse,ACC,Wake Forest,0.09,0.25,-0.02,0.11,0.22,0.0
+401112134,2019,14,TCU,Big 12,West Virginia,0.01,-0.13,0.18,-0.16,0.01,-0.38
+401117914,2019,14,Temple,American Athletic,UConn,0.44,0.56,0.32,-0.01,-0.02,0.01
+401110871,2019,14,Tennessee,SEC,Vanderbilt,0.35,0.52,0.28,0.02,-0.15,0.28
+401112138,2019,14,Texas,Big 12,Texas Tech,0.46,0.73,0.3,0.14,0.15,0.18
+401110869,2019,14,Texas A&M,SEC,LSU,-0.2,-0.5,0.5,0.42,0.63,0.11
+401121980,2019,14,Texas State,Sun Belt,Coastal Carolina,0.26,0.39,-0.08,0.24,0.39,0.15
+401112138,2019,14,Texas Tech,Big 12,Texas,0.14,0.15,0.18,0.46,0.73,0.3
+401119315,2019,14,Toledo,Mid-American,Central Michigan,-0.02,0.23,-0.31,0.48,0.72,0.37
+401121978,2019,14,Troy,Sun Belt,App State,0.05,0.15,-0.21,0.47,0.71,0.24
+401117917,2019,14,Tulane,American Athletic,SMU,0.15,0.09,0.19,0.18,0.09,0.28
+401117915,2019,14,Tulsa,American Athletic,East Carolina,0.5,0.88,0.23,0.07,0.31,-0.38
+401114325,2019,14,UAB,Conference USA,North Texas,0.12,0.16,0.12,-0.18,-0.07,-0.33
+401117912,2019,14,UCF,American Athletic,South Florida,0.35,0.32,0.38,0.01,-0.09,0.08
+401114183,2019,14,UCLA,Pac-12,California,0.07,0.16,-0.06,0.26,0.22,0.29
+401117914,2019,14,UConn,American Athletic,Temple,-0.01,-0.02,0.01,0.44,0.56,0.32
+401121982,2019,14,UL Monroe,Sun Belt,Louisiana,0.34,0.38,0.33,0.39,0.64,0.27
+401117558,2019,14,UNLV,Mountain West,Nevada,0.28,0.57,0.06,0.18,0.23,0.13
+401114192,2019,14,Utah,Pac-12,Colorado,0.32,0.52,0.27,0.07,0.25,-0.15
+401117555,2019,14,Utah State,Mountain West,New Mexico,0.15,0.04,0.23,0.11,-0.15,0.23
+401114326,2019,14,UTEP,Conference USA,Rice,0.09,0.14,0.02,0.33,-0.06,0.58
+401114323,2019,14,UTSA,Conference USA,Louisiana Tech,0.0,-0.06,0.13,0.16,0.33,-0.01
+401110871,2019,14,Vanderbilt,SEC,Tennessee,0.02,-0.15,0.28,0.35,0.52,0.28
+401112521,2019,14,Virginia,ACC,Virginia Tech,0.34,0.19,0.59,0.18,0.24,0.15
+401112521,2019,14,Virginia Tech,ACC,Virginia,0.18,0.24,0.15,0.34,0.19,0.59
+401112525,2019,14,Wake Forest,ACC,Syracuse,0.11,0.22,0.0,0.09,0.25,-0.02
+401114232,2019,14,Washington,Pac-12,Washington State,0.11,0.42,-0.08,-0.02,-0.09,0.19
+401114232,2019,14,Washington State,Pac-12,Washington,-0.02,-0.09,0.19,0.11,0.42,-0.08
+401114324,2019,14,Western Kentucky,Conference USA,Middle Tennessee,0.39,0.44,0.38,0.22,0.55,0.01
+401119311,2019,14,Western Michigan,Mid-American,Northern Illinois,0.14,0.14,0.15,-0.18,0.35,-0.32
+401112134,2019,14,West Virginia,Big 12,TCU,-0.16,0.01,-0.38,0.01,-0.13,0.18
+401112237,2019,14,Wisconsin,Big Ten,Minnesota,0.33,0.77,0.09,0.1,0.26,-0.15
+401117556,2019,14,Wyoming,Mountain West,Air Force,-0.13,-0.08,-0.11,0.09,1.72,-0.09
+401132984,2019,15,App State,Sun Belt,Louisiana,0.2,0.21,0.21,0.16,0.32,-0.05
+401114335,2019,15,Army,FBS Independents,Navy,-0.05,0.07,-0.07,0.35,0.07,0.37
+401132974,2019,15,Baylor,Big 12,Oklahoma,-0.08,-0.03,-0.11,0.2,0.58,-0.01
+401132979,2019,15,Boise State,Mountain West,Hawai'i,0.23,0.27,0.19,0.03,0.08,-0.07
+401132982,2019,15,Central Michigan,Mid-American,Miami (OH),0.13,0.16,0.09,0.01,0.13,-0.15
+401132976,2019,15,Cincinnati,American Athletic,Memphis,0.14,0.04,0.27,0.18,0.23,0.07
+401132975,2019,15,Clemson,ACC,Virginia,0.61,0.83,0.43,0.12,0.16,0.06
+401132980,2019,15,Florida Atlantic,Conference USA,UAB,0.37,0.25,0.48,-0.08,-0.36,0.07
+401132981,2019,15,Georgia,SEC,LSU,-0.04,0.03,-0.17,0.32,0.57,0.05
+401132979,2019,15,Hawai'i,Mountain West,Boise State,0.03,0.08,-0.07,0.23,0.27,0.19
+401132984,2019,15,Louisiana,Sun Belt,App State,0.16,0.32,-0.05,0.2,0.21,0.21
+401132981,2019,15,LSU,SEC,Georgia,0.32,0.57,0.05,-0.04,0.03,-0.17
+401132976,2019,15,Memphis,American Athletic,Cincinnati,0.18,0.23,0.07,0.14,0.04,0.27
+401132982,2019,15,Miami (OH),Mid-American,Central Michigan,0.01,0.13,-0.15,0.13,0.16,0.09
+401114335,2019,15,Navy,American Athletic,Army,0.35,0.07,0.37,-0.05,0.07,-0.07
+401132983,2019,15,Ohio State,Big Ten,Wisconsin,0.26,0.46,0.13,0.25,0.27,0.23
+401132974,2019,15,Oklahoma,Big 12,Baylor,0.2,0.58,-0.01,-0.08,-0.03,-0.11
+401132973,2019,15,Oregon,Pac-12,Utah,0.2,0.19,0.27,-0.09,0.02,-0.23
+401132980,2019,15,UAB,Conference USA,Florida Atlantic,-0.08,-0.36,0.07,0.37,0.25,0.48
+401132973,2019,15,Utah,Pac-12,Oregon,-0.09,0.02,-0.23,0.2,0.19,0.27
+401132975,2019,15,Virginia,ACC,Clemson,0.12,0.16,0.06,0.61,0.83,0.43
+401132983,2019,15,Wisconsin,Big Ten,Ohio State,0.25,0.27,0.23,0.26,0.46,0.13
+401135275,2019,1,Air Force,Mountain West,Washington State,0.19,-0.32,0.29,0.24,0.46,-1.11
+401135286,2019,1,Alabama,SEC,Michigan,0.48,0.84,0.17,0.02,-0.03,0.08
+401135267,2019,1,App State,Sun Belt,UAB,0.02,0.17,-0.06,0.13,0.34,-0.24
+401136255,2019,1,Arizona State,Pac-12,Florida State,-0.15,-0.07,-0.24,0.0,-0.25,0.17
+401135265,2019,1,Arkansas State,Sun Belt,Florida International,0.24,0.35,0.06,0.11,0.28,-0.07
+401135287,2019,1,Auburn,SEC,Minnesota,0.09,0.29,-0.15,0.27,0.62,0.05
+401135289,2019,1,Baylor,Big 12,Georgia,-0.02,0.0,-0.05,0.14,0.4,-0.1
+401135266,2019,1,Boise State,Mountain West,Washington,-0.07,0.12,-0.36,0.23,0.29,0.21
+401135290,2019,1,Boston College,ACC,Cincinnati,-0.16,-0.09,-0.22,0.23,-0.16,0.45
+401135260,2019,1,Buffalo,Mid-American,Charlotte,0.22,-0.08,0.34,0.11,0.25,-0.03
+401135269,2019,1,BYU,FBS Independents,Hawai'i,0.15,0.04,0.27,0.37,0.58,-0.25
+401136254,2019,1,California,Pac-12,Illinois,0.32,0.58,0.08,0.08,0.11,0.13
+401135263,2019,1,Central Michigan,Mid-American,San Diego State,-0.13,-0.16,-0.09,0.24,0.41,0.1
+401135260,2019,1,Charlotte,Conference USA,Buffalo,0.11,0.25,-0.03,0.22,-0.08,0.34
+401135290,2019,1,Cincinnati,American Athletic,Boston College,0.23,-0.16,0.45,-0.16,-0.09,-0.22
+401135279,2019,1,Clemson,ACC,Ohio State,0.22,0.07,0.45,0.13,0.22,0.06
+401135295,2019,1,Clemson,ACC,LSU,0.09,-0.08,0.33,0.42,0.45,0.38
+401135271,2019,1,Eastern Michigan,Mid-American,Pittsburgh,0.17,0.23,0.07,0.27,0.47,-0.1
+401135282,2019,1,Florida,SEC,Virginia,0.39,0.39,0.42,0.19,0.36,-0.2
+401135264,2019,1,Florida Atlantic,Conference USA,SMU,0.25,0.55,-0.01,0.16,0.27,-0.02
+401135265,2019,1,Florida International,Conference USA,Arkansas State,0.11,0.28,-0.07,0.24,0.35,0.06
+401136255,2019,1,Florida State,ACC,Arizona State,0.0,-0.25,0.17,-0.15,-0.07,-0.24
+401135289,2019,1,Georgia,SEC,Baylor,0.14,0.4,-0.1,-0.02,0.0,-0.05
+401147693,2019,1,Georgia Southern,Sun Belt,Liberty,0.0,-0.08,0.08,0.12,0.38,-0.17
+401147695,2019,1,Georgia State,Sun Belt,Wyoming,0.0,0.01,0.01,0.32,0.43,0.23
+401135269,2019,1,Hawai'i,Mountain West,BYU,0.37,0.58,-0.25,0.15,0.04,0.27
+401136254,2019,1,Illinois,Big Ten,California,0.08,0.11,0.13,0.32,0.58,0.08
+401135291,2019,1,Indiana,Big Ten,Tennessee,0.02,-0.04,0.09,-0.07,-0.23,0.09
+401136253,2019,1,Iowa,Big Ten,USC,0.38,0.51,0.26,0.02,0.08,-0.12
+401135276,2019,1,Iowa State,Big 12,Notre Dame,-0.02,0.04,-0.16,0.22,0.36,0.13
+401135284,2019,1,Kansas State,Big 12,Navy,-0.07,0.14,-0.23,0.29,0.81,0.25
+401135261,2019,1,Kent State,Mid-American,Utah State,0.23,0.58,0.09,0.32,0.43,0.19
+401135283,2019,1,Kentucky,SEC,Virginia Tech,0.28,0.13,0.31,0.19,0.18,0.17
+401147693,2019,1,Liberty,FBS Independents,Georgia Southern,0.12,0.38,-0.17,0.0,-0.08,0.08
+401135294,2019,1,Louisiana,Sun Belt,Miami (OH),0.32,0.6,0.11,0.17,0.19,0.15
+401135270,2019,1,Louisiana Tech,Conference USA,Miami,0.08,-0.02,0.16,-0.13,-0.19,-0.02
+401135281,2019,1,Louisville,ACC,Mississippi State,0.24,0.54,0.06,0.29,0.24,0.33
+401135278,2019,1,LSU,SEC,Oklahoma,0.63,1.03,0.06,0.27,0.19,0.37
+401135295,2019,1,LSU,SEC,Clemson,0.42,0.45,0.38,0.09,-0.08,0.33
+401135268,2019,1,Marshall,Conference USA,UCF,-0.08,-0.25,-0.02,0.18,-0.02,0.33
+401135277,2019,1,Memphis,American Athletic,Penn State,0.21,0.19,0.17,0.35,0.26,0.37
+401135270,2019,1,Miami,ACC,Louisiana Tech,-0.13,-0.19,-0.02,0.08,-0.02,0.16
+401135294,2019,1,Miami (OH),Mid-American,Louisiana,0.17,0.19,0.15,0.32,0.6,0.11
+401135286,2019,1,Michigan,Big Ten,Alabama,0.02,-0.03,0.08,0.48,0.84,0.17
+401135273,2019,1,Michigan State,Big Ten,Wake Forest,0.19,0.32,0.05,0.01,-0.2,0.18
+401135287,2019,1,Minnesota,Big Ten,Auburn,0.27,0.62,0.05,0.09,0.29,-0.15
+401135281,2019,1,Mississippi State,SEC,Louisville,0.29,0.24,0.33,0.24,0.54,0.06
+401135284,2019,1,Navy,American Athletic,Kansas State,0.29,0.81,0.25,-0.07,0.14,-0.23
+401135292,2019,1,Nevada,Mountain West,Ohio,0.15,0.24,-0.14,0.26,0.34,0.23
+401135272,2019,1,North Carolina,ACC,Temple,0.45,0.63,0.36,-0.1,-0.19,0.01
+401135276,2019,1,Notre Dame,FBS Independents,Iowa State,0.22,0.36,0.13,-0.02,0.04,-0.16
+401135292,2019,1,Ohio,Mid-American,Nevada,0.26,0.34,0.23,0.15,0.24,-0.14
+401135279,2019,1,Ohio State,Big Ten,Clemson,0.13,0.22,0.06,0.22,0.07,0.45
+401135278,2019,1,Oklahoma,Big 12,LSU,0.27,0.19,0.37,0.63,1.03,0.06
+401135274,2019,1,Oklahoma State,Big 12,Texas A&M,0.13,0.09,0.18,0.02,0.19,-0.05
+401135288,2019,1,Oregon,Pac-12,Wisconsin,-0.08,0.06,-0.2,0.08,0.24,-0.07
+401135277,2019,1,Penn State,Big Ten,Memphis,0.35,0.26,0.37,0.21,0.19,0.17
+401135271,2019,1,Pittsburgh,ACC,Eastern Michigan,0.27,0.47,-0.1,0.17,0.23,0.07
+401135263,2019,1,San Diego State,Mountain West,Central Michigan,0.24,0.41,0.1,-0.13,-0.16,-0.09
+401135264,2019,1,SMU,American Athletic,Florida Atlantic,0.16,0.27,-0.02,0.25,0.55,-0.01
+401135293,2019,1,Southern Miss,Conference USA,Tulane,0.08,0.12,-0.03,0.18,0.66,-0.04
+401135272,2019,1,Temple,American Athletic,North Carolina,-0.1,-0.19,0.01,0.45,0.63,0.36
+401135291,2019,1,Tennessee,SEC,Indiana,-0.07,-0.23,0.09,0.02,-0.04,0.09
+401135285,2019,1,Texas,Big 12,Utah,0.38,0.41,0.39,0.01,0.03,0.01
+401135274,2019,1,Texas A&M,SEC,Oklahoma State,0.02,0.19,-0.05,0.13,0.09,0.18
+401135293,2019,1,Tulane,American Athletic,Southern Miss,0.18,0.66,-0.04,0.08,0.12,-0.03
+401135267,2019,1,UAB,Conference USA,App State,0.13,0.34,-0.24,0.02,0.17,-0.06
+401135268,2019,1,UCF,American Athletic,Marshall,0.18,-0.02,0.33,-0.08,-0.25,-0.02
+401136253,2019,1,USC,Pac-12,Iowa,0.02,0.08,-0.12,0.38,0.51,0.26
+401135285,2019,1,Utah,Pac-12,Texas,0.01,0.03,0.01,0.38,0.41,0.39
+401135261,2019,1,Utah State,Mountain West,Kent State,0.32,0.43,0.19,0.23,0.58,0.09
+401135282,2019,1,Virginia,ACC,Florida,0.19,0.36,-0.2,0.39,0.39,0.42
+401135283,2019,1,Virginia Tech,ACC,Kentucky,0.19,0.18,0.17,0.28,0.13,0.31
+401135273,2019,1,Wake Forest,ACC,Michigan State,0.01,-0.2,0.18,0.19,0.32,0.05
+401135266,2019,1,Washington,Pac-12,Boise State,0.23,0.29,0.21,-0.07,0.12,-0.36
+401135275,2019,1,Washington State,Pac-12,Air Force,0.24,0.46,-1.11,0.19,-0.32,0.29
+401135280,2019,1,Western Kentucky,Conference USA,Western Michigan,0.07,0.11,0.05,0.0,0.1,-0.08
+401135280,2019,1,Western Michigan,Mid-American,Western Kentucky,0.0,0.1,-0.08,0.07,0.11,0.05
+401135288,2019,1,Wisconsin,Big Ten,Oregon,0.08,0.24,-0.07,-0.08,0.06,-0.2
+401147695,2019,1,Wyoming,Mountain West,Georgia State,0.32,0.43,0.23,0.0,0.01,0.01

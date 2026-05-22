@@ -1,0 +1,207 @@
+year,team,rank,points
+2020,Georgia,1,313.34
+2020,Alabama,2,310.44
+2020,Clemson,3,309.73
+2020,LSU,4,300.54
+2020,Ohio State,5,295.08
+2020,Texas A&M,6,289.49
+2020,Auburn,7,274.6
+2020,Florida,8,272.99
+2020,Texas,9,270.93
+2020,Tennessee,10,261.5
+2020,Oklahoma,11,259.6
+2020,Oregon,12,259.49
+2020,Miami,13,256.71
+2020,Michigan,14,256.34
+2020,Penn State,15,256.05
+2020,Washington,16,252.35
+2020,Notre Dame,17,251.45
+2020,South Carolina,18,250.12
+2020,North Carolina,19,246.65
+2020,Nebraska,20,240.27
+2020,Stanford,21,238.62
+2020,Florida State,22,238.41
+2020,Kentucky,23,229.87
+2020,Arizona State,24,229.47
+2020,Wisconsin,25,225.54
+2020,Georgia Tech,26,222.73
+2020,Mississippi State,27,220.24
+2020,TCU,28,215.88
+2020,Utah,29,212.32
+2020,Arkansas,30,212.16
+2020,Maryland,31,209.67
+2020,UCLA,32,208.42
+2020,Purdue,33,208.38
+2020,Ole Miss,34,204.07
+2020,Iowa,35,203.81
+2020,Colorado,36,203.17
+2020,West Virginia,37,199.77
+2020,Minnesota,38,199.35
+2020,California,39,198.0
+2020,Cincinnati,40,194.95
+2020,NC State,41,194.78
+2020,Louisville,42,194.46
+2020,Michigan State,43,193.32
+2020,Pittsburgh,44,192.65
+2020,Oklahoma State,45,192.35
+2020,Iowa State,46,190.9
+2020,Northwestern,47,190.69
+2020,Virginia,48,185.57
+2020,Texas Tech,49,183.17
+2020,Missouri,50,182.85
+2020,Kansas State,51,182.46
+2020,Vanderbilt,52,182.21
+2020,Oregon State,53,182.12
+2020,Baylor,54,181.12
+2020,USC,55,181.01
+2020,Washington State,56,179.28
+2020,Kansas,57,178.97
+2020,Indiana,58,177.39
+2020,Syracuse,59,175.88
+2020,Wake Forest,60,173.82
+2020,Duke,61,171.72
+2020,Arizona,62,170.89
+2020,Boston College,63,170.36
+2020,Rutgers,64,170.14
+2020,Boise State,65,167.92
+2020,Tulane,66,165.84
+2020,Memphis,67,165.67
+2020,North Texas,68,164.56
+2020,Toledo,69,164.2
+2020,East Carolina,70,163.06
+2020,UCF,71,162.97
+2020,Virginia Tech,72,162.89
+2020,Florida Atlantic,73,162.51
+2020,Florida International,74,162.27
+2020,Louisiana Tech,75,162.08
+2020,Southern Miss,76,161.52
+2020,UNLV,77,160.84
+2020,BYU,78,159.91
+2020,Louisiana,79,158.34
+2020,Western Kentucky,80,157.37
+2020,SMU,81,156.95
+2020,Houston,82,155.32
+2020,App State,83,154.59
+2020,Troy,84,154.47
+2020,Bowling Green,85,154.4
+2020,Western Michigan,86,153.11
+2020,Illinois,87,152.9
+2020,Charlotte,88,152.55
+2020,Miami (OH),89,150.61
+2020,Middle Tennessee,90,150.6
+2020,Northern Illinois,91,149.69
+2020,Arkansas State,92,148.75
+2020,Rice,93,147.7
+2020,Old Dominion,94,146.75
+2020,Liberty,95,146.5
+2020,Marshall,96,146.14
+2020,Temple,97,145.3
+2020,Georgia Southern,98,145.22
+2020,Texas State,99,145.19
+2020,Massachusetts,100,145.02
+2020,South Florida,101,142.97
+2020,Colorado State,102,142.8
+2020,UAB,103,142.57
+2020,San Diego State,104,142.57
+2020,UTSA,105,142.53
+2020,New Mexico,106,142.34
+2020,Air Force,107,142.11
+2020,Kent State,108,141.52
+2020,South Alabama,109,140.54
+2020,Georgia State,110,140.52
+2020,Army,111,139.43
+2020,Tulsa,112,138.25
+2020,Wyoming,113,138.13
+2020,San José State,114,137.42
+2020,Eastern Michigan,115,136.77
+2020,Coastal Carolina,116,136.61
+2020,Utah State,117,134.5
+2020,UConn,118,134.27
+2020,Nevada,119,132.46
+2020,UL Monroe,120,132.3
+2020,Fresno State,121,131.51
+2020,Ball State,122,131.5
+2020,Central Michigan,123,130.86
+2020,Princeton,124,129.51
+2020,Akron,125,129.48
+2020,Navy,126,128.76
+2020,Hawai'i,127,124.35
+2020,Eastern Washington,128,117.96
+2020,Ohio,129,116.96
+2020,Buffalo,130,114.94
+2020,UTEP,131,114.47
+2020,New Mexico State,132,108.54
+2020,Montana State,133,101.69
+2020,Idaho,134,96.43
+2020,Cal Poly,135,94.88
+2020,UC Davis,136,93.33
+2020,Sacramento State,137,89.88
+2020,Northern Arizona,139,86.06
+2020,Harvard,140,77.67
+2020,North Dakota State,141,77.43
+2020,Stephen F. Austin,142,77.21
+2020,Villanova,145,69.37
+2020,Northern Iowa,146,69.28
+2020,Yale,147,66.61
+2020,Dartmouth,148,64.97
+2020,Columbia,149,62.05
+2020,Central Arkansas,150,61.89
+2020,Eastern Kentucky,151,60.5
+2020,Rhode Island,152,57.83
+2020,Illinois State,153,56.34
+2020,Kennesaw State,154,55.15
+2020,Montana,155,51.3
+2020,Pennsylvania,157,50.08
+2020,Furman,158,43.15
+2020,Eastern Illinois,159,42.77
+2020,Portland State,161,41.99
+2020,Holy Cross,162,41.97
+2020,Georgetown,163,40.93
+2020,Missouri State,164,39.43
+2020,Idaho State,165,39.12
+2020,Elon,166,36.99
+2020,Northern Colorado,167,36.46
+2020,East Tennessee State,168,35.94
+2020,James Madison,170,35.08
+2020,Davidson,172,34.64
+2020,SE Louisiana,173,34.04
+2020,Tennessee State,175,32.21
+2020,South Dakota,176,29.87
+2020,Western Carolina,177,29.45
+2020,Mercer,179,28.8
+2020,Brown,180,28.57
+2020,San Diego,182,27.65
+2020,Youngstown State,183,27.25
+2020,Sam Houston,184,26.54
+2020,UT Martin,186,24.03
+2020,Western Illinois,188,23.72
+2020,Hampton,190,22.89
+2020,Stony Brook,192,22.7
+2020,Grambling,193,22.25
+2020,South Dakota State,194,22.07
+2020,Fordham,195,21.45
+2020,Samford,196,21.2
+2020,Houston Christian,198,20.55
+2020,Delaware,199,20.1
+2020,VMI,200,20.05
+2020,Bucknell,201,19.97
+2020,Wofford,203,19.41
+2020,Austin Peay,204,17.16
+2020,Indiana State,208,16.73
+2020,Arkansas-Pine Bluff,209,16.53
+2020,Jacksonville State,210,16.49
+2020,Cornell,211,15.89
+2020,North Dakota,218,12.79
+2020,North Carolina Central,219,12.65
+2020,Alcorn State,220,12.65
+2020,North Carolina A&T,225,11.52
+2020,Campbell,228,10.98
+2020,Richmond,229,9.98
+2020,Southern Illinois,230,9.91
+2020,Bryant,232,8.98
+2020,Southeast Missouri State,233,8.97
+2020,Texas Southern,236,8.97
+2020,Lehigh,239,6.97
+2020,Lafayette,240,6.97
+2020,Marist,242,6.3
+2020,Colgate,245,4.97

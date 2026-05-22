@@ -1,0 +1,1658 @@
+game_id,season,week,team,conference,opponent,off_epa,off_epa_pass,off_epa_rush,def_epa,def_epa_pass,def_epa_rush
+401310861,2021,1,Air Force,Mountain West,Lafayette,0.37,0.4,0.37,0.24,0.35,0.18
+401281944,2021,1,Akron,Mid-American,Auburn,0.19,0.33,0.07,0.78,0.74,0.81
+401281942,2021,1,Alabama,SEC,Miami,0.34,0.64,0.02,0.01,0.1,-0.12
+401300993,2021,1,App State,Sun Belt,East Carolina,0.35,0.47,0.26,0.2,0.2,0.18
+401309841,2021,1,Arizona,Pac-12,BYU,0.11,0.04,0.22,0.25,0.48,0.09
+401309835,2021,1,Arizona State,Pac-12,Southern Utah,0.62,0.59,0.64,-0.08,0.05,0.1
+401281943,2021,1,Arkansas,SEC,Rice,0.24,0.03,0.43,-0.09,0.29,-0.39
+401309598,2021,1,Arkansas State,Sun Belt,Central Arkansas,0.23,0.41,0.04,0.07,0.15,-0.1
+401309601,2021,1,Army,FBS Independents,Georgia State,0.39,2.15,0.25,0.17,0.37,0.0
+401281944,2021,1,Auburn,SEC,Akron,0.78,0.74,0.81,0.19,0.33,0.07
+401309540,2021,1,Ball State,Mid-American,Western Illinois,0.22,0.26,0.19,0.16,0.29,-0.01
+401287893,2021,1,Baylor,Big 12,Texas State,0.27,0.11,0.36,0.09,0.28,-0.13
+401300995,2021,1,Boise State,Mountain West,UCF,0.13,0.35,-0.21,0.22,0.16,0.28
+401282609,2021,1,Boston College,ACC,Colgate,0.56,1.0,0.18,-0.27,-0.55,-0.08
+401281952,2021,1,Bowling Green,Mid-American,Tennessee,-0.03,0.01,-0.11,0.19,-0.06,0.3
+401309542,2021,1,Buffalo,Mid-American,Wagner,0.49,0.61,0.56,-0.1,-0.02,-0.15
+401309841,2021,1,BYU,FBS Independents,Arizona,0.25,0.48,0.09,0.11,0.04,0.22
+401309837,2021,1,California,Pac-12,Nevada,0.22,0.16,0.33,0.19,0.43,-0.06
+401281950,2021,1,Central Michigan,Mid-American,Missouri,0.23,0.18,0.52,0.13,0.24,0.03
+401282052,2021,1,Charlotte,Conference USA,Duke,0.34,0.79,-0.01,0.46,0.28,0.59
+401300996,2021,1,Cincinnati,American Athletic,Miami (OH),0.51,0.45,0.58,-0.14,-0.54,0.13
+401281946,2021,1,Clemson,ACC,Georgia,-0.28,-0.28,-0.3,-0.02,0.04,-0.09
+401328545,2021,1,Coastal Carolina,Sun Belt,The Citadel,0.8,1.01,0.7,0.09,-0.05,0.11
+401309836,2021,1,Colorado,Pac-12,Northern Colorado,0.38,0.12,0.48,-0.03,0.02,-0.2
+401310695,2021,1,Colorado State,Mountain West,South Dakota State,0.2,0.37,0.14,0.39,0.35,0.43
+401282052,2021,1,Duke,ACC,Charlotte,0.46,0.28,0.59,0.34,0.79,-0.01
+401300993,2021,1,East Carolina,American Athletic,App State,0.2,0.2,0.18,0.35,0.47,0.26
+401309541,2021,1,Eastern Michigan,Mid-American,St. Francis (PA),0.2,0.14,0.27,0.04,-0.03,0.22
+401281945,2021,1,Florida,SEC,Florida Atlantic,0.32,0.01,0.67,0.13,0.16,0.1
+401281945,2021,1,Florida Atlantic,Conference USA,Florida,0.13,0.16,0.1,0.32,0.01,0.67
+401282051,2021,1,Florida International,Conference USA,Long Island University,1.37,1.37,0.0,0.45,0.51,-0.35
+401282614,2021,1,Florida State,ACC,Notre Dame,0.29,0.27,0.3,0.23,0.51,-0.12
+401286187,2021,1,Fresno State,Mountain West,UConn,0.29,0.48,0.09,-0.4,-0.32,-0.49
+401309838,2021,1,Fresno State,Mountain West,Oregon,0.2,0.33,-0.01,0.11,0.16,0.09
+401281946,2021,1,Georgia,SEC,Clemson,-0.02,0.04,-0.09,-0.28,-0.28,-0.3
+401309600,2021,1,Georgia Southern,Sun Belt,Gardner-Webb,0.22,0.34,0.27,0.15,0.26,-0.19
+401309601,2021,1,Georgia State,Sun Belt,Army,0.17,0.37,0.0,0.39,2.15,0.25
+401282610,2021,1,Georgia Tech,ACC,Northern Illinois,0.01,-0.42,0.35,0.16,0.63,-0.01
+401309833,2021,1,Hawai'i,Mountain West,UCLA,-0.05,-0.04,-0.08,0.23,0.28,0.2
+401310698,2021,1,Hawai'i,Mountain West,Portland State,0.39,0.63,0.27,0.11,0.4,-0.27
+401287886,2021,1,Houston,American Athletic,Texas Tech,0.02,-0.1,0.16,0.21,0.29,0.12
+401282714,2021,1,Illinois,Big Ten,Nebraska,0.04,0.44,-0.1,0.32,0.39,0.24
+401282179,2021,1,Illinois,Big Ten,UTSA,0.28,0.32,0.23,0.32,0.56,0.16
+401282723,2021,1,Indiana,Big Ten,Iowa,-0.3,-0.52,-0.06,0.01,0.09,-0.06
+401282723,2021,1,Iowa,Big Ten,Indiana,0.01,0.09,-0.06,-0.3,-0.52,-0.06
+401287887,2021,1,Iowa State,Big 12,Northern Iowa,0.13,0.38,-0.05,0.17,0.3,-0.03
+401287888,2021,1,Kansas,Big 12,South Dakota,-0.04,0.2,-0.21,0.0,0.17,-0.09
+401287889,2021,1,Kansas State,Big 12,Stanford,0.28,-0.14,0.54,0.08,0.2,-0.16
+401282053,2021,1,Kent State,Mid-American,Texas A&M,-0.13,-0.54,0.21,0.29,0.25,0.33
+401281947,2021,1,Kentucky,SEC,UL Monroe,0.39,0.53,0.22,-0.27,-0.28,-0.25
+401286294,2021,1,Liberty,FBS Independents,Campbell,0.53,0.61,0.47,0.09,0.11,0.06
+401287892,2021,1,Louisiana,Sun Belt,Texas,0.15,0.28,-0.06,0.4,0.67,0.2
+401281949,2021,1,Louisiana Tech,Conference USA,Mississippi State,0.22,0.4,0.03,0.34,0.3,0.45
+401282055,2021,1,Louisville,ACC,Ole Miss,0.41,0.11,0.74,0.76,0.74,0.78
+401281948,2021,1,LSU,SEC,UCLA,0.2,0.31,-0.04,0.39,0.84,0.19
+401282174,2021,1,Marshall,Conference USA,Navy,0.34,0.38,0.3,0.02,-0.58,0.25
+401282764,2021,1,Maryland,Big Ten,West Virginia,0.21,0.34,0.1,0.02,0.0,0.09
+401282612,2021,1,Massachusetts,FBS Independents,Pittsburgh,-0.14,-0.07,-0.27,0.45,0.56,0.43
+401300997,2021,1,Memphis,American Athletic,Nicholls,0.34,0.48,0.26,0.17,0.29,0.04
+401281942,2021,1,Miami,ACC,Alabama,0.01,0.1,-0.12,0.34,0.64,0.02
+401300996,2021,1,Miami (OH),Mid-American,Cincinnati,-0.14,-0.54,0.13,0.51,0.45,0.58
+401282772,2021,1,Michigan,Big Ten,Western Michigan,0.65,1.2,0.45,0.11,0.17,0.05
+401282782,2021,1,Michigan State,Big Ten,Northwestern,0.42,0.29,0.52,0.15,0.23,0.04
+401282173,2021,1,Middle Tennessee,Conference USA,Monmouth,0.23,0.49,0.03,0.04,0.02,0.09
+401282789,2021,1,Minnesota,Big Ten,Ohio State,0.05,0.5,-0.18,0.56,0.7,0.45
+401281949,2021,1,Mississippi State,SEC,Louisiana Tech,0.34,0.3,0.45,0.22,0.4,0.03
+401281950,2021,1,Missouri,SEC,Central Michigan,0.13,0.24,0.03,0.23,0.18,0.52
+401282174,2021,1,Navy,American Athletic,Marshall,0.02,-0.58,0.25,0.34,0.38,0.3
+401282607,2021,1,NC State,ACC,South Florida,0.45,0.52,0.5,-0.01,-0.02,0.18
+401327913,2021,1,Nebraska,Big Ten,Fordham,0.34,0.22,0.4,0.17,0.33,0.1
+401282714,2021,1,Nebraska,Big Ten,Illinois,0.32,0.39,0.24,0.04,0.44,-0.1
+401309837,2021,1,Nevada,Mountain West,California,0.19,0.43,-0.06,0.22,0.16,0.33
+401310696,2021,1,New Mexico,Mountain West,Houston Christian,0.06,0.44,-0.04,-0.02,0.09,-0.21
+401310699,2021,1,New Mexico State,FBS Independents,San Diego State,-0.05,-0.01,-0.08,-0.02,-0.19,0.18
+401282049,2021,1,New Mexico State,FBS Independents,UTEP,-0.19,-0.36,0.0,0.32,0.87,0.16
+401309937,2021,1,North Carolina,ACC,Virginia Tech,0.09,-0.17,0.49,0.05,0.39,-0.11
+401282610,2021,1,Northern Illinois,Mid-American,Georgia Tech,0.16,0.63,-0.01,0.01,-0.42,0.35
+401282175,2021,1,North Texas,Conference USA,Northwestern State,0.42,0.5,0.44,0.15,-0.04,0.31
+401282782,2021,1,Northwestern,Big Ten,Michigan State,0.15,0.23,0.04,0.42,0.29,0.52
+401282614,2021,1,Notre Dame,FBS Independents,Florida State,0.23,0.51,-0.12,0.29,0.27,0.3
+401282611,2021,1,Ohio,Mid-American,Syracuse,0.12,0.24,0.19,0.37,0.07,0.51
+401282789,2021,1,Ohio State,Big Ten,Minnesota,0.56,0.7,0.45,0.05,0.5,-0.18
+401287894,2021,1,Oklahoma,Big 12,Tulane,-0.11,-0.16,-0.05,0.18,0.14,0.25
+401287890,2021,1,Oklahoma State,Big 12,Missouri State,0.13,0.31,-0.02,0.0,-0.09,0.15
+401282608,2021,1,Old Dominion,Conference USA,Wake Forest,-0.07,0.0,-0.02,0.07,0.32,-0.13
+401282055,2021,1,Ole Miss,SEC,Louisville,0.76,0.74,0.78,0.41,0.11,0.74
+401309838,2021,1,Oregon,Pac-12,Fresno State,0.11,0.16,0.09,0.2,0.33,-0.01
+401282819,2021,1,Oregon State,Pac-12,Purdue,0.12,0.2,0.09,0.15,0.3,0.01
+401282815,2021,1,Penn State,Big Ten,Wisconsin,0.14,0.25,-0.1,-0.02,-0.1,0.04
+401282612,2021,1,Pittsburgh,ACC,Massachusetts,0.45,0.56,0.43,-0.14,-0.07,-0.27
+401282819,2021,1,Purdue,Big Ten,Oregon State,0.15,0.3,0.01,0.12,0.2,0.09
+401281943,2021,1,Rice,Conference USA,Arkansas,-0.09,0.29,-0.39,0.24,0.03,0.43
+401282822,2021,1,Rutgers,Big Ten,Temple,0.29,0.12,0.38,-0.12,-0.22,0.04
+401310699,2021,1,San Diego State,Mountain West,New Mexico State,-0.02,-0.19,0.18,-0.05,-0.01,-0.08
+401309842,2021,1,San José State,Mountain West,USC,0.09,0.18,-0.1,0.24,0.43,0.08
+401310693,2021,1,San José State,Mountain West,Southern Utah,0.51,0.79,0.26,-0.05,-0.03,-0.04
+401300998,2021,1,SMU,American Athletic,Abilene Christian,0.78,1.34,0.13,0.0,0.06,0.19
+401282177,2021,1,South Alabama,Sun Belt,Southern Miss,0.38,0.74,0.11,0.22,0.55,-0.09
+401281951,2021,1,South Carolina,SEC,Eastern Illinois,0.35,0.62,0.18,-0.4,-0.51,-0.28
+401282177,2021,1,Southern Miss,Conference USA,South Alabama,0.22,0.55,-0.09,0.38,0.74,0.11
+401282607,2021,1,South Florida,American Athletic,NC State,-0.01,-0.02,0.18,0.45,0.52,0.5
+401287889,2021,1,Stanford,Pac-12,Kansas State,0.08,0.2,-0.16,0.28,-0.14,0.54
+401282611,2021,1,Syracuse,ACC,Ohio,0.37,0.07,0.51,0.12,0.24,0.19
+401287891,2021,1,TCU,Big 12,Duquesne,0.36,0.7,0.27,-0.17,0.05,-0.23
+401282822,2021,1,Temple,American Athletic,Rutgers,-0.12,-0.22,0.04,0.29,0.12,0.38
+401281952,2021,1,Tennessee,SEC,Bowling Green,0.19,-0.06,0.3,-0.03,0.01,-0.11
+401287892,2021,1,Texas,Big 12,Louisiana,0.4,0.67,0.2,0.15,0.28,-0.06
+401282053,2021,1,Texas A&M,SEC,Kent State,0.29,0.25,0.33,-0.13,-0.54,0.21
+401287893,2021,1,Texas State,Sun Belt,Baylor,0.09,0.28,-0.13,0.27,0.11,0.36
+401287886,2021,1,Texas Tech,Big 12,Houston,0.21,0.29,0.12,0.02,-0.1,0.16
+401309543,2021,1,Toledo,Mid-American,Norfolk State,1.13,6.58,0.59,-0.76,1.03,-0.2
+401309602,2021,1,Troy,Sun Belt,Southern,0.37,0.72,0.23,-0.18,-0.1,-0.07
+401287894,2021,1,Tulane,American Athletic,Oklahoma,0.18,0.14,0.25,-0.11,-0.16,-0.05
+401300994,2021,1,Tulsa,American Athletic,UC Davis,0.11,-0.02,0.4,0.12,0.49,-0.21
+401282050,2021,1,UAB,Conference USA,Jacksonville State,0.4,1.29,-0.18,-0.22,-0.36,0.05
+401300995,2021,1,UCF,American Athletic,Boise State,0.22,0.16,0.28,0.13,0.35,-0.21
+401309833,2021,1,UCLA,Pac-12,Hawai'i,0.23,0.28,0.2,-0.05,-0.04,-0.08
+401281948,2021,1,UCLA,Pac-12,LSU,0.39,0.84,0.19,0.2,0.31,-0.04
+401286187,2021,1,UConn,FBS Independents,Fresno State,-0.4,-0.32,-0.49,0.29,0.48,0.09
+401286188,2021,1,UConn,FBS Independents,Holy Cross,0.02,0.04,0.2,0.3,0.25,0.33
+401281947,2021,1,UL Monroe,Sun Belt,Kentucky,-0.27,-0.28,-0.25,0.39,0.53,0.22
+401310694,2021,1,UNLV,Mountain West,Eastern Washington,0.11,-0.04,0.22,0.29,0.44,0.22
+401309842,2021,1,USC,Pac-12,San José State,0.24,0.43,0.08,0.09,0.18,-0.1
+401309834,2021,1,Utah,Pac-12,Weber State,0.28,0.39,0.19,0.12,0.25,-0.05
+401309840,2021,1,Utah State,Mountain West,Washington State,0.28,0.47,0.17,0.22,0.11,0.45
+401282178,2021,1,UTEP,Conference USA,Bethune-Cookman,0.64,1.09,0.33,0.46,0.77,0.07
+401282049,2021,1,UTEP,Conference USA,New Mexico State,0.32,0.87,0.16,-0.19,-0.36,0.0
+401282179,2021,1,UTSA,Conference USA,Illinois,0.32,0.56,0.16,0.28,0.32,0.23
+401282054,2021,1,Vanderbilt,SEC,East Tennessee State,-0.17,0.03,-0.17,0.1,0.19,0.04
+401282613,2021,1,Virginia,ACC,William & Mary,0.46,0.65,0.26,0.0,0.1,0.0
+401309937,2021,1,Virginia Tech,ACC,North Carolina,0.05,0.39,-0.11,0.09,-0.17,0.49
+401282608,2021,1,Wake Forest,ACC,Old Dominion,0.07,0.32,-0.13,-0.07,0.0,-0.02
+401309839,2021,1,Washington,Pac-12,Montana,-0.04,0.04,0.1,0.03,0.03,0.02
+401309840,2021,1,Washington State,Pac-12,Utah State,0.22,0.11,0.45,0.28,0.47,0.17
+401282180,2021,1,Western Kentucky,Conference USA,UT Martin,0.58,1.1,-0.15,0.13,-0.07,0.39
+401282772,2021,1,Western Michigan,Mid-American,Michigan,0.11,0.17,0.05,0.65,1.2,0.45
+401282764,2021,1,West Virginia,Big 12,Maryland,0.02,0.0,0.09,0.21,0.34,0.1
+401282815,2021,1,Wisconsin,Big Ten,Penn State,-0.02,-0.1,0.04,0.14,0.25,-0.1
+401310697,2021,1,Wyoming,Mountain West,Montana State,0.22,0.34,0.14,-0.17,0.08,-0.4
+401301004,2021,2,Air Force,Mountain West,Navy,-0.05,0.17,-0.09,-0.26,-0.44,-0.12
+401300999,2021,2,Akron,Mid-American,Temple,0.11,-0.01,0.2,0.3,0.43,0.22
+401282056,2021,2,Alabama,SEC,Mercer,0.38,0.36,0.39,-0.04,0.17,-0.18
+401282620,2021,2,App State,Sun Belt,Miami,0.17,0.37,-0.02,0.03,0.02,0.04
+401309846,2021,2,Arizona,Pac-12,San Diego State,-0.18,0.02,-0.23,0.28,0.58,0.19
+401309847,2021,2,Arizona State,Pac-12,UNLV,0.24,-0.08,0.45,0.01,-0.15,0.16
+401282057,2021,2,Arkansas,SEC,Texas,0.35,0.15,0.44,0.09,0.2,0.02
+401301003,2021,2,Arkansas State,Sun Belt,Memphis,0.4,0.53,0.12,0.62,0.76,0.48
+401282193,2021,2,Army,FBS Independents,Western Kentucky,0.24,1.18,0.16,0.43,0.48,0.29
+401282058,2021,2,Auburn,SEC,Alabama State,0.55,0.47,0.59,-0.47,-0.21,-0.37
+401282816,2021,2,Ball State,Mid-American,Penn State,-0.06,-0.08,-0.02,0.34,0.42,0.28
+401287895,2021,2,Baylor,Big 12,Texas Southern,0.74,0.67,0.79,0.14,0.07,0.19
+401282191,2021,2,Boise State,Mountain West,UTEP,0.33,0.74,0.04,-0.03,0.5,-0.23
+401282623,2021,2,Boston College,ACC,Massachusetts,0.35,0.93,0.11,0.1,0.2,0.0
+401309546,2021,2,Bowling Green,Mid-American,South Alabama,-0.16,0.14,-0.52,0.1,0.11,0.1
+401282797,2021,2,Buffalo,Mid-American,Nebraska,0.08,0.16,-0.02,0.47,0.86,0.28
+401309848,2021,2,BYU,FBS Independents,Utah,0.2,0.22,0.18,0.09,0.02,0.18
+401287900,2021,2,California,Pac-12,TCU,0.3,0.39,0.2,0.27,0.08,0.4
+401309548,2021,2,Central Michigan,Mid-American,Robert Morris,0.29,0.42,0.22,-0.22,-0.24,-0.21
+401282181,2021,2,Charlotte,Conference USA,Gardner-Webb,0.21,-0.01,0.47,-0.13,-0.35,0.04
+401301002,2021,2,Cincinnati,American Athletic,Murray State,0.39,0.51,0.27,0.05,0.18,-0.06
+401282615,2021,2,Clemson,ACC,South Carolina State,0.34,0.01,0.66,-0.2,-0.23,-0.17
+401287896,2021,2,Coastal Carolina,Sun Belt,Kansas,0.44,0.82,0.22,0.05,0.08,0.22
+401282067,2021,2,Colorado,Pac-12,Texas A&M,-0.1,-0.19,-0.04,-0.05,0.08,-0.25
+401282068,2021,2,Colorado State,Mountain West,Vanderbilt,0.25,0.25,0.24,0.14,0.31,-0.08
+401282616,2021,2,Duke,ACC,North Carolina A&T,0.53,0.52,0.53,0.15,-0.01,0.21
+401282065,2021,2,East Carolina,American Athletic,South Carolina,-0.21,-0.5,0.06,0.03,0.2,-0.08
+401282825,2021,2,Eastern Michigan,Mid-American,Wisconsin,-0.25,-0.2,-0.31,0.19,0.02,0.26
+401282059,2021,2,Florida,SEC,South Florida,0.4,0.21,0.52,-0.05,0.01,-0.09
+401282183,2021,2,Florida Atlantic,Conference USA,Georgia Southern,0.34,0.56,0.14,0.0,0.11,-0.06
+401282182,2021,2,Florida International,Conference USA,Texas State,0.09,0.16,0.03,0.16,0.05,0.27
+401282617,2021,2,Florida State,ACC,Jacksonville State,0.22,0.13,0.35,0.15,0.12,0.19
+401310702,2021,2,Fresno State,Mountain West,Cal Poly,0.62,0.95,0.36,-0.09,0.05,-0.28
+401282060,2021,2,Georgia,SEC,UAB,0.36,0.97,0.01,-0.31,-0.89,0.06
+401282183,2021,2,Georgia Southern,Sun Belt,Florida Atlantic,0.0,0.11,-0.06,0.34,0.56,0.14
+401282621,2021,2,Georgia State,Sun Belt,North Carolina,0.01,-0.16,0.13,0.57,0.92,0.27
+401282618,2021,2,Georgia Tech,ACC,Kennesaw State,0.37,0.78,0.07,-0.12,0.2,-0.29
+401309844,2021,2,Hawai'i,Mountain West,Oregon State,0.25,0.24,0.27,0.55,0.75,0.4
+401282189,2021,2,Houston,American Athletic,Rice,0.31,0.45,0.17,-0.13,-0.03,0.08
+401282624,2021,2,Illinois,Big Ten,Virginia,0.06,-0.01,0.3,0.41,0.87,0.16
+401282724,2021,2,Indiana,Big Ten,Idaho,0.32,0.55,0.22,-0.1,0.12,0.11
+401282754,2021,2,Iowa,Big Ten,Iowa State,-0.17,-0.19,-0.16,0.14,0.18,0.05
+401282754,2021,2,Iowa State,Big 12,Iowa,0.14,0.18,0.05,-0.17,-0.19,-0.16
+401287896,2021,2,Kansas,Big 12,Coastal Carolina,0.05,0.08,0.22,0.44,0.82,0.22
+401287897,2021,2,Kansas State,Big 12,Southern Illinois,0.18,0.29,0.22,0.17,0.15,0.21
+401309545,2021,2,Kent State,Mid-American,VMI,0.62,0.44,0.68,-0.03,0.0,0.09
+401282061,2021,2,Kentucky,SEC,Missouri,0.37,0.5,0.37,0.29,0.35,0.2
+401286295,2021,2,Liberty,FBS Independents,Troy,0.21,0.28,0.16,0.27,0.36,0.12
+401309603,2021,2,Louisiana,Sun Belt,Nicholls,0.23,0.52,-0.12,0.33,0.62,0.1
+401282184,2021,2,Louisiana Tech,Conference USA,SE Louisiana,0.21,0.37,0.09,0.3,0.22,0.51
+401282619,2021,2,Louisville,ACC,Eastern Kentucky,0.2,0.28,0.15,-0.05,-0.09,0.01
+401282062,2021,2,LSU,SEC,McNeese,0.04,0.2,-0.14,-0.19,-0.1,-0.28
+401282185,2021,2,Marshall,Conference USA,North Carolina Central,0.25,0.34,0.29,-0.32,-0.11,-0.31
+401286207,2021,2,Maryland,Big Ten,Howard,0.46,0.75,0.25,-0.18,-0.3,0.04
+401282623,2021,2,Massachusetts,FBS Independents,Boston College,0.1,0.2,0.0,0.35,0.93,0.11
+401301003,2021,2,Memphis,American Athletic,Arkansas State,0.62,0.76,0.48,0.4,0.53,0.12
+401282620,2021,2,Miami,ACC,App State,0.03,0.02,0.04,0.17,0.37,-0.02
+401282790,2021,2,Miami (OH),Mid-American,Minnesota,0.19,0.36,0.02,0.19,0.49,0.06
+401282773,2021,2,Michigan,Big Ten,Washington,0.21,0.06,0.25,0.09,0.22,-0.09
+401282783,2021,2,Michigan State,Big Ten,Youngstown State,0.56,0.7,0.48,0.05,-0.08,0.15
+401282186,2021,2,Middle Tennessee,Conference USA,Virginia Tech,0.07,0.21,0.07,0.36,0.28,0.42
+401282790,2021,2,Minnesota,Big Ten,Miami (OH),0.19,0.49,0.06,0.19,0.36,0.02
+401282064,2021,2,Mississippi State,SEC,NC State,0.17,0.33,-0.4,0.0,0.17,-0.23
+401282061,2021,2,Missouri,SEC,Kentucky,0.29,0.35,0.2,0.37,0.5,0.37
+401301004,2021,2,Navy,American Athletic,Air Force,-0.26,-0.44,-0.12,-0.05,0.17,-0.09
+401282064,2021,2,NC State,ACC,Mississippi State,0.0,0.17,-0.23,0.17,0.33,-0.4
+401282797,2021,2,Nebraska,Big Ten,Buffalo,0.47,0.86,0.28,0.08,0.16,-0.02
+401310703,2021,2,Nevada,Mountain West,Idaho State,0.55,0.58,0.46,0.13,0.01,0.24
+401310700,2021,2,New Mexico,Mountain West,New Mexico State,0.21,0.49,-0.04,0.01,0.09,-0.02
+401310700,2021,2,New Mexico State,FBS Independents,New Mexico,0.01,0.09,-0.02,0.21,0.49,-0.04
+401282621,2021,2,North Carolina,ACC,Georgia State,0.57,0.92,0.27,0.01,-0.16,0.13
+401309547,2021,2,Northern Illinois,Mid-American,Wyoming,0.39,0.47,0.5,0.47,0.5,0.46
+401282187,2021,2,North Texas,Conference USA,SMU,0.11,0.24,0.07,0.33,0.61,0.27
+401282804,2021,2,Northwestern,Big Ten,Indiana State,0.21,-0.13,0.42,-0.05,0.08,-0.26
+401282705,2021,2,Notre Dame,FBS Independents,Toledo,0.16,0.37,-0.1,0.09,0.08,0.1
+401309753,2021,2,Ohio,Mid-American,Duquesne,0.11,-0.08,0.4,0.19,0.28,0.12
+401282809,2021,2,Ohio State,Big Ten,Oregon,0.29,0.38,0.13,0.38,0.41,0.35
+401287898,2021,2,Oklahoma,Big 12,Western Carolina,0.56,0.66,0.45,-0.24,-0.16,-0.36
+401287899,2021,2,Oklahoma State,Big 12,Tulsa,0.03,0.11,-0.02,0.19,0.37,0.04
+401282188,2021,2,Old Dominion,Conference USA,Hampton,0.39,0.4,0.39,0.07,-0.04,0.12
+401282063,2021,2,Ole Miss,SEC,Austin Peay,0.48,0.38,0.58,-0.14,-0.09,-0.16
+401282809,2021,2,Oregon,Pac-12,Ohio State,0.38,0.41,0.35,0.29,0.38,0.13
+401309844,2021,2,Oregon State,Pac-12,Hawai'i,0.55,0.75,0.4,0.25,0.24,0.27
+401282816,2021,2,Penn State,Big Ten,Ball State,0.34,0.42,0.28,-0.06,-0.08,-0.02
+401282066,2021,2,Pittsburgh,ACC,Tennessee,0.22,0.51,-0.04,0.11,0.15,0.07
+401282820,2021,2,Purdue,Big Ten,UConn,0.48,0.83,0.12,-0.08,-0.12,-0.05
+401282189,2021,2,Rice,Conference USA,Houston,-0.13,-0.03,0.08,0.31,0.45,0.17
+401282622,2021,2,Rutgers,Big Ten,Syracuse,0.0,-0.08,0.07,0.04,0.16,-0.07
+401309846,2021,2,San Diego State,Mountain West,Arizona,0.28,0.58,0.19,-0.18,0.02,-0.23
+401282187,2021,2,SMU,American Athletic,North Texas,0.33,0.61,0.27,0.11,0.24,0.07
+401309546,2021,2,South Alabama,Sun Belt,Bowling Green,0.1,0.11,0.1,-0.16,0.14,-0.52
+401282065,2021,2,South Carolina,SEC,East Carolina,0.03,0.2,-0.08,-0.21,-0.5,0.06
+401282190,2021,2,Southern Miss,Conference USA,Grambling,0.25,0.3,0.22,-0.12,-0.14,-0.08
+401282059,2021,2,South Florida,American Athletic,Florida,-0.05,0.01,-0.09,0.4,0.21,0.52
+401309843,2021,2,Stanford,Pac-12,USC,0.32,0.84,-0.07,0.18,0.04,0.35
+401282622,2021,2,Syracuse,ACC,Rutgers,0.04,0.16,-0.07,0.0,-0.08,0.07
+401287900,2021,2,TCU,Big 12,California,0.27,0.08,0.4,0.3,0.39,0.2
+401300999,2021,2,Temple,American Athletic,Akron,0.3,0.43,0.22,0.11,-0.01,0.2
+401282066,2021,2,Tennessee,SEC,Pittsburgh,0.11,0.15,0.07,0.22,0.51,-0.04
+401282057,2021,2,Texas,Big 12,Arkansas,0.09,0.2,0.02,0.35,0.15,0.44
+401282067,2021,2,Texas A&M,SEC,Colorado,-0.05,0.08,-0.25,-0.1,-0.19,-0.04
+401282182,2021,2,Texas State,Sun Belt,Florida International,0.16,0.05,0.27,0.09,0.16,0.03
+401287901,2021,2,Texas Tech,Big 12,Stephen F. Austin,0.54,0.36,0.79,-0.04,0.01,-0.16
+401282705,2021,2,Toledo,Mid-American,Notre Dame,0.09,0.08,0.1,0.16,0.37,-0.1
+401286295,2021,2,Troy,Sun Belt,Liberty,0.27,0.36,0.12,0.21,0.28,0.16
+401301000,2021,2,Tulane,American Athletic,Morgan State,0.56,0.49,0.64,-0.5,-0.74,-0.32
+401287899,2021,2,Tulsa,American Athletic,Oklahoma State,0.19,0.37,0.04,0.03,0.11,-0.02
+401282060,2021,2,UAB,Conference USA,Georgia,-0.31,-0.89,0.06,0.36,0.97,0.01
+401301001,2021,2,UCF,American Athletic,Bethune-Cookman,0.55,0.55,0.55,0.09,0.19,-0.22
+401282820,2021,2,UConn,FBS Independents,Purdue,-0.08,-0.12,-0.05,0.48,0.83,0.12
+401309847,2021,2,UNLV,Mountain West,Arizona State,0.01,-0.15,0.16,0.24,-0.08,0.45
+401309843,2021,2,USC,Pac-12,Stanford,0.18,0.04,0.35,0.32,0.84,-0.07
+401309848,2021,2,Utah,Pac-12,BYU,0.09,0.02,0.18,0.2,0.22,0.18
+401310701,2021,2,Utah State,Mountain West,North Dakota,0.44,0.53,0.35,0.2,0.58,-0.24
+401282191,2021,2,UTEP,Conference USA,Boise State,-0.03,0.5,-0.23,0.33,0.74,0.04
+401282192,2021,2,UTSA,Conference USA,Lamar,0.5,0.73,0.22,-0.12,-0.07,0.05
+401282068,2021,2,Vanderbilt,SEC,Colorado State,0.14,0.31,-0.08,0.25,0.25,0.24
+401282624,2021,2,Virginia,ACC,Illinois,0.41,0.87,0.16,0.06,-0.01,0.3
+401282186,2021,2,Virginia Tech,ACC,Middle Tennessee,0.36,0.28,0.42,0.07,0.21,0.07
+401282625,2021,2,Wake Forest,ACC,Norfolk State,0.37,0.44,0.39,0.14,0.35,0.04
+401282773,2021,2,Washington,Pac-12,Michigan,0.09,0.22,-0.09,0.21,0.06,0.25
+401309845,2021,2,Washington State,Pac-12,Portland State,0.41,0.5,0.31,0.1,0.15,0.01
+401282193,2021,2,Western Kentucky,Conference USA,Army,0.43,0.48,0.29,0.24,1.18,0.16
+401309544,2021,2,Western Michigan,Mid-American,Illinois State,0.26,0.17,0.31,-0.22,-0.35,-0.08
+401287902,2021,2,West Virginia,Big 12,Long Island University,0.34,0.68,0.13,-0.18,-0.2,-0.17
+401282825,2021,2,Wisconsin,Big Ten,Eastern Michigan,0.19,0.02,0.26,-0.25,-0.2,-0.31
+401309547,2021,2,Wyoming,Mountain West,Northern Illinois,0.47,0.5,0.46,0.39,0.47,0.5
+401310704,2021,3,Air Force,Mountain West,Utah State,0.42,1.09,0.37,0.44,0.59,0.26
+401309550,2021,3,Akron,Mid-American,Bryant,0.4,0.65,0.21,0.02,0.17,-0.13
+401282071,2021,3,Alabama,SEC,Florida,0.2,0.34,0.0,0.28,0.27,0.29
+401309604,2021,3,App State,Sun Belt,Elon,0.42,0.6,0.27,-0.03,-0.03,-0.02
+401309853,2021,3,Arizona,Pac-12,Northern Arizona,-0.05,-0.13,0.09,-0.07,-0.11,-0.05
+401309854,2021,3,Arizona State,Pac-12,BYU,0.27,0.23,0.31,0.2,0.23,0.18
+401282069,2021,3,Arkansas,SEC,Georgia Southern,0.53,0.96,0.3,-0.06,-0.18,0.05
+401309605,2021,3,Arkansas State,Sun Belt,Washington,-0.08,-0.06,-0.01,0.42,0.53,0.39
+401286189,2021,3,Army,FBS Independents,UConn,0.47,2.87,0.37,0.1,-0.16,0.53
+401282070,2021,3,Auburn,SEC,Penn State,0.12,0.01,0.23,0.23,0.48,-0.04
+401309549,2021,3,Ball State,Mid-American,Wyoming,-0.16,-0.55,0.3,0.29,0.39,0.23
+401287904,2021,3,Baylor,Big 12,Kansas,0.61,0.7,0.57,0.01,-0.09,0.07
+401287903,2021,3,Boise State,Mountain West,Oklahoma State,0.15,0.32,-0.06,0.21,0.22,0.21
+401282634,2021,3,Boston College,ACC,Temple,0.31,0.3,0.31,-0.09,-0.04,-0.13
+401309551,2021,3,Bowling Green,Mid-American,Murray State,0.15,0.4,0.01,-0.1,-0.1,-0.03
+401309552,2021,3,Buffalo,Mid-American,Coastal Carolina,0.3,0.28,0.31,0.29,0.38,0.24
+401309854,2021,3,BYU,FBS Independents,Arizona State,0.2,0.23,0.18,0.27,0.23,0.31
+401309849,2021,3,California,Pac-12,Sacramento State,0.46,0.43,0.62,0.27,0.42,0.06
+401282074,2021,3,Central Michigan,Mid-American,LSU,-0.12,0.1,-0.45,0.36,0.57,-0.03
+401282196,2021,3,Charlotte,Conference USA,Georgia State,0.0,0.18,-0.15,0.35,0.4,0.34
+401282725,2021,3,Cincinnati,American Athletic,Indiana,0.09,0.0,0.18,0.03,0.08,-0.03
+401282627,2021,3,Clemson,ACC,Georgia Tech,-0.01,0.11,-0.03,0.0,0.03,-0.03
+401309552,2021,3,Coastal Carolina,Sun Belt,Buffalo,0.29,0.38,0.24,0.3,0.28,0.31
+401282791,2021,3,Colorado,Pac-12,Minnesota,-0.26,-0.25,-0.27,0.33,0.56,0.25
+401309553,2021,3,Colorado State,Mountain West,Toledo,0.03,-0.04,0.07,-0.01,0.01,-0.06
+401282628,2021,3,Duke,ACC,Northwestern,0.22,0.31,0.16,0.16,0.34,0.12
+401282200,2021,3,East Carolina,American Athletic,Marshall,0.37,0.45,0.23,0.47,0.56,0.44
+401286300,2021,3,Eastern Michigan,Mid-American,Massachusetts,0.4,0.81,0.14,0.27,0.2,0.36
+401282071,2021,3,Florida,SEC,Alabama,0.28,0.27,0.29,0.2,0.34,0.0
+401282198,2021,3,Florida Atlantic,Conference USA,Fordham,0.29,0.27,0.3,-0.11,0.04,-0.47
+401282197,2021,3,Florida International,Conference USA,Texas Tech,-0.07,-0.03,-0.13,0.54,0.93,0.14
+401282635,2021,3,Florida State,ACC,Wake Forest,0.14,0.3,-0.01,0.24,0.54,0.05
+401309855,2021,3,Fresno State,Mountain West,UCLA,0.29,0.54,-0.12,0.39,0.76,0.1
+401282072,2021,3,Georgia,SEC,South Carolina,0.37,0.5,0.21,-0.05,0.14,-0.18
+401282069,2021,3,Georgia Southern,Sun Belt,Arkansas,-0.06,-0.18,0.05,0.53,0.96,0.3
+401282196,2021,3,Georgia State,Sun Belt,Charlotte,0.35,0.4,0.34,0.0,0.18,-0.15
+401282627,2021,3,Georgia Tech,ACC,Clemson,0.0,0.03,-0.03,-0.01,0.11,-0.03
+401310705,2021,3,Hawai'i,Mountain West,San José State,0.02,-0.06,0.1,-0.02,0.1,-0.27
+401301005,2021,3,Houston,American Athletic,Grambling,0.29,0.51,0.12,-0.33,-0.61,-0.2
+401282715,2021,3,Illinois,Big Ten,Maryland,0.08,0.14,0.04,0.32,0.34,0.28
+401282725,2021,3,Indiana,Big Ten,Cincinnati,0.03,0.08,-0.03,0.09,0.0,0.18
+401282755,2021,3,Iowa,Big Ten,Kent State,0.23,0.23,0.23,0.02,0.04,0.06
+401287906,2021,3,Iowa State,Big 12,UNLV,0.43,0.74,0.22,-0.14,0.17,-0.32
+401287904,2021,3,Kansas,Big 12,Baylor,0.01,-0.09,0.07,0.61,0.7,0.57
+401287905,2021,3,Kansas State,Big 12,Nevada,0.39,0.67,0.32,0.24,0.23,0.28
+401282755,2021,3,Kent State,Mid-American,Iowa,0.02,0.04,0.06,0.23,0.23,0.23
+401282073,2021,3,Kentucky,SEC,Chattanooga,0.18,0.4,0.0,0.21,0.24,0.29
+401282201,2021,3,Liberty,FBS Independents,Old Dominion,0.39,0.55,0.26,-0.02,-0.01,0.02
+401309606,2021,3,Louisiana,Sun Belt,Ohio,0.43,0.26,0.55,0.0,0.05,-0.05
+401282199,2021,3,Louisiana Tech,Conference USA,SMU,0.31,0.44,0.12,0.33,0.5,0.1
+401282626,2021,3,Louisville,ACC,UCF,0.29,0.39,0.19,0.15,-0.08,0.39
+401282074,2021,3,LSU,SEC,Central Michigan,0.36,0.57,-0.03,-0.12,0.1,-0.45
+401282200,2021,3,Marshall,Conference USA,East Carolina,0.47,0.56,0.44,0.37,0.45,0.23
+401282715,2021,3,Maryland,Big Ten,Illinois,0.32,0.34,0.28,0.08,0.14,0.04
+401286300,2021,3,Massachusetts,FBS Independents,Eastern Michigan,0.27,0.2,0.36,0.4,0.81,0.14
+401282076,2021,3,Memphis,American Athletic,Mississippi State,0.04,0.16,-0.11,0.06,0.24,-0.28
+401282629,2021,3,Miami,ACC,Michigan State,0.2,0.36,-0.28,0.31,0.39,0.24
+401308843,2021,3,Miami (OH),Mid-American,Long Island University,0.56,0.85,0.37,-0.09,0.14,-0.25
+401282774,2021,3,Michigan,Big Ten,Northern Illinois,0.61,0.82,0.54,-0.05,0.01,-0.08
+401282629,2021,3,Michigan State,Big Ten,Miami,0.31,0.39,0.24,0.2,0.36,-0.28
+401282194,2021,3,Middle Tennessee,Conference USA,UTSA,-0.34,0.09,-0.6,0.13,0.29,0.1
+401282791,2021,3,Minnesota,Big Ten,Colorado,0.33,0.56,0.25,-0.26,-0.25,-0.27
+401282076,2021,3,Mississippi State,SEC,Memphis,0.06,0.24,-0.28,0.04,0.16,-0.11
+401282077,2021,3,Missouri,SEC,Southeast Missouri State,0.74,0.96,0.49,0.47,0.18,0.61
+401282630,2021,3,NC State,ACC,Furman,0.44,0.48,0.39,-0.03,0.29,-0.23
+401282798,2021,3,Nebraska,Big Ten,Oklahoma,0.23,0.47,0.01,0.38,0.41,0.34
+401287905,2021,3,Nevada,Mountain West,Kansas State,0.24,0.23,0.28,0.39,0.67,0.32
+401282079,2021,3,New Mexico,Mountain West,Texas A&M,-0.18,-0.41,0.01,0.23,0.28,0.17
+401319455,2021,3,New Mexico State,FBS Independents,South Carolina State,0.4,0.72,0.06,0.35,0.55,-0.04
+401282631,2021,3,North Carolina,ACC,Virginia,0.65,1.23,0.52,0.43,0.65,-0.17
+401282774,2021,3,Northern Illinois,Mid-American,Michigan,-0.05,0.01,-0.08,0.61,0.82,0.54
+401282195,2021,3,North Texas,Conference USA,UAB,-0.19,-0.14,-0.24,0.38,1.27,0.09
+401282628,2021,3,Northwestern,Big Ten,Duke,0.16,0.34,0.12,0.22,0.31,0.16
+401282706,2021,3,Notre Dame,FBS Independents,Purdue,0.13,0.19,0.06,-0.01,0.08,-0.24
+401309606,2021,3,Ohio,Mid-American,Louisiana,0.0,0.05,-0.05,0.43,0.26,0.55
+401282810,2021,3,Ohio State,Big Ten,Tulsa,0.39,0.27,0.47,0.14,0.25,-0.12
+401282798,2021,3,Oklahoma,Big 12,Nebraska,0.38,0.41,0.34,0.23,0.47,0.01
+401287903,2021,3,Oklahoma State,Big 12,Boise State,0.21,0.22,0.21,0.15,0.32,-0.06
+401282201,2021,3,Old Dominion,Conference USA,Liberty,-0.02,-0.01,0.02,0.39,0.55,0.26
+401282075,2021,3,Ole Miss,SEC,Tulane,0.49,0.45,0.51,0.16,0.37,0.04
+401309850,2021,3,Oregon,Pac-12,Stony Brook,0.29,0.38,0.21,0.05,0.07,0.04
+401309851,2021,3,Oregon State,Pac-12,Idaho,0.49,0.51,0.48,-0.26,-0.52,-0.04
+401282070,2021,3,Penn State,Big Ten,Auburn,0.23,0.48,-0.04,0.12,0.01,0.23
+401282632,2021,3,Pittsburgh,ACC,Western Michigan,0.48,0.61,0.26,0.29,0.65,0.0
+401282706,2021,3,Purdue,Big Ten,Notre Dame,-0.01,0.08,-0.24,0.13,0.19,0.06
+401282202,2021,3,Rice,Conference USA,Texas,-0.08,0.0,0.09,0.62,0.45,0.79
+401282823,2021,3,Rutgers,Big Ten,Delaware,0.51,0.7,0.36,-0.01,-0.29,0.28
+401309856,2021,3,San Diego State,Mountain West,Utah,0.02,-0.27,0.16,-0.06,0.03,-0.24
+401310705,2021,3,San José State,Mountain West,Hawai'i,-0.02,0.1,-0.27,0.02,-0.06,0.1
+401282199,2021,3,SMU,American Athletic,Louisiana Tech,0.33,0.5,0.1,0.31,0.44,0.12
+401309608,2021,3,South Alabama,Sun Belt,Alcorn State,0.29,0.31,0.28,-0.02,0.18,-0.3
+401282072,2021,3,South Carolina,SEC,Georgia,-0.05,0.14,-0.18,0.37,0.5,0.21
+401282203,2021,3,Southern Miss,Conference USA,Troy,-0.12,0.01,-0.29,-0.04,0.22,-0.47
+401301006,2021,3,South Florida,American Athletic,Florida A&M,0.23,0.08,0.33,0.1,0.14,0.04
+401282080,2021,3,Stanford,Pac-12,Vanderbilt,0.38,0.33,0.45,0.17,0.04,0.3
+401282633,2021,3,Syracuse,ACC,UAlbany,0.57,1.04,0.34,-0.02,0.07,-0.12
+401282634,2021,3,Temple,American Athletic,Boston College,-0.09,-0.04,-0.13,0.31,0.3,0.31
+401282078,2021,3,Tennessee,SEC,Tennessee Tech,0.28,0.33,0.24,-0.33,-0.38,-0.09
+401282202,2021,3,Texas,Big 12,Rice,0.62,0.45,0.79,-0.08,0.0,0.09
+401282079,2021,3,Texas A&M,SEC,New Mexico,0.23,0.28,0.17,-0.18,-0.41,0.01
+401309609,2021,3,Texas State,Sun Belt,Incarnate Word,0.35,0.42,0.28,0.43,0.63,0.21
+401282197,2021,3,Texas Tech,Big 12,Florida International,0.54,0.93,0.14,-0.07,-0.03,-0.13
+401309553,2021,3,Toledo,Mid-American,Colorado State,-0.01,0.01,-0.06,0.03,-0.04,0.07
+401282203,2021,3,Troy,Sun Belt,Southern Miss,-0.04,0.22,-0.47,-0.12,0.01,-0.29
+401282075,2021,3,Tulane,American Athletic,Ole Miss,0.16,0.37,0.04,0.49,0.45,0.51
+401282810,2021,3,Tulsa,American Athletic,Ohio State,0.14,0.25,-0.12,0.39,0.27,0.47
+401282195,2021,3,UAB,Conference USA,North Texas,0.38,1.27,0.09,-0.19,-0.14,-0.24
+401282626,2021,3,UCF,American Athletic,Louisville,0.15,-0.08,0.39,0.29,0.39,0.19
+401309855,2021,3,UCLA,Pac-12,Fresno State,0.39,0.76,0.1,0.29,0.54,-0.12
+401286189,2021,3,UConn,FBS Independents,Army,0.1,-0.16,0.53,0.47,2.87,0.37
+401309607,2021,3,UL Monroe,Sun Belt,Jackson State,-0.14,-0.06,-0.2,-0.05,0.15,-0.42
+401287906,2021,3,UNLV,Mountain West,Iowa State,-0.14,0.17,-0.32,0.43,0.74,0.22
+401309852,2021,3,USC,Pac-12,Washington State,0.23,0.48,-0.26,0.01,0.02,-0.02
+401309856,2021,3,Utah,Pac-12,San Diego State,-0.06,0.03,-0.24,0.02,-0.27,0.16
+401310704,2021,3,Utah State,Mountain West,Air Force,0.44,0.59,0.26,0.42,1.09,0.37
+401282194,2021,3,UTSA,Conference USA,Middle Tennessee,0.13,0.29,0.1,-0.34,0.09,-0.6
+401282080,2021,3,Vanderbilt,SEC,Stanford,0.17,0.04,0.3,0.38,0.33,0.45
+401282631,2021,3,Virginia,ACC,North Carolina,0.43,0.65,-0.17,0.65,1.23,0.52
+401282636,2021,3,Virginia Tech,ACC,West Virginia,0.11,0.21,0.0,0.28,0.34,0.23
+401282635,2021,3,Wake Forest,ACC,Florida State,0.24,0.54,0.05,0.14,0.3,-0.01
+401309605,2021,3,Washington,Pac-12,Arkansas State,0.42,0.53,0.39,-0.08,-0.06,-0.01
+401309852,2021,3,Washington State,Pac-12,USC,0.01,0.02,-0.02,0.23,0.48,-0.26
+401282632,2021,3,Western Michigan,Mid-American,Pittsburgh,0.29,0.65,0.0,0.48,0.61,0.26
+401282636,2021,3,West Virginia,Big 12,Virginia Tech,0.28,0.34,0.23,0.11,0.21,0.0
+401309549,2021,3,Wyoming,Mountain West,Ball State,0.29,0.39,0.23,-0.16,-0.55,0.3
+401282207,2021,4,Air Force,Mountain West,Florida Atlantic,0.35,0.38,0.35,-0.04,-0.35,0.5
+401282811,2021,4,Akron,Mid-American,Ohio State,-0.22,-0.35,-0.05,0.64,0.54,0.72
+401282081,2021,4,Alabama,SEC,Southern Miss,0.68,1.24,0.17,0.01,0.19,-0.13
+401282208,2021,4,App State,Sun Belt,Marshall,0.25,0.21,0.27,0.22,0.24,0.18
+401309859,2021,4,Arizona,Pac-12,Oregon,0.0,-0.09,0.06,0.32,0.49,0.24
+401309862,2021,4,Arizona State,Pac-12,Colorado,0.42,0.5,0.36,0.11,-0.12,0.23
+401282082,2021,4,Arkansas,SEC,Texas A&M,0.08,0.71,-0.2,-0.03,-0.19,0.29
+401301011,2021,4,Arkansas State,Sun Belt,Tulsa,0.18,0.36,0.02,0.5,0.9,0.38
+401308834,2021,4,Army,FBS Independents,Miami (OH),0.23,-0.64,0.3,0.05,0.16,-0.12
+401282083,2021,4,Auburn,SEC,Georgia State,0.11,0.22,-0.05,0.0,0.08,0.09
+401309555,2021,4,Ball State,Mid-American,Toledo,0.01,0.15,-0.09,0.25,0.27,0.34
+401287907,2021,4,Baylor,Big 12,Iowa State,0.22,0.31,0.17,0.31,0.54,0.23
+401310706,2021,4,Boise State,Mountain West,Utah State,0.15,0.27,0.02,0.11,0.07,0.14
+401282086,2021,4,Boston College,ACC,Missouri,0.29,0.23,0.32,0.28,0.41,0.04
+401282792,2021,4,Bowling Green,Mid-American,Minnesota,-0.1,-0.16,0.03,0.08,-0.35,0.23
+401282209,2021,4,Buffalo,Mid-American,Old Dominion,0.08,0.4,-0.16,-0.04,0.23,0.03
+401301009,2021,4,BYU,FBS Independents,South Florida,0.61,0.7,0.52,0.29,0.37,0.25
+401309857,2021,4,California,Pac-12,Washington,0.31,0.48,0.09,0.12,0.34,-0.12
+401282206,2021,4,Central Michigan,Mid-American,Florida International,0.26,0.42,0.11,0.19,0.52,-0.13
+401282204,2021,4,Charlotte,Conference USA,Middle Tennessee,0.47,0.62,0.33,0.43,0.53,0.23
+401282643,2021,4,Clemson,ACC,NC State,-0.03,-0.04,-0.01,0.07,0.13,0.02
+401286301,2021,4,Coastal Carolina,Sun Belt,Massachusetts,0.57,0.76,0.45,-0.05,0.0,-0.07
+401309862,2021,4,Colorado,Pac-12,Arizona State,0.11,-0.12,0.23,0.42,0.5,0.36
+401282756,2021,4,Colorado State,Mountain West,Iowa,-0.04,0.07,-0.12,-0.08,0.14,-0.28
+401282639,2021,4,Duke,ACC,Kansas,0.46,0.83,0.35,0.28,0.44,0.28
+401301007,2021,4,East Carolina,American Athletic,Charleston Southern,0.02,0.18,-0.11,0.18,0.15,0.23
+401309557,2021,4,Eastern Michigan,Mid-American,Texas State,0.46,0.55,0.39,0.3,0.43,0.18
+401282084,2021,4,Florida,SEC,Tennessee,0.41,0.54,0.31,0.26,0.4,0.12
+401282207,2021,4,Florida Atlantic,Conference USA,Air Force,-0.04,-0.35,0.5,0.35,0.38,0.35
+401282206,2021,4,Florida International,Conference USA,Central Michigan,0.19,0.52,-0.13,0.26,0.42,0.11
+401282640,2021,4,Florida State,ACC,Louisville,0.17,0.05,0.35,0.14,0.39,-0.1
+401310707,2021,4,Fresno State,Mountain West,UNLV,0.35,0.59,-0.13,0.31,0.3,0.32
+401282088,2021,4,Georgia,SEC,Vanderbilt,0.34,0.6,0.2,-0.3,-0.46,-0.18
+401309610,2021,4,Georgia Southern,Sun Belt,Louisiana,0.22,0.03,0.39,0.19,0.36,0.06
+401282083,2021,4,Georgia State,Sun Belt,Auburn,0.0,0.08,0.09,0.11,0.22,-0.05
+401282641,2021,4,Georgia Tech,ACC,North Carolina,0.31,0.31,0.32,0.13,0.18,0.03
+401310708,2021,4,Hawai'i,Mountain West,New Mexico State,0.38,0.5,0.43,0.19,0.23,0.25
+401301008,2021,4,Houston,American Athletic,Navy,0.28,0.45,0.1,0.18,0.13,0.19
+401282716,2021,4,Illinois,Big Ten,Purdue,-0.04,-0.02,-0.05,0.09,0.16,-0.06
+401282214,2021,4,Indiana,Big Ten,Western Kentucky,0.23,0.28,0.15,0.4,0.5,0.18
+401282756,2021,4,Iowa,Big Ten,Colorado State,-0.08,0.14,-0.28,-0.04,0.07,-0.12
+401287907,2021,4,Iowa State,Big 12,Baylor,0.31,0.54,0.23,0.22,0.31,0.17
+401282639,2021,4,Kansas,Big 12,Duke,0.28,0.44,0.28,0.46,0.83,0.35
+401287909,2021,4,Kansas State,Big 12,Oklahoma State,0.01,0.09,0.09,0.44,0.87,0.08
+401282765,2021,4,Kent State,Mid-American,Maryland,0.07,0.05,0.09,0.35,0.52,0.08
+401282087,2021,4,Kentucky,SEC,South Carolina,0.08,0.0,0.12,-0.14,0.03,-0.33
+401282637,2021,4,Liberty,FBS Independents,Syracuse,0.2,0.32,0.11,0.15,0.12,0.16
+401309610,2021,4,Louisiana,Sun Belt,Georgia Southern,0.19,0.36,0.06,0.22,0.03,0.39
+401282205,2021,4,Louisiana Tech,Conference USA,North Texas,0.08,0.4,-0.2,-0.03,-0.26,0.18
+401282640,2021,4,Louisville,ACC,Florida State,0.14,0.39,-0.1,0.17,0.05,0.35
+401282085,2021,4,LSU,SEC,Mississippi State,0.2,0.55,-0.2,0.23,0.29,0.07
+401282208,2021,4,Marshall,Conference USA,App State,0.22,0.24,0.18,0.25,0.21,0.27
+401282765,2021,4,Maryland,Big Ten,Kent State,0.35,0.52,0.08,0.07,0.05,0.09
+401286301,2021,4,Massachusetts,FBS Independents,Coastal Carolina,-0.05,0.0,-0.07,0.57,0.76,0.45
+401282213,2021,4,Memphis,American Athletic,UTSA,0.29,0.58,0.05,0.22,0.41,0.11
+401282642,2021,4,Miami,ACC,Central Connecticut,0.74,1.07,0.61,-0.13,-0.1,-0.15
+401308834,2021,4,Miami (OH),Mid-American,Army,0.05,0.16,-0.12,0.23,-0.64,0.3
+401282775,2021,4,Michigan,Big Ten,Rutgers,0.11,0.34,0.01,0.11,0.15,0.08
+401282784,2021,4,Michigan State,Big Ten,Nebraska,0.09,0.38,-0.36,0.22,0.19,0.26
+401282204,2021,4,Middle Tennessee,Conference USA,Charlotte,0.43,0.53,0.23,0.47,0.62,0.33
+401282792,2021,4,Minnesota,Big Ten,Bowling Green,0.08,-0.35,0.23,-0.1,-0.16,0.03
+401282085,2021,4,Mississippi State,SEC,LSU,0.23,0.29,0.07,0.2,0.55,-0.2
+401282086,2021,4,Missouri,SEC,Boston College,0.28,0.41,0.04,0.29,0.23,0.32
+401301008,2021,4,Navy,American Athletic,Houston,0.18,0.13,0.19,0.28,0.45,0.1
+401282643,2021,4,NC State,ACC,Clemson,0.07,0.13,0.02,-0.03,-0.04,-0.01
+401282784,2021,4,Nebraska,Big Ten,Michigan State,0.22,0.19,0.26,0.09,0.38,-0.36
+401282212,2021,4,New Mexico,Mountain West,UTEP,-0.02,0.03,-0.08,0.2,0.54,-0.14
+401310708,2021,4,New Mexico State,FBS Independents,Hawai'i,0.19,0.23,0.25,0.38,0.5,0.43
+401282641,2021,4,North Carolina,ACC,Georgia Tech,0.13,0.18,0.03,0.31,0.31,0.32
+401309556,2021,4,Northern Illinois,Mid-American,Maine,0.47,0.76,0.4,0.14,0.21,0.08
+401282205,2021,4,North Texas,Conference USA,Louisiana Tech,-0.03,-0.26,0.18,0.08,0.4,-0.2
+401282805,2021,4,Northwestern,Big Ten,Ohio,0.24,0.05,0.31,0.14,-0.01,0.34
+401282707,2021,4,Notre Dame,FBS Independents,Wisconsin,-0.03,0.06,-0.16,-0.38,-0.48,-0.23
+401282805,2021,4,Ohio,Mid-American,Northwestern,0.14,-0.01,0.34,0.24,0.05,0.31
+401282811,2021,4,Ohio State,Big Ten,Akron,0.64,0.54,0.72,-0.22,-0.35,-0.05
+401287908,2021,4,Oklahoma,Big 12,West Virginia,0.09,0.27,-0.21,0.01,0.08,-0.07
+401287909,2021,4,Oklahoma State,Big 12,Kansas State,0.44,0.87,0.08,0.01,0.09,0.09
+401282209,2021,4,Old Dominion,Conference USA,Buffalo,-0.04,0.23,0.03,0.08,0.4,-0.16
+401309859,2021,4,Oregon,Pac-12,Arizona,0.32,0.49,0.24,0.0,-0.09,0.06
+401309860,2021,4,Oregon State,Pac-12,USC,0.48,1.06,0.32,0.24,0.39,0.18
+401282817,2021,4,Penn State,Big Ten,Villanova,0.29,0.63,-0.09,0.06,0.22,-0.2
+401282644,2021,4,Pittsburgh,ACC,New Hampshire,0.65,1.08,0.34,-0.36,-0.42,-0.24
+401282716,2021,4,Purdue,Big Ten,Illinois,0.09,0.16,-0.06,-0.04,-0.02,-0.05
+401282210,2021,4,Rice,Conference USA,Texas Southern,0.58,0.76,0.54,0.24,0.54,0.03
+401282775,2021,4,Rutgers,Big Ten,Michigan,0.11,0.15,0.08,0.11,0.34,0.01
+401310709,2021,4,San Diego State,Mountain West,Towson,0.3,0.28,0.31,-0.06,0.2,-0.25
+401309554,2021,4,San José State,Mountain West,Western Michigan,-0.18,-0.31,0.02,0.13,0.13,0.14
+401287910,2021,4,SMU,American Athletic,TCU,0.38,0.84,0.34,0.55,0.81,0.31
+401282087,2021,4,South Carolina,SEC,Kentucky,-0.14,0.03,-0.33,0.08,0.0,0.12
+401282081,2021,4,Southern Miss,Conference USA,Alabama,0.01,0.19,-0.13,0.68,1.24,0.17
+401301009,2021,4,South Florida,American Athletic,BYU,0.29,0.37,0.25,0.61,0.7,0.52
+401309858,2021,4,Stanford,Pac-12,UCLA,0.44,0.42,0.48,0.39,0.24,0.48
+401282637,2021,4,Syracuse,ACC,Liberty,0.15,0.12,0.16,0.2,0.32,0.11
+401287910,2021,4,TCU,Big 12,SMU,0.55,0.81,0.31,0.38,0.84,0.34
+401301010,2021,4,Temple,American Athletic,Wagner,0.38,0.45,0.29,-0.14,0.01,-0.17
+401282084,2021,4,Tennessee,SEC,Florida,0.26,0.4,0.12,0.41,0.54,0.31
+401287911,2021,4,Texas,Big 12,Texas Tech,0.61,1.07,0.39,0.35,0.62,0.05
+401282082,2021,4,Texas A&M,SEC,Arkansas,-0.03,-0.19,0.29,0.08,0.71,-0.2
+401309557,2021,4,Texas State,Sun Belt,Eastern Michigan,0.3,0.43,0.18,0.46,0.55,0.39
+401287911,2021,4,Texas Tech,Big 12,Texas,0.35,0.62,0.05,0.61,1.07,0.39
+401309555,2021,4,Toledo,Mid-American,Ball State,0.25,0.27,0.34,0.01,0.15,-0.09
+401309611,2021,4,Troy,Sun Belt,UL Monroe,-0.02,-0.01,0.06,0.1,0.3,0.0
+401282211,2021,4,Tulane,American Athletic,UAB,0.0,0.14,-0.23,0.23,0.57,0.01
+401301011,2021,4,Tulsa,American Athletic,Arkansas State,0.5,0.9,0.38,0.18,0.36,0.02
+401282211,2021,4,UAB,Conference USA,Tulane,0.23,0.57,0.01,0.0,0.14,-0.23
+401309858,2021,4,UCLA,Pac-12,Stanford,0.39,0.24,0.48,0.44,0.42,0.48
+401286190,2021,4,UConn,FBS Independents,Wyoming,0.06,-0.06,0.26,0.2,0.29,0.14
+401309611,2021,4,UL Monroe,Sun Belt,Troy,0.1,0.3,0.0,-0.02,-0.01,0.06
+401310707,2021,4,UNLV,Mountain West,Fresno State,0.31,0.3,0.32,0.35,0.59,-0.13
+401309860,2021,4,USC,Pac-12,Oregon State,0.24,0.39,0.18,0.48,1.06,0.32
+401309861,2021,4,Utah,Pac-12,Washington State,0.23,0.09,0.35,-0.05,0.04,-0.2
+401310706,2021,4,Utah State,Mountain West,Boise State,0.11,0.07,0.14,0.15,0.27,0.02
+401282212,2021,4,UTEP,Conference USA,New Mexico,0.2,0.54,-0.14,-0.02,0.03,-0.08
+401282213,2021,4,UTSA,Conference USA,Memphis,0.22,0.41,0.11,0.29,0.58,0.05
+401282088,2021,4,Vanderbilt,SEC,Georgia,-0.3,-0.46,-0.18,0.34,0.6,0.2
+401282638,2021,4,Virginia,ACC,Wake Forest,0.2,0.16,0.32,0.3,0.76,0.0
+401282645,2021,4,Virginia Tech,ACC,Richmond,0.15,0.27,0.04,0.07,-0.1,0.21
+401282638,2021,4,Wake Forest,ACC,Virginia,0.3,0.76,0.0,0.2,0.16,0.32
+401309857,2021,4,Washington,Pac-12,California,0.12,0.34,-0.12,0.31,0.48,0.09
+401309861,2021,4,Washington State,Pac-12,Utah,-0.05,0.04,-0.2,0.23,0.09,0.35
+401282214,2021,4,Western Kentucky,Conference USA,Indiana,0.4,0.5,0.18,0.23,0.28,0.15
+401309554,2021,4,Western Michigan,Mid-American,San José State,0.13,0.13,0.14,-0.18,-0.31,0.02
+401287908,2021,4,West Virginia,Big 12,Oklahoma,0.01,0.08,-0.07,0.09,0.27,-0.21
+401282707,2021,4,Wisconsin,Big Ten,Notre Dame,-0.38,-0.48,-0.23,-0.03,0.06,-0.16
+401286190,2021,4,Wyoming,Mountain West,UConn,0.2,0.29,0.14,0.06,-0.06,0.26
+401310710,2021,5,Air Force,Mountain West,New Mexico,0.41,1.39,0.38,0.13,0.1,0.18
+401309560,2021,5,Akron,Mid-American,Ohio,0.13,0.39,-0.11,0.3,-0.18,0.61
+401282089,2021,5,Alabama,SEC,Ole Miss,0.28,0.49,0.16,0.18,0.41,-0.05
+401309612,2021,5,App State,Sun Belt,Georgia State,0.32,0.71,0.0,0.07,0.22,-0.09
+401309866,2021,5,Arizona State,Pac-12,UCLA,0.54,0.97,0.29,0.19,0.44,0.0
+401282090,2021,5,Arkansas,SEC,Georgia,-0.01,-0.05,0.02,0.19,0.04,0.22
+401309613,2021,5,Arkansas State,Sun Belt,Georgia Southern,0.04,0.17,0.24,0.56,-0.03,0.72
+401309559,2021,5,Army,FBS Independents,Ball State,0.1,0.08,0.12,0.08,0.32,-0.17
+401282092,2021,5,Auburn,SEC,LSU,0.22,0.25,0.18,-0.02,0.06,-0.18
+401309559,2021,5,Ball State,Mid-American,Army,0.08,0.32,-0.17,0.1,0.08,0.12
+401287914,2021,5,Baylor,Big 12,Oklahoma State,0.0,-0.15,0.18,0.13,0.3,0.06
+401310711,2021,5,Boise State,Mountain West,Nevada,0.25,0.41,-0.05,0.25,0.3,0.17
+401282647,2021,5,Boston College,ACC,Clemson,0.03,0.21,-0.24,0.14,0.12,0.15
+401309562,2021,5,Bowling Green,Mid-American,Kent State,0.1,0.26,-0.09,0.21,0.18,0.23
+401309561,2021,5,Buffalo,Mid-American,Western Michigan,0.19,0.14,0.23,0.27,0.29,0.25
+401309912,2021,5,BYU,FBS Independents,Utah State,0.39,0.4,0.38,0.11,0.4,-0.31
+401309863,2021,5,California,Pac-12,Washington State,0.0,-0.34,0.41,0.06,0.28,-0.06
+401308835,2021,5,Central Michigan,Mid-American,Miami (OH),0.09,0.2,-0.09,0.28,0.61,0.06
+401282219,2021,5,Charlotte,Conference USA,Illinois,0.3,0.48,0.13,0.3,0.26,0.32
+401282708,2021,5,Cincinnati,American Athletic,Notre Dame,0.3,0.58,-0.02,0.02,0.08,-0.09
+401282647,2021,5,Clemson,ACC,Boston College,0.14,0.12,0.15,0.03,0.21,-0.24
+401309614,2021,5,Coastal Carolina,Sun Belt,UL Monroe,0.69,1.03,0.49,-0.01,0.05,0.0
+401309867,2021,5,Colorado,Pac-12,USC,-0.01,0.4,-0.29,0.45,0.62,0.3
+401282650,2021,5,Duke,ACC,North Carolina,-0.17,-0.02,-0.3,0.25,0.36,0.12
+401301014,2021,5,East Carolina,American Athletic,Tulane,0.46,0.55,0.37,0.24,0.16,0.35
+401309558,2021,5,Eastern Michigan,Mid-American,Northern Illinois,0.12,0.16,0.02,0.05,-0.05,0.09
+401282091,2021,5,Florida,SEC,Kentucky,-0.01,0.38,-0.11,0.05,-0.13,0.18
+401282215,2021,5,Florida Atlantic,Conference USA,Florida International,0.65,0.95,0.47,0.17,0.22,0.08
+401282215,2021,5,Florida International,Conference USA,Florida Atlantic,0.17,0.22,0.08,0.65,0.95,0.47
+401282648,2021,5,Florida State,ACC,Syracuse,0.23,0.04,0.5,0.11,0.29,0.03
+401310712,2021,5,Fresno State,Mountain West,Hawai'i,0.03,0.04,0.01,0.08,0.02,0.13
+401282090,2021,5,Georgia,SEC,Arkansas,0.19,0.04,0.22,-0.01,-0.05,0.02
+401309613,2021,5,Georgia Southern,Sun Belt,Arkansas State,0.56,-0.03,0.72,0.04,0.17,0.24
+401309612,2021,5,Georgia State,Sun Belt,App State,0.07,0.22,-0.09,0.32,0.71,0.0
+401282649,2021,5,Georgia Tech,ACC,Pittsburgh,-0.03,0.12,-0.2,0.44,0.75,0.15
+401310712,2021,5,Hawai'i,Mountain West,Fresno State,0.08,0.02,0.13,0.03,0.04,0.01
+401301012,2021,5,Houston,American Athletic,Tulsa,0.24,0.57,-0.05,-0.11,0.05,-0.38
+401282219,2021,5,Illinois,Big Ten,Charlotte,0.3,0.26,0.32,0.3,0.48,0.13
+401282729,2021,5,Indiana,Big Ten,Penn State,-0.11,-0.11,-0.11,0.12,0.42,-0.13
+401282759,2021,5,Iowa,Big Ten,Maryland,0.24,0.47,0.02,0.04,0.05,0.1
+401287912,2021,5,Iowa State,Big 12,Kansas,0.7,0.7,0.71,-0.02,0.07,-0.07
+401287912,2021,5,Kansas,Big 12,Iowa State,-0.02,0.07,-0.07,0.7,0.7,0.71
+401287913,2021,5,Kansas State,Big 12,Oklahoma,0.24,0.53,-0.2,0.34,0.55,0.11
+401309562,2021,5,Kent State,Mid-American,Bowling Green,0.21,0.18,0.23,0.1,0.26,-0.09
+401282091,2021,5,Kentucky,SEC,Florida,0.05,-0.13,0.18,-0.01,0.38,-0.11
+401282221,2021,5,Liberty,FBS Independents,UAB,0.42,1.16,-0.04,0.06,0.0,0.21
+401309615,2021,5,Louisiana,Sun Belt,South Alabama,0.3,-0.1,0.63,0.2,0.24,0.2
+401282220,2021,5,Louisiana Tech,Conference USA,NC State,0.18,0.43,-0.01,0.22,0.18,0.27
+401282651,2021,5,Louisville,ACC,Wake Forest,0.39,0.6,0.26,0.26,0.24,0.28
+401282092,2021,5,LSU,SEC,Auburn,-0.02,0.06,-0.18,0.22,0.25,0.18
+401282216,2021,5,Marshall,Conference USA,Middle Tennessee,0.02,0.38,-0.32,0.06,0.11,0.03
+401282759,2021,5,Maryland,Big Ten,Iowa,0.04,0.05,0.1,0.24,0.47,0.02
+401286302,2021,5,Massachusetts,FBS Independents,Toledo,-0.27,-0.07,-0.48,0.29,0.42,0.2
+401301015,2021,5,Memphis,American Athletic,Temple,0.28,0.42,0.12,0.29,0.35,0.21
+401282646,2021,5,Miami,ACC,Virginia,0.18,0.24,0.19,0.16,0.06,0.3
+401308835,2021,5,Miami (OH),Mid-American,Central Michigan,0.28,0.61,0.06,0.09,0.2,-0.09
+401282776,2021,5,Michigan,Big Ten,Wisconsin,0.16,0.5,-0.07,0.0,0.07,-0.07
+401282223,2021,5,Michigan State,Big Ten,Western Kentucky,0.36,0.52,0.24,0.28,0.34,0.07
+401282216,2021,5,Middle Tennessee,Conference USA,Marshall,0.06,0.11,0.03,0.02,0.38,-0.32
+401282793,2021,5,Minnesota,Big Ten,Purdue,0.15,0.43,-0.01,0.13,0.24,-0.08
+401282095,2021,5,Mississippi State,SEC,Texas A&M,0.19,0.31,-0.34,0.19,0.27,0.18
+401282093,2021,5,Missouri,SEC,Tennessee,0.22,0.38,0.0,0.55,1.06,0.38
+401301013,2021,5,Navy,American Athletic,UCF,0.21,-0.04,0.23,0.23,0.09,0.36
+401282220,2021,5,NC State,ACC,Louisiana Tech,0.22,0.18,0.27,0.18,0.43,-0.01
+401282800,2021,5,Nebraska,Big Ten,Northwestern,0.66,0.66,0.65,0.05,0.1,-0.03
+401310711,2021,5,Nevada,Mountain West,Boise State,0.25,0.3,0.17,0.25,0.41,-0.05
+401310710,2021,5,New Mexico,Mountain West,Air Force,0.13,0.1,0.18,0.41,1.39,0.38
+401310713,2021,5,New Mexico State,FBS Independents,San José State,0.35,0.45,0.15,0.58,1.15,0.31
+401282650,2021,5,North Carolina,ACC,Duke,0.25,0.36,0.12,-0.17,-0.02,-0.3
+401309558,2021,5,Northern Illinois,Mid-American,Eastern Michigan,0.05,-0.05,0.09,0.12,0.16,0.02
+401282800,2021,5,Northwestern,Big Ten,Nebraska,0.05,0.1,-0.03,0.66,0.66,0.65
+401282708,2021,5,Notre Dame,FBS Independents,Cincinnati,0.02,0.08,-0.09,0.3,0.58,-0.02
+401309560,2021,5,Ohio,Mid-American,Akron,0.3,-0.18,0.61,0.13,0.39,-0.11
+401282813,2021,5,Ohio State,Big Ten,Rutgers,0.55,1.03,0.17,-0.04,0.06,-0.17
+401287913,2021,5,Oklahoma,Big 12,Kansas State,0.34,0.55,0.11,0.24,0.53,-0.2
+401287914,2021,5,Oklahoma State,Big 12,Baylor,0.13,0.3,0.06,0.0,-0.15,0.18
+401282217,2021,5,Old Dominion,Conference USA,UTEP,0.05,0.07,0.05,0.07,0.75,-0.13
+401282089,2021,5,Ole Miss,SEC,Alabama,0.18,0.41,-0.05,0.28,0.49,0.16
+401309864,2021,5,Oregon,Pac-12,Stanford,0.09,-0.04,0.16,0.15,0.3,-0.02
+401309865,2021,5,Oregon State,Pac-12,Washington,0.15,-0.21,0.29,0.18,0.02,0.33
+401282729,2021,5,Penn State,Big Ten,Indiana,0.12,0.42,-0.13,-0.11,-0.11,-0.11
+401282649,2021,5,Pittsburgh,ACC,Georgia Tech,0.44,0.75,0.15,-0.03,0.12,-0.2
+401282793,2021,5,Purdue,Big Ten,Minnesota,0.13,0.24,-0.08,0.15,0.43,-0.01
+401282218,2021,5,Rice,Conference USA,Southern Miss,0.31,0.68,0.01,0.15,0.3,0.28
+401282813,2021,5,Rutgers,Big Ten,Ohio State,-0.04,0.06,-0.17,0.55,1.03,0.17
+401310713,2021,5,San José State,Mountain West,New Mexico State,0.58,1.15,0.31,0.35,0.45,0.15
+401301016,2021,5,SMU,American Athletic,South Florida,0.31,0.6,0.01,0.23,0.49,0.04
+401309615,2021,5,South Alabama,Sun Belt,Louisiana,0.2,0.24,0.2,0.3,-0.1,0.63
+401282094,2021,5,South Carolina,SEC,Troy,0.23,0.3,0.13,0.02,-0.16,0.2
+401282218,2021,5,Southern Miss,Conference USA,Rice,0.15,0.3,0.28,0.31,0.68,0.01
+401301016,2021,5,South Florida,American Athletic,SMU,0.23,0.49,0.04,0.31,0.6,0.01
+401309864,2021,5,Stanford,Pac-12,Oregon,0.15,0.3,-0.02,0.09,-0.04,0.16
+401282648,2021,5,Syracuse,ACC,Florida State,0.11,0.29,0.03,0.23,0.04,0.5
+401287915,2021,5,TCU,Big 12,Texas,0.28,0.38,0.2,0.18,0.14,0.2
+401301015,2021,5,Temple,American Athletic,Memphis,0.29,0.35,0.21,0.28,0.42,0.12
+401282093,2021,5,Tennessee,SEC,Missouri,0.55,1.06,0.38,0.22,0.38,0.0
+401287915,2021,5,Texas,Big 12,TCU,0.18,0.14,0.2,0.28,0.38,0.2
+401282095,2021,5,Texas A&M,SEC,Mississippi State,0.19,0.27,0.18,0.19,0.31,-0.34
+401287916,2021,5,Texas Tech,Big 12,West Virginia,0.17,0.22,0.1,0.35,0.45,0.19
+401286302,2021,5,Toledo,Mid-American,Massachusetts,0.29,0.42,0.2,-0.27,-0.07,-0.48
+401282094,2021,5,Troy,Sun Belt,South Carolina,0.02,-0.16,0.2,0.23,0.3,0.13
+401301014,2021,5,Tulane,American Athletic,East Carolina,0.24,0.16,0.35,0.46,0.55,0.37
+401301012,2021,5,Tulsa,American Athletic,Houston,-0.11,0.05,-0.38,0.24,0.57,-0.05
+401282221,2021,5,UAB,Conference USA,Liberty,0.06,0.0,0.21,0.42,1.16,-0.04
+401301013,2021,5,UCF,American Athletic,Navy,0.23,0.09,0.36,0.21,-0.04,0.23
+401309866,2021,5,UCLA,Pac-12,Arizona State,0.19,0.44,0.0,0.54,0.97,0.29
+401282096,2021,5,UConn,FBS Independents,Vanderbilt,0.27,0.29,0.24,0.3,0.48,0.07
+401309614,2021,5,UL Monroe,Sun Belt,Coastal Carolina,-0.01,0.05,0.0,0.69,1.03,0.49
+401282222,2021,5,UNLV,Mountain West,UTSA,0.08,0.21,-0.17,0.17,0.56,-0.11
+401309867,2021,5,USC,Pac-12,Colorado,0.45,0.62,0.3,-0.01,0.4,-0.29
+401309912,2021,5,Utah State,Mountain West,BYU,0.11,0.4,-0.31,0.39,0.4,0.38
+401282217,2021,5,UTEP,Conference USA,Old Dominion,0.07,0.75,-0.13,0.05,0.07,0.05
+401282222,2021,5,UTSA,Conference USA,UNLV,0.17,0.56,-0.11,0.08,0.21,-0.17
+401282096,2021,5,Vanderbilt,SEC,UConn,0.3,0.48,0.07,0.27,0.29,0.24
+401282646,2021,5,Virginia,ACC,Miami,0.16,0.06,0.3,0.18,0.24,0.19
+401282651,2021,5,Wake Forest,ACC,Louisville,0.26,0.24,0.28,0.39,0.6,0.26
+401309865,2021,5,Washington,Pac-12,Oregon State,0.18,0.02,0.33,0.15,-0.21,0.29
+401309863,2021,5,Washington State,Pac-12,California,0.06,0.28,-0.06,0.0,-0.34,0.41
+401282223,2021,5,Western Kentucky,Conference USA,Michigan State,0.28,0.34,0.07,0.36,0.52,0.24
+401309561,2021,5,Western Michigan,Mid-American,Buffalo,0.27,0.29,0.25,0.19,0.14,0.23
+401287916,2021,5,West Virginia,Big 12,Texas Tech,0.35,0.45,0.19,0.17,0.22,0.1
+401282776,2021,5,Wisconsin,Big Ten,Michigan,0.0,0.07,-0.07,0.16,0.5,-0.07
+401310714,2021,6,Air Force,Mountain West,Wyoming,0.15,0.89,0.02,0.13,0.13,0.14
+401309566,2021,6,Akron,Mid-American,Bowling Green,0.37,0.72,0.12,0.01,0.31,-0.04
+401282103,2021,6,Alabama,SEC,Texas A&M,0.17,0.17,0.16,0.32,0.59,0.0
+401309870,2021,6,Arizona,Pac-12,UCLA,0.08,0.18,-0.02,0.27,0.05,0.37
+401309868,2021,6,Arizona State,Pac-12,Stanford,0.21,0.28,0.17,-0.07,-0.01,-0.29
+401282100,2021,6,Arkansas,SEC,Ole Miss,0.45,0.41,0.47,0.57,0.97,0.39
+401309616,2021,6,Arkansas State,Sun Belt,Coastal Carolina,0.11,0.11,0.1,0.66,0.93,0.45
+401282097,2021,6,Auburn,SEC,Georgia,0.03,-0.02,0.12,0.3,0.5,0.21
+401309563,2021,6,Ball State,Mid-American,Western Michigan,0.31,0.72,-0.09,0.21,0.15,0.26
+401287917,2021,6,Baylor,Big 12,West Virginia,0.51,0.72,0.3,0.16,0.15,0.21
+401309913,2021,6,Boise State,Mountain West,BYU,0.14,0.24,0.08,0.14,0.23,0.01
+401309566,2021,6,Bowling Green,Mid-American,Akron,0.01,0.31,-0.04,0.37,0.72,0.12
+401309565,2021,6,Buffalo,Mid-American,Kent State,0.2,0.11,0.36,0.51,0.69,0.37
+401309913,2021,6,BYU,FBS Independents,Boise State,0.14,0.23,0.01,0.14,0.24,0.08
+401309567,2021,6,Central Michigan,Mid-American,Ohio,0.29,0.32,0.26,0.22,0.3,0.18
+401282224,2021,6,Charlotte,Conference USA,Florida International,0.23,0.28,0.2,0.31,0.62,-0.07
+401301018,2021,6,Cincinnati,American Athletic,Temple,0.56,0.48,0.63,-0.15,-0.25,0.0
+401309616,2021,6,Coastal Carolina,Sun Belt,Arkansas State,0.66,0.93,0.45,0.11,0.11,0.1
+401310715,2021,6,Colorado State,Mountain West,San José State,0.26,0.73,0.03,0.16,0.05,0.25
+401282652,2021,6,Duke,ACC,Georgia Tech,0.18,0.74,-0.02,0.29,0.83,0.02
+401301019,2021,6,East Carolina,American Athletic,UCF,0.17,0.26,0.08,0.2,0.25,0.14
+401308836,2021,6,Eastern Michigan,Mid-American,Miami (OH),0.03,0.2,-0.04,0.12,0.18,0.02
+401282098,2021,6,Florida,SEC,Vanderbilt,0.4,0.7,0.15,-0.12,-0.09,-0.17
+401282225,2021,6,Florida Atlantic,Conference USA,UAB,0.0,0.24,-0.1,0.27,0.22,0.31
+401282224,2021,6,Florida International,Conference USA,Charlotte,0.31,0.62,-0.07,0.23,0.28,0.2
+401282654,2021,6,Florida State,ACC,North Carolina,0.45,1.25,0.19,0.24,-0.01,0.47
+401282097,2021,6,Georgia,SEC,Auburn,0.3,0.5,0.21,0.03,-0.02,0.12
+401309617,2021,6,Georgia Southern,Sun Belt,Troy,0.0,0.0,0.01,0.18,0.27,0.03
+401309618,2021,6,Georgia State,Sun Belt,UL Monroe,0.45,0.65,0.34,0.24,0.4,0.06
+401282652,2021,6,Georgia Tech,ACC,Duke,0.29,0.83,0.02,0.18,0.74,-0.02
+401301017,2021,6,Houston,American Athletic,Tulane,0.3,0.36,0.24,0.11,0.03,0.22
+401282718,2021,6,Illinois,Big Ten,Wisconsin,-0.36,-0.43,-0.14,0.32,0.23,0.4
+401282758,2021,6,Iowa,Big Ten,Penn State,-0.08,0.06,-0.19,0.05,-0.01,0.14
+401309565,2021,6,Kent State,Mid-American,Buffalo,0.51,0.69,0.37,0.2,0.11,0.36
+401282099,2021,6,Kentucky,SEC,LSU,0.44,0.45,0.43,0.57,1.01,0.27
+401282229,2021,6,Liberty,FBS Independents,Middle Tennessee,0.3,0.4,0.35,0.03,0.11,-0.05
+401282653,2021,6,Louisville,ACC,Virginia,0.37,0.71,0.09,0.24,0.33,-0.05
+401282099,2021,6,LSU,SEC,Kentucky,0.57,1.01,0.27,0.44,0.45,0.43
+401282226,2021,6,Marshall,Conference USA,Old Dominion,0.08,0.12,0.12,-0.05,-0.11,0.03
+401282769,2021,6,Maryland,Big Ten,Ohio State,-0.01,0.04,-0.08,0.56,0.82,0.24
+401286191,2021,6,Massachusetts,FBS Independents,UConn,0.14,0.28,0.09,0.02,0.02,0.02
+401301020,2021,6,Memphis,American Athletic,Tulsa,0.26,0.29,0.21,0.26,0.33,0.24
+401308836,2021,6,Miami (OH),Mid-American,Eastern Michigan,0.12,0.18,0.02,0.03,0.2,-0.04
+401282778,2021,6,Michigan,Big Ten,Nebraska,0.2,0.17,0.22,0.19,0.49,-0.1
+401282788,2021,6,Michigan State,Big Ten,Rutgers,0.38,0.72,0.14,0.03,0.03,0.03
+401282229,2021,6,Middle Tennessee,Conference USA,Liberty,0.03,0.11,-0.05,0.3,0.4,0.35
+401282101,2021,6,Missouri,SEC,North Texas,0.4,0.2,0.63,0.26,0.75,0.02
+401301021,2021,6,Navy,American Athletic,SMU,0.09,0.34,0.04,0.18,0.26,0.06
+401282778,2021,6,Nebraska,Big Ten,Michigan,0.19,0.49,-0.1,0.2,0.17,0.22
+401310717,2021,6,Nevada,Mountain West,New Mexico State,0.37,0.57,-0.01,0.09,0.19,-0.19
+401310716,2021,6,New Mexico,Mountain West,San Diego State,-0.15,-0.13,-0.16,0.22,-0.01,0.34
+401310717,2021,6,New Mexico State,FBS Independents,Nevada,0.09,0.19,-0.19,0.37,0.57,-0.01
+401282654,2021,6,North Carolina,ACC,Florida State,0.24,-0.01,0.47,0.45,1.25,0.19
+401309564,2021,6,Northern Illinois,Mid-American,Toledo,0.11,0.17,0.16,0.14,0.08,0.23
+401282101,2021,6,North Texas,Conference USA,Missouri,0.26,0.75,0.02,0.4,0.2,0.63
+401282656,2021,6,Notre Dame,FBS Independents,Virginia Tech,0.17,0.27,0.11,0.14,0.22,0.07
+401309567,2021,6,Ohio,Mid-American,Central Michigan,0.22,0.3,0.18,0.29,0.32,0.26
+401282769,2021,6,Ohio State,Big Ten,Maryland,0.56,0.82,0.24,-0.01,0.04,-0.08
+401287918,2021,6,Oklahoma,Big 12,Texas,0.45,0.42,0.48,0.5,0.59,0.34
+401282226,2021,6,Old Dominion,Conference USA,Marshall,-0.05,-0.11,0.03,0.08,0.12,0.12
+401282100,2021,6,Ole Miss,SEC,Arkansas,0.57,0.97,0.39,0.45,0.41,0.47
+401309869,2021,6,Oregon State,Pac-12,Washington State,0.2,-0.08,0.38,0.3,0.35,0.21
+401282758,2021,6,Penn State,Big Ten,Iowa,0.05,-0.01,0.14,-0.08,0.06,-0.19
+401282788,2021,6,Rutgers,Big Ten,Michigan State,0.03,0.03,0.03,0.38,0.72,0.14
+401310716,2021,6,San Diego State,Mountain West,New Mexico,0.22,-0.01,0.34,-0.15,-0.13,-0.16
+401310715,2021,6,San José State,Mountain West,Colorado State,0.16,0.05,0.25,0.26,0.73,0.03
+401301021,2021,6,SMU,American Athletic,Navy,0.18,0.26,0.06,0.09,0.34,0.04
+401309619,2021,6,South Alabama,Sun Belt,Texas State,0.17,0.48,0.08,0.01,0.1,0.17
+401282102,2021,6,South Carolina,SEC,Tennessee,0.09,0.0,0.17,0.39,0.44,0.35
+401282227,2021,6,Southern Miss,Conference USA,UTEP,-0.16,0.4,-0.82,0.33,0.25,0.36
+401309868,2021,6,Stanford,Pac-12,Arizona State,-0.07,-0.01,-0.29,0.21,0.28,0.17
+401282655,2021,6,Syracuse,ACC,Wake Forest,0.32,0.09,0.44,0.27,0.6,-0.04
+401287919,2021,6,TCU,Big 12,Texas Tech,0.57,0.86,0.51,0.22,0.04,0.42
+401301018,2021,6,Temple,American Athletic,Cincinnati,-0.15,-0.25,0.0,0.56,0.48,0.63
+401282102,2021,6,Tennessee,SEC,South Carolina,0.39,0.44,0.35,0.09,0.0,0.17
+401287918,2021,6,Texas,Big 12,Oklahoma,0.5,0.59,0.34,0.45,0.42,0.48
+401282103,2021,6,Texas A&M,SEC,Alabama,0.32,0.59,0.0,0.17,0.17,0.16
+401309619,2021,6,Texas State,Sun Belt,South Alabama,0.01,0.1,0.17,0.17,0.48,0.08
+401287919,2021,6,Texas Tech,Big 12,TCU,0.22,0.04,0.42,0.57,0.86,0.51
+401309564,2021,6,Toledo,Mid-American,Northern Illinois,0.14,0.08,0.23,0.11,0.17,0.16
+401309617,2021,6,Troy,Sun Belt,Georgia Southern,0.18,0.27,0.03,0.0,0.0,0.01
+401301017,2021,6,Tulane,American Athletic,Houston,0.11,0.03,0.22,0.3,0.36,0.24
+401301020,2021,6,Tulsa,American Athletic,Memphis,0.26,0.33,0.24,0.26,0.29,0.21
+401282225,2021,6,UAB,Conference USA,Florida Atlantic,0.27,0.22,0.31,0.0,0.24,-0.1
+401301019,2021,6,UCF,American Athletic,East Carolina,0.2,0.25,0.14,0.17,0.26,0.08
+401309870,2021,6,UCLA,Pac-12,Arizona,0.27,0.05,0.37,0.08,0.18,-0.02
+401286191,2021,6,UConn,FBS Independents,Massachusetts,0.02,0.02,0.02,0.14,0.28,0.09
+401309618,2021,6,UL Monroe,Sun Belt,Georgia State,0.24,0.4,0.06,0.45,0.65,0.34
+401309871,2021,6,USC,Pac-12,Utah,0.27,0.37,0.13,0.54,0.93,0.18
+401309871,2021,6,Utah,Pac-12,USC,0.54,0.93,0.18,0.27,0.37,0.13
+401282227,2021,6,UTEP,Conference USA,Southern Miss,0.33,0.25,0.36,-0.16,0.4,-0.82
+401282228,2021,6,UTSA,Conference USA,Western Kentucky,0.44,0.61,0.25,0.43,0.46,0.35
+401282098,2021,6,Vanderbilt,SEC,Florida,-0.12,-0.09,-0.17,0.4,0.7,0.15
+401282653,2021,6,Virginia,ACC,Louisville,0.24,0.33,-0.05,0.37,0.71,0.09
+401282656,2021,6,Virginia Tech,ACC,Notre Dame,0.14,0.22,0.07,0.17,0.27,0.11
+401282655,2021,6,Wake Forest,ACC,Syracuse,0.27,0.6,-0.04,0.32,0.09,0.44
+401309869,2021,6,Washington State,Pac-12,Oregon State,0.3,0.35,0.21,0.2,-0.08,0.38
+401282228,2021,6,Western Kentucky,Conference USA,UTSA,0.43,0.46,0.35,0.44,0.61,0.25
+401309563,2021,6,Western Michigan,Mid-American,Ball State,0.21,0.15,0.26,0.31,0.72,-0.09
+401287917,2021,6,West Virginia,Big 12,Baylor,0.16,0.15,0.21,0.51,0.72,0.3
+401282718,2021,6,Wisconsin,Big Ten,Illinois,0.32,0.23,0.4,-0.36,-0.43,-0.14
+401310714,2021,6,Wyoming,Mountain West,Air Force,0.13,0.13,0.14,0.15,0.89,0.02
+401310718,2021,7,Air Force,Mountain West,Boise State,0.27,0.08,0.3,0.2,0.16,0.26
+401308837,2021,7,Akron,Mid-American,Miami (OH),0.21,0.27,0.11,0.46,0.59,0.37
+401282107,2021,7,Alabama,SEC,Mississippi State,0.47,0.62,0.36,-0.14,-0.21,0.24
+401309620,2021,7,App State,Sun Belt,Louisiana,-0.07,-0.02,-0.11,0.33,0.21,0.4
+401309875,2021,7,Arizona,Pac-12,Colorado,-0.32,-0.36,-0.01,0.26,1.07,-0.19
+401309876,2021,7,Arizona State,Pac-12,Utah,0.24,0.35,0.12,0.34,0.34,0.35
+401282104,2021,7,Arkansas,SEC,Auburn,0.15,0.14,0.15,0.34,0.83,-0.03
+401282826,2021,7,Army,FBS Independents,Wisconsin,0.17,0.46,0.13,0.3,0.39,0.26
+401282104,2021,7,Auburn,SEC,Arkansas,0.34,0.83,-0.03,0.15,0.14,0.15
+401309568,2021,7,Ball State,Mid-American,Eastern Michigan,0.37,0.43,0.31,0.33,0.45,0.15
+401287920,2021,7,Baylor,Big 12,BYU,0.3,0.35,0.27,0.32,0.23,0.48
+401310718,2021,7,Boise State,Mountain West,Air Force,0.2,0.16,0.26,0.27,0.08,0.3
+401282658,2021,7,Boston College,ACC,NC State,-0.1,0.02,-0.21,0.34,0.87,-0.07
+401309570,2021,7,Bowling Green,Mid-American,Northern Illinois,0.23,0.02,0.54,0.23,0.12,0.25
+401309571,2021,7,Buffalo,Mid-American,Ohio,0.2,0.63,-0.11,0.26,0.07,0.31
+401287920,2021,7,BYU,FBS Independents,Baylor,0.32,0.23,0.48,0.3,0.35,0.27
+401309872,2021,7,California,Pac-12,Oregon,0.12,-0.01,0.29,0.34,0.28,0.39
+401309569,2021,7,Central Michigan,Mid-American,Toledo,0.17,0.33,-0.02,0.11,-0.08,0.29
+401301023,2021,7,Cincinnati,American Athletic,UCF,0.4,0.1,0.56,-0.01,-0.21,0.15
+401282657,2021,7,Clemson,ACC,Syracuse,0.08,0.21,-0.06,0.08,0.09,0.08
+401309875,2021,7,Colorado,Pac-12,Arizona,0.26,1.07,-0.19,-0.32,-0.36,-0.01
+401310719,2021,7,Colorado State,Mountain West,New Mexico,0.22,0.54,0.02,-0.28,-0.56,0.0
+401282660,2021,7,Duke,ACC,Virginia,0.01,0.15,-0.06,0.39,0.46,0.29
+401309568,2021,7,Eastern Michigan,Mid-American,Ball State,0.33,0.45,0.15,0.37,0.43,0.31
+401282106,2021,7,Florida,SEC,LSU,0.23,0.28,0.16,0.39,0.37,0.39
+401310721,2021,7,Fresno State,Mountain West,Wyoming,-0.02,0.16,-0.15,-0.13,-0.31,0.09
+401282105,2021,7,Georgia,SEC,Kentucky,0.46,0.88,0.12,0.1,0.17,-0.04
+401309621,2021,7,Georgia Southern,Sun Belt,South Alabama,-0.03,-0.17,0.07,0.49,0.75,0.18
+401310722,2021,7,Hawai'i,Mountain West,Nevada,0.1,-0.01,0.65,0.22,0.34,0.0
+401282731,2021,7,Indiana,Big Ten,Michigan State,-0.02,-0.11,0.16,-0.01,0.18,0.03
+401282760,2021,7,Iowa,Big Ten,Purdue,-0.09,-0.16,0.01,0.29,0.55,-0.06
+401287922,2021,7,Iowa State,Big 12,Kansas State,0.39,0.68,0.18,0.31,0.34,0.28
+401287921,2021,7,Kansas,Big 12,Texas Tech,0.14,0.11,0.17,0.37,0.45,0.43
+401287922,2021,7,Kansas State,Big 12,Iowa State,0.31,0.34,0.28,0.39,0.68,0.18
+401309572,2021,7,Kent State,Mid-American,Western Michigan,0.15,0.1,0.21,0.58,1.0,0.4
+401282105,2021,7,Kentucky,SEC,Georgia,0.1,0.17,-0.04,0.46,0.88,0.12
+401286296,2021,7,Liberty,FBS Independents,UL Monroe,0.14,-0.08,0.3,0.15,0.25,0.07
+401309620,2021,7,Louisiana,Sun Belt,App State,0.33,0.21,0.4,-0.07,-0.02,-0.11
+401282230,2021,7,Louisiana Tech,Conference USA,UTEP,-0.23,-0.14,-0.28,0.15,0.48,-0.1
+401282106,2021,7,LSU,SEC,Florida,0.39,0.37,0.39,0.23,0.28,0.16
+401282231,2021,7,Marshall,Conference USA,North Texas,0.37,0.43,0.33,0.12,-0.13,0.31
+401301022,2021,7,Memphis,American Athletic,Navy,0.53,1.35,0.24,0.1,-0.25,0.16
+401282659,2021,7,Miami,ACC,North Carolina,0.18,0.1,0.53,0.1,-0.28,0.37
+401308837,2021,7,Miami (OH),Mid-American,Akron,0.46,0.59,0.37,0.21,0.27,0.11
+401282731,2021,7,Michigan State,Big Ten,Indiana,-0.01,0.18,0.03,-0.02,-0.11,0.16
+401282796,2021,7,Minnesota,Big Ten,Nebraska,0.21,0.53,0.01,0.13,0.29,0.01
+401282107,2021,7,Mississippi State,SEC,Alabama,-0.14,-0.21,0.24,0.47,0.62,0.36
+401282108,2021,7,Missouri,SEC,Texas A&M,0.02,0.06,-0.04,0.26,0.09,0.36
+401301022,2021,7,Navy,American Athletic,Memphis,0.1,-0.25,0.16,0.53,1.35,0.24
+401282658,2021,7,NC State,ACC,Boston College,0.34,0.87,-0.07,-0.1,0.02,-0.21
+401282796,2021,7,Nebraska,Big Ten,Minnesota,0.13,0.29,0.01,0.21,0.53,0.01
+401310722,2021,7,Nevada,Mountain West,Hawai'i,0.22,0.34,0.0,0.1,-0.01,0.65
+401310719,2021,7,New Mexico,Mountain West,Colorado State,-0.28,-0.56,0.0,0.22,0.54,0.02
+401282659,2021,7,North Carolina,ACC,Miami,0.1,-0.28,0.37,0.18,0.1,0.53
+401309570,2021,7,Northern Illinois,Mid-American,Bowling Green,0.23,0.12,0.25,0.23,0.02,0.54
+401282231,2021,7,North Texas,Conference USA,Marshall,0.12,-0.13,0.31,0.37,0.43,0.33
+401282807,2021,7,Northwestern,Big Ten,Rutgers,0.07,0.33,-0.11,-0.06,0.0,-0.12
+401309571,2021,7,Ohio,Mid-American,Buffalo,0.26,0.07,0.31,0.2,0.63,-0.11
+401287923,2021,7,Oklahoma,Big 12,TCU,0.6,0.76,0.48,0.38,0.9,-0.02
+401287924,2021,7,Oklahoma State,Big 12,Texas,0.1,0.22,0.01,0.02,-0.16,0.2
+401282232,2021,7,Old Dominion,Conference USA,Western Kentucky,0.24,0.29,0.18,0.23,0.34,0.0
+401282110,2021,7,Ole Miss,SEC,Tennessee,0.23,0.13,0.37,0.21,0.2,0.23
+401309872,2021,7,Oregon,Pac-12,California,0.34,0.28,0.39,0.12,-0.01,0.29
+401282661,2021,7,Pittsburgh,ACC,Virginia Tech,0.16,0.05,0.25,-0.12,-0.15,-0.09
+401282760,2021,7,Purdue,Big Ten,Iowa,0.29,0.55,-0.06,-0.09,-0.16,0.01
+401282233,2021,7,Rice,Conference USA,UTSA,-0.43,-1.04,-0.07,0.22,0.06,0.32
+401282807,2021,7,Rutgers,Big Ten,Northwestern,-0.06,0.0,-0.12,0.07,0.33,-0.11
+401310723,2021,7,San Diego State,Mountain West,San José State,-0.17,-0.16,-0.18,-0.03,0.15,-0.19
+401310723,2021,7,San José State,Mountain West,San Diego State,-0.03,0.15,-0.19,-0.17,-0.16,-0.18
+401309621,2021,7,South Alabama,Sun Belt,Georgia Southern,0.49,0.75,0.18,-0.03,-0.17,0.07
+401282109,2021,7,South Carolina,SEC,Vanderbilt,0.36,0.61,0.24,0.09,0.69,-0.12
+401282234,2021,7,Southern Miss,Conference USA,UAB,-0.18,-0.31,-0.11,0.28,0.41,0.21
+401301024,2021,7,South Florida,American Athletic,Tulsa,0.06,-0.02,0.14,0.13,0.1,0.15
+401309873,2021,7,Stanford,Pac-12,Washington State,0.17,0.36,-0.06,0.29,0.34,0.23
+401282657,2021,7,Syracuse,ACC,Clemson,0.08,0.09,0.08,0.08,0.21,-0.06
+401287923,2021,7,TCU,Big 12,Oklahoma,0.38,0.9,-0.02,0.6,0.76,0.48
+401282110,2021,7,Tennessee,SEC,Ole Miss,0.21,0.2,0.23,0.23,0.13,0.37
+401287924,2021,7,Texas,Big 12,Oklahoma State,0.02,-0.16,0.2,0.1,0.22,0.01
+401282108,2021,7,Texas A&M,SEC,Missouri,0.26,0.09,0.36,0.02,0.06,-0.04
+401309622,2021,7,Texas State,Sun Belt,Troy,0.03,0.27,-0.11,0.21,0.27,0.17
+401287921,2021,7,Texas Tech,Big 12,Kansas,0.37,0.45,0.43,0.14,0.11,0.17
+401309569,2021,7,Toledo,Mid-American,Central Michigan,0.11,-0.08,0.29,0.17,0.33,-0.02
+401309622,2021,7,Troy,Sun Belt,Texas State,0.21,0.27,0.17,0.03,0.27,-0.11
+401301024,2021,7,Tulsa,American Athletic,South Florida,0.13,0.1,0.15,0.06,-0.02,0.14
+401282234,2021,7,UAB,Conference USA,Southern Miss,0.28,0.41,0.21,-0.18,-0.31,-0.11
+401301023,2021,7,UCF,American Athletic,Cincinnati,-0.01,-0.21,0.15,0.4,0.1,0.56
+401309874,2021,7,UCLA,Pac-12,Washington,0.32,0.25,0.37,0.09,0.15,0.02
+401286192,2021,7,UConn,FBS Independents,Yale,0.01,0.09,-0.07,-0.13,-0.24,0.11
+401286296,2021,7,UL Monroe,Sun Belt,Liberty,0.15,0.25,0.07,0.14,-0.08,0.3
+401310720,2021,7,UNLV,Mountain West,Utah State,0.24,0.04,0.44,0.2,0.55,0.03
+401309876,2021,7,Utah,Pac-12,Arizona State,0.34,0.34,0.35,0.24,0.35,0.12
+401310720,2021,7,Utah State,Mountain West,UNLV,0.2,0.55,0.03,0.24,0.04,0.44
+401282230,2021,7,UTEP,Conference USA,Louisiana Tech,0.15,0.48,-0.1,-0.23,-0.14,-0.28
+401282233,2021,7,UTSA,Conference USA,Rice,0.22,0.06,0.32,-0.43,-1.04,-0.07
+401282109,2021,7,Vanderbilt,SEC,South Carolina,0.09,0.69,-0.12,0.36,0.61,0.24
+401282660,2021,7,Virginia,ACC,Duke,0.39,0.46,0.29,0.01,0.15,-0.06
+401282661,2021,7,Virginia Tech,ACC,Pittsburgh,-0.12,-0.15,-0.09,0.16,0.05,0.25
+401309874,2021,7,Washington,Pac-12,UCLA,0.09,0.15,0.02,0.32,0.25,0.37
+401309873,2021,7,Washington State,Pac-12,Stanford,0.29,0.34,0.23,0.17,0.36,-0.06
+401282232,2021,7,Western Kentucky,Conference USA,Old Dominion,0.23,0.34,0.0,0.24,0.29,0.18
+401309572,2021,7,Western Michigan,Mid-American,Kent State,0.58,1.0,0.4,0.15,0.1,0.21
+401282826,2021,7,Wisconsin,Big Ten,Army,0.3,0.39,0.26,0.17,0.46,0.13
+401310721,2021,7,Wyoming,Mountain West,Fresno State,-0.13,-0.31,0.09,-0.02,0.16,-0.15
+401310724,2021,8,Air Force,Mountain West,San Diego State,0.03,-0.32,0.13,0.19,0.09,0.23
+401309575,2021,8,Akron,Mid-American,Buffalo,0.08,-0.4,0.57,0.34,0.66,0.19
+401282111,2021,8,Alabama,SEC,Tennessee,0.36,0.5,0.23,0.21,0.5,-0.19
+401309623,2021,8,App State,Sun Belt,Coastal Carolina,0.25,0.82,-0.12,0.26,0.59,-0.08
+401309877,2021,8,Arizona,Pac-12,Washington,0.08,-0.25,0.28,0.12,0.37,-0.07
+401282112,2021,8,Arkansas,SEC,Arkansas-Pine Bluff,0.38,0.61,0.25,-0.25,-0.42,-0.13
+401309624,2021,8,Arkansas State,Sun Belt,Louisiana,0.23,0.46,0.0,0.26,-0.34,0.5
+401282662,2021,8,Army,FBS Independents,Wake Forest,0.42,0.43,0.41,0.86,1.07,0.6
+401308838,2021,8,Ball State,Mid-American,Miami (OH),0.18,0.31,0.19,0.26,0.73,-0.03
+401282664,2021,8,Boston College,ACC,Louisville,0.0,-0.02,0.02,0.23,0.16,0.25
+401309574,2021,8,Bowling Green,Mid-American,Eastern Michigan,0.22,0.21,0.28,0.37,0.82,-0.01
+401309575,2021,8,Buffalo,Mid-American,Akron,0.34,0.66,0.19,0.08,-0.4,0.57
+401309881,2021,8,BYU,FBS Independents,Washington State,0.32,0.28,0.34,0.31,0.35,0.24
+401309878,2021,8,California,Pac-12,Colorado,0.3,0.42,0.19,-0.12,-0.35,0.18
+401309577,2021,8,Central Michigan,Mid-American,Northern Illinois,0.49,0.5,0.49,0.48,0.89,0.22
+401282235,2021,8,Charlotte,Conference USA,Florida Atlantic,0.02,0.2,-0.27,0.43,1.55,0.06
+401301027,2021,8,Cincinnati,American Athletic,Navy,0.09,0.18,-0.03,0.01,0.31,-0.07
+401282666,2021,8,Clemson,ACC,Pittsburgh,-0.07,-0.38,0.27,0.21,0.4,0.04
+401309623,2021,8,Coastal Carolina,Sun Belt,App State,0.26,0.59,-0.08,0.25,0.82,-0.12
+401309878,2021,8,Colorado,Pac-12,California,-0.12,-0.35,0.18,0.3,0.42,0.19
+401310725,2021,8,Colorado State,Mountain West,Utah State,0.26,0.61,0.04,0.01,0.16,-0.02
+401301028,2021,8,East Carolina,American Athletic,Houston,-0.13,0.05,-0.33,0.05,0.1,-0.01
+401309574,2021,8,Eastern Michigan,Mid-American,Bowling Green,0.37,0.82,-0.01,0.22,0.21,0.28
+401282235,2021,8,Florida Atlantic,Conference USA,Charlotte,0.43,1.55,0.06,0.02,0.2,-0.27
+401282236,2021,8,Florida International,Conference USA,Western Kentucky,0.11,0.05,0.25,0.38,0.45,0.24
+401282663,2021,8,Florida State,ACC,Massachusetts,0.68,1.09,0.53,-0.27,-0.19,-0.07
+401310727,2021,8,Fresno State,Mountain West,Nevada,0.29,0.39,0.16,0.24,0.31,-0.07
+401309625,2021,8,Georgia State,Sun Belt,Texas State,0.41,0.29,0.48,0.07,0.15,0.02
+401282667,2021,8,Georgia Tech,ACC,Virginia,0.4,0.33,0.62,0.58,0.52,0.68
+401310728,2021,8,Hawai'i,Mountain West,New Mexico State,0.38,0.37,0.39,-0.03,-0.39,0.54
+401301028,2021,8,Houston,American Athletic,East Carolina,0.05,0.1,-0.01,-0.13,0.05,-0.33
+401282717,2021,8,Illinois,Big Ten,Penn State,0.09,-0.37,0.27,-0.1,-0.05,-0.15
+401282730,2021,8,Indiana,Big Ten,Ohio State,-0.13,0.16,-0.29,0.5,0.7,0.27
+401287925,2021,8,Iowa State,Big 12,Oklahoma State,0.13,0.5,-0.3,0.19,0.5,-0.1
+401287926,2021,8,Kansas,Big 12,Oklahoma,0.31,0.99,-0.06,0.49,0.49,0.49
+401287928,2021,8,Kansas State,Big 12,Texas Tech,0.39,0.52,0.24,0.14,0.22,0.16
+401309576,2021,8,Kent State,Mid-American,Ohio,0.3,0.39,0.23,0.18,0.26,0.08
+401282240,2021,8,Liberty,FBS Independents,North Texas,0.14,0.19,0.05,0.04,0.14,0.09
+401309624,2021,8,Louisiana,Sun Belt,Arkansas State,0.26,-0.34,0.5,0.23,0.46,0.0
+401282237,2021,8,Louisiana Tech,Conference USA,UTSA,0.07,0.29,-0.08,0.25,0.48,0.12
+401282664,2021,8,Louisville,ACC,Boston College,0.23,0.16,0.25,0.0,-0.02,0.02
+401282113,2021,8,LSU,SEC,Ole Miss,0.09,0.11,0.06,0.23,0.32,0.18
+401282767,2021,8,Maryland,Big Ten,Minnesota,0.17,0.27,0.03,0.38,0.28,0.41
+401282663,2021,8,Massachusetts,FBS Independents,Florida State,-0.27,-0.19,-0.07,0.68,1.09,0.53
+401301026,2021,8,Memphis,American Athletic,UCF,-0.12,-0.32,0.3,0.08,0.13,0.05
+401282665,2021,8,Miami,ACC,NC State,0.27,0.69,-0.18,0.18,0.14,0.27
+401308838,2021,8,Miami (OH),Mid-American,Ball State,0.26,0.73,-0.03,0.18,0.31,0.19
+401282779,2021,8,Michigan,Big Ten,Northwestern,0.24,0.11,0.32,-0.02,0.05,-0.12
+401282239,2021,8,Middle Tennessee,Conference USA,UConn,0.34,0.62,0.08,0.06,0.23,-0.19
+401282767,2021,8,Minnesota,Big Ten,Maryland,0.38,0.28,0.41,0.17,0.27,0.03
+401282115,2021,8,Mississippi State,SEC,Vanderbilt,0.53,0.55,0.43,-0.21,-0.19,-0.25
+401301027,2021,8,Navy,American Athletic,Cincinnati,0.01,0.31,-0.07,0.09,0.18,-0.03
+401282665,2021,8,NC State,ACC,Miami,0.18,0.14,0.27,0.27,0.69,-0.18
+401310727,2021,8,Nevada,Mountain West,Fresno State,0.24,0.31,-0.07,0.29,0.39,0.16
+401310726,2021,8,New Mexico,Mountain West,Wyoming,0.04,0.55,-0.08,-0.02,-0.09,0.06
+401310728,2021,8,New Mexico State,FBS Independents,Hawai'i,-0.03,-0.39,0.54,0.38,0.37,0.39
+401309577,2021,8,Northern Illinois,Mid-American,Central Michigan,0.48,0.89,0.22,0.49,0.5,0.49
+401282240,2021,8,North Texas,Conference USA,Liberty,0.04,0.14,0.09,0.14,0.19,0.05
+401282779,2021,8,Northwestern,Big Ten,Michigan,-0.02,0.05,-0.12,0.24,0.11,0.32
+401282709,2021,8,Notre Dame,FBS Independents,USC,0.31,0.37,0.26,0.3,0.3,0.29
+401309576,2021,8,Ohio,Mid-American,Kent State,0.18,0.26,0.08,0.3,0.39,0.23
+401282730,2021,8,Ohio State,Big Ten,Indiana,0.5,0.7,0.27,-0.13,0.16,-0.29
+401287926,2021,8,Oklahoma,Big 12,Kansas,0.49,0.49,0.49,0.31,0.99,-0.06
+401287925,2021,8,Oklahoma State,Big 12,Iowa State,0.19,0.5,-0.1,0.13,0.5,-0.3
+401282113,2021,8,Ole Miss,SEC,LSU,0.23,0.32,0.18,0.09,0.11,0.06
+401309879,2021,8,Oregon,Pac-12,UCLA,0.25,0.24,0.26,0.16,0.17,0.15
+401309880,2021,8,Oregon State,Pac-12,Utah,0.52,0.65,0.45,0.14,0.11,0.18
+401282717,2021,8,Penn State,Big Ten,Illinois,-0.1,-0.05,-0.15,0.09,-0.37,0.27
+401282666,2021,8,Pittsburgh,ACC,Clemson,0.21,0.4,0.04,-0.07,-0.38,0.27
+401282821,2021,8,Purdue,Big Ten,Wisconsin,-0.05,0.11,-0.41,0.13,0.11,0.13
+401282238,2021,8,Rice,Conference USA,UAB,0.25,0.76,-0.04,0.32,0.32,0.32
+401310724,2021,8,San Diego State,Mountain West,Air Force,0.19,0.09,0.23,0.03,-0.32,0.13
+401310729,2021,8,San José State,Mountain West,UNLV,0.2,0.36,0.05,0.16,0.37,-0.05
+401301025,2021,8,SMU,American Athletic,Tulane,0.43,0.72,0.09,0.22,0.41,0.1
+401309626,2021,8,South Alabama,Sun Belt,UL Monroe,0.33,0.49,0.07,0.46,0.97,-0.04
+401282114,2021,8,South Carolina,SEC,Texas A&M,-0.15,-0.18,-0.12,0.2,0.35,0.13
+401301029,2021,8,South Florida,American Athletic,Temple,0.28,0.26,0.28,0.2,0.28,0.05
+401282668,2021,8,Syracuse,ACC,Virginia Tech,0.52,0.44,0.58,0.28,0.23,0.3
+401287927,2021,8,TCU,Big 12,West Virginia,0.29,0.39,0.37,0.3,0.37,0.25
+401301029,2021,8,Temple,American Athletic,South Florida,0.2,0.28,0.05,0.28,0.26,0.28
+401282111,2021,8,Tennessee,SEC,Alabama,0.21,0.5,-0.19,0.36,0.5,0.23
+401282114,2021,8,Texas A&M,SEC,South Carolina,0.2,0.35,0.13,-0.15,-0.18,-0.12
+401309625,2021,8,Texas State,Sun Belt,Georgia State,0.07,0.15,0.02,0.41,0.29,0.48
+401287928,2021,8,Texas Tech,Big 12,Kansas State,0.14,0.22,0.16,0.39,0.52,0.24
+401309573,2021,8,Toledo,Mid-American,Western Michigan,0.17,0.19,0.15,0.24,0.18,0.28
+401301025,2021,8,Tulane,American Athletic,SMU,0.22,0.41,0.1,0.43,0.72,0.09
+401282238,2021,8,UAB,Conference USA,Rice,0.32,0.32,0.32,0.25,0.76,-0.04
+401301026,2021,8,UCF,American Athletic,Memphis,0.08,0.13,0.05,-0.12,-0.32,0.3
+401309879,2021,8,UCLA,Pac-12,Oregon,0.16,0.17,0.15,0.25,0.24,0.26
+401282239,2021,8,UConn,FBS Independents,Middle Tennessee,0.06,0.23,-0.19,0.34,0.62,0.08
+401309626,2021,8,UL Monroe,Sun Belt,South Alabama,0.46,0.97,-0.04,0.33,0.49,0.07
+401310729,2021,8,UNLV,Mountain West,San José State,0.16,0.37,-0.05,0.2,0.36,0.05
+401282709,2021,8,USC,Pac-12,Notre Dame,0.3,0.3,0.29,0.31,0.37,0.26
+401309880,2021,8,Utah,Pac-12,Oregon State,0.14,0.11,0.18,0.52,0.65,0.45
+401310725,2021,8,Utah State,Mountain West,Colorado State,0.01,0.16,-0.02,0.26,0.61,0.04
+401282237,2021,8,UTSA,Conference USA,Louisiana Tech,0.25,0.48,0.12,0.07,0.29,-0.08
+401282115,2021,8,Vanderbilt,SEC,Mississippi State,-0.21,-0.19,-0.25,0.53,0.55,0.43
+401282667,2021,8,Virginia,ACC,Georgia Tech,0.58,0.52,0.68,0.4,0.33,0.62
+401282668,2021,8,Virginia Tech,ACC,Syracuse,0.28,0.23,0.3,0.52,0.44,0.58
+401282662,2021,8,Wake Forest,ACC,Army,0.86,1.07,0.6,0.42,0.43,0.41
+401309877,2021,8,Washington,Pac-12,Arizona,0.12,0.37,-0.07,0.08,-0.25,0.28
+401309881,2021,8,Washington State,Pac-12,BYU,0.31,0.35,0.24,0.32,0.28,0.34
+401282236,2021,8,Western Kentucky,Conference USA,Florida International,0.38,0.45,0.24,0.11,0.05,0.25
+401309573,2021,8,Western Michigan,Mid-American,Toledo,0.24,0.18,0.28,0.17,0.19,0.15
+401287927,2021,8,West Virginia,Big 12,TCU,0.3,0.37,0.25,0.29,0.39,0.37
+401282821,2021,8,Wisconsin,Big Ten,Purdue,0.13,0.11,0.13,-0.05,0.11,-0.41
+401310726,2021,8,Wyoming,Mountain West,New Mexico,-0.02,-0.09,0.06,0.04,0.55,-0.08
+401309628,2021,9,App State,Sun Belt,UL Monroe,0.38,0.51,0.28,0.13,0.12,0.13
+401309886,2021,9,Arizona,Pac-12,USC,0.36,0.35,0.38,0.24,0.27,0.21
+401309885,2021,9,Arizona State,Pac-12,Washington State,0.32,0.47,0.3,0.24,0.31,0.2
+401309629,2021,9,Arkansas State,Sun Belt,South Alabama,-0.14,-0.13,-0.17,0.18,0.32,0.0
+401282116,2021,9,Auburn,SEC,Ole Miss,0.29,0.32,0.28,0.08,-0.02,0.22
+401287929,2021,9,Baylor,Big 12,Texas,0.2,0.19,0.2,0.16,0.16,0.16
+401310730,2021,9,Boise State,Mountain West,Colorado State,0.25,0.54,0.03,0.16,0.4,-0.12
+401282675,2021,9,Boston College,ACC,Syracuse,-0.14,-0.13,-0.15,0.26,-0.04,0.38
+401309578,2021,9,Bowling Green,Mid-American,Buffalo,0.48,0.64,0.34,0.17,0.14,0.18
+401309578,2021,9,Buffalo,Mid-American,Bowling Green,0.17,0.14,0.18,0.48,0.64,0.34
+401282669,2021,9,BYU,FBS Independents,Virginia,0.61,0.54,0.66,0.54,0.47,0.67
+401309882,2021,9,California,Pac-12,Oregon State,0.39,0.68,0.23,0.33,0.56,0.26
+401282241,2021,9,Charlotte,Conference USA,Western Kentucky,-0.02,-0.14,0.05,0.39,0.62,-0.1
+401301032,2021,9,Cincinnati,American Athletic,Tulane,0.2,0.29,0.17,0.15,-0.34,0.43
+401282670,2021,9,Clemson,ACC,Florida State,0.14,0.38,-0.06,-0.04,0.32,-0.35
+401309627,2021,9,Coastal Carolina,Sun Belt,Troy,0.42,0.71,0.23,0.2,0.21,0.19
+401309884,2021,9,Colorado,Pac-12,Oregon,0.36,0.6,0.1,0.55,0.58,0.52
+401310730,2021,9,Colorado State,Mountain West,Boise State,0.16,0.4,-0.12,0.25,0.54,0.03
+401282676,2021,9,Duke,ACC,Wake Forest,-0.03,-0.08,0.0,0.5,0.54,0.45
+401301033,2021,9,East Carolina,American Athletic,South Florida,0.22,0.26,0.19,-0.12,-0.02,-0.22
+401282117,2021,9,Florida,SEC,Georgia,-0.05,-0.23,0.12,0.14,-0.03,0.25
+401282243,2021,9,Florida Atlantic,Conference USA,UTEP,0.13,0.06,0.19,0.1,0.28,-0.19
+401282242,2021,9,Florida International,Conference USA,Marshall,-0.02,-0.06,0.05,0.3,0.3,0.31
+401282670,2021,9,Florida State,ACC,Clemson,-0.04,0.32,-0.35,0.14,0.38,-0.06
+401310733,2021,9,Fresno State,Mountain West,San Diego State,0.13,0.26,-0.04,0.12,0.09,0.16
+401282117,2021,9,Georgia,SEC,Florida,0.14,-0.03,0.25,-0.05,-0.23,0.12
+401309630,2021,9,Georgia Southern,Sun Belt,Georgia State,0.07,0.41,0.06,0.23,0.08,0.36
+401309630,2021,9,Georgia State,Sun Belt,Georgia Southern,0.23,0.08,0.36,0.07,0.41,0.06
+401282671,2021,9,Georgia Tech,ACC,Virginia Tech,0.1,0.18,0.02,0.27,0.45,0.17
+401310731,2021,9,Hawai'i,Mountain West,Utah State,0.18,0.34,-0.3,0.2,1.04,-0.31
+401301034,2021,9,Houston,American Athletic,SMU,0.26,0.72,-0.23,0.24,0.42,-0.11
+401282719,2021,9,Illinois,Big Ten,Rutgers,0.3,0.73,0.03,0.17,0.21,0.15
+401282726,2021,9,Indiana,Big Ten,Maryland,0.34,0.4,0.29,0.2,0.64,-0.23
+401282763,2021,9,Iowa,Big Ten,Wisconsin,-0.13,-0.11,-0.15,0.01,0.26,-0.11
+401287933,2021,9,Iowa State,Big 12,West Virginia,0.28,0.02,0.51,0.27,0.36,0.13
+401287932,2021,9,Kansas,Big 12,Oklahoma State,-0.13,-0.15,-0.12,0.35,0.42,0.29
+401287930,2021,9,Kansas State,Big 12,TCU,0.33,0.62,0.18,-0.07,-0.23,0.1
+401282118,2021,9,Kentucky,SEC,Mississippi State,0.02,0.01,0.03,0.35,0.59,0.07
+401286297,2021,9,Liberty,FBS Independents,Massachusetts,0.65,0.92,0.33,0.06,-0.19,0.23
+401309631,2021,9,Louisiana,Sun Belt,Texas State,0.37,0.44,0.3,-0.1,0.08,-0.17
+401282244,2021,9,Louisiana Tech,Conference USA,Old Dominion,0.05,0.11,-0.07,0.06,0.09,0.03
+401282672,2021,9,Louisville,ACC,NC State,0.2,0.13,0.26,0.32,0.65,-0.2
+401282242,2021,9,Marshall,Conference USA,Florida International,0.3,0.3,0.31,-0.02,-0.06,0.05
+401282726,2021,9,Maryland,Big Ten,Indiana,0.2,0.64,-0.23,0.34,0.4,0.29
+401286297,2021,9,Massachusetts,FBS Independents,Liberty,0.06,-0.19,0.23,0.65,0.92,0.33
+401282674,2021,9,Miami,ACC,Pittsburgh,0.32,0.48,0.02,0.35,0.4,0.19
+401282777,2021,9,Michigan,Big Ten,Michigan State,0.18,0.45,-0.22,0.24,0.06,0.44
+401282777,2021,9,Michigan State,Big Ten,Michigan,0.24,0.06,0.44,0.18,0.45,-0.22
+401282245,2021,9,Middle Tennessee,Conference USA,Southern Miss,0.08,0.12,0.05,-0.25,-0.1,-0.12
+401282795,2021,9,Minnesota,Big Ten,Northwestern,0.38,0.27,0.41,0.01,0.09,-0.06
+401282118,2021,9,Mississippi State,SEC,Kentucky,0.35,0.59,0.07,0.02,0.01,0.03
+401282119,2021,9,Missouri,SEC,Vanderbilt,0.3,0.34,0.28,0.18,0.11,0.25
+401301030,2021,9,Navy,American Athletic,Tulsa,0.11,-0.53,0.15,0.05,0.19,-0.08
+401282672,2021,9,NC State,ACC,Louisville,0.32,0.65,-0.2,0.2,0.13,0.26
+401282801,2021,9,Nebraska,Big Ten,Purdue,0.14,0.15,0.14,0.17,0.29,0.02
+401310734,2021,9,Nevada,Mountain West,UNLV,0.37,0.69,-0.26,-0.18,-0.13,-0.06
+401282673,2021,9,North Carolina,ACC,Notre Dame,0.38,0.42,0.34,0.46,0.66,0.33
+401282246,2021,9,North Texas,Conference USA,Rice,0.23,0.14,0.28,0.2,0.39,0.04
+401282795,2021,9,Northwestern,Big Ten,Minnesota,0.01,0.09,-0.06,0.38,0.27,0.41
+401282673,2021,9,Notre Dame,FBS Independents,North Carolina,0.46,0.66,0.33,0.38,0.42,0.34
+401282814,2021,9,Ohio State,Big Ten,Penn State,0.18,0.45,-0.07,0.21,0.32,-0.03
+401287931,2021,9,Oklahoma,Big 12,Texas Tech,0.76,1.1,0.09,0.34,0.61,0.12
+401287932,2021,9,Oklahoma State,Big 12,Kansas,0.35,0.42,0.29,-0.13,-0.15,-0.12
+401282244,2021,9,Old Dominion,Conference USA,Louisiana Tech,0.06,0.09,0.03,0.05,0.11,-0.07
+401282116,2021,9,Ole Miss,SEC,Auburn,0.08,-0.02,0.22,0.29,0.32,0.28
+401309884,2021,9,Oregon,Pac-12,Colorado,0.55,0.58,0.52,0.36,0.6,0.1
+401309882,2021,9,Oregon State,Pac-12,California,0.33,0.56,0.26,0.39,0.68,0.23
+401282814,2021,9,Penn State,Big Ten,Ohio State,0.21,0.32,-0.03,0.18,0.45,-0.07
+401282674,2021,9,Pittsburgh,ACC,Miami,0.35,0.4,0.19,0.32,0.48,0.02
+401282801,2021,9,Purdue,Big Ten,Nebraska,0.17,0.29,0.02,0.14,0.15,0.14
+401282246,2021,9,Rice,Conference USA,North Texas,0.2,0.39,0.04,0.23,0.14,0.28
+401282719,2021,9,Rutgers,Big Ten,Illinois,0.17,0.21,0.15,0.3,0.73,0.03
+401310733,2021,9,San Diego State,Mountain West,Fresno State,0.12,0.09,0.16,0.13,0.26,-0.04
+401310732,2021,9,San José State,Mountain West,Wyoming,0.32,0.31,0.32,0.15,-0.1,0.28
+401301034,2021,9,SMU,American Athletic,Houston,0.24,0.42,-0.11,0.26,0.72,-0.23
+401309629,2021,9,South Alabama,Sun Belt,Arkansas State,0.18,0.32,0.0,-0.14,-0.13,-0.17
+401282245,2021,9,Southern Miss,Conference USA,Middle Tennessee,-0.25,-0.1,-0.12,0.08,0.12,0.05
+401301033,2021,9,South Florida,American Athletic,East Carolina,-0.12,-0.02,-0.22,0.22,0.26,0.19
+401309883,2021,9,Stanford,Pac-12,Washington,-0.02,0.19,-0.05,0.15,0.16,0.14
+401282675,2021,9,Syracuse,ACC,Boston College,0.26,-0.04,0.38,-0.14,-0.13,-0.15
+401287930,2021,9,TCU,Big 12,Kansas State,-0.07,-0.23,0.1,0.33,0.62,0.18
+401301031,2021,9,Temple,American Athletic,UCF,0.1,0.09,0.12,0.37,0.93,0.1
+401287929,2021,9,Texas,Big 12,Baylor,0.16,0.16,0.16,0.2,0.19,0.2
+401309631,2021,9,Texas State,Sun Belt,Louisiana,-0.1,0.08,-0.17,0.37,0.44,0.3
+401287931,2021,9,Texas Tech,Big 12,Oklahoma,0.34,0.61,0.12,0.76,1.1,0.09
+401309627,2021,9,Troy,Sun Belt,Coastal Carolina,0.2,0.21,0.19,0.42,0.71,0.23
+401301032,2021,9,Tulane,American Athletic,Cincinnati,0.15,-0.34,0.43,0.2,0.29,0.17
+401301030,2021,9,Tulsa,American Athletic,Navy,0.05,0.19,-0.08,0.11,-0.53,0.15
+401301031,2021,9,UCF,American Athletic,Temple,0.37,0.93,0.1,0.1,0.09,0.12
+401309887,2021,9,UCLA,Pac-12,Utah,0.24,0.25,0.3,0.39,0.22,0.5
+401309628,2021,9,UL Monroe,Sun Belt,App State,0.13,0.12,0.13,0.38,0.51,0.28
+401310734,2021,9,UNLV,Mountain West,Nevada,-0.18,-0.13,-0.06,0.37,0.69,-0.26
+401309886,2021,9,USC,Pac-12,Arizona,0.24,0.27,0.21,0.36,0.35,0.38
+401309887,2021,9,Utah,Pac-12,UCLA,0.39,0.22,0.5,0.24,0.25,0.3
+401310731,2021,9,Utah State,Mountain West,Hawai'i,0.2,1.04,-0.31,0.18,0.34,-0.3
+401282243,2021,9,UTEP,Conference USA,Florida Atlantic,0.1,0.28,-0.19,0.13,0.06,0.19
+401282119,2021,9,Vanderbilt,SEC,Missouri,0.18,0.11,0.25,0.3,0.34,0.28
+401282669,2021,9,Virginia,ACC,BYU,0.54,0.47,0.67,0.61,0.54,0.66
+401282671,2021,9,Virginia Tech,ACC,Georgia Tech,0.27,0.45,0.17,0.1,0.18,0.02
+401282676,2021,9,Wake Forest,ACC,Duke,0.5,0.54,0.45,-0.03,-0.08,0.0
+401309883,2021,9,Washington,Pac-12,Stanford,0.15,0.16,0.14,-0.02,0.19,-0.05
+401309885,2021,9,Washington State,Pac-12,Arizona State,0.24,0.31,0.2,0.32,0.47,0.3
+401282241,2021,9,Western Kentucky,Conference USA,Charlotte,0.39,0.62,-0.1,-0.02,-0.14,0.05
+401287933,2021,9,West Virginia,Big 12,Iowa State,0.27,0.36,0.13,0.28,0.02,0.51
+401282763,2021,9,Wisconsin,Big Ten,Iowa,0.01,0.26,-0.11,-0.13,-0.11,-0.15
+401310732,2021,9,Wyoming,Mountain West,San José State,0.15,-0.1,0.28,0.32,0.31,0.32
+401310253,2021,10,Air Force,Mountain West,Army,0.07,0.22,0.0,0.14,0.9,-0.13
+401309579,2021,10,Akron,Mid-American,Ball State,0.29,0.6,-0.09,0.28,0.33,0.25
+401282120,2021,10,Alabama,SEC,LSU,0.09,0.26,-0.19,0.0,0.03,-0.03
+401309633,2021,10,App State,Sun Belt,Arkansas State,0.35,0.4,0.31,-0.3,-0.28,-0.34
+401309889,2021,10,Arizona,Pac-12,California,-0.03,-0.21,0.08,-0.16,-0.14,-0.21
+401309892,2021,10,Arizona State,Pac-12,USC,0.29,0.23,0.32,-0.03,0.01,-0.09
+401282121,2021,10,Arkansas,SEC,Mississippi State,0.31,0.5,0.18,0.35,0.5,0.04
+401309633,2021,10,Arkansas State,Sun Belt,App State,-0.3,-0.28,-0.34,0.35,0.4,0.31
+401310253,2021,10,Army,FBS Independents,Air Force,0.14,0.9,-0.13,0.07,0.22,0.0
+401282126,2021,10,Auburn,SEC,Texas A&M,-0.04,-0.12,0.1,0.07,0.24,-0.07
+401309579,2021,10,Ball State,Mid-American,Akron,0.28,0.33,0.25,0.29,0.6,-0.09
+401287936,2021,10,Baylor,Big 12,TCU,0.29,0.51,0.16,0.38,0.94,-0.34
+401310735,2021,10,Boise State,Mountain West,Fresno State,0.2,0.34,0.11,0.02,0.09,-0.1
+401282677,2021,10,Boston College,ACC,Virginia Tech,0.17,0.27,0.15,-0.09,-0.23,-0.02
+401309914,2021,10,BYU,FBS Independents,Idaho State,0.38,0.45,0.31,0.15,0.35,0.01
+401309889,2021,10,California,Pac-12,Arizona,-0.16,-0.14,-0.21,-0.03,-0.21,0.08
+401309581,2021,10,Central Michigan,Mid-American,Western Michigan,0.3,0.49,0.16,0.05,0.25,0.2
+401282247,2021,10,Charlotte,Conference USA,Rice,0.33,0.45,0.12,0.26,0.25,0.27
+401301037,2021,10,Cincinnati,American Athletic,Tulsa,0.26,0.44,0.12,0.08,0.09,0.08
+401282680,2021,10,Clemson,ACC,Louisville,0.14,0.31,-0.05,0.18,0.23,0.15
+401309634,2021,10,Coastal Carolina,Sun Belt,Georgia Southern,0.15,-0.01,0.23,-0.08,0.23,0.0
+401309891,2021,10,Colorado,Pac-12,Oregon State,0.24,0.53,0.05,0.25,0.26,0.23
+401310736,2021,10,Colorado State,Mountain West,Wyoming,0.15,0.18,0.12,0.21,0.21,0.2
+401282678,2021,10,Duke,ACC,Pittsburgh,0.02,0.12,-0.08,0.4,0.59,0.25
+401301035,2021,10,East Carolina,American Athletic,Temple,0.33,0.62,0.18,-0.15,-0.42,0.17
+401309580,2021,10,Eastern Michigan,Mid-American,Toledo,0.17,0.3,-0.03,0.56,0.5,0.67
+401282125,2021,10,Florida,SEC,South Carolina,0.24,0.48,0.06,0.31,0.34,0.29
+401282249,2021,10,Florida Atlantic,Conference USA,Marshall,0.05,-0.07,0.15,0.06,0.18,0.04
+401282248,2021,10,Florida International,Conference USA,Old Dominion,0.07,0.14,-0.02,0.28,0.18,0.39
+401282679,2021,10,Florida State,ACC,NC State,0.02,-0.01,0.07,0.24,0.62,-0.12
+401310735,2021,10,Fresno State,Mountain West,Boise State,0.02,0.09,-0.1,0.2,0.34,0.11
+401282122,2021,10,Georgia,SEC,Missouri,0.43,0.93,-0.03,-0.06,-0.16,0.04
+401309634,2021,10,Georgia Southern,Sun Belt,Coastal Carolina,-0.08,0.23,0.0,0.15,-0.01,0.23
+401309632,2021,10,Georgia State,Sun Belt,Louisiana,0.12,-0.11,0.24,0.18,0.24,0.11
+401282681,2021,10,Georgia Tech,ACC,Miami,0.18,0.31,-0.02,0.19,0.71,-0.27
+401310739,2021,10,Hawai'i,Mountain West,San Diego State,0.06,0.09,0.02,0.09,0.31,-0.01
+401301038,2021,10,Houston,American Athletic,South Florida,0.5,0.88,0.22,0.22,0.26,0.21
+401282720,2021,10,Illinois,Big Ten,Minnesota,0.08,0.45,0.0,-0.06,-0.05,-0.08
+401282727,2021,10,Indiana,Big Ten,Michigan,-0.08,-0.14,-0.03,0.27,0.23,0.31
+401282757,2021,10,Iowa,Big Ten,Northwestern,0.11,-0.05,0.28,0.09,0.1,0.08
+401287934,2021,10,Iowa State,Big 12,Texas,0.23,0.41,0.01,0.07,-0.01,0.15
+401287935,2021,10,Kansas,Big 12,Kansas State,0.05,0.06,0.05,0.68,0.64,0.71
+401287935,2021,10,Kansas State,Big 12,Kansas,0.68,0.64,0.71,0.05,0.06,0.05
+401309582,2021,10,Kent State,Mid-American,Northern Illinois,0.6,0.53,0.64,0.49,0.61,0.32
+401282123,2021,10,Kentucky,SEC,Tennessee,0.22,0.09,0.36,0.44,0.79,0.08
+401282124,2021,10,Liberty,FBS Independents,Ole Miss,0.12,-0.3,0.45,0.36,0.51,0.2
+401309632,2021,10,Louisiana,Sun Belt,Georgia State,0.18,0.24,0.11,0.12,-0.11,0.24
+401282250,2021,10,Louisiana Tech,Conference USA,UAB,0.28,0.21,0.35,0.58,0.29,0.98
+401282680,2021,10,Louisville,ACC,Clemson,0.18,0.23,0.15,0.14,0.31,-0.05
+401282120,2021,10,LSU,SEC,Alabama,0.0,0.03,-0.03,0.09,0.26,-0.19
+401282249,2021,10,Marshall,Conference USA,Florida Atlantic,0.06,0.18,0.04,0.05,-0.07,0.15
+401282768,2021,10,Maryland,Big Ten,Penn State,-0.03,0.06,-0.25,0.25,0.38,0.03
+401286303,2021,10,Massachusetts,FBS Independents,Rhode Island,0.12,0.21,0.04,0.36,0.51,0.27
+401301039,2021,10,Memphis,American Athletic,SMU,0.29,0.59,-0.28,0.17,0.23,0.09
+401282681,2021,10,Miami,ACC,Georgia Tech,0.19,0.71,-0.27,0.18,0.31,-0.02
+401308839,2021,10,Miami (OH),Mid-American,Ohio,0.33,0.55,-0.2,0.17,0.43,-0.13
+401282727,2021,10,Michigan,Big Ten,Indiana,0.27,0.23,0.31,-0.08,-0.14,-0.03
+401282787,2021,10,Michigan State,Big Ten,Purdue,0.25,0.38,0.13,0.37,0.72,-0.31
+401282251,2021,10,Middle Tennessee,Conference USA,Western Kentucky,-0.07,-0.2,0.11,0.18,0.28,-0.04
+401282720,2021,10,Minnesota,Big Ten,Illinois,-0.06,-0.05,-0.08,0.08,0.45,0.0
+401282121,2021,10,Mississippi State,SEC,Arkansas,0.35,0.5,0.04,0.31,0.5,0.18
+401282122,2021,10,Missouri,SEC,Georgia,-0.06,-0.16,0.04,0.43,0.93,-0.03
+401282710,2021,10,Navy,American Athletic,Notre Dame,-0.06,-0.44,0.01,0.34,0.28,0.41
+401282679,2021,10,NC State,ACC,Florida State,0.24,0.62,-0.12,0.02,-0.01,0.07
+401282799,2021,10,Nebraska,Big Ten,Ohio State,0.08,0.14,0.01,0.08,0.24,-0.23
+401310740,2021,10,Nevada,Mountain West,San José State,0.05,0.16,-0.02,0.07,0.15,-0.02
+401310737,2021,10,New Mexico,Mountain West,UNLV,0.09,-0.3,0.33,0.1,0.31,-0.15
+401310738,2021,10,New Mexico State,FBS Independents,Utah State,0.01,0.0,0.01,0.3,0.87,-0.23
+401282682,2021,10,North Carolina,ACC,Wake Forest,0.41,0.44,0.39,0.33,0.34,0.32
+401309582,2021,10,Northern Illinois,Mid-American,Kent State,0.49,0.61,0.32,0.6,0.53,0.64
+401282252,2021,10,North Texas,Conference USA,Southern Miss,0.22,0.15,0.25,-0.34,-0.02,-0.69
+401282757,2021,10,Northwestern,Big Ten,Iowa,0.09,0.1,0.08,0.11,-0.05,0.28
+401282710,2021,10,Notre Dame,FBS Independents,Navy,0.34,0.28,0.41,-0.06,-0.44,0.01
+401308839,2021,10,Ohio,Mid-American,Miami (OH),0.17,0.43,-0.13,0.33,0.55,-0.2
+401282799,2021,10,Ohio State,Big Ten,Nebraska,0.08,0.24,-0.23,0.08,0.14,0.01
+401287937,2021,10,Oklahoma State,Big 12,West Virginia,0.03,0.24,-0.19,-0.2,-0.06,-0.36
+401282248,2021,10,Old Dominion,Conference USA,Florida International,0.28,0.18,0.39,0.07,0.14,-0.02
+401282124,2021,10,Ole Miss,SEC,Liberty,0.36,0.51,0.2,0.12,-0.3,0.45
+401309890,2021,10,Oregon,Pac-12,Washington,0.24,0.03,0.35,-0.15,-0.17,-0.07
+401309891,2021,10,Oregon State,Pac-12,Colorado,0.25,0.26,0.23,0.24,0.53,0.05
+401282768,2021,10,Penn State,Big Ten,Maryland,0.25,0.38,0.03,-0.03,0.06,-0.25
+401282678,2021,10,Pittsburgh,ACC,Duke,0.4,0.59,0.25,0.02,0.12,-0.08
+401282787,2021,10,Purdue,Big Ten,Michigan State,0.37,0.72,-0.31,0.25,0.38,0.13
+401282247,2021,10,Rice,Conference USA,Charlotte,0.26,0.25,0.27,0.33,0.45,0.12
+401282824,2021,10,Rutgers,Big Ten,Wisconsin,-0.26,-0.46,0.01,0.46,1.27,0.24
+401310739,2021,10,San Diego State,Mountain West,Hawai'i,0.09,0.31,-0.01,0.06,0.09,0.02
+401310740,2021,10,San José State,Mountain West,Nevada,0.07,0.15,-0.02,0.05,0.16,-0.02
+401301039,2021,10,SMU,American Athletic,Memphis,0.17,0.23,0.09,0.29,0.59,-0.28
+401309636,2021,10,South Alabama,Sun Belt,Troy,0.04,0.05,0.03,0.17,0.38,-0.02
+401282125,2021,10,South Carolina,SEC,Florida,0.31,0.34,0.29,0.24,0.48,0.06
+401282252,2021,10,Southern Miss,Conference USA,North Texas,-0.34,-0.02,-0.69,0.22,0.15,0.25
+401301038,2021,10,South Florida,American Athletic,Houston,0.22,0.26,0.21,0.5,0.88,0.22
+401309888,2021,10,Stanford,Pac-12,Utah,0.04,-0.2,0.31,0.56,0.19,0.73
+401287936,2021,10,TCU,Big 12,Baylor,0.38,0.94,-0.34,0.29,0.51,0.16
+401301035,2021,10,Temple,American Athletic,East Carolina,-0.15,-0.42,0.17,0.33,0.62,0.18
+401282123,2021,10,Tennessee,SEC,Kentucky,0.44,0.79,0.08,0.22,0.09,0.36
+401287934,2021,10,Texas,Big 12,Iowa State,0.07,-0.01,0.15,0.23,0.41,0.01
+401282126,2021,10,Texas A&M,SEC,Auburn,0.07,0.24,-0.07,-0.04,-0.12,0.1
+401309635,2021,10,Texas State,Sun Belt,UL Monroe,0.24,0.37,0.11,0.15,0.13,0.17
+401309580,2021,10,Toledo,Mid-American,Eastern Michigan,0.56,0.5,0.67,0.17,0.3,-0.03
+401309636,2021,10,Troy,Sun Belt,South Alabama,0.17,0.38,-0.02,0.04,0.05,0.03
+401301036,2021,10,Tulane,American Athletic,UCF,0.04,0.04,0.04,0.11,0.51,-0.31
+401301037,2021,10,Tulsa,American Athletic,Cincinnati,0.08,0.09,0.08,0.26,0.44,0.12
+401282250,2021,10,UAB,Conference USA,Louisiana Tech,0.58,0.29,0.98,0.28,0.21,0.35
+401301036,2021,10,UCF,American Athletic,Tulane,0.11,0.51,-0.31,0.04,0.04,0.04
+401309635,2021,10,UL Monroe,Sun Belt,Texas State,0.15,0.13,0.17,0.24,0.37,0.11
+401310737,2021,10,UNLV,Mountain West,New Mexico,0.1,0.31,-0.15,0.09,-0.3,0.33
+401309892,2021,10,USC,Pac-12,Arizona State,-0.03,0.01,-0.09,0.29,0.23,0.32
+401309888,2021,10,Utah,Pac-12,Stanford,0.56,0.19,0.73,0.04,-0.2,0.31
+401310738,2021,10,Utah State,Mountain West,New Mexico State,0.3,0.87,-0.23,0.01,0.0,0.01
+401282253,2021,10,UTEP,Conference USA,UTSA,0.27,0.45,0.1,0.41,0.66,0.21
+401282253,2021,10,UTSA,Conference USA,UTEP,0.41,0.66,0.21,0.27,0.45,0.1
+401282677,2021,10,Virginia Tech,ACC,Boston College,-0.09,-0.23,-0.02,0.17,0.27,0.15
+401282682,2021,10,Wake Forest,ACC,North Carolina,0.33,0.34,0.32,0.41,0.44,0.39
+401309890,2021,10,Washington,Pac-12,Oregon,-0.15,-0.17,-0.07,0.24,0.03,0.35
+401282251,2021,10,Western Kentucky,Conference USA,Middle Tennessee,0.18,0.28,-0.04,-0.07,-0.2,0.11
+401309581,2021,10,Western Michigan,Mid-American,Central Michigan,0.05,0.25,0.2,0.3,0.49,0.16
+401287937,2021,10,West Virginia,Big 12,Oklahoma State,-0.2,-0.06,-0.36,0.03,0.24,-0.19
+401282824,2021,10,Wisconsin,Big Ten,Rutgers,0.46,1.27,0.24,-0.26,-0.46,0.01
+401310736,2021,10,Wyoming,Mountain West,Colorado State,0.21,0.21,0.2,0.15,0.18,0.12
+401310741,2021,11,Air Force,Mountain West,Colorado State,0.43,0.62,0.4,0.15,0.04,0.22
+401309584,2021,11,Akron,Mid-American,Western Michigan,0.25,0.35,0.07,0.46,0.42,0.48
+401282127,2021,11,Alabama,SEC,New Mexico State,0.49,0.55,0.43,-0.22,-0.22,-0.22
+401309637,2021,11,App State,Sun Belt,South Alabama,0.13,0.17,0.1,-0.28,-0.23,-0.36
+401309896,2021,11,Arizona,Pac-12,Utah,0.12,0.28,-0.12,0.3,0.64,0.21
+401309897,2021,11,Arizona State,Pac-12,Washington,0.26,-0.09,0.44,0.13,-0.02,0.31
+401282130,2021,11,Arkansas,SEC,LSU,-0.01,-0.11,0.07,-0.08,-0.04,-0.12
+401309638,2021,11,Arkansas State,Sun Belt,UL Monroe,0.17,0.43,-0.25,0.06,0.07,0.04
+401310254,2021,11,Army,FBS Independents,Bucknell,0.6,0.76,0.59,-0.09,0.02,-0.29
+401282128,2021,11,Auburn,SEC,Mississippi State,0.39,0.46,0.26,0.36,0.51,-0.1
+401309587,2021,11,Ball State,Mid-American,Northern Illinois,0.18,-0.08,0.38,0.26,0.31,0.24
+401287938,2021,11,Baylor,Big 12,Oklahoma,0.07,-0.14,0.22,0.07,0.12,0.11
+401310742,2021,11,Boise State,Mountain West,Wyoming,0.22,0.35,0.09,0.24,0.39,0.14
+401282686,2021,11,Boston College,ACC,Georgia Tech,0.56,1.42,0.1,0.15,0.04,0.25
+401309585,2021,11,Bowling Green,Mid-American,Toledo,-0.04,-0.33,0.32,0.58,0.87,0.4
+401308840,2021,11,Buffalo,Mid-American,Miami (OH),0.1,0.27,0.0,0.57,0.83,0.36
+401309586,2021,11,Central Michigan,Mid-American,Kent State,0.43,0.71,0.27,0.3,0.45,0.14
+401282254,2021,11,Charlotte,Conference USA,Louisiana Tech,0.42,0.54,0.2,0.45,0.95,0.15
+401301040,2021,11,Cincinnati,American Athletic,South Florida,0.37,0.31,0.44,0.16,0.39,-0.05
+401282684,2021,11,Clemson,ACC,UConn,0.08,0.16,-0.02,-0.28,-0.25,-0.37
+401309639,2021,11,Coastal Carolina,Sun Belt,Georgia State,0.38,0.18,0.56,0.36,0.62,0.26
+401309898,2021,11,Colorado,Pac-12,UCLA,0.16,0.03,0.27,0.37,0.37,0.36
+401310741,2021,11,Colorado State,Mountain West,Air Force,0.15,0.04,0.22,0.43,0.62,0.4
+401282689,2021,11,Duke,ACC,Virginia Tech,-0.06,-0.02,-0.09,0.62,1.33,0.36
+401301042,2021,11,East Carolina,American Athletic,Memphis,0.2,0.24,0.15,0.29,0.54,-0.05
+401309583,2021,11,Eastern Michigan,Mid-American,Ohio,0.23,0.26,0.29,0.5,0.68,0.41
+401282129,2021,11,Florida,SEC,Samford,0.79,1.09,0.5,0.23,0.29,0.21
+401282256,2021,11,Florida Atlantic,Conference USA,Old Dominion,0.11,0.35,0.09,0.21,0.38,0.05
+401282255,2021,11,Florida International,Conference USA,Middle Tennessee,-0.1,-0.12,0.01,0.3,0.29,0.42
+401282685,2021,11,Florida State,ACC,Miami,0.19,0.34,0.1,0.22,0.32,-0.01
+401310743,2021,11,Fresno State,Mountain West,New Mexico,0.22,0.39,0.06,-0.07,-0.34,-0.02
+401282133,2021,11,Georgia,SEC,Tennessee,0.41,0.26,0.53,0.09,0.14,0.01
+401309640,2021,11,Georgia Southern,Sun Belt,Texas State,0.3,0.69,0.12,0.26,0.21,0.33
+401309639,2021,11,Georgia State,Sun Belt,Coastal Carolina,0.36,0.62,0.26,0.38,0.18,0.56
+401282686,2021,11,Georgia Tech,ACC,Boston College,0.15,0.04,0.25,0.56,1.42,0.1
+401310745,2021,11,Hawai'i,Mountain West,UNLV,-0.03,0.17,-0.05,0.12,0.18,0.11
+401301043,2021,11,Houston,American Athletic,Temple,0.25,0.24,0.27,-0.04,-0.28,0.25
+401282728,2021,11,Indiana,Big Ten,Rutgers,-0.13,-0.2,0.09,0.21,0.08,0.27
+401282762,2021,11,Iowa,Big Ten,Minnesota,0.23,0.45,0.02,0.18,0.25,0.12
+401287942,2021,11,Iowa State,Big 12,Texas Tech,0.33,0.55,-0.05,0.45,0.67,0.22
+401287941,2021,11,Kansas,Big 12,Texas,0.35,0.53,0.22,0.41,0.59,0.27
+401287939,2021,11,Kansas State,Big 12,West Virginia,0.22,0.58,0.04,0.12,0.37,0.03
+401309586,2021,11,Kent State,Mid-American,Central Michigan,0.3,0.45,0.14,0.43,0.71,0.27
+401282134,2021,11,Kentucky,SEC,Vanderbilt,0.29,0.3,0.28,0.06,0.15,-0.06
+401309641,2021,11,Louisiana,Sun Belt,Troy,0.24,0.27,0.22,0.23,0.46,-0.21
+401282254,2021,11,Louisiana Tech,Conference USA,Charlotte,0.45,0.95,0.15,0.42,0.54,0.2
+401282687,2021,11,Louisville,ACC,Syracuse,0.35,0.66,0.13,-0.1,-0.28,0.01
+401282130,2021,11,LSU,SEC,Arkansas,-0.08,-0.04,-0.12,-0.01,-0.11,0.07
+401282257,2021,11,Marshall,Conference USA,UAB,0.02,0.23,-0.28,0.32,0.75,0.13
+401282771,2021,11,Maryland,Big Ten,Michigan State,0.11,0.08,0.18,0.31,0.5,0.17
+401286304,2021,11,Massachusetts,FBS Independents,Maine,0.04,-0.14,0.23,0.24,0.5,0.04
+401301042,2021,11,Memphis,American Athletic,East Carolina,0.29,0.54,-0.05,0.2,0.24,0.15
+401282685,2021,11,Miami,ACC,Florida State,0.22,0.32,-0.01,0.19,0.34,0.1
+401308840,2021,11,Miami (OH),Mid-American,Buffalo,0.57,0.83,0.36,0.1,0.27,0.0
+401282780,2021,11,Michigan,Big Ten,Penn State,0.21,0.45,0.03,0.01,-0.03,0.06
+401282771,2021,11,Michigan State,Big Ten,Maryland,0.31,0.5,0.17,0.11,0.08,0.18
+401282255,2021,11,Middle Tennessee,Conference USA,Florida International,0.3,0.29,0.42,-0.1,-0.12,0.01
+401282762,2021,11,Minnesota,Big Ten,Iowa,0.18,0.25,0.12,0.23,0.45,0.02
+401282128,2021,11,Mississippi State,SEC,Auburn,0.36,0.51,-0.1,0.39,0.46,0.26
+401282132,2021,11,Missouri,SEC,South Carolina,0.27,0.21,0.3,0.19,0.44,-0.06
+401282690,2021,11,NC State,ACC,Wake Forest,0.17,0.16,0.2,0.09,0.21,-0.04
+401310746,2021,11,Nevada,Mountain West,San Diego State,0.24,0.39,-0.38,0.14,0.19,0.1
+401310743,2021,11,New Mexico,Mountain West,Fresno State,-0.07,-0.34,-0.02,0.22,0.39,0.06
+401282127,2021,11,New Mexico State,FBS Independents,Alabama,-0.22,-0.22,-0.22,0.49,0.55,0.43
+401282683,2021,11,North Carolina,ACC,Pittsburgh,0.1,0.24,-0.06,0.19,0.21,0.15
+401309587,2021,11,Northern Illinois,Mid-American,Ball State,0.26,0.31,0.24,0.18,-0.08,0.38
+401282258,2021,11,North Texas,Conference USA,UTEP,0.12,0.36,-0.04,0.17,0.36,-0.04
+401282806,2021,11,Northwestern,Big Ten,Wisconsin,-0.12,-0.16,-0.08,0.42,0.62,0.3
+401282688,2021,11,Notre Dame,FBS Independents,Virginia,0.21,0.75,-0.12,-0.07,-0.17,0.11
+401309583,2021,11,Ohio,Mid-American,Eastern Michigan,0.5,0.68,0.41,0.23,0.26,0.29
+401282812,2021,11,Ohio State,Big Ten,Purdue,0.67,0.81,0.51,0.37,0.5,0.02
+401287938,2021,11,Oklahoma,Big 12,Baylor,0.07,0.12,0.11,0.07,-0.14,0.22
+401287940,2021,11,Oklahoma State,Big 12,TCU,0.38,0.42,0.44,-0.05,-0.3,0.25
+401282256,2021,11,Old Dominion,Conference USA,Florida Atlantic,0.21,0.38,0.05,0.11,0.35,0.09
+401282131,2021,11,Ole Miss,SEC,Texas A&M,0.07,0.19,-0.01,0.02,-0.06,0.22
+401309895,2021,11,Oregon,Pac-12,Washington State,0.31,0.14,0.39,0.17,0.12,0.27
+401309894,2021,11,Oregon State,Pac-12,Stanford,0.46,0.75,0.32,0.11,0.08,0.13
+401282780,2021,11,Penn State,Big Ten,Michigan,0.01,-0.03,0.06,0.21,0.45,0.03
+401282683,2021,11,Pittsburgh,ACC,North Carolina,0.19,0.21,0.15,0.1,0.24,-0.06
+401282812,2021,11,Purdue,Big Ten,Ohio State,0.37,0.5,0.02,0.67,0.81,0.51
+401282259,2021,11,Rice,Conference USA,Western Kentucky,0.12,0.26,0.08,0.32,0.55,0.07
+401282728,2021,11,Rutgers,Big Ten,Indiana,0.21,0.08,0.27,-0.13,-0.2,0.09
+401310746,2021,11,San Diego State,Mountain West,Nevada,0.14,0.19,0.1,0.24,0.39,-0.38
+401310744,2021,11,San José State,Mountain West,Utah State,-0.06,0.04,-0.22,0.11,0.25,-0.01
+401301041,2021,11,SMU,American Athletic,UCF,0.33,0.26,0.45,0.25,0.04,0.65
+401309637,2021,11,South Alabama,Sun Belt,App State,-0.28,-0.23,-0.36,0.13,0.17,0.1
+401282132,2021,11,South Carolina,SEC,Missouri,0.19,0.44,-0.06,0.27,0.21,0.3
+401282260,2021,11,Southern Miss,Conference USA,UTSA,0.05,0.1,0.04,-0.02,-0.03,-0.01
+401301040,2021,11,South Florida,American Athletic,Cincinnati,0.16,0.39,-0.05,0.37,0.31,0.44
+401309894,2021,11,Stanford,Pac-12,Oregon State,0.11,0.08,0.13,0.46,0.75,0.32
+401282687,2021,11,Syracuse,ACC,Louisville,-0.1,-0.28,0.01,0.35,0.66,0.13
+401287940,2021,11,TCU,Big 12,Oklahoma State,-0.05,-0.3,0.25,0.38,0.42,0.44
+401301043,2021,11,Temple,American Athletic,Houston,-0.04,-0.28,0.25,0.25,0.24,0.27
+401282133,2021,11,Tennessee,SEC,Georgia,0.09,0.14,0.01,0.41,0.26,0.53
+401287941,2021,11,Texas,Big 12,Kansas,0.41,0.59,0.27,0.35,0.53,0.22
+401282131,2021,11,Texas A&M,SEC,Ole Miss,0.02,-0.06,0.22,0.07,0.19,-0.01
+401309640,2021,11,Texas State,Sun Belt,Georgia Southern,0.26,0.21,0.33,0.3,0.69,0.12
+401287942,2021,11,Texas Tech,Big 12,Iowa State,0.45,0.67,0.22,0.33,0.55,-0.05
+401309585,2021,11,Toledo,Mid-American,Bowling Green,0.58,0.87,0.4,-0.04,-0.33,0.32
+401309641,2021,11,Troy,Sun Belt,Louisiana,0.23,0.46,-0.21,0.24,0.27,0.22
+401301044,2021,11,Tulane,American Athletic,Tulsa,-0.03,0.02,-0.08,0.05,0.05,0.05
+401301044,2021,11,Tulsa,American Athletic,Tulane,0.05,0.05,0.05,-0.03,0.02,-0.08
+401282257,2021,11,UAB,Conference USA,Marshall,0.32,0.75,0.13,0.02,0.23,-0.28
+401301041,2021,11,UCF,American Athletic,SMU,0.25,0.04,0.65,0.33,0.26,0.45
+401309898,2021,11,UCLA,Pac-12,Colorado,0.37,0.37,0.36,0.16,0.03,0.27
+401282684,2021,11,UConn,FBS Independents,Clemson,-0.28,-0.25,-0.37,0.08,0.16,-0.02
+401309638,2021,11,UL Monroe,Sun Belt,Arkansas State,0.06,0.07,0.04,0.17,0.43,-0.25
+401310745,2021,11,UNLV,Mountain West,Hawai'i,0.12,0.18,0.11,-0.03,0.17,-0.05
+401309896,2021,11,Utah,Pac-12,Arizona,0.3,0.64,0.21,0.12,0.28,-0.12
+401310744,2021,11,Utah State,Mountain West,San José State,0.11,0.25,-0.01,-0.06,0.04,-0.22
+401282258,2021,11,UTEP,Conference USA,North Texas,0.17,0.36,-0.04,0.12,0.36,-0.04
+401282260,2021,11,UTSA,Conference USA,Southern Miss,-0.02,-0.03,-0.01,0.05,0.1,0.04
+401282134,2021,11,Vanderbilt,SEC,Kentucky,0.06,0.15,-0.06,0.29,0.3,0.28
+401282688,2021,11,Virginia,ACC,Notre Dame,-0.07,-0.17,0.11,0.21,0.75,-0.12
+401282689,2021,11,Virginia Tech,ACC,Duke,0.62,1.33,0.36,-0.06,-0.02,-0.09
+401282690,2021,11,Wake Forest,ACC,NC State,0.09,0.21,-0.04,0.17,0.16,0.2
+401309897,2021,11,Washington,Pac-12,Arizona State,0.13,-0.02,0.31,0.26,-0.09,0.44
+401309895,2021,11,Washington State,Pac-12,Oregon,0.17,0.12,0.27,0.31,0.14,0.39
+401282259,2021,11,Western Kentucky,Conference USA,Rice,0.32,0.55,0.07,0.12,0.26,0.08
+401309584,2021,11,Western Michigan,Mid-American,Akron,0.46,0.42,0.48,0.25,0.35,0.07
+401287939,2021,11,West Virginia,Big 12,Kansas State,0.12,0.37,0.03,0.22,0.58,0.04
+401282806,2021,11,Wisconsin,Big Ten,Northwestern,0.42,0.62,0.3,-0.12,-0.16,-0.08
+401310742,2021,11,Wyoming,Mountain West,Boise State,0.24,0.39,0.14,0.22,0.35,0.09
+401310747,2021,12,Air Force,Mountain West,Nevada,0.25,-0.39,0.29,0.26,0.34,0.17
+401309592,2021,12,Akron,Mid-American,Kent State,-0.15,-0.41,0.08,0.32,-0.11,0.49
+401282135,2021,12,Alabama,SEC,Arkansas,0.38,0.8,-0.18,0.33,0.79,-0.07
+401309642,2021,12,App State,Sun Belt,Troy,0.34,0.66,0.2,-0.11,0.05,-0.33
+401309899,2021,12,Arizona,Pac-12,Washington State,0.15,0.3,-0.05,0.41,0.49,0.35
+401309902,2021,12,Arizona State,Pac-12,Oregon State,0.14,0.13,0.14,0.19,0.12,0.22
+401282135,2021,12,Arkansas,SEC,Alabama,0.33,0.79,-0.07,0.38,0.8,-0.18
+401309643,2021,12,Arkansas State,Sun Belt,Georgia State,-0.18,0.05,-0.4,0.3,0.32,0.36
+401286305,2021,12,Army,FBS Independents,Massachusetts,0.17,-0.44,0.31,0.1,-0.15,0.21
+401282142,2021,12,Auburn,SEC,South Carolina,0.21,0.01,0.43,0.13,0.53,-0.07
+401309591,2021,12,Ball State,Mid-American,Central Michigan,0.08,-0.01,0.28,0.28,0.67,0.23
+401287943,2021,12,Baylor,Big 12,Kansas State,0.21,0.21,0.2,0.07,-0.02,0.42
+401310748,2021,12,Boise State,Mountain West,New Mexico,0.15,0.07,0.2,-0.55,-0.75,-0.18
+401282692,2021,12,Boston College,ACC,Florida State,0.04,-0.09,0.15,0.24,0.41,0.02
+401308841,2021,12,Bowling Green,Mid-American,Miami (OH),-0.08,-0.3,0.22,0.1,0.33,-0.05
+401309590,2021,12,Buffalo,Mid-American,Northern Illinois,0.17,0.38,0.06,0.39,0.29,0.45
+401309645,2021,12,BYU,FBS Independents,Georgia Southern,0.44,0.61,0.31,0.07,0.06,0.07
+401309900,2021,12,California,Pac-12,Stanford,0.56,0.55,0.68,-0.05,0.1,-0.22
+401309591,2021,12,Central Michigan,Mid-American,Ball State,0.28,0.67,0.23,0.08,-0.01,0.28
+401282261,2021,12,Charlotte,Conference USA,Marshall,0.22,0.4,-0.01,0.55,0.48,0.59
+401301046,2021,12,Cincinnati,American Athletic,SMU,0.5,0.61,0.42,0.01,-0.15,0.16
+401282693,2021,12,Clemson,ACC,Wake Forest,0.34,0.58,0.26,0.25,0.38,-0.02
+401309644,2021,12,Coastal Carolina,Sun Belt,Texas State,0.42,0.8,0.17,0.18,-0.18,0.51
+401309903,2021,12,Colorado,Pac-12,Washington,-0.05,0.06,-0.19,0.15,0.37,-0.4
+401310749,2021,12,Colorado State,Mountain West,Hawai'i,0.25,0.43,-0.03,0.3,0.41,0.16
+401282691,2021,12,Duke,ACC,Louisville,0.16,0.09,0.27,0.83,0.86,0.81
+401301047,2021,12,East Carolina,American Athletic,Navy,0.45,0.87,0.07,0.59,1.31,0.53
+401309588,2021,12,Eastern Michigan,Mid-American,Western Michigan,0.16,0.18,0.15,0.37,0.52,0.22
+401282141,2021,12,Florida,SEC,Missouri,0.14,0.38,-0.1,0.1,0.16,0.03
+401282263,2021,12,Florida Atlantic,Conference USA,Western Kentucky,-0.07,-0.01,-0.2,0.4,0.59,0.03
+401282262,2021,12,Florida International,Conference USA,North Texas,-0.07,0.23,-0.34,0.54,1.37,0.34
+401282692,2021,12,Florida State,ACC,Boston College,0.24,0.41,0.02,0.04,-0.09,0.15
+401282136,2021,12,Georgia,SEC,Charleston Southern,0.2,0.22,0.18,-0.32,-0.5,-0.05
+401309645,2021,12,Georgia Southern,Sun Belt,BYU,0.07,0.06,0.07,0.44,0.61,0.31
+401309643,2021,12,Georgia State,Sun Belt,Arkansas State,0.3,0.32,0.36,-0.18,0.05,-0.4
+401282697,2021,12,Georgia Tech,ACC,Notre Dame,-0.34,-0.52,-0.15,0.52,0.58,0.47
+401310749,2021,12,Hawai'i,Mountain West,Colorado State,0.3,0.41,0.16,0.25,0.43,-0.03
+401301045,2021,12,Houston,American Athletic,Memphis,0.25,0.24,0.25,-0.07,-0.16,0.1
+401282721,2021,12,Illinois,Big Ten,Iowa,0.01,0.1,-0.13,0.02,-0.07,0.06
+401282732,2021,12,Indiana,Big Ten,Minnesota,0.13,0.1,0.16,0.33,0.76,0.16
+401282721,2021,12,Iowa,Big Ten,Illinois,0.02,-0.07,0.06,0.01,0.1,-0.13
+401287944,2021,12,Iowa State,Big 12,Oklahoma,0.01,0.12,-0.1,0.28,-0.01,0.51
+401287945,2021,12,Kansas,Big 12,TCU,0.32,0.46,0.21,0.37,0.58,0.38
+401287943,2021,12,Kansas State,Big 12,Baylor,0.07,-0.02,0.42,0.21,0.21,0.2
+401309592,2021,12,Kent State,Mid-American,Akron,0.32,-0.11,0.49,-0.15,-0.41,0.08
+401282137,2021,12,Kentucky,SEC,New Mexico State,0.25,0.65,-0.04,-0.16,-0.33,0.1
+401286298,2021,12,Liberty,FBS Independents,Louisiana,0.09,-0.12,0.53,0.16,0.19,0.14
+401286298,2021,12,Louisiana,Sun Belt,Liberty,0.16,0.19,0.14,0.09,-0.12,0.53
+401282264,2021,12,Louisiana Tech,Conference USA,Southern Miss,-0.04,0.09,0.05,0.2,0.84,0.1
+401282691,2021,12,Louisville,ACC,Duke,0.83,0.86,0.81,0.16,0.09,0.27
+401282138,2021,12,LSU,SEC,UL Monroe,0.2,0.41,-0.02,0.01,0.1,-0.06
+401282261,2021,12,Marshall,Conference USA,Charlotte,0.55,0.48,0.59,0.22,0.4,-0.01
+401282770,2021,12,Maryland,Big Ten,Michigan,0.03,-0.04,0.09,0.32,0.38,0.25
+401286305,2021,12,Massachusetts,FBS Independents,Army,0.1,-0.15,0.21,0.17,-0.44,0.31
+401301045,2021,12,Memphis,American Athletic,Houston,-0.07,-0.16,0.1,0.25,0.24,0.25
+401282694,2021,12,Miami,ACC,Virginia Tech,0.41,0.68,0.08,0.27,0.36,0.21
+401308841,2021,12,Miami (OH),Mid-American,Bowling Green,0.1,0.33,-0.05,-0.08,-0.3,0.22
+401282770,2021,12,Michigan,Big Ten,Maryland,0.32,0.38,0.25,0.03,-0.04,0.09
+401282786,2021,12,Michigan State,Big Ten,Ohio State,-0.02,-0.07,0.07,0.52,0.6,0.42
+401282265,2021,12,Middle Tennessee,Conference USA,Old Dominion,0.06,0.19,-0.02,0.27,0.54,-0.01
+401282732,2021,12,Minnesota,Big Ten,Indiana,0.33,0.76,0.16,0.13,0.1,0.16
+401282140,2021,12,Mississippi State,SEC,Tennessee State,0.63,0.69,0.44,-0.05,0.18,-0.29
+401282141,2021,12,Missouri,SEC,Florida,0.1,0.16,0.03,0.14,0.38,-0.1
+401301047,2021,12,Navy,American Athletic,East Carolina,0.59,1.31,0.53,0.45,0.87,0.07
+401282695,2021,12,NC State,ACC,Syracuse,0.34,0.8,-0.09,-0.04,-0.56,0.42
+401282803,2021,12,Nebraska,Big Ten,Wisconsin,0.25,0.53,-0.03,0.34,0.34,0.35
+401310747,2021,12,Nevada,Mountain West,Air Force,0.26,0.34,0.17,0.25,-0.39,0.29
+401310748,2021,12,New Mexico,Mountain West,Boise State,-0.55,-0.75,-0.18,0.15,0.07,0.2
+401282137,2021,12,New Mexico State,FBS Independents,Kentucky,-0.16,-0.33,0.1,0.25,0.65,-0.04
+401282696,2021,12,North Carolina,ACC,Wofford,0.44,0.17,0.65,0.3,0.77,0.28
+401309590,2021,12,Northern Illinois,Mid-American,Buffalo,0.39,0.29,0.45,0.17,0.38,0.06
+401282262,2021,12,North Texas,Conference USA,Florida International,0.54,1.37,0.34,-0.07,0.23,-0.34
+401282808,2021,12,Northwestern,Big Ten,Purdue,0.09,0.14,0.08,0.37,0.57,0.01
+401282697,2021,12,Notre Dame,FBS Independents,Georgia Tech,0.52,0.58,0.47,-0.34,-0.52,-0.15
+401309589,2021,12,Ohio,Mid-American,Toledo,0.21,0.21,0.2,0.45,0.26,0.55
+401282786,2021,12,Ohio State,Big Ten,Michigan State,0.52,0.6,0.42,-0.02,-0.07,0.07
+401287944,2021,12,Oklahoma,Big 12,Iowa State,0.28,-0.01,0.51,0.01,0.12,-0.1
+401287946,2021,12,Oklahoma State,Big 12,Texas Tech,0.14,0.31,0.0,-0.34,-0.33,-0.34
+401282265,2021,12,Old Dominion,Conference USA,Middle Tennessee,0.27,0.54,-0.01,0.06,0.19,-0.02
+401282139,2021,12,Ole Miss,SEC,Vanderbilt,0.23,0.31,0.13,0.05,-0.06,0.15
+401309901,2021,12,Oregon,Pac-12,Utah,-0.1,0.0,0.07,0.37,0.46,0.33
+401309902,2021,12,Oregon State,Pac-12,Arizona State,0.19,0.12,0.22,0.14,0.13,0.14
+401282818,2021,12,Penn State,Big Ten,Rutgers,0.09,0.34,-0.1,-0.18,-0.26,-0.11
+401282698,2021,12,Pittsburgh,ACC,Virginia,0.3,0.35,0.25,0.24,0.34,-0.03
+401282808,2021,12,Purdue,Big Ten,Northwestern,0.37,0.57,0.01,0.09,0.14,0.08
+401282266,2021,12,Rice,Conference USA,UTEP,0.17,0.26,0.07,0.49,0.73,0.3
+401282818,2021,12,Rutgers,Big Ten,Penn State,-0.18,-0.26,-0.11,0.09,0.34,-0.1
+401310751,2021,12,San Diego State,Mountain West,UNLV,0.13,0.54,-0.08,0.21,0.47,-0.2
+401301046,2021,12,SMU,American Athletic,Cincinnati,0.01,-0.15,0.16,0.5,0.61,0.42
+401282143,2021,12,South Alabama,Sun Belt,Tennessee,0.11,0.21,0.06,0.53,0.48,0.57
+401282142,2021,12,South Carolina,SEC,Auburn,0.13,0.53,-0.07,0.21,0.01,0.43
+401282264,2021,12,Southern Miss,Conference USA,Louisiana Tech,0.2,0.84,0.1,-0.04,0.09,0.05
+401301048,2021,12,South Florida,American Athletic,Tulane,0.04,-0.1,0.18,0.46,0.77,0.24
+401309900,2021,12,Stanford,Pac-12,California,-0.05,0.1,-0.22,0.56,0.55,0.68
+401282695,2021,12,Syracuse,ACC,NC State,-0.04,-0.56,0.42,0.34,0.8,-0.09
+401287945,2021,12,TCU,Big 12,Kansas,0.37,0.58,0.38,0.32,0.46,0.21
+401301049,2021,12,Temple,American Athletic,Tulsa,-0.04,-0.02,0.07,0.23,0.42,0.09
+401282143,2021,12,Tennessee,SEC,South Alabama,0.53,0.48,0.57,0.11,0.21,0.06
+401287947,2021,12,Texas,Big 12,West Virginia,0.24,0.13,0.36,0.29,0.39,0.17
+401282144,2021,12,Texas A&M,SEC,Prairie View A&M,0.53,0.54,0.64,-0.1,-0.68,0.14
+401309644,2021,12,Texas State,Sun Belt,Coastal Carolina,0.18,-0.18,0.51,0.42,0.8,0.17
+401287946,2021,12,Texas Tech,Big 12,Oklahoma State,-0.34,-0.33,-0.34,0.14,0.31,0.0
+401309589,2021,12,Toledo,Mid-American,Ohio,0.45,0.26,0.55,0.21,0.21,0.2
+401309642,2021,12,Troy,Sun Belt,App State,-0.11,0.05,-0.33,0.34,0.66,0.2
+401301048,2021,12,Tulane,American Athletic,South Florida,0.46,0.77,0.24,0.04,-0.1,0.18
+401301049,2021,12,Tulsa,American Athletic,Temple,0.23,0.42,0.09,-0.04,-0.02,0.07
+401282267,2021,12,UAB,Conference USA,UTSA,0.41,0.67,0.23,0.21,0.32,0.07
+401286293,2021,12,UCF,American Athletic,UConn,0.36,0.34,0.38,0.02,-0.15,0.28
+401309904,2021,12,UCLA,Pac-12,USC,0.65,1.12,0.39,0.16,0.04,0.33
+401286293,2021,12,UConn,FBS Independents,UCF,0.02,-0.15,0.28,0.36,0.34,0.38
+401282138,2021,12,UL Monroe,Sun Belt,LSU,0.01,0.1,-0.06,0.2,0.41,-0.02
+401310751,2021,12,UNLV,Mountain West,San Diego State,0.21,0.47,-0.2,0.13,0.54,-0.08
+401309904,2021,12,USC,Pac-12,UCLA,0.16,0.04,0.33,0.65,1.12,0.39
+401309901,2021,12,Utah,Pac-12,Oregon,0.37,0.46,0.33,-0.1,0.0,0.07
+401310750,2021,12,Utah State,Mountain West,Wyoming,0.06,-0.06,0.23,0.48,1.15,0.26
+401282266,2021,12,UTEP,Conference USA,Rice,0.49,0.73,0.3,0.17,0.26,0.07
+401282267,2021,12,UTSA,Conference USA,UAB,0.21,0.32,0.07,0.41,0.67,0.23
+401282139,2021,12,Vanderbilt,SEC,Ole Miss,0.05,-0.06,0.15,0.23,0.31,0.13
+401282698,2021,12,Virginia,ACC,Pittsburgh,0.24,0.34,-0.03,0.3,0.35,0.25
+401282694,2021,12,Virginia Tech,ACC,Miami,0.27,0.36,0.21,0.41,0.68,0.08
+401282693,2021,12,Wake Forest,ACC,Clemson,0.25,0.38,-0.02,0.34,0.58,0.26
+401309903,2021,12,Washington,Pac-12,Colorado,0.15,0.37,-0.4,-0.05,0.06,-0.19
+401309899,2021,12,Washington State,Pac-12,Arizona,0.41,0.49,0.35,0.15,0.3,-0.05
+401282263,2021,12,Western Kentucky,Conference USA,Florida Atlantic,0.4,0.59,0.03,-0.07,-0.01,-0.2
+401309588,2021,12,Western Michigan,Mid-American,Eastern Michigan,0.37,0.52,0.22,0.16,0.18,0.15
+401287947,2021,12,West Virginia,Big 12,Texas,0.29,0.39,0.17,0.24,0.13,0.36
+401282803,2021,12,Wisconsin,Big Ten,Nebraska,0.34,0.34,0.35,0.25,0.53,-0.03
+401310750,2021,12,Wyoming,Mountain West,Utah State,0.48,1.15,0.26,0.06,-0.06,0.23
+401310752,2021,13,Air Force,Mountain West,UNLV,0.53,0.0,0.53,0.2,0.0,0.41
+401309597,2021,13,Akron,Mid-American,Toledo,0.12,0.08,0.16,0.52,0.53,0.51
+401282146,2021,13,Alabama,SEC,Auburn,0.01,0.15,-0.25,-0.26,-0.15,-0.36
+401309646,2021,13,App State,Sun Belt,Georgia Southern,0.18,0.46,-0.07,-0.09,-0.22,0.0
+401309909,2021,13,Arizona,Pac-12,Arizona State,0.01,0.11,-0.08,0.31,0.24,0.33
+401309909,2021,13,Arizona State,Pac-12,Arizona,0.31,0.24,0.33,0.01,0.11,-0.08
+401282145,2021,13,Arkansas,SEC,Missouri,0.4,0.57,0.26,0.01,-0.18,0.11
+401309647,2021,13,Arkansas State,Sun Belt,Texas State,0.32,0.44,0.18,0.16,0.09,0.23
+401286299,2021,13,Army,FBS Independents,Liberty,0.24,1.2,0.16,0.09,0.03,0.26
+401282146,2021,13,Auburn,SEC,Alabama,-0.26,-0.15,-0.36,0.01,0.15,-0.25
+401309593,2021,13,Ball State,Mid-American,Buffalo,0.03,0.04,0.02,-0.09,-0.01,0.16
+401287948,2021,13,Baylor,Big 12,Texas Tech,0.2,0.3,0.12,0.37,0.71,0.1
+401310753,2021,13,Boise State,Mountain West,San Diego State,0.04,0.05,0.04,0.17,0.27,0.05
+401282700,2021,13,Boston College,ACC,Wake Forest,0.05,-0.15,0.16,0.22,0.31,0.15
+401309596,2021,13,Bowling Green,Mid-American,Ohio,0.1,0.33,-0.11,-0.02,0.05,0.2
+401309593,2021,13,Buffalo,Mid-American,Ball State,-0.09,-0.01,0.16,0.03,0.04,0.02
+401309910,2021,13,BYU,FBS Independents,USC,0.27,0.28,0.26,0.23,0.2,0.26
+401309907,2021,13,California,Pac-12,UCLA,-0.08,-0.29,0.19,0.38,0.29,0.44
+401309595,2021,13,Central Michigan,Mid-American,Eastern Michigan,0.05,0.22,0.05,-0.01,0.06,-0.15
+401282268,2021,13,Charlotte,Conference USA,Old Dominion,0.1,0.0,0.24,0.51,0.68,0.38
+401301051,2021,13,Cincinnati,American Athletic,East Carolina,0.16,0.27,0.07,0.01,0.18,-0.18
+401282152,2021,13,Clemson,ACC,South Carolina,0.21,0.08,0.35,0.01,0.05,0.01
+401309648,2021,13,Coastal Carolina,Sun Belt,South Alabama,0.21,0.07,0.3,0.03,0.19,-0.33
+401309906,2021,13,Colorado,Pac-12,Utah,-0.1,-0.26,0.04,0.29,0.35,0.26
+401310754,2021,13,Colorado State,Mountain West,Nevada,0.11,0.09,0.13,0.47,0.63,0.32
+401282701,2021,13,Duke,ACC,Miami,-0.09,0.19,-0.27,0.39,0.55,0.16
+401301051,2021,13,East Carolina,American Athletic,Cincinnati,0.01,0.18,-0.18,0.16,0.27,0.07
+401309595,2021,13,Eastern Michigan,Mid-American,Central Michigan,-0.01,0.06,-0.15,0.05,0.22,0.05
+401282147,2021,13,Florida,SEC,Florida State,0.09,0.73,-0.06,0.13,0.17,0.25
+401282270,2021,13,Florida Atlantic,Conference USA,Middle Tennessee,0.05,0.17,-0.03,0.13,-0.01,0.35
+401282269,2021,13,Florida International,Conference USA,Southern Miss,0.29,0.13,0.42,0.44,0.48,0.43
+401282147,2021,13,Florida State,ACC,Florida,0.13,0.17,0.25,0.09,0.73,-0.06
+401310757,2021,13,Fresno State,Mountain West,San José State,0.36,0.76,-0.11,-0.06,-0.13,0.09
+401282148,2021,13,Georgia,SEC,Georgia Tech,0.63,0.96,0.39,-0.11,-0.41,0.08
+401309646,2021,13,Georgia Southern,Sun Belt,App State,-0.09,-0.22,0.0,0.18,0.46,-0.07
+401309649,2021,13,Georgia State,Sun Belt,Troy,0.19,0.22,0.17,0.01,0.09,-0.09
+401282148,2021,13,Georgia Tech,ACC,Georgia,-0.11,-0.41,0.08,0.63,0.96,0.39
+401310756,2021,13,Hawai'i,Mountain West,Wyoming,0.37,0.59,0.28,0.02,0.14,-0.08
+401301052,2021,13,Houston,American Athletic,UConn,0.19,0.32,0.06,0.0,-0.02,0.03
+401282722,2021,13,Illinois,Big Ten,Northwestern,0.33,0.38,0.38,0.11,0.07,0.13
+401282753,2021,13,Indiana,Big Ten,Purdue,0.0,0.0,0.0,0.4,0.41,0.38
+401282761,2021,13,Iowa,Big Ten,Nebraska,0.14,0.05,0.21,0.27,0.71,0.18
+401287949,2021,13,Iowa State,Big 12,TCU,0.66,0.53,0.86,0.08,0.16,0.0
+401287950,2021,13,Kansas,Big 12,West Virginia,0.01,0.16,0.12,0.33,0.32,0.36
+401287952,2021,13,Kansas State,Big 12,Texas,0.14,0.07,0.17,0.32,0.67,0.14
+401308842,2021,13,Kent State,Mid-American,Miami (OH),0.47,0.63,0.41,0.28,0.27,0.32
+401282149,2021,13,Kentucky,SEC,Louisville,0.51,0.48,0.52,0.15,0.15,0.15
+401286299,2021,13,Liberty,FBS Independents,Army,0.09,0.03,0.26,0.24,1.2,0.16
+401309650,2021,13,Louisiana,Sun Belt,UL Monroe,0.03,0.22,-0.1,0.03,-0.04,0.1
+401282271,2021,13,Louisiana Tech,Conference USA,Rice,0.25,0.3,0.2,0.33,0.49,0.22
+401282149,2021,13,Louisville,ACC,Kentucky,0.15,0.15,0.15,0.51,0.48,0.52
+401282150,2021,13,LSU,SEC,Texas A&M,0.14,0.16,0.1,0.12,0.37,-0.28
+401282272,2021,13,Marshall,Conference USA,Western Kentucky,0.03,0.03,-0.04,0.24,0.18,0.32
+401282766,2021,13,Maryland,Big Ten,Rutgers,0.58,0.91,0.34,-0.06,-0.15,0.06
+401286306,2021,13,Massachusetts,FBS Independents,New Mexico State,0.49,0.2,0.68,0.67,0.9,0.44
+401301053,2021,13,Memphis,American Athletic,Tulane,0.2,0.38,-0.09,0.26,-0.08,0.57
+401282701,2021,13,Miami,ACC,Duke,0.39,0.55,0.16,-0.09,0.19,-0.27
+401308842,2021,13,Miami (OH),Mid-American,Kent State,0.28,0.27,0.32,0.47,0.63,0.41
+401282781,2021,13,Michigan,Big Ten,Ohio State,0.44,0.13,0.59,0.31,0.54,-0.15
+401282785,2021,13,Michigan State,Big Ten,Penn State,0.19,0.62,-0.09,0.21,0.54,-0.33
+401282270,2021,13,Middle Tennessee,Conference USA,Florida Atlantic,0.13,-0.01,0.35,0.05,0.17,-0.03
+401282794,2021,13,Minnesota,Big Ten,Wisconsin,0.06,0.38,-0.11,-0.01,0.02,-0.06
+401282151,2021,13,Mississippi State,SEC,Ole Miss,0.17,0.08,0.49,0.18,0.15,0.2
+401282145,2021,13,Missouri,SEC,Arkansas,0.01,-0.18,0.11,0.4,0.57,0.26
+401301054,2021,13,Navy,American Athletic,Temple,0.21,0.31,0.19,0.11,-0.06,0.31
+401282699,2021,13,NC State,ACC,North Carolina,0.2,0.2,0.2,0.07,-0.14,0.43
+401282761,2021,13,Nebraska,Big Ten,Iowa,0.27,0.71,0.18,0.14,0.05,0.21
+401310754,2021,13,Nevada,Mountain West,Colorado State,0.47,0.63,0.32,0.11,0.09,0.13
+401310755,2021,13,New Mexico,Mountain West,Utah State,-0.22,0.18,-0.38,0.42,0.78,0.1
+401286306,2021,13,New Mexico State,FBS Independents,Massachusetts,0.67,0.9,0.44,0.49,0.2,0.68
+401282699,2021,13,North Carolina,ACC,NC State,0.07,-0.14,0.43,0.2,0.2,0.2
+401309594,2021,13,Northern Illinois,Mid-American,Western Michigan,0.38,-0.37,0.75,0.5,0.99,0.21
+401282273,2021,13,North Texas,Conference USA,UTSA,0.33,0.56,0.27,0.17,0.08,0.26
+401282722,2021,13,Northwestern,Big Ten,Illinois,0.11,0.07,0.13,0.33,0.38,0.38
+401282711,2021,13,Notre Dame,FBS Independents,Stanford,0.44,0.47,0.4,0.06,0.22,-0.12
+401309596,2021,13,Ohio,Mid-American,Bowling Green,-0.02,0.05,0.2,0.1,0.33,-0.11
+401282781,2021,13,Ohio State,Big Ten,Michigan,0.31,0.54,-0.15,0.44,0.13,0.59
+401287951,2021,13,Oklahoma,Big 12,Oklahoma State,0.09,0.09,0.09,0.1,0.17,0.1
+401287951,2021,13,Oklahoma State,Big 12,Oklahoma,0.1,0.17,0.1,0.09,0.09,0.09
+401282268,2021,13,Old Dominion,Conference USA,Charlotte,0.51,0.68,0.38,0.1,0.0,0.24
+401282151,2021,13,Ole Miss,SEC,Mississippi State,0.18,0.15,0.2,0.17,0.08,0.49
+401309908,2021,13,Oregon,Pac-12,Oregon State,0.53,0.9,0.27,0.32,0.48,0.04
+401309908,2021,13,Oregon State,Pac-12,Oregon,0.32,0.48,0.04,0.53,0.9,0.27
+401282785,2021,13,Penn State,Big Ten,Michigan State,0.21,0.54,-0.33,0.19,0.62,-0.09
+401282702,2021,13,Pittsburgh,ACC,Syracuse,0.19,0.33,0.15,0.14,0.37,-0.1
+401282753,2021,13,Purdue,Big Ten,Indiana,0.4,0.41,0.38,0.0,0.0,0.0
+401282271,2021,13,Rice,Conference USA,Louisiana Tech,0.33,0.49,0.22,0.25,0.3,0.2
+401282766,2021,13,Rutgers,Big Ten,Maryland,-0.06,-0.15,0.06,0.58,0.91,0.34
+401310753,2021,13,San Diego State,Mountain West,Boise State,0.17,0.27,0.05,0.04,0.05,0.04
+401310757,2021,13,San José State,Mountain West,Fresno State,-0.06,-0.13,0.09,0.36,0.76,-0.11
+401301055,2021,13,SMU,American Athletic,Tulsa,0.2,0.24,0.15,0.16,0.29,0.04
+401309648,2021,13,South Alabama,Sun Belt,Coastal Carolina,0.03,0.19,-0.33,0.21,0.07,0.3
+401282152,2021,13,South Carolina,SEC,Clemson,0.01,0.05,0.01,0.21,0.08,0.35
+401282269,2021,13,Southern Miss,Conference USA,Florida International,0.44,0.48,0.43,0.29,0.13,0.42
+401301050,2021,13,South Florida,American Athletic,UCF,0.16,0.27,0.06,0.14,0.01,0.28
+401282711,2021,13,Stanford,Pac-12,Notre Dame,0.06,0.22,-0.12,0.44,0.47,0.4
+401282702,2021,13,Syracuse,ACC,Pittsburgh,0.14,0.37,-0.1,0.19,0.33,0.15
+401287949,2021,13,TCU,Big 12,Iowa State,0.08,0.16,0.0,0.66,0.53,0.86
+401301054,2021,13,Temple,American Athletic,Navy,0.11,-0.06,0.31,0.21,0.31,0.19
+401282153,2021,13,Tennessee,SEC,Vanderbilt,0.35,0.57,0.26,0.21,0.32,0.22
+401287952,2021,13,Texas,Big 12,Kansas State,0.32,0.67,0.14,0.14,0.07,0.17
+401282150,2021,13,Texas A&M,SEC,LSU,0.12,0.37,-0.28,0.14,0.16,0.1
+401309647,2021,13,Texas State,Sun Belt,Arkansas State,0.16,0.09,0.23,0.32,0.44,0.18
+401287948,2021,13,Texas Tech,Big 12,Baylor,0.37,0.71,0.1,0.2,0.3,0.12
+401309597,2021,13,Toledo,Mid-American,Akron,0.52,0.53,0.51,0.12,0.08,0.16
+401309649,2021,13,Troy,Sun Belt,Georgia State,0.01,0.09,-0.09,0.19,0.22,0.17
+401301053,2021,13,Tulane,American Athletic,Memphis,0.26,-0.08,0.57,0.2,0.38,-0.09
+401301055,2021,13,Tulsa,American Athletic,SMU,0.16,0.29,0.04,0.2,0.24,0.15
+401282274,2021,13,UAB,Conference USA,UTEP,0.37,0.32,0.43,0.21,0.26,0.2
+401301050,2021,13,UCF,American Athletic,South Florida,0.14,0.01,0.28,0.16,0.27,0.06
+401309907,2021,13,UCLA,Pac-12,California,0.38,0.29,0.44,-0.08,-0.29,0.19
+401301052,2021,13,UConn,FBS Independents,Houston,0.0,-0.02,0.03,0.19,0.32,0.06
+401309650,2021,13,UL Monroe,Sun Belt,Louisiana,0.03,-0.04,0.1,0.03,0.22,-0.1
+401310752,2021,13,UNLV,Mountain West,Air Force,0.2,0.0,0.41,0.53,0.0,0.53
+401309910,2021,13,USC,Pac-12,BYU,0.23,0.2,0.26,0.27,0.28,0.26
+401309906,2021,13,Utah,Pac-12,Colorado,0.29,0.35,0.26,-0.1,-0.26,0.04
+401310755,2021,13,Utah State,Mountain West,New Mexico,0.42,0.78,0.1,-0.22,0.18,-0.38
+401282274,2021,13,UTEP,Conference USA,UAB,0.21,0.26,0.2,0.37,0.32,0.43
+401282273,2021,13,UTSA,Conference USA,North Texas,0.17,0.08,0.26,0.33,0.56,0.27
+401282153,2021,13,Vanderbilt,SEC,Tennessee,0.21,0.32,0.22,0.35,0.57,0.26
+401282703,2021,13,Virginia,ACC,Virginia Tech,0.23,0.3,0.35,0.27,0.24,0.29
+401282703,2021,13,Virginia Tech,ACC,Virginia,0.27,0.24,0.29,0.23,0.3,0.35
+401282700,2021,13,Wake Forest,ACC,Boston College,0.22,0.31,0.15,0.05,-0.15,0.16
+401309905,2021,13,Washington,Pac-12,Washington State,-0.04,-0.02,0.25,0.42,0.48,0.37
+401309905,2021,13,Washington State,Pac-12,Washington,0.42,0.48,0.37,-0.04,-0.02,0.25
+401282272,2021,13,Western Kentucky,Conference USA,Marshall,0.24,0.18,0.32,0.03,0.03,-0.04
+401309594,2021,13,Western Michigan,Mid-American,Northern Illinois,0.5,0.99,0.21,0.38,-0.37,0.75
+401287950,2021,13,West Virginia,Big 12,Kansas,0.33,0.32,0.36,0.01,0.16,0.12
+401282794,2021,13,Wisconsin,Big Ten,Minnesota,-0.01,0.02,-0.06,0.06,0.38,-0.11
+401310756,2021,13,Wyoming,Mountain West,Hawai'i,0.02,0.14,-0.08,0.37,0.59,0.28
+401282154,2021,14,Alabama,SEC,Georgia,0.38,0.59,0.02,0.03,-0.01,0.1
+401331161,2021,14,App State,Sun Belt,Louisiana,0.14,-0.03,0.32,0.13,0.18,0.07
+401287953,2021,14,Baylor,Big 12,Oklahoma State,0.04,0.14,-0.08,0.0,0.15,-0.2
+401387250,2021,14,California,Pac-12,USC,0.12,0.23,0.01,0.09,0.27,-0.12
+401331162,2021,14,Cincinnati,American Athletic,Houston,0.4,0.73,0.18,0.05,0.19,-0.06
+401282154,2021,14,Georgia,SEC,Alabama,0.03,-0.01,0.1,0.38,0.59,0.02
+401331162,2021,14,Houston,American Athletic,Cincinnati,0.05,0.19,-0.06,0.4,0.73,0.18
+401331447,2021,14,Iowa,Big Ten,Michigan,-0.09,-0.05,-0.15,0.16,0.01,0.3
+401331160,2021,14,Kent State,Mid-American,Northern Illinois,0.19,-0.08,0.43,0.25,0.34,0.23
+401331161,2021,14,Louisiana,Sun Belt,App State,0.13,0.18,0.07,0.14,-0.03,0.32
+401331447,2021,14,Michigan,Big Ten,Iowa,0.16,0.01,0.3,-0.09,-0.05,-0.15
+401331160,2021,14,Northern Illinois,Mid-American,Kent State,0.25,0.34,0.23,0.19,-0.08,0.43
+401287953,2021,14,Oklahoma State,Big 12,Baylor,0.0,0.15,-0.2,0.04,0.14,-0.08
+401331159,2021,14,Oregon,Pac-12,Utah,-0.11,-0.42,0.23,0.26,0.09,0.37
+401331163,2021,14,Pittsburgh,ACC,Wake Forest,0.09,0.18,-0.01,-0.04,-0.03,-0.05
+401310676,2021,14,San Diego State,Mountain West,Utah State,-0.11,-0.02,-0.17,0.29,0.48,-0.04
+401387250,2021,14,USC,Pac-12,California,0.09,0.27,-0.12,0.12,0.23,0.01
+401331159,2021,14,Utah,Pac-12,Oregon,0.26,0.09,0.37,-0.11,-0.42,0.23
+401310676,2021,14,Utah State,Mountain West,San Diego State,0.29,0.48,-0.04,-0.11,-0.02,-0.17
+401282156,2021,14,UTSA,Conference USA,Western Kentucky,0.4,0.72,0.21,0.42,0.48,0.13
+401331163,2021,14,Wake Forest,ACC,Pittsburgh,-0.04,-0.03,-0.05,0.09,0.18,-0.01
+401282156,2021,14,Western Kentucky,Conference USA,UTSA,0.42,0.48,0.13,0.4,0.72,0.21
+401301056,2021,15,Army,FBS Independents,Navy,-0.11,-0.13,-0.1,0.29,0.53,0.25
+401301056,2021,15,Navy,American Athletic,Army,0.29,0.53,0.25,-0.11,-0.13,-0.1
+401331222,2021,1,Air Force,Mountain West,Louisville,0.38,1.82,0.06,0.3,0.51,0.15
+401331235,2021,1,Alabama,SEC,Cincinnati,0.32,0.38,0.29,-0.1,-0.32,0.33
+401331242,2021,1,Alabama,SEC,Georgia,0.0,0.05,-0.13,0.28,0.2,0.37
+401331166,2021,1,App State,Sun Belt,Western Kentucky,0.22,0.27,0.18,0.54,0.55,0.53
+401331232,2021,1,Arizona State,Pac-12,Wisconsin,0.05,-0.16,0.27,0.14,0.72,-0.09
+401331236,2021,1,Arkansas,SEC,Penn State,0.15,-0.4,0.41,0.0,-0.22,0.32
+401331215,2021,1,Army,FBS Independents,Missouri,0.21,0.92,0.1,0.3,0.4,0.2
+401331221,2021,1,Auburn,SEC,Houston,0.03,0.04,0.01,0.13,0.2,0.01
+401331218,2021,1,Ball State,Mid-American,Georgia State,-0.01,0.05,-0.11,0.47,0.71,0.35
+401331240,2021,1,Baylor,Big 12,Ole Miss,0.06,-0.44,0.26,-0.13,-0.46,0.2
+401331168,2021,1,BYU,FBS Independents,UAB,0.28,0.4,0.2,0.33,0.55,0.18
+401331654,2021,1,Central Michigan,Mid-American,Washington State,0.04,0.24,-0.14,0.02,0.04,-0.02
+401331235,2021,1,Cincinnati,American Athletic,Alabama,-0.1,-0.32,0.33,0.32,0.38,0.29
+401331227,2021,1,Clemson,ACC,Iowa State,0.08,0.28,-0.1,-0.04,-0.09,0.07
+401331165,2021,1,Coastal Carolina,Sun Belt,Northern Illinois,0.62,0.72,0.5,0.31,0.29,0.32
+401331169,2021,1,Eastern Michigan,Mid-American,Liberty,-0.05,-0.11,0.04,0.38,0.33,0.42
+401331216,2021,1,Florida,SEC,UCF,0.12,-0.13,0.46,0.18,0.2,0.17
+401331167,2021,1,Fresno State,Mountain West,UTEP,0.28,0.31,0.25,0.17,0.46,-0.07
+401331234,2021,1,Georgia,SEC,Michigan,0.43,0.71,0.18,-0.03,-0.01,-0.06
+401331242,2021,1,Georgia,SEC,Alabama,0.28,0.2,0.37,0.0,0.05,-0.13
+401331218,2021,1,Georgia State,Sun Belt,Ball State,0.47,0.71,0.35,-0.01,0.05,-0.11
+401331221,2021,1,Houston,American Athletic,Auburn,0.13,0.2,0.01,0.03,0.04,0.01
+401331237,2021,1,Iowa,Big Ten,Kentucky,0.08,0.11,0.05,0.11,0.19,0.05
+401331227,2021,1,Iowa State,Big 12,Clemson,-0.04,-0.09,0.07,0.08,0.28,-0.1
+401331241,2021,1,Kansas State,Big 12,LSU,0.48,0.77,0.21,0.3,0.97,0.1
+401331213,2021,1,Kent State,Mid-American,Wyoming,0.37,0.3,0.42,0.49,0.56,0.47
+401331237,2021,1,Kentucky,SEC,Iowa,0.11,0.19,0.05,0.08,0.11,0.05
+401331169,2021,1,Liberty,FBS Independents,Eastern Michigan,0.38,0.33,0.42,-0.05,-0.11,0.04
+401331171,2021,1,Louisiana,Sun Belt,Marshall,0.16,0.33,0.05,0.1,-0.28,0.48
+401331222,2021,1,Louisville,ACC,Air Force,0.3,0.51,0.15,0.38,1.82,0.06
+401331241,2021,1,LSU,SEC,Kansas State,0.3,0.97,0.1,0.48,0.77,0.21
+401331171,2021,1,Marshall,Conference USA,Louisiana,0.1,-0.28,0.48,0.16,0.33,0.05
+401331226,2021,1,Maryland,Big Ten,Virginia Tech,0.61,0.79,0.44,0.02,0.41,-0.16
+401391158,2021,1,Miami (OH),Mid-American,North Texas,0.22,0.24,0.2,0.06,0.01,0.13
+401331234,2021,1,Michigan,Big Ten,Georgia,-0.03,-0.01,-0.06,0.43,0.71,0.18
+401331231,2021,1,Michigan State,Big Ten,Pittsburgh,0.12,0.28,-0.14,0.0,-0.22,0.23
+401331164,2021,1,Middle Tennessee,Conference USA,Toledo,0.11,0.2,0.01,0.27,0.07,0.52
+401331224,2021,1,Minnesota,Big Ten,West Virginia,0.02,0.17,-0.03,-0.01,-0.15,0.22
+401331223,2021,1,Mississippi State,SEC,Texas Tech,0.04,0.05,0.03,0.31,0.34,0.29
+401331215,2021,1,Missouri,SEC,Army,0.3,0.4,0.2,0.21,0.92,0.1
+401331219,2021,1,Nevada,Mountain West,Western Michigan,0.12,-0.03,0.29,0.45,0.43,0.46
+401331229,2021,1,North Carolina,ACC,South Carolina,0.21,0.22,0.2,0.5,0.99,0.32
+401331165,2021,1,Northern Illinois,Mid-American,Coastal Carolina,0.31,0.29,0.32,0.62,0.72,0.5
+401391158,2021,1,North Texas,Conference USA,Miami (OH),0.06,0.01,0.13,0.22,0.24,0.2
+401331238,2021,1,Notre Dame,FBS Independents,Oklahoma State,0.28,0.47,-0.42,0.19,0.31,0.04
+401331239,2021,1,Ohio State,Big Ten,Utah,0.53,0.84,-0.14,0.34,0.58,0.2
+401331228,2021,1,Oklahoma,Big 12,Oregon,0.47,0.76,0.3,0.38,0.38,0.37
+401331238,2021,1,Oklahoma State,Big 12,Notre Dame,0.19,0.31,0.04,0.28,0.47,-0.42
+401331172,2021,1,Old Dominion,Conference USA,Tulsa,0.15,0.26,-0.04,0.27,0.49,0.15
+401331240,2021,1,Ole Miss,SEC,Baylor,-0.13,-0.46,0.2,0.06,-0.44,0.26
+401331228,2021,1,Oregon,Pac-12,Oklahoma,0.38,0.38,0.37,0.47,0.76,0.3
+401331170,2021,1,Oregon State,Pac-12,Utah State,0.13,0.1,0.15,0.1,0.26,-0.04
+401331236,2021,1,Penn State,Big Ten,Arkansas,0.0,-0.22,0.32,0.15,-0.4,0.41
+401331231,2021,1,Pittsburgh,ACC,Michigan State,0.0,-0.22,0.23,0.12,0.28,-0.14
+401331230,2021,1,Purdue,Big Ten,Tennessee,0.19,0.41,-0.17,0.28,0.45,0.15
+401331233,2021,1,Rutgers,Big Ten,Wake Forest,-0.08,-0.26,0.18,0.31,0.6,-0.02
+401331214,2021,1,San Diego State,Mountain West,UTSA,0.36,0.55,0.18,0.16,0.2,0.1
+401331229,2021,1,South Carolina,SEC,North Carolina,0.5,0.99,0.32,0.21,0.22,0.2
+401331230,2021,1,Tennessee,SEC,Purdue,0.28,0.45,0.15,0.19,0.41,-0.17
+401331223,2021,1,Texas Tech,Big 12,Mississippi State,0.31,0.34,0.29,0.04,0.05,0.03
+401331164,2021,1,Toledo,Mid-American,Middle Tennessee,0.27,0.07,0.52,0.11,0.2,0.01
+401331172,2021,1,Tulsa,American Athletic,Old Dominion,0.27,0.49,0.15,0.15,0.26,-0.04
+401331168,2021,1,UAB,Conference USA,BYU,0.33,0.55,0.18,0.28,0.4,0.2
+401331216,2021,1,UCF,American Athletic,Florida,0.18,0.2,0.17,0.12,-0.13,0.46
+401331239,2021,1,Utah,Pac-12,Ohio State,0.34,0.58,0.2,0.53,0.84,-0.14
+401331170,2021,1,Utah State,Mountain West,Oregon State,0.1,0.26,-0.04,0.13,0.1,0.15
+401331167,2021,1,UTEP,Conference USA,Fresno State,0.17,0.46,-0.07,0.28,0.31,0.25
+401331214,2021,1,UTSA,Conference USA,San Diego State,0.16,0.2,0.1,0.36,0.55,0.18
+401331226,2021,1,Virginia Tech,ACC,Maryland,0.02,0.41,-0.16,0.61,0.79,0.44
+401331233,2021,1,Wake Forest,ACC,Rutgers,0.31,0.6,-0.02,-0.08,-0.26,0.18
+401331654,2021,1,Washington State,Pac-12,Central Michigan,0.02,0.04,-0.02,0.04,0.24,-0.14
+401331166,2021,1,Western Kentucky,Conference USA,App State,0.54,0.55,0.53,0.22,0.27,0.18
+401331219,2021,1,Western Michigan,Mid-American,Nevada,0.45,0.43,0.46,0.12,-0.03,0.29
+401331224,2021,1,West Virginia,Big 12,Minnesota,-0.01,-0.15,0.22,0.02,0.17,-0.03
+401331232,2021,1,Wisconsin,Big Ten,Arizona State,0.14,0.72,-0.09,0.05,-0.16,0.27
+401331213,2021,1,Wyoming,Mountain West,Kent State,0.49,0.56,0.47,0.37,0.3,0.42

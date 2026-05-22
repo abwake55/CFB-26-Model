@@ -1,0 +1,185 @@
+year,team,rank,points
+2022,Texas A&M,1,333.13
+2022,Alabama,2,322.25
+2022,Georgia,3,318.34
+2022,Ohio State,4,300.95
+2022,Texas,5,289.04
+2022,Penn State,6,278.66
+2022,Notre Dame,7,275.44
+2022,Oklahoma,8,266.73
+2022,Michigan,9,262.13
+2022,Clemson,10,260.87
+2022,North Carolina,11,258.5
+2022,LSU,12,245.76
+2022,Oregon,13,243.37
+2022,Kentucky,14,240.16
+2022,Missouri,15,236.92
+2022,Miami,16,235.03
+2022,Florida,17,232.99
+2022,Tennessee,18,232.77
+2022,Stanford,19,229.74
+2022,Florida State,20,229.46
+2022,Auburn,21,229.35
+2022,Arizona,22,224.38
+2022,Ole Miss,23,222.38
+2022,Michigan State,24,221.83
+2022,South Carolina,25,220.16
+2022,Indiana,26,219.8
+2022,Mississippi State,27,219.45
+2022,Arkansas,28,217.69
+2022,Oklahoma State,29,217.39
+2022,Iowa,30,215.05
+2022,Maryland,31,213.62
+2022,Vanderbilt,32,212.11
+2022,Rutgers,33,210.07
+2022,Utah,34,209.71
+2022,West Virginia,35,209.05
+2022,Virginia Tech,36,208.77
+2022,Baylor,37,208.03
+2022,Purdue,38,206.4
+2022,Iowa State,39,205.08
+2022,Boston College,40,202.55
+2022,Nebraska,41,198.64
+2022,Cincinnati,42,197.75
+2022,Texas Tech,43,197.4
+2022,Wisconsin,44,194.42
+2022,TCU,45,194.07
+2022,Illinois,46,192.59
+2022,Colorado,47,192.38
+2022,Northwestern,48,191.62
+2022,Minnesota,49,189.38
+2022,Houston,50,187.64
+2022,Louisville,51,187.58
+2022,Duke,52,186.78
+2022,UCF,53,186.37
+2022,Georgia Tech,54,184.81
+2022,BYU,55,181.5
+2022,Oregon State,56,181.41
+2022,Marshall,57,176.47
+2022,Memphis,58,176.39
+2022,California,59,175.53
+2022,Washington State,60,175.48
+2022,UCLA,61,175.37
+2022,Boise State,62,174.52
+2022,Kansas State,63,173.32
+2022,NC State,64,171.26
+2022,San Diego State,65,168.39
+2022,Virginia,66,166.85
+2022,Arkansas State,67,166.63
+2022,Syracuse,68,166.16
+2022,Coastal Carolina,69,165.67
+2022,USC,70,165.48
+2022,Wake Forest,71,164.19
+2022,Fresno State,72,163.46
+2022,UTSA,73,162.04
+2022,Tulane,74,160.73
+2022,San José State,75,157.03
+2022,Pittsburgh,76,153.09
+2022,Miami (OH),77,152.97
+2022,Colorado State,78,152.84
+2022,Southern Miss,79,152.38
+2022,Utah State,80,152.31
+2022,Buffalo,81,147.86
+2022,SMU,82,146.38
+2022,App State,83,144.67
+2022,Central Michigan,84,144.51
+2022,East Carolina,85,143.29
+2022,UAB,86,142.49
+2022,Northern Illinois,87,142.15
+2022,Louisiana Tech,88,140.27
+2022,Campbell,89,137.24
+2022,Kent State,90,136.64
+2022,South Florida,91,136.48
+2022,Toledo,92,134.89
+2022,Wyoming,93,133.87
+2022,Western Kentucky,94,129.6
+2022,Temple,95,129.57
+2022,Washington,96,129.55
+2022,Ball State,97,127.25
+2022,Liberty,98,126.37
+2022,New Mexico,99,124.26
+2022,Georgia State,100,124.06
+2022,UNLV,102,121.78
+2022,Arizona State,103,120.17
+2022,South Alabama,104,119.39
+2022,Western Michigan,105,119.04
+2022,Old Dominion,106,118.85
+2022,Charlotte,107,117.06
+2022,New Mexico State,108,117.0
+2022,Bowling Green,109,115.82
+2022,Georgia Southern,110,115.78
+2022,Louisiana,111,115.71
+2022,Tulsa,112,113.34
+2022,UConn,113,112.35
+2022,Air Force,114,110.12
+2022,Nevada,115,108.19
+2022,Kansas,116,106.28
+2022,Massachusetts,117,105.95
+2022,North Texas,118,102.95
+2022,Rice,119,102.87
+2022,Middle Tennessee,120,102.04
+2022,Sam Houston,121,101.32
+2022,Jackson State,122,100.92
+2022,Grambling,123,96.14
+2022,Florida Atlantic,124,94.73
+2022,Central Arkansas,125,90.76
+2022,Hawai'i,126,84.97
+2022,Akron,127,81.7
+2022,Eastern Michigan,128,77.97
+2022,UTEP,129,77.74
+2022,Troy,130,65.19
+2022,Princeton,131,56.25
+2022,Ohio,132,53.67
+2022,Texas State,133,51.34
+2022,UL Monroe,134,49.36
+2022,North Dakota State,135,46.49
+2022,Harvard,136,46.06
+2022,Murray State,137,41.85
+2022,Navy,138,41.48
+2022,Grand Valley State University,139,36.11
+2022,Florida A&M,140,32.58
+2022,Northern Arizona,141,32.26
+2022,Youngstown State,142,30.85
+2022,Austin Peay,143,30.6
+2022,South Carolina State,144,28.97
+2022,Yale,145,28.75
+2022,SE Louisiana,146,28.48
+2022,Idaho,148,27.31
+2022,Northern Iowa,149,26.87
+2022,Jacksonville State,150,25.39
+2022,Southern Illinois,151,25.26
+2022,Eastern Washington,152,24.93
+2022,Western Carolina,153,24.04
+2022,Portland State,154,23.86
+2022,Chattanooga,155,23.66
+2022,James Madison,156,21.94
+2022,Eastern Kentucky,157,19.26
+2022,Army,158,18.34
+2022,Georgetown,159,17.56
+2022,East Tennessee State,160,16.89
+2022,Northwestern State,161,15.78
+2022,Tennessee Tech,162,14.17
+2022,Howard,162,14.17
+2022,Missouri State,165,13.67
+2022,Western Illinois,167,13.0
+2022,UC Davis,168,12.81
+2022,Monmouth,169,12.67
+2022,Sacramento State,169,12.67
+2022,Lehigh,171,12.56
+2022,Pennsylvania,172,12.28
+2022,Furman,173,12.17
+2022,Villanova,173,12.17
+2022,Weber State,173,12.17
+2022,Lamar,177,11.67
+2022,Southeast Missouri State,177,11.67
+2022,North Carolina A&T,179,11.17
+2022,Alabama A&M,179,11.17
+2022,North Carolina Central,179,11.17
+2022,Richmond,182,10.89
+2022,Rhode Island,183,10.67
+2022,UT Martin,184,10.44
+2022,Towson,185,10.06
+2022,The Citadel,186,9.89
+2022,Stephen F. Austin,188,9.44
+2022,Bucknell,189,8.83
+2022,Montana State,190,8.33

@@ -1,0 +1,1622 @@
+game_id,season,week,team,conference,opponent,off_epa,off_epa_pass,off_epa_rush,def_epa,def_epa_pass,def_epa_rush
+400787111,2015,1,Air Force,Mountain West,Morgan State,0.52,1.22,0.44,-0.17,-0.14,-0.19
+400763404,2015,1,Akron,Mid-American,Oklahoma,-0.13,-0.24,-0.04,0.26,0.48,0.0
+400603827,2015,1,Alabama,SEC,Wisconsin,0.46,0.42,0.51,0.04,0.2,-0.35
+400787412,2015,1,App State,Sun Belt,Howard,0.43,0.79,0.26,-0.19,0.1,-0.44
+400756882,2015,1,Arizona,Pac-12,UTSA,0.18,0.35,0.01,0.18,0.39,0.04
+400603838,2015,1,Arizona State,Pac-12,Texas A&M,-0.05,-0.05,-0.02,0.14,0.18,0.14
+400603828,2015,1,Arkansas,SEC,UTEP,0.59,1.36,0.22,0.1,0.48,-0.14
+400756884,2015,1,Arkansas State,Sun Belt,USC,-0.08,-0.15,-0.03,0.34,0.37,0.3
+400760491,2015,1,Army,FBS Independents,Fordham,0.35,0.3,0.42,0.25,0.67,0.01
+400603829,2015,1,Auburn,SEC,Louisville,0.26,0.4,0.13,0.19,-0.02,0.37
+400787299,2015,1,Ball State,Mid-American,VMI,0.24,0.21,0.33,0.36,0.73,-0.21
+400764855,2015,1,Baylor,Big 12,SMU,0.69,0.75,0.63,0.1,0.1,0.1
+400756888,2015,1,Boise State,Mountain West,Washington,-0.08,0.11,-0.03,-0.15,0.0,-0.37
+400756897,2015,1,Boston College,ACC,Maine,0.14,0.42,-0.02,-0.2,-0.17,-0.3
+400834350,2015,1,Bowling Green,Mid-American,Tennessee,0.29,0.39,0.15,0.37,0.42,0.37
+400787303,2015,1,Buffalo,Mid-American,UAlbany,0.48,0.81,0.26,0.04,0.12,-0.03
+400763495,2015,1,BYU,FBS Independents,Nebraska,0.21,0.2,0.24,0.26,0.49,-0.02
+400756890,2015,1,California,Pac-12,Grambling,0.32,0.46,0.17,-0.3,-0.5,-0.09
+400763399,2015,1,Central Michigan,Mid-American,Oklahoma State,0.12,0.18,0.04,0.27,0.48,0.1
+400763587,2015,1,Charlotte,Conference USA,Georgia State,0.06,0.19,-0.02,0.0,0.23,-0.4
+400764856,2015,1,Cincinnati,American Athletic,Alabama A&M,0.34,0.61,0.15,-0.09,-0.1,-0.07
+400756898,2015,1,Clemson,ACC,Wofford,0.37,0.47,0.29,-0.08,0.15,-0.18
+400787112,2015,1,Colorado State,Mountain West,Savannah St,0.34,0.6,0.08,-0.18,-0.06,-0.28
+400756894,2015,1,Duke,ACC,Tulane,0.11,0.55,-0.23,-0.07,-0.01,-0.2
+400764857,2015,1,East Carolina,American Athletic,Towson,0.32,0.14,0.54,0.16,0.19,0.17
+400763588,2015,1,Eastern Michigan,Mid-American,Old Dominion,0.2,0.14,0.24,0.24,0.14,0.36
+400603830,2015,1,Florida,SEC,New Mexico State,0.49,0.7,0.34,0.0,-0.16,0.24
+400763592,2015,1,Florida Atlantic,Conference USA,Tulsa,0.28,0.39,0.19,0.37,0.61,0.23
+400763593,2015,1,Florida International,Conference USA,UCF,0.23,0.35,0.11,0.07,0.55,-0.48
+400756899,2015,1,Florida State,ACC,Texas State,0.57,0.97,0.27,-0.02,0.03,-0.06
+400799923,2015,1,Fresno State,Mountain West,Abilene Christian,0.17,0.1,0.26,-0.04,0.0,-0.12
+400603831,2015,1,Georgia,SEC,UL Monroe,0.53,0.9,0.37,0.12,0.33,-0.11
+400763407,2015,1,Georgia Southern,Sun Belt,West Virginia,-0.11,-0.43,-0.04,0.27,0.53,0.17
+400763587,2015,1,Georgia State,Sun Belt,Charlotte,0.0,0.23,-0.4,0.06,0.19,-0.02
+400756895,2015,1,Georgia Tech,ACC,Alcorn State,0.77,0.29,0.82,-0.03,-0.13,0.04
+400764858,2015,1,Houston,American Athletic,Tennessee Tech,0.38,0.4,0.39,0.16,0.59,-0.21
+400787302,2015,1,Idaho,Sun Belt,Ohio,0.09,0.05,0.25,0.47,0.84,0.23
+400835430,2015,1,Illinois,Big Ten,Kent State,0.19,0.48,-0.05,-0.18,-0.2,-0.2
+400763472,2015,1,Indiana,Big Ten,Southern Illinois,0.37,0.58,0.24,0.37,0.85,0.03
+400763473,2015,1,Iowa,Big Ten,Illinois State,0.29,0.5,0.15,0.03,0.08,-0.04
+400763400,2015,1,Iowa State,Big 12,Northern Iowa,0.01,0.26,-0.21,-0.06,-0.14,0.04
+400763401,2015,1,Kansas,Big 12,South Dakota State,0.29,0.29,0.31,0.31,0.44,0.24
+400763402,2015,1,Kansas State,Big 12,South Dakota,0.12,0.52,-0.01,-0.08,0.11,-0.27
+400835430,2015,1,Kent State,Mid-American,Illinois,-0.18,-0.2,-0.2,0.19,0.48,-0.05
+400603832,2015,1,Kentucky,SEC,Louisiana,0.3,0.33,0.34,0.18,0.03,0.33
+400603832,2015,1,Louisiana,Sun Belt,Kentucky,0.18,0.03,0.33,0.3,0.33,0.34
+400763589,2015,1,Louisiana Tech,Conference USA,Southern,0.12,0.16,0.1,-0.15,0.05,-0.17
+400603829,2015,1,Louisville,ACC,Auburn,0.19,-0.02,0.37,0.26,0.4,0.13
+400763498,2015,1,Marshall,Conference USA,Purdue,0.11,0.15,0.08,-0.01,-0.14,0.13
+400763494,2015,1,Maryland,Big Ten,Richmond,0.32,0.09,0.48,0.1,0.09,0.11
+400764859,2015,1,Memphis,American Athletic,Missouri State,0.47,0.8,0.35,-0.23,-0.03,-0.41
+400756900,2015,1,Miami,ACC,Bethune-Cookman,0.34,0.29,0.46,-0.42,-0.69,-0.28
+400787304,2015,1,Miami (OH),Mid-American,Presbyterian,0.19,0.64,-0.05,-0.13,-0.1,-0.15
+400756883,2015,1,Michigan,Big Ten,Utah,-0.02,0.08,-0.14,0.1,0.24,0.0
+400763470,2015,1,Michigan State,Big Ten,Western Michigan,0.3,0.47,0.15,0.11,0.19,-0.06
+400763590,2015,1,Middle Tennessee,Conference USA,Jackson State,0.39,0.91,0.09,-0.27,-0.07,-0.17
+400763398,2015,1,Minnesota,Big Ten,TCU,0.05,0.23,-0.11,0.12,0.17,0.02
+400603836,2015,1,Mississippi State,SEC,Southern Miss,0.2,0.31,0.08,0.0,0.12,-0.11
+400603834,2015,1,Missouri,SEC,Southeast Missouri State,0.1,0.28,-0.08,-0.21,-0.33,-0.14
+400764860,2015,1,Navy,American Athletic,Colgate,0.42,0.17,0.48,-0.04,0.16,-0.14
+400756901,2015,1,NC State,ACC,Troy,0.3,0.52,0.19,0.2,0.17,0.23
+400763495,2015,1,Nebraska,Big Ten,BYU,0.26,0.49,-0.02,0.21,0.2,0.24
+400787108,2015,1,Nevada,Mountain West,UC Davis,0.29,0.3,0.3,0.09,0.13,0.05
+400787114,2015,1,New Mexico,Mountain West,Mississippi Valley State,0.35,0.43,0.33,-0.34,-0.24,-0.41
+400603830,2015,1,New Mexico State,Sun Belt,Florida,0.0,-0.16,0.24,0.49,0.7,0.34
+400603840,2015,1,North Carolina,ACC,South Carolina,0.12,-0.04,0.3,0.12,0.07,0.17
+400787115,2015,1,Northern Illinois,Mid-American,UNLV,0.38,0.82,0.04,0.17,0.35,0.01
+400756891,2015,1,Northwestern,Big Ten,Stanford,0.04,0.33,-0.08,-0.12,-0.06,-0.2
+400763403,2015,1,Notre Dame,FBS Independents,Texas,0.35,1.0,0.07,-0.1,-0.14,-0.07
+400787302,2015,1,Ohio,Mid-American,Idaho,0.47,0.84,0.23,0.09,0.05,0.25
+400756905,2015,1,Ohio State,Big Ten,Virginia Tech,0.6,0.74,0.53,0.08,0.3,-0.09
+400763404,2015,1,Oklahoma,Big 12,Akron,0.26,0.48,0.0,-0.13,-0.24,-0.04
+400763399,2015,1,Oklahoma State,Big 12,Central Michigan,0.27,0.48,0.1,0.12,0.18,0.04
+400763588,2015,1,Old Dominion,Conference USA,Eastern Michigan,0.24,0.14,0.36,0.2,0.14,0.24
+400603835,2015,1,Ole Miss,SEC,UT Martin,0.75,0.9,0.64,-0.2,-0.19,-0.19
+400756886,2015,1,Oregon,Pac-12,Eastern Washington,0.53,0.29,0.7,0.32,0.38,0.2
+400756887,2015,1,Oregon State,Pac-12,Weber State,0.03,0.24,-0.04,-0.18,-0.25,0.0
+400763497,2015,1,Penn State,Big Ten,Temple,-0.13,-0.25,0.11,0.07,0.29,-0.02
+400756902,2015,1,Pittsburgh,ACC,Youngstown State,0.19,-0.32,0.39,0.03,0.09,-0.01
+400763498,2015,1,Purdue,Big Ten,Marshall,-0.01,-0.14,0.13,0.11,0.15,0.08
+400763591,2015,1,Rice,Conference USA,Wagner,0.38,-0.19,0.65,-0.01,0.18,-0.11
+400763496,2015,1,Rutgers,Big Ten,Norfolk State,0.54,1.27,0.3,-0.01,0.29,-0.53
+400791346,2015,1,San Diego State,Mountain West,San Diego,0.04,0.19,-0.05,-0.41,-0.55,-0.3
+400787109,2015,1,San José State,Mountain West,New Hampshire,0.47,0.77,0.26,-0.02,-0.22,0.18
+400764855,2015,1,SMU,American Athletic,Baylor,0.1,0.1,0.1,0.69,0.75,0.63
+400787414,2015,1,South Alabama,Sun Belt,Gardner-Webb,0.01,-0.3,0.37,-0.03,0.17,-0.11
+400603840,2015,1,South Carolina,SEC,North Carolina,0.12,0.07,0.17,0.12,-0.04,0.3
+400603836,2015,1,Southern Miss,Conference USA,Mississippi State,0.0,0.12,-0.11,0.2,0.31,0.08
+400764861,2015,1,South Florida,American Athletic,Florida A&M,0.29,0.52,0.19,-0.21,-0.13,-0.29
+400756891,2015,1,Stanford,Pac-12,Northwestern,-0.12,-0.06,-0.2,0.04,0.33,-0.08
+400756903,2015,1,Syracuse,ACC,Rhode Island,0.24,0.25,0.25,-0.51,-0.52,-0.44
+400763398,2015,1,TCU,Big 12,Minnesota,0.12,0.17,0.02,0.05,0.23,-0.11
+400763497,2015,1,Temple,American Athletic,Penn State,0.07,0.29,-0.02,-0.13,-0.25,0.11
+400834350,2015,1,Tennessee,SEC,Bowling Green,0.37,0.42,0.37,0.29,0.39,0.15
+400763403,2015,1,Texas,Big 12,Notre Dame,-0.1,-0.14,-0.07,0.35,1.0,0.07
+400603838,2015,1,Texas A&M,SEC,Arizona State,0.14,0.18,0.14,-0.05,-0.05,-0.02
+400756899,2015,1,Texas State,Sun Belt,Florida State,-0.02,0.03,-0.06,0.57,0.97,0.27
+400763406,2015,1,Texas Tech,Big 12,Sam Houston,0.36,0.35,0.4,0.23,-0.02,0.5
+400756901,2015,1,Troy,Sun Belt,NC State,0.2,0.17,0.23,0.3,0.52,0.19
+400756894,2015,1,Tulane,American Athletic,Duke,-0.07,-0.01,-0.2,0.11,0.55,-0.23
+400763592,2015,1,Tulsa,American Athletic,Florida Atlantic,0.37,0.61,0.23,0.28,0.39,0.19
+400763593,2015,1,UCF,American Athletic,Florida International,0.07,0.55,-0.48,0.23,0.35,0.11
+400756904,2015,1,UCLA,Pac-12,Virginia,0.26,0.5,0.06,0.1,0.34,-0.09
+400764854,2015,1,UConn,American Athletic,Villanova,0.19,0.57,0.04,0.08,0.14,0.01
+400603831,2015,1,UL Monroe,Sun Belt,Georgia,0.12,0.33,-0.11,0.53,0.9,0.37
+400787115,2015,1,UNLV,Mountain West,Northern Illinois,0.17,0.35,0.01,0.38,0.82,0.04
+400756884,2015,1,USC,Pac-12,Arkansas State,0.34,0.37,0.3,-0.08,-0.15,-0.03
+400756883,2015,1,Utah,Pac-12,Michigan,0.1,0.24,0.0,-0.02,0.08,-0.14
+400787110,2015,1,Utah State,Mountain West,Southern Utah,-0.13,-0.19,-0.06,-0.23,-0.21,-0.3
+400603828,2015,1,UTEP,Conference USA,Arkansas,0.1,0.48,-0.14,0.59,1.36,0.22
+400756882,2015,1,UTSA,Conference USA,Arizona,0.18,0.39,0.04,0.18,0.35,0.01
+400603839,2015,1,Vanderbilt,SEC,Western Kentucky,-0.05,-0.09,0.0,0.09,0.23,-0.12
+400756904,2015,1,Virginia,ACC,UCLA,0.1,0.34,-0.09,0.26,0.5,0.06
+400756905,2015,1,Virginia Tech,ACC,Ohio State,0.08,0.3,-0.09,0.6,0.74,0.53
+400756896,2015,1,Wake Forest,ACC,Elon,0.4,0.57,0.25,-0.14,-0.11,-0.2
+400756888,2015,1,Washington,Pac-12,Boise State,-0.15,0.0,-0.37,-0.08,0.11,-0.03
+400756889,2015,1,Washington State,Pac-12,Portland State,0.23,0.3,0.19,0.23,-0.34,0.4
+400603839,2015,1,Western Kentucky,Conference USA,Vanderbilt,0.09,0.23,-0.12,-0.05,-0.09,0.0
+400763470,2015,1,Western Michigan,Mid-American,Michigan State,0.11,0.19,-0.06,0.3,0.47,0.15
+400763407,2015,1,West Virginia,Big 12,Georgia Southern,0.27,0.53,0.17,-0.11,-0.43,-0.04
+400603827,2015,1,Wisconsin,Big Ten,Alabama,0.04,0.2,-0.35,0.46,0.42,0.51
+400787116,2015,1,Wyoming,Mountain West,North Dakota,0.1,0.24,-0.24,0.22,0.34,0.15
+400787117,2015,2,Air Force,Mountain West,San José State,0.29,-0.18,0.35,0.14,-0.07,0.52
+400756915,2015,2,Akron,Mid-American,Pittsburgh,-0.13,-0.22,-0.03,0.03,0.26,-0.1
+400603860,2015,2,Alabama,SEC,Middle Tennessee,0.19,0.09,0.3,-0.11,0.1,-0.33
+400756907,2015,2,App State,Sun Belt,Clemson,-0.21,-0.51,-0.02,0.18,0.32,0.05
+400756892,2015,2,Arizona,Pac-12,Nevada,0.36,0.32,0.38,0.08,0.15,0.02
+400756893,2015,2,Arizona State,Pac-12,Cal Poly,0.3,0.42,0.19,0.13,0.01,0.14
+400603861,2015,2,Arkansas,SEC,Toledo,0.13,0.27,-0.09,0.16,0.26,0.06
+400603862,2015,2,Arkansas State,Sun Belt,Missouri,-0.09,0.11,-0.21,0.04,0.06,0.03
+400760492,2015,2,Army,FBS Independents,UConn,0.15,0.67,0.02,0.14,0.58,-0.1
+400603863,2015,2,Auburn,SEC,Jacksonville State,0.17,0.59,-0.19,0.11,0.13,0.13
+400603869,2015,2,Ball State,Mid-American,Texas A&M,0.04,-0.26,0.29,0.39,0.64,0.22
+400763408,2015,2,Baylor,Big 12,Lamar,0.49,0.46,0.52,0.1,0.31,-0.05
+400787118,2015,2,Boise State,Mountain West,BYU,-0.14,-0.2,-0.05,0.17,0.3,0.05
+400756906,2015,2,Boston College,ACC,Howard,0.69,0.82,0.65,-0.46,-0.75,-0.26
+400763502,2015,2,Bowling Green,Mid-American,Maryland,0.3,0.39,0.18,0.09,0.1,0.1
+400763506,2015,2,Buffalo,Mid-American,Penn State,0.1,0.11,0.1,0.03,0.05,0.08
+400787118,2015,2,BYU,FBS Independents,Boise State,0.17,0.3,0.05,-0.14,-0.2,-0.05
+400757022,2015,2,California,Pac-12,San Diego State,0.46,0.66,0.3,-0.1,-0.07,-0.12
+400787306,2015,2,Central Michigan,Mid-American,Monmouth,0.25,0.63,-0.15,-0.17,-0.18,-0.15
+400763594,2015,2,Charlotte,Conference USA,Presbyterian,0.12,0.33,0.0,-0.08,-0.02,-0.08
+400764862,2015,2,Cincinnati,American Athletic,Temple,0.14,0.27,-0.01,0.05,0.15,-0.03
+400756907,2015,2,Clemson,ACC,App State,0.18,0.32,0.05,-0.21,-0.51,-0.02
+400757016,2015,2,Colorado,Pac-12,Massachusetts,0.38,0.48,0.37,0.06,-0.11,0.34
+400763499,2015,2,Colorado State,Mountain West,Minnesota,-0.06,-0.06,0.0,0.08,0.17,-0.01
+400756908,2015,2,Duke,ACC,North Carolina Central,0.38,0.71,0.23,-0.15,-0.07,-0.26
+400603864,2015,2,East Carolina,American Athletic,Florida,-0.01,0.13,-0.36,0.2,0.32,0.11
+400787119,2015,2,Eastern Michigan,Mid-American,Wyoming,0.48,1.13,0.07,0.24,-0.53,0.48
+400603864,2015,2,Florida,SEC,East Carolina,0.2,0.32,0.11,-0.01,0.13,-0.36
+400756912,2015,2,Florida Atlantic,Conference USA,Miami,0.19,0.03,0.42,0.34,0.45,0.25
+400763501,2015,2,Florida International,Conference USA,Indiana,0.03,0.02,0.04,0.13,0.18,0.12
+400792601,2015,2,Florida State,ACC,South Florida,0.17,0.17,0.15,-0.04,-0.14,0.03
+400603866,2015,2,Fresno State,Mountain West,Ole Miss,-0.22,-0.34,-0.17,0.44,0.35,0.54
+400603870,2015,2,Georgia,SEC,Vanderbilt,0.16,0.19,0.18,-0.14,-0.17,-0.17
+400787308,2015,2,Georgia Southern,Sun Belt,Western Michigan,0.29,0.14,0.35,0.06,0.24,-0.1
+400787415,2015,2,Georgia State,Sun Belt,New Mexico State,0.28,0.55,0.09,0.18,0.22,0.06
+400756910,2015,2,Georgia Tech,ACC,Tulane,0.63,0.91,0.58,-0.04,-0.01,0.01
+400763505,2015,2,Hawai'i,Mountain West,Ohio State,-0.21,-0.38,-0.05,0.07,-0.1,0.24
+400756911,2015,2,Houston,American Athletic,Louisville,0.17,0.25,0.15,0.17,0.33,-0.11
+400757014,2015,2,Idaho,Sun Belt,USC,-0.01,0.19,-0.29,0.63,0.83,0.47
+400763500,2015,2,Illinois,Big Ten,Western Illinois,0.12,0.35,-0.08,-0.28,-0.45,-0.14
+400763501,2015,2,Indiana,Big Ten,Florida International,0.13,0.18,0.12,0.03,0.02,0.04
+400763409,2015,2,Iowa,Big Ten,Iowa State,0.3,0.53,0.13,0.04,0.13,-0.07
+400763409,2015,2,Iowa State,Big 12,Iowa,0.04,0.13,-0.07,0.3,0.53,0.13
+400763410,2015,2,Kansas,Big 12,Memphis,0.05,-0.08,0.14,0.45,1.09,0.14
+400763414,2015,2,Kansas State,Big 12,UTSA,0.26,0.44,0.22,-0.06,-0.03,-0.17
+400787305,2015,2,Kent State,Mid-American,Delaware State,0.04,0.47,-0.15,-0.39,-0.34,-0.42
+400603867,2015,2,Kentucky,SEC,South Carolina,0.28,0.16,0.37,0.13,0.11,0.23
+400787416,2015,2,Louisiana,Sun Belt,Northwestern State,0.77,1.11,0.73,0.12,0.0,0.18
+400763599,2015,2,Louisiana Tech,Conference USA,Western Kentucky,0.24,0.18,0.37,0.25,0.68,-0.18
+400756911,2015,2,Louisville,ACC,Houston,0.17,0.33,-0.11,0.17,0.25,0.15
+400603865,2015,2,LSU,SEC,Mississippi State,0.08,-0.1,0.13,0.11,0.15,0.05
+400763595,2015,2,Marshall,Conference USA,Ohio,-0.07,-0.22,0.13,0.06,-0.13,0.19
+400763502,2015,2,Maryland,Big Ten,Bowling Green,0.09,0.1,0.1,0.3,0.39,0.18
+400757016,2015,2,Massachusetts,Mid-American,Colorado,0.06,-0.11,0.34,0.38,0.48,0.37
+400763410,2015,2,Memphis,American Athletic,Kansas,0.45,1.09,0.14,0.05,-0.08,0.14
+400756912,2015,2,Miami,ACC,Florida Atlantic,0.34,0.45,0.25,0.19,0.03,0.42
+400763508,2015,2,Miami (OH),Mid-American,Wisconsin,-0.16,-0.01,-0.41,0.25,0.37,0.23
+400757019,2015,2,Michigan,Big Ten,Oregon State,0.2,0.15,0.25,-0.18,-0.28,-0.1
+400757018,2015,2,Michigan State,Big Ten,Oregon,0.05,0.29,0.03,0.1,0.29,-0.1
+400603860,2015,2,Middle Tennessee,Conference USA,Alabama,-0.11,0.1,-0.33,0.19,0.09,0.3
+400763499,2015,2,Minnesota,Big Ten,Colorado State,0.08,0.17,-0.01,-0.06,-0.06,0.0
+400603865,2015,2,Mississippi State,SEC,LSU,0.11,0.15,0.05,0.08,-0.1,0.13
+400603862,2015,2,Missouri,SEC,Arkansas State,0.04,0.06,0.03,-0.09,0.11,-0.21
+400756914,2015,2,NC State,ACC,Eastern Kentucky,0.27,0.48,0.13,-0.25,-0.13,-0.39
+400763503,2015,2,Nebraska,Big Ten,South Alabama,0.41,0.55,0.33,0.01,0.3,-0.6
+400756892,2015,2,Nevada,Mountain West,Arizona,0.08,0.15,0.02,0.36,0.32,0.38
+400764863,2015,2,New Mexico,Mountain West,Tulsa,0.1,0.23,0.03,0.26,0.62,0.13
+400787415,2015,2,New Mexico State,Sun Belt,Georgia State,0.18,0.22,0.06,0.28,0.55,0.09
+400756913,2015,2,North Carolina,ACC,North Carolina A&T,0.41,0.77,0.16,0.04,0.22,-0.06
+400787307,2015,2,Northern Illinois,Mid-American,Murray State,0.37,0.54,0.22,-0.05,-0.07,0.03
+400763597,2015,2,North Texas,Conference USA,SMU,-0.1,0.12,-0.25,0.04,0.44,-0.22
+400763504,2015,2,Northwestern,Big Ten,Eastern Illinois,0.2,0.85,0.05,-0.47,-0.81,-0.17
+400756917,2015,2,Notre Dame,FBS Independents,Virginia,0.26,0.19,0.35,0.35,0.58,0.04
+400763595,2015,2,Ohio,Mid-American,Marshall,0.06,-0.13,0.19,-0.07,-0.22,0.13
+400763505,2015,2,Ohio State,Big Ten,Hawai'i,0.07,-0.1,0.24,-0.21,-0.38,-0.05
+400603868,2015,2,Oklahoma,Big 12,Tennessee,0.07,0.1,0.05,-0.13,-0.26,0.0
+400763411,2015,2,Oklahoma State,Big 12,Central Arkansas,0.35,0.7,0.01,-0.08,0.14,-0.24
+400763596,2015,2,Old Dominion,Conference USA,Norfolk State,0.2,0.31,0.18,-0.11,-0.07,-0.18
+400603866,2015,2,Ole Miss,SEC,Fresno State,0.44,0.35,0.54,-0.22,-0.34,-0.17
+400757018,2015,2,Oregon,Pac-12,Michigan State,0.1,0.29,-0.1,0.05,0.29,0.03
+400757019,2015,2,Oregon State,Pac-12,Michigan,-0.18,-0.28,-0.1,0.2,0.15,0.25
+400763506,2015,2,Penn State,Big Ten,Buffalo,0.03,0.05,0.08,0.1,0.11,0.1
+400756915,2015,2,Pittsburgh,ACC,Akron,0.03,0.26,-0.1,-0.13,-0.22,-0.03
+400763507,2015,2,Purdue,Big Ten,Indiana State,0.26,0.5,0.09,0.0,-0.08,0.09
+400763413,2015,2,Rice,Conference USA,Texas,0.08,0.16,0.02,0.4,0.68,0.28
+400757021,2015,2,Rutgers,Big Ten,Washington State,0.2,0.5,-0.03,0.29,0.37,-0.09
+400757022,2015,2,San Diego State,Mountain West,California,-0.1,-0.07,-0.12,0.46,0.66,0.3
+400787117,2015,2,San José State,Mountain West,Air Force,0.14,-0.07,0.52,0.29,-0.18,0.35
+400763597,2015,2,SMU,American Athletic,North Texas,0.04,0.44,-0.22,-0.1,0.12,-0.25
+400763503,2015,2,South Alabama,Sun Belt,Nebraska,0.01,0.3,-0.6,0.41,0.55,0.33
+400603867,2015,2,South Carolina,SEC,Kentucky,0.13,0.11,0.23,0.28,0.16,0.37
+400763598,2015,2,Southern Miss,Conference USA,Austin Peay,0.38,0.18,0.67,-0.25,-0.4,-0.18
+400792601,2015,2,South Florida,American Athletic,Florida State,-0.04,-0.14,0.03,0.17,0.17,0.15
+400757023,2015,2,Stanford,Pac-12,UCF,0.28,0.81,-0.13,-0.17,0.06,-0.48
+400756916,2015,2,Syracuse,ACC,Wake Forest,0.2,0.79,-0.01,-0.01,0.04,-0.07
+400763412,2015,2,TCU,Big 12,Stephen F. Austin,0.51,0.67,0.37,-0.39,-0.89,0.21
+400764862,2015,2,Temple,American Athletic,Cincinnati,0.05,0.15,-0.03,0.14,0.27,-0.01
+400603868,2015,2,Tennessee,SEC,Oklahoma,-0.13,-0.26,0.0,0.07,0.1,0.05
+400763413,2015,2,Texas,Big 12,Rice,0.4,0.68,0.28,0.08,0.16,0.02
+400603869,2015,2,Texas A&M,SEC,Ball State,0.39,0.64,0.22,0.04,-0.26,0.29
+400787418,2015,2,Texas State,Sun Belt,Prairie View A&M,0.66,1.06,0.48,-0.09,0.15,-0.42
+400763415,2015,2,Texas Tech,Big 12,UTEP,0.63,0.7,0.59,0.12,0.27,0.04
+400603861,2015,2,Toledo,Mid-American,Arkansas,0.16,0.26,0.06,0.13,0.27,-0.09
+400787419,2015,2,Troy,Sun Belt,Charleston Southern,0.26,0.51,0.08,0.02,-0.07,0.06
+400756910,2015,2,Tulane,American Athletic,Georgia Tech,-0.04,-0.01,0.01,0.63,0.91,0.58
+400764863,2015,2,Tulsa,American Athletic,New Mexico,0.26,0.62,0.13,0.1,0.23,0.03
+400757023,2015,2,UCF,American Athletic,Stanford,-0.17,0.06,-0.48,0.28,0.81,-0.13
+400757015,2015,2,UCLA,Pac-12,UNLV,0.09,-0.02,0.22,-0.34,-0.82,-0.08
+400760492,2015,2,UConn,American Athletic,Army,0.14,0.58,-0.1,0.15,0.67,0.02
+400787417,2015,2,UL Monroe,Sun Belt,Nicholls,0.4,0.63,0.19,-0.07,0.04,-0.12
+400757015,2015,2,UNLV,Mountain West,UCLA,-0.34,-0.82,-0.08,0.09,-0.02,0.22
+400757014,2015,2,USC,Pac-12,Idaho,0.63,0.83,0.47,-0.01,0.19,-0.29
+400787981,2015,2,Utah,Pac-12,Utah State,0.21,0.3,0.19,0.09,0.18,-0.02
+400787981,2015,2,Utah State,Mountain West,Utah,0.09,0.18,-0.02,0.21,0.3,0.19
+400763415,2015,2,UTEP,Conference USA,Texas Tech,0.12,0.27,0.04,0.63,0.7,0.59
+400763414,2015,2,UTSA,Conference USA,Kansas State,-0.06,-0.03,-0.17,0.26,0.44,0.22
+400603870,2015,2,Vanderbilt,SEC,Georgia,-0.14,-0.17,-0.17,0.16,0.19,0.18
+400756917,2015,2,Virginia,ACC,Notre Dame,0.35,0.58,0.04,0.26,0.19,0.35
+400756918,2015,2,Virginia Tech,ACC,Furman,0.47,0.55,0.4,-0.12,-0.41,0.07
+400756916,2015,2,Wake Forest,ACC,Syracuse,-0.01,0.04,-0.07,0.2,0.79,-0.01
+400757020,2015,2,Washington,Pac-12,Sacramento State,0.49,0.51,0.46,-0.2,0.19,-0.79
+400757021,2015,2,Washington State,Pac-12,Rutgers,0.29,0.37,-0.09,0.2,0.5,-0.03
+400763599,2015,2,Western Kentucky,Conference USA,Louisiana Tech,0.25,0.68,-0.18,0.24,0.18,0.37
+400787308,2015,2,Western Michigan,Mid-American,Georgia Southern,0.06,0.24,-0.1,0.29,0.14,0.35
+400763416,2015,2,West Virginia,Big 12,Liberty,0.3,0.55,0.15,0.17,0.4,-0.14
+400763508,2015,2,Wisconsin,Big Ten,Miami (OH),0.25,0.37,0.23,-0.16,-0.01,-0.41
+400787119,2015,2,Wyoming,Mountain West,Eastern Michigan,0.24,-0.53,0.48,0.48,1.13,0.07
+400763512,2015,3,Air Force,Mountain West,Michigan State,0.15,0.55,0.07,0.1,0.75,-0.32
+400787310,2015,3,Akron,Mid-American,Savannah St,0.17,0.23,0.37,-0.09,-0.04,-0.12
+400603850,2015,3,Alabama,SEC,Ole Miss,0.2,0.24,0.18,0.26,0.51,-0.02
+400757024,2015,3,Arizona,Pac-12,Northern Arizona,0.69,0.41,0.96,0.01,0.29,-0.18
+400787241,2015,3,Arizona State,Pac-12,New Mexico,0.3,0.51,0.11,0.01,-0.09,0.09
+400603851,2015,3,Arkansas,SEC,Texas Tech,0.35,0.88,0.12,0.53,0.78,0.24
+400787420,2015,3,Arkansas State,Sun Belt,Missouri State,0.53,0.66,0.46,-0.09,-0.36,0.16
+400756930,2015,3,Army,FBS Independents,Wake Forest,0.05,0.84,0.0,0.08,-0.07,0.24
+400603854,2015,3,Auburn,SEC,LSU,0.16,0.06,0.23,0.46,0.34,0.52
+400787311,2015,3,Ball State,Mid-American,Eastern Michigan,0.21,0.06,0.32,-0.02,-0.03,0.01
+400787120,2015,3,Boise State,Mountain West,Idaho State,0.34,0.34,0.33,-0.02,0.1,-0.33
+400756920,2015,3,Boston College,ACC,Florida State,-0.04,-0.05,-0.04,-0.05,0.03,-0.11
+400764864,2015,3,Bowling Green,Mid-American,Memphis,0.47,0.51,0.4,0.27,0.44,0.09
+400763600,2015,3,Buffalo,Mid-American,Florida Atlantic,0.01,-0.04,0.1,-0.17,-0.14,-0.15
+400757027,2015,3,BYU,FBS Independents,UCLA,0.11,0.07,0.17,0.15,-0.31,0.43
+400757034,2015,3,California,Pac-12,Texas,0.31,0.5,0.16,0.35,0.43,0.31
+400756927,2015,3,Central Michigan,Mid-American,Syracuse,0.15,0.31,-0.05,0.24,0.57,0.07
+400763603,2015,3,Charlotte,Conference USA,Middle Tennessee,-0.29,-0.53,-0.04,0.45,0.68,0.32
+400764865,2015,3,Cincinnati,American Athletic,Miami (OH),0.16,0.06,0.2,0.12,0.21,0.1
+400756919,2015,3,Clemson,ACC,Louisville,0.13,0.12,0.18,-0.01,0.05,-0.05
+400757028,2015,3,Colorado,Pac-12,Colorado State,0.18,0.34,0.01,0.09,0.19,0.02
+400757028,2015,3,Colorado State,Mountain West,Colorado,0.09,0.19,0.02,0.18,0.34,0.01
+400756921,2015,3,Duke,ACC,Northwestern,-0.13,-0.26,0.03,-0.05,-0.29,0.02
+400764866,2015,3,East Carolina,American Athletic,Navy,0.26,0.3,0.14,0.28,-0.27,0.35
+400787311,2015,3,Eastern Michigan,Mid-American,Ball State,-0.02,-0.03,0.01,0.21,0.06,0.32
+400603853,2015,3,Florida,SEC,Kentucky,0.09,-0.15,0.25,-0.04,-0.24,0.13
+400763600,2015,3,Florida Atlantic,Conference USA,Buffalo,-0.17,-0.14,-0.15,0.01,-0.04,0.1
+400763601,2015,3,Florida International,Conference USA,North Carolina Central,0.2,0.25,0.16,-0.18,-0.26,-0.05
+400756920,2015,3,Florida State,ACC,Boston College,-0.05,0.03,-0.11,-0.04,-0.05,-0.04
+400757029,2015,3,Fresno State,Mountain West,Utah,0.24,0.31,0.16,0.19,0.31,0.13
+400603852,2015,3,Georgia,SEC,South Carolina,0.63,1.16,0.31,0.07,-0.1,0.17
+400787441,2015,3,Georgia Southern,Sun Belt,The Citadel,0.31,0.25,0.36,0.05,-0.29,0.1
+400757030,2015,3,Georgia State,Sun Belt,Oregon,-0.02,0.23,-0.34,0.27,0.21,0.34
+400756922,2015,3,Georgia Tech,ACC,Notre Dame,0.05,0.03,0.06,0.26,0.32,0.23
+400787242,2015,3,Hawai'i,Mountain West,UC Davis,0.46,0.66,0.35,0.11,0.67,-0.16
+400787442,2015,3,Idaho,Sun Belt,Wofford,0.28,0.29,0.36,0.5,1.1,0.4
+400756924,2015,3,Illinois,Big Ten,North Carolina,0.08,-0.07,0.2,0.31,0.59,0.11
+400763509,2015,3,Indiana,Big Ten,Western Kentucky,0.34,0.93,0.08,0.41,0.66,-0.03
+400756926,2015,3,Iowa,Big Ten,Pittsburgh,0.26,0.22,0.27,0.11,0.32,-0.18
+400763421,2015,3,Iowa State,Big 12,Toledo,0.12,0.21,0.01,0.1,0.1,0.12
+400763417,2015,3,Kansas State,Big 12,Louisiana Tech,0.1,0.55,-0.16,0.09,0.01,0.26
+400763513,2015,3,Kent State,Mid-American,Minnesota,-0.12,-0.11,-0.13,-0.07,0.29,-0.31
+400603853,2015,3,Kentucky,SEC,Florida,-0.04,-0.24,0.13,0.09,-0.15,0.25
+400763417,2015,3,Louisiana Tech,Conference USA,Kansas State,0.09,0.01,0.26,0.1,0.55,-0.16
+400756919,2015,3,Louisville,ACC,Clemson,-0.01,0.05,-0.05,0.13,0.12,0.18
+400603854,2015,3,LSU,SEC,Auburn,0.46,0.34,0.52,0.16,0.06,0.23
+400763602,2015,3,Marshall,Conference USA,Norfolk State,0.36,0.55,0.2,-0.09,-0.07,-0.09
+400763510,2015,3,Maryland,Big Ten,South Florida,0.21,0.59,-0.16,0.09,-0.21,0.27
+400764869,2015,3,Massachusetts,Mid-American,Temple,0.1,0.24,-0.2,-0.07,0.23,-0.46
+400764864,2015,3,Memphis,American Athletic,Bowling Green,0.27,0.44,0.09,0.47,0.51,0.4
+400756923,2015,3,Miami,ACC,Nebraska,0.12,0.3,-0.01,0.17,0.1,0.24
+400764865,2015,3,Miami (OH),Mid-American,Cincinnati,0.12,0.21,0.1,0.16,0.06,0.2
+400763511,2015,3,Michigan,Big Ten,UNLV,0.15,0.11,0.18,-0.03,0.1,-0.14
+400763512,2015,3,Michigan State,Big Ten,Air Force,0.1,0.75,-0.32,0.15,0.55,0.07
+400763603,2015,3,Middle Tennessee,Conference USA,Charlotte,0.45,0.68,0.32,-0.29,-0.53,-0.04
+400763513,2015,3,Minnesota,Big Ten,Kent State,-0.07,0.29,-0.31,-0.12,-0.11,-0.13
+400603855,2015,3,Mississippi State,SEC,Northwestern State,0.89,1.29,0.68,0.01,0.01,0.0
+400603856,2015,3,Missouri,SEC,UConn,-0.15,-0.07,-0.23,-0.07,-0.09,-0.06
+400764866,2015,3,Navy,American Athletic,East Carolina,0.28,-0.27,0.35,0.26,0.3,0.14
+400756925,2015,3,NC State,ACC,Old Dominion,0.25,0.21,0.27,0.06,0.27,-0.21
+400756923,2015,3,Nebraska,Big Ten,Miami,0.17,0.1,0.24,0.12,0.3,-0.01
+400603858,2015,3,Nevada,Mountain West,Texas A&M,0.09,0.35,-0.1,0.28,0.32,0.33
+400787241,2015,3,New Mexico,Mountain West,Arizona State,0.01,-0.09,0.09,0.3,0.51,0.11
+400763604,2015,3,New Mexico State,Sun Belt,UTEP,0.4,0.26,0.62,0.28,0.39,0.19
+400756924,2015,3,North Carolina,ACC,Illinois,0.31,0.59,0.11,0.08,-0.07,0.2
+400763514,2015,3,Northern Illinois,Mid-American,Ohio State,-0.23,-0.39,-0.07,-0.18,-0.2,-0.13
+400763605,2015,3,North Texas,Conference USA,Rice,0.25,0.35,0.13,0.28,0.53,0.09
+400756921,2015,3,Northwestern,Big Ten,Duke,-0.05,-0.29,0.02,-0.13,-0.26,0.03
+400756922,2015,3,Notre Dame,FBS Independents,Georgia Tech,0.26,0.32,0.23,0.05,0.03,0.06
+400787309,2015,3,Ohio,Mid-American,SE Louisiana,0.45,0.78,0.1,-0.03,0.19,-0.22
+400763514,2015,3,Ohio State,Big Ten,Northern Illinois,-0.18,-0.2,-0.13,-0.23,-0.39,-0.07
+400763418,2015,3,Oklahoma,Big 12,Tulsa,0.45,0.83,0.13,0.33,0.57,0.04
+400763419,2015,3,Oklahoma State,Big 12,UTSA,0.46,0.53,0.42,0.02,0.01,0.03
+400756925,2015,3,Old Dominion,Conference USA,NC State,0.06,0.27,-0.21,0.25,0.21,0.27
+400603850,2015,3,Ole Miss,SEC,Alabama,0.26,0.51,-0.02,0.2,0.24,0.18
+400757030,2015,3,Oregon,Pac-12,Georgia State,0.27,0.21,0.34,-0.02,0.23,-0.34
+400757031,2015,3,Oregon State,Pac-12,San José State,0.25,0.21,0.27,-0.1,-0.25,0.04
+400763515,2015,3,Penn State,Big Ten,Rutgers,0.24,0.15,0.29,-0.03,-0.02,-0.05
+400756926,2015,3,Pittsburgh,ACC,Iowa,0.11,0.32,-0.18,0.26,0.22,0.27
+400756929,2015,3,Purdue,Big Ten,Virginia Tech,-0.13,-0.2,-0.07,0.02,0.51,-0.23
+400763605,2015,3,Rice,Conference USA,North Texas,0.28,0.53,0.09,0.25,0.35,0.13
+400763515,2015,3,Rutgers,Big Ten,Penn State,-0.03,-0.02,-0.05,0.24,0.15,0.29
+400787243,2015,3,San Diego State,Mountain West,South Alabama,0.05,0.17,-0.07,0.19,0.35,0.08
+400757031,2015,3,San José State,Mountain West,Oregon State,-0.1,-0.25,0.04,0.25,0.21,0.27
+400763420,2015,3,SMU,American Athletic,TCU,0.25,0.39,0.22,0.54,0.92,0.24
+400787243,2015,3,South Alabama,Sun Belt,San Diego State,0.19,0.35,0.08,0.05,0.17,-0.07
+400603852,2015,3,South Carolina,SEC,Georgia,0.07,-0.1,0.17,0.63,1.16,0.31
+400763606,2015,3,Southern Miss,Conference USA,Texas State,0.51,1.01,0.24,0.28,0.26,0.37
+400763510,2015,3,South Florida,American Athletic,Maryland,0.09,-0.21,0.27,0.21,0.59,-0.16
+400757026,2015,3,Stanford,Pac-12,USC,0.44,0.76,0.25,0.35,0.43,0.27
+400756927,2015,3,Syracuse,ACC,Central Michigan,0.24,0.57,0.07,0.15,0.31,-0.05
+400763420,2015,3,TCU,Big 12,SMU,0.54,0.92,0.24,0.25,0.39,0.22
+400764869,2015,3,Temple,American Athletic,Massachusetts,-0.07,0.23,-0.46,0.1,0.24,-0.2
+400603857,2015,3,Tennessee,SEC,Western Carolina,0.17,0.24,0.17,0.02,-0.08,0.11
+400757034,2015,3,Texas,Big 12,California,0.35,0.43,0.31,0.31,0.5,0.16
+400603858,2015,3,Texas A&M,SEC,Nevada,0.28,0.32,0.33,0.09,0.35,-0.1
+400763606,2015,3,Texas State,Sun Belt,Southern Miss,0.28,0.26,0.37,0.51,1.01,0.24
+400603851,2015,3,Texas Tech,Big 12,Arkansas,0.53,0.78,0.24,0.35,0.88,0.12
+400763421,2015,3,Toledo,Mid-American,Iowa State,0.1,0.1,0.12,0.12,0.21,0.01
+400763516,2015,3,Troy,Sun Belt,Wisconsin,0.06,0.18,-0.07,0.39,0.51,0.32
+400764867,2015,3,Tulane,American Athletic,Maine,0.31,0.47,0.2,-0.15,-0.04,-0.28
+400763418,2015,3,Tulsa,American Athletic,Oklahoma,0.33,0.57,0.04,0.45,0.83,0.13
+400764868,2015,3,UCF,American Athletic,Furman,-0.18,-0.25,-0.11,0.03,0.2,-0.15
+400757027,2015,3,UCLA,Pac-12,BYU,0.15,-0.31,0.43,0.11,0.07,0.17
+400603856,2015,3,UConn,American Athletic,Missouri,-0.07,-0.09,-0.06,-0.15,-0.07,-0.23
+400763511,2015,3,UNLV,Mountain West,Michigan,-0.03,0.1,-0.14,0.15,0.11,0.18
+400757026,2015,3,USC,Pac-12,Stanford,0.35,0.43,0.27,0.44,0.76,0.25
+400757029,2015,3,Utah,Pac-12,Fresno State,0.19,0.31,0.13,0.24,0.31,0.16
+400757032,2015,3,Utah State,Mountain West,Washington,-0.11,0.04,-0.23,0.34,0.85,-0.14
+400763604,2015,3,UTEP,Conference USA,New Mexico State,0.28,0.39,0.19,0.4,0.26,0.62
+400763419,2015,3,UTSA,Conference USA,Oklahoma State,0.02,0.01,0.03,0.46,0.53,0.42
+400603859,2015,3,Vanderbilt,SEC,Austin Peay,0.41,0.66,0.16,-0.21,-0.21,-0.21
+400756928,2015,3,Virginia,ACC,William & Mary,0.4,0.81,0.05,0.07,0.05,0.13
+400756929,2015,3,Virginia Tech,ACC,Purdue,0.02,0.51,-0.23,-0.13,-0.2,-0.07
+400756930,2015,3,Wake Forest,ACC,Army,0.08,-0.07,0.24,0.05,0.84,0.0
+400757032,2015,3,Washington,Pac-12,Utah State,0.34,0.85,-0.14,-0.11,0.04,-0.23
+400757033,2015,3,Washington State,Pac-12,Wyoming,0.24,0.26,0.27,0.09,0.36,-0.21
+400763509,2015,3,Western Kentucky,Conference USA,Indiana,0.41,0.66,-0.03,0.34,0.93,0.08
+400787312,2015,3,Western Michigan,Mid-American,Murray State,0.37,0.81,0.04,0.09,0.08,0.1
+400763516,2015,3,Wisconsin,Big Ten,Troy,0.39,0.51,0.32,0.06,0.18,-0.07
+400757033,2015,3,Wyoming,Mountain West,Washington State,0.09,0.36,-0.21,0.24,0.26,0.27
+400787313,2015,4,Akron,Mid-American,Louisiana,0.24,0.23,0.25,0.03,0.05,0.01
+400603841,2015,4,Alabama,SEC,UL Monroe,0.0,-0.05,0.06,-0.28,-0.31,-0.2
+400763610,2015,4,App State,Sun Belt,Old Dominion,0.22,0.83,0.03,-0.28,-0.11,-0.51
+400757036,2015,4,Arizona,Pac-12,UCLA,0.15,-0.23,0.33,0.47,0.71,0.32
+400757037,2015,4,Arizona State,Pac-12,USC,0.13,0.09,0.19,0.34,0.76,-0.15
+400603842,2015,4,Arkansas,SEC,Texas A&M,0.35,0.37,0.33,0.31,0.61,-0.04
+400787314,2015,4,Arkansas State,Sun Belt,Toledo,-0.3,-0.16,-0.58,0.15,0.28,0.04
+400760493,2015,4,Army,FBS Independents,Eastern Michigan,0.48,0.59,0.46,0.29,0.37,0.13
+400603843,2015,4,Auburn,SEC,Mississippi State,0.08,0.0,0.16,0.1,0.34,-0.33
+400763523,2015,4,Ball State,Mid-American,Northwestern,-0.05,0.06,-0.16,0.24,0.55,0.09
+400763422,2015,4,Baylor,Big 12,Rice,0.65,1.21,0.38,-0.01,-0.06,0.0
+400756931,2015,4,Boise State,Mountain West,Virginia,0.18,0.28,-0.01,-0.27,-0.16,-0.35
+400756932,2015,4,Boston College,ACC,Northern Illinois,-0.06,0.12,-0.09,-0.16,-0.28,-0.05
+400763526,2015,4,Bowling Green,Mid-American,Purdue,0.29,0.26,0.35,0.23,0.39,0.03
+400787245,2015,4,Buffalo,Mid-American,Nevada,0.24,0.43,-0.04,0.17,-0.07,0.32
+400763519,2015,4,BYU,FBS Independents,Michigan,-0.23,-0.44,0.1,0.22,0.36,0.15
+400757040,2015,4,California,Pac-12,Washington,0.06,0.31,-0.22,0.01,0.06,-0.07
+400763520,2015,4,Central Michigan,Mid-American,Michigan State,0.14,0.37,-0.34,0.28,0.5,0.18
+400763607,2015,4,Charlotte,Conference USA,Florida Atlantic,-0.35,-0.62,-0.14,-0.47,-0.37,-0.58
+400764870,2015,4,Cincinnati,American Athletic,Memphis,0.24,0.36,0.01,0.43,0.58,0.25
+400757038,2015,4,Colorado,Pac-12,Nicholls,0.28,0.42,0.19,-0.07,-0.19,0.01
+400763612,2015,4,Colorado State,Mountain West,UTSA,0.23,0.48,0.09,0.32,0.05,0.58
+400756933,2015,4,Duke,ACC,Georgia Tech,-0.03,0.0,-0.05,-0.06,0.25,-0.23
+400756937,2015,4,East Carolina,American Athletic,Virginia Tech,0.3,0.85,0.04,0.2,0.24,0.16
+400760493,2015,4,Eastern Michigan,Mid-American,Army,0.29,0.37,0.13,0.48,0.59,0.46
+400603844,2015,4,Florida,SEC,Tennessee,0.2,0.26,0.09,0.23,0.31,0.23
+400763607,2015,4,Florida Atlantic,Conference USA,Charlotte,-0.47,-0.37,-0.58,-0.35,-0.62,-0.14
+400763609,2015,4,Florida International,Conference USA,Louisiana Tech,0.08,0.28,-0.35,0.25,0.34,0.2
+400787244,2015,4,Fresno State,Mountain West,San José State,-0.17,-0.25,-0.08,0.44,0.45,0.44
+400603845,2015,4,Georgia,SEC,Southern,0.57,0.65,0.54,-0.08,-0.15,-0.03
+400787443,2015,4,Georgia Southern,Sun Belt,Idaho,0.32,-0.04,0.45,0.09,0.19,0.01
+400756933,2015,4,Georgia Tech,ACC,Duke,-0.06,0.25,-0.23,-0.03,0.0,-0.05
+400763527,2015,4,Hawai'i,Mountain West,Wisconsin,-0.16,-0.04,-0.46,0.36,0.44,0.32
+400764872,2015,4,Houston,American Athletic,Texas State,0.45,0.97,0.23,-0.06,-0.08,-0.02
+400787443,2015,4,Idaho,Sun Belt,Georgia Southern,0.09,0.19,0.01,0.32,-0.04,0.45
+400763517,2015,4,Illinois,Big Ten,Middle Tennessee,0.01,-0.09,0.22,0.18,0.52,-0.28
+400756938,2015,4,Indiana,Big Ten,Wake Forest,0.15,0.25,0.13,0.0,-0.16,0.34
+400763518,2015,4,Iowa,Big Ten,North Texas,0.47,0.91,0.23,-0.14,-0.43,0.18
+400763423,2015,4,Kansas,Big 12,Rutgers,0.02,0.2,-0.23,0.24,0.52,0.13
+400763608,2015,4,Kent State,Mid-American,Marshall,0.06,0.09,0.05,-0.11,-0.15,-0.07
+400603846,2015,4,Kentucky,SEC,Missouri,0.21,0.52,-0.05,0.08,0.21,-0.04
+400787313,2015,4,Louisiana,Sun Belt,Akron,0.03,0.05,0.01,0.24,0.23,0.25
+400763609,2015,4,Louisiana Tech,Conference USA,Florida International,0.25,0.34,0.2,0.08,0.28,-0.35
+400756934,2015,4,Louisville,ACC,Samford,0.41,0.2,0.5,-0.18,-0.19,-0.17
+400603849,2015,4,LSU,SEC,Syracuse,0.32,0.56,0.26,0.09,0.05,0.13
+400763608,2015,4,Marshall,Conference USA,Kent State,-0.11,-0.15,-0.07,0.06,0.09,0.05
+400763426,2015,4,Maryland,Big Ten,West Virginia,-0.16,-0.33,0.1,0.27,0.16,0.32
+400763583,2015,4,Massachusetts,Mid-American,Notre Dame,0.14,0.19,0.32,0.56,0.47,0.61
+400764870,2015,4,Memphis,American Athletic,Cincinnati,0.43,0.58,0.25,0.24,0.36,0.01
+400763613,2015,4,Miami (OH),Mid-American,Western Kentucky,0.06,0.34,-0.18,0.4,0.74,-0.08
+400763519,2015,4,Michigan,Big Ten,BYU,0.22,0.36,0.15,-0.23,-0.44,0.1
+400763520,2015,4,Michigan State,Big Ten,Central Michigan,0.28,0.5,0.18,0.14,0.37,-0.34
+400763517,2015,4,Middle Tennessee,Conference USA,Illinois,0.18,0.52,-0.28,0.01,-0.09,0.22
+400763521,2015,4,Minnesota,Big Ten,Ohio,0.31,0.5,0.1,0.22,0.4,0.04
+400603843,2015,4,Mississippi State,SEC,Auburn,0.1,0.34,-0.33,0.08,0.0,0.16
+400603846,2015,4,Missouri,SEC,Kentucky,0.08,0.21,-0.04,0.21,0.52,-0.05
+400764871,2015,4,Navy,American Athletic,UConn,0.24,1.19,0.16,0.11,0.01,0.27
+400756936,2015,4,NC State,ACC,South Alabama,0.61,0.54,0.65,-0.04,0.02,-0.23
+400763522,2015,4,Nebraska,Big Ten,Southern Miss,0.35,0.57,0.22,0.16,0.45,-0.54
+400787245,2015,4,Nevada,Mountain West,Buffalo,0.17,-0.07,0.32,0.24,0.43,-0.04
+400787246,2015,4,New Mexico,Mountain West,Wyoming,0.33,0.94,0.26,0.32,0.58,-0.08
+400756935,2015,4,North Carolina,ACC,Delaware,0.5,0.77,0.21,0.08,-0.53,0.2
+400756932,2015,4,Northern Illinois,Mid-American,Boston College,-0.16,-0.28,-0.05,-0.06,0.12,-0.09
+400763518,2015,4,North Texas,Conference USA,Iowa,-0.14,-0.43,0.18,0.47,0.91,0.23
+400763523,2015,4,Northwestern,Big Ten,Ball State,0.24,0.55,0.09,-0.05,0.06,-0.16
+400763583,2015,4,Notre Dame,FBS Independents,Massachusetts,0.56,0.47,0.61,0.14,0.19,0.32
+400763521,2015,4,Ohio,Mid-American,Minnesota,0.22,0.4,0.04,0.31,0.5,0.1
+400763524,2015,4,Ohio State,Big Ten,Western Michigan,0.28,0.22,0.35,0.04,-0.04,0.11
+400763424,2015,4,Oklahoma State,Big 12,Texas,0.02,0.24,-0.2,-0.01,-0.38,0.18
+400763610,2015,4,Old Dominion,Conference USA,App State,-0.28,-0.11,-0.51,0.22,0.83,0.03
+400603847,2015,4,Ole Miss,SEC,Vanderbilt,0.12,0.23,0.03,0.0,0.21,-0.19
+400757039,2015,4,Oregon,Pac-12,Utah,0.06,-0.24,0.34,0.42,0.69,0.23
+400757035,2015,4,Oregon State,Pac-12,Stanford,0.2,0.38,0.03,0.33,0.55,0.26
+400763525,2015,4,Penn State,Big Ten,San Diego State,0.09,0.55,-0.41,-0.06,-0.19,0.07
+400763526,2015,4,Purdue,Big Ten,Bowling Green,0.23,0.39,0.03,0.29,0.26,0.35
+400763422,2015,4,Rice,Conference USA,Baylor,-0.01,-0.06,0.0,0.65,1.21,0.38
+400763423,2015,4,Rutgers,Big Ten,Kansas,0.24,0.52,0.13,0.02,0.2,-0.23
+400763525,2015,4,San Diego State,Mountain West,Penn State,-0.06,-0.19,0.07,0.09,0.55,-0.41
+400787244,2015,4,San José State,Mountain West,Fresno State,0.44,0.45,0.44,-0.17,-0.25,-0.08
+400768337,2015,4,SMU,American Athletic,James Madison,0.17,0.23,0.11,0.38,0.44,0.38
+400756936,2015,4,South Alabama,Sun Belt,NC State,-0.04,0.02,-0.23,0.61,0.54,0.65
+400603848,2015,4,South Carolina,SEC,UCF,0.2,0.4,0.07,-0.02,0.04,-0.05
+400763522,2015,4,Southern Miss,Conference USA,Nebraska,0.16,0.45,-0.54,0.35,0.57,0.22
+400757035,2015,4,Stanford,Pac-12,Oregon State,0.33,0.55,0.26,0.2,0.38,0.03
+400603849,2015,4,Syracuse,ACC,LSU,0.09,0.05,0.13,0.32,0.56,0.26
+400763425,2015,4,TCU,Big 12,Texas Tech,0.48,0.64,0.29,0.36,0.32,0.46
+400603844,2015,4,Tennessee,SEC,Florida,0.23,0.31,0.23,0.2,0.26,0.09
+400763424,2015,4,Texas,Big 12,Oklahoma State,-0.01,-0.38,0.18,0.02,0.24,-0.2
+400603842,2015,4,Texas A&M,SEC,Arkansas,0.31,0.61,-0.04,0.35,0.37,0.33
+400764872,2015,4,Texas State,Sun Belt,Houston,-0.06,-0.08,-0.02,0.45,0.97,0.23
+400763425,2015,4,Texas Tech,Big 12,TCU,0.36,0.32,0.46,0.48,0.64,0.29
+400787314,2015,4,Toledo,Mid-American,Arkansas State,0.15,0.28,0.04,-0.3,-0.16,-0.58
+400603848,2015,4,UCF,American Athletic,South Carolina,-0.02,0.04,-0.05,0.2,0.4,0.07
+400757036,2015,4,UCLA,Pac-12,Arizona,0.47,0.71,0.32,0.15,-0.23,0.33
+400764871,2015,4,UConn,American Athletic,Navy,0.11,0.01,0.27,0.24,1.19,0.16
+400603841,2015,4,UL Monroe,Sun Belt,Alabama,-0.28,-0.31,-0.2,0.0,-0.05,0.06
+400787247,2015,4,UNLV,Mountain West,Idaho State,0.51,0.54,0.53,-0.2,-0.26,-0.11
+400757037,2015,4,USC,Pac-12,Arizona State,0.34,0.76,-0.15,0.13,0.09,0.19
+400757039,2015,4,Utah,Pac-12,Oregon,0.42,0.69,0.23,0.06,-0.24,0.34
+400763611,2015,4,UTEP,Conference USA,Incarnate Word,0.06,0.5,-0.32,-0.22,-0.29,-0.08
+400763612,2015,4,UTSA,Conference USA,Colorado State,0.32,0.05,0.58,0.23,0.48,0.09
+400603847,2015,4,Vanderbilt,SEC,Ole Miss,0.0,0.21,-0.19,0.12,0.23,0.03
+400756931,2015,4,Virginia,ACC,Boise State,-0.27,-0.16,-0.35,0.18,0.28,-0.01
+400756937,2015,4,Virginia Tech,ACC,East Carolina,0.2,0.24,0.16,0.3,0.85,0.04
+400756938,2015,4,Wake Forest,ACC,Indiana,0.0,-0.16,0.34,0.15,0.25,0.13
+400757040,2015,4,Washington,Pac-12,California,0.01,0.06,-0.07,0.06,0.31,-0.22
+400763613,2015,4,Western Kentucky,Conference USA,Miami (OH),0.4,0.74,-0.08,0.06,0.34,-0.18
+400763524,2015,4,Western Michigan,Mid-American,Ohio State,0.04,-0.04,0.11,0.28,0.22,0.35
+400763426,2015,4,West Virginia,Big 12,Maryland,0.27,0.16,0.32,-0.16,-0.33,0.1
+400763527,2015,4,Wisconsin,Big Ten,Hawai'i,0.36,0.44,0.32,-0.16,-0.04,-0.46
+400787246,2015,4,Wyoming,Mountain West,New Mexico,0.32,0.58,-0.08,0.33,0.94,0.26
+400764876,2015,5,Air Force,Mountain West,Navy,-0.2,-0.05,-0.24,0.35,0.94,0.24
+400787316,2015,5,Akron,Mid-American,Ohio,0.07,0.12,-0.02,-0.02,0.11,-0.15
+400603879,2015,5,Alabama,SEC,Georgia,0.05,0.37,-0.05,-0.27,-0.54,-0.02
+400787253,2015,5,App State,Sun Belt,Wyoming,0.2,-0.17,0.26,-0.13,-0.32,-0.04
+400757041,2015,5,Arizona,Pac-12,Stanford,0.13,0.25,0.02,0.55,0.76,0.44
+400757042,2015,5,Arizona State,Pac-12,UCLA,0.14,0.3,0.02,0.07,0.27,-0.08
+400603884,2015,5,Arkansas,SEC,Tennessee,0.22,0.45,0.14,0.18,0.21,0.15
+400787444,2015,5,Arkansas State,Sun Belt,Idaho,0.27,0.2,0.31,0.11,-0.04,0.35
+400760494,2015,5,Army,FBS Independents,Penn State,0.11,-0.17,0.13,0.03,0.14,-0.01
+400603877,2015,5,Auburn,SEC,San José State,0.29,0.46,0.25,0.19,0.29,0.1
+400787317,2015,5,Ball State,Mid-American,Toledo,-0.11,0.14,-0.42,0.25,0.56,0.13
+400763431,2015,5,Baylor,Big 12,Texas Tech,0.6,1.08,0.37,0.27,0.44,-0.17
+400787248,2015,5,Boise State,Mountain West,Hawai'i,0.22,0.68,0.02,-0.18,-0.29,-0.03
+400756939,2015,5,Boston College,ACC,Duke,0.0,0.05,-0.03,-0.13,0.19,-0.57
+400787318,2015,5,Bowling Green,Mid-American,Buffalo,0.35,0.34,0.36,0.17,0.15,0.27
+400787318,2015,5,Buffalo,Mid-American,Bowling Green,0.17,0.15,0.27,0.35,0.34,0.36
+400764874,2015,5,BYU,FBS Independents,UConn,0.13,0.36,-0.14,0.04,0.16,-0.12
+400757044,2015,5,California,Pac-12,Washington State,0.22,0.55,-0.31,0.13,0.19,-0.02
+400787315,2015,5,Central Michigan,Mid-American,Northern Illinois,0.0,0.3,-0.26,-0.01,0.12,-0.06
+400763614,2015,5,Charlotte,Conference USA,Temple,-0.02,-0.17,0.07,0.14,0.45,-0.01
+400764873,2015,5,Cincinnati,American Athletic,Miami,0.29,0.38,0.2,0.12,0.1,0.15
+400756940,2015,5,Clemson,ACC,Notre Dame,-0.04,-0.05,-0.03,0.07,0.33,-0.27
+400757043,2015,5,Colorado,Pac-12,Oregon,0.12,0.15,0.07,0.25,0.1,0.33
+400787249,2015,5,Colorado State,Mountain West,Utah State,0.08,0.1,0.05,0.22,0.06,0.28
+400756939,2015,5,Duke,ACC,Boston College,-0.13,0.19,-0.57,0.0,0.05,-0.03
+400764877,2015,5,East Carolina,American Athletic,SMU,0.35,0.61,0.22,0.08,0.16,-0.08
+400603881,2015,5,Eastern Michigan,Mid-American,LSU,-0.11,-0.32,0.07,0.36,0.06,0.51
+400603878,2015,5,Florida,SEC,Ole Miss,0.22,0.71,-0.17,0.09,0.28,-0.16
+400763620,2015,5,Florida International,Conference USA,Massachusetts,-0.03,-0.05,0.0,0.18,0.37,-0.08
+400756941,2015,5,Florida State,ACC,Wake Forest,0.24,0.19,0.4,0.04,0.01,0.11
+400787250,2015,5,Fresno State,Mountain West,San Diego State,-0.24,-0.21,-0.29,0.17,-0.07,0.23
+400603879,2015,5,Georgia,SEC,Alabama,-0.27,-0.54,-0.02,0.05,0.37,-0.05
+400787445,2015,5,Georgia Southern,Sun Belt,UL Monroe,0.18,-1.05,0.38,0.13,0.2,-0.02
+400787446,2015,5,Georgia State,Sun Belt,Liberty,0.53,0.69,0.14,0.28,0.4,0.2
+400756942,2015,5,Georgia Tech,ACC,North Carolina,0.23,0.4,0.16,0.37,0.03,0.73
+400787248,2015,5,Hawai'i,Mountain West,Boise State,-0.18,-0.29,-0.03,0.22,0.68,0.02
+400764879,2015,5,Houston,American Athletic,Tulsa,0.24,0.34,0.19,0.06,0.04,0.08
+400787444,2015,5,Idaho,Sun Belt,Arkansas State,0.11,-0.04,0.35,0.27,0.2,0.31
+400763528,2015,5,Illinois,Big Ten,Nebraska,-0.01,0.17,-0.29,-0.11,-0.43,0.19
+400763529,2015,5,Indiana,Big Ten,Ohio State,0.08,0.33,-0.07,0.11,0.21,0.1
+400763533,2015,5,Iowa,Big Ten,Wisconsin,-0.09,-0.26,0.02,-0.08,0.02,-0.27
+400763427,2015,5,Iowa State,Big 12,Kansas,0.15,-0.1,0.46,-0.02,0.19,-0.32
+400763427,2015,5,Kansas,Big 12,Iowa State,-0.02,0.19,-0.32,0.15,-0.1,0.46
+400763429,2015,5,Kansas State,Big 12,Oklahoma State,0.22,0.29,0.17,0.26,0.47,-0.2
+400787319,2015,5,Kent State,Mid-American,Miami (OH),-0.07,0.35,-0.27,0.04,-0.02,0.14
+400603880,2015,5,Kentucky,SEC,Eastern Kentucky,0.36,0.42,0.28,-0.07,-0.13,-0.03
+400763615,2015,5,Louisiana,Sun Belt,Louisiana Tech,-0.1,-0.37,0.26,0.31,0.68,-0.05
+400763615,2015,5,Louisiana Tech,Conference USA,Louisiana,0.31,0.68,-0.05,-0.1,-0.37,0.26
+400756943,2015,5,Louisville,ACC,NC State,0.04,0.02,0.08,-0.07,0.05,-0.19
+400603881,2015,5,LSU,SEC,Eastern Michigan,0.36,0.06,0.51,-0.11,-0.32,0.07
+400763616,2015,5,Marshall,Conference USA,Old Dominion,0.02,0.29,-0.25,-0.14,-0.53,0.27
+400763530,2015,5,Maryland,Big Ten,Michigan,-0.37,-0.37,-0.38,0.07,0.11,0.07
+400763620,2015,5,Massachusetts,Mid-American,Florida International,0.18,0.37,-0.08,-0.03,-0.05,0.0
+400764875,2015,5,Memphis,American Athletic,South Florida,0.13,0.29,-0.07,0.09,0.21,0.04
+400764873,2015,5,Miami,ACC,Cincinnati,0.12,0.1,0.15,0.29,0.38,0.2
+400787319,2015,5,Miami (OH),Mid-American,Kent State,0.04,-0.02,0.14,-0.07,0.35,-0.27
+400763530,2015,5,Michigan,Big Ten,Maryland,0.07,0.11,0.07,-0.37,-0.37,-0.38
+400763531,2015,5,Michigan State,Big Ten,Purdue,0.24,0.49,0.16,-0.02,-0.13,0.11
+400603882,2015,5,Middle Tennessee,Conference USA,Vanderbilt,-0.02,0.18,-0.5,0.07,0.08,0.07
+400763532,2015,5,Minnesota,Big Ten,Northwestern,-0.2,-0.3,-0.08,0.09,0.41,0.01
+400603885,2015,5,Mississippi State,SEC,Texas A&M,0.09,0.09,0.11,0.15,0.29,0.03
+400603883,2015,5,Missouri,SEC,South Carolina,0.13,0.17,0.13,0.01,-0.08,0.1
+400764876,2015,5,Navy,American Athletic,Air Force,0.35,0.94,0.24,-0.2,-0.05,-0.24
+400756943,2015,5,NC State,ACC,Louisville,-0.07,0.05,-0.19,0.04,0.02,0.08
+400763528,2015,5,Nebraska,Big Ten,Illinois,-0.11,-0.43,0.19,-0.01,0.17,-0.29
+400787251,2015,5,Nevada,Mountain West,UNLV,-0.03,-0.16,0.16,-0.01,0.1,-0.08
+400787252,2015,5,New Mexico,Mountain West,New Mexico State,0.16,-0.13,0.25,0.12,-0.42,0.8
+400787252,2015,5,New Mexico State,Sun Belt,New Mexico,0.12,-0.42,0.8,0.16,-0.13,0.25
+400756942,2015,5,North Carolina,ACC,Georgia Tech,0.37,0.03,0.73,0.23,0.4,0.16
+400787315,2015,5,Northern Illinois,Mid-American,Central Michigan,-0.01,0.12,-0.06,0.0,0.3,-0.26
+400763618,2015,5,North Texas,Conference USA,Southern Miss,0.04,-0.2,0.24,0.52,0.59,0.45
+400763532,2015,5,Northwestern,Big Ten,Minnesota,0.09,0.41,0.01,-0.2,-0.3,-0.08
+400756940,2015,5,Notre Dame,FBS Independents,Clemson,0.07,0.33,-0.27,-0.04,-0.05,-0.03
+400787316,2015,5,Ohio,Mid-American,Akron,-0.02,0.11,-0.15,0.07,0.12,-0.02
+400763529,2015,5,Ohio State,Big Ten,Indiana,0.11,0.21,0.1,0.08,0.33,-0.07
+400763428,2015,5,Oklahoma,Big 12,West Virginia,0.14,0.45,-0.17,0.12,-0.08,0.31
+400763429,2015,5,Oklahoma State,Big 12,Kansas State,0.26,0.47,-0.2,0.22,0.29,0.17
+400763616,2015,5,Old Dominion,Conference USA,Marshall,-0.14,-0.53,0.27,0.02,0.29,-0.25
+400603878,2015,5,Ole Miss,SEC,Florida,0.09,0.28,-0.16,0.22,0.71,-0.17
+400757043,2015,5,Oregon,Pac-12,Colorado,0.25,0.1,0.33,0.12,0.15,0.07
+400760494,2015,5,Penn State,Big Ten,Army,0.03,0.14,-0.01,0.11,-0.17,0.13
+400756945,2015,5,Pittsburgh,ACC,Virginia Tech,0.0,0.25,-0.1,-0.11,-0.09,-0.22
+400763531,2015,5,Purdue,Big Ten,Michigan State,-0.02,-0.13,0.11,0.24,0.49,0.16
+400763617,2015,5,Rice,Conference USA,Western Kentucky,0.01,0.28,-0.27,0.35,0.76,-0.15
+400787250,2015,5,San Diego State,Mountain West,Fresno State,0.17,-0.07,0.23,-0.24,-0.21,-0.29
+400603877,2015,5,San José State,Mountain West,Auburn,0.19,0.29,0.1,0.29,0.46,0.25
+400764877,2015,5,SMU,American Athletic,East Carolina,0.08,0.16,-0.08,0.35,0.61,0.22
+400787447,2015,5,South Alabama,Sun Belt,Troy,0.11,0.29,0.03,-0.02,-0.01,-0.05
+400603883,2015,5,South Carolina,SEC,Missouri,0.01,-0.08,0.1,0.13,0.17,0.13
+400763618,2015,5,Southern Miss,Conference USA,North Texas,0.52,0.59,0.45,0.04,-0.2,0.24
+400764875,2015,5,South Florida,American Athletic,Memphis,0.09,0.21,0.04,0.13,0.29,-0.07
+400757041,2015,5,Stanford,Pac-12,Arizona,0.55,0.76,0.44,0.13,0.25,0.02
+400763430,2015,5,TCU,Big 12,Texas,0.34,0.65,0.11,0.0,-0.13,0.11
+400763614,2015,5,Temple,American Athletic,Charlotte,0.14,0.45,-0.01,-0.02,-0.17,0.07
+400603884,2015,5,Tennessee,SEC,Arkansas,0.18,0.21,0.15,0.22,0.45,0.14
+400763430,2015,5,Texas,Big 12,TCU,0.0,-0.13,0.11,0.34,0.65,0.11
+400603885,2015,5,Texas A&M,SEC,Mississippi State,0.15,0.29,0.03,0.09,0.09,0.11
+400763431,2015,5,Texas Tech,Big 12,Baylor,0.27,0.44,-0.17,0.6,1.08,0.37
+400787317,2015,5,Toledo,Mid-American,Ball State,0.25,0.56,0.13,-0.11,0.14,-0.42
+400787447,2015,5,Troy,Sun Belt,South Alabama,-0.02,-0.01,-0.05,0.11,0.29,0.03
+400764878,2015,5,Tulane,American Athletic,UCF,0.23,0.66,-0.03,0.11,0.28,-0.49
+400764879,2015,5,Tulsa,American Athletic,Houston,0.06,0.04,0.08,0.24,0.34,0.19
+400764878,2015,5,UCF,American Athletic,Tulane,0.11,0.28,-0.49,0.23,0.66,-0.03
+400757042,2015,5,UCLA,Pac-12,Arizona State,0.07,0.27,-0.08,0.14,0.3,0.02
+400764874,2015,5,UConn,American Athletic,BYU,0.04,0.16,-0.12,0.13,0.36,-0.14
+400787445,2015,5,UL Monroe,Sun Belt,Georgia Southern,0.13,0.2,-0.02,0.18,-1.05,0.38
+400787251,2015,5,UNLV,Mountain West,Nevada,-0.01,0.1,-0.08,-0.03,-0.16,0.16
+400787249,2015,5,Utah State,Mountain West,Colorado State,0.22,0.06,0.28,0.08,0.1,0.05
+400763619,2015,5,UTEP,Conference USA,UTSA,-0.39,-0.49,-0.04,-0.05,0.03,-0.11
+400763619,2015,5,UTSA,Conference USA,UTEP,-0.05,0.03,-0.11,-0.39,-0.49,-0.04
+400603882,2015,5,Vanderbilt,SEC,Middle Tennessee,0.07,0.08,0.07,-0.02,0.18,-0.5
+400756945,2015,5,Virginia Tech,ACC,Pittsburgh,-0.11,-0.09,-0.22,0.0,0.25,-0.1
+400756941,2015,5,Wake Forest,ACC,Florida State,0.04,0.01,0.11,0.24,0.19,0.4
+400757044,2015,5,Washington State,Pac-12,California,0.13,0.19,-0.02,0.22,0.55,-0.31
+400763617,2015,5,Western Kentucky,Conference USA,Rice,0.35,0.76,-0.15,0.01,0.28,-0.27
+400763428,2015,5,West Virginia,Big 12,Oklahoma,0.12,-0.08,0.31,0.14,0.45,-0.17
+400763533,2015,5,Wisconsin,Big Ten,Iowa,-0.08,0.02,-0.27,-0.09,-0.26,0.02
+400787253,2015,5,Wyoming,Mountain West,App State,-0.13,-0.32,-0.04,0.2,-0.17,0.26
+400787254,2015,6,Air Force,Mountain West,Wyoming,0.16,0.33,0.13,-0.09,-0.11,-0.12
+400787322,2015,6,Akron,Mid-American,Eastern Michigan,0.4,0.88,0.19,0.17,0.31,0.01
+400603899,2015,6,Alabama,SEC,Arkansas,0.1,0.3,-0.04,0.0,0.17,-0.27
+400787448,2015,6,App State,Sun Belt,Georgia State,0.27,0.78,0.0,-0.33,-0.32,-0.29
+400757046,2015,6,Arizona,Pac-12,Oregon State,0.32,0.45,0.3,-0.01,-0.18,0.19
+400757047,2015,6,Arizona State,Pac-12,Colorado,0.34,0.62,0.19,0.22,0.28,0.16
+400603899,2015,6,Arkansas,SEC,Alabama,0.0,0.17,-0.27,0.1,0.3,-0.04
+400756949,2015,6,Army,FBS Independents,Duke,0.03,0.47,-0.02,0.29,0.6,0.16
+400787324,2015,6,Ball State,Mid-American,Northern Illinois,0.27,0.41,0.1,0.5,0.95,0.26
+400763432,2015,6,Baylor,Big 12,Kansas,0.5,0.64,0.4,-0.11,0.17,-0.39
+400787255,2015,6,Boise State,Mountain West,Colorado State,0.26,0.5,0.1,-0.07,-0.18,0.08
+400756947,2015,6,Boston College,ACC,Wake Forest,-0.21,-0.31,-0.17,-0.21,-0.11,-0.3
+400787321,2015,6,Bowling Green,Mid-American,Massachusetts,0.53,0.83,0.26,0.3,0.34,0.16
+400764881,2015,6,BYU,FBS Independents,East Carolina,0.31,0.38,0.24,0.25,0.48,-0.06
+400757048,2015,6,California,Pac-12,Utah,0.08,0.04,0.2,0.15,0.14,0.13
+400787323,2015,6,Central Michigan,Mid-American,Western Michigan,0.33,0.75,-0.09,0.4,1.08,0.13
+400756948,2015,6,Clemson,ACC,Georgia Tech,0.26,0.55,0.05,0.0,0.74,-0.27
+400757047,2015,6,Colorado,Pac-12,Arizona State,0.22,0.28,0.16,0.34,0.62,0.19
+400787255,2015,6,Colorado State,Mountain West,Boise State,-0.07,-0.18,0.08,0.26,0.5,0.1
+400756949,2015,6,Duke,ACC,Army,0.29,0.6,0.16,0.03,0.47,-0.02
+400764881,2015,6,East Carolina,American Athletic,BYU,0.25,0.48,-0.06,0.31,0.38,0.24
+400787322,2015,6,Eastern Michigan,Mid-American,Akron,0.17,0.31,0.01,0.4,0.88,0.19
+400603901,2015,6,Florida,SEC,Missouri,0.09,0.11,0.08,-0.23,-0.42,0.15
+400763621,2015,6,Florida Atlantic,Conference USA,Rice,0.22,0.21,0.31,0.23,0.34,0.14
+400763622,2015,6,Florida International,Conference USA,UTEP,0.48,1.21,-0.04,-0.16,-0.48,0.04
+400756950,2015,6,Florida State,ACC,Miami,0.28,0.53,0.11,0.25,0.51,-0.45
+400787256,2015,6,Fresno State,Mountain West,Utah State,-0.1,-0.04,-0.08,0.44,0.54,0.37
+400603904,2015,6,Georgia,SEC,Tennessee,0.25,0.39,0.09,0.18,0.57,-0.02
+400787448,2015,6,Georgia State,Sun Belt,App State,-0.33,-0.32,-0.29,0.27,0.78,0.0
+400756948,2015,6,Georgia Tech,ACC,Clemson,0.0,0.74,-0.27,0.26,0.55,0.05
+400787257,2015,6,Hawai'i,Mountain West,San Diego State,-0.12,-0.2,0.01,0.21,0.85,0.03
+400764880,2015,6,Houston,American Athletic,SMU,0.44,0.71,0.32,0.17,0.27,0.06
+400763534,2015,6,Illinois,Big Ten,Iowa,0.08,0.18,-0.15,0.12,0.21,0.11
+400763538,2015,6,Indiana,Big Ten,Penn State,-0.13,-0.04,-0.24,0.15,0.19,0.11
+400763534,2015,6,Iowa,Big Ten,Illinois,0.12,0.21,0.11,0.08,0.18,-0.15
+400763435,2015,6,Iowa State,Big 12,Texas Tech,0.31,0.19,0.43,0.56,0.59,0.54
+400763432,2015,6,Kansas,Big 12,Baylor,-0.11,0.17,-0.39,0.5,0.64,0.4
+400763433,2015,6,Kansas State,Big 12,TCU,0.09,-0.17,0.31,0.65,0.61,0.67
+400787320,2015,6,Kent State,Mid-American,Toledo,-0.06,-0.18,0.06,0.4,0.52,0.32
+400787449,2015,6,Louisiana,Sun Belt,Texas State,0.26,0.54,0.09,0.16,0.0,0.32
+400763625,2015,6,Louisiana Tech,Conference USA,UTSA,0.17,0.37,-0.04,0.01,0.3,-0.25
+400603903,2015,6,LSU,SEC,South Carolina,0.42,0.27,0.51,0.13,0.16,0.16
+400763623,2015,6,Marshall,Conference USA,Southern Miss,0.03,0.28,-0.12,-0.02,0.07,-0.2
+400763537,2015,6,Maryland,Big Ten,Ohio State,0.25,-0.15,0.58,0.39,0.7,0.19
+400787321,2015,6,Massachusetts,Mid-American,Bowling Green,0.3,0.34,0.16,0.53,0.83,0.26
+400756950,2015,6,Miami,ACC,Florida State,0.25,0.51,-0.45,0.28,0.53,0.11
+400787325,2015,6,Miami (OH),Mid-American,Ohio,-0.23,-0.38,-0.05,0.18,0.23,0.07
+400763535,2015,6,Michigan,Big Ten,Northwestern,0.21,0.21,0.2,-0.19,-0.18,-0.21
+400763540,2015,6,Michigan State,Big Ten,Rutgers,0.25,0.54,-0.05,0.23,0.4,0.11
+400763626,2015,6,Middle Tennessee,Conference USA,Western Kentucky,0.22,0.38,-0.03,0.36,0.81,0.03
+400763539,2015,6,Minnesota,Big Ten,Purdue,0.12,-0.19,0.27,-0.05,-0.24,0.33
+400603900,2015,6,Mississippi State,SEC,Troy,0.3,0.85,0.07,-0.02,-0.03,0.0
+400603901,2015,6,Missouri,SEC,Florida,-0.23,-0.42,0.15,0.09,0.11,0.08
+400763584,2015,6,Navy,American Athletic,Notre Dame,0.25,-0.9,0.43,0.39,0.58,0.28
+400756946,2015,6,NC State,ACC,Virginia Tech,-0.07,-0.13,-0.02,0.19,0.26,0.13
+400763536,2015,6,Nebraska,Big Ten,Wisconsin,0.12,0.1,0.14,0.15,0.26,-0.02
+400787258,2015,6,Nevada,Mountain West,New Mexico,0.27,0.7,0.12,0.01,0.14,-0.09
+400787258,2015,6,New Mexico,Mountain West,Nevada,0.01,0.14,-0.09,0.27,0.7,0.12
+400603902,2015,6,New Mexico State,Sun Belt,Ole Miss,-0.13,-0.23,-0.05,0.55,0.51,0.65
+400787324,2015,6,Northern Illinois,Mid-American,Ball State,0.5,0.95,0.26,0.27,0.41,0.1
+400763624,2015,6,North Texas,Conference USA,Portland State,-0.17,-0.26,-0.03,0.6,0.83,0.5
+400763535,2015,6,Northwestern,Big Ten,Michigan,-0.19,-0.18,-0.21,0.21,0.21,0.2
+400763584,2015,6,Notre Dame,FBS Independents,Navy,0.39,0.58,0.28,0.25,-0.9,0.43
+400787325,2015,6,Ohio,Mid-American,Miami (OH),0.18,0.23,0.07,-0.23,-0.38,-0.05
+400763537,2015,6,Ohio State,Big Ten,Maryland,0.39,0.7,0.19,0.25,-0.15,0.58
+400763434,2015,6,Oklahoma,Big 12,Texas,0.06,0.16,-0.01,0.16,0.11,0.19
+400763436,2015,6,Oklahoma State,Big 12,West Virginia,0.03,0.11,0.06,0.08,-0.03,0.16
+400603902,2015,6,Ole Miss,SEC,New Mexico State,0.55,0.51,0.65,-0.13,-0.23,-0.05
+400757049,2015,6,Oregon,Pac-12,Washington State,0.12,-0.21,0.3,0.18,0.27,-0.05
+400757046,2015,6,Oregon State,Pac-12,Arizona,-0.01,-0.18,0.19,0.32,0.45,0.3
+400763538,2015,6,Penn State,Big Ten,Indiana,0.15,0.19,0.11,-0.13,-0.04,-0.24
+400756951,2015,6,Pittsburgh,ACC,Virginia,0.17,0.68,-0.17,0.03,-0.04,0.21
+400763539,2015,6,Purdue,Big Ten,Minnesota,-0.05,-0.24,0.33,0.12,-0.19,0.27
+400763621,2015,6,Rice,Conference USA,Florida Atlantic,0.23,0.34,0.14,0.22,0.21,0.31
+400763540,2015,6,Rutgers,Big Ten,Michigan State,0.23,0.4,0.11,0.25,0.54,-0.05
+400787257,2015,6,San Diego State,Mountain West,Hawai'i,0.21,0.85,0.03,-0.12,-0.2,0.01
+400787259,2015,6,San José State,Mountain West,UNLV,0.24,0.41,0.0,0.09,0.01,0.13
+400764880,2015,6,SMU,American Athletic,Houston,0.17,0.27,0.06,0.44,0.71,0.32
+400603903,2015,6,South Carolina,SEC,LSU,0.13,0.16,0.16,0.42,0.27,0.51
+400763623,2015,6,Southern Miss,Conference USA,Marshall,-0.02,0.07,-0.2,0.03,0.28,-0.12
+400756952,2015,6,South Florida,American Athletic,Syracuse,0.39,0.64,0.3,0.14,0.24,0.03
+400756952,2015,6,Syracuse,ACC,South Florida,0.14,0.24,0.03,0.39,0.64,0.3
+400763433,2015,6,TCU,Big 12,Kansas State,0.65,0.61,0.67,0.09,-0.17,0.31
+400764882,2015,6,Temple,American Athletic,Tulane,0.29,1.24,-0.11,-0.26,-0.23,-0.29
+400603904,2015,6,Tennessee,SEC,Georgia,0.18,0.57,-0.02,0.25,0.39,0.09
+400763434,2015,6,Texas,Big 12,Oklahoma,0.16,0.11,0.19,0.06,0.16,-0.01
+400787449,2015,6,Texas State,Sun Belt,Louisiana,0.16,0.0,0.32,0.26,0.54,0.09
+400763435,2015,6,Texas Tech,Big 12,Iowa State,0.56,0.59,0.54,0.31,0.19,0.43
+400787320,2015,6,Toledo,Mid-American,Kent State,0.4,0.52,0.32,-0.06,-0.18,0.06
+400603900,2015,6,Troy,Sun Belt,Mississippi State,-0.02,-0.03,0.0,0.3,0.85,0.07
+400764882,2015,6,Tulane,American Athletic,Temple,-0.26,-0.23,-0.29,0.29,1.24,-0.11
+400764883,2015,6,Tulsa,American Athletic,UL Monroe,0.18,0.31,0.09,0.11,0.13,0.12
+400764884,2015,6,UCF,American Athletic,UConn,0.05,0.02,0.1,0.23,0.37,0.16
+400764884,2015,6,UConn,American Athletic,UCF,0.23,0.37,0.16,0.05,0.02,0.1
+400764883,2015,6,UL Monroe,Sun Belt,Tulsa,0.11,0.13,0.12,0.18,0.31,0.09
+400787259,2015,6,UNLV,Mountain West,San José State,0.09,0.01,0.13,0.24,0.41,0.0
+400757045,2015,6,USC,Pac-12,Washington,0.11,0.0,0.27,-0.02,0.07,-0.09
+400757048,2015,6,Utah,Pac-12,California,0.15,0.14,0.13,0.08,0.04,0.2
+400787256,2015,6,Utah State,Mountain West,Fresno State,0.44,0.54,0.37,-0.1,-0.04,-0.08
+400763622,2015,6,UTEP,Conference USA,Florida International,-0.16,-0.48,0.04,0.48,1.21,-0.04
+400763625,2015,6,UTSA,Conference USA,Louisiana Tech,0.01,0.3,-0.25,0.17,0.37,-0.04
+400756951,2015,6,Virginia,ACC,Pittsburgh,0.03,-0.04,0.21,0.17,0.68,-0.17
+400756946,2015,6,Virginia Tech,ACC,NC State,0.19,0.26,0.13,-0.07,-0.13,-0.02
+400756947,2015,6,Wake Forest,ACC,Boston College,-0.21,-0.11,-0.3,-0.21,-0.31,-0.17
+400757045,2015,6,Washington,Pac-12,USC,-0.02,0.07,-0.09,0.11,0.0,0.27
+400757049,2015,6,Washington State,Pac-12,Oregon,0.18,0.27,-0.05,0.12,-0.21,0.3
+400763626,2015,6,Western Kentucky,Conference USA,Middle Tennessee,0.36,0.81,0.03,0.22,0.38,-0.03
+400787323,2015,6,Western Michigan,Mid-American,Central Michigan,0.4,1.08,0.13,0.33,0.75,-0.09
+400763436,2015,6,West Virginia,Big 12,Oklahoma State,0.08,-0.03,0.16,0.03,0.11,0.06
+400763536,2015,6,Wisconsin,Big Ten,Nebraska,0.15,0.26,-0.02,0.12,0.1,0.14
+400787254,2015,6,Wyoming,Mountain West,Air Force,-0.09,-0.11,-0.12,0.16,0.33,0.13
+400787260,2015,7,Air Force,Mountain West,Colorado State,0.18,-0.06,0.25,0.32,0.75,-0.01
+400787331,2015,7,Akron,Mid-American,Bowling Green,-0.2,-0.09,-0.31,0.72,1.36,0.16
+400603897,2015,7,Alabama,SEC,Texas A&M,0.05,0.15,0.18,-0.28,-0.44,-0.08
+400787451,2015,7,App State,Sun Belt,UL Monroe,0.62,1.28,0.44,0.01,0.23,-0.21
+400757051,2015,7,Arizona,Pac-12,Colorado,0.31,0.29,0.31,0.21,0.42,0.01
+400757052,2015,7,Arizona State,Pac-12,Utah,-0.11,0.06,-0.33,0.13,0.28,-0.13
+400787450,2015,7,Arkansas State,Sun Belt,South Alabama,0.04,0.27,-0.04,-0.04,-0.01,-0.06
+400760495,2015,7,Army,FBS Independents,Bucknell,0.27,0.71,0.2,0.11,0.2,-0.03
+400603898,2015,7,Auburn,SEC,Kentucky,0.23,0.62,-0.02,0.23,0.18,0.36
+400787329,2015,7,Ball State,Mid-American,Georgia State,0.08,0.16,0.01,0.25,0.6,-0.25
+400763437,2015,7,Baylor,Big 12,West Virginia,0.47,0.79,0.27,0.15,0.36,-0.02
+400790882,2015,7,Boise State,Mountain West,Utah State,-0.04,-0.16,0.12,0.15,0.43,-0.04
+400756953,2015,7,Boston College,ACC,Clemson,-0.03,-0.04,0.03,0.29,0.56,-0.04
+400787331,2015,7,Bowling Green,Mid-American,Akron,0.72,1.36,0.16,-0.2,-0.09,-0.31
+400787332,2015,7,Buffalo,Mid-American,Central Michigan,-0.1,0.07,-0.29,0.35,0.76,0.07
+400764886,2015,7,BYU,FBS Independents,Cincinnati,0.33,0.27,0.43,0.11,0.19,0.04
+400787332,2015,7,Central Michigan,Mid-American,Buffalo,0.35,0.76,0.07,-0.1,0.07,-0.29
+400763630,2015,7,Charlotte,Conference USA,Old Dominion,0.12,0.01,0.2,0.16,0.41,-0.28
+400764886,2015,7,Cincinnati,American Athletic,BYU,0.11,0.19,0.04,0.33,0.27,0.43
+400756953,2015,7,Clemson,ACC,Boston College,0.29,0.56,-0.04,-0.03,-0.04,0.03
+400757051,2015,7,Colorado,Pac-12,Arizona,0.21,0.42,0.01,0.31,0.29,0.31
+400787260,2015,7,Colorado State,Mountain West,Air Force,0.32,0.75,-0.01,0.18,-0.06,0.25
+400764888,2015,7,East Carolina,American Athletic,Tulsa,0.0,0.34,-0.25,0.02,-0.15,0.23
+400787330,2015,7,Eastern Michigan,Mid-American,Toledo,0.06,-0.09,0.39,0.71,0.84,0.56
+400603893,2015,7,Florida,SEC,LSU,0.2,0.26,0.12,0.27,0.79,0.2
+400763627,2015,7,Florida Atlantic,Conference USA,Marshall,0.06,0.07,0.14,0.19,0.01,0.32
+400763628,2015,7,Florida International,Conference USA,Middle Tennessee,-0.03,-0.05,0.08,0.41,0.54,0.33
+400756954,2015,7,Florida State,ACC,Louisville,0.46,0.87,-0.06,0.2,0.19,0.22
+400790883,2015,7,Fresno State,Mountain West,UNLV,0.28,0.09,0.43,0.14,0.08,0.19
+400603892,2015,7,Georgia,SEC,Missouri,-0.01,0.25,-0.17,-0.15,0.01,-0.33
+400787452,2015,7,Georgia Southern,Sun Belt,New Mexico State,0.51,0.32,0.54,0.18,0.27,0.05
+400787329,2015,7,Georgia State,Sun Belt,Ball State,0.25,0.6,-0.25,0.08,0.16,0.01
+400756955,2015,7,Georgia Tech,ACC,Pittsburgh,0.49,0.32,0.57,0.33,0.59,0.15
+400787262,2015,7,Hawai'i,Mountain West,New Mexico,0.23,0.54,0.03,0.08,0.23,-0.01
+400764885,2015,7,Houston,American Athletic,Tulane,0.25,0.24,0.25,-0.08,-0.19,0.06
+400787453,2015,7,Idaho,Sun Belt,Troy,0.06,0.08,0.09,0.03,0.19,-0.18
+400763541,2015,7,Indiana,Big Ten,Rutgers,0.32,0.69,-0.13,0.36,0.53,0.22
+400763544,2015,7,Iowa,Big Ten,Northwestern,0.27,0.29,0.3,-0.02,-0.1,0.18
+400763438,2015,7,Iowa State,Big 12,TCU,0.15,0.37,-0.1,0.43,1.06,-0.07
+400763439,2015,7,Kansas,Big 12,Texas Tech,0.08,0.23,-0.11,0.1,0.09,0.17
+400763440,2015,7,Kansas State,Big 12,Oklahoma,-0.31,-0.62,0.03,0.33,0.71,0.11
+400787326,2015,7,Kent State,Mid-American,Massachusetts,-0.03,0.21,-0.15,-0.14,-0.22,0.09
+400603898,2015,7,Kentucky,SEC,Auburn,0.23,0.18,0.36,0.23,0.62,-0.02
+400603895,2015,7,Louisiana Tech,Conference USA,Mississippi State,0.08,0.17,-0.04,0.33,0.35,0.34
+400756954,2015,7,Louisville,ACC,Florida State,0.2,0.19,0.22,0.46,0.87,-0.06
+400603893,2015,7,LSU,SEC,Florida,0.27,0.79,0.2,0.2,0.26,0.12
+400763627,2015,7,Marshall,Conference USA,Florida Atlantic,0.19,0.01,0.32,0.06,0.07,0.14
+400787326,2015,7,Massachusetts,Mid-American,Kent State,-0.14,-0.22,0.09,-0.03,0.21,-0.15
+400603894,2015,7,Memphis,American Athletic,Ole Miss,0.14,0.35,-0.12,0.19,0.42,-0.28
+400756956,2015,7,Miami,ACC,Virginia Tech,0.17,0.68,-0.19,0.12,-0.01,0.24
+400787327,2015,7,Miami (OH),Mid-American,Northern Illinois,-0.09,-0.14,0.03,0.36,0.14,0.54
+400763542,2015,7,Michigan,Big Ten,Michigan State,-0.01,0.12,-0.07,0.07,0.15,-0.05
+400763542,2015,7,Michigan State,Big Ten,Michigan,0.07,0.15,-0.05,-0.01,0.12,-0.07
+400763628,2015,7,Middle Tennessee,Conference USA,Florida International,0.41,0.54,0.33,-0.03,-0.05,0.08
+400763543,2015,7,Minnesota,Big Ten,Nebraska,0.13,0.27,-0.14,0.38,0.77,0.07
+400603895,2015,7,Mississippi State,SEC,Louisiana Tech,0.33,0.35,0.34,0.08,0.17,-0.04
+400603892,2015,7,Missouri,SEC,Georgia,-0.15,0.01,-0.33,-0.01,0.25,-0.17
+400763543,2015,7,Nebraska,Big Ten,Minnesota,0.38,0.77,0.07,0.13,0.27,-0.14
+400787264,2015,7,Nevada,Mountain West,Wyoming,0.27,0.37,0.13,0.4,0.86,0.22
+400787262,2015,7,New Mexico,Mountain West,Hawai'i,0.08,0.23,-0.01,0.23,0.54,0.03
+400787452,2015,7,New Mexico State,Sun Belt,Georgia Southern,0.18,0.27,0.05,0.51,0.32,0.54
+400756957,2015,7,North Carolina,ACC,Wake Forest,0.54,0.79,0.32,0.06,0.25,-0.08
+400787327,2015,7,Northern Illinois,Mid-American,Miami (OH),0.36,0.14,0.54,-0.09,-0.14,0.03
+400763629,2015,7,North Texas,Conference USA,Western Kentucky,0.19,0.24,0.14,0.51,0.53,0.53
+400763544,2015,7,Northwestern,Big Ten,Iowa,-0.02,-0.1,0.18,0.27,0.29,0.3
+400757053,2015,7,Notre Dame,FBS Independents,USC,0.26,0.4,0.16,0.31,0.47,0.28
+400787328,2015,7,Ohio,Mid-American,Western Michigan,0.04,0.15,-0.1,0.59,0.35,0.73
+400763545,2015,7,Ohio State,Big Ten,Penn State,0.28,0.22,0.31,-0.01,-0.18,0.09
+400763440,2015,7,Oklahoma,Big 12,Kansas State,0.33,0.71,0.11,-0.31,-0.62,0.03
+400763630,2015,7,Old Dominion,Conference USA,Charlotte,0.16,0.41,-0.28,0.12,0.01,0.2
+400603894,2015,7,Ole Miss,SEC,Memphis,0.19,0.42,-0.28,0.14,0.35,-0.12
+400757054,2015,7,Oregon,Pac-12,Washington,0.19,0.57,0.01,0.23,0.07,0.38
+400757055,2015,7,Oregon State,Pac-12,Washington State,-0.01,-0.1,0.0,0.38,0.49,0.15
+400763545,2015,7,Penn State,Big Ten,Ohio State,-0.01,-0.18,0.09,0.28,0.22,0.31
+400756955,2015,7,Pittsburgh,ACC,Georgia Tech,0.33,0.59,0.15,0.49,0.32,0.57
+400763546,2015,7,Purdue,Big Ten,Wisconsin,-0.07,-0.01,-0.13,0.15,0.4,-0.09
+400763541,2015,7,Rutgers,Big Ten,Indiana,0.36,0.53,0.22,0.32,0.69,-0.13
+400787265,2015,7,San Diego State,Mountain West,San José State,0.22,0.4,0.2,-0.04,-0.18,0.08
+400787265,2015,7,San José State,Mountain West,San Diego State,-0.04,-0.18,0.08,0.22,0.4,0.2
+400787450,2015,7,South Alabama,Sun Belt,Arkansas State,-0.04,-0.01,-0.06,0.04,0.27,-0.04
+400603896,2015,7,South Carolina,SEC,Vanderbilt,0.12,0.44,-0.11,0.0,-0.13,0.21
+400763631,2015,7,Southern Miss,Conference USA,UTSA,0.17,0.49,0.05,-0.11,-0.14,-0.07
+400764887,2015,7,South Florida,American Athletic,UConn,0.29,0.67,0.13,0.11,0.2,0.05
+400757050,2015,7,Stanford,Pac-12,UCLA,0.37,0.59,0.3,0.18,0.15,0.24
+400756958,2015,7,Syracuse,ACC,Virginia,0.14,0.54,-0.08,0.15,0.4,-0.04
+400763438,2015,7,TCU,Big 12,Iowa State,0.43,1.06,-0.07,0.15,0.37,-0.1
+400764889,2015,7,Temple,American Athletic,UCF,0.0,-0.16,0.11,-0.21,-0.4,-0.05
+400603897,2015,7,Texas A&M,SEC,Alabama,-0.28,-0.44,-0.08,0.05,0.15,0.18
+400763439,2015,7,Texas Tech,Big 12,Kansas,0.1,0.09,0.17,0.08,0.23,-0.11
+400787330,2015,7,Toledo,Mid-American,Eastern Michigan,0.71,0.84,0.56,0.06,-0.09,0.39
+400787453,2015,7,Troy,Sun Belt,Idaho,0.03,0.19,-0.18,0.06,0.08,0.09
+400764885,2015,7,Tulane,American Athletic,Houston,-0.08,-0.19,0.06,0.25,0.24,0.25
+400764888,2015,7,Tulsa,American Athletic,East Carolina,0.02,-0.15,0.23,0.0,0.34,-0.25
+400764889,2015,7,UCF,American Athletic,Temple,-0.21,-0.4,-0.05,0.0,-0.16,0.11
+400757050,2015,7,UCLA,Pac-12,Stanford,0.18,0.15,0.24,0.37,0.59,0.3
+400764887,2015,7,UConn,American Athletic,South Florida,0.11,0.2,0.05,0.29,0.67,0.13
+400787451,2015,7,UL Monroe,Sun Belt,App State,0.01,0.23,-0.21,0.62,1.28,0.44
+400790883,2015,7,UNLV,Mountain West,Fresno State,0.14,0.08,0.19,0.28,0.09,0.43
+400757053,2015,7,USC,Pac-12,Notre Dame,0.31,0.47,0.28,0.26,0.4,0.16
+400757052,2015,7,Utah,Pac-12,Arizona State,0.13,0.28,-0.13,-0.11,0.06,-0.33
+400790882,2015,7,Utah State,Mountain West,Boise State,0.15,0.43,-0.04,-0.04,-0.16,0.12
+400763631,2015,7,UTSA,Conference USA,Southern Miss,-0.11,-0.14,-0.07,0.17,0.49,0.05
+400603896,2015,7,Vanderbilt,SEC,South Carolina,0.0,-0.13,0.21,0.12,0.44,-0.11
+400756958,2015,7,Virginia,ACC,Syracuse,0.15,0.4,-0.04,0.14,0.54,-0.08
+400756956,2015,7,Virginia Tech,ACC,Miami,0.12,-0.01,0.24,0.17,0.68,-0.19
+400756957,2015,7,Wake Forest,ACC,North Carolina,0.06,0.25,-0.08,0.54,0.79,0.32
+400757054,2015,7,Washington,Pac-12,Oregon,0.23,0.07,0.38,0.19,0.57,0.01
+400757055,2015,7,Washington State,Pac-12,Oregon State,0.38,0.49,0.15,-0.01,-0.1,0.0
+400763629,2015,7,Western Kentucky,Conference USA,North Texas,0.51,0.53,0.53,0.19,0.24,0.14
+400787328,2015,7,Western Michigan,Mid-American,Ohio,0.59,0.35,0.73,0.04,0.15,-0.1
+400763437,2015,7,West Virginia,Big 12,Baylor,0.15,0.36,-0.02,0.47,0.79,0.27
+400763546,2015,7,Wisconsin,Big Ten,Purdue,0.15,0.4,-0.09,-0.07,-0.01,-0.13
+400787264,2015,7,Wyoming,Mountain West,Nevada,0.4,0.86,0.22,0.27,0.37,0.13
+400787266,2015,8,Air Force,Mountain West,Fresno State,0.32,0.37,0.31,0.04,-0.01,0.17
+400603886,2015,8,Alabama,SEC,Tennessee,0.15,0.34,0.04,0.25,0.27,0.23
+400787455,2015,8,App State,Sun Belt,Georgia Southern,0.36,0.81,0.17,0.17,0.07,0.21
+400757057,2015,8,Arizona,Pac-12,Washington State,0.39,0.61,0.14,0.36,0.56,-0.01
+400603887,2015,8,Arkansas,SEC,Auburn,0.3,0.27,0.35,0.21,0.31,0.17
+400787454,2015,8,Arkansas State,Sun Belt,Louisiana,0.16,0.12,0.17,0.11,-0.09,0.36
+400760496,2015,8,Army,FBS Independents,Rice,0.11,-0.41,0.23,0.3,0.71,-0.05
+400603887,2015,8,Auburn,SEC,Arkansas,0.21,0.31,0.17,0.3,0.27,0.35
+400787336,2015,8,Ball State,Mid-American,Central Michigan,0.03,0.09,-0.05,0.12,0.41,-0.25
+400763441,2015,8,Baylor,Big 12,Iowa State,0.17,0.08,0.26,0.11,0.32,-0.01
+400787267,2015,8,Boise State,Mountain West,Wyoming,0.2,0.62,-0.02,0.02,0.13,-0.07
+400756959,2015,8,Boston College,ACC,Louisville,-0.23,-0.1,-0.37,-0.13,-0.09,-0.14
+400787334,2015,8,Bowling Green,Mid-American,Kent State,0.37,0.71,0.06,-0.24,-0.28,-0.2
+400787333,2015,8,Buffalo,Mid-American,Ohio,0.19,0.3,0.13,-0.19,-0.26,-0.03
+400787429,2015,8,BYU,FBS Independents,Wagner,0.76,1.25,0.44,-0.12,-0.07,-0.14
+400757056,2015,8,California,Pac-12,UCLA,0.17,0.14,0.26,0.3,0.5,0.04
+400787336,2015,8,Central Michigan,Mid-American,Ball State,0.12,0.41,-0.25,0.03,0.09,-0.05
+400763632,2015,8,Charlotte,Conference USA,Southern Miss,-0.14,-0.23,-0.03,0.22,0.35,0.09
+400764892,2015,8,Cincinnati,American Athletic,UConn,0.34,0.49,0.28,-0.13,-0.22,0.02
+400756960,2015,8,Clemson,ACC,Miami,0.42,0.28,0.49,-0.45,-0.6,-0.24
+400757059,2015,8,Colorado,Pac-12,Oregon State,0.09,0.22,0.04,0.0,-0.12,0.09
+400756961,2015,8,Duke,ACC,Virginia Tech,0.23,0.42,0.04,0.2,0.22,0.16
+400764890,2015,8,East Carolina,American Athletic,Temple,0.07,0.11,0.0,0.18,0.26,0.08
+400787335,2015,8,Eastern Michigan,Mid-American,Northern Illinois,0.07,0.07,0.06,0.4,0.4,0.4
+400763636,2015,8,Florida Atlantic,Conference USA,UTEP,0.01,0.34,-0.22,0.18,0.38,-0.05
+400763633,2015,8,Florida International,Conference USA,Old Dominion,0.2,0.31,0.06,0.23,-0.06,0.53
+400756962,2015,8,Florida State,ACC,Georgia Tech,-0.1,0.18,-0.02,0.13,-0.25,0.21
+400787266,2015,8,Fresno State,Mountain West,Air Force,0.04,-0.01,0.17,0.32,0.37,0.31
+400787455,2015,8,Georgia Southern,Sun Belt,App State,0.17,0.07,0.21,0.36,0.81,0.17
+400756962,2015,8,Georgia Tech,ACC,Florida State,0.13,-0.25,0.21,-0.1,0.18,-0.02
+400787268,2015,8,Hawai'i,Mountain West,Nevada,0.09,0.17,-0.18,0.14,0.09,0.14
+400764895,2015,8,Houston,American Athletic,UCF,0.45,0.59,0.41,0.0,0.17,-0.25
+400787456,2015,8,Idaho,Sun Belt,UL Monroe,0.16,0.3,0.0,-0.08,0.03,-0.34
+400763547,2015,8,Illinois,Big Ten,Wisconsin,0.06,0.16,-0.22,0.09,0.28,-0.12
+400763549,2015,8,Indiana,Big Ten,Michigan State,0.31,0.43,0.07,0.27,0.46,0.03
+400763441,2015,8,Iowa State,Big 12,Baylor,0.11,0.32,-0.01,0.17,0.08,0.26
+400763443,2015,8,Kansas,Big 12,Oklahoma State,-0.21,0.09,-0.27,0.41,0.54,0.29
+400763444,2015,8,Kansas State,Big 12,Texas,0.07,0.09,0.06,0.14,0.07,0.18
+400787334,2015,8,Kent State,Mid-American,Bowling Green,-0.24,-0.28,-0.2,0.37,0.71,0.06
+400603889,2015,8,Kentucky,SEC,Mississippi State,0.08,0.0,0.18,0.46,0.7,0.2
+400787454,2015,8,Louisiana,Sun Belt,Arkansas State,0.11,-0.09,0.36,0.16,0.12,0.17
+400763634,2015,8,Louisiana Tech,Conference USA,Middle Tennessee,0.29,0.28,0.34,-0.04,0.02,-0.15
+400756959,2015,8,Louisville,ACC,Boston College,-0.13,-0.09,-0.14,-0.23,-0.1,-0.37
+400603888,2015,8,LSU,SEC,Western Kentucky,0.36,0.84,0.15,0.07,0.14,-0.1
+400763635,2015,8,Marshall,Conference USA,North Texas,0.1,0.02,0.2,-0.03,-0.26,0.25
+400763548,2015,8,Maryland,Big Ten,Penn State,0.08,0.0,0.16,0.17,0.48,-0.21
+400787338,2015,8,Massachusetts,Mid-American,Toledo,0.12,0.2,-0.03,0.18,0.3,0.12
+400764891,2015,8,Memphis,American Athletic,Tulsa,0.42,0.7,0.2,0.25,0.35,0.15
+400756960,2015,8,Miami,ACC,Clemson,-0.45,-0.6,-0.24,0.42,0.28,0.49
+400787337,2015,8,Miami (OH),Mid-American,Western Michigan,0.03,0.09,-0.07,0.22,0.52,-0.02
+400763549,2015,8,Michigan State,Big Ten,Indiana,0.27,0.46,0.03,0.31,0.43,0.07
+400763634,2015,8,Middle Tennessee,Conference USA,Louisiana Tech,-0.04,0.02,-0.15,0.29,0.28,0.34
+400603889,2015,8,Mississippi State,SEC,Kentucky,0.46,0.7,0.2,0.08,0.0,0.18
+400603891,2015,8,Missouri,SEC,Vanderbilt,-0.15,-0.3,0.22,0.01,0.03,-0.02
+400764893,2015,8,Navy,American Athletic,Tulane,0.21,0.4,0.16,0.2,0.4,-0.12
+400756964,2015,8,NC State,ACC,Wake Forest,0.28,0.23,0.34,-0.08,-0.27,0.14
+400763550,2015,8,Nebraska,Big Ten,Northwestern,0.0,-0.05,0.0,0.12,0.2,0.27
+400787268,2015,8,Nevada,Mountain West,Hawai'i,0.14,0.09,0.14,0.09,0.17,-0.18
+400787269,2015,8,New Mexico,Mountain West,San José State,0.15,-0.03,0.26,0.24,0.53,0.12
+400787457,2015,8,New Mexico State,Sun Belt,Troy,-0.07,-0.32,0.13,0.41,0.56,0.12
+400756963,2015,8,North Carolina,ACC,Virginia,0.18,0.23,0.17,-0.01,-0.08,0.11
+400787335,2015,8,Northern Illinois,Mid-American,Eastern Michigan,0.4,0.4,0.4,0.07,0.07,0.06
+400763635,2015,8,North Texas,Conference USA,Marshall,-0.03,-0.26,0.25,0.1,0.02,0.2
+400763550,2015,8,Northwestern,Big Ten,Nebraska,0.12,0.2,0.27,0.0,-0.05,0.0
+400787333,2015,8,Ohio,Mid-American,Buffalo,-0.19,-0.26,-0.03,0.19,0.3,0.13
+400763551,2015,8,Ohio State,Big Ten,Rutgers,0.38,0.77,0.2,0.1,0.12,0.08
+400763442,2015,8,Oklahoma,Big 12,Texas Tech,0.47,0.6,0.42,0.17,-0.07,0.53
+400763443,2015,8,Oklahoma State,Big 12,Kansas,0.41,0.54,0.29,-0.21,0.09,-0.27
+400763633,2015,8,Old Dominion,Conference USA,Florida International,0.23,-0.06,0.53,0.2,0.31,0.06
+400603890,2015,8,Ole Miss,SEC,Texas A&M,-0.01,0.17,-0.13,-0.17,-0.21,-0.11
+400757059,2015,8,Oregon State,Pac-12,Colorado,0.0,-0.12,0.09,0.09,0.22,0.04
+400763548,2015,8,Penn State,Big Ten,Maryland,0.17,0.48,-0.21,0.08,0.0,0.16
+400756965,2015,8,Pittsburgh,ACC,Syracuse,0.12,0.31,0.09,0.2,0.32,0.11
+400760496,2015,8,Rice,Conference USA,Army,0.3,0.71,-0.05,0.11,-0.41,0.23
+400763551,2015,8,Rutgers,Big Ten,Ohio State,0.1,0.12,0.08,0.38,0.77,0.2
+400790884,2015,8,San Diego State,Mountain West,Utah State,0.35,0.37,0.36,0.05,-0.14,0.16
+400787269,2015,8,San José State,Mountain West,New Mexico,0.24,0.53,0.12,0.15,-0.03,0.26
+400764894,2015,8,SMU,American Athletic,South Florida,0.13,0.17,0.09,0.06,-0.37,0.28
+400787458,2015,8,South Alabama,Sun Belt,Texas State,0.21,0.12,0.28,0.28,-0.01,0.44
+400763632,2015,8,Southern Miss,Conference USA,Charlotte,0.22,0.35,0.09,-0.14,-0.23,-0.03
+400764894,2015,8,South Florida,American Athletic,SMU,0.06,-0.37,0.28,0.13,0.17,0.09
+400757060,2015,8,Stanford,Pac-12,Washington,0.33,0.61,0.19,0.16,0.19,0.13
+400756965,2015,8,Syracuse,ACC,Pittsburgh,0.2,0.32,0.11,0.12,0.31,0.09
+400764890,2015,8,Temple,American Athletic,East Carolina,0.18,0.26,0.08,0.07,0.11,0.0
+400603886,2015,8,Tennessee,SEC,Alabama,0.25,0.27,0.23,0.15,0.34,0.04
+400763444,2015,8,Texas,Big 12,Kansas State,0.14,0.07,0.18,0.07,0.09,0.06
+400603890,2015,8,Texas A&M,SEC,Ole Miss,-0.17,-0.21,-0.11,-0.01,0.17,-0.13
+400787458,2015,8,Texas State,Sun Belt,South Alabama,0.28,-0.01,0.44,0.21,0.12,0.28
+400763442,2015,8,Texas Tech,Big 12,Oklahoma,0.17,-0.07,0.53,0.47,0.6,0.42
+400787338,2015,8,Toledo,Mid-American,Massachusetts,0.18,0.3,0.12,0.12,0.2,-0.03
+400787457,2015,8,Troy,Sun Belt,New Mexico State,0.41,0.56,0.12,-0.07,-0.32,0.13
+400764893,2015,8,Tulane,American Athletic,Navy,0.2,0.4,-0.12,0.21,0.4,0.16
+400764891,2015,8,Tulsa,American Athletic,Memphis,0.25,0.35,0.15,0.42,0.7,0.2
+400764895,2015,8,UCF,American Athletic,Houston,0.0,0.17,-0.25,0.45,0.59,0.41
+400757056,2015,8,UCLA,Pac-12,California,0.3,0.5,0.04,0.17,0.14,0.26
+400764892,2015,8,UConn,American Athletic,Cincinnati,-0.13,-0.22,0.02,0.34,0.49,0.28
+400787456,2015,8,UL Monroe,Sun Belt,Idaho,-0.08,0.03,-0.34,0.16,0.3,0.0
+400757058,2015,8,USC,Pac-12,Utah,0.21,0.5,-0.01,-0.01,-0.13,0.11
+400757058,2015,8,Utah,Pac-12,USC,-0.01,-0.13,0.11,0.21,0.5,-0.01
+400790884,2015,8,Utah State,Mountain West,San Diego State,0.05,-0.14,0.16,0.35,0.37,0.36
+400763636,2015,8,UTEP,Conference USA,Florida Atlantic,0.18,0.38,-0.05,0.01,0.34,-0.22
+400603891,2015,8,Vanderbilt,SEC,Missouri,0.01,0.03,-0.02,-0.15,-0.3,0.22
+400756963,2015,8,Virginia,ACC,North Carolina,-0.01,-0.08,0.11,0.18,0.23,0.17
+400756961,2015,8,Virginia Tech,ACC,Duke,0.2,0.22,0.16,0.23,0.42,0.04
+400756964,2015,8,Wake Forest,ACC,NC State,-0.08,-0.27,0.14,0.28,0.23,0.34
+400757060,2015,8,Washington,Pac-12,Stanford,0.16,0.19,0.13,0.33,0.61,0.19
+400757057,2015,8,Washington State,Pac-12,Arizona,0.36,0.56,-0.01,0.39,0.61,0.14
+400603888,2015,8,Western Kentucky,Conference USA,LSU,0.07,0.14,-0.1,0.36,0.84,0.15
+400787337,2015,8,Western Michigan,Mid-American,Miami (OH),0.22,0.52,-0.02,0.03,0.09,-0.07
+400763547,2015,8,Wisconsin,Big Ten,Illinois,0.09,0.28,-0.12,0.06,0.16,-0.22
+400787267,2015,8,Wyoming,Mountain West,Boise State,0.02,0.13,-0.07,0.2,0.62,-0.02
+400787271,2015,9,Air Force,Mountain West,Hawai'i,0.34,0.2,0.33,-0.17,-0.08,-0.56
+400787341,2015,9,Akron,Mid-American,Central Michigan,-0.01,0.24,-0.41,0.05,0.19,-0.22
+400787460,2015,9,App State,Sun Belt,Troy,0.09,0.32,0.01,0.04,0.0,0.12
+400757062,2015,9,Arizona,Pac-12,Washington,-0.05,-0.02,-0.07,0.41,0.69,0.19
+400757061,2015,9,Arizona State,Pac-12,Oregon,0.23,0.13,0.37,0.38,0.37,0.45
+400603871,2015,9,Arkansas,SEC,UT Martin,0.76,0.85,0.7,0.32,0.36,0.26
+400787461,2015,9,Arkansas State,Sun Belt,Georgia State,0.24,0.15,0.3,0.2,0.33,-0.03
+400603872,2015,9,Auburn,SEC,Ole Miss,0.02,0.27,-0.21,0.13,0.33,-0.12
+400787342,2015,9,Ball State,Mid-American,Massachusetts,0.13,0.5,-0.14,0.07,-0.06,0.25
+400787272,2015,9,Boise State,Mountain West,UNLV,0.45,0.59,0.29,0.07,0.14,0.0
+400756968,2015,9,Boston College,ACC,Virginia Tech,-0.17,-0.21,-0.14,-0.11,0.17,-0.23
+400787340,2015,9,Buffalo,Mid-American,Miami (OH),0.06,0.31,-0.14,0.03,0.04,0.04
+400757063,2015,9,California,Pac-12,USC,0.13,0.32,-0.06,0.15,0.52,-0.01
+400787341,2015,9,Central Michigan,Mid-American,Akron,0.05,0.19,-0.22,-0.01,0.24,-0.41
+400763637,2015,9,Charlotte,Conference USA,Marshall,-0.02,-0.19,0.15,0.31,0.46,0.12
+400764897,2015,9,Cincinnati,American Athletic,UCF,0.62,1.15,0.25,0.06,-0.12,0.17
+400756969,2015,9,Clemson,ACC,NC State,0.4,0.85,0.15,0.12,0.03,0.31
+400757064,2015,9,Colorado,Pac-12,UCLA,0.01,-0.07,0.12,0.23,0.41,0.01
+400787273,2015,9,Colorado State,Mountain West,San Diego State,-0.03,0.06,-0.11,0.37,1.14,0.19
+400756970,2015,9,Duke,ACC,Miami,0.01,0.09,-0.08,0.19,0.65,-0.11
+400764896,2015,9,East Carolina,American Athletic,UConn,-0.06,-0.39,0.31,0.15,0.06,0.19
+400787339,2015,9,Eastern Michigan,Mid-American,Western Michigan,0.38,0.69,0.13,0.63,0.73,0.64
+400603873,2015,9,Florida,SEC,Georgia,0.12,0.07,0.15,-0.18,-0.15,-0.2
+400763638,2015,9,Florida Atlantic,Conference USA,Florida International,0.24,0.09,0.34,-0.08,-0.3,0.18
+400763638,2015,9,Florida International,Conference USA,Florida Atlantic,-0.08,-0.3,0.18,0.24,0.09,0.34
+400756971,2015,9,Florida State,ACC,Syracuse,0.48,0.56,0.4,0.05,-0.15,0.18
+400603873,2015,9,Georgia,SEC,Florida,-0.18,-0.15,-0.2,0.12,0.07,0.15
+400787459,2015,9,Georgia Southern,Sun Belt,Texas State,0.32,-0.09,0.38,-0.04,-0.26,0.19
+400787461,2015,9,Georgia State,Sun Belt,Arkansas State,0.2,0.33,-0.03,0.24,0.15,0.3
+400756972,2015,9,Georgia Tech,ACC,Virginia,0.11,0.25,-0.04,0.18,0.27,0.18
+400787271,2015,9,Hawai'i,Mountain West,Air Force,-0.17,-0.08,-0.56,0.34,0.2,0.33
+400603874,2015,9,Houston,American Athletic,Vanderbilt,0.02,0.63,-0.28,-0.26,-0.67,-0.02
+400787462,2015,9,Idaho,Sun Belt,New Mexico State,0.24,0.15,0.38,0.49,0.32,0.65
+400763554,2015,9,Illinois,Big Ten,Penn State,-0.2,-0.2,-0.2,0.22,0.49,-0.06
+400763552,2015,9,Iowa,Big Ten,Maryland,0.14,0.14,0.08,-0.19,-0.58,0.11
+400763446,2015,9,Iowa State,Big 12,Texas,0.13,-0.08,0.32,-0.06,-0.26,0.11
+400763447,2015,9,Kansas,Big 12,Oklahoma,-0.12,0.14,-0.44,0.53,0.78,0.26
+400603875,2015,9,Kentucky,SEC,Tennessee,0.06,-0.07,0.21,0.31,0.76,0.02
+400787463,2015,9,Louisiana,Sun Belt,UL Monroe,0.03,-0.01,0.04,0.23,0.44,-0.08
+400763641,2015,9,Louisiana Tech,Conference USA,Rice,0.41,0.77,0.07,0.12,0.21,-0.01
+400756967,2015,9,Louisville,ACC,Wake Forest,-0.01,0.49,-0.43,-0.04,0.05,-0.15
+400763637,2015,9,Marshall,Conference USA,Charlotte,0.31,0.46,0.12,-0.02,-0.19,0.15
+400763552,2015,9,Maryland,Big Ten,Iowa,-0.19,-0.58,0.11,0.14,0.14,0.08
+400787342,2015,9,Massachusetts,Mid-American,Ball State,0.07,-0.06,0.25,0.13,0.5,-0.14
+400764898,2015,9,Memphis,American Athletic,Tulane,0.26,0.18,0.38,0.02,0.12,0.07
+400756970,2015,9,Miami,ACC,Duke,0.19,0.65,-0.11,0.01,0.09,-0.08
+400787340,2015,9,Miami (OH),Mid-American,Buffalo,0.03,0.04,0.04,0.06,0.31,-0.14
+400763553,2015,9,Michigan,Big Ten,Minnesota,0.18,0.26,0.11,0.21,0.46,0.02
+400763553,2015,9,Minnesota,Big Ten,Michigan,0.21,0.46,0.02,0.18,0.26,0.11
+400764899,2015,9,Navy,American Athletic,South Florida,0.19,-0.36,0.31,0.1,0.56,-0.24
+400756969,2015,9,NC State,ACC,Clemson,0.12,0.03,0.31,0.4,0.85,0.15
+400763555,2015,9,Nebraska,Big Ten,Purdue,0.31,0.45,0.03,0.34,0.34,0.33
+400787462,2015,9,New Mexico State,Sun Belt,Idaho,0.49,0.32,0.65,0.24,0.15,0.38
+400756966,2015,9,North Carolina,ACC,Pittsburgh,0.26,0.81,0.02,0.16,0.13,0.21
+400763639,2015,9,North Texas,Conference USA,UTSA,0.15,0.0,0.25,0.09,0.09,0.11
+400763585,2015,9,Notre Dame,FBS Independents,Temple,0.16,0.16,0.19,0.09,0.23,-0.03
+400763447,2015,9,Oklahoma,Big 12,Kansas,0.53,0.78,0.26,-0.12,0.14,-0.44
+400763448,2015,9,Oklahoma State,Big 12,Texas Tech,0.46,0.66,0.19,0.13,0.22,0.18
+400763640,2015,9,Old Dominion,Conference USA,Western Kentucky,0.17,0.14,0.22,0.49,0.56,0.45
+400603872,2015,9,Ole Miss,SEC,Auburn,0.13,0.33,-0.12,0.02,0.27,-0.21
+400757061,2015,9,Oregon,Pac-12,Arizona State,0.38,0.37,0.45,0.23,0.13,0.37
+400757065,2015,9,Oregon State,Pac-12,Utah,0.04,0.11,0.0,0.29,0.74,0.07
+400763554,2015,9,Penn State,Big Ten,Illinois,0.22,0.49,-0.06,-0.2,-0.2,-0.2
+400756966,2015,9,Pittsburgh,ACC,North Carolina,0.16,0.13,0.21,0.26,0.81,0.02
+400763555,2015,9,Purdue,Big Ten,Nebraska,0.34,0.34,0.33,0.31,0.45,0.03
+400763641,2015,9,Rice,Conference USA,Louisiana Tech,0.12,0.21,-0.01,0.41,0.77,0.07
+400763556,2015,9,Rutgers,Big Ten,Wisconsin,-0.15,-0.12,-0.13,0.06,0.01,0.1
+400787273,2015,9,San Diego State,Mountain West,Colorado State,0.37,1.14,0.19,-0.03,0.06,-0.11
+400764900,2015,9,SMU,American Athletic,Tulsa,0.0,-0.03,0.03,0.23,0.38,0.16
+400603876,2015,9,South Carolina,SEC,Texas A&M,0.21,0.09,0.28,0.3,0.35,0.28
+400763642,2015,9,Southern Miss,Conference USA,UTEP,0.38,0.6,0.16,0.05,0.16,-0.05
+400764899,2015,9,South Florida,American Athletic,Navy,0.1,0.56,-0.24,0.19,-0.36,0.31
+400757066,2015,9,Stanford,Pac-12,Washington State,0.02,-0.28,0.27,0.12,0.18,-0.03
+400756971,2015,9,Syracuse,ACC,Florida State,0.05,-0.15,0.18,0.48,0.56,0.4
+400763445,2015,9,TCU,Big 12,West Virginia,0.31,0.41,0.29,-0.07,-0.37,0.25
+400763585,2015,9,Temple,American Athletic,Notre Dame,0.09,0.23,-0.03,0.16,0.16,0.19
+400603875,2015,9,Tennessee,SEC,Kentucky,0.31,0.76,0.02,0.06,-0.07,0.21
+400763446,2015,9,Texas,Big 12,Iowa State,-0.06,-0.26,0.11,0.13,-0.08,0.32
+400603876,2015,9,Texas A&M,SEC,South Carolina,0.3,0.35,0.28,0.21,0.09,0.28
+400787459,2015,9,Texas State,Sun Belt,Georgia Southern,-0.04,-0.26,0.19,0.32,-0.09,0.38
+400763448,2015,9,Texas Tech,Big 12,Oklahoma State,0.13,0.22,0.18,0.46,0.66,0.19
+400787460,2015,9,Troy,Sun Belt,App State,0.04,0.0,0.12,0.09,0.32,0.01
+400764898,2015,9,Tulane,American Athletic,Memphis,0.02,0.12,0.07,0.26,0.18,0.38
+400764900,2015,9,Tulsa,American Athletic,SMU,0.23,0.38,0.16,0.0,-0.03,0.03
+400764897,2015,9,UCF,American Athletic,Cincinnati,0.06,-0.12,0.17,0.62,1.15,0.25
+400757064,2015,9,UCLA,Pac-12,Colorado,0.23,0.41,0.01,0.01,-0.07,0.12
+400764896,2015,9,UConn,American Athletic,East Carolina,0.15,0.06,0.19,-0.06,-0.39,0.31
+400787463,2015,9,UL Monroe,Sun Belt,Louisiana,0.23,0.44,-0.08,0.03,-0.01,0.04
+400787272,2015,9,UNLV,Mountain West,Boise State,0.07,0.14,0.0,0.45,0.59,0.29
+400757063,2015,9,USC,Pac-12,California,0.15,0.52,-0.01,0.13,0.32,-0.06
+400757065,2015,9,Utah,Pac-12,Oregon State,0.29,0.74,0.07,0.04,0.11,0.0
+400790885,2015,9,Utah State,Mountain West,Wyoming,0.68,1.42,0.41,0.11,0.25,0.2
+400763642,2015,9,UTEP,Conference USA,Southern Miss,0.05,0.16,-0.05,0.38,0.6,0.16
+400763639,2015,9,UTSA,Conference USA,North Texas,0.09,0.09,0.11,0.15,0.0,0.25
+400603874,2015,9,Vanderbilt,SEC,Houston,-0.26,-0.67,-0.02,0.02,0.63,-0.28
+400756972,2015,9,Virginia,ACC,Georgia Tech,0.18,0.27,0.18,0.11,0.25,-0.04
+400756968,2015,9,Virginia Tech,ACC,Boston College,-0.11,0.17,-0.23,-0.17,-0.21,-0.14
+400756967,2015,9,Wake Forest,ACC,Louisville,-0.04,0.05,-0.15,-0.01,0.49,-0.43
+400757062,2015,9,Washington,Pac-12,Arizona,0.41,0.69,0.19,-0.05,-0.02,-0.07
+400757066,2015,9,Washington State,Pac-12,Stanford,0.12,0.18,-0.03,0.02,-0.28,0.27
+400763640,2015,9,Western Kentucky,Conference USA,Old Dominion,0.49,0.56,0.45,0.17,0.14,0.22
+400787339,2015,9,Western Michigan,Mid-American,Eastern Michigan,0.63,0.73,0.64,0.38,0.69,0.13
+400763445,2015,9,West Virginia,Big 12,TCU,-0.07,-0.37,0.25,0.31,0.41,0.29
+400763556,2015,9,Wisconsin,Big Ten,Rutgers,0.06,0.01,0.1,-0.15,-0.12,-0.13
+400790885,2015,9,Wyoming,Mountain West,Utah State,0.11,0.25,0.2,0.68,1.42,0.41
+400760497,2015,10,Air Force,Mountain West,Army,0.17,1.49,-0.09,-0.11,-0.07,-0.13
+400787348,2015,10,Akron,Mid-American,Massachusetts,0.08,0.24,-0.02,-0.1,-0.22,0.1
+400603905,2015,10,Alabama,SEC,LSU,0.19,0.31,0.13,0.05,0.17,-0.07
+400787464,2015,10,App State,Sun Belt,Arkansas State,0.35,0.71,-0.11,0.2,0.47,0.15
+400757067,2015,10,Arizona,Pac-12,USC,0.04,0.14,-0.15,0.27,0.32,0.24
+400757068,2015,10,Arizona State,Pac-12,Washington State,0.11,0.09,0.16,0.34,0.49,-0.15
+400603908,2015,10,Arkansas,SEC,Ole Miss,0.43,0.75,0.04,0.58,0.57,0.66
+400787464,2015,10,Arkansas State,Sun Belt,App State,0.2,0.47,0.15,0.35,0.71,-0.11
+400760497,2015,10,Army,FBS Independents,Air Force,-0.11,-0.07,-0.13,0.17,1.49,-0.09
+400603910,2015,10,Auburn,SEC,Texas A&M,0.26,0.46,0.28,-0.07,-0.27,0.07
+400787346,2015,10,Ball State,Mid-American,Western Michigan,-0.13,-0.07,-0.19,0.55,1.13,0.3
+400763449,2015,10,Baylor,Big 12,Kansas State,0.42,0.79,0.0,0.25,0.39,0.18
+400756973,2015,10,Boston College,ACC,NC State,-0.05,0.17,-0.38,0.03,0.01,0.01
+400787344,2015,10,Bowling Green,Mid-American,Ohio,0.54,0.69,0.33,0.03,-0.12,0.17
+400790887,2015,10,BYU,FBS Independents,San José State,0.04,0.21,-0.23,0.01,0.12,-0.09
+400757072,2015,10,California,Pac-12,Oregon,0.16,0.09,0.22,0.41,0.45,0.45
+400763643,2015,10,Charlotte,Conference USA,Florida International,0.11,0.04,0.15,0.32,0.37,0.27
+400764903,2015,10,Cincinnati,American Athletic,Houston,0.15,0.27,-0.18,0.02,0.27,-0.07
+400756974,2015,10,Clemson,ACC,Florida State,0.14,0.22,0.11,-0.02,-0.22,0.22
+400757070,2015,10,Colorado,Pac-12,Stanford,0.04,0.02,0.09,0.38,0.42,0.36
+400787275,2015,10,Colorado State,Mountain West,Wyoming,0.1,-0.13,0.19,-0.02,-0.09,0.03
+400756975,2015,10,Duke,ACC,North Carolina,0.23,0.17,0.32,0.58,0.97,0.21
+400764902,2015,10,East Carolina,American Athletic,South Florida,-0.08,0.09,-0.17,0.1,0.5,-0.05
+400787347,2015,10,Eastern Michigan,Mid-American,Miami (OH),0.02,-0.27,0.18,0.2,0.28,0.17
+400603906,2015,10,Florida,SEC,Vanderbilt,-0.34,-0.14,-0.5,-0.04,-0.35,0.1
+400763648,2015,10,Florida Atlantic,Conference USA,Western Kentucky,0.15,0.2,0.16,0.55,0.65,0.47
+400763643,2015,10,Florida International,Conference USA,Charlotte,0.32,0.37,0.27,0.11,0.04,0.15
+400756974,2015,10,Florida State,ACC,Clemson,-0.02,-0.22,0.22,0.14,0.22,0.11
+400790886,2015,10,Fresno State,Mountain West,Nevada,-0.17,-0.24,-0.04,0.3,0.64,0.18
+400603907,2015,10,Georgia,SEC,Kentucky,0.11,0.16,0.13,-0.11,-0.07,-0.13
+400787465,2015,10,Georgia State,Sun Belt,Louisiana,0.17,0.37,-0.16,0.06,0.29,-0.1
+400787277,2015,10,Hawai'i,Mountain West,UNLV,0.08,-0.13,0.33,0.25,0.75,0.04
+400764903,2015,10,Houston,American Athletic,Cincinnati,0.02,0.27,-0.07,0.15,0.27,-0.18
+400787466,2015,10,Idaho,Sun Belt,South Alabama,0.18,0.35,0.06,0.18,0.15,0.19
+400763563,2015,10,Illinois,Big Ten,Purdue,0.37,0.11,0.63,-0.07,-0.12,0.04
+400763557,2015,10,Indiana,Big Ten,Iowa,0.2,0.11,0.33,0.29,0.4,0.22
+400763557,2015,10,Iowa,Big Ten,Indiana,0.29,0.4,0.22,0.2,0.11,0.33
+400763450,2015,10,Iowa State,Big 12,Oklahoma,0.01,0.02,-0.07,0.49,0.58,0.4
+400763452,2015,10,Kansas,Big 12,Texas,0.08,-0.14,0.32,0.49,0.65,0.39
+400763449,2015,10,Kansas State,Big 12,Baylor,0.25,0.39,0.18,0.42,0.79,0.0
+400603907,2015,10,Kentucky,SEC,Georgia,-0.11,-0.07,-0.13,0.11,0.16,0.13
+400787465,2015,10,Louisiana,Sun Belt,Georgia State,0.06,0.29,-0.1,0.17,0.37,-0.16
+400763644,2015,10,Louisiana Tech,Conference USA,North Texas,0.58,0.54,0.61,-0.04,0.04,-0.16
+400756976,2015,10,Louisville,ACC,Syracuse,0.29,0.59,0.01,-0.12,-0.19,-0.04
+400603905,2015,10,LSU,SEC,Alabama,0.05,0.17,-0.07,0.19,0.31,0.13
+400763645,2015,10,Marshall,Conference USA,Middle Tennessee,0.12,0.25,-0.04,-0.02,0.24,-0.18
+400763558,2015,10,Maryland,Big Ten,Wisconsin,0.1,0.08,0.07,0.07,0.2,-0.02
+400787348,2015,10,Massachusetts,Mid-American,Akron,-0.1,-0.22,0.1,0.08,0.24,-0.02
+400764904,2015,10,Memphis,American Athletic,Navy,0.16,0.26,-0.01,0.33,1.01,0.29
+400756977,2015,10,Miami,ACC,Virginia,0.31,0.8,0.0,0.18,0.26,0.1
+400787347,2015,10,Miami (OH),Mid-American,Eastern Michigan,0.2,0.28,0.17,0.02,-0.27,0.18
+400763559,2015,10,Michigan,Big Ten,Rutgers,0.34,0.88,0.06,-0.12,-0.34,0.18
+400763560,2015,10,Michigan State,Big Ten,Nebraska,0.35,0.65,-0.01,0.31,0.28,0.3
+400763645,2015,10,Middle Tennessee,Conference USA,Marshall,-0.02,0.24,-0.18,0.12,0.25,-0.04
+400763562,2015,10,Minnesota,Big Ten,Ohio State,0.0,0.24,-0.43,0.16,0.13,0.18
+400603911,2015,10,Mississippi State,SEC,Missouri,0.07,0.24,-0.12,-0.07,-0.26,0.1
+400603911,2015,10,Missouri,SEC,Mississippi State,-0.07,-0.26,0.1,0.07,0.24,-0.12
+400764904,2015,10,Navy,American Athletic,Memphis,0.33,1.01,0.29,0.16,0.26,-0.01
+400756973,2015,10,NC State,ACC,Boston College,0.03,0.01,0.01,-0.05,0.17,-0.38
+400763560,2015,10,Nebraska,Big Ten,Michigan State,0.31,0.28,0.3,0.35,0.65,-0.01
+400790886,2015,10,Nevada,Mountain West,Fresno State,0.3,0.64,0.18,-0.17,-0.24,-0.04
+400787278,2015,10,New Mexico,Mountain West,Utah State,-0.02,0.09,-0.05,-0.18,0.32,-0.52
+400787468,2015,10,New Mexico State,Sun Belt,Texas State,0.22,0.31,0.16,0.1,0.2,-0.01
+400756975,2015,10,North Carolina,ACC,Duke,0.58,0.97,0.21,0.23,0.17,0.32
+400787343,2015,10,Northern Illinois,Mid-American,Toledo,0.06,0.43,-0.12,0.15,0.09,0.21
+400763644,2015,10,North Texas,Conference USA,Louisiana Tech,-0.04,0.04,-0.16,0.58,0.54,0.61
+400763561,2015,10,Northwestern,Big Ten,Penn State,0.05,0.05,0.06,0.11,0.05,0.21
+400756978,2015,10,Notre Dame,FBS Independents,Pittsburgh,0.42,0.71,0.21,0.21,-0.03,0.56
+400787344,2015,10,Ohio,Mid-American,Bowling Green,0.03,-0.12,0.17,0.54,0.69,0.33
+400763562,2015,10,Ohio State,Big Ten,Minnesota,0.16,0.13,0.18,0.0,0.24,-0.43
+400763450,2015,10,Oklahoma,Big 12,Iowa State,0.49,0.58,0.4,0.01,0.02,-0.07
+400763451,2015,10,Oklahoma State,Big 12,TCU,0.4,0.89,-0.15,0.1,0.12,0.1
+400763647,2015,10,Old Dominion,Conference USA,UTSA,0.24,0.21,0.33,0.12,0.18,0.06
+400603908,2015,10,Ole Miss,SEC,Arkansas,0.58,0.57,0.66,0.43,0.75,0.04
+400757072,2015,10,Oregon,Pac-12,California,0.41,0.45,0.45,0.16,0.09,0.22
+400757069,2015,10,Oregon State,Pac-12,UCLA,-0.13,-0.18,-0.09,0.4,0.49,0.36
+400763561,2015,10,Penn State,Big Ten,Northwestern,0.11,0.05,0.21,0.05,0.05,0.06
+400756978,2015,10,Pittsburgh,ACC,Notre Dame,0.21,-0.03,0.56,0.42,0.71,0.21
+400763563,2015,10,Purdue,Big Ten,Illinois,-0.07,-0.12,0.04,0.37,0.11,0.63
+400763559,2015,10,Rutgers,Big Ten,Michigan,-0.12,-0.34,0.18,0.34,0.88,0.06
+400790887,2015,10,San José State,Mountain West,BYU,0.01,0.12,-0.09,0.04,0.21,-0.23
+400764901,2015,10,SMU,American Athletic,Temple,0.12,0.03,0.22,0.48,0.6,0.44
+400787466,2015,10,South Alabama,Sun Belt,Idaho,0.18,0.15,0.19,0.18,0.35,0.06
+400603909,2015,10,South Carolina,SEC,Tennessee,0.12,0.34,-0.11,0.13,0.31,-0.01
+400764902,2015,10,South Florida,American Athletic,East Carolina,0.1,0.5,-0.05,-0.08,0.09,-0.17
+400757070,2015,10,Stanford,Pac-12,Colorado,0.38,0.42,0.36,0.04,0.02,0.09
+400756976,2015,10,Syracuse,ACC,Louisville,-0.12,-0.19,-0.04,0.29,0.59,0.01
+400763451,2015,10,TCU,Big 12,Oklahoma State,0.1,0.12,0.1,0.4,0.89,-0.15
+400764901,2015,10,Temple,American Athletic,SMU,0.48,0.6,0.44,0.12,0.03,0.22
+400603909,2015,10,Tennessee,SEC,South Carolina,0.13,0.31,-0.01,0.12,0.34,-0.11
+400763452,2015,10,Texas,Big 12,Kansas,0.49,0.65,0.39,0.08,-0.14,0.32
+400603910,2015,10,Texas A&M,SEC,Auburn,-0.07,-0.27,0.07,0.26,0.46,0.28
+400787468,2015,10,Texas State,Sun Belt,New Mexico State,0.1,0.2,-0.01,0.22,0.31,0.16
+400763453,2015,10,Texas Tech,Big 12,West Virginia,0.1,0.0,0.23,0.26,0.28,0.27
+400787343,2015,10,Toledo,Mid-American,Northern Illinois,0.15,0.09,0.21,0.06,0.43,-0.12
+400787467,2015,10,Troy,Sun Belt,UL Monroe,0.21,0.61,-0.13,0.08,0.1,0.04
+400764905,2015,10,Tulane,American Athletic,UConn,-0.29,-0.33,-0.23,-0.16,-0.26,-0.1
+400764906,2015,10,Tulsa,American Athletic,UCF,0.27,0.31,0.27,0.01,0.1,-0.07
+400764906,2015,10,UCF,American Athletic,Tulsa,0.01,0.1,-0.07,0.27,0.31,0.27
+400757069,2015,10,UCLA,Pac-12,Oregon State,0.4,0.49,0.36,-0.13,-0.18,-0.09
+400764905,2015,10,UConn,American Athletic,Tulane,-0.16,-0.26,-0.1,-0.29,-0.33,-0.23
+400787467,2015,10,UL Monroe,Sun Belt,Troy,0.08,0.1,0.04,0.21,0.61,-0.13
+400787277,2015,10,UNLV,Mountain West,Hawai'i,0.25,0.75,0.04,0.08,-0.13,0.33
+400757067,2015,10,USC,Pac-12,Arizona,0.27,0.32,0.24,0.04,0.14,-0.15
+400757071,2015,10,Utah,Pac-12,Washington,0.02,-0.09,0.1,-0.04,0.1,-0.28
+400787278,2015,10,Utah State,Mountain West,New Mexico,-0.18,0.32,-0.52,-0.02,0.09,-0.05
+400763647,2015,10,UTSA,Conference USA,Old Dominion,0.12,0.18,0.06,0.24,0.21,0.33
+400603906,2015,10,Vanderbilt,SEC,Florida,-0.04,-0.35,0.1,-0.34,-0.14,-0.5
+400756977,2015,10,Virginia,ACC,Miami,0.18,0.26,0.1,0.31,0.8,0.0
+400757071,2015,10,Washington,Pac-12,Utah,-0.04,0.1,-0.28,0.02,-0.09,0.1
+400757068,2015,10,Washington State,Pac-12,Arizona State,0.34,0.49,-0.15,0.11,0.09,0.16
+400763648,2015,10,Western Kentucky,Conference USA,Florida Atlantic,0.55,0.65,0.47,0.15,0.2,0.16
+400787346,2015,10,Western Michigan,Mid-American,Ball State,0.55,1.13,0.3,-0.13,-0.07,-0.19
+400763453,2015,10,West Virginia,Big 12,Texas Tech,0.26,0.28,0.27,0.1,0.0,0.23
+400763558,2015,10,Wisconsin,Big Ten,Maryland,0.07,0.2,-0.02,0.1,0.08,0.07
+400787275,2015,10,Wyoming,Mountain West,Colorado State,-0.02,-0.09,0.03,0.1,-0.13,0.19
+400787280,2015,11,Air Force,Mountain West,Utah State,0.35,1.24,0.12,0.2,0.22,0.13
+400787353,2015,11,Akron,Mid-American,Miami (OH),0.12,0.02,0.14,0.0,0.26,-0.39
+400603933,2015,11,Alabama,SEC,Mississippi State,0.2,0.12,0.27,-0.1,-0.1,-0.09
+400787470,2015,11,App State,Sun Belt,Idaho,0.44,0.52,0.44,0.05,0.21,0.01
+400757074,2015,11,Arizona,Pac-12,Utah,0.17,0.32,-0.02,0.14,0.25,0.09
+400757075,2015,11,Arizona State,Pac-12,Washington,0.07,0.25,-0.08,0.1,0.08,0.16
+400603932,2015,11,Arkansas,SEC,LSU,0.28,0.42,0.24,0.13,0.22,-0.01
+400787471,2015,11,Arkansas State,Sun Belt,UL Monroe,0.12,0.42,-0.08,-0.12,-0.23,-0.02
+400760498,2015,11,Army,FBS Independents,Tulane,0.04,0.64,-0.12,0.26,0.55,0.04
+400603931,2015,11,Auburn,SEC,Georgia,0.02,-0.34,0.3,-0.03,0.05,-0.09
+400763454,2015,11,Baylor,Big 12,Oklahoma,0.23,0.55,0.02,0.2,0.39,0.07
+400787281,2015,11,Boise State,Mountain West,New Mexico,0.08,0.12,0.01,0.21,0.74,0.04
+400787352,2015,11,Bowling Green,Mid-American,Western Michigan,0.3,0.15,0.48,0.1,-0.01,0.22
+400787351,2015,11,Buffalo,Mid-American,Northern Illinois,0.12,0.24,-0.11,0.13,-0.09,0.22
+400785063,2015,11,BYU,FBS Independents,Missouri,0.06,0.15,-0.15,0.14,0.64,-0.1
+400757078,2015,11,California,Pac-12,Oregon State,0.53,0.73,0.38,0.15,0.18,0.09
+400787350,2015,11,Central Michigan,Mid-American,Toledo,0.17,0.17,0.11,0.25,0.5,-0.07
+400763649,2015,11,Charlotte,Conference USA,UTSA,0.03,0.15,-0.05,0.05,-0.07,0.18
+400764907,2015,11,Cincinnati,American Athletic,Tulsa,0.48,0.6,0.36,0.28,0.22,0.38
+400756980,2015,11,Clemson,ACC,Syracuse,0.31,0.33,0.34,0.1,-0.16,0.26
+400757073,2015,11,Colorado,Pac-12,USC,0.02,0.14,-0.11,0.15,0.41,-0.06
+400787282,2015,11,Colorado State,Mountain West,UNLV,0.5,0.82,0.35,0.21,0.27,0.13
+400756981,2015,11,Duke,ACC,Pittsburgh,0.01,-0.11,0.26,0.21,0.69,0.0
+400787354,2015,11,Eastern Michigan,Mid-American,Massachusetts,0.12,0.25,-0.15,0.25,-0.1,0.39
+400603934,2015,11,Florida,SEC,South Carolina,0.18,0.24,0.13,-0.07,0.21,-0.49
+400763650,2015,11,Florida Atlantic,Conference USA,Middle Tennessee,-0.1,0.16,-0.35,0.13,0.47,-0.08
+400763651,2015,11,Florida International,Conference USA,Marshall,-0.18,-0.43,0.03,0.4,0.41,0.41
+400756982,2015,11,Florida State,ACC,NC State,0.19,0.36,0.04,0.06,0.1,-0.01
+400787283,2015,11,Fresno State,Mountain West,Hawai'i,0.09,0.29,-0.08,0.07,-0.06,0.25
+400603931,2015,11,Georgia,SEC,Auburn,-0.03,0.05,-0.09,0.02,-0.34,0.3
+400787472,2015,11,Georgia Southern,Sun Belt,Troy,0.4,0.74,0.38,-0.22,0.14,-0.72
+400787473,2015,11,Georgia State,Sun Belt,Texas State,0.39,0.72,0.06,0.16,0.03,0.3
+400756979,2015,11,Georgia Tech,ACC,Virginia Tech,-0.01,0.13,-0.06,-0.01,-0.06,0.04
+400787283,2015,11,Hawai'i,Mountain West,Fresno State,0.07,-0.06,0.25,0.09,0.29,-0.08
+400764908,2015,11,Houston,American Athletic,Memphis,0.22,0.18,0.31,0.29,0.5,0.16
+400787470,2015,11,Idaho,Sun Belt,App State,0.05,0.21,0.01,0.44,0.52,0.44
+400763564,2015,11,Illinois,Big Ten,Ohio State,-0.17,-0.04,-0.49,0.21,0.02,0.3
+400763565,2015,11,Indiana,Big Ten,Michigan,0.23,0.13,0.25,0.35,0.6,0.27
+400763566,2015,11,Iowa,Big Ten,Minnesota,0.34,0.46,0.26,0.46,0.67,0.24
+400763455,2015,11,Iowa State,Big 12,Oklahoma State,0.33,0.14,0.5,0.27,0.7,-0.09
+400763456,2015,11,Kansas,Big 12,TCU,0.08,0.06,0.1,0.02,-0.01,0.04
+400763457,2015,11,Kansas State,Big 12,Texas Tech,0.2,0.23,0.16,0.48,0.45,0.52
+400787349,2015,11,Kent State,Mid-American,Ohio,-0.22,-0.2,-0.25,0.24,-0.03,0.32
+400603937,2015,11,Kentucky,SEC,Vanderbilt,-0.12,-0.45,0.19,-0.13,0.21,-0.33
+400787469,2015,11,Louisiana,Sun Belt,South Alabama,0.13,0.28,-0.12,0.1,0.28,0.0
+400756983,2015,11,Louisville,ACC,Virginia,0.38,0.23,0.52,0.24,0.49,-0.18
+400603932,2015,11,LSU,SEC,Arkansas,0.13,0.22,-0.01,0.28,0.42,0.24
+400763651,2015,11,Marshall,Conference USA,Florida International,0.4,0.41,0.41,-0.18,-0.43,0.03
+400763567,2015,11,Maryland,Big Ten,Michigan State,-0.28,-0.39,-0.16,-0.29,-0.36,-0.23
+400787354,2015,11,Massachusetts,Mid-American,Eastern Michigan,0.25,-0.1,0.39,0.12,0.25,-0.15
+400764908,2015,11,Memphis,American Athletic,Houston,0.29,0.5,0.16,0.22,0.18,0.31
+400756984,2015,11,Miami,ACC,North Carolina,0.18,0.2,0.16,0.39,0.35,0.44
+400787353,2015,11,Miami (OH),Mid-American,Akron,0.0,0.26,-0.39,0.12,0.02,0.14
+400763565,2015,11,Michigan,Big Ten,Indiana,0.35,0.6,0.27,0.23,0.13,0.25
+400763567,2015,11,Michigan State,Big Ten,Maryland,-0.29,-0.36,-0.23,-0.28,-0.39,-0.16
+400763650,2015,11,Middle Tennessee,Conference USA,Florida Atlantic,0.13,0.47,-0.08,-0.1,0.16,-0.35
+400763566,2015,11,Minnesota,Big Ten,Iowa,0.46,0.67,0.24,0.34,0.46,0.26
+400603933,2015,11,Mississippi State,SEC,Alabama,-0.1,-0.1,-0.09,0.2,0.12,0.27
+400785063,2015,11,Missouri,SEC,BYU,0.14,0.64,-0.1,0.06,0.15,-0.15
+400764909,2015,11,Navy,American Athletic,SMU,0.51,0.28,0.54,0.03,-0.39,0.37
+400756982,2015,11,NC State,ACC,Florida State,0.06,0.1,-0.01,0.19,0.36,0.04
+400763569,2015,11,Nebraska,Big Ten,Rutgers,0.13,0.46,-0.04,-0.08,-0.23,0.07
+400787284,2015,11,Nevada,Mountain West,San José State,0.2,0.5,0.05,0.24,0.57,0.08
+400787281,2015,11,New Mexico,Mountain West,Boise State,0.21,0.74,0.04,0.08,0.12,0.01
+400756984,2015,11,North Carolina,ACC,Miami,0.39,0.35,0.44,0.18,0.2,0.16
+400787351,2015,11,Northern Illinois,Mid-American,Buffalo,0.13,-0.09,0.22,0.12,0.24,-0.11
+400603935,2015,11,North Texas,Conference USA,Tennessee,-0.14,-0.09,-0.19,0.14,0.05,0.2
+400763568,2015,11,Northwestern,Big Ten,Purdue,0.02,-0.08,0.07,0.02,0.08,-0.08
+400756985,2015,11,Notre Dame,FBS Independents,Wake Forest,0.26,0.16,0.33,-0.15,-0.16,-0.15
+400787349,2015,11,Ohio,Mid-American,Kent State,0.24,-0.03,0.32,-0.22,-0.2,-0.25
+400763564,2015,11,Ohio State,Big Ten,Illinois,0.21,0.02,0.3,-0.17,-0.04,-0.49
+400763454,2015,11,Oklahoma,Big 12,Baylor,0.2,0.39,0.07,0.23,0.55,0.02
+400763455,2015,11,Oklahoma State,Big 12,Iowa State,0.27,0.7,-0.09,0.33,0.14,0.5
+400763652,2015,11,Old Dominion,Conference USA,UTEP,0.17,0.27,0.06,0.07,0.19,-0.06
+400757077,2015,11,Oregon,Pac-12,Stanford,0.56,1.18,0.31,0.22,0.46,0.08
+400757078,2015,11,Oregon State,Pac-12,California,0.15,0.18,0.09,0.53,0.73,0.38
+400756981,2015,11,Pittsburgh,ACC,Duke,0.21,0.69,0.0,0.01,-0.11,0.26
+400763568,2015,11,Purdue,Big Ten,Northwestern,0.02,0.08,-0.08,0.02,-0.08,0.07
+400763653,2015,11,Rice,Conference USA,Southern Miss,-0.12,-0.3,0.14,0.67,1.16,0.15
+400763569,2015,11,Rutgers,Big Ten,Nebraska,-0.08,-0.23,0.07,0.13,0.46,-0.04
+400787285,2015,11,San Diego State,Mountain West,Wyoming,0.25,0.45,0.19,-0.12,-0.34,0.12
+400787284,2015,11,San José State,Mountain West,Nevada,0.24,0.57,0.08,0.2,0.5,0.05
+400764909,2015,11,SMU,American Athletic,Navy,0.03,-0.39,0.37,0.51,0.28,0.54
+400787469,2015,11,South Alabama,Sun Belt,Louisiana,0.1,0.28,0.0,0.13,0.28,-0.12
+400603934,2015,11,South Carolina,SEC,Florida,-0.07,0.21,-0.49,0.18,0.24,0.13
+400763653,2015,11,Southern Miss,Conference USA,Rice,0.67,1.16,0.15,-0.12,-0.3,0.14
+400764910,2015,11,South Florida,American Athletic,Temple,0.33,0.33,0.36,0.08,0.12,0.03
+400757077,2015,11,Stanford,Pac-12,Oregon,0.22,0.46,0.08,0.56,1.18,0.31
+400756980,2015,11,Syracuse,ACC,Clemson,0.1,-0.16,0.26,0.31,0.33,0.34
+400763456,2015,11,TCU,Big 12,Kansas,0.02,-0.01,0.04,0.08,0.06,0.1
+400764910,2015,11,Temple,American Athletic,South Florida,0.08,0.12,0.03,0.33,0.33,0.36
+400603935,2015,11,Tennessee,SEC,North Texas,0.14,0.05,0.2,-0.14,-0.09,-0.19
+400763458,2015,11,Texas,Big 12,West Virginia,0.09,0.1,0.1,0.23,0.54,0.16
+400603936,2015,11,Texas A&M,SEC,Western Carolina,0.3,0.15,0.42,-0.01,0.02,-0.01
+400787473,2015,11,Texas State,Sun Belt,Georgia State,0.16,0.03,0.3,0.39,0.72,0.06
+400763457,2015,11,Texas Tech,Big 12,Kansas State,0.48,0.45,0.52,0.2,0.23,0.16
+400787350,2015,11,Toledo,Mid-American,Central Michigan,0.25,0.5,-0.07,0.17,0.17,0.11
+400787472,2015,11,Troy,Sun Belt,Georgia Southern,-0.22,0.14,-0.72,0.4,0.74,0.38
+400760498,2015,11,Tulane,American Athletic,Army,0.26,0.55,0.04,0.04,0.64,-0.12
+400764907,2015,11,Tulsa,American Athletic,Cincinnati,0.28,0.22,0.38,0.48,0.6,0.36
+400757076,2015,11,UCLA,Pac-12,Washington State,0.26,0.24,0.36,0.16,0.12,0.38
+400787471,2015,11,UL Monroe,Sun Belt,Arkansas State,-0.12,-0.23,-0.02,0.12,0.42,-0.08
+400787282,2015,11,UNLV,Mountain West,Colorado State,0.21,0.27,0.13,0.5,0.82,0.35
+400757073,2015,11,USC,Pac-12,Colorado,0.15,0.41,-0.06,0.02,0.14,-0.11
+400757074,2015,11,Utah,Pac-12,Arizona,0.14,0.25,0.09,0.17,0.32,-0.02
+400787280,2015,11,Utah State,Mountain West,Air Force,0.2,0.22,0.13,0.35,1.24,0.12
+400763652,2015,11,UTEP,Conference USA,Old Dominion,0.07,0.19,-0.06,0.17,0.27,0.06
+400763649,2015,11,UTSA,Conference USA,Charlotte,0.05,-0.07,0.18,0.03,0.15,-0.05
+400603937,2015,11,Vanderbilt,SEC,Kentucky,-0.13,0.21,-0.33,-0.12,-0.45,0.19
+400756983,2015,11,Virginia,ACC,Louisville,0.24,0.49,-0.18,0.38,0.23,0.52
+400756979,2015,11,Virginia Tech,ACC,Georgia Tech,-0.01,-0.06,0.04,-0.01,0.13,-0.06
+400756985,2015,11,Wake Forest,ACC,Notre Dame,-0.15,-0.16,-0.15,0.26,0.16,0.33
+400757075,2015,11,Washington,Pac-12,Arizona State,0.1,0.08,0.16,0.07,0.25,-0.08
+400757076,2015,11,Washington State,Pac-12,UCLA,0.16,0.12,0.38,0.26,0.24,0.36
+400787352,2015,11,Western Michigan,Mid-American,Bowling Green,0.1,-0.01,0.22,0.3,0.15,0.48
+400763458,2015,11,West Virginia,Big 12,Texas,0.23,0.54,0.16,0.09,0.1,0.1
+400787285,2015,11,Wyoming,Mountain West,San Diego State,-0.12,-0.34,0.12,0.25,0.45,0.19
+400790881,2015,12,Air Force,Mountain West,Boise State,0.32,0.88,0.19,0.08,-0.04,0.25
+400787360,2015,12,Akron,Mid-American,Buffalo,0.25,0.58,0.03,0.1,0.04,0.21
+400603921,2015,12,Alabama,SEC,Charleston Southern,0.63,0.74,0.54,0.25,0.11,0.31
+400757079,2015,12,Arizona,Pac-12,Arizona State,-0.03,-0.1,0.09,0.22,0.33,0.15
+400757079,2015,12,Arizona State,Pac-12,Arizona,0.22,0.33,0.15,-0.03,-0.1,0.09
+400603922,2015,12,Arkansas,SEC,Mississippi State,0.35,0.76,-0.22,0.49,0.68,0.21
+400760499,2015,12,Army,FBS Independents,Rutgers,0.29,1.08,0.18,0.3,0.02,0.46
+400603923,2015,12,Auburn,SEC,Idaho,0.39,0.73,0.26,0.13,-0.01,0.37
+400787355,2015,12,Ball State,Mid-American,Ohio,0.13,0.1,0.16,0.48,0.95,0.31
+400763462,2015,12,Baylor,Big 12,Oklahoma State,0.31,0.61,0.18,0.23,0.32,-0.08
+400790881,2015,12,Boise State,Mountain West,Air Force,0.08,-0.04,0.25,0.32,0.88,0.19
+400756986,2015,12,Boston College,ACC,Notre Dame,0.07,-0.08,0.16,-0.08,0.22,-0.38
+400787356,2015,12,Bowling Green,Mid-American,Toledo,0.16,0.27,-0.01,0.2,0.56,0.08
+400787360,2015,12,Buffalo,Mid-American,Akron,0.1,0.04,0.21,0.25,0.58,0.03
+400787288,2015,12,BYU,FBS Independents,Fresno State,0.37,0.54,0.19,-0.22,-0.32,-0.03
+400757084,2015,12,California,Pac-12,Stanford,0.23,0.36,0.05,0.37,0.27,0.4
+400603926,2015,12,Charlotte,Conference USA,Kentucky,-0.15,-0.35,0.0,0.39,0.05,0.66
+400764912,2015,12,Cincinnati,American Athletic,South Florida,0.01,-0.04,0.07,0.41,0.72,0.32
+400756987,2015,12,Clemson,ACC,Wake Forest,0.3,0.75,-0.07,-0.25,-0.32,-0.18
+400757082,2015,12,Colorado,Pac-12,Washington State,0.01,0.17,-0.21,0.16,0.06,0.44
+400787287,2015,12,Colorado State,Mountain West,New Mexico,0.24,0.65,0.12,0.31,0.02,0.39
+400756988,2015,12,Duke,ACC,Virginia,0.15,0.23,0.03,0.26,0.48,0.08
+400764911,2015,12,East Carolina,American Athletic,UCF,0.31,0.34,0.22,-0.12,-0.1,-0.16
+400603924,2015,12,Florida,SEC,Florida Atlantic,-0.14,-0.09,-0.17,-0.02,-0.03,-0.01
+400603924,2015,12,Florida Atlantic,Conference USA,Florida,-0.02,-0.03,-0.01,-0.14,-0.09,-0.17
+400756989,2015,12,Florida State,ACC,Chattanooga,0.44,0.78,0.25,0.05,0.15,0.02
+400787288,2015,12,Fresno State,Mountain West,BYU,-0.22,-0.32,-0.03,0.37,0.54,0.19
+400603925,2015,12,Georgia,SEC,Georgia Southern,0.44,0.5,0.28,-0.2,-0.6,-0.18
+400603925,2015,12,Georgia Southern,Sun Belt,Georgia,-0.2,-0.6,-0.18,0.44,0.5,0.28
+400787475,2015,12,Georgia State,Sun Belt,South Alabama,0.19,0.53,-0.23,-0.01,-0.06,0.03
+400756990,2015,12,Georgia Tech,ACC,Miami,0.19,0.02,0.22,0.32,0.75,-0.09
+400787289,2015,12,Hawai'i,Mountain West,San José State,0.13,0.06,0.17,0.41,0.59,0.28
+400764913,2015,12,Houston,American Athletic,UConn,0.05,0.19,-0.1,0.02,0.55,-0.24
+400603923,2015,12,Idaho,Sun Belt,Auburn,0.13,-0.01,0.37,0.39,0.73,0.26
+400763572,2015,12,Illinois,Big Ten,Minnesota,0.11,0.25,-0.04,0.21,0.02,0.32
+400763571,2015,12,Indiana,Big Ten,Maryland,0.24,0.64,-0.03,0.14,0.0,0.27
+400763570,2015,12,Iowa,Big Ten,Purdue,0.3,0.65,0.09,0.06,0.16,0.0
+400763460,2015,12,Iowa State,Big 12,Kansas State,0.17,0.44,0.01,0.17,0.16,0.2
+400763459,2015,12,Kansas,Big 12,West Virginia,-0.36,-0.62,0.0,0.28,-0.01,0.45
+400763460,2015,12,Kansas State,Big 12,Iowa State,0.17,0.16,0.2,0.17,0.44,0.01
+400603926,2015,12,Kentucky,SEC,Charlotte,0.39,0.05,0.66,-0.15,-0.35,0.0
+400787476,2015,12,Louisiana,Sun Belt,New Mexico State,0.24,0.39,0.13,0.1,0.22,0.01
+400763657,2015,12,Louisiana Tech,Conference USA,UTEP,0.12,0.47,-0.06,0.06,0.09,0.06
+400756991,2015,12,Louisville,ACC,Pittsburgh,0.11,0.18,-0.04,0.27,0.43,0.17
+400603928,2015,12,LSU,SEC,Ole Miss,0.13,0.2,0.04,0.26,0.28,0.28
+400763571,2015,12,Maryland,Big Ten,Indiana,0.14,0.0,0.27,0.24,0.64,-0.03
+400787359,2015,12,Massachusetts,Mid-American,Miami (OH),-0.06,-0.08,-0.02,0.06,0.22,-0.04
+400764915,2015,12,Memphis,American Athletic,Temple,-0.07,0.07,-0.25,0.17,0.43,0.04
+400756990,2015,12,Miami,ACC,Georgia Tech,0.32,0.75,-0.09,0.19,0.02,0.22
+400787359,2015,12,Miami (OH),Mid-American,Massachusetts,0.06,0.22,-0.04,-0.06,-0.08,-0.02
+400763574,2015,12,Michigan,Big Ten,Penn State,0.18,0.3,0.0,-0.14,-0.07,-0.13
+400763573,2015,12,Michigan State,Big Ten,Ohio State,0.11,0.11,0.12,-0.01,-0.04,0.01
+400763655,2015,12,Middle Tennessee,Conference USA,North Texas,0.33,0.46,0.2,-0.08,-0.09,-0.07
+400763572,2015,12,Minnesota,Big Ten,Illinois,0.21,0.02,0.32,0.11,0.25,-0.04
+400603922,2015,12,Mississippi State,SEC,Arkansas,0.49,0.68,0.21,0.35,0.76,-0.22
+400603927,2015,12,Missouri,SEC,Tennessee,-0.06,-0.07,-0.05,-0.03,-0.14,0.05
+400764916,2015,12,Navy,American Athletic,Tulsa,0.45,0.54,0.45,0.12,0.34,-0.12
+400756993,2015,12,NC State,ACC,Syracuse,0.22,0.3,0.15,-0.17,0.0,-0.27
+400787290,2015,12,Nevada,Mountain West,Utah State,0.09,0.15,0.07,0.05,-0.25,0.25
+400787287,2015,12,New Mexico,Mountain West,Colorado State,0.31,0.02,0.39,0.24,0.65,0.12
+400787476,2015,12,New Mexico State,Sun Belt,Louisiana,0.1,0.22,0.01,0.24,0.39,0.13
+400756992,2015,12,North Carolina,ACC,Virginia Tech,0.2,0.35,0.13,0.09,0.19,0.01
+400787358,2015,12,Northern Illinois,Mid-American,Western Michigan,0.23,0.4,0.13,0.16,0.27,0.07
+400763655,2015,12,North Texas,Conference USA,Middle Tennessee,-0.08,-0.09,-0.07,0.33,0.46,0.2
+400763575,2015,12,Northwestern,Big Ten,Wisconsin,-0.12,-0.09,-0.13,-0.09,0.02,-0.3
+400756986,2015,12,Notre Dame,FBS Independents,Boston College,-0.08,0.22,-0.38,0.07,-0.08,0.16
+400787355,2015,12,Ohio,Mid-American,Ball State,0.48,0.95,0.31,0.13,0.1,0.16
+400763573,2015,12,Ohio State,Big Ten,Michigan State,-0.01,-0.04,0.01,0.11,0.11,0.12
+400763461,2015,12,Oklahoma,Big 12,TCU,0.1,0.06,0.13,0.11,0.17,0.06
+400763462,2015,12,Oklahoma State,Big 12,Baylor,0.23,0.32,-0.08,0.31,0.61,0.18
+400763656,2015,12,Old Dominion,Conference USA,Southern Miss,0.1,0.15,0.08,0.44,0.37,0.5
+400603928,2015,12,Ole Miss,SEC,LSU,0.26,0.28,0.28,0.13,0.2,0.04
+400757080,2015,12,Oregon,Pac-12,USC,0.45,1.03,0.05,0.11,-0.11,0.42
+400757083,2015,12,Oregon State,Pac-12,Washington,0.05,-0.09,0.18,0.23,0.52,0.11
+400763574,2015,12,Penn State,Big Ten,Michigan,-0.14,-0.07,-0.13,0.18,0.3,0.0
+400756991,2015,12,Pittsburgh,ACC,Louisville,0.27,0.43,0.17,0.11,0.18,-0.04
+400763570,2015,12,Purdue,Big Ten,Iowa,0.06,0.16,0.0,0.3,0.65,0.09
+400763658,2015,12,Rice,Conference USA,UTSA,0.2,0.48,-0.1,0.44,0.78,0.29
+400760499,2015,12,Rutgers,Big Ten,Army,0.3,0.02,0.46,0.29,1.08,0.18
+400787291,2015,12,San Diego State,Mountain West,UNLV,0.3,0.3,0.33,0.05,0.11,-0.06
+400787289,2015,12,San José State,Mountain West,Hawai'i,0.41,0.59,0.28,0.13,0.06,0.17
+400764914,2015,12,SMU,American Athletic,Tulane,0.45,0.45,0.44,-0.02,0.02,0.25
+400787475,2015,12,South Alabama,Sun Belt,Georgia State,-0.01,-0.06,0.03,0.19,0.53,-0.23
+400603929,2015,12,South Carolina,SEC,The Citadel,0.27,0.5,-0.05,0.28,-0.46,0.3
+400763656,2015,12,Southern Miss,Conference USA,Old Dominion,0.44,0.37,0.5,0.1,0.15,0.08
+400764912,2015,12,South Florida,American Athletic,Cincinnati,0.41,0.72,0.32,0.01,-0.04,0.07
+400757084,2015,12,Stanford,Pac-12,California,0.37,0.27,0.4,0.23,0.36,0.05
+400756993,2015,12,Syracuse,ACC,NC State,-0.17,0.0,-0.27,0.22,0.3,0.15
+400763461,2015,12,TCU,Big 12,Oklahoma,0.11,0.17,0.06,0.1,0.06,0.13
+400764915,2015,12,Temple,American Athletic,Memphis,0.17,0.43,0.04,-0.07,0.07,-0.25
+400603927,2015,12,Tennessee,SEC,Missouri,-0.03,-0.14,0.05,-0.06,-0.07,-0.05
+400603930,2015,12,Texas A&M,SEC,Vanderbilt,0.14,0.31,0.08,-0.19,-0.74,0.07
+400787474,2015,12,Texas State,Sun Belt,UL Monroe,-0.01,0.51,-0.26,-0.12,-0.18,-0.03
+400787356,2015,12,Toledo,Mid-American,Bowling Green,0.2,0.56,0.08,0.16,0.27,-0.01
+400764914,2015,12,Tulane,American Athletic,SMU,-0.02,0.02,0.25,0.45,0.45,0.44
+400764916,2015,12,Tulsa,American Athletic,Navy,0.12,0.34,-0.12,0.45,0.54,0.45
+400764911,2015,12,UCF,American Athletic,East Carolina,-0.12,-0.1,-0.16,0.31,0.34,0.22
+400757081,2015,12,UCLA,Pac-12,Utah,0.12,0.4,-0.11,0.0,-0.01,0.04
+400764913,2015,12,UConn,American Athletic,Houston,0.02,0.55,-0.24,0.05,0.19,-0.1
+400787474,2015,12,UL Monroe,Sun Belt,Texas State,-0.12,-0.18,-0.03,-0.01,0.51,-0.26
+400787291,2015,12,UNLV,Mountain West,San Diego State,0.05,0.11,-0.06,0.3,0.3,0.33
+400757080,2015,12,USC,Pac-12,Oregon,0.11,-0.11,0.42,0.45,1.03,0.05
+400757081,2015,12,Utah,Pac-12,UCLA,0.0,-0.01,0.04,0.12,0.4,-0.11
+400787290,2015,12,Utah State,Mountain West,Nevada,0.05,-0.25,0.25,0.09,0.15,0.07
+400763657,2015,12,UTEP,Conference USA,Louisiana Tech,0.06,0.09,0.06,0.12,0.47,-0.06
+400763658,2015,12,UTSA,Conference USA,Rice,0.44,0.78,0.29,0.2,0.48,-0.1
+400603930,2015,12,Vanderbilt,SEC,Texas A&M,-0.19,-0.74,0.07,0.14,0.31,0.08
+400756988,2015,12,Virginia,ACC,Duke,0.26,0.48,0.08,0.15,0.23,0.03
+400756992,2015,12,Virginia Tech,ACC,North Carolina,0.09,0.19,0.01,0.2,0.35,0.13
+400756987,2015,12,Wake Forest,ACC,Clemson,-0.25,-0.32,-0.18,0.3,0.75,-0.07
+400757083,2015,12,Washington,Pac-12,Oregon State,0.23,0.52,0.11,0.05,-0.09,0.18
+400757082,2015,12,Washington State,Pac-12,Colorado,0.16,0.06,0.44,0.01,0.17,-0.21
+400787358,2015,12,Western Michigan,Mid-American,Northern Illinois,0.16,0.27,0.07,0.23,0.4,0.13
+400763459,2015,12,West Virginia,Big 12,Kansas,0.28,-0.01,0.45,-0.36,-0.62,0.0
+400763575,2015,12,Wisconsin,Big Ten,Northwestern,-0.09,0.02,-0.3,-0.12,-0.09,-0.13
+400787292,2015,13,Air Force,Mountain West,New Mexico,0.27,0.36,0.23,0.4,0.97,0.31
+400787366,2015,13,Akron,Mid-American,Kent State,0.16,0.43,0.1,-0.17,0.0,-0.4
+400603913,2015,13,Alabama,SEC,Auburn,0.2,0.21,0.22,0.03,0.09,-0.02
+400787478,2015,13,App State,Sun Belt,Louisiana,0.26,0.7,0.07,-0.01,0.19,-0.26
+400757087,2015,13,Arizona State,Pac-12,California,0.28,0.57,0.09,0.48,0.59,0.29
+400603912,2015,13,Arkansas,SEC,Missouri,0.15,0.22,0.13,-0.2,-0.25,-0.14
+400787479,2015,13,Arkansas State,Sun Belt,New Mexico State,0.24,0.2,0.3,0.09,0.05,0.17
+400603913,2015,13,Auburn,SEC,Alabama,0.03,0.09,-0.02,0.2,0.21,0.22
+400787361,2015,13,Ball State,Mid-American,Bowling Green,-0.12,-0.11,-0.11,0.46,0.16,0.77
+400763464,2015,13,Baylor,Big 12,TCU,-0.16,-0.29,-0.11,-0.11,-0.12,-0.11
+400790888,2015,13,Boise State,Mountain West,San José State,0.34,0.38,0.38,0.28,0.36,0.21
+400756995,2015,13,Boston College,ACC,Syracuse,-0.04,-0.52,0.12,-0.08,-0.07,-0.08
+400787361,2015,13,Bowling Green,Mid-American,Ball State,0.46,0.16,0.77,-0.12,-0.11,-0.11
+400787365,2015,13,Buffalo,Mid-American,Massachusetts,0.08,0.3,-0.07,0.13,0.09,0.15
+400787297,2015,13,BYU,FBS Independents,Utah State,0.25,0.4,0.04,0.13,0.0,0.27
+400757087,2015,13,California,Pac-12,Arizona State,0.48,0.59,0.29,0.28,0.57,0.09
+400787364,2015,13,Central Michigan,Mid-American,Eastern Michigan,0.11,0.22,-0.03,-0.02,0.13,-0.18
+400763662,2015,13,Charlotte,Conference USA,Rice,0.1,0.09,0.11,0.17,0.15,0.22
+400764919,2015,13,Cincinnati,American Athletic,East Carolina,0.2,0.29,0.07,0.2,0.31,-0.05
+400603919,2015,13,Clemson,ACC,South Carolina,0.32,0.69,0.14,0.19,0.17,0.25
+400757089,2015,13,Colorado,Pac-12,Utah,-0.01,0.05,-0.11,0.0,-0.16,0.11
+400787294,2015,13,Colorado State,Mountain West,Fresno State,0.16,-0.05,0.27,0.09,-0.1,0.25
+400756996,2015,13,Duke,ACC,Wake Forest,0.15,0.3,-0.02,0.34,0.31,0.37
+400764919,2015,13,East Carolina,American Athletic,Cincinnati,0.2,0.31,-0.05,0.2,0.29,0.07
+400787364,2015,13,Eastern Michigan,Mid-American,Central Michigan,-0.02,0.13,-0.18,0.11,0.22,-0.03
+400603914,2015,13,Florida,SEC,Florida State,0.09,-0.05,0.26,-0.14,-0.13,0.01
+400763661,2015,13,Florida Atlantic,Conference USA,Old Dominion,0.06,0.06,0.1,0.06,0.11,-0.06
+400603914,2015,13,Florida State,ACC,Florida,-0.14,-0.13,0.01,0.09,-0.05,0.26
+400787294,2015,13,Fresno State,Mountain West,Colorado State,0.09,-0.1,0.25,0.16,-0.05,0.27
+400603915,2015,13,Georgia,SEC,Georgia Tech,0.12,0.47,-0.09,-0.11,-0.43,0.05
+400787480,2015,13,Georgia Southern,Sun Belt,South Alabama,0.4,0.62,0.4,-0.13,-0.22,-0.04
+400787477,2015,13,Georgia State,Sun Belt,Troy,0.17,0.54,-0.22,0.05,0.03,0.09
+400603915,2015,13,Georgia Tech,ACC,Georgia,-0.11,-0.43,0.05,0.12,0.47,-0.09
+400787295,2015,13,Hawai'i,Mountain West,UL Monroe,0.23,0.54,0.13,0.14,0.24,0.05
+400764917,2015,13,Houston,American Athletic,Navy,0.48,0.67,0.38,0.46,0.77,0.28
+400763577,2015,13,Illinois,Big Ten,Northwestern,-0.06,-0.03,-0.12,-0.02,-0.3,0.09
+400763581,2015,13,Indiana,Big Ten,Purdue,0.33,0.98,0.01,0.17,0.17,0.15
+400763576,2015,13,Iowa,Big Ten,Nebraska,-0.09,0.06,-0.18,-0.02,-0.1,0.09
+400763467,2015,13,Iowa State,Big 12,West Virginia,-0.07,-0.01,-0.15,0.09,0.17,0.06
+400763465,2015,13,Kansas,Big 12,Kansas State,0.01,0.19,-0.24,0.25,0.03,0.35
+400763465,2015,13,Kansas State,Big 12,Kansas,0.25,0.03,0.35,0.01,0.19,-0.24
+400787366,2015,13,Kent State,Mid-American,Akron,-0.17,0.0,-0.4,0.16,0.43,0.1
+400603916,2015,13,Kentucky,SEC,Louisville,0.01,0.22,-0.14,0.12,-0.42,0.49
+400787478,2015,13,Louisiana,Sun Belt,App State,-0.01,0.19,-0.26,0.26,0.7,0.07
+400763659,2015,13,Louisiana Tech,Conference USA,Southern Miss,0.0,0.19,-0.59,0.42,0.74,0.12
+400603916,2015,13,Louisville,ACC,Kentucky,0.12,-0.42,0.49,0.01,0.22,-0.14
+400603917,2015,13,LSU,SEC,Texas A&M,0.09,0.01,0.13,-0.07,-0.09,-0.04
+400763664,2015,13,Marshall,Conference USA,Western Kentucky,-0.02,0.09,-0.25,0.25,0.63,-0.11
+400763582,2015,13,Maryland,Big Ten,Rutgers,0.39,0.29,0.55,0.26,0.83,-0.14
+400787365,2015,13,Massachusetts,Mid-American,Buffalo,0.13,0.09,0.15,0.08,0.3,-0.07
+400764920,2015,13,Memphis,American Athletic,SMU,0.2,0.85,-0.1,-0.2,-0.12,-0.25
+400756994,2015,13,Miami,ACC,Pittsburgh,0.1,0.39,-0.11,0.18,0.04,0.35
+400763578,2015,13,Michigan,Big Ten,Ohio State,0.07,0.21,-0.16,0.41,0.24,0.46
+400763579,2015,13,Michigan State,Big Ten,Penn State,0.45,0.72,0.26,0.1,0.01,0.34
+400763663,2015,13,Middle Tennessee,Conference USA,UTSA,0.33,0.35,0.31,-0.23,-0.42,-0.11
+400763580,2015,13,Minnesota,Big Ten,Wisconsin,0.03,0.05,-0.01,0.05,-0.21,0.1
+400603918,2015,13,Mississippi State,SEC,Ole Miss,0.07,0.01,0.23,0.39,0.65,0.16
+400603912,2015,13,Missouri,SEC,Arkansas,-0.2,-0.25,-0.14,0.15,0.22,0.13
+400764917,2015,13,Navy,American Athletic,Houston,0.46,0.77,0.28,0.48,0.67,0.38
+400756997,2015,13,NC State,ACC,North Carolina,0.23,-0.05,0.49,0.41,0.12,0.64
+400763576,2015,13,Nebraska,Big Ten,Iowa,-0.02,-0.1,0.09,-0.09,0.06,-0.18
+400787296,2015,13,Nevada,Mountain West,San Diego State,0.05,0.34,-0.2,0.3,0.22,0.34
+400787292,2015,13,New Mexico,Mountain West,Air Force,0.4,0.97,0.31,0.27,0.36,0.23
+400787479,2015,13,New Mexico State,Sun Belt,Arkansas State,0.09,0.05,0.17,0.24,0.2,0.3
+400756997,2015,13,North Carolina,ACC,NC State,0.41,0.12,0.64,0.23,-0.05,0.49
+400787362,2015,13,Northern Illinois,Mid-American,Ohio,0.12,0.27,-0.03,0.0,0.07,0.02
+400763660,2015,13,North Texas,Conference USA,UTEP,-0.4,-0.7,-0.11,-0.21,-0.04,-0.13
+400763577,2015,13,Northwestern,Big Ten,Illinois,-0.02,-0.3,0.09,-0.06,-0.03,-0.12
+400757090,2015,13,Notre Dame,FBS Independents,Stanford,0.36,0.55,0.33,0.43,1.21,0.08
+400787362,2015,13,Ohio,Mid-American,Northern Illinois,0.0,0.07,0.02,0.12,0.27,-0.03
+400763578,2015,13,Ohio State,Big Ten,Michigan,0.41,0.24,0.46,0.07,0.21,-0.16
+400763466,2015,13,Oklahoma,Big 12,Oklahoma State,0.45,0.37,0.52,0.09,0.2,-0.01
+400763466,2015,13,Oklahoma State,Big 12,Oklahoma,0.09,0.2,-0.01,0.45,0.37,0.52
+400763661,2015,13,Old Dominion,Conference USA,Florida Atlantic,0.06,0.11,-0.06,0.06,0.06,0.1
+400603918,2015,13,Ole Miss,SEC,Mississippi State,0.39,0.65,0.16,0.07,0.01,0.23
+400757085,2015,13,Oregon,Pac-12,Oregon State,0.27,0.41,0.32,0.37,0.28,0.44
+400757085,2015,13,Oregon State,Pac-12,Oregon,0.37,0.28,0.44,0.27,0.41,0.32
+400763579,2015,13,Penn State,Big Ten,Michigan State,0.1,0.01,0.34,0.45,0.72,0.26
+400756994,2015,13,Pittsburgh,ACC,Miami,0.18,0.04,0.35,0.1,0.39,-0.11
+400763581,2015,13,Purdue,Big Ten,Indiana,0.17,0.17,0.15,0.33,0.98,0.01
+400763662,2015,13,Rice,Conference USA,Charlotte,0.17,0.15,0.22,0.1,0.09,0.11
+400763582,2015,13,Rutgers,Big Ten,Maryland,0.26,0.83,-0.14,0.39,0.29,0.55
+400787296,2015,13,San Diego State,Mountain West,Nevada,0.3,0.22,0.34,0.05,0.34,-0.2
+400790888,2015,13,San José State,Mountain West,Boise State,0.28,0.36,0.21,0.34,0.38,0.38
+400764920,2015,13,SMU,American Athletic,Memphis,-0.2,-0.12,-0.25,0.2,0.85,-0.1
+400787480,2015,13,South Alabama,Sun Belt,Georgia Southern,-0.13,-0.22,-0.04,0.4,0.62,0.4
+400603919,2015,13,South Carolina,SEC,Clemson,0.19,0.17,0.25,0.32,0.69,0.14
+400763659,2015,13,Southern Miss,Conference USA,Louisiana Tech,0.42,0.74,0.12,0.0,0.19,-0.59
+400764918,2015,13,South Florida,American Athletic,UCF,0.34,0.44,0.32,-0.12,-0.16,-0.06
+400757090,2015,13,Stanford,Pac-12,Notre Dame,0.43,1.21,0.08,0.36,0.55,0.33
+400756995,2015,13,Syracuse,ACC,Boston College,-0.08,-0.07,-0.08,-0.04,-0.52,0.12
+400763464,2015,13,TCU,Big 12,Baylor,-0.11,-0.12,-0.11,-0.16,-0.29,-0.11
+400764921,2015,13,Temple,American Athletic,UConn,0.09,0.31,-0.06,-0.19,0.0,-0.46
+400603920,2015,13,Tennessee,SEC,Vanderbilt,0.26,0.53,0.16,0.21,0.21,0.27
+400763463,2015,13,Texas,Big 12,Texas Tech,0.27,-0.23,0.56,0.29,0.23,0.3
+400603917,2015,13,Texas A&M,SEC,LSU,-0.07,-0.09,-0.04,0.09,0.01,0.13
+400763463,2015,13,Texas Tech,Big 12,Texas,0.29,0.23,0.3,0.27,-0.23,0.56
+400787477,2015,13,Troy,Sun Belt,Georgia State,0.05,0.03,0.09,0.17,0.54,-0.22
+400764922,2015,13,Tulane,American Athletic,Tulsa,0.05,0.06,0.05,0.32,0.64,-0.07
+400764922,2015,13,Tulsa,American Athletic,Tulane,0.32,0.64,-0.07,0.05,0.06,0.05
+400764918,2015,13,UCF,American Athletic,South Florida,-0.12,-0.16,-0.06,0.34,0.44,0.32
+400757088,2015,13,UCLA,Pac-12,USC,-0.1,0.11,-0.16,0.17,0.36,0.12
+400764921,2015,13,UConn,American Athletic,Temple,-0.19,0.0,-0.46,0.09,0.31,-0.06
+400787295,2015,13,UL Monroe,Sun Belt,Hawai'i,0.14,0.24,0.05,0.23,0.54,0.13
+400787298,2015,13,UNLV,Mountain West,Wyoming,0.28,0.33,0.22,0.37,0.56,0.26
+400757088,2015,13,USC,Pac-12,UCLA,0.17,0.36,0.12,-0.1,0.11,-0.16
+400757089,2015,13,Utah,Pac-12,Colorado,0.0,-0.16,0.11,-0.01,0.05,-0.11
+400787297,2015,13,Utah State,Mountain West,BYU,0.13,0.0,0.27,0.25,0.4,0.04
+400763660,2015,13,UTEP,Conference USA,North Texas,-0.21,-0.04,-0.13,-0.4,-0.7,-0.11
+400763663,2015,13,UTSA,Conference USA,Middle Tennessee,-0.23,-0.42,-0.11,0.33,0.35,0.31
+400603920,2015,13,Vanderbilt,SEC,Tennessee,0.21,0.21,0.27,0.26,0.53,0.16
+400756998,2015,13,Virginia,ACC,Virginia Tech,0.17,0.03,0.3,0.04,0.23,-0.19
+400756998,2015,13,Virginia Tech,ACC,Virginia,0.04,0.23,-0.19,0.17,0.03,0.3
+400756996,2015,13,Wake Forest,ACC,Duke,0.34,0.31,0.37,0.15,0.3,-0.02
+400757086,2015,13,Washington,Pac-12,Washington State,0.16,0.4,0.08,-0.23,-0.1,-0.91
+400757086,2015,13,Washington State,Pac-12,Washington,-0.23,-0.1,-0.91,0.16,0.4,0.08
+400763664,2015,13,Western Kentucky,Conference USA,Marshall,0.25,0.63,-0.11,-0.02,0.09,-0.25
+400763467,2015,13,West Virginia,Big 12,Iowa State,0.09,0.17,0.06,-0.07,-0.01,-0.15
+400763580,2015,13,Wisconsin,Big Ten,Minnesota,0.05,-0.21,0.1,0.03,0.05,-0.01
+400787298,2015,13,Wyoming,Mountain West,UNLV,0.37,0.56,0.26,0.28,0.33,0.22
+400852675,2015,14,Air Force,Mountain West,San Diego State,0.16,-0.19,0.27,0.33,1.32,0.04
+400852681,2015,14,Alabama,SEC,Florida,0.02,0.51,-0.06,0.0,0.13,-0.22
+400787482,2015,14,App State,Sun Belt,South Alabama,0.23,0.25,0.11,0.08,-0.04,0.18
+400787483,2015,14,Arkansas State,Sun Belt,Texas State,0.64,0.91,0.54,-0.08,-0.15,-0.05
+400763468,2015,14,Baylor,Big 12,Texas,0.09,-0.31,0.28,0.01,0.24,-0.1
+400852680,2015,14,Bowling Green,Mid-American,Northern Illinois,0.01,-0.18,0.16,-0.2,-0.11,-0.28
+400852676,2015,14,Clemson,ACC,North Carolina,0.32,0.4,0.29,0.15,0.03,0.32
+400852681,2015,14,Florida,SEC,Alabama,0.0,0.13,-0.22,0.02,0.51,-0.06
+400787484,2015,14,Georgia Southern,Sun Belt,Georgia State,-0.22,-0.63,0.0,0.31,0.48,0.17
+400787484,2015,14,Georgia State,Sun Belt,Georgia Southern,0.31,0.48,0.17,-0.22,-0.63,0.0
+400852678,2015,14,Houston,American Athletic,Temple,0.2,0.0,0.33,-0.04,0.12,-0.31
+400852682,2015,14,Iowa,Big Ten,Michigan State,0.06,0.36,-0.23,0.11,0.15,0.12
+400763469,2015,14,Kansas State,Big 12,West Virginia,-0.03,-0.04,-0.03,0.02,0.01,0.11
+400787485,2015,14,Louisiana,Sun Belt,Troy,0.13,0.11,0.14,0.3,0.87,-0.12
+400852682,2015,14,Michigan State,Big Ten,Iowa,0.11,0.15,0.12,0.06,0.36,-0.23
+400787486,2015,14,New Mexico State,Sun Belt,UL Monroe,-0.01,0.01,-0.03,0.02,0.23,-0.16
+400852676,2015,14,North Carolina,ACC,Clemson,0.15,0.03,0.32,0.32,0.4,0.29
+400852680,2015,14,Northern Illinois,Mid-American,Bowling Green,-0.2,-0.11,-0.28,0.01,-0.18,0.16
+400852675,2015,14,San Diego State,Mountain West,Air Force,0.33,1.32,0.04,0.16,-0.19,0.27
+400787482,2015,14,South Alabama,Sun Belt,App State,0.08,-0.04,0.18,0.23,0.25,0.11
+400852672,2015,14,Southern Miss,Conference USA,Western Kentucky,0.0,-0.08,0.09,0.19,0.31,0.04
+400852677,2015,14,Stanford,Pac-12,USC,0.22,0.51,0.17,0.12,0.06,0.22
+400852678,2015,14,Temple,American Athletic,Houston,-0.04,0.12,-0.31,0.2,0.0,0.33
+400763468,2015,14,Texas,Big 12,Baylor,0.01,0.24,-0.1,0.09,-0.31,0.28
+400787483,2015,14,Texas State,Sun Belt,Arkansas State,-0.08,-0.15,-0.05,0.64,0.91,0.54
+400787485,2015,14,Troy,Sun Belt,Louisiana,0.3,0.87,-0.12,0.13,0.11,0.14
+400787486,2015,14,UL Monroe,Sun Belt,New Mexico State,0.02,0.23,-0.16,-0.01,0.01,-0.03
+400852677,2015,14,USC,Pac-12,Stanford,0.12,0.06,0.22,0.22,0.51,0.17
+400852672,2015,14,Western Kentucky,Conference USA,Southern Miss,0.19,0.31,0.04,0.0,-0.08,0.09
+400763469,2015,14,West Virginia,Big 12,Kansas State,0.02,0.01,0.11,-0.03,-0.04,-0.03
+400760500,2015,15,Army,FBS Independents,Navy,0.04,0.45,-0.15,0.08,0.15,0.05
+400760500,2015,15,Navy,American Athletic,Army,0.08,0.15,0.05,0.04,0.45,-0.15
+400852723,2015,1,Air Force,Mountain West,California,0.31,0.35,0.3,0.5,0.89,0.14
+400852708,2015,1,Akron,Mid-American,Utah State,-0.08,0.11,-0.21,0.0,0.04,-0.08
+400852732,2015,1,Alabama,SEC,Michigan State,0.32,0.56,0.04,-0.29,-0.12,-0.35
+400852743,2015,1,Alabama,SEC,Clemson,0.28,0.63,0.03,0.29,0.47,0.07
+400852685,2015,1,App State,Sun Belt,Ohio,-0.11,-0.01,-0.1,-0.13,-0.08,-0.15
+400852668,2015,1,Arizona,Pac-12,New Mexico,0.43,0.78,0.19,0.13,0.06,0.16
+400852742,2015,1,Arizona State,Pac-12,West Virginia,0.14,0.39,-0.2,0.32,0.46,0.16
+400852740,2015,1,Arkansas,SEC,Kansas State,0.51,0.72,0.4,0.07,0.19,-0.01
+400852686,2015,1,Arkansas State,Sun Belt,Louisiana Tech,0.02,-0.12,0.12,0.44,0.77,0.15
+400852727,2015,1,Auburn,SEC,Memphis,0.11,0.09,0.13,-0.15,-0.27,-0.06
+400852724,2015,1,Baylor,Big 12,North Carolina,0.4,-0.09,0.51,0.31,0.27,0.36
+400852710,2015,1,Boise State,Mountain West,Northern Illinois,0.32,0.54,0.2,-0.28,-0.38,-0.19
+400852711,2015,1,Bowling Green,Mid-American,Georgia Southern,0.17,0.22,0.12,0.44,0.95,0.38
+400852684,2015,1,BYU,FBS Independents,Utah,-0.01,-0.09,0.21,-0.12,-0.12,-0.13
+400852723,2015,1,California,Pac-12,Air Force,0.5,0.89,0.14,0.31,0.35,0.3
+400852722,2015,1,Central Michigan,Mid-American,Minnesota,0.04,-0.12,0.23,0.16,0.39,-0.02
+400852714,2015,1,Cincinnati,American Athletic,San Diego State,-0.21,-0.36,-0.04,0.27,0.88,0.12
+400852733,2015,1,Clemson,ACC,Oklahoma,0.22,0.1,0.31,-0.05,0.01,-0.12
+400852743,2015,1,Clemson,ACC,Alabama,0.29,0.47,0.07,0.28,0.63,0.03
+400852725,2015,1,Colorado State,Mountain West,Nevada,0.25,0.37,0.16,0.23,0.22,0.27
+400852718,2015,1,Duke,ACC,Indiana,0.09,-0.2,0.36,0.22,0.2,0.28
+400852735,2015,1,Florida,SEC,Michigan,0.05,-0.15,0.26,0.33,0.72,0.13
+400852731,2015,1,Florida State,ACC,Houston,0.1,0.27,-0.29,0.14,0.29,-0.01
+400852739,2015,1,Georgia,SEC,Penn State,0.08,0.19,0.01,0.12,0.29,-0.09
+400852711,2015,1,Georgia Southern,Sun Belt,Bowling Green,0.44,0.95,0.38,0.17,0.22,0.12
+400852683,2015,1,Georgia State,Sun Belt,San José State,-0.01,0.09,-0.23,0.01,0.14,0.04
+400852731,2015,1,Houston,American Athletic,Florida State,0.14,0.29,-0.01,0.1,0.27,-0.29
+400852718,2015,1,Indiana,Big Ten,Duke,0.22,0.2,0.28,0.09,-0.2,0.36
+400852737,2015,1,Iowa,Big Ten,Stanford,-0.08,0.09,-0.33,0.28,0.43,0.2
+400852740,2015,1,Kansas State,Big 12,Arkansas,0.07,0.19,-0.01,0.51,0.72,0.4
+400852686,2015,1,Louisiana Tech,Conference USA,Arkansas State,0.44,0.77,0.15,0.02,-0.12,0.12
+400852729,2015,1,Louisville,ACC,Texas A&M,0.26,0.13,0.34,0.08,0.09,0.05
+400852726,2015,1,LSU,SEC,Texas Tech,0.67,0.81,0.6,0.07,0.13,-0.11
+400852715,2015,1,Marshall,Conference USA,UConn,0.08,0.24,0.02,0.08,-0.09,0.13
+400852727,2015,1,Memphis,American Athletic,Auburn,-0.15,-0.27,-0.06,0.11,0.09,0.13
+400852716,2015,1,Miami,ACC,Washington State,0.03,-0.06,0.15,0.01,0.06,-0.04
+400852735,2015,1,Michigan,Big Ten,Florida,0.33,0.72,0.13,0.05,-0.15,0.26
+400852732,2015,1,Michigan State,Big Ten,Alabama,-0.29,-0.12,-0.35,0.32,0.56,0.04
+400852713,2015,1,Middle Tennessee,Conference USA,Western Michigan,0.18,0.38,-0.12,0.51,0.56,0.45
+400852722,2015,1,Minnesota,Big Ten,Central Michigan,0.16,0.39,-0.02,0.04,-0.12,0.23
+400852728,2015,1,Mississippi State,SEC,NC State,0.36,0.52,0.17,0.21,0.07,0.31
+400852721,2015,1,Navy,American Athletic,Pittsburgh,0.44,0.69,0.39,0.2,-0.06,0.46
+400852728,2015,1,NC State,ACC,Mississippi State,0.21,0.07,0.31,0.36,0.52,0.17
+400852720,2015,1,Nebraska,Big Ten,UCLA,0.25,0.4,0.22,0.31,0.4,0.09
+400852725,2015,1,Nevada,Mountain West,Colorado State,0.23,0.22,0.27,0.25,0.37,0.16
+400852668,2015,1,New Mexico,Mountain West,Arizona,0.13,0.06,0.16,0.43,0.78,0.19
+400852724,2015,1,North Carolina,ACC,Baylor,0.31,0.27,0.36,0.4,-0.09,0.51
+400852710,2015,1,Northern Illinois,Mid-American,Boise State,-0.28,-0.38,-0.19,0.32,0.54,0.2
+400852734,2015,1,Northwestern,Big Ten,Tennessee,-0.14,-0.53,0.26,0.14,-0.09,0.3
+400852736,2015,1,Notre Dame,FBS Independents,Ohio State,0.23,0.24,0.21,0.22,0.15,0.28
+400852685,2015,1,Ohio,Mid-American,App State,-0.13,-0.08,-0.15,-0.11,-0.01,-0.1
+400852736,2015,1,Ohio State,Big Ten,Notre Dame,0.22,0.15,0.28,0.23,0.24,0.21
+400852733,2015,1,Oklahoma,Big 12,Clemson,-0.05,0.01,-0.12,0.22,0.1,0.31
+400852738,2015,1,Oklahoma State,Big 12,Ole Miss,0.02,0.09,-0.05,0.39,0.49,0.32
+400852738,2015,1,Ole Miss,SEC,Oklahoma State,0.39,0.49,0.32,0.02,0.09,-0.05
+400852741,2015,1,Oregon,Pac-12,TCU,0.14,0.05,0.17,0.21,0.31,0.13
+400852739,2015,1,Penn State,Big Ten,Georgia,0.12,0.29,-0.09,0.08,0.19,0.01
+400852721,2015,1,Pittsburgh,ACC,Navy,0.2,-0.06,0.46,0.44,0.69,0.39
+400852714,2015,1,San Diego State,Mountain West,Cincinnati,0.27,0.88,0.12,-0.21,-0.36,-0.04
+400852683,2015,1,San José State,Mountain West,Georgia State,0.01,0.14,0.04,-0.01,0.09,-0.23
+400852717,2015,1,Southern Miss,Conference USA,Washington,0.21,0.53,-0.25,0.26,0.39,0.24
+400852687,2015,1,South Florida,American Athletic,Western Kentucky,0.33,0.24,0.41,0.3,0.32,0.3
+400852737,2015,1,Stanford,Pac-12,Iowa,0.28,0.43,0.2,-0.08,0.09,-0.33
+400852741,2015,1,TCU,Big 12,Oregon,0.21,0.31,0.13,0.14,0.05,0.17
+400852709,2015,1,Temple,American Athletic,Toledo,-0.04,0.0,0.02,0.25,0.61,-0.05
+400852734,2015,1,Tennessee,SEC,Northwestern,0.14,-0.09,0.3,-0.14,-0.53,0.26
+400852729,2015,1,Texas A&M,SEC,Louisville,0.08,0.09,0.05,0.26,0.13,0.34
+400852726,2015,1,Texas Tech,Big 12,LSU,0.07,0.13,-0.11,0.67,0.81,0.6
+400852709,2015,1,Toledo,Mid-American,Temple,0.25,0.61,-0.05,-0.04,0.0,0.02
+400852719,2015,1,Tulsa,American Athletic,Virginia Tech,0.4,0.42,0.38,0.38,0.52,0.28
+400852720,2015,1,UCLA,Pac-12,Nebraska,0.31,0.4,0.09,0.25,0.4,0.22
+400852715,2015,1,UConn,American Athletic,Marshall,0.08,-0.09,0.13,0.08,0.24,0.02
+400852730,2015,1,USC,Pac-12,Wisconsin,0.1,0.12,0.07,0.11,0.6,-0.16
+400852684,2015,1,Utah,Pac-12,BYU,-0.12,-0.12,-0.13,-0.01,-0.09,0.21
+400852708,2015,1,Utah State,Mountain West,Akron,0.0,0.04,-0.08,-0.08,0.11,-0.21
+400852719,2015,1,Virginia Tech,ACC,Tulsa,0.38,0.52,0.28,0.4,0.42,0.38
+400852717,2015,1,Washington,Pac-12,Southern Miss,0.26,0.39,0.24,0.21,0.53,-0.25
+400852716,2015,1,Washington State,Pac-12,Miami,0.01,0.06,-0.04,0.03,-0.06,0.15
+400852687,2015,1,Western Kentucky,Conference USA,South Florida,0.3,0.32,0.3,0.33,0.24,0.41
+400852713,2015,1,Western Michigan,Mid-American,Middle Tennessee,0.51,0.56,0.45,0.18,0.38,-0.12
+400852742,2015,1,West Virginia,Big 12,Arizona State,0.32,0.46,0.16,0.14,0.39,-0.2
+400852730,2015,1,Wisconsin,Big Ten,USC,0.11,0.6,-0.16,0.1,0.12,0.07

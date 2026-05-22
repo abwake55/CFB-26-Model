@@ -1,0 +1,20 @@
+# Core data science
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+
+# Web app
+streamlit>=1.35
+
+# HTTP
+requests>=2.31
+
+# Chat interface (Claude API)
+anthropic>=0.25.0
+
+# Development / local use only (not needed on Streamlit Cloud)
+# jupyter>=1.0
+# notebook>=7.0
+# matplotlib>=3.7
+# seaborn>=0.12

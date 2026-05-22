@@ -1,0 +1,233 @@
+year,team,rank,points
+2025,Texas,1,312.27
+2025,Georgia,2,304.64
+2025,Alabama,3,298.4
+2025,Ohio State,4,297.72
+2025,Oregon,5,296.1
+2025,Michigan,6,290.87
+2025,Florida,7,287.77
+2025,Auburn,8,286.89
+2025,Texas A&M,9,282.42
+2025,LSU,10,281.53
+2025,Tennessee,11,277.93
+2025,Notre Dame,12,270.22
+2025,Miami,13,257.66
+2025,USC,14,257.02
+2025,Penn State,15,255.36
+2025,Ole Miss,16,251.63
+2025,Oklahoma,17,248.6
+2025,South Carolina,18,244.27
+2025,Florida State,19,244.11
+2025,Missouri,20,243.48
+2025,Georgia Tech,21,240.77
+2025,Nebraska,22,237.53
+2025,Washington,23,235.26
+2025,TCU,24,229.8
+2025,Maryland,25,228.43
+2025,Clemson,26,227.23
+2025,Wisconsin,27,227.22
+2025,Mississippi State,28,224.62
+2025,Kentucky,29,224.01
+2025,Duke,30,220.94
+2025,SMU,31,220.85
+2025,Arkansas,32,219.73
+2025,Rutgers,33,218.6
+2025,NC State,34,214.25
+2025,Kansas State,35,213.85
+2025,Baylor,36,210.4
+2025,Colorado,37,209.08
+2025,Iowa,38,208.27
+2025,Virginia Tech,39,208.19
+2025,Utah,40,207.85
+2025,North Carolina,41,207.81
+2025,Syracuse,42,206.41
+2025,West Virginia,43,205.16
+2025,Arizona State,44,203.39
+2025,Illinois,45,202.76
+2025,UCLA,46,202.28
+2025,Indiana,47,201.75
+2025,Texas Tech,48,201.51
+2025,Minnesota,49,200.95
+2025,Arizona,50,200.65
+2025,Pittsburgh,51,199.28
+2025,Houston,52,198.73
+2025,Oklahoma State,53,198.62
+2025,Iowa State,54,197.45
+2025,BYU,55,197.17
+2025,Stanford,56,196.58
+2025,Michigan State,57,196.1
+2025,Virginia,58,195.76
+2025,Boston College,59,195.09
+2025,Memphis,60,194.42
+2025,Cincinnati,61,189.52
+2025,Boise State,62,189.06
+2025,Wake Forest,63,189.05
+2025,Oregon State,64,188.93
+2025,South Florida,65,188.76
+2025,Northwestern,66,187.75
+2025,Georgia State,67,184.18
+2025,Louisville,68,183.1
+2025,California,69,180.41
+2025,UTEP,70,179.54
+2025,Washington State,71,178.96
+2025,Kansas,72,178.35
+2025,Toledo,73,175.56
+2025,Tulane,74,175.32
+2025,Arkansas State,75,173.32
+2025,Vanderbilt,76,173.04
+2025,East Carolina,77,172.8
+2025,San Diego State,78,171.52
+2025,UCF,79,171.17
+2025,Georgia Southern,80,165.34
+2025,Louisiana,81,165.34
+2025,Troy,82,164.69
+2025,Miami (OH),83,164.23
+2025,Northern Illinois,84,164.05
+2025,Florida Atlantic,85,163.23
+2025,Liberty,86,160.79
+2025,Utah State,87,159.33
+2025,Nevada,88,159.31
+2025,Wyoming,89,159.12
+2025,Florida International,90,157.7
+2025,Coastal Carolina,91,156.66
+2025,Buffalo,92,155.63
+2025,Kent State,93,155.36
+2025,Bowling Green,94,154.51
+2025,UNLV,95,154.36
+2025,Western Kentucky,96,152.76
+2025,Eastern Michigan,97,151.82
+2025,Middle Tennessee,98,151.49
+2025,Purdue,99,147.08
+2025,Rice,100,146.64
+2025,Texas State,101,144.43
+2025,Old Dominion,102,144.31
+2025,Fresno State,103,142.63
+2025,Western Michigan,104,141.86
+2025,Southern Miss,105,140.71
+2025,Colorado State,106,140.19
+2025,UTSA,107,138.78
+2025,James Madison,108,138.48
+2025,Tulsa,109,137.85
+2025,Jacksonville State,110,134.66
+2025,Louisiana Tech,111,131.97
+2025,North Texas,112,130.14
+2025,Central Michigan,113,128.41
+2025,UConn,114,127.8
+2025,UL Monroe,115,127.14
+2025,App State,116,125.92
+2025,San José State,117,123.98
+2025,South Alabama,118,120.71
+2025,Ball State,119,118.63
+2025,Marshall,120,118.44
+2025,Ohio,121,115.37
+2025,Sam Houston,122,108.47
+2025,Temple,123,101.99
+2025,Hawai'i,124,101.95
+2025,UAB,125,98.28
+2025,New Mexico State,126,97.17
+2025,Sacramento State,127,89.3
+2025,Akron,128,87.44
+2025,Air Force,129,80.06
+2025,Army,130,77.24
+2025,Youngstown State,131,67.28
+2025,Navy,132,64.76
+2025,North Dakota State,133,64.74
+2025,Central Arkansas,134,60.84
+2025,Northern Arizona,135,56.75
+2025,Missouri State,136,52.92
+2025,Delaware,137,51.97
+2025,Eastern Kentucky,139,45.26
+2025,Howard,140,44.54
+2025,Towson,141,43.65
+2025,Western Carolina,142,39.03
+2025,UC Davis,143,38.84
+2025,Charlotte,144,38.64
+2025,Massachusetts,145,36.99
+2025,Texas Southern,146,34.26
+2025,South Dakota State,147,32.14
+2025,Delaware State,148,31.07
+2025,Stephen F. Austin,149,29.9
+2025,Saint Francis (PA),150,29.64
+2025,Eastern Washington,151,29.08
+2025,Cal Poly,152,28.69
+2025,Kennesaw State,154,28.05
+2025,Samford,155,27.91
+2025,Wofford,156,27.89
+2025,Chattanooga,157,25.66
+2025,Austin Peay,158,17.69
+2025,Western Illinois,159,17.67
+2025,Yale,160,17.14
+2025,East Tennessee State,161,16.67
+2025,Rhode Island,162,16.39
+2025,Duquesne,163,16.25
+2025,Cornell,164,15.89
+2025,Southern Utah,166,15.83
+2025,Mercer,167,15.63
+2025,Columbia,168,15.33
+2025,Southern Illinois,169,15.17
+2025,Grand Valley State University,170,14.85
+2025,Prairie View A&M,171,14.78
+2025,Portland State,171,14.78
+2025,Bryant,173,14.58
+2025,Campbell,174,14.52
+2025,Idaho State,175,14.17
+2025,Idaho,176,14.06
+2025,Incarnate Word,177,14.0
+2025,Furman,178,13.67
+2025,Colgate,178,13.67
+2025,Lamar,181,13.31
+2025,South Dakota,182,13.11
+2025,Gardner-Webb,183,13.0
+2025,Hampton,183,13.0
+2025,Robert Morris,185,12.78
+2025,Presbyterian,186,12.52
+2025,Murray State,187,12.5
+2025,Tennessee State,188,12.44
+2025,North Carolina Central,188,12.44
+2025,William & Mary,190,12.28
+2025,Harvard,191,12.17
+2025,Houston Christian,192,12.04
+2025,San Diego,193,11.17
+2025,New Mexico,194,10.33
+2025,Eastern Illinois,195,10.17
+2025,Fordham,196,9.33
+2025,Weber State,197,0.0
+2025,Wagner,197,0.0
+2025,Indiana State,197,0.0
+2025,Richmond,197,0.0
+2025,Valparaiso,197,0.0
+2025,Alabama State,197,0.0
+2025,Drake,197,0.0
+2025,Lafayette,197,0.0
+2025,Southeast Missouri State,197,0.0
+2025,Illinois State,197,0.0
+2025,Brown,197,0.0
+2025,Stetson,197,0.0
+2025,Holy Cross,197,0.0
+2025,Montana,197,0.0
+2025,Princeton,197,0.0
+2025,Northern Iowa,197,0.0
+2025,New Hampshire,197,0.0
+2025,Maine,197,0.0
+2025,Charleston Southern,197,0.0
+2025,Southeastern Louisiana,197,0.0
+2025,Morgan State,197,0.0
+2025,Morehead State,197,0.0
+2025,McNeese,197,0.0
+2025,Jackson State,197,0.0
+2025,UT Martin,197,0.0
+2025,Lehigh,197,0.0
+2025,Montana State,197,0.0
+2025,Pennsylvania,197,0.0
+2025,Alabama A&M,197,0.0
+2025,Northern Colorado,197,0.0
+2025,Northwestern State,197,0.0
+2025,North Dakota,197,0.0
+2025,Bucknell,197,0.0
+2025,Dartmouth,197,0.0
+2025,Butler,197,0.0
+2025,Utah Tech,197,0.0
+2025,Alcorn State,197,0.0
+2025,Georgetown,197,0.0
+2025,Davidson,197,0.0
+2025,Dayton,197,0.0

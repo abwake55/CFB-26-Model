@@ -1,0 +1,587 @@
+"""
+CFB Betting Model — Feature Engineering
+=========================================
+Transforms raw data into a game-level feature matrix ready for modeling.
+
+Each row in the output = one game, with features for both the home and
+away team side by side, plus the Vegas line and actual result.
+
+Run:
+    python3 src/features.py
+
+Output:
+    data/processed/feature_matrix.csv
+"""
+
+import pandas as pd
+import numpy as np
+from pathlib import Path
+
+DATA_DIR  = Path(__file__).parent.parent / "data"
+PROC_DIR  = DATA_DIR / "processed"
+RAW_DIR   = DATA_DIR / "raw"
+
+# ─── 1. LOADERS ──────────────────────────────────────────────────────────────
+
+def load_games() -> pd.DataFrame:
+    df = pd.read_csv(PROC_DIR / "master_games.csv")
+    df["start_date"] = pd.to_datetime(df["start_date"], utc=True)
+    return df
+
+
+def load_lines() -> pd.DataFrame:
+    """
+    Return one line per game using a priority order of providers.
+    Prefer 'consensus' → 'Bovada' → first available.
+    """
+    df = pd.read_csv(PROC_DIR / "master_lines.csv")
+
+    priority = ["consensus", "Bovada", "DraftKings", "ESPN Bet",
+                "William Hill (New Jersey)", "teamrankings"]
+
+    # Assign a numeric rank to each provider (lower = preferred)
+    rank_map = {p: i for i, p in enumerate(priority)}
+    df["_rank"] = df["provider"].map(rank_map).fillna(len(priority))
+
+    # Sort by rank and keep the best line per game
+    best = (
+        df.sort_values("_rank")
+          .drop_duplicates("game_id", keep="first")
+          .drop(columns=["_rank"])
+          .reset_index(drop=True)
+    )
+
+    # Only keep columns that actually exist in the CSV
+    want = ["game_id", "provider", "spread", "over_under",
+            "spread_open", "over_under_open",
+            "home_moneyline", "away_moneyline"]
+    keep = [c for c in want if c in best.columns]
+
+    return best[keep].copy()
+
+
+def load_sp_ratings() -> pd.DataFrame:
+    """
+    Flatten nested offense/defense dicts and return clean SP+ table.
+
+    IMPORTANT — leakage fix: SP+ ratings are season-FINAL values that
+    incorporate all games played that year. To use only genuinely pre-game
+    available data, we shift ratings forward by one year: a team's 2023
+    final SP+ becomes their pre-season strength estimate for 2024.
+    This is standard practice — the prior season's final rating is the
+    best publicly available pre-season predictor.
+    """
+    df = pd.read_csv(PROC_DIR / "master_sp_ratings.csv")
+
+    import ast
+
+    def safe_parse(val):
+        if pd.isna(val):
+            return {}
+        if isinstance(val, dict):
+            return val
+        try:
+            return ast.literal_eval(val)
+        except Exception:
+            return {}
+
+    df["off_dict"] = df["offense"].apply(safe_parse)
+    df["def_dict"] = df["defense"].apply(safe_parse)
+
+    df["sp_offense"] = df["off_dict"].apply(lambda d: d.get("rating"))
+    df["sp_defense"] = df["def_dict"].apply(lambda d: d.get("rating"))
+
+    rename = {"year": "season", "rating": "sp_rating", "sos": "sp_sos"}
+    df = df.rename(columns=rename)
+
+    df = df[["season", "team", "sp_rating", "sp_offense",
+             "sp_defense", "sp_sos"]].copy()
+
+    # ── Shift ratings forward one year (leakage fix) ──────────────────────
+    # Season N final rating → used as pre-season estimate for season N+1.
+    # Games in season N itself will get NaN (no prior-season data available),
+    # which the model handles via median imputation — acceptable for 2019.
+    df["season"] = df["season"] + 1
+
+    return df
+
+
+def load_fpi_ratings() -> pd.DataFrame:
+    """
+    Load ESPN FPI ratings with the same +1 year leakage fix as SP+.
+    FPI is structured differently by season — we normalise to (season, team, fpi).
+    """
+    path = PROC_DIR / "master_fpi_ratings.csv"
+    if not path.exists():
+        print("  ⚠️  FPI ratings not found — run data_collection.py to pull them.")
+        return pd.DataFrame(columns=["season", "team", "fpi"])
+
+    df = pd.read_csv(path)
+    df.columns = [c.lower() for c in df.columns]
+
+    # Normalise team name column (API sometimes returns 'school' or 'team')
+    if "school" in df.columns and "team" not in df.columns:
+        df = df.rename(columns={"school": "team"})
+
+    # Season column
+    if "year" in df.columns and "season" not in df.columns:
+        df = df.rename(columns={"year": "season"})
+
+    # FPI value — API returns 'fpi' directly
+    keep_cols = [c for c in ["season", "team", "fpi"] if c in df.columns]
+    df = df[keep_cols].dropna(subset=["team"]).copy()
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    df["fpi"]    = pd.to_numeric(df["fpi"],    errors="coerce")
+
+    # Leakage fix: same shift as SP+
+    df["season"] = df["season"] + 1
+    return df
+
+
+def load_srs_ratings() -> pd.DataFrame:
+    """
+    Load SRS (Simple Rating System) ratings with the same +1 year leakage fix.
+    SRS = adjusted point differential per game vs. schedule.
+    """
+    path = PROC_DIR / "master_srs_ratings.csv"
+    if not path.exists():
+        print("  ⚠️  SRS ratings not found — run data_collection.py to pull them.")
+        return pd.DataFrame(columns=["season", "team", "rating"])
+
+    df = pd.read_csv(path)
+    df.columns = [c.lower() for c in df.columns]
+
+    if "school" in df.columns and "team" not in df.columns:
+        df = df.rename(columns={"school": "team"})
+    if "year" in df.columns and "season" not in df.columns:
+        df = df.rename(columns={"year": "season"})
+
+    # SRS value is called 'rating' in the API response
+    if "rating" in df.columns:
+        df = df.rename(columns={"rating": "srs"})
+
+    keep_cols = [c for c in ["season", "team", "srs"] if c in df.columns]
+    df = df[keep_cols].dropna(subset=["team"]).copy()
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    if "srs" in df.columns:
+        df["srs"] = pd.to_numeric(df["srs"], errors="coerce")
+
+    # Leakage fix
+    df["season"] = df["season"] + 1
+    return df
+
+
+def load_recruiting() -> pd.DataFrame:
+    """
+    Build a 4-year rolling average recruiting composite per team per season.
+    Recruiting data has a 3–4 year lag before players appear on the field.
+    """
+    df = pd.read_csv(PROC_DIR / "master_recruiting.csv")
+
+    # Standardise column names (API returns camelCase or snake_case)
+    df.columns = [c.lower() for c in df.columns]
+    if "points" not in df.columns and "total" in df.columns:
+        df = df.rename(columns={"total": "points"})
+
+    # Sort and compute 4-year rolling mean per team
+    df = df.sort_values(["team", "year"])
+    df["recruiting_4yr"] = (
+        df.groupby("team")["points"]
+          .transform(lambda x: x.rolling(4, min_periods=1).mean())
+    )
+
+    return df[["year", "team", "recruiting_4yr"]].rename(
+        columns={"year": "season"}
+    )
+
+
+def load_ppa_games() -> pd.DataFrame:
+    return pd.read_csv(PROC_DIR / "master_ppa_games.csv")
+
+
+def build_home_field_advantage(games: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute each team's home field advantage (HFA) estimate from historical data.
+
+    Method: for each team-season, calculate their average home point margin
+    minus average away point margin over the PRIOR two seasons.
+    This captures venue effects, fan atmosphere, and travel burden.
+
+    Returns a DataFrame keyed by (season, team) with column hfa_estimate.
+    A value of +3.5 means that team historically scores ~3.5 more points
+    at home than away (vs. equivalent opponents on neutral ground).
+    """
+    # Build per-game home/away margins
+    home = games[["season","home_team","point_diff"]].rename(
+        columns={"home_team":"team","point_diff":"margin"})
+    home["is_home"] = 1
+
+    away = games[["season","away_team","point_diff"]].copy()
+    away["margin"] = -away["point_diff"]   # flip: away margin = -(home margin)
+    away = away.rename(columns={"away_team":"team"})
+    away["is_home"] = 0
+
+    all_margins = pd.concat([home, away], ignore_index=True)
+    all_margins = all_margins[all_margins["neutral_site"] == 0] if "neutral_site" in all_margins.columns else all_margins
+
+    # Season-level averages per team
+    season_avg = all_margins.groupby(["season","team","is_home"])["margin"].mean().reset_index()
+    home_avg = season_avg[season_avg["is_home"]==1][["season","team","margin"]].rename(columns={"margin":"home_margin_avg"})
+    away_avg = season_avg[season_avg["is_home"]==0][["season","team","margin"]].rename(columns={"margin":"away_margin_avg"})
+
+    hfa = home_avg.merge(away_avg, on=["season","team"], how="outer")
+    hfa["hfa_raw"] = hfa["home_margin_avg"].fillna(0) - hfa["away_margin_avg"].fillna(0)
+
+    # Rolling 2-season average, then shift forward 1 year (no leakage)
+    hfa = hfa.sort_values(["team","season"])
+    hfa["hfa_estimate"] = (
+        hfa.groupby("team")["hfa_raw"]
+           .transform(lambda x: x.shift(1).rolling(2, min_periods=1).mean())
+    )
+
+    return hfa[["season","team","hfa_estimate"]]
+
+
+def build_rest_features(games: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute days of rest for each team heading into each game.
+
+    Uses start_date to find each team's previous game within the same season.
+    Season openers get a default of 14 days (standard week + bye equivalent).
+    Capped at 21 days so late-season extended byes don't dominate.
+
+    Returns a flat DataFrame keyed by (game_id, team).
+    """
+    df = games[["game_id", "season", "home_team", "away_team", "start_date"]].copy()
+    df["start_date"] = pd.to_datetime(df["start_date"], utc=True)
+
+    # Flatten: one row per team per game
+    home = df[["game_id", "season", "home_team", "start_date"]].rename(
+        columns={"home_team": "team"})
+    away = df[["game_id", "season", "away_team", "start_date"]].rename(
+        columns={"away_team": "team"})
+    flat = pd.concat([home, away], ignore_index=True).sort_values(
+        ["team", "season", "start_date"])
+
+    # Previous game date — within the same season only (no cross-season spillover)
+    flat["prev_date"] = flat.groupby(["team", "season"])["start_date"].shift(1)
+    flat["rest_days"] = (
+        (flat["start_date"] - flat["prev_date"]).dt.days
+        .fillna(14)       # season opener → treat as standard 2-week rest
+        .clip(upper=21)   # cap so extended byes don't outscore everything else
+    )
+
+    return flat[["game_id", "team", "rest_days"]]
+
+
+# ─── 2. ROLLING EPA FEATURES ─────────────────────────────────────────────────
+
+def build_rolling_epa(ppa: pd.DataFrame, windows: list = [3, 5]) -> pd.DataFrame:
+    """
+    For each team-season, compute rolling EPA averages over the last N games
+    (calculated *before* the current game so there's no data leakage).
+
+    Returns a DataFrame keyed by (game_id, team) with rolling EPA columns.
+    """
+    ppa = ppa.sort_values(["season", "team", "week"]).copy()
+
+    for w in windows:
+        for col in ["off_epa", "def_epa", "off_epa_pass", "off_epa_rush"]:
+            if col not in ppa.columns:
+                continue
+            # shift(1) ensures we only use games *before* the current one
+            ppa[f"{col}_roll{w}"] = (
+                ppa.groupby(["season", "team"])[col]
+                   .transform(lambda x: x.shift(1).rolling(w, min_periods=1).mean())
+            )
+
+    # Also compute season-to-date average (all prior games this season)
+    for col in ["off_epa", "def_epa"]:
+        if col not in ppa.columns:
+            continue
+        ppa[f"{col}_ytd"] = (
+            ppa.groupby(["season", "team"])[col]
+               .transform(lambda x: x.shift(1).expanding().mean())
+        )
+
+    return ppa
+
+
+# ─── 3. ATTACH TEAM FEATURES TO GAMES ────────────────────────────────────────
+
+def attach_team_features(
+    games: pd.DataFrame,
+    ppa_rolled: pd.DataFrame,
+    sp: pd.DataFrame,
+    recruiting: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    For each game, merge in pre-game features for both the home and away team.
+    Returns games df with home_* and away_* feature columns appended.
+    """
+
+    # ── SP+ (pre-season rating, same value all season) ──
+    sp_lookup = sp.set_index(["season", "team"])
+
+    # ── Recruiting (4-year rolling, keyed by season) ──
+    rec_lookup = recruiting.set_index(["season", "team"])
+
+    # ── Per-game EPA (keyed by game_id + team) ──
+    epa_cols = [c for c in ppa_rolled.columns
+                if c not in ("game_id", "season", "week", "team",
+                             "conference", "opponent",
+                             "off_epa", "def_epa",        # raw values — use rolled versions
+                             "off_epa_pass", "def_epa_pass",
+                             "off_epa_rush", "def_epa_rush")]
+    ppa_lookup = ppa_rolled.set_index(["game_id", "team"])[epa_cols]
+
+    def get_team_features(game_id, season, team, prefix):
+        row = {}
+
+        # SP+ features
+        try:
+            s = sp_lookup.loc[(season, team)]
+            row[f"{prefix}sp_rating"]  = s.get("sp_rating")
+            row[f"{prefix}sp_offense"] = s.get("sp_offense")
+            row[f"{prefix}sp_defense"] = s.get("sp_defense")
+            row[f"{prefix}sp_sos"]     = s.get("sp_sos")
+        except KeyError:
+            row[f"{prefix}sp_rating"]  = np.nan
+            row[f"{prefix}sp_offense"] = np.nan
+            row[f"{prefix}sp_defense"] = np.nan
+            row[f"{prefix}sp_sos"]     = np.nan
+
+        # Recruiting
+        try:
+            row[f"{prefix}recruiting_4yr"] = rec_lookup.loc[(season, team), "recruiting_4yr"]
+        except KeyError:
+            row[f"{prefix}recruiting_4yr"] = np.nan
+
+        # Rolling EPA
+        try:
+            epa = ppa_lookup.loc[(game_id, team)]
+            for col in epa_cols:
+                row[f"{prefix}{col}"] = epa[col] if not isinstance(epa, pd.DataFrame) else epa[col].iloc[0]
+        except KeyError:
+            for col in epa_cols:
+                row[f"{prefix}{col}"] = np.nan
+
+        return row
+
+    feature_rows = []
+    for _, g in games.iterrows():
+        home_feats = get_team_features(g["game_id"], g["season"], g["home_team"], "home_")
+        away_feats = get_team_features(g["game_id"], g["season"], g["away_team"], "away_")
+        feature_rows.append({**home_feats, **away_feats})
+
+    feat_df = pd.DataFrame(feature_rows, index=games.index)
+    return pd.concat([games, feat_df], axis=1)
+
+
+# ─── 4. MERGE BETTING LINES ──────────────────────────────────────────────────
+
+def attach_lines(games: pd.DataFrame, lines: pd.DataFrame) -> pd.DataFrame:
+    """
+    Join betting lines onto games. Only keep games that have a line
+    (i.e. FBS games that sportsbooks priced).
+    """
+    merged = games.merge(
+        lines[["game_id", "spread", "over_under",
+               "spread_open", "over_under_open",
+               "home_moneyline", "away_moneyline"]],
+        on="game_id",
+        how="inner",   # drop games with no line
+    )
+    return merged
+
+
+# ─── 5. DERIVED TARGETS & CONTEXT FEATURES ───────────────────────────────────
+
+def add_targets_and_context(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add model target variables and a few context features.
+    """
+    # Targets
+    df["home_win"]         = (df["point_diff"] > 0).astype(int)
+    df["covered_spread"]   = (df["point_diff"] + df["spread"].astype(float) > 0).astype(int)
+    df["went_over"]        = (df["total_points"] > df["over_under"].astype(float)).astype(int)
+
+    # Context
+    df["neutral_site"]     = df["neutral_site"].fillna(False).astype(int)
+    df["conference_game"]  = df["conference_game"].fillna(False).astype(int)
+
+    # SP+ differential (home advantage in ratings)
+    df["sp_diff"]          = df["home_sp_rating"] - df["away_sp_rating"]
+    df["sp_off_diff"]      = df["home_sp_offense"] - df["away_sp_offense"]
+    df["sp_def_diff"]      = df["home_sp_defense"] - df["away_sp_defense"]
+
+    # EPA differential (rolling 3-game)
+    if "home_off_epa_roll3" in df.columns:
+        df["epa_off_diff_roll3"] = df["home_off_epa_roll3"] - df["away_off_epa_roll3"]
+        df["epa_def_diff_roll3"] = df["home_def_epa_roll3"] - df["away_def_epa_roll3"]
+
+    # Recruiting differential
+    df["recruiting_diff"]  = df["home_recruiting_4yr"] - df["away_recruiting_4yr"]
+
+    # Vegas implied home margin (spread is from home team's perspective: negative = home favored)
+    df["vegas_home_margin"] = -df["spread"].astype(float)
+
+    # Line movement: how much did the spread shift from open to close?
+    # Negative = home team became MORE favored (sharp money on home side)
+    # Positive = home team became LESS favored (sharp money on away side)
+    if "spread_open" in df.columns:
+        spread      = pd.to_numeric(df["spread"],       errors="coerce")
+        spread_open = pd.to_numeric(df["spread_open"],  errors="coerce")
+        df["line_movement"]  = spread - spread_open
+        # Binary flag: any meaningful movement of 1+ point
+        df["line_moved_home"] = (df["line_movement"] < -1.0).astype(int)
+        df["line_moved_away"] = (df["line_movement"] >  1.0).astype(int)
+
+    return df
+
+
+# ─── 6. MAIN PIPELINE ────────────────────────────────────────────────────────
+
+def build_feature_matrix() -> pd.DataFrame:
+    print("Loading raw data...")
+    games      = load_games()
+    lines      = load_lines()
+    sp         = load_sp_ratings()
+    recruiting = load_recruiting()
+    ppa        = load_ppa_games()
+    fpi        = load_fpi_ratings()
+    srs        = load_srs_ratings()
+
+    print(f"  Games:       {len(games):,}")
+    print(f"  Lines:       {len(lines):,} (one per game)")
+    print(f"  SP+ rows:    {len(sp):,}")
+    print(f"  Recruiting:  {len(recruiting):,}")
+    print(f"  PPA rows:    {len(ppa):,}")
+    print(f"  FPI rows:    {len(fpi):,}")
+    print(f"  SRS rows:    {len(srs):,}")
+
+    print("\nBuilding rolling EPA features...")
+    ppa_rolled = build_rolling_epa(ppa, windows=[3, 5])
+
+    print("Building home field advantage estimates...")
+    hfa = build_home_field_advantage(games)
+
+    print("Attaching team features to games...")
+    games_feat = attach_team_features(games, ppa_rolled, sp, recruiting)
+
+    # Merge HFA for home team
+    games_feat = games_feat.merge(
+        hfa.rename(columns={"team": "home_team", "hfa_estimate": "home_hfa"}),
+        on=["season", "home_team"], how="left"
+    )
+    # Merge HFA for away team (their home-field effect doesn't apply here,
+    # but their travel/away comfort does — use negative of their HFA)
+    games_feat = games_feat.merge(
+        hfa.rename(columns={"team": "away_team", "hfa_estimate": "away_hfa"}),
+        on=["season", "away_team"], how="left"
+    )
+    # Net HFA: home team's advantage minus away team's away-game penalty
+    games_feat["hfa_diff"] = games_feat["home_hfa"].fillna(0) - games_feat["away_hfa"].fillna(0)
+
+    # ── Merge FPI (home and away) ──────────────────────────────────────────
+    if len(fpi) > 0 and "fpi" in fpi.columns:
+        games_feat = games_feat.merge(
+            fpi.rename(columns={"team": "home_team", "fpi": "home_fpi"}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            fpi.rename(columns={"team": "away_team", "fpi": "away_fpi"}),
+            on=["season", "away_team"], how="left"
+        )
+        games_feat["fpi_diff"] = games_feat["home_fpi"] - games_feat["away_fpi"]
+
+    # ── Merge SRS (home and away) ──────────────────────────────────────────
+    if len(srs) > 0 and "srs" in srs.columns:
+        games_feat = games_feat.merge(
+            srs.rename(columns={"team": "home_team", "srs": "home_srs"}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            srs.rename(columns={"team": "away_team", "srs": "away_srs"}),
+            on=["season", "away_team"], how="left"
+        )
+        games_feat["srs_diff"] = games_feat["home_srs"] - games_feat["away_srs"]
+
+    print("Building rest-day features...")
+    rest = build_rest_features(games)
+    games_feat = games_feat.merge(
+        rest.rename(columns={"team": "home_team", "rest_days": "home_rest_days"}),
+        on=["game_id", "home_team"], how="left"
+    )
+    games_feat = games_feat.merge(
+        rest.rename(columns={"team": "away_team", "rest_days": "away_rest_days"}),
+        on=["game_id", "away_team"], how="left"
+    )
+    games_feat["rest_diff"] = (
+        games_feat["home_rest_days"].fillna(14) - games_feat["away_rest_days"].fillna(14)
+    )
+
+    print("Merging betting lines (filtering to FBS games with lines)...")
+    games_with_lines = attach_lines(games_feat, lines)
+    print(f"  Games with lines: {len(games_with_lines):,}")
+
+    print("Adding targets and context features...")
+    final = add_targets_and_context(games_with_lines)
+
+    # Optionally merge weather (run src/weather.py first to generate this file)
+    weather_path = PROC_DIR / "game_weather.csv"
+    if weather_path.exists():
+        print("Merging weather data...")
+        weather = pd.read_csv(weather_path)
+        want_weather = [c for c in ["game_id", "wind_speed", "temp_avg",
+                                     "precipitation", "is_dome"] if c in weather.columns]
+        final = final.merge(weather[want_weather], on="game_id", how="left")
+        print(f"  Weather coverage: {final['wind_speed'].notna().mean():.1%} of games")
+    else:
+        print("  (no weather data — run src/weather.py to add wind/temp features)")
+
+    # Drop rows missing spread or total (can't train/backtest without them)
+    before = len(final)
+    final = final.dropna(subset=["spread", "over_under", "point_diff"])
+    print(f"  Dropped {before - len(final)} rows with missing spread/total/score")
+    print(f"  Final feature matrix: {len(final):,} rows")
+
+    # Save
+    out_path = PROC_DIR / "feature_matrix.csv"
+    final.to_csv(out_path, index=False)
+    print(f"\n✅ Saved feature matrix → {out_path}")
+    print(f"   Columns: {len(final.columns)}")
+    print(f"   Rows:    {len(final):,}")
+    print(f"\nNext step: run python3 src/elo_ratings.py to build team power ratings.")
+
+    return final
+
+
+# ─── MAIN ────────────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    # First check that per-game EPA data exists — run data_collection.py if not
+    ppa_path = PROC_DIR / "master_ppa_games.csv"
+    if not ppa_path.exists():
+        print("⚠️  Per-game EPA data not found.")
+        print("   Run data_collection.py first (it now pulls ppa/games too).")
+        import sys; sys.exit(1)
+
+    df = build_feature_matrix()
+
+    # Quick preview
+    print("\nSample rows (2024 season):")
+    sample_cols = [
+        "season", "week", "home_team", "away_team",
+        "home_points", "away_points", "point_diff",
+        "spread", "over_under",
+        "home_sp_rating", "away_sp_rating", "sp_diff",
+    ]
+    sample_cols = [c for c in sample_cols if c in df.columns]
+    print(df[df["season"] == 2024][sample_cols].head(10).to_string(index=False))
+
+    print("\nNull rates for key features:")
+    key_feats = [c for c in df.columns if any(x in c for x in
+                 ["sp_rating", "epa_roll", "recruiting", "spread", "over_under"])]
+    null_rates = df[key_feats].isna().mean().sort_values(ascending=False)
+    print(null_rates[null_rates > 0].to_string())
