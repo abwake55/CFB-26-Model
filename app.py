@@ -79,6 +79,8 @@ TOTALS_EDGE_MIN, TOTALS_EDGE_MAX = 3.0, 6.0
 MONEYLINE_EV_MIN = 0.04
 MONEYLINE_EV_MAX = 0.08
 
+BETTORS = ["Alex", "Joe", "Zou", "Pat"]
+
 
 # ─── BET TRACKER ─────────────────────────────────────────────────────────────
 
@@ -94,7 +96,7 @@ def save_bets(bets: list):
     BETS_FILE.write_text(json.dumps(bets, indent=2))
 
 def add_bet(game: str, bet_type: str, pick: str, line: str,
-            units: int, season: int, week: int, edge: str = ""):
+            units: int, season: int, week: int, edge: str = "", bettor: str = ""):
     bets = load_bets()
     bets.append({
         "id":       str(uuid.uuid4())[:8],
@@ -108,6 +110,7 @@ def add_bet(game: str, bet_type: str, pick: str, line: str,
         "edge":     edge,
         "units":    units,
         "status":   "Pending",
+        "bettor":   bettor,
     })
     save_bets(bets)
 
@@ -116,6 +119,14 @@ def update_bet_status(bet_id: str, status: str):
     for b in bets:
         if b["id"] == bet_id:
             b["status"] = status
+            break
+    save_bets(bets)
+
+def update_bet_bettor(bet_id: str, bettor: str):
+    bets = load_bets()
+    for b in bets:
+        if b["id"] == bet_id:
+            b["bettor"] = bettor
             break
     save_bets(bets)
 
@@ -526,9 +537,10 @@ def track_button(label: str, game: str, bet_type: str, pick: str,
                  line: str, units: int, season: int, week: int, edge: str = "", key_prefix: str = ""):
     """Render a small Track button. Returns True if clicked."""
     key = f"{key_prefix}track_{game}_{bet_type}_{pick}".replace(" ", "_")
+    bettor = st.session_state.get("bettor", BETTORS[0])
     if st.button(f"➕ Track  {label}", key=key, use_container_width=False):
-        add_bet(game, bet_type, pick, line, units, season, week, edge)
-        st.toast(f"Added: {pick} ({game})", icon="✅")
+        add_bet(game, bet_type, pick, line, units, season, week, edge, bettor)
+        st.toast(f"Added: {pick} — {bettor}", icon="✅")
         return True
     return False
 
@@ -630,14 +642,21 @@ def render_bets_tab():
 
     st.divider()
 
-    # ── Filter ───────────────────────────────────────────────────────────
-    col_f1, col_f2 = st.columns([1, 3])
+    # ── Filters ──────────────────────────────────────────────────────────
+    col_f1, col_f2, col_f3 = st.columns([1, 1, 2])
     status_filter = col_f1.selectbox("Filter by status",
                                       ["All", "Pending", "Won", "Lost", "Push"])
-    filtered = bets if status_filter == "All" else [b for b in bets if b["status"] == status_filter]
+    bettor_filter = col_f2.selectbox("Filter by bettor",
+                                      ["All"] + BETTORS)
+
+    filtered = bets
+    if status_filter != "All":
+        filtered = [b for b in filtered if b["status"] == status_filter]
+    if bettor_filter != "All":
+        filtered = [b for b in filtered if b.get("bettor", "") == bettor_filter]
 
     if not filtered:
-        st.info(f"No {status_filter.lower()} bets.")
+        st.info("No bets match the selected filters.")
         return
 
     # ── Bet rows ─────────────────────────────────────────────────────────
@@ -650,21 +669,23 @@ def render_bets_tab():
     status_icons = {"Pending": "⏳", "Won": "✅", "Lost": "❌", "Push": "↩️"}
 
     for bet in reversed(filtered):
-        color = status_colors.get(bet["status"], "#1c2b3a")
-        icon  = status_icons.get(bet["status"], "")
-        pnl   = bet_pnl(bet)
-        pnl_str = f"{pnl:+.2f}u" if bet["status"] != "Pending" else "—"
+        color     = status_colors.get(bet["status"], "#1c2b3a")
+        icon      = status_icons.get(bet["status"], "")
+        pnl       = bet_pnl(bet)
+        pnl_str   = f"{pnl:+.2f}u" if bet["status"] != "Pending" else "—"
         pnl_color = "#2ecc71" if pnl > 0 else "#e74c3c" if pnl < 0 else "#aaa"
+        bettor    = bet.get("bettor", "—")
+        edge_tag  = f"&nbsp;·&nbsp;{bet['edge']}" if bet.get("edge") else ""
 
-        edge_tag = f"&nbsp;·&nbsp;{bet['edge']}" if bet.get("edge") else ""
         st.html(f"""
-        <div style="background:{color};border-radius:8px;padding:12px 16px;margin-bottom:6px;
+        <div style="background:{color};border-radius:8px;padding:12px 16px;margin-bottom:4px;
                     border:1px solid #2a3a4a;">
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <div>
                     <span style="color:#fff;font-weight:700;font-size:1em">{bet['pick']}</span>
                     <span style="color:#aaa;font-size:0.82em;margin-left:10px">{bet['bet_type']}</span>
                     <span style="color:#aaa;font-size:0.82em;margin-left:6px">·&nbsp;{bet['units']}u</span>
+                    <span style="color:#7ec8e3;font-size:0.82em;margin-left:10px">👤 {bettor}</span>
                 </div>
                 <div style="text-align:right">
                     <span style="color:{pnl_color};font-weight:700">{pnl_str}</span>
@@ -678,8 +699,8 @@ def render_bets_tab():
         </div>
         """)
 
-        # Status buttons
-        b_cols = st.columns([1, 1, 1, 1, 4])
+        # Status + bettor buttons
+        b_cols = st.columns([1, 1, 1, 1, 1, 2])
         if bet["status"] != "Won":
             if b_cols[0].button("✅ Won",  key=f"won_{bet['id']}"):
                 update_bet_status(bet["id"], "Won");  st.rerun()
@@ -689,8 +710,16 @@ def render_bets_tab():
         if bet["status"] != "Push":
             if b_cols[2].button("↩️ Push", key=f"push_{bet['id']}"):
                 update_bet_status(bet["id"], "Push"); st.rerun()
-        if b_cols[3].button("🗑️",         key=f"del_{bet['id']}"):
+        if b_cols[3].button("🗑️", key=f"del_{bet['id']}"):
             delete_bet(bet["id"]); st.rerun()
+        # Bettor dropdown — change who owns this bet
+        current_bettor = bet.get("bettor", BETTORS[0])
+        idx = BETTORS.index(current_bettor) if current_bettor in BETTORS else 0
+        new_bettor = b_cols[5].selectbox("", BETTORS, index=idx,
+                                          key=f"bettor_{bet['id']}",
+                                          label_visibility="collapsed")
+        if new_bettor != current_bettor:
+            update_bet_bettor(bet["id"], new_bettor); st.rerun()
 
     # ── Export ───────────────────────────────────────────────────────────
     st.divider()
@@ -770,6 +799,10 @@ def main():
 
         season = st.selectbox("Season", [2026, 2025], index=0)
         week   = st.slider("Week", min_value=0, max_value=15, value=1)
+
+        bettor = st.selectbox("🙋 Betting as", BETTORS,
+                              index=BETTORS.index(st.session_state.get("bettor", BETTORS[0])))
+        st.session_state["bettor"] = bettor
         st.divider()
 
         run = st.button("🔍 Get This Week's Picks", type="primary", use_container_width=True)
