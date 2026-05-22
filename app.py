@@ -548,7 +548,7 @@ def render_moneyline_card(row, season, week):
     matchup = f"{row['home_team']} vs {row['away_team']}"
     units   = 1
 
-    st.markdown(f"""
+    st.html(f"""
     <div style="background:{color};border-left:4px solid {border};
                 border-radius:8px;padding:14px 18px;margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;align-items:center">
@@ -564,7 +564,7 @@ def render_moneyline_card(row, season, week):
             Model implied: <b>{model_label}</b> &nbsp;·&nbsp; Book: <b>{label}</b>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
     track_button(f"{team} ML {label}", matchup, "Moneyline", f"{team} ML {label}",
                  label, units, season, week, f"EV {ev:+.1%}")
 
@@ -579,7 +579,8 @@ def render_totals_card(row, season, week):
     matchup  = f"{row['home_team']} vs {row['away_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
 
-    st.markdown(f"""
+    neutral_tag = "&nbsp;·&nbsp;Neutral site" if row.get("neutral_site") else ""
+    st.html(f"""
     <div style="background:{color};border-left:4px solid {border};
                 border-radius:8px;padding:14px 18px;margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;align-items:center">
@@ -591,11 +592,10 @@ def render_totals_card(row, season, week):
         </div>
         <div style="color:#ddd;margin-top:6px;font-size:1em">{matchup}</div>
         <div style="color:#aaa;font-size:0.82em;margin-top:4px">
-            Model: {row['pred_total']:.1f} pts total
-            {"&nbsp;·&nbsp;Neutral site" if row.get("neutral_site") else ""}
+            Model: {row['pred_total']:.1f} pts total{neutral_tag}
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
     track_button(f"{side_str} {ou_str}", matchup, "Total",
                  f"{side_str} {ou_str}", ou_str, units, season, week,
                  f"{row['totals_edge']:+.1f} pts")
@@ -656,14 +656,15 @@ def render_bets_tab():
         pnl_str = f"{pnl:+.2f}u" if bet["status"] != "Pending" else "—"
         pnl_color = "#2ecc71" if pnl > 0 else "#e74c3c" if pnl < 0 else "#aaa"
 
-        st.markdown(f"""
+        edge_tag = f"&nbsp;·&nbsp;{bet['edge']}" if bet.get("edge") else ""
+        st.html(f"""
         <div style="background:{color};border-radius:8px;padding:12px 16px;margin-bottom:6px;
                     border:1px solid #2a3a4a;">
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <div>
                     <span style="color:#fff;font-weight:700;font-size:1em">{bet['pick']}</span>
                     <span style="color:#aaa;font-size:0.82em;margin-left:10px">{bet['bet_type']}</span>
-                    <span style="color:#aaa;font-size:0.82em;margin-left:6px">·  {bet['units']}u</span>
+                    <span style="color:#aaa;font-size:0.82em;margin-left:6px">·&nbsp;{bet['units']}u</span>
                 </div>
                 <div style="text-align:right">
                     <span style="color:{pnl_color};font-weight:700">{pnl_str}</span>
@@ -672,11 +673,10 @@ def render_bets_tab():
             </div>
             <div style="color:#ccc;font-size:0.85em;margin-top:4px">{bet['game']}</div>
             <div style="color:#888;font-size:0.78em;margin-top:2px">
-                Wk {bet['week']} · {bet['date']} · Line: {bet['line']}
-                {"· " + bet['edge'] if bet.get('edge') else ""}
+                Wk {bet['week']} · {bet['date']} · Line: {bet['line']}{edge_tag}
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
         # Status buttons
         b_cols = st.columns([1, 1, 1, 1, 4])
