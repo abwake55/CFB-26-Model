@@ -523,9 +523,9 @@ def ev_stars(ev: float) -> str:
     return "⭐"
 
 def track_button(label: str, game: str, bet_type: str, pick: str,
-                 line: str, units: int, season: int, week: int, edge: str = ""):
+                 line: str, units: int, season: int, week: int, edge: str = "", key_prefix: str = ""):
     """Render a small Track button. Returns True if clicked."""
-    key = f"track_{game}_{bet_type}_{pick}".replace(" ", "_")
+    key = f"{key_prefix}track_{game}_{bet_type}_{pick}".replace(" ", "_")
     if st.button(f"➕ Track  {label}", key=key, use_container_width=False):
         add_bet(game, bet_type, pick, line, units, season, week, edge)
         st.toast(f"Added: {pick} ({game})", icon="✅")
@@ -730,9 +730,9 @@ def render_all_game_card(row, season, week):
             st.markdown("**📊 Spread**")
             if spread_h:
                 track_button(f"{row['home_team']} {spread_h}", matchup, "Spread",
-                             f"{row['home_team']} {spread_h}", spread_h, 1, season, week)
+                             f"{row['home_team']} {spread_h}", spread_h, 1, season, week, key_prefix="ag_")
                 track_button(f"{row['away_team']} {spread_a}", matchup, "Spread",
-                             f"{row['away_team']} {spread_a}", spread_a, 1, season, week)
+                             f"{row['away_team']} {spread_a}", spread_a, 1, season, week, key_prefix="ag_")
             else:
                 st.caption("No line yet")
 
@@ -740,9 +740,9 @@ def render_all_game_card(row, season, week):
             st.markdown("**🎯 Total**")
             if ou_str:
                 track_button(f"OVER {ou_str}", matchup, "Total",
-                             f"OVER {ou_str}", ou_str, 1, season, week)
+                             f"OVER {ou_str}", ou_str, 1, season, week, key_prefix="ag_")
                 track_button(f"UNDER {ou_str}", matchup, "Total",
-                             f"UNDER {ou_str}", ou_str, 1, season, week)
+                             f"UNDER {ou_str}", ou_str, 1, season, week, key_prefix="ag_")
             else:
                 st.caption("No total yet")
 
@@ -750,10 +750,10 @@ def render_all_game_card(row, season, week):
             st.markdown("**💰 Moneyline**")
             if hml_str:
                 track_button(f"{row['home_team']} {hml_str}", matchup, "Moneyline",
-                             f"{row['home_team']} {hml_str}", hml_str, 1, season, week)
+                             f"{row['home_team']} {hml_str}", hml_str, 1, season, week, key_prefix="ag_")
             if aml_str:
                 track_button(f"{row['away_team']} {aml_str}", matchup, "Moneyline",
-                             f"{row['away_team']} {aml_str}", aml_str, 1, season, week)
+                             f"{row['away_team']} {aml_str}", aml_str, 1, season, week, key_prefix="ag_")
             if not hml_str and not aml_str:
                 st.caption("No ML yet")
 
