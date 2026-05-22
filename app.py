@@ -705,6 +705,59 @@ def render_bets_tab():
         )
 
 
+# ─── ALL-GAMES CARD ───────────────────────────────────────────────────────────
+
+def render_all_game_card(row, season, week):
+    """One expandable card per game with Track buttons for every bet type."""
+    matchup  = f"{row['home_team']} vs {row['away_team']}"
+    win_p    = row.get("pred_win_p")
+    spread   = row.get("spread")
+    ou       = row.get("over_under")
+    home_ml  = row.get("home_moneyline")
+    away_ml  = row.get("away_moneyline")
+
+    win_str  = f"  ·  Home win {win_p:.0%}" if pd.notna(win_p) else ""
+    spread_h = f"{spread:+.1f}"  if pd.notna(spread) else None
+    spread_a = f"{-spread:+.1f}" if pd.notna(spread) else None
+    ou_str   = f"{ou:.1f}"       if pd.notna(ou)     else None
+    hml_str  = (f"{int(home_ml):+d}" if home_ml > 0 else str(int(home_ml))) if pd.notna(home_ml) else None
+    aml_str  = (f"{int(away_ml):+d}" if away_ml > 0 else str(int(away_ml))) if pd.notna(away_ml) else None
+
+    with st.expander(f"🏈 {matchup}{win_str}"):
+        c1, c2, c3 = st.columns(3)
+
+        with c1:
+            st.markdown("**📊 Spread**")
+            if spread_h:
+                track_button(f"{row['home_team']} {spread_h}", matchup, "Spread",
+                             f"{row['home_team']} {spread_h}", spread_h, 1, season, week)
+                track_button(f"{row['away_team']} {spread_a}", matchup, "Spread",
+                             f"{row['away_team']} {spread_a}", spread_a, 1, season, week)
+            else:
+                st.caption("No line yet")
+
+        with c2:
+            st.markdown("**🎯 Total**")
+            if ou_str:
+                track_button(f"OVER {ou_str}", matchup, "Total",
+                             f"OVER {ou_str}", ou_str, 1, season, week)
+                track_button(f"UNDER {ou_str}", matchup, "Total",
+                             f"UNDER {ou_str}", ou_str, 1, season, week)
+            else:
+                st.caption("No total yet")
+
+        with c3:
+            st.markdown("**💰 Moneyline**")
+            if hml_str:
+                track_button(f"{row['home_team']} {hml_str}", matchup, "Moneyline",
+                             f"{row['home_team']} {hml_str}", hml_str, 1, season, week)
+            if aml_str:
+                track_button(f"{row['away_team']} {aml_str}", matchup, "Moneyline",
+                             f"{row['away_team']} {aml_str}", aml_str, 1, season, week)
+            if not hml_str and not aml_str:
+                st.caption("No ML yet")
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -720,6 +773,10 @@ def main():
         st.divider()
 
         run = st.button("🔍 Get This Week's Picks", type="primary", use_container_width=True)
+        if run:
+            st.session_state["has_run"]     = True
+            st.session_state["run_season"]  = season
+            st.session_state["run_week"]    = week
 
         st.divider()
         st.markdown("**How it works**")
@@ -749,7 +806,7 @@ def main():
 
     # ── PICKS TAB ─────────────────────────────────────────────────────────
     with picks_tab:
-        if not run:
+        if not st.session_state.get("has_run"):
             st.info("👈 Select a season and week in the sidebar, then hit **Get This Week's Picks**.")
             col1, col2, col3, col4 = st.columns(4)
             col1.metric("Totals Win Rate", "54.7%", "+2.3% above breakeven")
@@ -771,6 +828,10 @@ def main():
 *Always check injuries, weather, and current lines before betting.*
             """)
             return
+
+        # Use the season/week that were active when Run was last clicked
+        season = st.session_state.get("run_season", season)
+        week   = st.session_state.get("run_week",   week)
 
         # ── Load everything ───────────────────────────────────────────────
         spread_model, totals_model, win_prob_model, feature_lists = load_models()
@@ -890,33 +951,12 @@ def main():
                 track_button(f"{bet_on} {vl}", matchup, "Spread",
                              f"{bet_on} {vl}", vl, 1, season, week, f"{edge_s}")
 
-        # ── All games expander ────────────────────────────────────────────
+        # ── All games — expandable cards with Track buttons ───────────────
         st.divider()
-        with st.expander(f"📋 All {len(preds)} games this week"):
-            all_display = preds.copy()
-            all_display["Spread"]       = all_display["spread"].apply(
-                lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
-            all_display["Model Spread"] = all_display["pred_spread"].apply(lambda x: f"{x:+.1f}")
-            all_display["S.Edge"]       = all_display["spread_edge"].apply(
-                lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
-            all_display["O/U"]          = all_display["over_under"].apply(
-                lambda x: f"{x:.1f}" if pd.notna(x) else "—")
-            all_display["Model Total"]  = all_display["pred_total"].apply(lambda x: f"{x:.1f}")
-            all_display["T.Edge"]       = all_display["totals_edge"].apply(
-                lambda x: f"{x:+.1f}" if pd.notna(x) else "—")
-            all_display["Home Win%"]    = all_display["pred_win_p"].apply(lambda x: f"{x:.0%}")
-            all_display["Home ML"]      = all_display["home_moneyline"].apply(
-                lambda x: f"{int(x):+d}" if pd.notna(x) else "—")
-            all_display["ML EV"]        = all_display.apply(
-                lambda r: f"{r['ml_ev']:+.1%}" if pd.notna(r.get("ml_ev")) else "—", axis=1)
-            st.dataframe(
-                all_display[["home_team","away_team",
-                             "Spread","Model Spread","S.Edge",
-                             "O/U","Model Total","T.Edge",
-                             "Home Win%","Home ML","ML EV"]].rename(columns={
-                    "home_team": "Home", "away_team": "Away"}),
-                use_container_width=True, hide_index=True,
-            )
+        st.subheader(f"🏈 All {len(preds)} Games This Week")
+        st.caption("Expand any game to track a spread, total, or moneyline bet.")
+        for _, row in preds.iterrows():
+            render_all_game_card(row, season, week)
 
         st.divider()
         st.caption(
