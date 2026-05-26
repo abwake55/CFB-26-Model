@@ -372,6 +372,19 @@ def fetch_schedule(season: int, week: int) -> pd.DataFrame:
         df["home_conference"].notna() & df["away_conference"].notna() &
         (df["home_conference"] == df["away_conference"])
     ).astype(int)
+
+    # Deduplicate — a team can only play one game per week.
+    # CFBD occasionally returns duplicate entries for Week 1 / neutral-site games.
+    df = df.drop_duplicates(subset=["home_team", "away_team"])
+    seen_teams: set = set()
+    clean: list = []
+    for _, row in df.iterrows():
+        h, a = row["home_team"], row["away_team"]
+        if h not in seen_teams and a not in seen_teams:
+            clean.append(row)
+            seen_teams.update([h, a])
+    df = pd.DataFrame(clean).reset_index(drop=True)
+
     return df
 
 
@@ -547,9 +560,20 @@ def build_and_predict(games, lines, ratings, epa, elo,
     feat_tot = make_feat(feature_lists["totals"])
     feat_win = make_feat(feature_lists["win_prob"])
 
+    # ── Flag unrated opponents (FCS teams / small programs with no ratings) ──
+    # When a team has no SP+, FPI, or SRS, the imputer fills medians and the
+    # model effectively sees an "average FBS opponent" — badly underpredicting
+    # blowouts. We flag these games so the UI can warn users.
+    key_rating_cols = ["sp_rating", "fpi", "srs"]
+    for side in ("home", "away"):
+        rating_check = [f"{side}_{c}" for c in key_rating_cols if f"{side}_{c}" in df.columns]
+        df[f"{side}_unrated"] = (df[rating_check].isna().all(axis=1)) if rating_check else False
+    df["has_unrated_opponent"] = df["home_unrated"] | df["away_unrated"]
+
     out = df[["game_id","season","week","home_team","away_team",
               "neutral_site","conference_game","spread","over_under",
-              "spread_open","home_moneyline","away_moneyline"]].copy()
+              "spread_open","home_moneyline","away_moneyline",
+              "home_unrated","away_unrated","has_unrated_opponent"]].copy()
     if "provider" in df.columns:
         out["provider"] = df["provider"]
 
@@ -814,6 +838,13 @@ def render_all_game_card(row, season, week):
     home_ml   = row.get("home_moneyline")
     away_ml   = row.get("away_moneyline")
 
+    # Unrated opponent flag (FCS teams have no SP+/FPI/SRS in training data)
+    home_unrated = bool(row.get("home_unrated", False))
+    away_unrated = bool(row.get("away_unrated", False))
+    unrated_team = (row["away_team"] if away_unrated else
+                    row["home_team"] if home_unrated else None)
+    unrated_badge = f" ⚠️ FCS/unrated" if unrated_team else ""
+
     # Model predictions (always available once models run)
     pred_sp   = row.get("pred_spread")
     pred_tot  = row.get("pred_total")
@@ -835,20 +866,30 @@ def render_all_game_card(row, season, week):
     mdl_hml_s = (f"{int(mdl_hml):+d}" if mdl_hml > 0 else str(int(mdl_hml))) if pd.notna(mdl_hml) else None
     mdl_aml_s = (f"{int(mdl_aml):+d}" if mdl_aml > 0 else str(int(mdl_aml))) if pd.notna(mdl_aml) else None
 
-    with st.expander(f"🏈 {matchup}{win_str}"):
+    with st.expander(f"🏈 {matchup}{win_str}{unrated_badge}"):
+        # Unrated opponent warning — model projection is unreliable for FCS games
+        if unrated_team:
+            st.warning(
+                f"⚠️ **{unrated_team}** has no SP+/FPI/SRS ratings (likely FCS or untracked program). "
+                f"Model spread projection is **not reliable** for this game — "
+                f"trust the Vegas line only.",
+                icon=None,
+            )
         c1, c2, c3 = st.columns(3)
 
         with c1:
             st.markdown("**📊 Spread**")
             if spread_h:
                 st.caption(f"Vegas: {row['home_team']} {spread_h} / {row['away_team']} {spread_a}")
-                if mdl_sp_h:
+                if mdl_sp_h and not unrated_team:
                     st.caption(f"Model: {row['home_team']} {mdl_sp_h}")
+                elif mdl_sp_h and unrated_team:
+                    st.caption(f"Model: {row['home_team']} {mdl_sp_h} _(unreliable — FCS opp)_")
                 track_button(f"{row['home_team']} {spread_h}", matchup, "Spread",
                              f"{row['home_team']} {spread_h}", spread_h, 1, season, week, key_prefix="ag_")
                 track_button(f"{row['away_team']} {spread_a}", matchup, "Spread",
                              f"{row['away_team']} {spread_a}", spread_a, 1, season, week, key_prefix="ag_")
-            elif mdl_sp_h:
+            elif mdl_sp_h and not unrated_team:
                 st.caption(f"📋 Model projects: {row['home_team']} {mdl_sp_h}")
                 st.caption("_Vegas line not posted yet — tracking will use model projection_")
                 track_button(f"{row['home_team']} {mdl_sp_h} (model)", matchup, "Spread",
