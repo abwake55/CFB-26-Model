@@ -738,19 +738,32 @@ def render_bets_tab():
 
 def render_all_game_card(row, season, week):
     """One expandable card per game with Track buttons for every bet type."""
-    matchup  = f"{row['home_team']} vs {row['away_team']}"
-    win_p    = row.get("pred_win_p")
-    spread   = row.get("spread")
-    ou       = row.get("over_under")
-    home_ml  = row.get("home_moneyline")
-    away_ml  = row.get("away_moneyline")
+    matchup   = f"{row['home_team']} vs {row['away_team']}"
+    win_p     = row.get("pred_win_p")
+    spread    = row.get("spread")
+    ou        = row.get("over_under")
+    home_ml   = row.get("home_moneyline")
+    away_ml   = row.get("away_moneyline")
 
-    win_str  = f"  ·  Home win {win_p:.0%}" if pd.notna(win_p) else ""
-    spread_h = f"{spread:+.1f}"  if pd.notna(spread) else None
-    spread_a = f"{-spread:+.1f}" if pd.notna(spread) else None
-    ou_str   = f"{ou:.1f}"       if pd.notna(ou)     else None
-    hml_str  = (f"{int(home_ml):+d}" if home_ml > 0 else str(int(home_ml))) if pd.notna(home_ml) else None
-    aml_str  = (f"{int(away_ml):+d}" if away_ml > 0 else str(int(away_ml))) if pd.notna(away_ml) else None
+    # Model predictions (always available once models run)
+    pred_sp   = row.get("pred_spread")
+    pred_tot  = row.get("pred_total")
+    mdl_hml   = row.get("model_home_ml")
+    mdl_aml   = row.get("model_away_ml")
+
+    win_str   = f"  ·  Home win {win_p:.0%}" if pd.notna(win_p) else ""
+    spread_h  = f"{spread:+.1f}"  if pd.notna(spread) else None
+    spread_a  = f"{-spread:+.1f}" if pd.notna(spread) else None
+    ou_str    = f"{ou:.1f}"       if pd.notna(ou)     else None
+    hml_str   = (f"{int(home_ml):+d}" if home_ml > 0 else str(int(home_ml))) if pd.notna(home_ml) else None
+    aml_str   = (f"{int(away_ml):+d}" if away_ml > 0 else str(int(away_ml))) if pd.notna(away_ml) else None
+
+    # Model-implied labels (fallback when Vegas hasn't posted yet)
+    mdl_sp_h  = f"{pred_sp:+.1f}"  if pd.notna(pred_sp) else None
+    mdl_sp_a  = f"{-pred_sp:+.1f}" if pd.notna(pred_sp) else None
+    mdl_tot   = f"{pred_tot:.1f}"   if pd.notna(pred_tot) else None
+    mdl_hml_s = (f"{int(mdl_hml):+d}" if mdl_hml > 0 else str(int(mdl_hml))) if pd.notna(mdl_hml) else None
+    mdl_aml_s = (f"{int(mdl_aml):+d}" if mdl_aml > 0 else str(int(mdl_aml))) if pd.notna(mdl_aml) else None
 
     with st.expander(f"🏈 {matchup}{win_str}"):
         c1, c2, c3 = st.columns(3)
@@ -758,33 +771,60 @@ def render_all_game_card(row, season, week):
         with c1:
             st.markdown("**📊 Spread**")
             if spread_h:
+                st.caption(f"Vegas: {row['home_team']} {spread_h} / {row['away_team']} {spread_a}")
+                if mdl_sp_h:
+                    st.caption(f"Model: {row['home_team']} {mdl_sp_h}")
                 track_button(f"{row['home_team']} {spread_h}", matchup, "Spread",
                              f"{row['home_team']} {spread_h}", spread_h, 1, season, week, key_prefix="ag_")
                 track_button(f"{row['away_team']} {spread_a}", matchup, "Spread",
                              f"{row['away_team']} {spread_a}", spread_a, 1, season, week, key_prefix="ag_")
+            elif mdl_sp_h:
+                st.caption(f"📋 Model projects: {row['home_team']} {mdl_sp_h}")
+                st.caption("_Vegas line not posted yet — tracking will use model projection_")
+                track_button(f"{row['home_team']} {mdl_sp_h} (model)", matchup, "Spread",
+                             f"{row['home_team']} {mdl_sp_h}", mdl_sp_h, 1, season, week, key_prefix="ag_")
+                track_button(f"{row['away_team']} {mdl_sp_a} (model)", matchup, "Spread",
+                             f"{row['away_team']} {mdl_sp_a}", mdl_sp_a, 1, season, week, key_prefix="ag_")
             else:
                 st.caption("No line yet")
 
         with c2:
             st.markdown("**🎯 Total**")
             if ou_str:
+                st.caption(f"Vegas O/U: {ou_str}")
+                if mdl_tot:
+                    st.caption(f"Model: {mdl_tot} pts")
                 track_button(f"OVER {ou_str}", matchup, "Total",
                              f"OVER {ou_str}", ou_str, 1, season, week, key_prefix="ag_")
                 track_button(f"UNDER {ou_str}", matchup, "Total",
                              f"UNDER {ou_str}", ou_str, 1, season, week, key_prefix="ag_")
+            elif mdl_tot:
+                st.caption(f"📋 Model projects: {mdl_tot} pts")
+                st.caption("_Vegas total not posted yet — tracking will use model projection_")
+                track_button(f"OVER {mdl_tot} (model)", matchup, "Total",
+                             f"OVER {mdl_tot}", mdl_tot, 1, season, week, key_prefix="ag_")
+                track_button(f"UNDER {mdl_tot} (model)", matchup, "Total",
+                             f"UNDER {mdl_tot}", mdl_tot, 1, season, week, key_prefix="ag_")
             else:
                 st.caption("No total yet")
 
         with c3:
             st.markdown("**💰 Moneyline**")
             if hml_str:
+                st.caption(f"Vegas: {row['home_team']} {hml_str} / {row['away_team']} {aml_str or '—'}")
+                if mdl_hml_s:
+                    st.caption(f"Model implied: {row['home_team']} {mdl_hml_s}")
                 track_button(f"{row['home_team']} {hml_str}", matchup, "Moneyline",
                              f"{row['home_team']} {hml_str}", hml_str, 1, season, week, key_prefix="ag_")
             if aml_str:
                 track_button(f"{row['away_team']} {aml_str}", matchup, "Moneyline",
                              f"{row['away_team']} {aml_str}", aml_str, 1, season, week, key_prefix="ag_")
             if not hml_str and not aml_str:
-                st.caption("No ML yet")
+                if mdl_hml_s:
+                    st.caption(f"📋 Model implied: {row['home_team']} {mdl_hml_s} / {row['away_team']} {mdl_aml_s or '—'}")
+                    st.caption("_Vegas ML not posted yet_")
+                else:
+                    st.caption("No ML yet")
 
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
