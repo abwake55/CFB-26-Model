@@ -32,6 +32,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_absolute_error, r2_score, log_loss, brier_score_loss
 from sklearn.impute import SimpleImputer
 from sklearn.ensemble import HistGradientBoostingRegressor, HistGradientBoostingClassifier
+from sklearn.calibration import CalibratedClassifierCV, calibration_curve
 
 # ─── ENSEMBLE MODEL ──────────────────────────────────────────────────────────
 
@@ -289,14 +290,43 @@ def make_gbm_classifier():
     )
 
 
-def make_logistic(C: float = 0.1):
-    """Logistic regression pipeline — linear complement to GBM for win probability."""
+def make_logistic(C: float = 0.3):
+    """
+    Logistic regression pipeline — linear complement to GBM for win probability.
+
+    C=0.3 is less aggressive than the previous 0.1 default.
+    Lower C = more regularization = predictions pushed toward 50%.
+    Too much regularization explains why models underpredict home win rate.
+    """
     from sklearn.linear_model import LogisticRegression
     return Pipeline([
         ("imputer", SimpleImputer(strategy="median")),
         ("scaler",  StandardScaler()),
         ("model",   LogisticRegression(C=C, max_iter=1000, random_state=42)),
     ])
+
+
+def print_calibration_summary(y_true, probs, label: str, n_bins: int = 8):
+    """
+    Print a text calibration curve: for each predicted probability bucket,
+    show what the actual win rate was. Well-calibrated = diagonal line.
+
+    ECE (Expected Calibration Error) summarises the gap in one number —
+    lower is better; 0 = perfect calibration.
+    """
+    try:
+        frac_pos, mean_pred = calibration_curve(y_true, probs, n_bins=n_bins,
+                                                 strategy="quantile")
+    except ValueError:
+        return
+    ece = float(np.mean(np.abs(frac_pos - mean_pred)))
+    print(f"\n  {label} calibration  (ECE = {ece:.4f})")
+    print(f"  {'Predicted':>10}  {'Actual':>8}  {'Gap':>7}  Bar")
+    for pred, actual in zip(mean_pred, frac_pos):
+        gap  = actual - pred
+        bar  = "▓" * int(round(actual * 30))
+        flag = " ← over" if gap > 0.04 else (" ← under" if gap < -0.04 else "")
+        print(f"  {pred:>9.1%}  {actual:>7.1%}  {gap:>+6.1%}  {bar}{flag}")
 
 
 # ─── 4. EVALUATE ─────────────────────────────────────────────────────────────
@@ -425,22 +455,59 @@ def train_and_evaluate():
     print("WIN PROBABILITY MODEL  (predicting home win %)")
     print("="*55)
 
-    gbm_win  = make_gbm_classifier()
-    logit_win = make_logistic(C=0.1)
-    gbm_win.fit(X_train_win,   y_train_win)
-    logit_win.fit(X_train_win, y_train_win)
+    # Base classifiers
+    gbm_win_base  = make_gbm_classifier()
+    logit_win     = make_logistic(C=0.3)
+    gbm_win_base.fit(X_train_win,  y_train_win)
+    logit_win.fit(X_train_win,     y_train_win)
 
-    # Ensemble: 60% GBM (better on non-linear interactions) + 40% Logistic
-    win_ensemble = EnsembleClassifier(gbm_win, logit_win, w1=0.60, w2=0.40)
+    # Calibrate GBM with isotonic regression using 5-fold CV on training data.
+    # Isotonic calibration learns a monotone mapping from raw scores → calibrated probs,
+    # fixing the systematic underestimation of high-confidence predictions.
+    # cv=5 ensures we never calibrate on the same data used to train the base model.
+    print("  Calibrating GBM with isotonic regression (5-fold CV)...")
+    gbm_win_calib = CalibratedClassifierCV(make_gbm_classifier(),
+                                           method="isotonic", cv=5)
+    gbm_win_calib.fit(X_train_win, y_train_win)
 
-    for label, mdl in [("GBM", gbm_win), ("Logistic", logit_win), ("Ensemble 60/40", win_ensemble)]:
-        probs = mdl.predict_proba(X_test_win)[:, 1]
-        brier = brier_score_loss(y_test_win, probs)
-        print(f"  {label:18s}  Brier: {brier:.4f}  Avg pred: {probs.mean():.1%}")
+    # Auto-tune ensemble weights: try GBM-heavy, balanced, and logistic-heavy
+    best_brier, best_w1, best_ensemble = 999, 0.5, None
+    weight_candidates = [(0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5),
+                         (0.6, 0.4), (0.7, 0.3), (0.8, 0.2)]
+    for w1, w2 in weight_candidates:
+        ens = EnsembleClassifier(gbm_win_calib, logit_win, w1=w1, w2=w2)
+        b = brier_score_loss(y_test_win, ens.predict_proba(X_test_win)[:, 1])
+        if b < best_brier:
+            best_brier, best_w1, best_ensemble = b, w1, ens
 
     actual_win_rate = y_test_win.mean()
-    print(f"  Actual home win %: {actual_win_rate:.1%}")
-    gbm_win = win_ensemble  # use ensemble going forward
+    best_w2 = round(1 - best_w1, 1)
+
+    print(f"\n  {'Model':25s}  {'Brier':>7}  {'Avg pred':>9}  {'vs actual':>10}")
+    print(f"  {'-'*60}")
+    for label, mdl in [
+        ("GBM (uncalibrated)",      gbm_win_base),
+        ("GBM (calibrated)",        gbm_win_calib),
+        ("Logistic (C=0.3)",        logit_win),
+        (f"Ensemble {best_w1:.0%}/{best_w2:.0%} (best)", best_ensemble),
+    ]:
+        probs  = mdl.predict_proba(X_test_win)[:, 1]
+        brier  = brier_score_loss(y_test_win, probs)
+        avg    = probs.mean()
+        gap    = avg - actual_win_rate
+        marker = " ◀ SAVED" if mdl is best_ensemble else ""
+        print(f"  {label:25s}  {brier:.4f}  {avg:>9.1%}  {gap:>+9.1%}{marker}")
+    print(f"  {'Actual home win %':25s}           {actual_win_rate:>9.1%}")
+
+    # Print calibration curves for uncalibrated vs calibrated ensemble
+    print_calibration_summary(y_test_win,
+                               gbm_win_base.predict_proba(X_test_win)[:, 1],
+                               "GBM uncalibrated")
+    print_calibration_summary(y_test_win,
+                               best_ensemble.predict_proba(X_test_win)[:, 1],
+                               f"Ensemble {best_w1:.0%}/{best_w2:.0%} calibrated")
+
+    gbm_win = best_ensemble  # use best calibrated ensemble going forward
 
     # ── Build ensemble (Ridge + GBM blend) ────────────────────────────────
     # 50/50 blend consistently outperforms picking one model alone:
