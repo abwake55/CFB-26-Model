@@ -191,6 +191,145 @@ def collect_recruiting(season: int) -> pd.DataFrame:
     return df
 
 
+def collect_transfer_portal(season: int) -> pd.DataFrame:
+    """
+    Pull transfer portal entries for a given season.
+
+    Each row = one player who entered the portal, with:
+      - origin:      team they left
+      - destination: team they joined (NaN if uncommitted)
+      - position:    e.g. "QB", "WR", "OL"
+      - stars:       2–5 star rating
+      - rating:      composite recruiting rating (0.0–1.0 scale)
+
+    Year convention: year=N returns players who transferred TO PLAY IN season N.
+    A player entering the portal in Dec 2025 and committing in Jan 2026 appears
+    under year=2026, and is used to predict 2026 games. No leakage shift needed.
+
+    This is the single biggest unmodeled factor in CFB — teams that lost their
+    starting QB via portal look identical to a team that returned everyone until
+    actual games are played. Portal features fix that blind spot.
+    """
+    print(f"  Pulling transfer portal for {season}...")
+    try:
+        headers = {"Authorization": f"Bearer {CFB_API_KEY}"}
+        resp = requests.get(
+            f"{CFB_BASE_URL}/player/portal",
+            headers=headers,
+            params={"year": season},
+            timeout=15,
+        )
+        resp.raise_for_status()
+
+        raw = resp.text.strip()
+        if not raw or raw in ("null", "[]", ""):
+            # API returned empty — free tier keys don't include portal data.
+            # Upgrade to Patreon tier at https://www.patreon.com/collegefootballdata
+            # or use the manual CSV approach described in the README.
+            return pd.DataFrame()
+
+        data = resp.json()
+        if not data:
+            return pd.DataFrame()
+
+        df = pd.DataFrame(data)
+        df["season"] = season
+        rename = {
+            "firstName": "first_name", "lastName": "last_name",
+            "transferDate": "transfer_date",
+        }
+        df = df.rename(columns={k: v for k, v in rename.items() if k in df.columns})
+        print(f"    {len(df)} portal entries for {season}")
+        return df
+
+    except requests.exceptions.HTTPError as e:
+        status = e.response.status_code if e.response is not None else "?"
+        if status in (401, 403):
+            print(f"    ⚠️  Portal data requires Patreon API access (status {status}).")
+            print(f"         Upgrade at https://www.patreon.com/collegefootballdata")
+        else:
+            print(f"    Portal HTTP error for {season}: {e}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"    Portal data unavailable for {season}: {e}")
+        return pd.DataFrame()
+
+
+def build_portal_team_features(portal_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Aggregate raw portal entries into per-team per-season features.
+
+    Returns a DataFrame keyed by (season, team) with:
+      portal_talent_in    — sum of incoming player ratings (0–1 scale × 100 for readability)
+      portal_talent_out   — sum of outgoing player ratings
+      portal_net_rating   — incoming − outgoing talent (positive = net gain)
+      portal_count_in     — # players gained
+      portal_count_out    — # players lost
+      portal_net_count    — count_in − count_out
+      portal_stars_in_avg — avg star rating of incoming players
+      portal_qb_in        — 1 if team gained a QB, else 0
+      portal_qb_out       — 1 if team lost a QB, else 0
+    """
+    if portal_df.empty or "origin" not in portal_df.columns:
+        return pd.DataFrame()
+
+    df = portal_df.copy()
+    # Ensure numeric
+    df["rating"] = pd.to_numeric(df.get("rating", 0), errors="coerce").fillna(0) * 100
+    df["stars"]  = pd.to_numeric(df.get("stars",  0), errors="coerce").fillna(0)
+    pos_col = "position" if "position" in df.columns else None
+
+    # ── Incoming (destination = this team) ───────────────────────────────
+    incoming = df[df["destination"].notna() & (df["destination"] != "")].copy()
+    if incoming.empty:
+        in_df = pd.DataFrame(columns=["season", "team", "portal_talent_in",
+                                       "portal_count_in", "portal_stars_in_avg",
+                                       "portal_qb_in"])
+    else:
+        def agg_in(g):
+            return pd.Series({
+                "portal_talent_in":    g["rating"].sum(),
+                "portal_count_in":     len(g),
+                "portal_stars_in_avg": g["stars"].mean(),
+                "portal_qb_in":        int((g[pos_col].str.upper() == "QB").any()) if pos_col else 0,
+            })
+        in_df = (incoming.groupby(["season", "destination"])
+                         .apply(agg_in).reset_index()
+                         .rename(columns={"destination": "team"}))
+
+    # ── Outgoing (origin = this team) ─────────────────────────────────────
+    outgoing = df[df["origin"].notna() & (df["origin"] != "")].copy()
+    if outgoing.empty:
+        out_df = pd.DataFrame(columns=["season", "team", "portal_talent_out",
+                                        "portal_count_out", "portal_qb_out"])
+    else:
+        def agg_out(g):
+            return pd.Series({
+                "portal_talent_out": g["rating"].sum(),
+                "portal_count_out":  len(g),
+                "portal_qb_out":     int((g[pos_col].str.upper() == "QB").any()) if pos_col else 0,
+            })
+        out_df = (outgoing.groupby(["season", "origin"])
+                          .apply(agg_out).reset_index()
+                          .rename(columns={"origin": "team"}))
+
+    # ── Merge in/out ──────────────────────────────────────────────────────
+    feat = in_df.merge(out_df, on=["season", "team"], how="outer")
+    for col in ["portal_talent_in", "portal_count_in", "portal_stars_in_avg",
+                "portal_qb_in", "portal_talent_out", "portal_count_out", "portal_qb_out"]:
+        if col not in feat.columns:
+            feat[col] = 0.0
+        feat[col] = feat[col].fillna(0)
+
+    feat["portal_net_rating"] = feat["portal_talent_in"] - feat["portal_talent_out"]
+    feat["portal_net_count"]  = feat["portal_count_in"]  - feat["portal_count_out"]
+
+    return feat[["season", "team", "portal_talent_in", "portal_talent_out",
+                 "portal_net_rating", "portal_count_in", "portal_count_out",
+                 "portal_net_count", "portal_stars_in_avg",
+                 "portal_qb_in", "portal_qb_out"]]
+
+
 def collect_game_lines(season: int) -> pd.DataFrame:
     """
     Pull historical betting lines (spread + total) for each game.
@@ -278,6 +417,7 @@ def collect_all_seasons():
     all_ppa_games = []
     all_fpi = []
     all_srs = []
+    all_portal = []
 
     for season in SEASONS:
         print(f"\n{'='*50}")
@@ -333,6 +473,14 @@ def collect_all_seasons():
             all_srs.append(srs_df)
             time.sleep(0.5)
 
+            # Transfer portal (available from 2018 onward)
+            if season >= 2018:
+                portal_df = collect_transfer_portal(season)
+                if not portal_df.empty:
+                    save_csv(portal_df, RAW_DIR / f"portal_{season}.csv")
+                    all_portal.append(portal_df)
+                time.sleep(0.5)
+
         except Exception as e:
             print(f"  ERROR on {season}: {e}")
             continue
@@ -373,6 +521,15 @@ def collect_all_seasons():
         master_srs = pd.concat(all_srs, ignore_index=True)
         save_csv(master_srs, DATA_DIR / "processed" / "master_srs_ratings.csv")
 
+    if all_portal:
+        master_portal_raw = pd.concat(all_portal, ignore_index=True)
+        save_csv(master_portal_raw, DATA_DIR / "processed" / "master_portal.csv")
+        # Also pre-compute team-level features and save
+        portal_features = build_portal_team_features(master_portal_raw)
+        if not portal_features.empty:
+            save_csv(portal_features, DATA_DIR / "processed" / "master_portal_features.csv")
+            print(f"   Portal feature rows: {len(portal_features)}")
+
     print("\n✅ Data collection complete!")
     print(f"   Games collected:    {len(master_games) if all_games else 0}")
     print(f"   Lines collected:    {len(master_lines) if all_lines else 0}")
@@ -395,6 +552,40 @@ def collect_single_season_quick(season: int = 2024):
     print(lines_df[["home_team", "away_team", "spread", "over_under"]].head(10))
 
     return games_df, lines_df
+
+
+def refresh_portal_only(seasons: list = None):
+    """
+    Pull/refresh transfer portal data without re-running the full pipeline.
+    Useful each offseason to capture the latest portal activity.
+
+    Usage:
+        python3 src/data_collection.py  # (uncomment refresh_portal_only() in __main__)
+    """
+    if seasons is None:
+        seasons = list(range(2018, 2027))
+    all_portal = []
+    for season in seasons:
+        df = collect_transfer_portal(season)
+        if not df.empty:
+            save_csv(df, RAW_DIR / f"portal_{season}.csv")
+            all_portal.append(df)
+        time.sleep(0.5)
+
+    if not all_portal:
+        print("No portal data collected.")
+        return
+
+    master_raw = pd.concat(all_portal, ignore_index=True)
+    save_csv(master_raw, DATA_DIR / "processed" / "master_portal.csv")
+
+    features = build_portal_team_features(master_raw)
+    if not features.empty:
+        save_csv(features, DATA_DIR / "processed" / "master_portal_features.csv")
+        print(f"\n✅ Portal features saved — {len(features)} team-season rows")
+        seasons_covered = sorted(features["season"].unique())
+        print(f"   Seasons: {seasons_covered[0]}–{seasons_covered[-1]}")
+    return features
 
 
 def backfill_sp_ratings(extra_seasons: list = [2018]):

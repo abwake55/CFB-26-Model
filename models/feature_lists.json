@@ -49,7 +49,22 @@
     "away_fpi",
     "srs_diff",
     "home_srs",
-    "away_srs"
+    "away_srs",
+    "portal_net_rating_diff",
+    "home_portal_net_rating",
+    "away_portal_net_rating",
+    "home_portal_talent_in",
+    "away_portal_talent_in",
+    "home_portal_talent_out",
+    "away_portal_talent_out",
+    "home_portal_net_count",
+    "away_portal_net_count",
+    "home_portal_qb_in",
+    "away_portal_qb_in",
+    "home_portal_qb_out",
+    "away_portal_qb_out",
+    "home_portal_stars_in_avg",
+    "away_portal_stars_in_avg"
   ],
   "totals": [
     "home_sp_offense",
@@ -141,6 +156,21 @@
     "away_fpi",
     "srs_diff",
     "home_srs",
-    "away_srs"
+    "away_srs",
+    "portal_net_rating_diff",
+    "home_portal_net_rating",
+    "away_portal_net_rating",
+    "home_portal_talent_in",
+    "away_portal_talent_in",
+    "home_portal_talent_out",
+    "away_portal_talent_out",
+    "home_portal_net_count",
+    "away_portal_net_count",
+    "home_portal_qb_in",
+    "away_portal_qb_in",
+    "home_portal_qb_out",
+    "away_portal_qb_out",
+    "home_portal_stars_in_avg",
+    "away_portal_stars_in_avg"
   ]
 }
