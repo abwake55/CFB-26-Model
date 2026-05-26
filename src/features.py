@@ -266,7 +266,9 @@ def load_wepa() -> pd.DataFrame:
     if "year" in df.columns and "season" not in df.columns:
         df = df.rename(columns={"year": "season"})
 
-    keep = [c for c in ["season", "team", "wepa_offense", "wepa_defense"] if c in df.columns]
+    keep = [c for c in ["season", "team", "wepa_offense", "wepa_defense",
+                        "wepa_success_off", "wepa_success_def",
+                        "wepa_explosiveness", "wepa_explosiveness_def"] if c in df.columns]
     df = df[keep].dropna(subset=["team"]).copy()
     df["season"] = pd.to_numeric(df["season"], errors="coerce")
     for col in ["wepa_offense", "wepa_defense"]:
@@ -666,7 +668,10 @@ def build_feature_matrix() -> pd.DataFrame:
 
     # ── Merge WEPA (home and away) ────────────────────────────────────────
     if len(wepa) > 0 and "wepa_offense" in wepa.columns:
-        wepa_cols = [c for c in ["wepa_offense", "wepa_defense"] if c in wepa.columns]
+        wepa_cols = [c for c in ["wepa_offense", "wepa_defense",
+                                  "wepa_success_off", "wepa_success_def",
+                                  "wepa_explosiveness", "wepa_explosiveness_def"]
+                     if c in wepa.columns]
         games_feat = games_feat.merge(
             wepa[["season", "team"] + wepa_cols].rename(
                 columns={"team": "home_team",
@@ -685,6 +690,15 @@ def build_feature_matrix() -> pd.DataFrame:
         if "home_wepa_defense" in games_feat.columns:
             games_feat["wepa_def_diff"] = (
                 games_feat["home_wepa_defense"] - games_feat["away_wepa_defense"])
+        if "home_wepa_success_off" in games_feat.columns:
+            games_feat["wepa_success_off_diff"] = (
+                games_feat["home_wepa_success_off"] - games_feat["away_wepa_success_off"])
+        if "home_wepa_success_def" in games_feat.columns:
+            games_feat["wepa_success_def_diff"] = (
+                games_feat["home_wepa_success_def"] - games_feat["away_wepa_success_def"])
+        if "home_wepa_explosiveness" in games_feat.columns:
+            games_feat["wepa_explosiveness_diff"] = (
+                games_feat["home_wepa_explosiveness"] - games_feat["away_wepa_explosiveness"])
         cov = games_feat["home_wepa_offense"].notna().mean()
         print(f"  WEPA coverage: {cov:.1%} of games")
 

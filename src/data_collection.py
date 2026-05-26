@@ -332,15 +332,20 @@ def build_portal_team_features(portal_df: pd.DataFrame) -> pd.DataFrame:
 
 def collect_wepa(season: int) -> pd.DataFrame:
     """
-    Pull WEPA (opponent-adjusted EPA) per team per season.
+    Pull opponent-adjusted efficiency stats per team per season.
 
-    WEPA adjusts raw EPA for the quality of opponents faced — a team that
-    generates efficiency against top defenses scores higher than one padding
-    stats vs. weak opponents. This makes it more predictive than raw EPA
-    for future game outcomes, especially early-season when small samples
-    can be skewed by schedule quality.
+    The /wepa/team/season endpoint returns opponent-adjusted EPA (epa.total),
+    EPA allowed (epaAllowed.total), success rates, and explosiveness.
+    These are more predictive than raw EPA because they account for schedule quality.
 
-    Returns offense_wepa and defense_wepa per team (lower defense_wepa = better D).
+    Field structure (confirmed from API):
+      epa.total            → offensive EPA per play (opponent-adjusted)
+      epaAllowed.total     → defensive EPA allowed per play (opponent-adjusted)
+      successRate.total    → offensive success rate
+      successRateAllowed.total → defensive success rate allowed
+      explosiveness        → offensive play-by-play explosiveness
+      explosivenessAllowed → defensive explosiveness allowed
+
     Available from 2014 onward.
     """
     print(f"  Pulling WEPA for {season}...")
@@ -350,15 +355,7 @@ def collect_wepa(season: int) -> pd.DataFrame:
         if df.empty:
             return pd.DataFrame()
 
-        # Flatten nested offense/defense sub-dicts
-        if "offense" in df.columns:
-            df["wepa_offense"] = df["offense"].apply(
-                lambda x: x.get("wepa") if isinstance(x, dict) else x)
-        if "defense" in df.columns:
-            df["wepa_defense"] = df["defense"].apply(
-                lambda x: x.get("wepa") if isinstance(x, dict) else x)
-
-        # Normalize column names
+        # Normalize team name and year → season
         if "school" in df.columns and "team" not in df.columns:
             df = df.rename(columns={"school": "team"})
         if "year" in df.columns and "season" not in df.columns:
@@ -366,10 +363,35 @@ def collect_wepa(season: int) -> pd.DataFrame:
         if "season" not in df.columns:
             df["season"] = season
 
-        keep = [c for c in ["season", "team", "wepa_offense", "wepa_defense"]
+        # Extract from nested dicts — confirmed field names from API
+        if "epa" in df.columns:
+            df["wepa_offense"] = df["epa"].apply(
+                lambda x: x.get("total") if isinstance(x, dict) else None)
+        if "epaAllowed" in df.columns:
+            df["wepa_defense"] = df["epaAllowed"].apply(
+                lambda x: x.get("total") if isinstance(x, dict) else None)
+        if "successRate" in df.columns:
+            df["wepa_success_off"] = df["successRate"].apply(
+                lambda x: x.get("total") if isinstance(x, dict) else None)
+        if "successRateAllowed" in df.columns:
+            df["wepa_success_def"] = df["successRateAllowed"].apply(
+                lambda x: x.get("total") if isinstance(x, dict) else None)
+        # Flat numeric fields
+        df["wepa_explosiveness"]     = pd.to_numeric(df.get("explosiveness"),        errors="coerce")
+        df["wepa_explosiveness_def"] = pd.to_numeric(df.get("explosivenessAllowed"), errors="coerce")
+
+        keep = [c for c in ["season", "team",
+                             "wepa_offense", "wepa_defense",
+                             "wepa_success_off", "wepa_success_def",
+                             "wepa_explosiveness", "wepa_explosiveness_def"]
                 if c in df.columns]
-        print(f"    {len(df)} WEPA rows for {season}")
-        return df[keep].copy()
+        result = df[keep].copy()
+        for col in keep:
+            if col not in ("season", "team"):
+                result[col] = pd.to_numeric(result[col], errors="coerce")
+
+        print(f"    {len(result)} WEPA rows for {season}")
+        return result
 
     except Exception as e:
         print(f"    WEPA unavailable for {season}: {e}")

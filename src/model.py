@@ -184,6 +184,13 @@ SPREAD_FEATURES = [
     "wepa_def_diff",           # home def WEPA minus away def WEPA
     "home_wepa_offense", "away_wepa_offense",
     "home_wepa_defense", "away_wepa_defense",
+    # Success rates & explosiveness (opponent-adjusted)
+    "wepa_success_off_diff", "wepa_success_def_diff",
+    "wepa_explosiveness_diff",
+    "home_wepa_success_off", "away_wepa_success_off",
+    "home_wepa_success_def", "away_wepa_success_def",
+    "home_wepa_explosiveness", "away_wepa_explosiveness",
+    "home_wepa_explosiveness_def", "away_wepa_explosiveness_def",
 
     # ── Talent composite (247Sports roster ratings) ────────────────────────
     "talent_diff",             # home talent minus away talent
@@ -232,6 +239,9 @@ TOTALS_FEATURES = [
     # WEPA (total scoring context — both sides' adjusted efficiency matters for totals)
     "home_wepa_offense", "away_wepa_offense",
     "home_wepa_defense", "away_wepa_defense",
+    "home_wepa_success_off", "away_wepa_success_off",
+    "home_wepa_explosiveness", "away_wepa_explosiveness",
+    "home_wepa_explosiveness_def", "away_wepa_explosiveness_def",
 
     # Talent (high-talent games tend to be lower variance)
     "home_talent", "away_talent", "talent_diff",
