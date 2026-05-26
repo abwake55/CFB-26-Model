@@ -33,6 +33,51 @@ from sklearn.metrics import mean_absolute_error, r2_score, log_loss, brier_score
 from sklearn.impute import SimpleImputer
 from sklearn.ensemble import HistGradientBoostingRegressor, HistGradientBoostingClassifier
 
+# ─── ENSEMBLE MODEL ──────────────────────────────────────────────────────────
+
+class EnsembleRegressor:
+    """
+    Weighted blend of two sklearn-compatible regressors.
+
+    Blending Ridge + GBM almost always outperforms either model alone:
+    - Ridge is strong on linear signals (SP+, Elo differentials)
+    - GBM captures non-linear interactions (QB portal changes × weak opponent, etc.)
+    - 50/50 blend balances both and reduces overfitting vs. picking one
+
+    This class is joblib-serializable and drop-in compatible with sklearn's predict().
+    """
+    def __init__(self, m1, m2, w1: float = 0.5, w2: float = 0.5):
+        self.m1, self.m2, self.w1, self.w2 = m1, m2, w1, w2
+
+    def predict(self, X):
+        return self.w1 * np.array(self.m1.predict(X)) + \
+               self.w2 * np.array(self.m2.predict(X))
+
+    def fit(self, X, y):
+        """Not used directly — models are pre-fit. Kept for sklearn API compatibility."""
+        return self
+
+
+class EnsembleClassifier:
+    """
+    Weighted blend of two sklearn-compatible classifiers' probabilities.
+    Both must implement predict_proba().
+    """
+    def __init__(self, m1, m2, w1: float = 0.5, w2: float = 0.5):
+        self.m1, self.m2, self.w1, self.w2 = m1, m2, w1, w2
+
+    def predict_proba(self, X):
+        p1 = np.array(self.m1.predict_proba(X))
+        p2 = np.array(self.m2.predict_proba(X))
+        return self.w1 * p1 + self.w2 * p2
+
+    def predict(self, X):
+        return (self.predict_proba(X)[:, 1] >= 0.5).astype(int)
+
+    def fit(self, X, y):
+        return self
+
+
 DATA_DIR    = Path(__file__).parent.parent / "data" / "processed"
 OUT_DIR     = Path(__file__).parent.parent / "outputs" / "predictions"
 CHART_DIR   = Path(__file__).parent.parent / "outputs" / "charts"
@@ -118,6 +163,40 @@ SPREAD_FEATURES = [
 
     # SRS — adjusted point differential per game
     "srs_diff", "home_srs", "away_srs",
+
+    # ── Transfer Portal (biggest unmodeled factor in modern CFB) ──────────
+    # Net talent change via portal (positive = net gain vs opponent)
+    "portal_net_rating_diff",
+    "home_portal_net_rating", "away_portal_net_rating",
+    # Absolute talent flows (team's own incoming/outgoing)
+    "home_portal_talent_in",  "away_portal_talent_in",
+    "home_portal_talent_out", "away_portal_talent_out",
+    # Roster turnover volume
+    "home_portal_net_count",  "away_portal_net_count",
+    # QB-specific changes — single biggest position impact
+    "home_portal_qb_in",  "away_portal_qb_in",
+    "home_portal_qb_out", "away_portal_qb_out",
+    # Recruiting quality of incoming transfers
+    "home_portal_stars_in_avg", "away_portal_stars_in_avg",
+
+    # ── WEPA (opponent-adjusted EPA) — better than raw EPA vs tough schedules ──
+    "wepa_off_diff",           # home off WEPA minus away off WEPA
+    "wepa_def_diff",           # home def WEPA minus away def WEPA
+    "home_wepa_offense", "away_wepa_offense",
+    "home_wepa_defense", "away_wepa_defense",
+
+    # ── Talent composite (247Sports roster ratings) ────────────────────────
+    "talent_diff",             # home talent minus away talent
+    "home_talent", "away_talent",
+
+    # ── Havoc rate (defensive disruption) ─────────────────────────────────
+    "havoc_diff",              # home havoc rate minus away (positive = home D more disruptive)
+    "home_havoc_total", "away_havoc_total",
+    "home_havoc_front_seven", "away_havoc_front_seven",
+    # Offensive success rates (past season — predictive of future efficiency)
+    "rush_sr_diff",
+    "home_rush_success_rate", "away_rush_success_rate",
+    "home_pass_success_rate", "away_pass_success_rate",
 ]
 
 # Totals model uses both teams' offense AND defense independently
@@ -149,6 +228,18 @@ TOTALS_FEATURES = [
     # Additional ratings
     "fpi_diff", "home_fpi", "away_fpi",
     "srs_diff", "home_srs", "away_srs",
+
+    # WEPA (total scoring context — both sides' adjusted efficiency matters for totals)
+    "home_wepa_offense", "away_wepa_offense",
+    "home_wepa_defense", "away_wepa_defense",
+
+    # Talent (high-talent games tend to be lower variance)
+    "home_talent", "away_talent", "talent_diff",
+
+    # Havoc + success rates (both affect total scoring pace)
+    "home_havoc_total", "away_havoc_total",
+    "home_rush_success_rate", "away_rush_success_rate",
+    "home_pass_success_rate", "away_pass_success_rate",
 ]
 
 WIN_PROB_FEATURES = SPREAD_FEATURES  # same features, different target
@@ -186,6 +277,16 @@ def make_gbm_classifier():
         l2_regularization=2.0,
         random_state=42,
     )
+
+
+def make_logistic(C: float = 0.1):
+    """Logistic regression pipeline — linear complement to GBM for win probability."""
+    from sklearn.linear_model import LogisticRegression
+    return Pipeline([
+        ("imputer", SimpleImputer(strategy="median")),
+        ("scaler",  StandardScaler()),
+        ("model",   LogisticRegression(C=C, max_iter=1000, random_state=42)),
+    ])
 
 
 # ─── 4. EVALUATE ─────────────────────────────────────────────────────────────
@@ -314,31 +415,55 @@ def train_and_evaluate():
     print("WIN PROBABILITY MODEL  (predicting home win %)")
     print("="*55)
 
-    gbm_win = make_gbm_classifier()
-    gbm_win.fit(X_train_win, y_train_win)
+    gbm_win  = make_gbm_classifier()
+    logit_win = make_logistic(C=0.1)
+    gbm_win.fit(X_train_win,   y_train_win)
+    logit_win.fit(X_train_win, y_train_win)
 
-    win_probs = gbm_win.predict_proba(X_test_win)[:, 1]
-    brier = brier_score_loss(y_test_win, win_probs)
+    # Ensemble: 60% GBM (better on non-linear interactions) + 40% Logistic
+    win_ensemble = EnsembleClassifier(gbm_win, logit_win, w1=0.60, w2=0.40)
+
+    for label, mdl in [("GBM", gbm_win), ("Logistic", logit_win), ("Ensemble 60/40", win_ensemble)]:
+        probs = mdl.predict_proba(X_test_win)[:, 1]
+        brier = brier_score_loss(y_test_win, probs)
+        print(f"  {label:18s}  Brier: {brier:.4f}  Avg pred: {probs.mean():.1%}")
+
     actual_win_rate = y_test_win.mean()
-    pred_win_rate   = win_probs.mean()
-    print(f"  Brier score:       {brier:.4f}  (lower = better; random = 0.25, good ≈ 0.21)")
     print(f"  Actual home win %: {actual_win_rate:.1%}")
-    print(f"  Avg predicted %:   {pred_win_rate:.1%}")
+    gbm_win = win_ensemble  # use ensemble going forward
 
-    # ── Pick best spread & totals model ───────────────────────────────────
-    best_sp_label  = min(results_sp[:-1], key=lambda x: x["MAE"])["label"]
-    best_tot_label = min(results_tot[:-1], key=lambda x: x["MAE"])["label"]
-    best_sp_pipe   = ridge_sp  if best_sp_label  == "Ridge" else gbm_sp
-    best_tot_pipe  = ridge_tot if best_tot_label == "Ridge" else gbm_tot
+    # ── Build ensemble (Ridge + GBM blend) ────────────────────────────────
+    # 50/50 blend consistently outperforms picking one model alone:
+    # Ridge is strong on linear signals; GBM captures non-linear interactions.
+    # We also test the pure models for comparison but always save the ensemble.
 
-    print(f"\nBest spread model: {best_sp_label}")
-    print(f"Best totals model: {best_tot_label}")
+    ensemble_sp  = EnsembleRegressor(ridge_sp,  gbm_sp,  w1=0.5, w2=0.5)
+    ensemble_tot = EnsembleRegressor(ridge_tot, gbm_tot, w1=0.5, w2=0.5)
 
-    # ── Feature importance ─────────────────────────────────────────────────
+    # Evaluate ensemble on test set
+    ens_sp_preds  = ensemble_sp.predict(X_test_sp)
+    ens_tot_preds = ensemble_tot.predict(X_test_tot)
+    ens_sp_result  = evaluate_spread(y_test_sp,  ens_sp_preds,  "Ensemble (50/50)")
+    ens_tot_result = evaluate_totals(y_test_tot, ens_tot_preds, "Ensemble (50/50)")
+    results_sp.append(ens_sp_result)
+    results_tot.append(ens_tot_result)
+
+    print("\nUpdated spread results (with ensemble):")
+    print(pd.DataFrame(results_sp).to_string(index=False))
+    print("\nUpdated totals results (with ensemble):")
+    print(pd.DataFrame(results_tot).to_string(index=False))
+
+    best_sp_pipe  = ensemble_sp
+    best_tot_pipe = ensemble_tot
+    print(f"\nSaving ensemble model (Ridge 50% + GBM 50%) for both spread and totals.")
+
+    # ── Feature importance (from GBM component of ensemble) ───────────────
     print("\n" + "="*55)
-    print("TOP 15 SPREAD FEATURES")
+    print("TOP 15 SPREAD FEATURES  (GBM component importance)")
     print("="*55)
-    imp_df = extract_importance(best_sp_pipe, spread_feats, best_sp_label)
+    # EnsembleRegressor doesn't expose feature_importances_ directly —
+    # extract from the GBM sub-model (best_sp_pipe.m2 = gbm_sp)
+    imp_df = extract_importance(best_sp_pipe.m2, spread_feats, "GBM component")
     if not imp_df.empty:
         print(imp_df.head(15)[["feature", "importance"]].to_string(index=False))
         imp_df.to_csv(CHART_DIR / "feature_importance_spread.csv", index=False)

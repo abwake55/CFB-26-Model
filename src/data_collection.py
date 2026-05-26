@@ -330,6 +330,148 @@ def build_portal_team_features(portal_df: pd.DataFrame) -> pd.DataFrame:
                  "portal_qb_in", "portal_qb_out"]]
 
 
+def collect_wepa(season: int) -> pd.DataFrame:
+    """
+    Pull WEPA (opponent-adjusted EPA) per team per season.
+
+    WEPA adjusts raw EPA for the quality of opponents faced — a team that
+    generates efficiency against top defenses scores higher than one padding
+    stats vs. weak opponents. This makes it more predictive than raw EPA
+    for future game outcomes, especially early-season when small samples
+    can be skewed by schedule quality.
+
+    Returns offense_wepa and defense_wepa per team (lower defense_wepa = better D).
+    Available from 2014 onward.
+    """
+    print(f"  Pulling WEPA for {season}...")
+    try:
+        data = cfb_get("wepa/team/season", params={"year": season})
+        df = pd.DataFrame(data)
+        if df.empty:
+            return pd.DataFrame()
+
+        # Flatten nested offense/defense sub-dicts
+        if "offense" in df.columns:
+            df["wepa_offense"] = df["offense"].apply(
+                lambda x: x.get("wepa") if isinstance(x, dict) else x)
+        if "defense" in df.columns:
+            df["wepa_defense"] = df["defense"].apply(
+                lambda x: x.get("wepa") if isinstance(x, dict) else x)
+
+        # Normalize column names
+        if "school" in df.columns and "team" not in df.columns:
+            df = df.rename(columns={"school": "team"})
+        if "year" in df.columns and "season" not in df.columns:
+            df = df.rename(columns={"year": "season"})
+        if "season" not in df.columns:
+            df["season"] = season
+
+        keep = [c for c in ["season", "team", "wepa_offense", "wepa_defense"]
+                if c in df.columns]
+        print(f"    {len(df)} WEPA rows for {season}")
+        return df[keep].copy()
+
+    except Exception as e:
+        print(f"    WEPA unavailable for {season}: {e}")
+        return pd.DataFrame()
+
+
+def collect_talent(season: int) -> pd.DataFrame:
+    """
+    Pull team talent composite ratings.
+
+    Based on 247Sports composite ratings for ALL scholarship players currently
+    on the roster (not just one recruiting class). More predictive than a
+    4-year recruiting average because it reflects actual current roster quality —
+    captures both portal additions and attrition.
+
+    Available from ~2015 onward. No year-shift needed in features.py:
+    talent[year=N] reflects the roster heading into season N.
+    """
+    print(f"  Pulling talent composite for {season}...")
+    try:
+        data = cfb_get("talent", params={"year": season})
+        df = pd.DataFrame(data)
+        if df.empty:
+            return pd.DataFrame()
+
+        # Normalize column names
+        rename = {"school": "team"}
+        df = df.rename(columns={k: v for k, v in rename.items() if k in df.columns})
+        if "year" in df.columns and "season" not in df.columns:
+            df = df.rename(columns={"year": "season"})
+        if "season" not in df.columns:
+            df["season"] = season
+
+        keep = [c for c in ["season", "team", "talent"] if c in df.columns]
+        print(f"    {len(df)} talent rows for {season}")
+        return df[keep].copy()
+
+    except Exception as e:
+        print(f"    Talent data unavailable for {season}: {e}")
+        return pd.DataFrame()
+
+
+def collect_havoc(season: int) -> pd.DataFrame:
+    """
+    Pull advanced team stats including havoc rate from the stats/season/advanced endpoint.
+
+    Havoc rate = % of opponent plays resulting in a TFL, sack, forced fumble, or PBU.
+    It's one of the most predictive defensive metrics — high havoc disrupts opposing
+    offenses regardless of whether that shows up in EPA yet.
+
+    Also captures rush/passing success rates and explosiveness.
+    Garbage-time plays excluded (excludeGarbageTime=true) for cleaner signal.
+    """
+    print(f"  Pulling advanced stats (havoc) for {season}...")
+    try:
+        data = cfb_get("stats/season/advanced",
+                       params={"year": season, "excludeGarbageTime": "true"})
+        df = pd.DataFrame(data)
+        if df.empty:
+            return pd.DataFrame()
+
+        # Flatten nested havoc sub-dict
+        if "defense" in df.columns:
+            df["havoc_total"]       = df["defense"].apply(
+                lambda x: x.get("havoc", {}).get("total")      if isinstance(x, dict) else None)
+            df["havoc_front_seven"] = df["defense"].apply(
+                lambda x: x.get("havoc", {}).get("frontSeven") if isinstance(x, dict) else None)
+            df["havoc_db"]          = df["defense"].apply(
+                lambda x: x.get("havoc", {}).get("db")         if isinstance(x, dict) else None)
+
+        # Offensive success rate (rushing + passing)
+        if "offense" in df.columns:
+            df["rush_success_rate"] = df["offense"].apply(
+                lambda x: x.get("rushingPlays", {}).get("successRate") if isinstance(x, dict) else None)
+            df["pass_success_rate"] = df["offense"].apply(
+                lambda x: x.get("passingDowns", {}).get("successRate") if isinstance(x, dict) else None)
+
+        # Normalize column names
+        if "school" in df.columns and "team" not in df.columns:
+            df = df.rename(columns={"school": "team"})
+        if "year" in df.columns and "season" not in df.columns:
+            df = df.rename(columns={"year": "season"})
+        if "season" not in df.columns:
+            df["season"] = season
+
+        keep = [c for c in ["season", "team",
+                             "havoc_total", "havoc_front_seven", "havoc_db",
+                             "rush_success_rate", "pass_success_rate"]
+                if c in df.columns]
+        result = df[keep].copy()
+        # Convert to numeric
+        for col in keep:
+            if col not in ("season", "team"):
+                result[col] = pd.to_numeric(result[col], errors="coerce")
+        print(f"    {len(result)} havoc rows for {season}")
+        return result
+
+    except Exception as e:
+        print(f"    Havoc data unavailable for {season}: {e}")
+        return pd.DataFrame()
+
+
 def collect_game_lines(season: int) -> pd.DataFrame:
     """
     Pull historical betting lines (spread + total) for each game.
@@ -418,6 +560,9 @@ def collect_all_seasons():
     all_fpi = []
     all_srs = []
     all_portal = []
+    all_wepa = []
+    all_talent = []
+    all_havoc = []
 
     for season in SEASONS:
         print(f"\n{'='*50}")
@@ -481,6 +626,27 @@ def collect_all_seasons():
                     all_portal.append(portal_df)
                 time.sleep(0.5)
 
+            # WEPA (opponent-adjusted EPA) — available 2014+
+            wepa_df = collect_wepa(season)
+            if not wepa_df.empty:
+                save_csv(wepa_df, RAW_DIR / f"wepa_{season}.csv")
+                all_wepa.append(wepa_df)
+            time.sleep(0.5)
+
+            # Talent composite (247Sports roster ratings) — available ~2015+
+            talent_df = collect_talent(season)
+            if not talent_df.empty:
+                save_csv(talent_df, RAW_DIR / f"talent_{season}.csv")
+                all_talent.append(talent_df)
+            time.sleep(0.5)
+
+            # Advanced stats — havoc rate, success rates — available ~2014+
+            havoc_df = collect_havoc(season)
+            if not havoc_df.empty:
+                save_csv(havoc_df, RAW_DIR / f"havoc_{season}.csv")
+                all_havoc.append(havoc_df)
+            time.sleep(0.5)
+
         except Exception as e:
             print(f"  ERROR on {season}: {e}")
             continue
@@ -529,6 +695,18 @@ def collect_all_seasons():
         if not portal_features.empty:
             save_csv(portal_features, DATA_DIR / "processed" / "master_portal_features.csv")
             print(f"   Portal feature rows: {len(portal_features)}")
+
+    if all_wepa:
+        master_wepa = pd.concat(all_wepa, ignore_index=True)
+        save_csv(master_wepa, DATA_DIR / "processed" / "master_wepa.csv")
+
+    if all_talent:
+        master_talent = pd.concat(all_talent, ignore_index=True)
+        save_csv(master_talent, DATA_DIR / "processed" / "master_talent.csv")
+
+    if all_havoc:
+        master_havoc = pd.concat(all_havoc, ignore_index=True)
+        save_csv(master_havoc, DATA_DIR / "processed" / "master_havoc.csv")
 
     print("\n✅ Data collection complete!")
     print(f"   Games collected:    {len(master_games) if all_games else 0}")
@@ -586,6 +764,65 @@ def refresh_portal_only(seasons: list = None):
         seasons_covered = sorted(features["season"].unique())
         print(f"   Seasons: {seasons_covered[0]}–{seasons_covered[-1]}")
     return features
+
+
+def refresh_advanced_stats(seasons: list = None):
+    """
+    Pull/refresh WEPA, talent composite, and havoc rate without re-running
+    the full data pipeline.
+
+    Run this each offseason (or once to bootstrap) before re-running features.py.
+    Typically takes ~2 minutes for all seasons.
+
+    Usage:
+        python3 -c "from src.data_collection import refresh_advanced_stats; refresh_advanced_stats()"
+    """
+    if seasons is None:
+        seasons = list(range(2015, 2027))
+
+    all_wepa, all_talent, all_havoc = [], [], []
+
+    for season in seasons:
+        print(f"\nSeason {season}:")
+
+        wepa_df = collect_wepa(season)
+        if not wepa_df.empty:
+            save_csv(wepa_df, RAW_DIR / f"wepa_{season}.csv")
+            all_wepa.append(wepa_df)
+        time.sleep(0.3)
+
+        talent_df = collect_talent(season)
+        if not talent_df.empty:
+            save_csv(talent_df, RAW_DIR / f"talent_{season}.csv")
+            all_talent.append(talent_df)
+        time.sleep(0.3)
+
+        havoc_df = collect_havoc(season)
+        if not havoc_df.empty:
+            save_csv(havoc_df, RAW_DIR / f"havoc_{season}.csv")
+            all_havoc.append(havoc_df)
+        time.sleep(0.3)
+
+    # Save master files
+    results = {}
+    if all_wepa:
+        master = pd.concat(all_wepa, ignore_index=True)
+        save_csv(master, DATA_DIR / "processed" / "master_wepa.csv")
+        results["wepa"] = len(master)
+    if all_talent:
+        master = pd.concat(all_talent, ignore_index=True)
+        save_csv(master, DATA_DIR / "processed" / "master_talent.csv")
+        results["talent"] = len(master)
+    if all_havoc:
+        master = pd.concat(all_havoc, ignore_index=True)
+        save_csv(master, DATA_DIR / "processed" / "master_havoc.csv")
+        results["havoc"] = len(master)
+
+    print("\n✅ Advanced stats refresh complete!")
+    for k, v in results.items():
+        print(f"   {k}: {v} rows saved")
+    print("\nNext step: python3 src/features.py  (rebuilds feature matrix with new data)")
+    return results
 
 
 def backfill_sp_ratings(extra_seasons: list = [2018]):

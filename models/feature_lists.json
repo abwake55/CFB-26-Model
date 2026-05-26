@@ -64,7 +64,20 @@
     "home_portal_qb_out",
     "away_portal_qb_out",
     "home_portal_stars_in_avg",
-    "away_portal_stars_in_avg"
+    "away_portal_stars_in_avg",
+    "talent_diff",
+    "home_talent",
+    "away_talent",
+    "havoc_diff",
+    "home_havoc_total",
+    "away_havoc_total",
+    "home_havoc_front_seven",
+    "away_havoc_front_seven",
+    "rush_sr_diff",
+    "home_rush_success_rate",
+    "away_rush_success_rate",
+    "home_pass_success_rate",
+    "away_pass_success_rate"
   ],
   "totals": [
     "home_sp_offense",
@@ -104,7 +117,16 @@
     "away_fpi",
     "srs_diff",
     "home_srs",
-    "away_srs"
+    "away_srs",
+    "home_talent",
+    "away_talent",
+    "talent_diff",
+    "home_havoc_total",
+    "away_havoc_total",
+    "home_rush_success_rate",
+    "away_rush_success_rate",
+    "home_pass_success_rate",
+    "away_pass_success_rate"
   ],
   "win_prob": [
     "sp_diff",
@@ -171,6 +193,19 @@
     "home_portal_qb_out",
     "away_portal_qb_out",
     "home_portal_stars_in_avg",
-    "away_portal_stars_in_avg"
+    "away_portal_stars_in_avg",
+    "talent_diff",
+    "home_talent",
+    "away_talent",
+    "havoc_diff",
+    "home_havoc_total",
+    "away_havoc_total",
+    "home_havoc_front_seven",
+    "away_havoc_front_seven",
+    "rush_sr_diff",
+    "home_rush_success_rate",
+    "away_rush_success_rate",
+    "home_pass_success_rate",
+    "away_pass_success_rate"
   ]
 }

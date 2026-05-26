@@ -199,6 +199,155 @@ def load_ppa_games() -> pd.DataFrame:
     return pd.read_csv(PROC_DIR / "master_ppa_games.csv")
 
 
+def load_portal_features() -> pd.DataFrame:
+    """
+    Load pre-computed transfer portal team features.
+
+    If the raw portal CSV exists but the features file doesn't, build it on the fly.
+    Returns a DataFrame keyed by (season, team) with columns:
+      portal_net_rating, portal_qb_in, portal_qb_out,
+      portal_net_count, portal_stars_in_avg, portal_talent_in, portal_talent_out
+
+    NO year-shift needed: portal[year=N] reflects roster changes heading into season N.
+    All transfers happen in the Dec-Aug offseason before the fall season starts.
+    """
+    feat_path = PROC_DIR / "master_portal_features.csv"
+    raw_path  = PROC_DIR / "master_portal.csv"
+
+    if feat_path.exists():
+        df = pd.read_csv(feat_path)
+        df["season"] = pd.to_numeric(df["season"], errors="coerce")
+        num_cols = ["portal_talent_in", "portal_talent_out", "portal_net_rating",
+                    "portal_count_in", "portal_count_out", "portal_net_count",
+                    "portal_stars_in_avg", "portal_qb_in", "portal_qb_out"]
+        for c in num_cols:
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
+        return df
+
+    if raw_path.exists():
+        print("  Building portal features from raw data...")
+        import sys
+        sys.path.insert(0, str(PROC_DIR.parent.parent / "src"))
+        from data_collection import build_portal_team_features
+        raw = pd.read_csv(raw_path)
+        feat = build_portal_team_features(raw)
+        if not feat.empty:
+            feat.to_csv(feat_path, index=False)
+            print(f"  Saved portal features → {feat_path.name}")
+        return feat
+
+    print("  ⚠️  No portal data found — run data_collection.py to pull it.")
+    print("      Run:  python3 src/data_collection.py  (or refresh_portal_only())")
+    return pd.DataFrame()
+
+
+def load_wepa() -> pd.DataFrame:
+    """
+    Load WEPA (opponent-adjusted EPA) ratings with +1 year leakage fix.
+
+    WEPA is computed from full-season results, so we shift forward one year:
+    a team's 2023 WEPA becomes their pre-season strength estimate for 2024.
+    Same logic as SP+ — use prior season's final value as next season's prior.
+
+    wepa_offense: positive = efficient offense vs. good defenses
+    wepa_defense: negative = disruptive defense (lower = better)
+    """
+    path = PROC_DIR / "master_wepa.csv"
+    if not path.exists():
+        print("  ⚠️  WEPA data not found — run refresh_advanced_stats() in data_collection.py")
+        return pd.DataFrame(columns=["season", "team", "wepa_offense", "wepa_defense"])
+
+    df = pd.read_csv(path)
+    df.columns = [c.lower() for c in df.columns]
+
+    if "school" in df.columns and "team" not in df.columns:
+        df = df.rename(columns={"school": "team"})
+    if "year" in df.columns and "season" not in df.columns:
+        df = df.rename(columns={"year": "season"})
+
+    keep = [c for c in ["season", "team", "wepa_offense", "wepa_defense"] if c in df.columns]
+    df = df[keep].dropna(subset=["team"]).copy()
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    for col in ["wepa_offense", "wepa_defense"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    # Leakage fix: same shift as SP+
+    df["season"] = df["season"] + 1
+    print(f"  WEPA rows: {len(df):,} (seasons {df['season'].min():.0f}–{df['season'].max():.0f})")
+    return df
+
+
+def load_talent() -> pd.DataFrame:
+    """
+    Load team talent composite ratings.
+
+    Unlike SP+ and WEPA, talent IS available pre-season (247Sports publishes roster
+    ratings before fall games start). No year-shift needed.
+
+    talent: composite score (higher = more talent on roster; ~600-800 for P5 teams)
+    """
+    path = PROC_DIR / "master_talent.csv"
+    if not path.exists():
+        print("  ⚠️  Talent data not found — run refresh_advanced_stats() in data_collection.py")
+        return pd.DataFrame(columns=["season", "team", "talent"])
+
+    df = pd.read_csv(path)
+    df.columns = [c.lower() for c in df.columns]
+
+    if "school" in df.columns and "team" not in df.columns:
+        df = df.rename(columns={"school": "team"})
+    if "year" in df.columns and "season" not in df.columns:
+        df = df.rename(columns={"year": "season"})
+
+    keep = [c for c in ["season", "team", "talent"] if c in df.columns]
+    df = df[keep].dropna(subset=["team"]).copy()
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    if "talent" in df.columns:
+        df["talent"] = pd.to_numeric(df["talent"], errors="coerce")
+
+    # No leakage shift — talent reflects current roster, available pre-season
+    print(f"  Talent rows: {len(df):,} (seasons {df['season'].min():.0f}–{df['season'].max():.0f})")
+    return df
+
+
+def load_havoc() -> pd.DataFrame:
+    """
+    Load advanced team stats (havoc rate, success rates) with +1 year leakage fix.
+
+    havoc_total: % of opponent plays resulting in TFL/sack/FF/PBU — lower is better D
+    rush_success_rate / pass_success_rate: offensive efficiency metrics
+    All are end-of-season values, so shifted +1 year like SP+.
+    """
+    path = PROC_DIR / "master_havoc.csv"
+    if not path.exists():
+        print("  ⚠️  Havoc data not found — run refresh_advanced_stats() in data_collection.py")
+        return pd.DataFrame(columns=["season", "team", "havoc_total"])
+
+    df = pd.read_csv(path)
+    df.columns = [c.lower() for c in df.columns]
+
+    if "school" in df.columns and "team" not in df.columns:
+        df = df.rename(columns={"school": "team"})
+    if "year" in df.columns and "season" not in df.columns:
+        df = df.rename(columns={"year": "season"})
+
+    havoc_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
+                  "rush_success_rate", "pass_success_rate"]
+    keep = [c for c in ["season", "team"] + havoc_cols if c in df.columns]
+    df = df[keep].dropna(subset=["team"]).copy()
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    for col in havoc_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    # Leakage fix: same shift as SP+
+    df["season"] = df["season"] + 1
+    print(f"  Havoc rows: {len(df):,} (seasons {df['season'].min():.0f}–{df['season'].max():.0f})")
+    return df
+
+
 def build_home_field_advantage(games: pd.DataFrame) -> pd.DataFrame:
     """
     Compute each team's home field advantage (HFA) estimate from historical data.
@@ -451,6 +600,10 @@ def build_feature_matrix() -> pd.DataFrame:
     ppa        = load_ppa_games()
     fpi        = load_fpi_ratings()
     srs        = load_srs_ratings()
+    portal     = load_portal_features()
+    wepa       = load_wepa()
+    talent     = load_talent()
+    havoc      = load_havoc()
 
     print(f"  Games:       {len(games):,}")
     print(f"  Lines:       {len(lines):,} (one per game)")
@@ -459,6 +612,10 @@ def build_feature_matrix() -> pd.DataFrame:
     print(f"  PPA rows:    {len(ppa):,}")
     print(f"  FPI rows:    {len(fpi):,}")
     print(f"  SRS rows:    {len(srs):,}")
+    print(f"  Portal rows: {len(portal):,}")
+    print(f"  WEPA rows:   {len(wepa):,}")
+    print(f"  Talent rows: {len(talent):,}")
+    print(f"  Havoc rows:  {len(havoc):,}")
 
     print("\nBuilding rolling EPA features...")
     ppa_rolled = build_rolling_epa(ppa, windows=[3, 5])
@@ -506,6 +663,105 @@ def build_feature_matrix() -> pd.DataFrame:
             on=["season", "away_team"], how="left"
         )
         games_feat["srs_diff"] = games_feat["home_srs"] - games_feat["away_srs"]
+
+    # ── Merge WEPA (home and away) ────────────────────────────────────────
+    if len(wepa) > 0 and "wepa_offense" in wepa.columns:
+        wepa_cols = [c for c in ["wepa_offense", "wepa_defense"] if c in wepa.columns]
+        games_feat = games_feat.merge(
+            wepa[["season", "team"] + wepa_cols].rename(
+                columns={"team": "home_team",
+                         **{c: f"home_{c}" for c in wepa_cols}}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            wepa[["season", "team"] + wepa_cols].rename(
+                columns={"team": "away_team",
+                         **{c: f"away_{c}" for c in wepa_cols}}),
+            on=["season", "away_team"], how="left"
+        )
+        if "home_wepa_offense" in games_feat.columns:
+            games_feat["wepa_off_diff"] = (
+                games_feat["home_wepa_offense"] - games_feat["away_wepa_offense"])
+        if "home_wepa_defense" in games_feat.columns:
+            games_feat["wepa_def_diff"] = (
+                games_feat["home_wepa_defense"] - games_feat["away_wepa_defense"])
+        cov = games_feat["home_wepa_offense"].notna().mean()
+        print(f"  WEPA coverage: {cov:.1%} of games")
+
+    # ── Merge Talent composite (home and away) ────────────────────────────
+    if len(talent) > 0 and "talent" in talent.columns:
+        games_feat = games_feat.merge(
+            talent[["season", "team", "talent"]].rename(
+                columns={"team": "home_team", "talent": "home_talent"}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            talent[["season", "team", "talent"]].rename(
+                columns={"team": "away_team", "talent": "away_talent"}),
+            on=["season", "away_team"], how="left"
+        )
+        if "home_talent" in games_feat.columns and "away_talent" in games_feat.columns:
+            games_feat["talent_diff"] = (
+                games_feat["home_talent"] - games_feat["away_talent"])
+        cov = games_feat["home_talent"].notna().mean()
+        print(f"  Talent coverage: {cov:.1%} of games")
+
+    # ── Merge Havoc & advanced stats (home and away) ──────────────────────
+    havoc_stat_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
+                       "rush_success_rate", "pass_success_rate"]
+    if len(havoc) > 0 and "havoc_total" in havoc.columns:
+        avail_havoc = [c for c in havoc_stat_cols if c in havoc.columns]
+        games_feat = games_feat.merge(
+            havoc[["season", "team"] + avail_havoc].rename(
+                columns={"team": "home_team",
+                         **{c: f"home_{c}" for c in avail_havoc}}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            havoc[["season", "team"] + avail_havoc].rename(
+                columns={"team": "away_team",
+                         **{c: f"away_{c}" for c in avail_havoc}}),
+            on=["season", "away_team"], how="left"
+        )
+        if "home_havoc_total" in games_feat.columns:
+            games_feat["havoc_diff"] = (
+                games_feat["home_havoc_total"] - games_feat["away_havoc_total"])
+        if "home_rush_success_rate" in games_feat.columns:
+            games_feat["rush_sr_diff"] = (
+                games_feat["home_rush_success_rate"] - games_feat["away_rush_success_rate"])
+        cov = games_feat["home_havoc_total"].notna().mean()
+        print(f"  Havoc coverage: {cov:.1%} of games")
+
+    # ── Merge Transfer Portal features (home and away) ────────────────────
+    PORTAL_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",
+                   "portal_net_count", "portal_stars_in_avg",
+                   "portal_talent_in", "portal_talent_out"]
+    if len(portal) > 0 and "portal_net_rating" in portal.columns:
+        avail_portal = [c for c in PORTAL_COLS if c in portal.columns]
+        games_feat = games_feat.merge(
+            portal[["season", "team"] + avail_portal].rename(
+                columns={"team": "home_team",
+                         **{c: f"home_{c}" for c in avail_portal}}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            portal[["season", "team"] + avail_portal].rename(
+                columns={"team": "away_team",
+                         **{c: f"away_{c}" for c in avail_portal}}),
+            on=["season", "away_team"], how="left"
+        )
+        # Fill NaN portal values with 0 — no portal activity = no change
+        for col in avail_portal:
+            for side in ["home_", "away_"]:
+                col_name = f"{side}{col}"
+                if col_name in games_feat.columns:
+                    games_feat[col_name] = games_feat[col_name].fillna(0)
+        # Net differential (positive = home team had better portal offseason)
+        if "home_portal_net_rating" in games_feat.columns:
+            games_feat["portal_net_rating_diff"] = (
+                games_feat["home_portal_net_rating"] - games_feat["away_portal_net_rating"]
+            )
+        print(f"  Portal coverage: {(games_feat['home_portal_net_rating'] != 0).mean():.1%} of games")
 
     print("Building rest-day features...")
     rest = build_rest_features(games)
