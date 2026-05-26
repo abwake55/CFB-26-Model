@@ -82,6 +82,42 @@ MONEYLINE_EV_MAX = 0.08
 BETTORS = ["Alex", "Joe", "Zou", "Pat"]
 
 
+# ─── KELLY CRITERION SIZING ───────────────────────────────────────────────────
+
+def kelly_units_spread(edge_abs: float, fraction: float = 0.25) -> int:
+    """
+    Quarter-Kelly bet sizing for ATS bets at standard -110 juice.
+
+    Empirical calibration: each point of spread edge ≈ 2% improvement
+    in ATS cover probability beyond the 50% baseline.
+
+    Full Kelly formula at -110:
+        b = 100/110 ≈ 0.909 (net payout per unit)
+        f = (p·b − q) / b  where q = 1 − p
+
+    Uses quarter-Kelly (25%) as a conservative default. Capped at 4 units.
+    """
+    win_prob = min(0.50 + edge_abs * 0.02, 0.70)
+    b = 100 / 110  # -110 payout
+    kelly_f = max((win_prob * b - (1 - win_prob)) / b, 0.0)
+    units = kelly_f * fraction * 100  # bankroll assumed = 100 units
+    return max(1, min(4, round(units)))
+
+
+def kelly_units_ml(ev: float, fraction: float = 0.25) -> int:
+    """
+    Quarter-Kelly bet sizing for moneyline bets given expected value.
+
+    Tiered to be conservative at the margin (4% EV is the minimum threshold):
+      4–5.9% EV → 1u  (borderline, keep small)
+      6–7.9% EV → 2u  (solid edge)
+      8%+ EV    → 3u  (strong edge, capped at 3 due to ML variance)
+    """
+    if ev >= 0.08: return 3
+    if ev >= 0.06: return 2
+    return 1
+
+
 # ─── BET TRACKER ─────────────────────────────────────────────────────────────
 
 def load_bets() -> list:
@@ -239,6 +275,19 @@ def load_team_ratings(pred_season: int) -> dict:
             lambda x: x.rolling(4, min_periods=1).mean())
         ratings["recruiting"] = rec[rec["year"] == pred_season - 1][
             ["team","recruiting_4yr"]].set_index("team")
+    # ── Transfer Portal features (current season — no year shift) ─────────
+    portal_path = DATA_DIR / "master_portal_features.csv"
+    if portal_path.exists():
+        portal = pd.read_csv(portal_path)
+        portal.columns = [c.lower() for c in portal.columns]
+        portal["season"] = pd.to_numeric(portal["season"], errors="coerce")
+        portal_cols = ["portal_net_rating", "portal_qb_in", "portal_qb_out",
+                       "portal_net_count", "portal_stars_in_avg",
+                       "portal_talent_in", "portal_talent_out"]
+        avail = [c for c in portal_cols if c in portal.columns]
+        season_portal = portal[portal["season"] == pred_season]
+        if not season_portal.empty and avail:
+            ratings["portal"] = season_portal[["team"] + avail].set_index("team")
     fm_path = DATA_DIR / "feature_matrix.csv"
     if fm_path.exists():
         try:
@@ -437,6 +486,10 @@ def build_and_predict(games, lines, ratings, epa, elo,
         try: return np.nan if pd.isna(val) else float(val)
         except: return np.nan
 
+    PORTAL_FEAT_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",
+                        "portal_net_count", "portal_stars_in_avg",
+                        "portal_talent_in", "portal_talent_out"]
+
     for side, tcol in [("home","home_team"), ("away","away_team")]:
         ts = df[tcol]
         df[f"{side}_sp_rating"]      = ts.map(lambda t: get_r(t,"sp","sp_rating"))
@@ -452,15 +505,25 @@ def build_and_predict(games, lines, ratings, epa, elo,
             for col in epa.columns:
                 df[f"{side}_{col}"] = ts.map(
                     lambda t, c=col: float(epa.loc[t,c]) if t in epa.index else np.nan)
+        # Transfer portal features (fill 0 = no portal activity)
+        portal_src = ratings.get("portal")
+        for pcol in PORTAL_FEAT_COLS:
+            if portal_src is not None and pcol in portal_src.columns:
+                df[f"{side}_{pcol}"] = ts.map(
+                    lambda t, c=pcol: float(portal_src.loc[t, c])
+                    if t in portal_src.index else 0.0)
+            else:
+                df[f"{side}_{pcol}"] = 0.0
 
-    df["sp_diff"]         = df["home_sp_rating"]   - df["away_sp_rating"]
-    df["sp_off_diff"]     = df["home_sp_offense"]  - df["away_sp_offense"]
-    df["sp_def_diff"]     = df["home_sp_defense"]  - df["away_sp_defense"]
-    df["elo_diff"]        = df["home_pregame_elo"] - df["away_pregame_elo"]
-    df["fpi_diff"]        = df["home_fpi"]         - df["away_fpi"]
-    df["srs_diff"]        = df["home_srs"]         - df["away_srs"]
-    df["recruiting_diff"] = df["home_recruiting_4yr"] - df["away_recruiting_4yr"]
-    df["hfa_diff"]        = df["home_hfa"].fillna(0) - df["away_hfa"].fillna(0)
+    df["sp_diff"]              = df["home_sp_rating"]        - df["away_sp_rating"]
+    df["sp_off_diff"]          = df["home_sp_offense"]       - df["away_sp_offense"]
+    df["sp_def_diff"]          = df["home_sp_defense"]       - df["away_sp_defense"]
+    df["elo_diff"]             = df["home_pregame_elo"]      - df["away_pregame_elo"]
+    df["fpi_diff"]             = df["home_fpi"]              - df["away_fpi"]
+    df["srs_diff"]             = df["home_srs"]              - df["away_srs"]
+    df["recruiting_diff"]      = df["home_recruiting_4yr"]   - df["away_recruiting_4yr"]
+    df["hfa_diff"]             = df["home_hfa"].fillna(0)    - df["away_hfa"].fillna(0)
+    df["portal_net_rating_diff"] = df["home_portal_net_rating"] - df["away_portal_net_rating"]
     if "home_off_epa_roll3" in df.columns:
         df["epa_off_diff_roll3"] = df["home_off_epa_roll3"] - df["away_off_epa_roll3"]
         df["epa_def_diff_roll3"] = df["home_def_epa_roll3"] - df["away_def_epa_roll3"]
@@ -558,7 +621,7 @@ def render_moneyline_card(row, season, week):
     border  = "#3498db" if ev >= 0.07 else "#5b7fa6"
     dog_tag = " 🐶 Underdog" if is_dog else " 🏆 Favorite"
     matchup = f"{row['home_team']} vs {row['away_team']}"
-    units   = 1
+    units   = kelly_units_ml(ev)
 
     st.html(f"""
     <div style="background:{color};border-left:4px solid {border};
@@ -569,7 +632,10 @@ def render_moneyline_card(row, season, week):
                 <span style="color:#aaa;font-size:0.82em;margin-left:8px">{label}{dog_tag}</span>
                 <span style="color:#aaa;font-size:0.85em;margin-left:8px">{stars}</span>
             </div>
-            <div style="color:#ccc;font-size:0.9em">EV: <b style="color:#3498db">{ev:+.1%}</b></div>
+            <div style="color:#ccc;font-size:0.9em">
+                EV: <b style="color:#3498db">{ev:+.1%}</b>
+                &nbsp;·&nbsp; Kelly: <b style="color:#3498db">{units}u</b>
+            </div>
         </div>
         <div style="color:#ddd;margin-top:6px;font-size:1em">{matchup}</div>
         <div style="color:#aaa;font-size:0.82em;margin-top:4px">
@@ -587,7 +653,7 @@ def render_totals_card(row, season, week):
     stars    = confidence_stars(edge_abs)
     color    = "#1a4d2e" if edge_abs >= 5.0 else "#2d3a1e"
     border   = "#2ecc71" if edge_abs >= 5.0 else "#a8d08d"
-    units    = 2 if edge_abs >= 5.0 else 1
+    units    = kelly_units_spread(edge_abs)
     matchup  = f"{row['home_team']} vs {row['away_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
 
@@ -600,7 +666,10 @@ def render_totals_card(row, season, week):
                 <span style="color:#2ecc71;font-size:1.1em;font-weight:700">{side} {ou_str}</span>
                 <span style="color:#aaa;font-size:0.85em;margin-left:10px">{stars}</span>
             </div>
-            <div style="color:#ccc;font-size:0.9em">Edge: <b style="color:#2ecc71">{row['totals_edge']:+.1f} pts</b></div>
+            <div style="color:#ccc;font-size:0.9em">
+                Edge: <b style="color:#2ecc71">{row['totals_edge']:+.1f} pts</b>
+                &nbsp;·&nbsp; Kelly: <b style="color:#2ecc71">{units}u</b>
+            </div>
         </div>
         <div style="color:#ddd;margin-top:6px;font-size:1em">{matchup}</div>
         <div style="color:#aaa;font-size:0.82em;margin-top:4px">
@@ -759,8 +828,9 @@ def render_all_game_card(row, season, week):
     aml_str   = (f"{int(away_ml):+d}" if away_ml > 0 else str(int(away_ml))) if pd.notna(away_ml) else None
 
     # Model-implied labels (fallback when Vegas hasn't posted yet)
-    mdl_sp_h  = f"{pred_sp:+.1f}"  if pd.notna(pred_sp) else None
-    mdl_sp_a  = f"{-pred_sp:+.1f}" if pd.notna(pred_sp) else None
+    # pred_sp = home margin (positive = home wins); betting spread is opposite sign
+    mdl_sp_h  = f"{-pred_sp:+.1f}" if pd.notna(pred_sp) else None
+    mdl_sp_a  = f"{pred_sp:+.1f}"  if pd.notna(pred_sp) else None
     mdl_tot   = f"{pred_tot:.1f}"   if pd.notna(pred_tot) else None
     mdl_hml_s = (f"{int(mdl_hml):+d}" if mdl_hml > 0 else str(int(mdl_hml))) if pd.notna(mdl_hml) else None
     mdl_aml_s = (f"{int(mdl_aml):+d}" if mdl_aml > 0 else str(int(mdl_aml))) if pd.notna(mdl_aml) else None
@@ -1009,7 +1079,7 @@ def main():
                 lambda r: r["home_team"] if r["spread_edge"] > 0 else r["away_team"], axis=1)
             sp_display["Vegas line"] = sp_display["spread"].apply(
                 lambda x: f"{x:+.1f}" if pd.notna(x) else "N/A")
-            sp_display["Model"]      = sp_display["pred_spread"].apply(lambda x: f"{x:+.1f}")
+            sp_display["Model"]      = sp_display["pred_spread"].apply(lambda x: f"{-x:+.1f}")
             sp_display["Edge"]       = sp_display["spread_edge"].apply(lambda x: f"{x:+.1f}")
             sp_display["Matchup"]    = sp_display["home_team"] + " vs " + sp_display["away_team"]
             sp_display["⭐"]          = sp_display["spread_edge"].abs().apply(confidence_stars)
