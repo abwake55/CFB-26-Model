@@ -1233,6 +1233,131 @@ def render_all_game_card(row, season, week):
                     st.caption("No ML yet")
 
 
+# ─── MODEL ANALYSIS TAB ──────────────────────────────────────────────────────
+
+def render_analysis_tab():
+    """
+    Residual analysis tab — loads model_results.csv and renders four charts:
+      1. Predicted vs. actual spread margin (scatter + regression)
+      2. Team-level bias (which teams the model chronically misses)
+      3. MAE by week (early-season noise vs. late-season fatigue)
+      4. Predicted vs. actual totals (scatter + OVER/UNDER accuracy)
+    """
+    try:
+        import plotly.graph_objects as go
+    except ImportError:
+        st.error("plotly is required for this tab. Add `plotly>=5.0` to requirements.txt.")
+        return
+
+    # Import analysis helpers from scripts/generate_analysis.py
+    import importlib.util as _ilu
+    _spec = _ilu.spec_from_file_location(
+        "generate_analysis", ROOT_DIR / "scripts" / "generate_analysis.py"
+    )
+    _mod = _ilu.module_from_spec(_spec)
+    _spec.loader.exec_module(_mod)
+    load_results      = _mod.load_results
+    summary_stats     = _mod.summary_stats
+    fig_scatter_spread = _mod.fig_scatter_spread
+    fig_team_residuals = _mod.fig_team_residuals
+    fig_mae_by_week    = _mod.fig_mae_by_week
+    fig_scatter_totals = _mod.fig_scatter_totals
+
+    results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
+    if not results_path.exists():
+        st.info("No model results found. Run `python3 src/model.py` to generate predictions.")
+        return
+
+    # Season selector — only offer seasons present in the CSV
+    try:
+        all_seasons = sorted(pd.read_csv(results_path, usecols=["season"])["season"].unique(), reverse=True)
+    except Exception:
+        st.error("Could not read model_results.csv.")
+        return
+
+    col_s, col_info = st.columns([1, 3])
+    with col_s:
+        sel_season = st.selectbox("Season", ["All"] + [str(s) for s in all_seasons], index=1)
+    season_filter = int(sel_season) if sel_season != "All" else None
+
+    try:
+        df    = load_results(season=season_filter)
+        stats = summary_stats(df)
+    except Exception as e:
+        st.error(f"Error loading results: {e}")
+        return
+
+    if df.empty:
+        st.warning(f"No games found for season {sel_season}.")
+        return
+
+    # ── Summary metrics ───────────────────────────────────────────────────
+    st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+    c1, c2, c3, c4, c5 = st.columns(5)
+    c1.metric("Games",       f"{stats['n']:,}")
+    c2.metric("Spread MAE",  f"{stats['spread_mae']:.1f} pts")
+    c3.metric("Spread R²",   f"{stats['spread_r2']:.3f}")
+    c4.metric("Within 7 pts", f"{stats['within_7']:.0%}")
+    if "ats_acc" in stats:
+        c5.metric("ATS Accuracy", f"{stats['ats_acc']:.1%}")
+    elif "totals_acc" in stats:
+        c5.metric("Totals Acc.", f"{stats['totals_acc']:.1%}")
+
+    plotly_cfg = {"displayModeBar": False}
+
+    # ── Chart 1: Predicted vs. actual spread ─────────────────────────────
+    section_header("Predicted vs. Actual Margin",
+                   "Green = correct direction · Dashed = perfect prediction")
+    st.plotly_chart(fig_scatter_spread(df), use_container_width=True, config=plotly_cfg)
+
+    # ── Chart 2 + 3 side-by-side ─────────────────────────────────────────
+    col_l, col_r = st.columns([3, 2])
+
+    with col_l:
+        section_header("Team Residuals",
+                       "+pts = model overestimates team · −pts = underestimates")
+        st.caption("Only teams with ≥ 3 games in the selected season. "
+                   "Large bars surface systematic biases (e.g. service academies, run-heavy offenses).")
+        st.plotly_chart(fig_team_residuals(df), use_container_width=True, config=plotly_cfg)
+
+    with col_r:
+        section_header("MAE by Week",
+                       "Early = small sample noise · Late = fatigue / garbage time")
+        st.plotly_chart(fig_mae_by_week(df), use_container_width=True, config=plotly_cfg)
+
+    # ── Chart 4: Totals ───────────────────────────────────────────────────
+    fig_tot = fig_scatter_totals(df)
+    if fig_tot is not None:
+        section_header("Predicted vs. Actual Total Score",
+                       "Green = correct OVER/UNDER call")
+        if "totals_acc" in stats and "totals_mae" in stats:
+            st.caption(
+                f"O/U accuracy: **{stats['totals_acc']:.1%}** · "
+                f"MAE: **{stats['totals_mae']:.1f} pts**"
+            )
+        st.plotly_chart(fig_tot, use_container_width=True, config=plotly_cfg)
+
+    # ── Residual table ────────────────────────────────────────────────────
+    section_header("Raw Predictions", "Sortable — click any column header")
+    disp_cols = ["season", "week", "home_team", "away_team",
+                 "point_diff", "pred_spread", "residual",
+                 "total_points", "pred_total"]
+    disp = df[[c for c in disp_cols if c in df.columns]].copy()
+    disp.columns = [c.replace("_", " ").title() for c in disp.columns]
+    st.dataframe(
+        disp.sort_values("Week").reset_index(drop=True),
+        use_container_width=True,
+        height=320,
+    )
+
+    st.download_button(
+        "Export predictions CSV",
+        data=df.to_csv(index=False),
+        file_name=f"cfb_predictions_{sel_season}.csv",
+        mime="text/csv",
+    )
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -1297,11 +1422,15 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    picks_tab, bets_tab = st.tabs(["This Week's Picks", "My Bets"])
+    picks_tab, bets_tab, analysis_tab = st.tabs(["This Week's Picks", "My Bets", "Model Analysis"])
 
     # ── MY BETS TAB ───────────────────────────────────────────────────────
     with bets_tab:
         render_bets_tab()
+
+    # ── MODEL ANALYSIS TAB ────────────────────────────────────────────────
+    with analysis_tab:
+        render_analysis_tab()
 
     # ── PICKS TAB ─────────────────────────────────────────────────────────
     with picks_tab:
