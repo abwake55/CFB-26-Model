@@ -439,7 +439,7 @@ def fetch_lines(games_df: pd.DataFrame) -> pd.DataFrame:
                     if matched:
                         return pd.DataFrame(matched).drop_duplicates("game_id")
         except Exception as exc:
-            st.toast(f"OddsBlaze unavailable — using CFBD lines ({exc})", icon="⚠️")
+            print(f"OddsBlaze unavailable — using CFBD lines: {exc}")
 
     # ── Fallback: CFBD lines API ──────────────────────────────────────────────
     season = int(games_df["season"].iloc[0])
