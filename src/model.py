@@ -127,22 +127,35 @@ SPREAD_FEATURES = [
     "elo_diff",
     "home_pregame_elo", "away_pregame_elo",
 
-    # Rolling EPA (last 3 games — most recent form)
+    # Rolling EPA (last 3 games — most recent form) — raw
     "home_off_epa_roll3", "away_off_epa_roll3",
     "home_def_epa_roll3", "away_def_epa_roll3",
     "home_off_epa_pass_roll3", "away_off_epa_pass_roll3",
     "home_off_epa_rush_roll3", "away_off_epa_rush_roll3",
 
-    # Rolling EPA (last 5 games — slightly longer window)
+    # Rolling EPA (last 5 games — slightly longer window) — raw
     "home_off_epa_roll5", "away_off_epa_roll5",
     "home_def_epa_roll5", "away_def_epa_roll5",
 
-    # Season-to-date EPA
+    # Season-to-date EPA — raw
     "home_off_epa_ytd", "away_off_epa_ytd",
     "home_def_epa_ytd", "away_def_epa_ytd",
 
     # Derived differentials
     "epa_off_diff_roll3", "epa_def_diff_roll3",
+
+    # ── Opponent-adjusted rolling EPA ─────────────────────────────────────────
+    # Each game's EPA de-meaned by opponent's prior-season avg defensive EPA.
+    # Captures schedule-controlled efficiency — most valuable early in season
+    # before raw EPA has averaged across diverse opponents.
+    "home_adj_off_epa_roll3", "away_adj_off_epa_roll3",
+    "home_adj_def_epa_roll3", "away_adj_def_epa_roll3",
+    "home_adj_off_epa_pass_roll3", "away_adj_off_epa_pass_roll3",
+    "home_adj_off_epa_rush_roll3", "away_adj_off_epa_rush_roll3",
+    "home_adj_off_epa_roll5", "away_adj_off_epa_roll5",
+    "home_adj_def_epa_roll5", "away_adj_def_epa_roll5",
+    "home_adj_off_epa_ytd", "away_adj_off_epa_ytd",
+    "home_adj_def_epa_ytd", "away_adj_def_epa_ytd",
 
     # Recruiting (4-year rolling composite)
     "recruiting_diff",
@@ -236,6 +249,15 @@ TOTALS_FEATURES = [
     "home_def_epa_roll5", "away_def_epa_roll5",
     "home_off_epa_ytd", "away_off_epa_ytd",
     "home_def_epa_ytd", "away_def_epa_ytd",
+
+    # Opponent-adjusted rolling EPA (schedule-corrected)
+    "home_adj_off_epa_roll3", "away_adj_off_epa_roll3",
+    "home_adj_def_epa_roll3", "away_adj_def_epa_roll3",
+    "home_adj_off_epa_roll5", "away_adj_off_epa_roll5",
+    "home_adj_def_epa_roll5", "away_adj_def_epa_roll5",
+    "home_adj_off_epa_ytd", "away_adj_off_epa_ytd",
+    "home_adj_def_epa_ytd", "away_adj_def_epa_ytd",
+
     "home_sp_rating", "away_sp_rating",
     "home_hfa", "away_hfa",
     "neutral_site", "conference_game",

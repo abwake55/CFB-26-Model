@@ -441,10 +441,19 @@ def build_rolling_epa(ppa: pd.DataFrame, windows: list = [3, 5]) -> pd.DataFrame
     For each team-season, compute rolling EPA averages over the last N games
     (calculated *before* the current game so there's no data leakage).
 
+    Also computes opponent-adjusted rolling EPA: each game's raw EPA is first
+    de-meaned by the opponent's prior-season average defensive EPA. This makes
+    rolling windows schedule-neutral — a team that hung 0.4 EPA/play against a
+    top-10 defense looks different from one that did it against a bottom-20 defense.
+
+    Adjustment: adj_off_epa = raw_off_epa − opponent_prior_season_avg_def_epa
+    Uses prior-season (not same-season) opponent stats to avoid data leakage.
+
     Returns a DataFrame keyed by (game_id, team) with rolling EPA columns.
     """
     ppa = ppa.sort_values(["season", "team", "week"]).copy()
 
+    # ── Raw rolling windows ───────────────────────────────────────────────────
     for w in windows:
         for col in ["off_epa", "def_epa", "off_epa_pass", "off_epa_rush"]:
             if col not in ppa.columns:
@@ -463,6 +472,79 @@ def build_rolling_epa(ppa: pd.DataFrame, windows: list = [3, 5]) -> pd.DataFrame
             ppa.groupby(["season", "team"])[col]
                .transform(lambda x: x.shift(1).expanding().mean())
         )
+
+    # ── Opponent-adjusted rolling EPA ─────────────────────────────────────────
+    # Step 1: compute each team's prior-season average defensive EPA
+    #   (def_epa = EPA allowed per play — higher = worse defense)
+    if "opponent" in ppa.columns and "def_epa" in ppa.columns:
+        prior_def = (
+            ppa.groupby(["season", "team"])["def_epa"]
+               .mean()
+               .reset_index()
+               .rename(columns={"season": "prior_season",
+                                "team":   "opponent",
+                                "def_epa": "opp_prior_def_epa"})
+        )
+        # prior_season N → used as adjustment for season N+1 (no leakage)
+        prior_def["season"] = prior_def["prior_season"] + 1
+
+        ppa = ppa.merge(
+            prior_def[["season", "opponent", "opp_prior_def_epa"]],
+            on=["season", "opponent"],
+            how="left",
+        )
+
+        # Step 2: adjusted EPA = raw − opponent's prior-season avg def EPA
+        # Positive adjusted EPA means the team outperformed what the opponent
+        # typically allows — true efficiency regardless of schedule strength.
+        if "off_epa" in ppa.columns:
+            ppa["adj_off_epa"] = ppa["off_epa"] - ppa["opp_prior_def_epa"].fillna(0)
+        if "off_epa_pass" in ppa.columns:
+            ppa["adj_off_epa_pass"] = ppa["off_epa_pass"] - ppa["opp_prior_def_epa"].fillna(0)
+        if "off_epa_rush" in ppa.columns:
+            ppa["adj_off_epa_rush"] = ppa["off_epa_rush"] - ppa["opp_prior_def_epa"].fillna(0)
+
+        # Adjusted defensive EPA: how well did the D hold up vs. the opponent's
+        # typical offensive output? (lower adj_def_epa = better adjusted defense)
+        prior_off = (
+            ppa.groupby(["season", "team"])["off_epa"]
+               .mean()
+               .reset_index()
+               .rename(columns={"season": "prior_season",
+                                "team":   "opponent",
+                                "off_epa": "opp_prior_off_epa"})
+        )
+        prior_off["season"] = prior_off["prior_season"] + 1
+        ppa = ppa.merge(
+            prior_off[["season", "opponent", "opp_prior_off_epa"]],
+            on=["season", "opponent"],
+            how="left",
+            suffixes=("", "_dup"),
+        )
+        if "def_epa" in ppa.columns:
+            ppa["adj_def_epa"] = ppa["def_epa"] - ppa["opp_prior_off_epa"].fillna(0)
+
+        # Step 3: rolling windows on adjusted values (same shift(1) no-leakage pattern)
+        for w in windows:
+            for col in ["adj_off_epa", "adj_off_epa_pass", "adj_off_epa_rush", "adj_def_epa"]:
+                if col not in ppa.columns:
+                    continue
+                ppa[f"{col}_roll{w}"] = (
+                    ppa.groupby(["season", "team"])[col]
+                       .transform(lambda x: x.shift(1).rolling(w, min_periods=1).mean())
+                )
+
+        # Season-to-date adjusted EPA
+        for col in ["adj_off_epa", "adj_def_epa"]:
+            if col not in ppa.columns:
+                continue
+            ppa[f"{col}_ytd"] = (
+                ppa.groupby(["season", "team"])[col]
+                   .transform(lambda x: x.shift(1).expanding().mean())
+            )
+
+        adj_cov = ppa["opp_prior_def_epa"].notna().mean()
+        print(f"  Opponent-adjusted EPA coverage: {adj_cov:.1%} of games")
 
     return ppa
 
