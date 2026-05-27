@@ -99,7 +99,14 @@
     "home_rush_success_rate",
     "away_rush_success_rate",
     "home_pass_success_rate",
-    "away_pass_success_rate"
+    "away_pass_success_rate",
+    "explosiveness_off_diff",
+    "explosiveness_def_diff",
+    "explosiveness_net_diff",
+    "home_explosiveness_off",
+    "away_explosiveness_off",
+    "home_explosiveness_def",
+    "away_explosiveness_def"
   ],
   "totals": [
     "home_sp_offense",
@@ -164,7 +171,18 @@
     "home_rush_success_rate",
     "away_rush_success_rate",
     "home_pass_success_rate",
-    "away_pass_success_rate"
+    "away_pass_success_rate",
+    "home_explosiveness_off",
+    "away_explosiveness_off",
+    "home_explosiveness_off_rush",
+    "away_explosiveness_off_rush",
+    "home_explosiveness_off_pass",
+    "away_explosiveness_off_pass",
+    "home_explosiveness_def",
+    "away_explosiveness_def",
+    "explosiveness_off_diff",
+    "explosiveness_def_diff",
+    "explosiveness_net_diff"
   ],
   "win_prob": [
     "sp_diff",
@@ -266,6 +284,13 @@
     "home_rush_success_rate",
     "away_rush_success_rate",
     "home_pass_success_rate",
-    "away_pass_success_rate"
+    "away_pass_success_rate",
+    "explosiveness_off_diff",
+    "explosiveness_def_diff",
+    "explosiveness_net_diff",
+    "home_explosiveness_off",
+    "away_explosiveness_off",
+    "home_explosiveness_def",
+    "away_explosiveness_def"
   ]
 }

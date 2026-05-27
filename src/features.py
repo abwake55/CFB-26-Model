@@ -336,7 +336,9 @@ def load_havoc() -> pd.DataFrame:
         df = df.rename(columns={"year": "season"})
 
     havoc_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
-                  "rush_success_rate", "pass_success_rate"]
+                  "rush_success_rate", "pass_success_rate",
+                  "explosiveness_off", "explosiveness_off_rush",
+                  "explosiveness_off_pass", "explosiveness_def"]
     keep = [c for c in ["season", "team"] + havoc_cols if c in df.columns]
     df = df[keep].dropna(subset=["team"]).copy()
     df["season"] = pd.to_numeric(df["season"], errors="coerce")
@@ -764,7 +766,9 @@ def build_feature_matrix() -> pd.DataFrame:
 
     # ── Merge Havoc & advanced stats (home and away) ──────────────────────
     havoc_stat_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
-                       "rush_success_rate", "pass_success_rate"]
+                       "rush_success_rate", "pass_success_rate",
+                       "explosiveness_off", "explosiveness_off_rush",
+                       "explosiveness_off_pass", "explosiveness_def"]
     if len(havoc) > 0 and "havoc_total" in havoc.columns:
         avail_havoc = [c for c in havoc_stat_cols if c in havoc.columns]
         games_feat = games_feat.merge(
@@ -785,8 +789,29 @@ def build_feature_matrix() -> pd.DataFrame:
         if "home_rush_success_rate" in games_feat.columns:
             games_feat["rush_sr_diff"] = (
                 games_feat["home_rush_success_rate"] - games_feat["away_rush_success_rate"])
+        # Explosiveness differentials
+        # Off: home offense big-play rate vs. away offense big-play rate
+        # Def: how much big-play EPA each team's defense allows (lower = better)
+        # Net: (home_off - away_off) - (home_def_allowed - away_def_allowed)
+        if "home_explosiveness_off" in games_feat.columns:
+            games_feat["explosiveness_off_diff"] = (
+                games_feat["home_explosiveness_off"] - games_feat["away_explosiveness_off"])
+        if "home_explosiveness_def" in games_feat.columns:
+            games_feat["explosiveness_def_diff"] = (
+                games_feat["home_explosiveness_def"] - games_feat["away_explosiveness_def"])
+        if ("home_explosiveness_off" in games_feat.columns and
+                "home_explosiveness_def" in games_feat.columns):
+            # Net explosiveness advantage: home's big-play offense minus their big-play allowed
+            # vs. same for away team — positive = home team creates more explosives than it gives up
+            home_net = (games_feat["home_explosiveness_off"].fillna(0) -
+                        games_feat["home_explosiveness_def"].fillna(0))
+            away_net = (games_feat["away_explosiveness_off"].fillna(0) -
+                        games_feat["away_explosiveness_def"].fillna(0))
+            games_feat["explosiveness_net_diff"] = home_net - away_net
         cov = games_feat["home_havoc_total"].notna().mean()
+        exp_cov = games_feat["home_explosiveness_off"].notna().mean() if "home_explosiveness_off" in games_feat.columns else 0
         print(f"  Havoc coverage: {cov:.1%} of games")
+        print(f"  Explosiveness coverage: {exp_cov:.1%} of games")
 
     # ── Merge Transfer Portal features (home and away) ────────────────────
     PORTAL_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",

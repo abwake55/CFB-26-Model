@@ -462,12 +462,39 @@ def collect_havoc(season: int) -> pd.DataFrame:
             df["havoc_db"]          = df["defense"].apply(
                 lambda x: x.get("havoc", {}).get("db")         if isinstance(x, dict) else None)
 
-        # Offensive success rate (rushing + passing)
+        # Offensive success rate + explosiveness (from same response)
         if "offense" in df.columns:
             df["rush_success_rate"] = df["offense"].apply(
                 lambda x: x.get("rushingPlays", {}).get("successRate") if isinstance(x, dict) else None)
             df["pass_success_rate"] = df["offense"].apply(
                 lambda x: x.get("passingDowns", {}).get("successRate") if isinstance(x, dict) else None)
+            # Explosiveness = average EPA on "big" plays (10+ yd pass, 5+ yd rush)
+            # API returns explosiveness as either a nested dict {"total":x,"rushing":x,...}
+            # or a plain float depending on season — handle both safely.
+            def _exp(obj, subkey):
+                if not isinstance(obj, dict):
+                    return None
+                val = obj.get("explosiveness")
+                if isinstance(val, dict):
+                    return val.get(subkey)
+                if subkey == "total" and val is not None:
+                    return val  # plain float IS the total
+                return None
+
+            df["explosiveness_off"]      = df["offense"].apply(lambda x: _exp(x, "total"))
+            df["explosiveness_off_rush"] = df["offense"].apply(lambda x: _exp(x, "rushing"))
+            df["explosiveness_off_pass"] = df["offense"].apply(lambda x: _exp(x, "passing"))
+
+        # Defensive explosiveness allowed (lower = better D vs. big plays)
+        if "defense" in df.columns:
+            def _exp_def(obj):
+                if not isinstance(obj, dict):
+                    return None
+                val = obj.get("explosiveness")
+                if isinstance(val, dict):
+                    return val.get("total")
+                return val  # plain float
+            df["explosiveness_def"] = df["defense"].apply(_exp_def)
 
         # Normalize column names
         if "school" in df.columns and "team" not in df.columns:
@@ -479,7 +506,9 @@ def collect_havoc(season: int) -> pd.DataFrame:
 
         keep = [c for c in ["season", "team",
                              "havoc_total", "havoc_front_seven", "havoc_db",
-                             "rush_success_rate", "pass_success_rate"]
+                             "rush_success_rate", "pass_success_rate",
+                             "explosiveness_off", "explosiveness_off_rush",
+                             "explosiveness_off_pass", "explosiveness_def"]
                 if c in df.columns]
         result = df[keep].copy()
         # Convert to numeric

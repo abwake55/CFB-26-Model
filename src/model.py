@@ -211,6 +211,16 @@ SPREAD_FEATURES = [
     "rush_sr_diff",
     "home_rush_success_rate", "away_rush_success_rate",
     "home_pass_success_rate", "away_pass_success_rate",
+
+    # ── Explosive play rate (garbage-time excluded) ────────────────────────
+    # EPA on big plays (10+ yd pass, 5+ yd rush) — distinct from havoc:
+    # havoc = D disruption rate; explosiveness = O big-play upside.
+    # Spread: matters as a net advantage (home can hit big plays, away can't defend them)
+    "explosiveness_off_diff",   # home off explosiveness minus away off explosiveness
+    "explosiveness_def_diff",   # home def explosiveness allowed minus away def allowed
+    "explosiveness_net_diff",   # combined net (off advantage minus def disadvantage)
+    "home_explosiveness_off", "away_explosiveness_off",
+    "home_explosiveness_def", "away_explosiveness_def",
 ]
 
 # Totals model uses both teams' offense AND defense independently
@@ -260,6 +270,18 @@ TOTALS_FEATURES = [
     "home_havoc_total", "away_havoc_total",
     "home_rush_success_rate", "away_rush_success_rate",
     "home_pass_success_rate", "away_pass_success_rate",
+
+    # ── Explosive play rate (primary totals signal) ────────────────────────
+    # Totals: both teams' absolute explosiveness matters independently.
+    # High-explosiveness offenses vs. high-explosiveness-allowed defenses → Overs.
+    # This is the main channel through which explosive play rate affects scoring totals.
+    "home_explosiveness_off", "away_explosiveness_off",   # raw big-play rates
+    "home_explosiveness_off_rush", "away_explosiveness_off_rush",
+    "home_explosiveness_off_pass", "away_explosiveness_off_pass",
+    "home_explosiveness_def", "away_explosiveness_def",   # allowed big-play rates
+    "explosiveness_off_diff",   # net offensive big-play advantage
+    "explosiveness_def_diff",   # net defensive big-play exposure
+    "explosiveness_net_diff",   # combined net signal
 ]
 
 WIN_PROB_FEATURES = SPREAD_FEATURES  # same features, different target
