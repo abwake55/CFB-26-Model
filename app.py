@@ -1101,7 +1101,17 @@ def main():
         """, unsafe_allow_html=True)
         st.divider()
 
-        season = st.selectbox("Season", [2026, 2025], index=0)
+        # CFB seasons span two calendar years (e.g. fall 2026 → Jan 2027 championship).
+        # The API uses the start year (2026); the UI shows "2026-27" for clarity.
+        # Before August, upcoming season = current year. Aug onward = current year.
+        _today = date.today()
+        _current_season = _today.year if _today.month >= 8 else _today.year
+        season = st.selectbox(
+            "Season",
+            [_current_season],
+            format_func=lambda y: f"{y}–{str(y + 1)[-2:]}",
+            index=0,
+        )
         week   = st.slider("Week", min_value=0, max_value=15, value=1)
         bettor = st.selectbox("Betting as", BETTORS,
                               index=BETTORS.index(st.session_state.get("bettor", BETTORS[0])))
