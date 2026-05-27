@@ -50,9 +50,8 @@ def get_secret(key: str, fallback: str = "") -> str:
     except Exception:
         return os.getenv(key, fallback)
 
-CFB_API_KEY  = get_secret("CFB_API_KEY",
-    "uxvnvwwBh6dQBE/hxA+GK+srmnfZ1mkRSr8E7gOg/BuIL/TeNHw5aHbbZDbi4TMt")
-ODDS_API_KEY = get_secret("ODDS_API_KEY", "97fefeb9de733240ae640967ed5c1427")
+CFB_API_KEY  = get_secret("CFB_API_KEY",  "")
+ODDS_API_KEY = get_secret("ODDS_API_KEY", "")
 
 CFB_BASE_URL  = "https://api.collegefootballdata.com"
 ODDS_API_BASE = "https://api.the-odds-api.com/v4"

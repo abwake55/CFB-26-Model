@@ -362,18 +362,25 @@ def build_home_field_advantage(games: pd.DataFrame) -> pd.DataFrame:
     A value of +3.5 means that team historically scores ~3.5 more points
     at home than away (vs. equivalent opponents on neutral ground).
     """
-    # Build per-game home/away margins
+    # Build per-game home/away margins.
+    # Include neutral_site so we can drop those games — neutral venues don't
+    # reflect a true home or away environment and would pollute the HFA estimate.
+    ns_col = games["neutral_site"] if "neutral_site" in games.columns else 0
+
     home = games[["season","home_team","point_diff"]].rename(
-        columns={"home_team":"team","point_diff":"margin"})
-    home["is_home"] = 1
+        columns={"home_team":"team","point_diff":"margin"}).copy()
+    home["is_home"]     = 1
+    home["neutral_site"] = ns_col.values
 
     away = games[["season","away_team","point_diff"]].copy()
-    away["margin"] = -away["point_diff"]   # flip: away margin = -(home margin)
+    away["margin"]       = -away["point_diff"]   # flip: away margin = -(home margin)
     away = away.rename(columns={"away_team":"team"})
-    away["is_home"] = 0
+    away["is_home"]      = 0
+    away["neutral_site"] = ns_col.values
 
     all_margins = pd.concat([home, away], ignore_index=True)
-    all_margins = all_margins[all_margins["neutral_site"] == 0] if "neutral_site" in all_margins.columns else all_margins
+    # Filter AFTER concat — neutral_site is now guaranteed to exist
+    all_margins = all_margins[all_margins["neutral_site"] == 0]
 
     # Season-level averages per team
     season_avg = all_margins.groupby(["season","team","is_home"])["margin"].mean().reset_index()

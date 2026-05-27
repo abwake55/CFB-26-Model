@@ -21,8 +21,8 @@ from pathlib import Path
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-CFB_API_KEY = os.getenv("CFB_API_KEY", "uxvnvwwBh6dQBE/hxA+GK+srmnfZ1mkRSr8E7gOg/BuIL/TeNHw5aHbbZDbi4TMt")
-ODDS_API_KEY = os.getenv("ODDS_API_KEY", "YOUR_ODDS_API_KEY_HERE")
+CFB_API_KEY  = os.getenv("CFB_API_KEY", "")
+ODDS_API_KEY = os.getenv("ODDS_API_KEY", "")
 
 CFB_BASE_URL = "https://api.collegefootballdata.com"
 ODDS_BASE_URL = "https://api.the-odds-api.com/v4"

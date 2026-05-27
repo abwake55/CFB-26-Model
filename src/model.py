@@ -558,9 +558,14 @@ def train_and_evaluate():
     results_df["pred_total"]       = best_tot_pipe.predict(X_test_tot)
     results_df["pred_home_win_p"]  = gbm_win.predict_proba(X_test_win)[:, 1]
 
-    # Model edge vs Vegas line
+    # Model edge vs Vegas line.
+    # Convention: pred_spread and vegas_home_margin are both expressed as
+    # "home team margin" (positive = home wins). A positive spread_edge means
+    # the model is MORE bullish on the home team than Vegas → bet home to cover.
+    # A negative edge means model favors away → bet away to cover.
+    # This matches the convention used in predict.py and app.py.
     results_df["spread_edge"] = (
-        results_df["vegas_home_margin"] - results_df["pred_spread"]
+        results_df["pred_spread"] - results_df["vegas_home_margin"]
     )
 
     results_df.to_csv(OUT_DIR / "model_results.csv", index=False)

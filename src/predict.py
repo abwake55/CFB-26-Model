@@ -45,11 +45,10 @@ DATA_DIR  = ROOT_DIR / "data" / "processed"
 MODEL_DIR = ROOT_DIR / "models"
 RAW_DIR   = ROOT_DIR / "data" / "raw"
 
-CFB_API_KEY  = os.getenv("CFB_API_KEY",
-    "uxvnvwwBh6dQBE/hxA+GK+srmnfZ1mkRSr8E7gOg/BuIL/TeNHw5aHbbZDbi4TMt")
+CFB_API_KEY  = os.getenv("CFB_API_KEY", "")
 CFB_BASE_URL = "https://api.collegefootballdata.com"
 
-ODDS_API_KEY  = os.getenv("ODDS_API_KEY", "97fefeb9de733240ae640967ed5c1427")
+ODDS_API_KEY = os.getenv("ODDS_API_KEY", "")
 ODDS_API_BASE = "https://api.the-odds-api.com/v4"
 NCAAF_SPORT   = "americanfootball_ncaaf"
 
