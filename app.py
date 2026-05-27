@@ -83,7 +83,7 @@ ODDS_TO_CFBD = {
     "North Carolina State": "NC State",
 }
 
-SPREAD_EDGE_MIN, SPREAD_EDGE_MAX = 2.0, 5.0
+SPREAD_EDGE_MIN, SPREAD_EDGE_MAX = 4.0, 7.0
 TOTALS_EDGE_MIN, TOTALS_EDGE_MAX = 3.0, 6.0
 MONEYLINE_EV_MIN = 0.04
 MONEYLINE_EV_MAX = 0.08
@@ -521,51 +521,77 @@ def inject_css():
     /* ── Base ── */
     [data-testid="stAppViewContainer"],
     [data-testid="stMain"], .main {
-        background-color: #1a1d21;
+        background-color: #0f1117;
         color: #ffffff;
     }
     [data-testid="stHeader"] {
-        background-color: #1a1d21;
-        border-bottom: 1px solid #2d3340;
+        background-color: #0f1117;
+        border-bottom: 1px solid #1e2537;
     }
     /* ── Sidebar ── */
     [data-testid="stSidebar"] {
-        background-color: #13161a;
-        border-right: 1px solid #2d3340;
+        background-color: #0b0e14;
+        border-right: 1px solid #1e2537;
     }
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] .stSelectbox label {
-        color: #8b9bb4 !important;
+        color: #6b7280 !important;
     }
     /* ── Tabs ── */
     .stTabs [data-baseweb="tab-list"] {
-        background: #13161a;
+        background: #0b0e14;
         border-radius: 8px;
         padding: 4px;
         gap: 4px;
-        border: 1px solid #2d3340;
+        border: 1px solid #1e2537;
     }
     .stTabs [data-baseweb="tab"] {
-        color: #8b9bb4;
+        color: #6b7280;
         background: transparent;
         border-radius: 6px;
         font-weight: 600;
         font-size: 0.88em;
     }
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: #23272b;
+        background: #1a1f2e;
         color: #ffffff;
     }
+    /* ── Sub-nav radio as pills ── */
+    .stRadio > label { display: none !important; }
+    .stRadio > div {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        padding: 6px 0 10px 0 !important;
+    }
+    .stRadio > div > label {
+        background: #1a1f2e !important;
+        border: 1px solid #252d3d !important;
+        border-radius: 20px !important;
+        padding: 5px 16px !important;
+        cursor: pointer !important;
+        font-size: 0.82em !important;
+        font-weight: 600 !important;
+        color: #6b7280 !important;
+        margin: 0 !important;
+        transition: all 0.15s !important;
+    }
+    .stRadio > div > label:has(input:checked) {
+        background: #eab308 !important;
+        border-color: #eab308 !important;
+        color: #0f1117 !important;
+    }
+    .stRadio > div > label > div:first-child { display: none !important; }
     /* ── Metrics ── */
     [data-testid="metric-container"] {
-        background: #23272b;
-        border-radius: 8px;
+        background: #1a1f2e;
+        border-radius: 10px;
         padding: 16px 20px;
-        border: 1px solid #2d3340;
+        border: 1px solid #252d3d;
     }
     [data-testid="metric-container"] label {
-        color: #8b9bb4 !important;
+        color: #6b7280 !important;
         font-size: 0.72em !important;
         text-transform: uppercase;
         letter-spacing: 0.07em;
@@ -577,85 +603,89 @@ def inject_css():
     }
     /* ── Expanders ── */
     [data-testid="stExpander"] {
-        background: #23272b;
-        border: 1px solid #2d3340 !important;
-        border-radius: 8px !important;
+        background: #1a1f2e;
+        border: 1px solid #252d3d !important;
+        border-radius: 10px !important;
         margin-bottom: 6px;
     }
     [data-testid="stExpander"] summary {
-        color: #cdd6e4;
+        color: #d1d5db;
         font-weight: 600;
         font-size: 0.92em;
     }
-    [data-testid="stExpander"] summary:hover { color: #53d337; }
+    [data-testid="stExpander"] summary:hover { color: #eab308; }
     /* ── Buttons ── */
     [data-testid="stButton"] > button {
-        background: #23272b;
-        color: #8b9bb4;
-        border: 1px solid #2d3340;
+        background: #1a1f2e;
+        color: #6b7280;
+        border: 1px solid #252d3d;
         border-radius: 6px;
         font-size: 0.8em;
         padding: 4px 12px;
         transition: all 0.15s;
     }
     [data-testid="stButton"] > button:hover {
-        background: #2d3340;
+        background: #252d3d;
         color: #ffffff;
-        border-color: #3d4450;
+        border-color: #374151;
     }
     [data-testid="stButton"] > button[kind="primary"] {
-        background: #53d337;
-        color: #1a1d21;
+        background: #eab308;
+        color: #0f1117;
         border: none;
         font-weight: 700;
     }
     [data-testid="stButton"] > button[kind="primary"]:hover {
-        background: #45b82e;
+        background: #ca8a04;
     }
     /* ── Selects / Slider ── */
     [data-baseweb="select"] > div {
-        background: #23272b !important;
-        border-color: #2d3340 !important;
+        background: #1a1f2e !important;
+        border-color: #252d3d !important;
         color: #ffffff !important;
     }
     [data-testid="stSlider"] > div > div > div {
-        background: #53d337 !important;
+        background: #eab308 !important;
     }
     /* ── Alerts ── */
     [data-testid="stAlert"] {
-        background: #23272b;
-        border-radius: 8px;
+        background: #1a1f2e;
+        border-radius: 10px;
     }
     /* ── Dividers ── */
-    hr { border-color: #2d3340 !important; margin: 16px 0 !important; }
+    hr { border-color: #252d3d !important; margin: 16px 0 !important; }
     /* ── Typography ── */
     h1, h2, h3, h4 { color: #ffffff !important; }
-    p, li, .stMarkdown { color: #cdd6e4; }
-    [data-testid="stCaptionContainer"] { color: #5c6680 !important; }
+    p, li, .stMarkdown { color: #d1d5db; }
+    [data-testid="stCaptionContainer"] { color: #4b5563 !important; }
     /* ── Download button ── */
     [data-testid="stDownloadButton"] > button {
-        background: #23272b;
-        color: #8b9bb4;
-        border: 1px solid #2d3340;
+        background: #1a1f2e;
+        color: #6b7280;
+        border: 1px solid #252d3d;
         border-radius: 6px;
     }
     /* ── Code blocks ── */
-    code { background: #23272b; color: #53d337; border-radius: 4px; padding: 1px 5px; }
+    code { background: #1a1f2e; color: #eab308; border-radius: 4px; padding: 1px 5px; }
+    /* ── Text inputs ── */
+    [data-testid="stTextInput"] input {
+        background: #1a1f2e !important;
+        border-color: #252d3d !important;
+        color: #ffffff !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
 
 def section_header(title: str, subtitle: str = ""):
-    sub = (f'<div style="color:#5c6680;font-size:0.8em;margin-top:3px">{subtitle}</div>'
+    sub = (f'<span style="color:#4b5563;font-size:0.8em;margin-left:10px">{subtitle}</span>'
            if subtitle else "")
     st.markdown(f"""
-    <div style="margin:28px 0 12px 0">
-        <div style="display:flex;align-items:center;gap:14px">
-            <span style="color:#ffffff;font-size:0.72em;font-weight:700;
-                         letter-spacing:0.12em;text-transform:uppercase;
-                         white-space:nowrap">{title}</span>
-            <div style="flex:1;height:1px;background:#2d3340"></div>
-        </div>
+    <div style="margin:28px 0 14px 0;display:flex;align-items:center;gap:12px">
+        <span style="background:#1a1f2e;color:#9ca3af;font-size:0.7em;font-weight:700;
+                     letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;
+                     padding:4px 12px;border-radius:20px;border:1px solid #252d3d">{title}</span>
+        <div style="flex:1;height:1px;background:#1e2537"></div>
         {sub}
     </div>
     """, unsafe_allow_html=True)
@@ -692,36 +722,60 @@ def render_moneyline_card(row, season, week):
     label   = f"+{int(book_ml)}" if is_dog else str(int(book_ml))
     model_label = (f"+{int(mdl_ml)}" if (not pd.isna(mdl_ml) and mdl_ml > 0)
                    else str(int(mdl_ml)) if not pd.isna(mdl_ml) else "—")
-    accent  = "#53d337" if ev >= 0.07 else "#1eb1f0"
     dog_tag = "DOG" if is_dog else "FAV"
     matchup = f"{row['home_team']} vs {row['away_team']}"
     units   = kelly_units_ml(ev)
+    ev_str  = f"{ev:+.1%}"
+
+    # Yellow border = high-EV hot pick, blue = standard
+    left_color = "#eab308" if ev >= 0.07 else "#3b82f6"
+    ev_color   = "#22c55e" if ev >= 0.05 else "#9ca3af"
 
     st.html(f"""
-    <div style="background:#23272b;border-left:3px solid {accent};
-                border-top:1px solid #2d3340;border-right:1px solid #2d3340;
-                border-bottom:1px solid #2d3340;
-                border-radius:8px;padding:14px 18px;margin-bottom:6px;">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-                <span style="color:{accent};font-size:1.05em;font-weight:700;
-                             letter-spacing:0.01em">{team}</span>
-                <span style="background:#2d3340;color:#8b9bb4;font-size:0.7em;
-                             font-weight:700;letter-spacing:0.08em;padding:2px 7px;
-                             border-radius:4px;margin-left:8px">{dog_tag}</span>
-                <span style="color:#5c6680;font-size:0.8em;margin-left:6px">{stars}</span>
+    <div style="background:#1a1f2e;border-left:4px solid {left_color};
+                border-top:1px solid #252d3d;border-right:1px solid #252d3d;
+                border-bottom:1px solid #252d3d;
+                border-radius:10px;padding:14px 18px;margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="background:#3b82f6;color:#ffffff;font-size:0.63em;
+                             font-weight:800;letter-spacing:0.1em;padding:3px 8px;
+                             border-radius:4px">MONEYLINE</span>
+                <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
+                             font-weight:700;letter-spacing:0.08em;padding:3px 7px;
+                             border-radius:4px">{dog_tag}</span>
             </div>
-            <span style="color:#ffffff;font-size:1.25em;font-weight:700">{label}</span>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="color:{ev_color};font-size:0.82em;font-weight:700">EV {ev_str}</span>
+                <span style="color:#eab308;font-size:0.88em">{stars}</span>
+            </div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;
-                    margin-top:8px">
-            <span style="color:#8b9bb4;font-size:0.82em">{matchup}</span>
-            <div style="color:#8b9bb4;font-size:0.82em;text-align:right">
-                EV <span style="color:{accent};font-weight:700">{ev:+.1%}</span>
-                <span style="color:#2d3340;margin:0 5px">·</span>
-                Kelly <span style="color:{accent};font-weight:700">{units}u</span>
-                <span style="color:#2d3340;margin:0 5px">·</span>
-                Model <span style="color:#8b9bb4">{model_label}</span>
+        <div style="display:flex;justify-content:space-between;align-items:flex-center">
+            <span style="color:#ffffff;font-size:1.1em;font-weight:700">{team}</span>
+            <span style="color:{left_color};font-size:1.3em;font-weight:800;
+                         font-variant-numeric:tabular-nums">{label}</span>
+        </div>
+        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}</div>
+        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
+            <div style="flex:1;text-align:center">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Book</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{label}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Model</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{model_label}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">EV</div>
+                <div style="color:{ev_color};font-size:0.88em;font-weight:700">{ev_str}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Kelly</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{units}u</div>
             </div>
         </div>
     </div>
@@ -734,41 +788,146 @@ def render_totals_card(row, season, week):
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
     stars    = confidence_stars(edge_abs)
-    accent   = "#53d337" if is_under else "#f0a500"
     units    = kelly_units_spread(edge_abs)
     matchup  = f"{row['home_team']} vs {row['away_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
-    neutral_tag = "&nbsp;·&nbsp;Neutral" if row.get("neutral_site") else ""
+    neutral_tag = "  ·  Neutral" if row.get("neutral_site") else ""
+    edge_str = f"{row['totals_edge']:+.1f}"
+
+    # Under = cyan, Over = orange
+    left_color = "#06b6d4" if is_under else "#f97316"
+    edge_color = "#22c55e" if edge_abs >= 4.5 else "#9ca3af"
 
     st.html(f"""
-    <div style="background:#23272b;border-left:3px solid {accent};
-                border-top:1px solid #2d3340;border-right:1px solid #2d3340;
-                border-bottom:1px solid #2d3340;
-                border-radius:8px;padding:14px 18px;margin-bottom:6px;">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-                <span style="color:{accent};font-size:1.05em;font-weight:700;
-                             letter-spacing:0.04em">{side_str} {ou_str}</span>
-                <span style="color:#5c6680;font-size:0.8em;margin-left:8px">{stars}</span>
+    <div style="background:#1a1f2e;border-left:4px solid {left_color};
+                border-top:1px solid #252d3d;border-right:1px solid #252d3d;
+                border-bottom:1px solid #252d3d;
+                border-radius:10px;padding:14px 18px;margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="background:{left_color};color:#0f1117;font-size:0.63em;
+                             font-weight:800;letter-spacing:0.1em;padding:3px 8px;
+                             border-radius:4px">{side_str}</span>
+                <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
+                             font-weight:700;letter-spacing:0.08em;padding:3px 7px;
+                             border-radius:4px">TOTAL</span>
             </div>
-            <div style="color:#8b9bb4;font-size:0.9em;text-align:right">
-                Edge <span style="color:{accent};font-weight:700">{row['totals_edge']:+.1f}</span>
-                <span style="color:#2d3340;margin:0 5px">·</span>
-                Kelly <span style="color:{accent};font-weight:700">{units}u</span>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="color:{edge_color};font-size:0.82em;font-weight:700">Edge {edge_str}</span>
+                <span style="color:#eab308;font-size:0.88em">{stars}</span>
             </div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;
-                    margin-top:8px">
-            <span style="color:#8b9bb4;font-size:0.82em">{matchup}</span>
-            <span style="color:#5c6680;font-size:0.8em">
-                Model {row['pred_total']:.1f}{neutral_tag}
-            </span>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="color:#ffffff;font-size:1.1em;font-weight:700">{side_str} {ou_str}</span>
+            <span style="color:{left_color};font-size:1.3em;font-weight:800;
+                         font-variant-numeric:tabular-nums">{ou_str}</span>
+        </div>
+        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{neutral_tag}</div>
+        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
+            <div style="flex:1;text-align:center">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Line</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{ou_str}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Model</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{row['pred_total']:.1f}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Edge</div>
+                <div style="color:{edge_color};font-size:0.88em;font-weight:700">{edge_str} pts</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Kelly</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{units}u</div>
+            </div>
         </div>
     </div>
     """)
     track_button(f"{side_str} {ou_str}", matchup, "Total",
                  f"{side_str} {ou_str}", ou_str, units, season, week,
                  f"{row['totals_edge']:+.1f} pts")
+
+
+def render_spread_card(row, season, week):
+    """Sportsbook-style spread card (reference only)."""
+    is_home  = row["spread_edge"] > 0
+    bet_on   = row["home_team"] if is_home else row["away_team"]
+    edge     = row["spread_edge"]
+    spread   = row["spread"]
+    pred_sp  = row["pred_spread"]
+    matchup  = f"{row['home_team']} vs {row['away_team']}"
+    stars    = confidence_stars(abs(edge))
+    edge_str = f"{edge:+.1f}"
+
+    # Vegas line from bet_on's perspective
+    if pd.notna(spread):
+        vl_bet = f"{spread:+.1f}" if is_home else f"{-spread:+.1f}"
+    else:
+        vl_bet = "N/A"
+
+    # Model line from bet_on's perspective
+    if pd.notna(pred_sp):
+        mdl_str = f"{-pred_sp:+.1f}" if is_home else f"{pred_sp:+.1f}"
+    else:
+        mdl_str = "—"
+
+    edge_color = "#22c55e" if abs(edge) >= 5.5 else "#9ca3af"
+
+    st.html(f"""
+    <div style="background:#1a1f2e;border-left:4px solid #8b5cf6;
+                border-top:1px solid #252d3d;border-right:1px solid #252d3d;
+                border-bottom:1px solid #252d3d;
+                border-radius:10px;padding:14px 18px;margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="background:#8b5cf6;color:#ffffff;font-size:0.63em;
+                             font-weight:800;letter-spacing:0.1em;padding:3px 8px;
+                             border-radius:4px">SPREAD</span>
+                <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
+                             font-weight:700;letter-spacing:0.08em;padding:3px 7px;
+                             border-radius:4px">REF ONLY</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="color:{edge_color};font-size:0.82em;font-weight:700">Edge {edge_str}</span>
+                <span style="color:#eab308;font-size:0.88em">{stars}</span>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="color:#ffffff;font-size:1.1em;font-weight:700">{bet_on}</span>
+            <span style="color:#8b5cf6;font-size:1.3em;font-weight:800;
+                         font-variant-numeric:tabular-nums">{vl_bet}</span>
+        </div>
+        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}</div>
+        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
+            <div style="flex:1;text-align:center">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Vegas</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{vl_bet}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Model</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{mdl_str}</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Edge</div>
+                <div style="color:{edge_color};font-size:0.88em;font-weight:700">{edge_str} pts</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Kelly</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">1u</div>
+            </div>
+        </div>
+    </div>
+    """)
+    track_button(f"{bet_on} {vl_bet}", matchup, "Spread",
+                 f"{bet_on} {vl_bet}", vl_bet, 1, season, week, edge_str)
 
 
 # ─── MY BETS TAB ──────────────────────────────────────────────────────────────
@@ -824,8 +983,8 @@ def render_bets_tab():
         return
 
     # ── Bet rows ─────────────────────────────────────────────────────────
-    status_left = {"Pending": "#2d3340", "Won": "#53d337", "Lost": "#e74c3c", "Push": "#f0a500"}
-    status_bg   = {"Pending": "#23272b", "Won": "#1e2b1e", "Lost": "#2b1e1e", "Push": "#2b2a1e"}
+    status_left = {"Pending": "#252d3d", "Won": "#22c55e", "Lost": "#ef4444", "Push": "#f97316"}
+    status_bg   = {"Pending": "#1a1f2e", "Won": "#0f1f14", "Lost": "#1f0f0f", "Push": "#1f1608"}
     status_label = {"Pending": "PENDING", "Won": "WON", "Lost": "LOST", "Push": "PUSH"}
 
     for bet in reversed(filtered):
@@ -1032,10 +1191,11 @@ def main():
     with st.sidebar:
         st.markdown("""
         <div style="padding:16px 0 8px 0">
-            <div style="color:#ffffff;font-size:1.1em;font-weight:700;
-                        letter-spacing:0.04em">CFB Picks</div>
-            <div style="color:#5c6680;font-size:0.75em;margin-top:2px">
-                Powered by SP+ · FPI · Elo · EPA
+            <div style="color:#ffffff;font-size:1.1em;font-weight:800;
+                        letter-spacing:0.02em">CFB Picks</div>
+            <div style="color:#eab308;font-size:0.68em;font-weight:700;
+                        letter-spacing:0.1em;text-transform:uppercase;margin-top:2px">
+                SP+ · FPI · Elo · EPA
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -1069,15 +1229,20 @@ def main():
         if pending:
             st.divider()
             n = len(pending)
-            st.markdown(f'<div style="color:#f0a500;font-size:0.82em;font-weight:600">'
+            st.markdown(f'<div style="color:#f97316;font-size:0.82em;font-weight:600">'
                         f'{n} pending bet{"s" if n != 1 else ""}</div>', unsafe_allow_html=True)
             st.caption("Go to My Bets to mark results.")
 
     # ── Page header ───────────────────────────────────────────────────────
     st.markdown("""
-    <div style="padding:8px 0 4px 0;border-bottom:1px solid #2d3340;margin-bottom:4px">
-        <span style="color:#ffffff;font-size:1.4em;font-weight:700;
-                     letter-spacing:0.02em">CFB Bet Recommendations</span>
+    <div style="padding:10px 0 6px 0;border-bottom:1px solid #1e2537;margin-bottom:6px;
+                display:flex;align-items:baseline;gap:14px">
+        <span style="color:#ffffff;font-size:1.4em;font-weight:800;
+                     letter-spacing:0.01em">CFB Picks</span>
+        <span style="color:#eab308;font-size:0.75em;font-weight:700;
+                     letter-spacing:0.08em;text-transform:uppercase">Model-Powered</span>
+        <span style="color:#252d3d;flex:1;height:1px;display:inline-block;
+                     vertical-align:middle;margin-left:4px"></span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1173,14 +1338,11 @@ def main():
 
         # ── Week header + summary tiles ───────────────────────────────────
         st.markdown(f"""
-        <div style="display:flex;align-items:baseline;gap:10px;
-                    padding:12px 0 4px 0">
-            <span style="color:#ffffff;font-size:1em;font-weight:700">
+        <div style="display:flex;align-items:baseline;gap:10px;padding:12px 0 4px 0">
+            <span style="color:#ffffff;font-size:1.05em;font-weight:700">
                 {season} · Week {week}
             </span>
-            <span style="color:#5c6680;font-size:0.82em">
-                {len(preds)} games
-            </span>
+            <span style="color:#4b5563;font-size:0.82em">{len(preds)} games</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1193,139 +1355,130 @@ def main():
         if not has_lines:
             st.warning("No Vegas lines yet — lines usually appear 7–10 days before kickoff.")
 
-        # ── Best Bets (top picks across all categories) ───────────────────
-        best_tot  = tot_bets.head(3) if not tot_bets.empty else pd.DataFrame()
-        best_ml   = ml_bets.head(2)  if not ml_bets.empty  else pd.DataFrame()
-        has_best  = not best_tot.empty or not best_ml.empty
+        # ── Sub-navigation pill tabs ──────────────────────────────────────
+        best_tot = tot_bets.head(3) if not tot_bets.empty else pd.DataFrame()
+        best_ml  = ml_bets.head(2)  if not ml_bets.empty  else pd.DataFrame()
+        has_best = not best_tot.empty or not best_ml.empty
 
-        if has_best:
-            section_header("Best Bets", "Highest-confidence picks this week")
-            if not best_tot.empty:
-                for _, row in best_tot.iterrows():
-                    render_totals_card(row, season, week)
-            if not best_ml.empty:
-                for _, row in best_ml.iterrows():
-                    render_moneyline_card(row, season, week)
+        view = st.radio(
+            "View",
+            ["Best Bets", "Totals", "Spreads", "Moneylines", "All Games"],
+            horizontal=True,
+            label_visibility="collapsed",
+        )
 
-        # ── Moneyline section ─────────────────────────────────────────────
-        section_header("Moneyline", "Underdogs drive +52.7% historical ROI")
-        if not has_lines or preds["home_moneyline"].isna().all():
-            st.info("No moneyline data yet — appears closer to kickoff.")
-        elif ml_bets.empty:
-            st.info("No +EV moneyline bets this week.")
-        else:
-            remaining_ml = ml_bets.iloc[2:] if has_best else ml_bets
-            dog_bets = ml_bets[ml_bets["ml_book_odds"] > 0]
-            fav_bets = ml_bets[ml_bets["ml_book_odds"] <= 0]
-            if not dog_bets.empty:
-                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
-                            'text-transform:uppercase;letter-spacing:0.07em">'
-                            'Underdogs</span>', unsafe_allow_html=True)
-                for _, row in dog_bets.iterrows():
-                    render_moneyline_card(row, season, week)
-            if not fav_bets.empty:
-                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
-                            'text-transform:uppercase;letter-spacing:0.07em">'
-                            'Favorites</span>', unsafe_allow_html=True)
-                for _, row in fav_bets.iterrows():
-                    render_moneyline_card(row, season, week)
+        # ── Best Bets ─────────────────────────────────────────────────────
+        if view == "Best Bets":
+            if not has_best:
+                st.info("No high-confidence picks this week.")
+            else:
+                section_header("Best Bets", "Highest-confidence picks this week")
+                if not best_tot.empty:
+                    for _, row in best_tot.iterrows():
+                        render_totals_card(row, season, week)
+                if not best_ml.empty:
+                    for _, row in best_ml.iterrows():
+                        render_moneyline_card(row, season, week)
 
-        # ── Totals section ────────────────────────────────────────────────
-        section_header("Totals", "Unders win 59% historically")
-        if tot_bets.empty:
-            st.info("No totals bets meet the threshold this week.")
-        else:
-            under_bets = tot_bets[tot_bets["totals_edge"] < 0]
-            over_bets  = tot_bets[tot_bets["totals_edge"] > 0]
-            if not under_bets.empty:
-                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
-                            'text-transform:uppercase;letter-spacing:0.07em">'
-                            'Unders</span>', unsafe_allow_html=True)
-                for _, row in under_bets.iterrows():
-                    render_totals_card(row, season, week)
-            if not over_bets.empty:
-                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
-                            'text-transform:uppercase;letter-spacing:0.07em">'
-                            'Overs</span>', unsafe_allow_html=True)
-                for _, row in over_bets.iterrows():
-                    render_totals_card(row, season, week)
+        # ── Totals ────────────────────────────────────────────────────────
+        elif view == "Totals":
+            section_header("Totals", "Unders win 59% historically")
+            if tot_bets.empty:
+                st.info("No totals bets meet the threshold this week.")
+            else:
+                under_bets = tot_bets[tot_bets["totals_edge"] < 0]
+                over_bets  = tot_bets[tot_bets["totals_edge"] > 0]
+                if not under_bets.empty:
+                    st.markdown(
+                        '<span style="color:#06b6d4;font-size:0.75em;font-weight:700;'
+                        'text-transform:uppercase;letter-spacing:0.1em">Unders</span>',
+                        unsafe_allow_html=True)
+                    for _, row in under_bets.iterrows():
+                        render_totals_card(row, season, week)
+                if not over_bets.empty:
+                    st.markdown(
+                        '<span style="color:#f97316;font-size:0.75em;font-weight:700;'
+                        'text-transform:uppercase;letter-spacing:0.1em">Overs</span>',
+                        unsafe_allow_html=True)
+                    for _, row in over_bets.iterrows():
+                        render_totals_card(row, season, week)
 
-        # ── Spreads section ───────────────────────────────────────────────
-        section_header("Spreads", "Informational only · near breakeven")
-        if sp_bets.empty:
-            st.info("No spread bets meet the threshold this week.")
-        else:
-            sp_display = sp_bets.copy()
-            sp_display["Bet on"]     = sp_display.apply(
-                lambda r: r["home_team"] if r["spread_edge"] > 0 else r["away_team"], axis=1)
-            sp_display["Vegas line"] = sp_display["spread"].apply(
-                lambda x: f"{x:+.1f}" if pd.notna(x) else "N/A")
-            sp_display["Model"]      = sp_display["pred_spread"].apply(lambda x: f"{-x:+.1f}")
-            sp_display["Edge"]       = sp_display["spread_edge"].apply(lambda x: f"{x:+.1f}")
-            sp_display["Matchup"]    = sp_display["home_team"] + " vs " + sp_display["away_team"]
-            sp_display["Stars"]      = sp_display["spread_edge"].abs().apply(confidence_stars)
-            for _, row in sp_display.iterrows():
-                bet_on  = row["Bet on"]
-                vl      = row["Vegas line"]
-                edge_s  = row["Edge"]
-                matchup = row["Matchup"]
-                stars   = row["Stars"]
-                st.markdown(
-                    f'<div style="color:#cdd6e4;font-size:0.9em;padding:4px 0">'
-                    f'<span style="color:#53d337;font-weight:700">{stars}</span>'
-                    f'&nbsp; <b>{bet_on}</b>'
-                    f'&nbsp;<span style="color:#5c6680">·</span>&nbsp;'
-                    f'Vegas <code>{vl}</code>'
-                    f'&nbsp;<span style="color:#5c6680">·</span>&nbsp;'
-                    f'Edge <code>{edge_s}</code>'
-                    f'&nbsp;<span style="color:#5c6680;font-size:0.88em">{matchup}</span>'
-                    f'</div>',
-                    unsafe_allow_html=True
-                )
-                track_button(f"{bet_on} {vl}", matchup, "Spread",
-                             f"{bet_on} {vl}", vl, 1, season, week, f"{edge_s}")
+        # ── Spreads ───────────────────────────────────────────────────────
+        elif view == "Spreads":
+            section_header("Spreads", "Informational only · near breakeven")
+            if sp_bets.empty:
+                st.info("No spread bets meet the threshold this week.")
+            else:
+                for _, row in sp_bets.iterrows():
+                    render_spread_card(row, season, week)
+
+        # ── Moneylines ────────────────────────────────────────────────────
+        elif view == "Moneylines":
+            section_header("Moneylines", "Underdogs drive +52.7% historical ROI")
+            if not has_lines or preds["home_moneyline"].isna().all():
+                st.info("No moneyline data yet — appears closer to kickoff.")
+            elif ml_bets.empty:
+                st.info("No +EV moneyline bets this week.")
+            else:
+                dog_bets = ml_bets[ml_bets["ml_book_odds"] > 0]
+                fav_bets = ml_bets[ml_bets["ml_book_odds"] <= 0]
+                if not dog_bets.empty:
+                    st.markdown(
+                        '<span style="color:#3b82f6;font-size:0.75em;font-weight:700;'
+                        'text-transform:uppercase;letter-spacing:0.1em">Underdogs</span>',
+                        unsafe_allow_html=True)
+                    for _, row in dog_bets.iterrows():
+                        render_moneyline_card(row, season, week)
+                if not fav_bets.empty:
+                    st.markdown(
+                        '<span style="color:#6b7280;font-size:0.75em;font-weight:700;'
+                        'text-transform:uppercase;letter-spacing:0.1em">Favorites</span>',
+                        unsafe_allow_html=True)
+                    for _, row in fav_bets.iterrows():
+                        render_moneyline_card(row, season, week)
 
         # ── All Games ─────────────────────────────────────────────────────
-        section_header(f"All Games — Week {week}",
-                       "Expand any game to track a spread, total, or moneyline bet")
+        if view == "All Games":
+            section_header(f"All Games — Week {week}",
+                           "Expand any game to track a spread, total, or moneyline bet")
 
-        search_col, clear_col = st.columns([4, 1])
-        with search_col:
-            team_search = st.text_input(
-                "Search teams",
-                placeholder="e.g. Ohio State, Michigan, Alabama…",
-                label_visibility="collapsed",
-                key="team_search",
-            )
-        with clear_col:
-            if st.button("Clear", key="clear_search", use_container_width=True):
-                st.session_state["team_search"] = ""
-                st.rerun()
-
-        query = team_search.strip().lower()
-        if query:
-            filtered_preds = preds[
-                preds["home_team"].str.lower().str.contains(query, na=False) |
-                preds["away_team"].str.lower().str.contains(query, na=False)
-            ]
-            if filtered_preds.empty:
-                st.info(f'No games found matching "{team_search}" this week.')
-            else:
-                match_word = "game" if len(filtered_preds) == 1 else "games"
-                st.markdown(
-                    f'<div style="color:#5c6680;font-size:0.8em;margin-bottom:6px">'
-                    f'{len(filtered_preds)} {match_word} matching '
-                    f'<span style="color:#ffffff">"{team_search}"</span></div>',
-                    unsafe_allow_html=True,
+            search_col, clear_col = st.columns([4, 1])
+            with search_col:
+                team_search = st.text_input(
+                    "Search teams",
+                    placeholder="e.g. Ohio State, Michigan, Alabama…",
+                    label_visibility="collapsed",
+                    key="team_search",
                 )
-                for _, row in filtered_preds.iterrows():
+            with clear_col:
+                if st.button("Clear", key="clear_search", use_container_width=True):
+                    st.session_state["team_search"] = ""
+                    st.rerun()
+
+            query = team_search.strip().lower()
+            if query:
+                filtered_preds = preds[
+                    preds["home_team"].str.lower().str.contains(query, na=False) |
+                    preds["away_team"].str.lower().str.contains(query, na=False)
+                ]
+                if filtered_preds.empty:
+                    st.info(f'No games found matching "{team_search}" this week.')
+                else:
+                    match_word = "game" if len(filtered_preds) == 1 else "games"
+                    st.markdown(
+                        f'<div style="color:#4b5563;font-size:0.8em;margin-bottom:6px">'
+                        f'{len(filtered_preds)} {match_word} matching '
+                        f'<span style="color:#ffffff">"{team_search}"</span></div>',
+                        unsafe_allow_html=True,
+                    )
+                    for _, row in filtered_preds.iterrows():
+                        render_all_game_card(row, season, week)
+            else:
+                for _, row in preds.iterrows():
                     render_all_game_card(row, season, week)
-        else:
-            for _, row in preds.iterrows():
-                render_all_game_card(row, season, week)
 
         st.markdown(
-            '<div style="color:#5c6680;font-size:0.78em;padding:16px 0 8px 0">'
+            '<div style="color:#4b5563;font-size:0.78em;padding:16px 0 8px 0">'
             'Always verify before betting — check injuries, weather, and current lines. '
             'This model is a tool, not a guarantee.'
             '</div>',
