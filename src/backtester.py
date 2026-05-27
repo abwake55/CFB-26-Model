@@ -726,13 +726,15 @@ if __name__ == "__main__":
 
     if has_ml:
         print("\n\n" + "="*60)
-        print("MONEYLINE — EV THRESHOLD SWEEP")
+        print("MONEYLINE — UNDERDOG EV THRESHOLD SWEEP  (uncapped)")
         print("="*60)
         print(f"{'EV Min':>10}  {'Bets':>6}  {'Win%':>6}  {'ROI':>7}  {'P&L':>8}")
         print("-"*60)
 
         for ev_min in [0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10, 0.12]:
             r = Backtester.run_moneyline(raw, ev_threshold=ev_min)
+            if len(r) > 0:
+                r = r[r["book_odds"] > 0].copy()
             if len(r) == 0:
                 continue
             wins   = r["won"].sum()

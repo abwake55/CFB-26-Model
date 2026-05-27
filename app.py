@@ -19,6 +19,10 @@ warnings.filterwarnings("ignore")
 
 # ── Shared feature builder (single source of truth for feature construction) ──
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent / "src"))
+from model import EnsembleRegressor, EnsembleClassifier  # required so joblib can unpickle saved models
+import __main__
+__main__.EnsembleRegressor  = EnsembleRegressor   # joblib looks in __main__ when model was trained via python3 src/model.py
+__main__.EnsembleClassifier = EnsembleClassifier
 from feature_builder import (
     load_rating_sources,
     load_recent_epa    as _fb_load_recent_epa,
@@ -271,6 +275,10 @@ def cfb_get(endpoint: str, params: dict = None) -> list:
 
 @st.cache_resource(show_spinner="Loading models...")
 def load_models():
+    # Ensure both ensemble classes are findable in __main__ before joblib unpickling
+    import sys
+    sys.modules["__main__"].__dict__.setdefault("EnsembleRegressor",  EnsembleRegressor)
+    sys.modules["__main__"].__dict__.setdefault("EnsembleClassifier", EnsembleClassifier)
     missing = [f for f in ["spread_model.pkl", "totals_model.pkl",
                             "win_prob_model.pkl", "feature_lists.json"]
                if not (MODEL_DIR / f).exists()]
