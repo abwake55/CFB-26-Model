@@ -64,8 +64,9 @@ def get_secret(key: str, fallback: str = "") -> str:
     except Exception:
         return os.getenv(key, fallback)
 
-CFB_API_KEY  = get_secret("CFB_API_KEY",  "")
-ODDS_API_KEY = get_secret("ODDS_API_KEY", "")
+# Keys are read at call-time (not module load) so Streamlit secrets are always initialised first
+def _cfb_api_key()  -> str: return get_secret("CFB_API_KEY",  "")
+def _odds_api_key() -> str: return get_secret("ODDS_API_KEY", "")
 
 CFB_BASE_URL  = "https://api.collegefootballdata.com"
 ODDS_API_BASE = "https://api.the-odds-api.com/v4"
@@ -264,7 +265,7 @@ def ml_ev(model_prob, american_odds):
 # ─── API HELPERS ──────────────────────────────────────────────────────────────
 
 def cfb_get(endpoint: str, params: dict = None) -> list:
-    headers = {"Authorization": f"Bearer {CFB_API_KEY}"}
+    headers = {"Authorization": f"Bearer {_cfb_api_key()}"}
     resp = requests.get(f"{CFB_BASE_URL}/{endpoint}",
                         headers=headers, params=params or {}, timeout=15)
     resp.raise_for_status()
@@ -361,7 +362,7 @@ def fetch_lines(games_df: pd.DataFrame) -> pd.DataFrame:
     try:
         resp = requests.get(
             f"{ODDS_API_BASE}/sports/{NCAAF_SPORT}/odds",
-            params={"apiKey": ODDS_API_KEY, "regions": "us",
+            params={"apiKey": _odds_api_key(), "regions": "us",
                     "markets": "spreads,totals,h2h",
                     "oddsFormat": "american", "dateFormat": "iso"},
             timeout=15)
