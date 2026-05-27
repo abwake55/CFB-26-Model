@@ -584,16 +584,51 @@ def add_targets_and_context(df: pd.DataFrame) -> pd.DataFrame:
     # Vegas implied home margin (spread is from home team's perspective: negative = home favored)
     df["vegas_home_margin"] = -df["spread"].astype(float)
 
-    # Line movement: how much did the spread shift from open to close?
-    # Negative = home team became MORE favored (sharp money on home side)
-    # Positive = home team became LESS favored (sharp money on away side)
+    # ── Line movement features ────────────────────────────────────────────────
+    # Sign convention: negative movement = line moved toward home team
+    #   (home got more expensive, sharp money went to home side)
+    # Coverage: opening lines only available for 2023+ (~60% of recent games).
+    # For earlier seasons: has_line_data=0 and movement columns stay NaN
+    # so LightGBM handles them natively; Ridge uses median imputation.
     if "spread_open" in df.columns:
         spread      = pd.to_numeric(df["spread"],       errors="coerce")
         spread_open = pd.to_numeric(df["spread_open"],  errors="coerce")
-        df["line_movement"]  = spread - spread_open
-        # Binary flag: any meaningful movement of 1+ point
+        ou          = pd.to_numeric(df.get("over_under"),      errors="coerce")
+        ou_open     = pd.to_numeric(df.get("over_under_open"), errors="coerce")
+
+        # Flag: do we actually have opening line data for this game?
+        df["has_line_data"] = spread_open.notna().astype(int)
+
+        # Raw movement (NaN when no opener available)
+        df["line_movement"]      = spread - spread_open
+        df["line_movement_abs"]  = df["line_movement"].abs()
+
+        # Sharp-money flags: 2+ point moves are typically sharp, not public
+        # Negative move = home team got more expensive = sharp money on HOME side
+        # Positive move = home team got cheaper      = sharp money on AWAY side
+        df["sharp_move_home"] = (df["line_movement"] <= -2.0).astype(int)
+        df["sharp_move_away"] = (df["line_movement"] >=  2.0).astype(int)
+
+        # Finer-grained direction flags (1+ pt threshold, kept for backwards compat)
         df["line_moved_home"] = (df["line_movement"] < -1.0).astype(int)
         df["line_moved_away"] = (df["line_movement"] >  1.0).astype(int)
+
+        # Opening spread itself — the "sharp-only" estimate before public money
+        # Only populated where we have it; NaN elsewhere (handled by imputer/LightGBM)
+        df["spread_open_val"] = spread_open   # renamed to avoid collision
+
+        # Totals movement (same logic as spread)
+        if ou_open.notna().any():
+            df["total_movement"]     = ou - ou_open
+            df["total_movement_abs"] = df["total_movement"].abs()
+            # Sharp-money flags for totals: 2+ pt move suggests sharp interest
+            df["sharp_total_under"] = (df["total_movement"] <= -2.0).astype(int)
+            df["sharp_total_over"]  = (df["total_movement"] >=  2.0).astype(int)
+    else:
+        df["has_line_data"]    = 0
+        df["line_movement_abs"] = np.nan
+        df["sharp_move_home"]  = 0
+        df["sharp_move_away"]  = 0
 
     return df
 

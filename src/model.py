@@ -158,7 +158,12 @@ SPREAD_FEATURES = [
     "home_rest_days", "away_rest_days", "rest_diff",
 
     # Line movement (sharp money signal)
-    "line_movement", "line_moved_home", "line_moved_away",
+    # has_line_data = 1 when opening line exists; LightGBM handles NaN natively
+    "has_line_data",
+    "line_movement", "line_movement_abs",
+    "line_moved_home", "line_moved_away",
+    "sharp_move_home", "sharp_move_away",
+    "spread_open_val",     # opening spread — sharp-only estimate before public money
 
     # ESPN FPI (independent composite rating)
     "fpi_diff", "home_fpi", "away_fpi",
@@ -232,7 +237,10 @@ TOTALS_FEATURES = [
     "rest_diff",
 
     # Line movement
-    "line_movement",
+    "has_line_data",
+    "line_movement", "line_movement_abs",
+    "total_movement", "total_movement_abs",
+    "sharp_total_under", "sharp_total_over",
 
     # Additional ratings
     "fpi_diff", "home_fpi", "away_fpi",
