@@ -169,6 +169,54 @@ def delete_bet(bet_id: str):
     bets = load_bets()
     save_bets([b for b in bets if b["id"] != bet_id])
 
+def update_bet_closing_line(bet_id: str, closing_line: str):
+    bets = load_bets()
+    for b in bets:
+        if b["id"] == bet_id:
+            b["closing_line"] = closing_line.strip()
+            break
+    save_bets(bets)
+
+def compute_clv(bet: dict) -> float | None:
+    """
+    Closing Line Value: how much better (or worse) was your line vs. the closing line.
+    Positive = you beat the close (good). Negative = line moved against you.
+
+    Spreads / Totals → returned in points.
+    Moneylines       → returned in implied-probability percentage points.
+
+    Sign convention
+    ───────────────
+    Spread:  CLV = bet_line − closing_line
+             e.g. bet −7, closes −9  → CLV = +2.0 (you got the better number)
+             e.g. bet +7, closes +5  → CLV = +2.0 (same logic, dog side)
+    Total:   CLV = (closing − bet) for OVER, (bet − closing) for UNDER
+             e.g. OVER 45, closes 47 → CLV = +2.0
+             e.g. UNDER 45, closes 43 → CLV = +2.0
+    ML:      CLV = (closing implied prob − bet implied prob) × 100
+             e.g. bet +150 (40%), closes +120 (45.5%) → CLV = +5.5 ppts
+    """
+    closing_str = bet.get("closing_line", "").strip()
+    if not closing_str:
+        return None
+    try:
+        close    = float(closing_str.replace("+", ""))
+        line_str = str(bet.get("line", "")).replace("+", "")
+        bet_line = float(line_str)
+        btype    = bet.get("bet_type", "")
+
+        if btype == "Spread":
+            return bet_line - close
+        elif btype == "Total":
+            is_over = "OVER" in str(bet.get("pick", "")).upper()
+            return (close - bet_line) if is_over else (bet_line - close)
+        elif btype == "Moneyline":
+            def impl(o: float) -> float:
+                return abs(o) / (abs(o) + 100) if o < 0 else 100 / (o + 100)
+            return (impl(close) - impl(bet_line)) * 100
+    except (ValueError, TypeError):
+        return None
+
 def bet_pnl(bet: dict) -> float:
     u = bet.get("units", 1)
     if bet["status"] == "Won":   return u * 0.91  # standard -110 juice
@@ -883,13 +931,23 @@ def render_bets_tab():
     total_pnl = sum(bet_pnl(b) for b in settled)
     win_rate  = len(wins) / len(settled) if settled else 0
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    clv_vals   = [v for b in bets if (v := compute_clv(b)) is not None]
+    avg_clv    = sum(clv_vals) / len(clv_vals) if clv_vals else None
+    clv_beat   = sum(1 for v in clv_vals if v > 0)
+    clv_label  = (f"{avg_clv:+.1f}" if avg_clv is not None else "—")
+    clv_delta  = (f"{clv_beat}/{len(clv_vals)} beat close" if clv_vals else None)
+
+    c1, c2, c3, c4, c5, c6 = st.columns(6)
     c1.metric("Total Bets",  len(bets))
     c2.metric("Pending",     len(pending))
     c3.metric("Record",      f"{len(wins)}-{len(losses)}" if settled else "—")
     c4.metric("Win Rate",    f"{win_rate:.0%}" if settled else "—")
     c5.metric("Units P&L",   f"{total_pnl:+.2f}u",
               delta_color="normal" if total_pnl >= 0 else "inverse")
+    c6.metric("Avg CLV",     clv_label, delta=clv_delta,
+              delta_color="normal" if (avg_clv or 0) >= 0 else "inverse",
+              help="Closing Line Value — how much better your line was vs. the closing line. "
+                   "Positive = beat the close. Enter closing lines on each bet below.")
 
     # ── Filters ──────────────────────────────────────────────────────────
     section_header("Bet History")
@@ -922,6 +980,15 @@ def render_bets_tab():
         bettor  = bet.get("bettor", "—")
         edge_tag = f" · {bet['edge']}" if bet.get("edge") else ""
 
+        clv      = compute_clv(bet)
+        clv_col  = "#53d337" if (clv or 0) > 0 else "#e74c3c" if (clv or 0) < 0 else "#8b9bb4"
+        clv_unit = "ppts" if bet.get("bet_type") == "Moneyline" else "pts"
+        clv_html = (
+            f'<span style="color:{clv_col};font-size:0.78em;font-weight:700;'
+            f'margin-left:10px">CLV {clv:+.1f}{clv_unit}</span>'
+            if clv is not None else ""
+        )
+
         st.html(f"""
         <div style="background:{bg};border-left:3px solid {left};
                     border-top:1px solid #2d3340;border-right:1px solid #2d3340;
@@ -935,6 +1002,7 @@ def render_bets_tab():
                                  border-radius:4px;margin-left:8px">{bet['bet_type'].upper()}</span>
                     <span style="color:#8b9bb4;font-size:0.82em;margin-left:8px">{bet['units']}u</span>
                     <span style="color:#5c6680;font-size:0.8em;margin-left:8px">{bettor}</span>
+                    {clv_html}
                 </div>
                 <div style="text-align:right">
                     <span style="color:{pnl_col};font-weight:700;font-size:0.95em">{pnl_str}</span>
@@ -950,7 +1018,7 @@ def render_bets_tab():
         </div>
         """)
 
-        b_cols = st.columns([1, 1, 1, 1, 1, 2])
+        b_cols = st.columns([1, 1, 1, 1, 2, 2])
         if bet["status"] != "Won":
             if b_cols[0].button("Won",  key=f"won_{bet['id']}"):
                 update_bet_status(bet["id"], "Won");  st.rerun()
@@ -962,6 +1030,20 @@ def render_bets_tab():
                 update_bet_status(bet["id"], "Push"); st.rerun()
         if b_cols[3].button("Delete", key=f"del_{bet['id']}"):
             delete_bet(bet["id"]); st.rerun()
+
+        # Closing line input — saves automatically when value changes
+        current_cl = bet.get("closing_line", "")
+        new_cl = b_cols[4].text_input(
+            "Closing line",
+            value=current_cl,
+            key=f"cl_{bet['id']}",
+            placeholder="Closing line",
+            label_visibility="collapsed",
+        )
+        if new_cl != current_cl:
+            update_bet_closing_line(bet["id"], new_cl)
+            st.rerun()
+
         current_bettor = bet.get("bettor", BETTORS[0])
         idx = BETTORS.index(current_bettor) if current_bettor in BETTORS else 0
         new_bettor = b_cols[5].selectbox("", BETTORS, index=idx,
