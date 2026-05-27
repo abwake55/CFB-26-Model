@@ -87,8 +87,9 @@ MODELS_DIR  = Path(__file__).parent.parent / "models"
 for d in [OUT_DIR, CHART_DIR, MODELS_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
-TRAIN_SEASONS = [2017, 2018, 2019, 2021, 2022, 2023]  # exclude 2020 (COVID distortion)
-TEST_SEASONS  = [2024, 2025]  # hold out most recent 2 seasons for evaluation
+TRAIN_SEASONS = [2017, 2018, 2019, 2021, 2022]  # exclude 2020 (COVID distortion)
+VAL_SEASONS   = [2023]        # held out for hyperparameter / weight tuning only
+TEST_SEASONS  = [2024, 2025]  # final holdout — never used for any tuning decision
 
 # ─── 1. LOAD & PREPARE DATA ──────────────────────────────────────────────────
 
@@ -387,10 +388,12 @@ def train_and_evaluate():
     df = load_data()
 
     train = df[df["season"].isin(TRAIN_SEASONS)].copy()
+    val   = df[df["season"].isin(VAL_SEASONS)].copy()
     test  = df[df["season"].isin(TEST_SEASONS)].copy()
 
-    print(f"\nTrain: {len(train):,} games ({TRAIN_SEASONS[0]}–{TRAIN_SEASONS[-1]})")
-    print(f"Test:  {len(test):,}  games ({TEST_SEASONS[0]}–{TEST_SEASONS[-1]})")
+    print(f"\nTrain: {len(train):,} games  ({TRAIN_SEASONS[0]}–{TRAIN_SEASONS[-1]})")
+    print(f"Val:   {len(val):,}  games  ({VAL_SEASONS[0]}–{VAL_SEASONS[-1]})  ← weight tuning only")
+    print(f"Test:  {len(test):,}  games  ({TEST_SEASONS[0]}–{TEST_SEASONS[-1]})  ← final holdout")
 
     # Only keep features that actually exist in the dataframe
     spread_feats = [f for f in SPREAD_FEATURES if f in df.columns]
@@ -409,6 +412,8 @@ def train_and_evaluate():
 
     X_train_win = train[win_feats]
     y_train_win = train["home_win"]
+    X_val_win   = val[win_feats]
+    y_val_win   = val["home_win"]
     X_test_win  = test[win_feats]
     y_test_win  = test["home_win"]
 
@@ -470,13 +475,15 @@ def train_and_evaluate():
                                            method="isotonic", cv=5)
     gbm_win_calib.fit(X_train_win, y_train_win)
 
-    # Auto-tune ensemble weights: try GBM-heavy, balanced, and logistic-heavy
+    # Auto-tune ensemble weights on the VALIDATION set (2023) only.
+    # The test set (2024-2025) is never used for any tuning decision — it is the
+    # final, clean holdout for honest evaluation of the chosen model.
     best_brier, best_w1, best_ensemble = 999, 0.5, None
     weight_candidates = [(0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5),
                          (0.6, 0.4), (0.7, 0.3), (0.8, 0.2)]
     for w1, w2 in weight_candidates:
         ens = EnsembleClassifier(gbm_win_calib, logit_win, w1=w1, w2=w2)
-        b = brier_score_loss(y_test_win, ens.predict_proba(X_test_win)[:, 1])
+        b = brier_score_loss(y_val_win, ens.predict_proba(X_val_win)[:, 1])
         if b < best_brier:
             best_brier, best_w1, best_ensemble = b, w1, ens
 

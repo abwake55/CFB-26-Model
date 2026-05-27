@@ -335,17 +335,79 @@ def load_team_ratings(pred_season: int) -> dict:
         season_portal = portal[portal["season"] == pred_season]
         if not season_portal.empty and avail:
             ratings["portal"] = season_portal[["team"] + avail].set_index("team")
-    fm_path = DATA_DIR / "feature_matrix.csv"
-    if fm_path.exists():
+
+    # ── WEPA (opponent-adjusted EPA) — +1 year shift already in the data ──
+    wepa_path = DATA_DIR / "master_wepa.csv"
+    if wepa_path.exists():
         try:
-            fm = pd.read_csv(fm_path, usecols=["season","home_team","home_hfa"])
-            fm = fm[fm["season"] == pred_season - 1]
-            if not fm.empty:
-                hfa = fm.groupby("home_team")["home_hfa"].last().reset_index()
-                hfa.columns = ["team","hfa_estimate"]
-                ratings["hfa"] = hfa.set_index("team")
+            wepa = pd.read_csv(wepa_path)
+            wepa.columns = [c.lower() for c in wepa.columns]
+            wepa["season"] = pd.to_numeric(wepa["season"], errors="coerce")
+            wepa_cols = ["wepa_offense", "wepa_defense", "wepa_success_off",
+                         "wepa_success_def", "wepa_explosiveness",
+                         "wepa_explosiveness_def"]
+            avail = [c for c in wepa_cols if c in wepa.columns]
+            w = wepa[wepa["season"] == pred_season]
+            if not w.empty and avail:
+                ratings["wepa"] = w[["team"] + avail].set_index("team")
         except Exception:
             pass
+
+    # ── Talent composite (current season — no year shift) ─────────────────
+    talent_path = DATA_DIR / "master_talent.csv"
+    if talent_path.exists():
+        try:
+            talent = pd.read_csv(talent_path)
+            talent.columns = [c.lower() for c in talent.columns]
+            talent["season"] = pd.to_numeric(talent["season"], errors="coerce")
+            t = talent[talent["season"] == pred_season]
+            if not t.empty and "talent" in t.columns:
+                ratings["talent"] = t[["team", "talent"]].set_index("team")
+        except Exception:
+            pass
+
+    # ── Havoc rate — +1 year shift already in the data ────────────────────
+    havoc_path = DATA_DIR / "master_havoc.csv"
+    if havoc_path.exists():
+        try:
+            havoc = pd.read_csv(havoc_path)
+            havoc.columns = [c.lower() for c in havoc.columns]
+            havoc["season"] = pd.to_numeric(havoc["season"], errors="coerce")
+            havoc_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
+                          "rush_success_rate", "pass_success_rate"]
+            avail = [c for c in havoc_cols if c in havoc.columns]
+            h = havoc[havoc["season"] == pred_season]
+            if not h.empty and avail:
+                ratings["havoc"] = h[["team"] + avail].set_index("team")
+        except Exception:
+            pass
+
+    # ── HFA — computed fresh from master_games.csv to avoid stale feature_matrix ──
+    # build_home_field_advantage() shifts 1 year, so for pred_season we use
+    # games from the 2 most recently completed seasons.
+    games_path = DATA_DIR / "master_games.csv"
+    if games_path.exists():
+        try:
+            g = pd.read_csv(games_path)
+            g["season"]       = pd.to_numeric(g["season"],       errors="coerce")
+            g["home_points"]  = pd.to_numeric(g.get("home_points",  pd.Series()), errors="coerce")
+            g["away_points"]  = pd.to_numeric(g.get("away_points",  pd.Series()), errors="coerce")
+            g["neutral_site"] = g.get("neutral_site", 0).fillna(0).astype(int)
+            g = g.dropna(subset=["home_points", "away_points"])
+            g["point_diff"] = g["home_points"] - g["away_points"]
+            # Use 2 most recently completed seasons (< pred_season)
+            completed = sorted(g[g["season"] < pred_season]["season"].dropna().unique())
+            recent2   = completed[-2:] if len(completed) >= 2 else completed
+            g = g[(g["season"].isin(recent2)) & (g["neutral_site"] == 0)]
+            if not g.empty:
+                h_m = g.groupby("home_team")["point_diff"].mean().rename("home_margin")
+                a_m = (-g.groupby("away_team")["point_diff"]).mean().rename("away_margin")
+                hfa_df = pd.concat([h_m, a_m], axis=1).fillna(0)
+                hfa_df["hfa_estimate"] = hfa_df["home_margin"] - hfa_df["away_margin"]
+                ratings["hfa"] = hfa_df[["hfa_estimate"]]
+        except Exception:
+            pass
+
     return ratings
 
 
@@ -584,6 +646,48 @@ def build_and_predict(games, lines, ratings, epa, elo,
     df["recruiting_diff"]      = df["home_recruiting_4yr"]   - df["away_recruiting_4yr"]
     df["hfa_diff"]             = df["home_hfa"].fillna(0)    - df["away_hfa"].fillna(0)
     df["portal_net_rating_diff"] = df["home_portal_net_rating"] - df["away_portal_net_rating"]
+
+    # ── WEPA differentials ────────────────────────────────────────────────
+    wepa_src = ratings.get("wepa")
+    for side, tcol in [("home", "home_team"), ("away", "away_team")]:
+        for col in ["wepa_offense", "wepa_defense", "wepa_success_off",
+                    "wepa_success_def", "wepa_explosiveness", "wepa_explosiveness_def"]:
+            df[f"{side}_{col}"] = (
+                df[tcol].map(lambda t, c=col:
+                    float(wepa_src.loc[t, c]) if (wepa_src is not None
+                    and t in wepa_src.index and c in wepa_src.columns) else np.nan)
+            )
+    if wepa_src is not None:
+        df["wepa_off_diff"]           = df["home_wepa_offense"]         - df["away_wepa_offense"]
+        df["wepa_def_diff"]           = df["home_wepa_defense"]         - df["away_wepa_defense"]
+        df["wepa_success_off_diff"]   = df["home_wepa_success_off"]     - df["away_wepa_success_off"]
+        df["wepa_success_def_diff"]   = df["home_wepa_success_def"]     - df["away_wepa_success_def"]
+        df["wepa_explosiveness_diff"] = df["home_wepa_explosiveness"]   - df["away_wepa_explosiveness"]
+
+    # ── Talent differential ───────────────────────────────────────────────
+    talent_src = ratings.get("talent")
+    for side, tcol in [("home", "home_team"), ("away", "away_team")]:
+        df[f"{side}_talent"] = (
+            df[tcol].map(lambda t:
+                float(talent_src.loc[t, "talent"]) if (talent_src is not None
+                and t in talent_src.index) else np.nan)
+        )
+    if talent_src is not None:
+        df["talent_diff"] = df["home_talent"] - df["away_talent"]
+
+    # ── Havoc differentials ───────────────────────────────────────────────
+    havoc_src = ratings.get("havoc")
+    for side, tcol in [("home", "home_team"), ("away", "away_team")]:
+        for col in ["havoc_total", "havoc_front_seven", "havoc_db",
+                    "rush_success_rate", "pass_success_rate"]:
+            df[f"{side}_{col}"] = (
+                df[tcol].map(lambda t, c=col:
+                    float(havoc_src.loc[t, c]) if (havoc_src is not None
+                    and t in havoc_src.index and c in havoc_src.columns) else np.nan)
+            )
+    if havoc_src is not None:
+        df["havoc_diff"]   = df["home_havoc_total"]       - df["away_havoc_total"]
+        df["rush_sr_diff"] = df["home_rush_success_rate"] - df["away_rush_success_rate"]
     if "home_off_epa_roll3" in df.columns:
         df["epa_off_diff_roll3"] = df["home_off_epa_roll3"] - df["away_off_epa_roll3"]
         df["epa_def_diff_roll3"] = df["home_def_epa_roll3"] - df["away_def_epa_roll3"]
