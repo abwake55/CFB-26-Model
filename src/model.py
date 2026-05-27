@@ -31,8 +31,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_absolute_error, r2_score, log_loss, brier_score_loss
 from sklearn.impute import SimpleImputer
-from sklearn.ensemble import HistGradientBoostingRegressor, HistGradientBoostingClassifier
 from sklearn.calibration import CalibratedClassifierCV, calibration_curve
+import lightgbm as lgb
 
 # ─── ENSEMBLE MODEL ──────────────────────────────────────────────────────────
 
@@ -269,25 +269,37 @@ def make_linear(alpha: float = 1.0):
 
 
 def make_gbm_regressor():
-    # HistGradientBoosting is scikit-learn's fast gradient booster —
-    # handles missing values natively (no separate imputer needed),
-    # comparable performance to XGBoost, zero extra dependencies.
-    return HistGradientBoostingRegressor(
-        max_iter=300,
-        learning_rate=0.05,
-        max_depth=4,
-        l2_regularization=2.0,
+    # LightGBM — leaf-wise tree grower with native NaN handling.
+    # Faster and more accurate than sklearn's HistGradientBoosting:
+    # - num_leaves=63 controls tree complexity (≈ max_depth 6)
+    # - subsample + colsample_bytree add stochastic regularisation
+    # - reg_lambda mirrors the previous l2_regularization value
+    return lgb.LGBMRegressor(
+        n_estimators=500,
+        learning_rate=0.03,
+        num_leaves=63,
+        min_child_samples=20,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        reg_lambda=2.0,
         random_state=42,
+        n_jobs=-1,
+        verbose=-1,
     )
 
 
 def make_gbm_classifier():
-    return HistGradientBoostingClassifier(
-        max_iter=300,
-        learning_rate=0.05,
-        max_depth=4,
-        l2_regularization=2.0,
+    return lgb.LGBMClassifier(
+        n_estimators=500,
+        learning_rate=0.03,
+        num_leaves=63,
+        min_child_samples=20,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        reg_lambda=2.0,
         random_state=42,
+        n_jobs=-1,
+        verbose=-1,
     )
 
 
@@ -614,7 +626,10 @@ def train_and_evaluate():
     imp_df = extract_importance(best_sp_pipe.m2, spread_feats, "GBM component")
     if not imp_df.empty:
         print(imp_df.head(15)[["feature", "importance"]].to_string(index=False))
-        imp_df.to_csv(CHART_DIR / "feature_importance_spread.csv", index=False)
+        try:
+            imp_df.to_csv(CHART_DIR / "feature_importance_spread.csv", index=False)
+        except OSError:
+            pass  # non-critical; skip if filesystem unavailable
 
     # ── Save per-game predictions on test set ─────────────────────────────
     # Base columns — include moneylines if present (needed for moneyline backtesting)
@@ -639,8 +654,11 @@ def train_and_evaluate():
         results_df["pred_spread"] - results_df["vegas_home_margin"]
     )
 
-    results_df.to_csv(OUT_DIR / "model_results.csv", index=False)
-    print(f"\n✅ Saved {len(results_df):,} game predictions → outputs/predictions/model_results.csv")
+    try:
+        results_df.to_csv(OUT_DIR / "model_results.csv", index=False)
+        print(f"\n✅ Saved {len(results_df):,} game predictions → outputs/predictions/model_results.csv")
+    except OSError:
+        print(f"\n⚠️  Could not write model_results.csv (filesystem issue) — models will still save")
 
     # ── Save models ────────────────────────────────────────────────────────
     joblib.dump(best_sp_pipe,  MODELS_DIR / "spread_model.pkl")
