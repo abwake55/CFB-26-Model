@@ -1321,8 +1321,41 @@ def main():
         # ── All Games ─────────────────────────────────────────────────────
         section_header(f"All Games — Week {week}",
                        "Expand any game to track a spread, total, or moneyline bet")
-        for _, row in preds.iterrows():
-            render_all_game_card(row, season, week)
+
+        search_col, clear_col = st.columns([4, 1])
+        with search_col:
+            team_search = st.text_input(
+                "Search teams",
+                placeholder="e.g. Ohio State, Michigan, Alabama…",
+                label_visibility="collapsed",
+                key="team_search",
+            )
+        with clear_col:
+            if st.button("Clear", key="clear_search", use_container_width=True):
+                st.session_state["team_search"] = ""
+                st.rerun()
+
+        query = team_search.strip().lower()
+        if query:
+            filtered_preds = preds[
+                preds["home_team"].str.lower().str.contains(query, na=False) |
+                preds["away_team"].str.lower().str.contains(query, na=False)
+            ]
+            if filtered_preds.empty:
+                st.info(f'No games found matching "{team_search}" this week.')
+            else:
+                match_word = "game" if len(filtered_preds) == 1 else "games"
+                st.markdown(
+                    f'<div style="color:#5c6680;font-size:0.8em;margin-bottom:6px">'
+                    f'{len(filtered_preds)} {match_word} matching '
+                    f'<span style="color:#ffffff">"{team_search}"</span></div>',
+                    unsafe_allow_html=True,
+                )
+                for _, row in filtered_preds.iterrows():
+                    render_all_game_card(row, season, week)
+        else:
+            for _, row in preds.iterrows():
+                render_all_game_card(row, season, week)
 
         st.markdown(
             '<div style="color:#5c6680;font-size:0.78em;padding:16px 0 8px 0">'
