@@ -87,9 +87,9 @@ MODELS_DIR  = Path(__file__).parent.parent / "models"
 for d in [OUT_DIR, CHART_DIR, MODELS_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
-TRAIN_SEASONS = [2017, 2018, 2019, 2021, 2022]  # exclude 2020 (COVID distortion)
-VAL_SEASONS   = [2023]        # held out for hyperparameter / weight tuning only
-TEST_SEASONS  = [2024, 2025]  # final holdout — never used for any tuning decision
+TRAIN_SEASONS = [2017, 2018, 2019, 2021, 2022, 2023]  # exclude 2020 (COVID distortion)
+VAL_SEASONS   = [2024]        # held out for hyperparameter / weight tuning only
+TEST_SEASONS  = [2025]        # final holdout — most recent full season, best predictor of 2026
 
 # ─── 1. LOAD & PREPARE DATA ──────────────────────────────────────────────────
 
