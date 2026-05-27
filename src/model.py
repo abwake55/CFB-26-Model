@@ -410,6 +410,11 @@ def train_and_evaluate():
     X_test_tot  = test[totals_feats]
     y_test_tot  = test["total_points"]
 
+    X_val_sp    = val[spread_feats]
+    y_val_sp    = val["point_diff"]
+    X_val_tot   = val[totals_feats]
+    y_val_tot   = val["total_points"]
+
     X_train_win = train[win_feats]
     y_train_win = train["home_win"]
     X_val_win   = val[win_feats]
@@ -516,19 +521,43 @@ def train_and_evaluate():
 
     gbm_win = best_ensemble  # use best calibrated ensemble going forward
 
-    # ── Build ensemble (Ridge + GBM blend) ────────────────────────────────
-    # 50/50 blend consistently outperforms picking one model alone:
-    # Ridge is strong on linear signals; GBM captures non-linear interactions.
-    # We also test the pure models for comparison but always save the ensemble.
+    # ── Auto-tune ensemble blend weights on validation set (2023) ─────────
+    # Same discipline as win-prob: pick the blend on val, evaluate on test.
+    # RMSE on val is minimised — lower = better calibrated predictions.
+    weight_candidates = [(0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5),
+                         (0.6, 0.4), (0.7, 0.3), (0.8, 0.2)]
 
-    ensemble_sp  = EnsembleRegressor(ridge_sp,  gbm_sp,  w1=0.5, w2=0.5)
-    ensemble_tot = EnsembleRegressor(ridge_tot, gbm_tot, w1=0.5, w2=0.5)
+    # Spread blend
+    best_sp_rmse, best_sp_w1 = 999.0, 0.5
+    for w1, w2 in weight_candidates:
+        ens = EnsembleRegressor(ridge_sp, gbm_sp, w1=w1, w2=w2)
+        val_rmse = np.sqrt(np.mean((ens.predict(X_val_sp) - y_val_sp) ** 2))
+        if val_rmse < best_sp_rmse:
+            best_sp_rmse, best_sp_w1 = val_rmse, w1
+    best_sp_w2 = round(1 - best_sp_w1, 1)
+    ensemble_sp = EnsembleRegressor(ridge_sp, gbm_sp, w1=best_sp_w1, w2=best_sp_w2)
+    print(f"\n  Spread ensemble: best val blend = Ridge {best_sp_w1:.0%} / GBM {best_sp_w2:.0%}"
+          f"  (val RMSE {best_sp_rmse:.3f})")
 
-    # Evaluate ensemble on test set
+    # Totals blend
+    best_tot_rmse, best_tot_w1 = 999.0, 0.5
+    for w1, w2 in weight_candidates:
+        ens = EnsembleRegressor(ridge_tot, gbm_tot, w1=w1, w2=w2)
+        val_rmse = np.sqrt(np.mean((ens.predict(X_val_tot) - y_val_tot) ** 2))
+        if val_rmse < best_tot_rmse:
+            best_tot_rmse, best_tot_w1 = val_rmse, w1
+    best_tot_w2 = round(1 - best_tot_w1, 1)
+    ensemble_tot = EnsembleRegressor(ridge_tot, gbm_tot, w1=best_tot_w1, w2=best_tot_w2)
+    print(f"  Totals ensemble: best val blend = Ridge {best_tot_w1:.0%} / GBM {best_tot_w2:.0%}"
+          f"  (val RMSE {best_tot_rmse:.3f})")
+
+    # Evaluate best ensembles on test set
     ens_sp_preds  = ensemble_sp.predict(X_test_sp)
     ens_tot_preds = ensemble_tot.predict(X_test_tot)
-    ens_sp_result  = evaluate_spread(y_test_sp,  ens_sp_preds,  "Ensemble (50/50)")
-    ens_tot_result = evaluate_totals(y_test_tot, ens_tot_preds, "Ensemble (50/50)")
+    ens_sp_label  = f"Ensemble ({best_sp_w1:.0%}/{best_sp_w2:.0%})"
+    ens_tot_label = f"Ensemble ({best_tot_w1:.0%}/{best_tot_w2:.0%})"
+    ens_sp_result  = evaluate_spread(y_test_sp,  ens_sp_preds,  ens_sp_label)
+    ens_tot_result = evaluate_totals(y_test_tot, ens_tot_preds, ens_tot_label)
     results_sp.append(ens_sp_result)
     results_tot.append(ens_tot_result)
 
@@ -539,7 +568,9 @@ def train_and_evaluate():
 
     best_sp_pipe  = ensemble_sp
     best_tot_pipe = ensemble_tot
-    print(f"\nSaving ensemble model (Ridge 50% + GBM 50%) for both spread and totals.")
+    print(f"\nSaving ensemble model:"
+          f" Spread Ridge {best_sp_w1:.0%}/GBM {best_sp_w2:.0%},"
+          f" Totals Ridge {best_tot_w1:.0%}/GBM {best_tot_w2:.0%}.")
 
     # ── Feature importance (from GBM component of ensemble) ───────────────
     print("\n" + "="*55)

@@ -80,8 +80,8 @@ After deploying (or before clicking Deploy), click **Advanced settings** → **S
 Paste this, replacing the placeholder values with your real keys:
 
 ```toml
-CFB_API_KEY = "uxvnvwwBh6dQBE/hxA+GK+srmnfZ1mkRSr8E7gOg/BuIL/TeNHw5aHbbZDbi4TMt"
-ODDS_API_KEY = "97fefeb9de733240ae640967ed5c1427"
+CFB_API_KEY  = "your-cfbd-api-key-here"
+ODDS_API_KEY = "your-odds-api-key-here"
 ```
 
 Click **Save** — Streamlit will reboot the app with the keys loaded.

@@ -2,9 +2,10 @@
 Quick diagnostic — prints the actual field names returned by the API
 so we can fix the data collection script.
 """
+import os
 import requests, json
 
-API_KEY = "uxvnvwwBh6dQBE/hxA+GK+srmnfZ1mkRSr8E7gOg/BuIL/TeNHw5aHbbZDbi4TMt"
+API_KEY = os.getenv("CFB_API_KEY", "")  # set via env var — never hardcode keys
 headers = {"Authorization": f"Bearer {API_KEY}"}
 
 # Fetch 3 games from 2024 to inspect the response shape

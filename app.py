@@ -17,6 +17,16 @@ import uuid
 import warnings
 warnings.filterwarnings("ignore")
 
+# ── Shared feature builder (single source of truth for feature construction) ──
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent / "src"))
+from feature_builder import (
+    load_rating_sources,
+    load_recent_epa    as _fb_load_recent_epa,
+    load_current_elo   as _fb_load_current_elo,
+    attach_team_features,
+    feature_coverage_report,
+)
+
 import joblib
 import numpy as np
 import pandas as pd
@@ -276,179 +286,20 @@ def load_models():
 
 @st.cache_data(show_spinner="Loading team ratings...", ttl=86400)
 def load_team_ratings(pred_season: int) -> dict:
-    import ast
-    ratings = {}
-    sp_path = DATA_DIR / "master_sp_ratings.csv"
-    if sp_path.exists():
-        sp = pd.read_csv(sp_path)
-        def safe_parse(val):
-            if pd.isna(val): return {}
-            if isinstance(val, dict): return val
-            try: return ast.literal_eval(val)
-            except: return {}
-        sp["off_dict"]   = sp["offense"].apply(safe_parse)
-        sp["def_dict"]   = sp["defense"].apply(safe_parse)
-        sp["sp_offense"] = sp["off_dict"].apply(lambda d: d.get("rating"))
-        sp["sp_defense"] = sp["def_dict"].apply(lambda d: d.get("rating"))
-        year_col = "year" if "year" in sp.columns else "season"
-        sp = sp.rename(columns={year_col: "season", "rating": "sp_rating"})
-        sp["season"] = sp["season"] + 1
-        ratings["sp"] = sp[sp["season"] == pred_season][
-            ["team","sp_rating","sp_offense","sp_defense"]].set_index("team")
-    for key, fname, col in [
-        ("fpi", "master_fpi_ratings.csv", "fpi"),
-        ("srs", "master_srs_ratings.csv", "srs"),
-    ]:
-        path = DATA_DIR / fname
-        if path.exists():
-            df = pd.read_csv(path)
-            df.columns = [c.lower() for c in df.columns]
-            if "school" in df.columns: df = df.rename(columns={"school": "team"})
-            if "year"   in df.columns: df = df.rename(columns={"year": "season"})
-            if "rating" in df.columns and col == "srs":
-                df = df.rename(columns={"rating": "srs"})
-            df["season"] = pd.to_numeric(df["season"], errors="coerce") + 1
-            if col in df.columns:
-                ratings[key] = df[df["season"] == pred_season][
-                    ["team", col]].set_index("team")
-    rec_path = DATA_DIR / "master_recruiting.csv"
-    if rec_path.exists():
-        rec = pd.read_csv(rec_path)
-        rec.columns = [c.lower() for c in rec.columns]
-        if "points" not in rec.columns and "total" in rec.columns:
-            rec = rec.rename(columns={"total": "points"})
-        rec = rec.sort_values(["team","year"])
-        rec["recruiting_4yr"] = rec.groupby("team")["points"].transform(
-            lambda x: x.rolling(4, min_periods=1).mean())
-        ratings["recruiting"] = rec[rec["year"] == pred_season - 1][
-            ["team","recruiting_4yr"]].set_index("team")
-    # ── Transfer Portal features (current season — no year shift) ─────────
-    portal_path = DATA_DIR / "master_portal_features.csv"
-    if portal_path.exists():
-        portal = pd.read_csv(portal_path)
-        portal.columns = [c.lower() for c in portal.columns]
-        portal["season"] = pd.to_numeric(portal["season"], errors="coerce")
-        portal_cols = ["portal_net_rating", "portal_qb_in", "portal_qb_out",
-                       "portal_net_count", "portal_stars_in_avg",
-                       "portal_talent_in", "portal_talent_out"]
-        avail = [c for c in portal_cols if c in portal.columns]
-        season_portal = portal[portal["season"] == pred_season]
-        if not season_portal.empty and avail:
-            ratings["portal"] = season_portal[["team"] + avail].set_index("team")
-
-    # ── WEPA (opponent-adjusted EPA) — +1 year shift already in the data ──
-    wepa_path = DATA_DIR / "master_wepa.csv"
-    if wepa_path.exists():
-        try:
-            wepa = pd.read_csv(wepa_path)
-            wepa.columns = [c.lower() for c in wepa.columns]
-            wepa["season"] = pd.to_numeric(wepa["season"], errors="coerce")
-            wepa_cols = ["wepa_offense", "wepa_defense", "wepa_success_off",
-                         "wepa_success_def", "wepa_explosiveness",
-                         "wepa_explosiveness_def"]
-            avail = [c for c in wepa_cols if c in wepa.columns]
-            w = wepa[wepa["season"] == pred_season]
-            if not w.empty and avail:
-                ratings["wepa"] = w[["team"] + avail].set_index("team")
-        except Exception:
-            pass
-
-    # ── Talent composite (current season — no year shift) ─────────────────
-    talent_path = DATA_DIR / "master_talent.csv"
-    if talent_path.exists():
-        try:
-            talent = pd.read_csv(talent_path)
-            talent.columns = [c.lower() for c in talent.columns]
-            talent["season"] = pd.to_numeric(talent["season"], errors="coerce")
-            t = talent[talent["season"] == pred_season]
-            if not t.empty and "talent" in t.columns:
-                ratings["talent"] = t[["team", "talent"]].set_index("team")
-        except Exception:
-            pass
-
-    # ── Havoc rate — +1 year shift already in the data ────────────────────
-    havoc_path = DATA_DIR / "master_havoc.csv"
-    if havoc_path.exists():
-        try:
-            havoc = pd.read_csv(havoc_path)
-            havoc.columns = [c.lower() for c in havoc.columns]
-            havoc["season"] = pd.to_numeric(havoc["season"], errors="coerce")
-            havoc_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
-                          "rush_success_rate", "pass_success_rate"]
-            avail = [c for c in havoc_cols if c in havoc.columns]
-            h = havoc[havoc["season"] == pred_season]
-            if not h.empty and avail:
-                ratings["havoc"] = h[["team"] + avail].set_index("team")
-        except Exception:
-            pass
-
-    # ── HFA — computed fresh from master_games.csv to avoid stale feature_matrix ──
-    # build_home_field_advantage() shifts 1 year, so for pred_season we use
-    # games from the 2 most recently completed seasons.
-    games_path = DATA_DIR / "master_games.csv"
-    if games_path.exists():
-        try:
-            g = pd.read_csv(games_path)
-            g["season"]       = pd.to_numeric(g["season"],       errors="coerce")
-            g["home_points"]  = pd.to_numeric(g.get("home_points",  pd.Series()), errors="coerce")
-            g["away_points"]  = pd.to_numeric(g.get("away_points",  pd.Series()), errors="coerce")
-            g["neutral_site"] = g.get("neutral_site", 0).fillna(0).astype(int)
-            g = g.dropna(subset=["home_points", "away_points"])
-            g["point_diff"] = g["home_points"] - g["away_points"]
-            # Use 2 most recently completed seasons (< pred_season)
-            completed = sorted(g[g["season"] < pred_season]["season"].dropna().unique())
-            recent2   = completed[-2:] if len(completed) >= 2 else completed
-            g = g[(g["season"].isin(recent2)) & (g["neutral_site"] == 0)]
-            if not g.empty:
-                h_m = g.groupby("home_team")["point_diff"].mean().rename("home_margin")
-                a_m = (-g.groupby("away_team")["point_diff"]).mean().rename("away_margin")
-                hfa_df = pd.concat([h_m, a_m], axis=1).fillna(0)
-                hfa_df["hfa_estimate"] = hfa_df["home_margin"] - hfa_df["away_margin"]
-                ratings["hfa"] = hfa_df[["hfa_estimate"]]
-        except Exception:
-            pass
-
-    return ratings
+    """Thin wrapper — delegates entirely to feature_builder.load_rating_sources."""
+    return load_rating_sources(pred_season, DATA_DIR)
 
 
 @st.cache_data(show_spinner="Computing Elo ratings...", ttl=86400)
 def load_current_elo(pred_season: int) -> pd.DataFrame:
-    sys.path.insert(0, str(ROOT_DIR / "src"))
-    try:
-        from elo_ratings import EloSystem
-    except ImportError:
-        return pd.DataFrame(columns=["elo"])
-    games_path = DATA_DIR / "master_games.csv"
-    sp_path    = DATA_DIR / "master_sp_ratings.csv"
-    if not games_path.exists():
-        return pd.DataFrame(columns=["elo"])
-    games = pd.read_csv(games_path)
-    if sp_path.exists():
-        sp  = pd.read_csv(sp_path)
-        fbs = set(sp["team"].unique())
-        games = games[games["home_team"].isin(fbs) & games["away_team"].isin(fbs)]
-    games = games[games["season"] <= pred_season - 1].dropna(
-        subset=["home_points","away_points"])
-    elo = EloSystem()
-    elo.run(games)
-    return elo.current_ratings_df().set_index("team")[["elo"]]
+    """Thin wrapper — delegates entirely to feature_builder.load_current_elo."""
+    return _fb_load_current_elo(pred_season, DATA_DIR)
 
 
 @st.cache_data(show_spinner="Loading recent form...", ttl=86400)
 def load_recent_epa(pred_season: int) -> pd.DataFrame:
-    ppa_path = DATA_DIR / "master_ppa_games.csv"
-    if not ppa_path.exists():
-        return pd.DataFrame()
-    ppa = pd.read_csv(ppa_path)
-    last = ppa[ppa["season"] == pred_season - 1].sort_values(["team","week"])
-    if last.empty:
-        return pd.DataFrame()
-    cols = ["off_epa","def_epa","off_epa_pass","off_epa_rush"]
-    last3 = last.groupby("team").tail(3).groupby("team")[cols].mean()
-    last3.columns = ["off_epa_roll3","def_epa_roll3","off_epa_pass_roll3","off_epa_rush_roll3"]
-    last5 = last.groupby("team").tail(5).groupby("team")[cols].mean()
-    last5.columns = ["off_epa_roll5","def_epa_roll5","off_epa_pass_roll5","off_epa_rush_roll5"]
-    return last3.join(last5, how="outer")
+    """Thin wrapper — delegates entirely to feature_builder.load_recent_epa."""
+    return _fb_load_recent_epa(pred_season, DATA_DIR)
 
 
 # ─── SCHEDULE & LINES ─────────────────────────────────────────────────────────
@@ -585,122 +436,33 @@ def fetch_lines(games_df: pd.DataFrame) -> pd.DataFrame:
 
 def build_and_predict(games, lines, ratings, epa, elo,
                       spread_model, totals_model, win_prob_model, feature_lists):
+    """
+    Merge lines onto games, build feature vectors via feature_builder, run
+    the three models, and return a predictions DataFrame.
+    """
+    # ── Merge lines ───────────────────────────────────────────────────────
     if not lines.empty:
-        ml_avail = [c for c in ["home_moneyline","away_moneyline"] if c in lines.columns]
-        line_cols = ["game_id","spread","over_under","spread_open"] + ml_avail
+        ml_avail = [c for c in ["home_moneyline", "away_moneyline"] if c in lines.columns]
+        line_cols = ["game_id", "spread", "over_under", "spread_open"] + ml_avail
         if "provider" in lines.columns:
             line_cols.append("provider")
-        df = games.merge(lines[[c for c in line_cols if c in lines.columns]],
-                         on="game_id", how="left")
+        df = games.merge(
+            lines[[c for c in line_cols if c in lines.columns]],
+            on="game_id", how="left"
+        )
     else:
         df = games.copy()
         df["spread"] = df["over_under"] = df["spread_open"] = np.nan
 
-    if "home_moneyline" not in df.columns: df["home_moneyline"] = np.nan
-    if "away_moneyline" not in df.columns: df["away_moneyline"] = np.nan
+    if "home_moneyline" not in df.columns:
+        df["home_moneyline"] = np.nan
+    if "away_moneyline" not in df.columns:
+        df["away_moneyline"] = np.nan
 
-    def get_r(team, src_key, col):
-        src = ratings.get(src_key)
-        if src is None or team not in src.index: return np.nan
-        if col not in src.columns: return np.nan
-        val = src.loc[team, col]
-        if isinstance(val, pd.Series): val = val.iloc[0]
-        try: return np.nan if pd.isna(val) else float(val)
-        except: return np.nan
+    # ── Build all team features via shared feature_builder ────────────────
+    df = attach_team_features(df, ratings, epa, elo if not elo.empty else None)
 
-    PORTAL_FEAT_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",
-                        "portal_net_count", "portal_stars_in_avg",
-                        "portal_talent_in", "portal_talent_out"]
-
-    for side, tcol in [("home","home_team"), ("away","away_team")]:
-        ts = df[tcol]
-        df[f"{side}_sp_rating"]      = ts.map(lambda t: get_r(t,"sp","sp_rating"))
-        df[f"{side}_sp_offense"]     = ts.map(lambda t: get_r(t,"sp","sp_offense"))
-        df[f"{side}_sp_defense"]     = ts.map(lambda t: get_r(t,"sp","sp_defense"))
-        df[f"{side}_fpi"]            = ts.map(lambda t: get_r(t,"fpi","fpi"))
-        df[f"{side}_srs"]            = ts.map(lambda t: get_r(t,"srs","srs"))
-        df[f"{side}_recruiting_4yr"] = ts.map(lambda t: get_r(t,"recruiting","recruiting_4yr"))
-        df[f"{side}_hfa"]            = ts.map(lambda t: get_r(t,"hfa","hfa_estimate"))
-        df[f"{side}_pregame_elo"]    = ts.map(
-            lambda t: float(elo.loc[t,"elo"]) if (not elo.empty and t in elo.index) else np.nan)
-        if not epa.empty:
-            for col in epa.columns:
-                df[f"{side}_{col}"] = ts.map(
-                    lambda t, c=col: float(epa.loc[t,c]) if t in epa.index else np.nan)
-        # Transfer portal features (fill 0 = no portal activity)
-        portal_src = ratings.get("portal")
-        for pcol in PORTAL_FEAT_COLS:
-            if portal_src is not None and pcol in portal_src.columns:
-                df[f"{side}_{pcol}"] = ts.map(
-                    lambda t, c=pcol: float(portal_src.loc[t, c])
-                    if t in portal_src.index else 0.0)
-            else:
-                df[f"{side}_{pcol}"] = 0.0
-
-    df["sp_diff"]              = df["home_sp_rating"]        - df["away_sp_rating"]
-    df["sp_off_diff"]          = df["home_sp_offense"]       - df["away_sp_offense"]
-    df["sp_def_diff"]          = df["home_sp_defense"]       - df["away_sp_defense"]
-    df["elo_diff"]             = df["home_pregame_elo"]      - df["away_pregame_elo"]
-    df["fpi_diff"]             = df["home_fpi"]              - df["away_fpi"]
-    df["srs_diff"]             = df["home_srs"]              - df["away_srs"]
-    df["recruiting_diff"]      = df["home_recruiting_4yr"]   - df["away_recruiting_4yr"]
-    df["hfa_diff"]             = df["home_hfa"].fillna(0)    - df["away_hfa"].fillna(0)
-    df["portal_net_rating_diff"] = df["home_portal_net_rating"] - df["away_portal_net_rating"]
-
-    # ── WEPA differentials ────────────────────────────────────────────────
-    wepa_src = ratings.get("wepa")
-    for side, tcol in [("home", "home_team"), ("away", "away_team")]:
-        for col in ["wepa_offense", "wepa_defense", "wepa_success_off",
-                    "wepa_success_def", "wepa_explosiveness", "wepa_explosiveness_def"]:
-            df[f"{side}_{col}"] = (
-                df[tcol].map(lambda t, c=col:
-                    float(wepa_src.loc[t, c]) if (wepa_src is not None
-                    and t in wepa_src.index and c in wepa_src.columns) else np.nan)
-            )
-    if wepa_src is not None:
-        df["wepa_off_diff"]           = df["home_wepa_offense"]         - df["away_wepa_offense"]
-        df["wepa_def_diff"]           = df["home_wepa_defense"]         - df["away_wepa_defense"]
-        df["wepa_success_off_diff"]   = df["home_wepa_success_off"]     - df["away_wepa_success_off"]
-        df["wepa_success_def_diff"]   = df["home_wepa_success_def"]     - df["away_wepa_success_def"]
-        df["wepa_explosiveness_diff"] = df["home_wepa_explosiveness"]   - df["away_wepa_explosiveness"]
-
-    # ── Talent differential ───────────────────────────────────────────────
-    talent_src = ratings.get("talent")
-    for side, tcol in [("home", "home_team"), ("away", "away_team")]:
-        df[f"{side}_talent"] = (
-            df[tcol].map(lambda t:
-                float(talent_src.loc[t, "talent"]) if (talent_src is not None
-                and t in talent_src.index) else np.nan)
-        )
-    if talent_src is not None:
-        df["talent_diff"] = df["home_talent"] - df["away_talent"]
-
-    # ── Havoc differentials ───────────────────────────────────────────────
-    havoc_src = ratings.get("havoc")
-    for side, tcol in [("home", "home_team"), ("away", "away_team")]:
-        for col in ["havoc_total", "havoc_front_seven", "havoc_db",
-                    "rush_success_rate", "pass_success_rate"]:
-            df[f"{side}_{col}"] = (
-                df[tcol].map(lambda t, c=col:
-                    float(havoc_src.loc[t, c]) if (havoc_src is not None
-                    and t in havoc_src.index and c in havoc_src.columns) else np.nan)
-            )
-    if havoc_src is not None:
-        df["havoc_diff"]   = df["home_havoc_total"]       - df["away_havoc_total"]
-        df["rush_sr_diff"] = df["home_rush_success_rate"] - df["away_rush_success_rate"]
-    if "home_off_epa_roll3" in df.columns:
-        df["epa_off_diff_roll3"] = df["home_off_epa_roll3"] - df["away_off_epa_roll3"]
-        df["epa_def_diff_roll3"] = df["home_def_epa_roll3"] - df["away_def_epa_roll3"]
-    df["home_rest_days"] = df["away_rest_days"] = 14
-    df["rest_diff"]      = 0
-    df["spread"]         = pd.to_numeric(df["spread"], errors="coerce")
-    df["over_under"]     = pd.to_numeric(df["over_under"], errors="coerce")
-    df["spread_open"]    = pd.to_numeric(df.get("spread_open", pd.Series(dtype=float)), errors="coerce")
-    df["line_movement"]  = df["spread"] - df["spread_open"]
-    df["line_moved_home"] = (df["line_movement"] < -1.0).astype(int)
-    df["line_moved_away"] = (df["line_movement"] >  1.0).astype(int)
-    df["vegas_home_margin"] = -df["spread"].fillna(0)
-
+    # ── Assemble feature matrices for each model ──────────────────────────
     def make_feat(feat_names):
         out = pd.DataFrame(index=df.index)
         for f in feat_names:
@@ -711,20 +473,12 @@ def build_and_predict(games, lines, ratings, epa, elo,
     feat_tot = make_feat(feature_lists["totals"])
     feat_win = make_feat(feature_lists["win_prob"])
 
-    # ── Flag unrated opponents (FCS teams / small programs with no ratings) ──
-    # When a team has no SP+, FPI, or SRS, the imputer fills medians and the
-    # model effectively sees an "average FBS opponent" — badly underpredicting
-    # blowouts. We flag these games so the UI can warn users.
-    key_rating_cols = ["sp_rating", "fpi", "srs"]
-    for side in ("home", "away"):
-        rating_check = [f"{side}_{c}" for c in key_rating_cols if f"{side}_{c}" in df.columns]
-        df[f"{side}_unrated"] = (df[rating_check].isna().all(axis=1)) if rating_check else False
-    df["has_unrated_opponent"] = df["home_unrated"] | df["away_unrated"]
-
-    out = df[["game_id","season","week","home_team","away_team",
-              "neutral_site","conference_game","spread","over_under",
-              "spread_open","home_moneyline","away_moneyline",
-              "home_unrated","away_unrated","has_unrated_opponent"]].copy()
+    # ── Build output frame ────────────────────────────────────────────────
+    out_cols = ["game_id", "season", "week", "home_team", "away_team",
+                "neutral_site", "conference_game", "spread", "over_under",
+                "spread_open", "home_moneyline", "away_moneyline",
+                "home_unrated", "away_unrated", "has_unrated_opponent"]
+    out = df[[c for c in out_cols if c in df.columns]].copy()
     if "provider" in df.columns:
         out["provider"] = df["provider"]
 
@@ -755,7 +509,7 @@ def build_and_predict(games, lines, ratings, epa, elo,
                            "ml_book_odds": r["away_moneyline"],
                            "ml_model_odds": r["model_away_ml"]})
 
-    out[["ml_team","ml_ev","ml_book_odds","ml_model_odds"]] = out.apply(best_ml, axis=1)
+    out[["ml_team", "ml_ev", "ml_book_odds", "ml_model_odds"]] = out.apply(best_ml, axis=1)
     return out
 
 
@@ -1379,6 +1133,24 @@ def main():
             preds = build_and_predict(games, lines, ratings, epa, elo,
                                       spread_model, totals_model, win_prob_model,
                                       feature_lists)
+
+        # ── Feature coverage report ───────────────────────────────────────
+        # Show which data sources are actually present for this week's games
+        # so users know when predictions are flying partially blind.
+        cov = feature_coverage_report(preds)
+        COVERAGE_WARN = {"HFA", "Talent", "WEPA", "Havoc", "Portal", "Line Move"}
+        missing = [g for g, pct in cov.items() if pct < 0.5 and g in COVERAGE_WARN]
+        if missing:
+            with st.expander(f"⚠️  Data coverage — {len(missing)} source(s) below 50%", expanded=False):
+                st.caption("Sources with low coverage may reduce prediction accuracy.")
+                cols = st.columns(4)
+                for i, (group, pct) in enumerate(sorted(cov.items(), key=lambda x: x[1])):
+                    color = "#53d337" if pct >= 0.8 else "#f0b429" if pct >= 0.5 else "#e53e3e"
+                    cols[i % 4].markdown(
+                        f"<div style='font-size:0.8em;color:#8b9bb4'>{group}</div>"
+                        f"<div style='font-size:1em;font-weight:700;color:{color}'>{pct:.0%}</div>",
+                        unsafe_allow_html=True,
+                    )
 
         # ── Filter picks ──────────────────────────────────────────────────
         ml_bets = preds[

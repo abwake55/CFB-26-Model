@@ -38,6 +38,17 @@ import pandas as pd
 import requests
 from pathlib import Path
 
+# ── Shared feature builder ────────────────────────────────────────────────────
+_SRC_DIR = Path(__file__).parent
+if str(_SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(_SRC_DIR))
+from feature_builder import (
+    load_rating_sources,
+    load_recent_epa    as _fb_load_recent_epa,
+    load_current_elo   as _fb_load_current_elo,
+    attach_team_features,
+)
+
 # ─── PATHS ───────────────────────────────────────────────────────────────────
 
 ROOT_DIR  = Path(__file__).parent.parent
@@ -290,182 +301,21 @@ def load_models():
 
 
 # ─── 2. LOAD TEAM DATA ───────────────────────────────────────────────────────
+# All three loaders now delegate to feature_builder — single source of truth.
 
 def load_team_ratings(pred_season: int) -> dict:
-    """
-    Load all per-team rating data for the prediction season.
-
-    pred_season = the season we're predicting (e.g. 2026).
-    Because features.py shifts SP+/FPI/SRS forward by +1, the 2025 raw file
-    already represents 2026 pre-season ratings after the shift.
-    We load with the shift already applied — so we query by pred_season directly.
-    """
-    ratings = {}
-
-    # ── SP+ ──────────────────────────────────────────────────────────────────
-    sp_path = DATA_DIR / "master_sp_ratings.csv"
-    if sp_path.exists():
-        sp = pd.read_csv(sp_path)
-        import ast
-
-        def safe_parse(val):
-            if pd.isna(val): return {}
-            if isinstance(val, dict): return val
-            try: return ast.literal_eval(val)
-            except: return {}
-
-        sp["off_dict"] = sp["offense"].apply(safe_parse)
-        sp["def_dict"] = sp["defense"].apply(safe_parse)
-        sp["sp_offense"] = sp["off_dict"].apply(lambda d: d.get("rating"))
-        sp["sp_defense"] = sp["def_dict"].apply(lambda d: d.get("rating"))
-
-        year_col = "year" if "year" in sp.columns else "season"
-        sp = sp.rename(columns={year_col: "season", "rating": "sp_rating"})
-        sp["season"] = sp["season"] + 1   # apply same leakage shift as features.py
-
-        sp_cur = sp[sp["season"] == pred_season][
-            ["team", "sp_rating", "sp_offense", "sp_defense"]
-        ].set_index("team")
-        ratings["sp"] = sp_cur
-
-    # ── FPI ───────────────────────────────────────────────────────────────────
-    fpi_path = DATA_DIR / "master_fpi_ratings.csv"
-    if fpi_path.exists():
-        fpi = pd.read_csv(fpi_path)
-        fpi.columns = [c.lower() for c in fpi.columns]
-        if "school" in fpi.columns: fpi = fpi.rename(columns={"school": "team"})
-        if "year"   in fpi.columns: fpi = fpi.rename(columns={"year": "season"})
-        fpi["season"] = pd.to_numeric(fpi["season"], errors="coerce") + 1
-        if "fpi" in fpi.columns:
-            fpi_cur = fpi[fpi["season"] == pred_season][["team","fpi"]].set_index("team")
-            ratings["fpi"] = fpi_cur
-
-    # ── SRS ───────────────────────────────────────────────────────────────────
-    srs_path = DATA_DIR / "master_srs_ratings.csv"
-    if srs_path.exists():
-        srs = pd.read_csv(srs_path)
-        srs.columns = [c.lower() for c in srs.columns]
-        if "school" in srs.columns: srs = srs.rename(columns={"school": "team"})
-        if "year"   in srs.columns: srs = srs.rename(columns={"year": "season"})
-        srs["season"] = pd.to_numeric(srs["season"], errors="coerce") + 1
-        if "rating" in srs.columns: srs = srs.rename(columns={"rating": "srs"})
-        if "srs" in srs.columns:
-            srs_cur = srs[srs["season"] == pred_season][["team","srs"]].set_index("team")
-            ratings["srs"] = srs_cur
-
-    # ── Recruiting (4-year rolling) ───────────────────────────────────────────
-    rec_path = DATA_DIR / "master_recruiting.csv"
-    if rec_path.exists():
-        rec = pd.read_csv(rec_path)
-        rec.columns = [c.lower() for c in rec.columns]
-        if "points" not in rec.columns and "total" in rec.columns:
-            rec = rec.rename(columns={"total": "points"})
-        rec = rec.sort_values(["team", "year"])
-        rec["recruiting_4yr"] = (
-            rec.groupby("team")["points"]
-               .transform(lambda x: x.rolling(4, min_periods=1).mean())
-        )
-        # Use most recent available year (pred_season - 1)
-        rec_cur = rec[rec["year"] == pred_season - 1][
-            ["team", "recruiting_4yr"]
-        ].set_index("team")
-        ratings["recruiting"] = rec_cur
-
-    # ── Home Field Advantage (from feature matrix, last computed) ─────────────
-    fm_path = DATA_DIR / "feature_matrix.csv"
-    if fm_path.exists():
-        fm = pd.read_csv(fm_path,
-            usecols=lambda c: c in ["season","home_team","home_hfa"])
-        fm = fm[fm["season"] == pred_season - 1]
-        if not fm.empty:
-            hfa = fm.groupby("home_team")["home_hfa"].last().reset_index()
-            hfa.columns = ["team", "hfa_estimate"]
-            ratings["hfa"] = hfa.set_index("team")
-
-    return ratings
+    """Load all per-team rating data for pred_season via feature_builder."""
+    return load_rating_sources(pred_season, DATA_DIR)
 
 
 def load_current_elo(pred_season: int) -> pd.DataFrame:
-    """
-    Recompute Elo through the end of pred_season-1 and return current ratings.
-    Returns DataFrame with index=team, column=elo.
-    """
-    sys.path.insert(0, str(ROOT_DIR / "src"))
-    from elo_ratings import EloSystem
-
-    games_path = DATA_DIR / "master_games.csv"
-    sp_path    = DATA_DIR / "master_sp_ratings.csv"
-
-    if not games_path.exists():
-        return pd.DataFrame(columns=["elo"])
-
-    games = pd.read_csv(games_path)
-
-    # Filter to FBS only
-    if sp_path.exists():
-        sp  = pd.read_csv(sp_path)
-        fbs = set(sp["team"].unique())
-        games = games[
-            games["home_team"].isin(fbs) & games["away_team"].isin(fbs)
-        ]
-
-    # Only use completed games up to and including pred_season-1
-    games = games[
-        games["season"] <= (pred_season - 1)
-    ].dropna(subset=["home_points", "away_points"])
-
-    elo = EloSystem()
-    elo.run(games)
-
-    return elo.current_ratings_df().set_index("team")[["elo"]]
+    """Recompute Elo through pred_season−1 via feature_builder."""
+    return _fb_load_current_elo(pred_season, DATA_DIR)
 
 
 def load_recent_epa(pred_season: int) -> pd.DataFrame:
-    """
-    Get each team's rolling EPA from their last 5 games of pred_season-1.
-    Used as a form proxy when no in-season pred_season data exists yet.
-    Returns DataFrame indexed by team with epa columns.
-    """
-    ppa_path = DATA_DIR / "master_ppa_games.csv"
-    if not ppa_path.exists():
-        return pd.DataFrame()
-
-    ppa = pd.read_csv(ppa_path)
-    last_season = ppa[ppa["season"] == pred_season - 1].copy()
-
-    if last_season.empty:
-        return pd.DataFrame()
-
-    last_season = last_season.sort_values(["team", "week"])
-
-    # Last 5 games per team
-    last5 = (
-        last_season.groupby("team")
-        .tail(5)
-        .groupby("team")
-        [["off_epa", "def_epa", "off_epa_pass", "off_epa_rush"]]
-        .mean()
-    )
-
-    last5.columns = [
-        "off_epa_roll5", "def_epa_roll5",
-        "off_epa_pass_roll5", "off_epa_rush_roll5",
-    ]
-
-    # Last 3 games
-    last3 = (
-        last_season.groupby("team")
-        .tail(3)
-        .groupby("team")
-        [["off_epa", "def_epa", "off_epa_pass", "off_epa_rush"]]
-        .mean()
-    )
-    last3.columns = [
-        "off_epa_roll3", "def_epa_roll3",
-        "off_epa_pass_roll3", "off_epa_rush_roll3",
-    ]
-
-    return last3.join(last5, how="outer")
+    """Load last-season rolling EPA per team via feature_builder."""
+    return _fb_load_recent_epa(pred_season, DATA_DIR)
 
 
 # ─── 3. FETCH SCHEDULE & LINES ───────────────────────────────────────────────
@@ -564,18 +414,20 @@ def fetch_lines(season: int, week: int) -> pd.DataFrame:
 # ─── 4. BUILD FEATURES FOR UPCOMING GAMES ────────────────────────────────────
 
 def build_features(
-    games:    pd.DataFrame,
-    lines:    pd.DataFrame,
-    ratings:  dict,
-    epa:      pd.DataFrame,
-    elo:      pd.DataFrame,
+    games:         pd.DataFrame,
+    lines:         pd.DataFrame,
+    ratings:       dict,
+    epa:           pd.DataFrame,
+    elo:           pd.DataFrame,
     feature_names: list,
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Build a feature row for each game, matching the columns the saved models expect.
-    Any feature that can't be computed is left as NaN (models handle via imputation).
+    Merge lines onto games, build all team features via feature_builder, and
+    extract the feature matrix columns that the saved model expects.
+
+    Returns (games_with_features, feature_matrix).
     """
-    # Merge lines onto games (including moneylines)
+    # ── Merge lines ────────────────────────────────────────────────────────
     if not lines.empty:
         line_cols = ["game_id", "spread", "over_under", "spread_open"]
         for ml_col in ["home_moneyline", "away_moneyline"]:
@@ -584,87 +436,20 @@ def build_features(
         df = games.merge(lines[line_cols], on="game_id", how="left")
     else:
         df = games.copy()
-        df["spread"] = np.nan
-        df["over_under"] = np.nan
-        df["spread_open"] = np.nan
+        df["spread"] = df["over_under"] = df["spread_open"] = np.nan
 
     if "home_moneyline" not in df.columns:
         df["home_moneyline"] = np.nan
     if "away_moneyline" not in df.columns:
         df["away_moneyline"] = np.nan
 
-    # ── Add ratings for each team ──────────────────────────────────────────
+    # ── Build all team features via shared feature_builder ─────────────────
+    df = attach_team_features(
+        df, ratings, epa,
+        elo if (elo is not None and not elo.empty) else None,
+    )
 
-    def get_rating(team, source_key, col, default=np.nan):
-        src = ratings.get(source_key)
-        if src is None or team not in src.index:
-            return default
-        if col not in src.columns:
-            return default
-        val = src.loc[team, col]
-        # If duplicate index entries, take the first scalar value
-        if isinstance(val, pd.Series):
-            val = val.iloc[0]
-        try:
-            return default if pd.isna(val) else val
-        except Exception:
-            return default
-
-    for side, team_col in [("home", "home_team"), ("away", "away_team")]:
-        team_series = df[team_col]
-
-        df[f"{side}_sp_rating"]  = team_series.map(lambda t: get_rating(t, "sp", "sp_rating"))
-        df[f"{side}_sp_offense"] = team_series.map(lambda t: get_rating(t, "sp", "sp_offense"))
-        df[f"{side}_sp_defense"] = team_series.map(lambda t: get_rating(t, "sp", "sp_defense"))
-        df[f"{side}_fpi"]        = team_series.map(lambda t: get_rating(t, "fpi", "fpi"))
-        df[f"{side}_srs"]        = team_series.map(lambda t: get_rating(t, "srs", "srs"))
-        df[f"{side}_recruiting_4yr"] = team_series.map(
-            lambda t: get_rating(t, "recruiting", "recruiting_4yr"))
-        df[f"{side}_hfa"]        = team_series.map(
-            lambda t: get_rating(t, "hfa", "hfa_estimate"))
-
-        # Elo
-        if not elo.empty:
-            df[f"{side}_pregame_elo"] = team_series.map(
-                lambda t: elo.loc[t, "elo"] if t in elo.index else np.nan)
-        else:
-            df[f"{side}_pregame_elo"] = np.nan
-
-        # EPA from last season
-        if not epa.empty:
-            for col in epa.columns:
-                df[f"{side}_{col}"] = team_series.map(
-                    lambda t, c=col: epa.loc[t, c] if t in epa.index else np.nan)
-
-    # ── Derived differentials ──────────────────────────────────────────────
-    df["sp_diff"]     = df["home_sp_rating"]  - df["away_sp_rating"]
-    df["sp_off_diff"] = df["home_sp_offense"] - df["away_sp_offense"]
-    df["sp_def_diff"] = df["home_sp_defense"] - df["away_sp_defense"]
-    df["elo_diff"]    = df["home_pregame_elo"]- df["away_pregame_elo"]
-    df["fpi_diff"]    = df["home_fpi"]        - df["away_fpi"]
-    df["srs_diff"]    = df["home_srs"]        - df["away_srs"]
-    df["recruiting_diff"] = df["home_recruiting_4yr"] - df["away_recruiting_4yr"]
-    df["hfa_diff"]    = df["home_hfa"].fillna(0) - df["away_hfa"].fillna(0)
-
-    if "home_off_epa_roll3" in df.columns and "away_off_epa_roll3" in df.columns:
-        df["epa_off_diff_roll3"] = df["home_off_epa_roll3"] - df["away_off_epa_roll3"]
-        df["epa_def_diff_roll3"] = df["home_def_epa_roll3"] - df["away_def_epa_roll3"]
-
-    # ── Rest days (default 14 for week 1, TBD for later weeks) ────────────
-    df["home_rest_days"] = 14
-    df["away_rest_days"] = 14
-    df["rest_diff"]      = 0
-
-    # ── Line movement ──────────────────────────────────────────────────────
-    df["line_movement"]   = df["spread"] - df["spread_open"]
-    df["line_moved_home"] = (df["line_movement"] < -1.0).astype(int)
-    df["line_moved_away"] = (df["line_movement"] >  1.0).astype(int)
-
-    # ── Vegas implied home margin ──────────────────────────────────────────
-    df["vegas_home_margin"] = -df["spread"].fillna(0)
-
-    # ── Only return the columns the models expect ──────────────────────────
-    available = [f for f in feature_names if f in df.columns]
+    # ── Extract the exact columns the model expects ────────────────────────
     feature_df = pd.DataFrame(index=df.index)
     for f in feature_names:
         feature_df[f] = df[f] if f in df.columns else np.nan
