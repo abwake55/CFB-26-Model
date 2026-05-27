@@ -536,6 +536,39 @@ def train_and_evaluate():
             best_sp_rmse, best_sp_w1 = val_rmse, w1
     best_sp_w2 = round(1 - best_sp_w1, 1)
     ensemble_sp = EnsembleRegressor(ridge_sp, gbm_sp, w1=best_sp_w1, w2=best_sp_w2)
+
+    # ── Cross-calibrate win probability with spread-implied probability ────────
+    # Spread model and win prob classifier are trained independently and can give
+    # inconsistent signals (e.g. spread says coin-flip but classifier says 70/30).
+    # Fix: convert spread prediction → implied win prob via N(0,σ), then blend.
+    #   P(home wins | spread) = Φ(pred_spread / σ)
+    # where σ = std of spread residuals on the val set.
+    # Blend weight α is tuned on the val set to minimise Brier score.
+    print("\n  Cross-calibrating spread model with win probability model...")
+    from math import erf as _erf, sqrt as _msqrt
+    def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
+
+    sp_val_preds       = ensemble_sp.predict(X_val_sp)
+    spread_sigma       = float(np.std(sp_val_preds - y_val_sp.values))
+    spread_implied_val = np.array([_norm_cdf(p / spread_sigma) for p in sp_val_preds])
+    classifier_val     = gbm_win.predict_proba(X_val_win)[:, 1]
+    y_val_win_arr      = y_val_win.values
+
+    best_cal_brier, best_alpha = 999.0, 0.5
+    for a in [i / 10 for i in range(0, 11)]:
+        blended = np.clip(a * spread_implied_val + (1 - a) * classifier_val, 1e-6, 1 - 1e-6)
+        b = brier_score_loss(y_val_win_arr, blended)
+        if b < best_cal_brier:
+            best_cal_brier, best_alpha = b, a
+
+    print(f"  Calibration: spread σ={spread_sigma:.2f} pts  "
+          f"blend α={best_alpha:.1f} (spread) / {1-best_alpha:.1f} (classifier)  "
+          f"val Brier={best_cal_brier:.4f}")
+
+    import json as _json
+    with open(MODELS_DIR / "win_prob_calibration.json", "w") as _f:
+        _json.dump({"spread_sigma": spread_sigma, "blend_alpha": best_alpha}, _f, indent=2)
+
     print(f"\n  Spread ensemble: best val blend = Ridge {best_sp_w1:.0%} / GBM {best_sp_w2:.0%}"
           f"  (val RMSE {best_sp_rmse:.3f})")
 

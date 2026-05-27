@@ -521,6 +521,22 @@ def build_and_predict(games, lines, ratings, epa, elo,
     out["pred_total"]      = totals_model.predict(feat_tot)
     out["pred_win_p"]      = win_prob_model.predict_proba(feat_win)[:, 1]
     out["pred_away_win_p"] = 1 - out["pred_win_p"]
+
+    # ── Cross-calibration: blend spread-implied win prob with classifier ──────
+    # Ensures spread prediction and win probability are internally consistent.
+    # Parameters (sigma, alpha) are tuned on the 2023 validation set in model.py.
+    _calib_path = MODEL_DIR / "win_prob_calibration.json"
+    if _calib_path.exists():
+        import json as _json
+        from math import erf as _erf, sqrt as _msqrt
+        def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
+        _calib  = _json.load(open(_calib_path))
+        _sigma  = _calib["spread_sigma"]
+        _alpha  = _calib["blend_alpha"]
+        _s_impl = out["pred_spread"].apply(lambda s: _norm_cdf(s / _sigma))
+        out["pred_win_p"]      = (_alpha * _s_impl + (1 - _alpha) * out["pred_win_p"]).clip(0.01, 0.99)
+        out["pred_away_win_p"] = 1 - out["pred_win_p"]
+
     out["spread_edge"]     = out["pred_spread"] - (-out["spread"])
     out["totals_edge"]     = out["pred_total"]  - out["over_under"]
 
