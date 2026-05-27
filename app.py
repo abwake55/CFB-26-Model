@@ -593,8 +593,8 @@ def inject_css():
     .stTabs [data-baseweb="tab-list"] {
         background: #0b0e14;
         border-radius: 8px;
-        padding: 4px;
-        gap: 4px;
+        padding: 4px 8px;
+        gap: 20px;
         border: 1px solid #1e2537;
     }
     .stTabs [data-baseweb="tab"] {
