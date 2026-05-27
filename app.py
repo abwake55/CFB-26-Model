@@ -1358,6 +1358,420 @@ def render_analysis_tab():
     )
 
 
+# ─── SEASON STANDINGS TAB ────────────────────────────────────────────────────
+
+def render_standings_tab():
+    """
+    Season Standings — model's full pick record (all flagged bets from
+    model_results.csv) shown side-by-side with each bettor's tracked record.
+    """
+    section_header("Season Standings", "Model picks vs. tracked bets")
+
+    # ── Model record from model_results.csv ──────────────────────────────────
+    results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
+    model_rows = []
+    if results_path.exists():
+        try:
+            res = pd.read_csv(results_path)
+            for col in ["spread_edge", "totals_edge", "covered_spread", "went_over",
+                        "over_under", "pred_total", "spread", "pred_spread"]:
+                if col in res.columns:
+                    res[col] = pd.to_numeric(res[col], errors="coerce")
+
+            # Totals picks — model flags games where edge >= TOTALS_EDGE_MIN
+            if "totals_edge" in res.columns and "went_over" in res.columns:
+                tot = res[res["totals_edge"].abs() >= TOTALS_EDGE_MIN].copy()
+                for _, r in tot.iterrows():
+                    is_over  = r["totals_edge"] > 0
+                    won      = (is_over and r["went_over"] == 1) or (not is_over and r["went_over"] == 0)
+                    model_rows.append({"source": "Model", "bet_type": "Total",
+                                       "won": won, "units": 1, "status": "Won" if won else "Lost"})
+
+            # Spread picks
+            if "spread_edge" in res.columns and "covered_spread" in res.columns:
+                sp = res[res["spread_edge"].abs() >= SPREAD_EDGE_MIN].copy()
+                for _, r in sp.iterrows():
+                    bet_home = r["spread_edge"] > 0
+                    won      = (bet_home and r["covered_spread"] == 1) or \
+                               (not bet_home and r["covered_spread"] == 0)
+                    model_rows.append({"source": "Model", "bet_type": "Spread",
+                                       "won": won, "units": 1, "status": "Won" if won else "Lost"})
+        except Exception as e:
+            st.caption(f"Could not load model results: {e}")
+
+    # ── Bettor records from tracked_bets.json ─────────────────────────────────
+    bets     = load_bets()
+    settled  = [b for b in bets if b["status"] in ("Won", "Lost", "Push")]
+
+    def record_for(source_bets):
+        wins   = sum(1 for b in source_bets if b["status"] == "Won")
+        losses = sum(1 for b in source_bets if b["status"] == "Lost")
+        pushes = sum(1 for b in source_bets if b["status"] == "Push")
+        pnl    = sum(bet_pnl(b) for b in source_bets)
+        total  = wins + losses + pushes
+        wr     = wins / (wins + losses) if (wins + losses) > 0 else None
+        roi    = pnl / total if total > 0 else None
+        clv_vals = [v for b in source_bets if (v := compute_clv(b)) is not None]
+        avg_clv  = sum(clv_vals) / len(clv_vals) if clv_vals else None
+        return dict(wins=wins, losses=losses, pushes=pushes, pnl=pnl,
+                    win_rate=wr, roi=roi, avg_clv=avg_clv, n=total)
+
+    # Build standings rows
+    rows = []
+
+    # Model row
+    if model_rows:
+        model_settled = [r for r in model_rows if r["status"] in ("Won", "Lost")]
+        mw = sum(1 for r in model_settled if r["won"])
+        ml = sum(1 for r in model_settled if not r["won"])
+        mp = sum(0.909 if r["won"] else -1.0 for r in model_settled)
+        wr = mw / (mw + ml) if (mw + ml) > 0 else None
+        rows.append({"Who": "🤖 Model", "Record": f"{mw}–{ml}",
+                     "Win Rate": f"{wr:.1%}" if wr else "—",
+                     "Units P&L": f"{mp:+.1f}u",
+                     "ROI": f"{mp/(mw+ml):.1%}" if (mw+ml) > 0 else "—",
+                     "Avg CLV": "—", "_pnl": mp, "_wr": wr or 0})
+
+    # Bettor rows
+    all_bettors = BETTORS + ["All Bettors"]
+    for bettor in all_bettors:
+        if bettor == "All Bettors":
+            source = settled
+            label  = "📊 All Bettors"
+        else:
+            source = [b for b in settled if b.get("bettor") == bettor]
+            label  = bettor
+        if not source:
+            continue
+        r = record_for(source)
+        rows.append({
+            "Who":       label,
+            "Record":    f"{r['wins']}–{r['losses']}" + (f"–{r['pushes']}P" if r["pushes"] else ""),
+            "Win Rate":  f"{r['win_rate']:.1%}" if r["win_rate"] is not None else "—",
+            "Units P&L": f"{r['pnl']:+.2f}u",
+            "ROI":       f"{r['roi']:.1%}" if r["roi"] is not None else "—",
+            "Avg CLV":   f"{r['avg_clv']:+.1f}" if r["avg_clv"] is not None else "—",
+            "_pnl": r["pnl"], "_wr": r["win_rate"] or 0,
+        })
+
+    if not rows:
+        st.info("No settled bets yet. Track picks from This Week's Picks and mark results in My Bets.")
+        return
+
+    # ── Render leaderboard cards ──────────────────────────────────────────────
+    for i, row in enumerate(sorted(rows, key=lambda x: x["_pnl"], reverse=True)):
+        rank_color = ["#eab308", "#9ca3af", "#b45309"] if i < 3 else ["#374151"]
+        color = rank_color[min(i, len(rank_color)-1)]
+        pnl_val = row["_pnl"]
+        pnl_color = "#22c55e" if pnl_val > 0 else "#ef4444" if pnl_val < 0 else "#6b7280"
+
+        st.html(f"""
+        <div style="background:#1a1f2e;border-left:4px solid {color};
+                    border-top:1px solid #252d3d;border-right:1px solid #252d3d;
+                    border-bottom:1px solid #252d3d;
+                    border-radius:10px;padding:14px 20px;margin-bottom:8px;
+                    display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;align-items:center;gap:14px">
+                <span style="color:{color};font-size:1.1em;font-weight:800;
+                             min-width:24px;text-align:center">{"🥇" if i==0 else "🥈" if i==1 else "🥉" if i==2 else f"#{i+1}"}</span>
+                <span style="color:#ffffff;font-size:1.05em;font-weight:700">{row['Who']}</span>
+            </div>
+            <div style="display:flex;gap:28px;align-items:center">
+                <div style="text-align:center">
+                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
+                                text-transform:uppercase;letter-spacing:.08em">Record</div>
+                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['Record']}</div>
+                </div>
+                <div style="text-align:center">
+                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
+                                text-transform:uppercase;letter-spacing:.08em">Win Rate</div>
+                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['Win Rate']}</div>
+                </div>
+                <div style="text-align:center">
+                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
+                                text-transform:uppercase;letter-spacing:.08em">Units P&L</div>
+                    <div style="color:{pnl_color};font-size:0.9em;font-weight:700">{row['Units P&L']}</div>
+                </div>
+                <div style="text-align:center">
+                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
+                                text-transform:uppercase;letter-spacing:.08em">ROI</div>
+                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['ROI']}</div>
+                </div>
+                <div style="text-align:center">
+                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
+                                text-transform:uppercase;letter-spacing:.08em">Avg CLV</div>
+                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['Avg CLV']}</div>
+                </div>
+            </div>
+        </div>
+        """)
+
+    # ── Breakdown by bet type ─────────────────────────────────────────────────
+    if settled:
+        section_header("Breakdown by Bet Type")
+        by_type = {}
+        for b in settled:
+            bt = b.get("bet_type", "Other")
+            by_type.setdefault(bt, []).append(b)
+        cols = st.columns(len(by_type))
+        for i, (bt, bt_bets) in enumerate(by_type.items()):
+            r = record_for(bt_bets)
+            cols[i].metric(bt, f"{r['wins']}–{r['losses']}",
+                           delta=f"{r['win_rate']:.1%} win rate" if r["win_rate"] else None)
+
+
+# ─── CLV TRACKER TAB ─────────────────────────────────────────────────────────
+
+def render_clv_tab():
+    """Dedicated Closing Line Value tracker with chart + table."""
+    try:
+        import plotly.graph_objects as go
+    except ImportError:
+        st.error("plotly required. Add `plotly>=5.0` to requirements.txt.")
+        return
+
+    bets = load_bets()
+    clv_bets = [b for b in bets if compute_clv(b) is not None]
+
+    if not clv_bets:
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+        st.info("No CLV data yet. Enter closing lines on bets in My Bets to track line value.")
+        st.caption("CLV (Closing Line Value) measures how much better your line was vs. the closing line. "
+                   "Consistently positive CLV is the strongest indicator of long-term edge.")
+        return
+
+    # ── Summary metrics ───────────────────────────────────────────────────────
+    all_clv   = [compute_clv(b) for b in clv_bets]
+    avg_clv   = sum(all_clv) / len(all_clv)
+    beat_rate = sum(1 for v in all_clv if v > 0) / len(all_clv)
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Bets w/ CLV", len(clv_bets))
+    c2.metric("Avg CLV", f"{avg_clv:+.2f}",
+              delta_color="normal" if avg_clv >= 0 else "inverse")
+    c3.metric("Beat the Close", f"{beat_rate:.0%}")
+    c4.metric("Total CLV", f"{sum(all_clv):+.1f}")
+
+    # ── Per-bettor CLV chart ──────────────────────────────────────────────────
+    section_header("CLV Over Time", "Cumulative closing line value per bettor")
+
+    DARK_BG  = "#0f1117"
+    PANEL_BG = "#1a1f2e"
+    BORDER   = "#252d3d"
+    TEXT     = "#d1d5db"
+    COLORS   = ["#eab308", "#3b82f6", "#22c55e", "#f97316", "#8b5cf6"]
+
+    fig = go.Figure()
+    bettor_filter = ["All"] + BETTORS
+    for i, bettor in enumerate(BETTORS):
+        b_bets = sorted(
+            [b for b in clv_bets if b.get("bettor") == bettor],
+            key=lambda x: x.get("date", "")
+        )
+        if not b_bets:
+            continue
+        clv_vals = [compute_clv(b) for b in b_bets]
+        cum_clv  = [sum(clv_vals[:j+1]) for j in range(len(clv_vals))]
+        dates    = [b.get("date", f"Bet {j+1}") for j, b in enumerate(b_bets)]
+        fig.add_trace(go.Scatter(
+            x=list(range(1, len(cum_clv)+1)), y=cum_clv,
+            mode="lines+markers",
+            name=bettor,
+            line=dict(color=COLORS[i % len(COLORS)], width=2),
+            marker=dict(size=6),
+            hovertemplate=f"{bettor}<br>Bet %{{x}}<br>Cumulative CLV: %{{y:+.2f}}<extra></extra>",
+        ))
+
+    fig.add_hline(y=0, line_color="#374151", line_width=1, line_dash="dash")
+    fig.update_layout(
+        paper_bgcolor=PANEL_BG, plot_bgcolor=PANEL_BG,
+        font=dict(color=TEXT, size=11),
+        xaxis=dict(title="Bet #", gridcolor=BORDER, zerolinecolor=BORDER),
+        yaxis=dict(title="Cumulative CLV", gridcolor=BORDER, zerolinecolor=BORDER),
+        legend=dict(bgcolor=PANEL_BG, bordercolor=BORDER),
+        margin=dict(l=50, r=20, t=20, b=50),
+        height=340,
+    )
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+
+    # ── CLV by bet type breakdown ─────────────────────────────────────────────
+    section_header("CLV by Bet Type")
+    by_type = {}
+    for b in clv_bets:
+        bt = b.get("bet_type", "Other")
+        by_type.setdefault(bt, []).append(compute_clv(b))
+
+    cols = st.columns(len(by_type)) if by_type else []
+    for i, (bt, vals) in enumerate(by_type.items()):
+        avg  = sum(vals) / len(vals)
+        beat = sum(1 for v in vals if v > 0) / len(vals)
+        cols[i].metric(bt, f"{avg:+.2f} avg CLV",
+                       delta=f"{beat:.0%} beat close",
+                       delta_color="normal" if avg >= 0 else "inverse")
+
+    # ── Full CLV table ────────────────────────────────────────────────────────
+    section_header("All Bets with CLV")
+    rows = []
+    for b in sorted(clv_bets, key=lambda x: compute_clv(x) or 0, reverse=True):
+        clv = compute_clv(b)
+        unit = "ppts" if b.get("bet_type") == "Moneyline" else "pts"
+        rows.append({
+            "Pick":       b.get("pick", ""),
+            "Type":       b.get("bet_type", ""),
+            "Bettor":     b.get("bettor", ""),
+            "Line":       b.get("line", ""),
+            "Close":      b.get("closing_line", ""),
+            "CLV":        f"{clv:+.2f} {unit}",
+            "Result":     b.get("status", ""),
+            "Week":       f"Wk {b.get('week', '')}",
+        })
+    if rows:
+        clv_df = pd.DataFrame(rows)
+        st.dataframe(clv_df, use_container_width=True, height=300)
+
+
+# ─── HISTORICAL PICKS TAB ─────────────────────────────────────────────────────
+
+def render_history_tab():
+    """Browse any prior week's model picks alongside actual results."""
+    results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
+    if not results_path.exists():
+        st.info("No historical results yet. Run `python3 src/model.py` to generate predictions.")
+        return
+
+    try:
+        res = pd.read_csv(results_path)
+        for col in ["spread_edge", "totals_edge", "point_diff", "total_points",
+                    "spread", "over_under", "pred_spread", "pred_total",
+                    "covered_spread", "went_over", "week", "season"]:
+            if col in res.columns:
+                res[col] = pd.to_numeric(res[col], errors="coerce")
+    except Exception as e:
+        st.error(f"Could not load model results: {e}")
+        return
+
+    # ── Week / season selectors ───────────────────────────────────────────────
+    seasons = sorted(res["season"].dropna().unique().astype(int), reverse=True)
+    col_s, col_w, col_v, _ = st.columns([1, 1, 1, 2])
+    sel_season = col_s.selectbox("Season", seasons, index=0)
+    weeks      = sorted(res[res["season"] == sel_season]["week"].dropna().unique().astype(int))
+    sel_week   = col_w.selectbox("Week", weeks, index=len(weeks)-1 if weeks else 0)
+    view_mode  = col_v.selectbox("Show", ["Flagged Picks", "All Games"])
+
+    week_df = res[(res["season"] == sel_season) & (res["week"] == sel_week)].copy()
+
+    if week_df.empty:
+        st.info(f"No data for {sel_season} Week {sel_week}.")
+        return
+
+    st.markdown(
+        f'<div style="color:#4b5563;font-size:0.82em;margin:8px 0 16px 0">'
+        f'{len(week_df)} games · {sel_season} Week {sel_week}</div>',
+        unsafe_allow_html=True
+    )
+
+    # Filter to flagged picks if requested
+    if view_mode == "Flagged Picks":
+        flagged = week_df[
+            (week_df["totals_edge"].abs() >= TOTALS_EDGE_MIN) |
+            (week_df["spread_edge"].abs() >= SPREAD_EDGE_MIN)
+        ]
+        if flagged.empty:
+            st.info("No picks met the edge threshold this week.")
+            return
+        display_df = flagged
+    else:
+        display_df = week_df
+
+    # ── Render each game ──────────────────────────────────────────────────────
+    for _, row in display_df.iterrows():
+        matchup    = f"{row['home_team']} vs {row['away_team']}"
+        actual_mg  = row.get("point_diff")   # home margin
+        actual_tot = row.get("total_points")
+        pred_sp    = row.get("pred_spread")
+        pred_tot   = row.get("pred_total")
+        t_edge     = row.get("totals_edge")
+        s_edge     = row.get("spread_edge")
+        covered    = row.get("covered_spread")
+        went_over  = row.get("went_over")
+
+        picks_html = ""
+
+        # Totals pick
+        if pd.notna(t_edge) and abs(t_edge) >= TOTALS_EDGE_MIN:
+            is_under   = t_edge < 0
+            side       = "UNDER" if is_under else "OVER"
+            ou_str     = f"{row['over_under']:.1f}" if pd.notna(row.get("over_under")) else "?"
+            correct    = (is_under and went_over == 0) or (not is_under and went_over == 1)
+            res_color  = "#22c55e" if correct else "#ef4444"
+            res_label  = "✓ HIT" if correct else "✗ MISS"
+            actual_str = f"{actual_tot:.0f}" if pd.notna(actual_tot) else "?"
+            picks_html += f"""
+            <span style="background:#06b6d4;color:#0f1117;font-size:0.63em;font-weight:800;
+                         padding:2px 7px;border-radius:4px;margin-right:6px">{side} {ou_str}</span>
+            <span style="color:{res_color};font-size:0.78em;font-weight:700;margin-right:12px">
+                {res_label} (actual: {actual_str})</span>"""
+
+        # Spread pick
+        if pd.notna(s_edge) and abs(s_edge) >= SPREAD_EDGE_MIN:
+            bet_home   = s_edge > 0
+            team       = row["home_team"] if bet_home else row["away_team"]
+            vl         = row.get("spread")
+            vl_str     = (f"{vl:+.1f}" if pd.notna(vl) and bet_home
+                          else f"{-vl:+.1f}" if pd.notna(vl) else "?")
+            correct    = (bet_home and covered == 1) or (not bet_home and covered == 0)
+            res_color  = "#22c55e" if correct else "#ef4444"
+            res_label  = "✓ HIT" if correct else "✗ MISS"
+            actual_str = f"{actual_mg:+.0f}" if pd.notna(actual_mg) else "?"
+            picks_html += f"""
+            <span style="background:#8b5cf6;color:#ffffff;font-size:0.63em;font-weight:800;
+                         padding:2px 7px;border-radius:4px;margin-right:6px">{team} {vl_str}</span>
+            <span style="color:{res_color};font-size:0.78em;font-weight:700;margin-right:12px">
+                {res_label} (actual margin: {actual_str})</span>"""
+
+        if not picks_html and view_mode == "All Games":
+            picks_html = '<span style="color:#4b5563;font-size:0.78em">No flagged pick</span>'
+
+        actual_display = f"Final: {actual_mg:+.0f} pts" if pd.notna(actual_mg) else "No result"
+
+        st.html(f"""
+        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;
+                    padding:12px 16px;margin-bottom:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="color:#ffffff;font-weight:700;font-size:0.95em">{matchup}</span>
+                <span style="color:#6b7280;font-size:0.78em">{actual_display}</span>
+            </div>
+            <div style="margin-top:8px">{picks_html}</div>
+        </div>
+        """)
+
+    # ── Weekly summary ────────────────────────────────────────────────────────
+    flagged_all = week_df[
+        (week_df["totals_edge"].abs() >= TOTALS_EDGE_MIN) |
+        (week_df["spread_edge"].abs() >= SPREAD_EDGE_MIN)
+    ]
+    if not flagged_all.empty:
+        tot_picks = flagged_all[flagged_all["totals_edge"].abs() >= TOTALS_EDGE_MIN]
+        sp_picks  = flagged_all[flagged_all["spread_edge"].abs() >= SPREAD_EDGE_MIN]
+
+        def hit_rate(picks, col, hit_val):
+            settled = picks[picks[col].notna()]
+            if settled.empty: return None
+            hits = ((settled["totals_edge"] < 0) & (settled["went_over"] == 0)).sum() + \
+                   ((settled["totals_edge"] > 0) & (settled["went_over"] == 1)).sum() \
+                   if col == "went_over" else \
+                   ((settled["spread_edge"] > 0) & (settled["covered_spread"] == 1)).sum() + \
+                   ((settled["spread_edge"] < 0) & (settled["covered_spread"] == 0)).sum()
+            return hits / len(settled)
+
+        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+        section_header(f"Week {sel_week} Summary")
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Total Picks",   len(flagged_all))
+        c2.metric("Totals Picks",  len(tot_picks))
+        c3.metric("Spread Picks",  len(sp_picks))
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -1422,11 +1836,25 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    picks_tab, bets_tab, analysis_tab = st.tabs(["This Week's Picks", "My Bets", "Model Analysis"])
+    picks_tab, bets_tab, standings_tab, clv_tab, history_tab, analysis_tab = st.tabs([
+        "This Week's Picks", "My Bets", "Season Standings", "CLV Tracker", "Historical Picks", "Model Analysis"
+    ])
 
     # ── MY BETS TAB ───────────────────────────────────────────────────────
     with bets_tab:
         render_bets_tab()
+
+    # ── SEASON STANDINGS TAB ──────────────────────────────────────────────
+    with standings_tab:
+        render_standings_tab()
+
+    # ── CLV TRACKER TAB ───────────────────────────────────────────────────
+    with clv_tab:
+        render_clv_tab()
+
+    # ── HISTORICAL PICKS TAB ──────────────────────────────────────────────
+    with history_tab:
+        render_history_tab()
 
     # ── MODEL ANALYSIS TAB ────────────────────────────────────────────────
     with analysis_tab:
