@@ -610,22 +610,168 @@ def build_and_predict(games, lines, ratings, epa, elo,
 
 # ─── UI HELPERS ───────────────────────────────────────────────────────────────
 
+def inject_css():
+    st.markdown("""
+    <style>
+    /* ── Base ── */
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], .main {
+        background-color: #1a1d21;
+        color: #ffffff;
+    }
+    [data-testid="stHeader"] {
+        background-color: #1a1d21;
+        border-bottom: 1px solid #2d3340;
+    }
+    /* ── Sidebar ── */
+    [data-testid="stSidebar"] {
+        background-color: #13161a;
+        border-right: 1px solid #2d3340;
+    }
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] .stSelectbox label {
+        color: #8b9bb4 !important;
+    }
+    /* ── Tabs ── */
+    .stTabs [data-baseweb="tab-list"] {
+        background: #13161a;
+        border-radius: 8px;
+        padding: 4px;
+        gap: 4px;
+        border: 1px solid #2d3340;
+    }
+    .stTabs [data-baseweb="tab"] {
+        color: #8b9bb4;
+        background: transparent;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.88em;
+    }
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background: #23272b;
+        color: #ffffff;
+    }
+    /* ── Metrics ── */
+    [data-testid="metric-container"] {
+        background: #23272b;
+        border-radius: 8px;
+        padding: 16px 20px;
+        border: 1px solid #2d3340;
+    }
+    [data-testid="metric-container"] label {
+        color: #8b9bb4 !important;
+        font-size: 0.72em !important;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+    }
+    [data-testid="metric-container"] [data-testid="stMetricValue"] {
+        color: #ffffff !important;
+        font-size: 1.5em !important;
+        font-weight: 700 !important;
+    }
+    /* ── Expanders ── */
+    [data-testid="stExpander"] {
+        background: #23272b;
+        border: 1px solid #2d3340 !important;
+        border-radius: 8px !important;
+        margin-bottom: 6px;
+    }
+    [data-testid="stExpander"] summary {
+        color: #cdd6e4;
+        font-weight: 600;
+        font-size: 0.92em;
+    }
+    [data-testid="stExpander"] summary:hover { color: #53d337; }
+    /* ── Buttons ── */
+    [data-testid="stButton"] > button {
+        background: #23272b;
+        color: #8b9bb4;
+        border: 1px solid #2d3340;
+        border-radius: 6px;
+        font-size: 0.8em;
+        padding: 4px 12px;
+        transition: all 0.15s;
+    }
+    [data-testid="stButton"] > button:hover {
+        background: #2d3340;
+        color: #ffffff;
+        border-color: #3d4450;
+    }
+    [data-testid="stButton"] > button[kind="primary"] {
+        background: #53d337;
+        color: #1a1d21;
+        border: none;
+        font-weight: 700;
+    }
+    [data-testid="stButton"] > button[kind="primary"]:hover {
+        background: #45b82e;
+    }
+    /* ── Selects / Slider ── */
+    [data-baseweb="select"] > div {
+        background: #23272b !important;
+        border-color: #2d3340 !important;
+        color: #ffffff !important;
+    }
+    [data-testid="stSlider"] > div > div > div {
+        background: #53d337 !important;
+    }
+    /* ── Alerts ── */
+    [data-testid="stAlert"] {
+        background: #23272b;
+        border-radius: 8px;
+    }
+    /* ── Dividers ── */
+    hr { border-color: #2d3340 !important; margin: 16px 0 !important; }
+    /* ── Typography ── */
+    h1, h2, h3, h4 { color: #ffffff !important; }
+    p, li, .stMarkdown { color: #cdd6e4; }
+    [data-testid="stCaptionContainer"] { color: #5c6680 !important; }
+    /* ── Download button ── */
+    [data-testid="stDownloadButton"] > button {
+        background: #23272b;
+        color: #8b9bb4;
+        border: 1px solid #2d3340;
+        border-radius: 6px;
+    }
+    /* ── Code blocks ── */
+    code { background: #23272b; color: #53d337; border-radius: 4px; padding: 1px 5px; }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+def section_header(title: str, subtitle: str = ""):
+    sub = (f'<div style="color:#5c6680;font-size:0.8em;margin-top:3px">{subtitle}</div>'
+           if subtitle else "")
+    st.markdown(f"""
+    <div style="margin:28px 0 12px 0">
+        <div style="display:flex;align-items:center;gap:14px">
+            <span style="color:#ffffff;font-size:0.72em;font-weight:700;
+                         letter-spacing:0.12em;text-transform:uppercase;
+                         white-space:nowrap">{title}</span>
+            <div style="flex:1;height:1px;background:#2d3340"></div>
+        </div>
+        {sub}
+    </div>
+    """, unsafe_allow_html=True)
+
+
 def confidence_stars(edge_abs: float) -> str:
-    if edge_abs >= 5.5: return "⭐⭐⭐"
-    if edge_abs >= 4.5: return "⭐⭐"
-    return "⭐"
+    if edge_abs >= 5.5: return "★★★"
+    if edge_abs >= 4.5: return "★★"
+    return "★"
 
 def ev_stars(ev: float) -> str:
-    if ev >= 0.07: return "⭐⭐⭐"
-    if ev >= 0.05: return "⭐⭐"
-    return "⭐"
+    if ev >= 0.07: return "★★★"
+    if ev >= 0.05: return "★★"
+    return "★"
 
 def track_button(label: str, game: str, bet_type: str, pick: str,
                  line: str, units: int, season: int, week: int, edge: str = "", key_prefix: str = ""):
     """Render a small Track button. Returns True if clicked."""
     key = f"{key_prefix}track_{game}_{bet_type}_{pick}".replace(" ", "_")
     bettor = st.session_state.get("bettor", BETTORS[0])
-    if st.button(f"➕ Track  {label}", key=key, use_container_width=False):
+    if st.button(f"+ Track  {label}", key=key, use_container_width=False):
         add_bet(game, bet_type, pick, line, units, season, week, edge, bettor)
         st.toast(f"Added: {pick} — {bettor}", icon="✅")
         return True
@@ -641,29 +787,37 @@ def render_moneyline_card(row, season, week):
     label   = f"+{int(book_ml)}" if is_dog else str(int(book_ml))
     model_label = (f"+{int(mdl_ml)}" if (not pd.isna(mdl_ml) and mdl_ml > 0)
                    else str(int(mdl_ml)) if not pd.isna(mdl_ml) else "—")
-    color   = "#1a3a5c" if ev >= 0.07 else "#1c2b3a"
-    border  = "#3498db" if ev >= 0.07 else "#5b7fa6"
-    dog_tag = " 🐶 Underdog" if is_dog else " 🏆 Favorite"
+    accent  = "#53d337" if ev >= 0.07 else "#1eb1f0"
+    dog_tag = "DOG" if is_dog else "FAV"
     matchup = f"{row['home_team']} vs {row['away_team']}"
     units   = kelly_units_ml(ev)
 
     st.html(f"""
-    <div style="background:{color};border-left:4px solid {border};
+    <div style="background:#23272b;border-left:3px solid {accent};
+                border-top:1px solid #2d3340;border-right:1px solid #2d3340;
+                border-bottom:1px solid #2d3340;
                 border-radius:8px;padding:14px 18px;margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
-                <span style="color:#3498db;font-size:1.1em;font-weight:700">{team}</span>
-                <span style="color:#aaa;font-size:0.82em;margin-left:8px">{label}{dog_tag}</span>
-                <span style="color:#aaa;font-size:0.85em;margin-left:8px">{stars}</span>
+                <span style="color:{accent};font-size:1.05em;font-weight:700;
+                             letter-spacing:0.01em">{team}</span>
+                <span style="background:#2d3340;color:#8b9bb4;font-size:0.7em;
+                             font-weight:700;letter-spacing:0.08em;padding:2px 7px;
+                             border-radius:4px;margin-left:8px">{dog_tag}</span>
+                <span style="color:#5c6680;font-size:0.8em;margin-left:6px">{stars}</span>
             </div>
-            <div style="color:#ccc;font-size:0.9em">
-                EV: <b style="color:#3498db">{ev:+.1%}</b>
-                &nbsp;·&nbsp; Kelly: <b style="color:#3498db">{units}u</b>
-            </div>
+            <span style="color:#ffffff;font-size:1.25em;font-weight:700">{label}</span>
         </div>
-        <div style="color:#ddd;margin-top:6px;font-size:1em">{matchup}</div>
-        <div style="color:#aaa;font-size:0.82em;margin-top:4px">
-            Model implied: <b>{model_label}</b> &nbsp;·&nbsp; Book: <b>{label}</b>
+        <div style="display:flex;justify-content:space-between;align-items:center;
+                    margin-top:8px">
+            <span style="color:#8b9bb4;font-size:0.82em">{matchup}</span>
+            <div style="color:#8b9bb4;font-size:0.82em;text-align:right">
+                EV <span style="color:{accent};font-weight:700">{ev:+.1%}</span>
+                <span style="color:#2d3340;margin:0 5px">·</span>
+                Kelly <span style="color:{accent};font-weight:700">{units}u</span>
+                <span style="color:#2d3340;margin:0 5px">·</span>
+                Model <span style="color:#8b9bb4">{model_label}</span>
+            </div>
         </div>
     </div>
     """)
@@ -671,33 +825,39 @@ def render_moneyline_card(row, season, week):
                  label, units, season, week, f"EV {ev:+.1%}")
 
 def render_totals_card(row, season, week):
-    side     = "UNDER 🔽" if row["totals_edge"] < 0 else "OVER 🔼"
-    side_str = "UNDER" if row["totals_edge"] < 0 else "OVER"
+    is_under = row["totals_edge"] < 0
+    side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
     stars    = confidence_stars(edge_abs)
-    color    = "#1a4d2e" if edge_abs >= 5.0 else "#2d3a1e"
-    border   = "#2ecc71" if edge_abs >= 5.0 else "#a8d08d"
+    accent   = "#53d337" if is_under else "#f0a500"
     units    = kelly_units_spread(edge_abs)
     matchup  = f"{row['home_team']} vs {row['away_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
+    neutral_tag = "&nbsp;·&nbsp;Neutral" if row.get("neutral_site") else ""
 
-    neutral_tag = "&nbsp;·&nbsp;Neutral site" if row.get("neutral_site") else ""
     st.html(f"""
-    <div style="background:{color};border-left:4px solid {border};
+    <div style="background:#23272b;border-left:3px solid {accent};
+                border-top:1px solid #2d3340;border-right:1px solid #2d3340;
+                border-bottom:1px solid #2d3340;
                 border-radius:8px;padding:14px 18px;margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
-                <span style="color:#2ecc71;font-size:1.1em;font-weight:700">{side} {ou_str}</span>
-                <span style="color:#aaa;font-size:0.85em;margin-left:10px">{stars}</span>
+                <span style="color:{accent};font-size:1.05em;font-weight:700;
+                             letter-spacing:0.04em">{side_str} {ou_str}</span>
+                <span style="color:#5c6680;font-size:0.8em;margin-left:8px">{stars}</span>
             </div>
-            <div style="color:#ccc;font-size:0.9em">
-                Edge: <b style="color:#2ecc71">{row['totals_edge']:+.1f} pts</b>
-                &nbsp;·&nbsp; Kelly: <b style="color:#2ecc71">{units}u</b>
+            <div style="color:#8b9bb4;font-size:0.9em;text-align:right">
+                Edge <span style="color:{accent};font-weight:700">{row['totals_edge']:+.1f}</span>
+                <span style="color:#2d3340;margin:0 5px">·</span>
+                Kelly <span style="color:{accent};font-weight:700">{units}u</span>
             </div>
         </div>
-        <div style="color:#ddd;margin-top:6px;font-size:1em">{matchup}</div>
-        <div style="color:#aaa;font-size:0.82em;margin-top:4px">
-            Model: {row['pred_total']:.1f} pts total{neutral_tag}
+        <div style="display:flex;justify-content:space-between;align-items:center;
+                    margin-top:8px">
+            <span style="color:#8b9bb4;font-size:0.82em">{matchup}</span>
+            <span style="color:#5c6680;font-size:0.8em">
+                Model {row['pred_total']:.1f}{neutral_tag}
+            </span>
         </div>
     </div>
     """)
@@ -711,10 +871,9 @@ def render_totals_card(row, season, week):
 def render_bets_tab():
     bets = load_bets()
 
-    st.markdown("### 📋 My Tracked Bets")
-
     if not bets:
-        st.info("No bets tracked yet. Go to **📊 This Week's Picks**, load a week, and hit **➕ Track** on any pick.")
+        st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+        st.info("No bets tracked yet. Load a week on the Picks tab and hit **+ Track** on any pick.")
         return
 
     # ── Summary metrics ──────────────────────────────────────────────────
@@ -726,21 +885,18 @@ def render_bets_tab():
     win_rate  = len(wins) / len(settled) if settled else 0
 
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Total Bets",    len(bets))
-    c2.metric("Pending",       len(pending))
-    c3.metric("Record",        f"{len(wins)}-{len(losses)}" if settled else "—")
-    c4.metric("Win Rate",      f"{win_rate:.0%}" if settled else "—")
-    c5.metric("Units P&L",     f"{total_pnl:+.2f}u",
+    c1.metric("Total Bets",  len(bets))
+    c2.metric("Pending",     len(pending))
+    c3.metric("Record",      f"{len(wins)}-{len(losses)}" if settled else "—")
+    c4.metric("Win Rate",    f"{win_rate:.0%}" if settled else "—")
+    c5.metric("Units P&L",   f"{total_pnl:+.2f}u",
               delta_color="normal" if total_pnl >= 0 else "inverse")
 
-    st.divider()
-
     # ── Filters ──────────────────────────────────────────────────────────
-    col_f1, col_f2, col_f3 = st.columns([1, 1, 2])
-    status_filter = col_f1.selectbox("Filter by status",
-                                      ["All", "Pending", "Won", "Lost", "Push"])
-    bettor_filter = col_f2.selectbox("Filter by bettor",
-                                      ["All"] + BETTORS)
+    section_header("Bet History")
+    col_f1, col_f2, _ = st.columns([1, 1, 2])
+    status_filter = col_f1.selectbox("Status", ["All", "Pending", "Won", "Lost", "Push"])
+    bettor_filter = col_f2.selectbox("Bettor",  ["All"] + BETTORS)
 
     filtered = bets
     if status_filter != "All":
@@ -753,59 +909,60 @@ def render_bets_tab():
         return
 
     # ── Bet rows ─────────────────────────────────────────────────────────
-    status_colors = {
-        "Pending": "#1c2b3a",
-        "Won":     "#1a4d2e",
-        "Lost":    "#4d1a1a",
-        "Push":    "#2d2d1a",
-    }
-    status_icons = {"Pending": "⏳", "Won": "✅", "Lost": "❌", "Push": "↩️"}
+    status_left = {"Pending": "#2d3340", "Won": "#53d337", "Lost": "#e74c3c", "Push": "#f0a500"}
+    status_bg   = {"Pending": "#23272b", "Won": "#1e2b1e", "Lost": "#2b1e1e", "Push": "#2b2a1e"}
+    status_label = {"Pending": "PENDING", "Won": "WON", "Lost": "LOST", "Push": "PUSH"}
 
     for bet in reversed(filtered):
-        color     = status_colors.get(bet["status"], "#1c2b3a")
-        icon      = status_icons.get(bet["status"], "")
-        pnl       = bet_pnl(bet)
-        pnl_str   = f"{pnl:+.2f}u" if bet["status"] != "Pending" else "—"
-        pnl_color = "#2ecc71" if pnl > 0 else "#e74c3c" if pnl < 0 else "#aaa"
-        bettor    = bet.get("bettor", "—")
-        edge_tag  = f"&nbsp;·&nbsp;{bet['edge']}" if bet.get("edge") else ""
+        left    = status_left.get(bet["status"], "#2d3340")
+        bg      = status_bg.get(bet["status"],   "#23272b")
+        slabel  = status_label.get(bet["status"], bet["status"])
+        pnl     = bet_pnl(bet)
+        pnl_str = f"{pnl:+.2f}u" if bet["status"] != "Pending" else "—"
+        pnl_col = "#53d337" if pnl > 0 else "#e74c3c" if pnl < 0 else "#8b9bb4"
+        bettor  = bet.get("bettor", "—")
+        edge_tag = f" · {bet['edge']}" if bet.get("edge") else ""
 
         st.html(f"""
-        <div style="background:{color};border-radius:8px;padding:12px 16px;margin-bottom:4px;
-                    border:1px solid #2a3a4a;">
+        <div style="background:{bg};border-left:3px solid {left};
+                    border-top:1px solid #2d3340;border-right:1px solid #2d3340;
+                    border-bottom:1px solid #2d3340;
+                    border-radius:8px;padding:12px 16px;margin-bottom:4px;">
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <div>
-                    <span style="color:#fff;font-weight:700;font-size:1em">{bet['pick']}</span>
-                    <span style="color:#aaa;font-size:0.82em;margin-left:10px">{bet['bet_type']}</span>
-                    <span style="color:#aaa;font-size:0.82em;margin-left:6px">·&nbsp;{bet['units']}u</span>
-                    <span style="color:#7ec8e3;font-size:0.82em;margin-left:10px">👤 {bettor}</span>
+                    <span style="color:#ffffff;font-weight:700;font-size:0.98em">{bet['pick']}</span>
+                    <span style="background:#2d3340;color:#8b9bb4;font-size:0.68em;
+                                 font-weight:700;letter-spacing:0.07em;padding:2px 6px;
+                                 border-radius:4px;margin-left:8px">{bet['bet_type'].upper()}</span>
+                    <span style="color:#8b9bb4;font-size:0.82em;margin-left:8px">{bet['units']}u</span>
+                    <span style="color:#5c6680;font-size:0.8em;margin-left:8px">{bettor}</span>
                 </div>
                 <div style="text-align:right">
-                    <span style="color:{pnl_color};font-weight:700">{pnl_str}</span>
-                    <span style="color:#aaa;font-size:0.82em;margin-left:10px">{icon} {bet['status']}</span>
+                    <span style="color:{pnl_col};font-weight:700;font-size:0.95em">{pnl_str}</span>
+                    <span style="background:{left};color:#1a1d21;font-size:0.68em;
+                                 font-weight:700;letter-spacing:0.07em;padding:2px 7px;
+                                 border-radius:4px;margin-left:8px">{slabel}</span>
                 </div>
             </div>
-            <div style="color:#ccc;font-size:0.85em;margin-top:4px">{bet['game']}</div>
-            <div style="color:#888;font-size:0.78em;margin-top:2px">
+            <div style="color:#8b9bb4;font-size:0.82em;margin-top:5px">{bet['game']}</div>
+            <div style="color:#5c6680;font-size:0.76em;margin-top:2px">
                 Wk {bet['week']} · {bet['date']} · Line: {bet['line']}{edge_tag}
             </div>
         </div>
         """)
 
-        # Status + bettor buttons
         b_cols = st.columns([1, 1, 1, 1, 1, 2])
         if bet["status"] != "Won":
-            if b_cols[0].button("✅ Won",  key=f"won_{bet['id']}"):
+            if b_cols[0].button("Won",  key=f"won_{bet['id']}"):
                 update_bet_status(bet["id"], "Won");  st.rerun()
         if bet["status"] != "Lost":
-            if b_cols[1].button("❌ Lost", key=f"lost_{bet['id']}"):
+            if b_cols[1].button("Lost", key=f"lost_{bet['id']}"):
                 update_bet_status(bet["id"], "Lost"); st.rerun()
         if bet["status"] != "Push":
-            if b_cols[2].button("↩️ Push", key=f"push_{bet['id']}"):
+            if b_cols[2].button("Push", key=f"push_{bet['id']}"):
                 update_bet_status(bet["id"], "Push"); st.rerun()
-        if b_cols[3].button("🗑️", key=f"del_{bet['id']}"):
+        if b_cols[3].button("Delete", key=f"del_{bet['id']}"):
             delete_bet(bet["id"]); st.rerun()
-        # Bettor dropdown — change who owns this bet
         current_bettor = bet.get("bettor", BETTORS[0])
         idx = BETTORS.index(current_bettor) if current_bettor in BETTORS else 0
         new_bettor = b_cols[5].selectbox("", BETTORS, index=idx,
@@ -815,12 +972,12 @@ def render_bets_tab():
             update_bet_bettor(bet["id"], new_bettor); st.rerun()
 
     # ── Export ───────────────────────────────────────────────────────────
-    st.divider()
+    st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
     df_export = pd.DataFrame(bets)
     if not df_export.empty:
         df_export["pnl"] = df_export.apply(bet_pnl, axis=1)
         st.download_button(
-            "⬇️ Export to CSV",
+            "Export to CSV",
             data=df_export.to_csv(index=False),
             file_name="cfb_bets.csv",
             mime="text/csv",
@@ -838,27 +995,24 @@ def render_all_game_card(row, season, week):
     home_ml   = row.get("home_moneyline")
     away_ml   = row.get("away_moneyline")
 
-    # Unrated opponent flag (FCS teams have no SP+/FPI/SRS in training data)
     home_unrated = bool(row.get("home_unrated", False))
     away_unrated = bool(row.get("away_unrated", False))
     unrated_team = (row["away_team"] if away_unrated else
                     row["home_team"] if home_unrated else None)
-    unrated_badge = f" ⚠️ FCS/unrated" if unrated_team else ""
+    unrated_badge = "  ·  FCS" if unrated_team else ""
 
-    # Model predictions (always available once models run)
     pred_sp   = row.get("pred_spread")
     pred_tot  = row.get("pred_total")
     mdl_hml   = row.get("model_home_ml")
     mdl_aml   = row.get("model_away_ml")
 
-    win_str   = f"  ·  Home win {win_p:.0%}" if pd.notna(win_p) else ""
+    win_str   = f"  ·  Home {win_p:.0%}" if pd.notna(win_p) else ""
     spread_h  = f"{spread:+.1f}"  if pd.notna(spread) else None
     spread_a  = f"{-spread:+.1f}" if pd.notna(spread) else None
     ou_str    = f"{ou:.1f}"       if pd.notna(ou)     else None
     hml_str   = (f"{int(home_ml):+d}" if home_ml > 0 else str(int(home_ml))) if pd.notna(home_ml) else None
     aml_str   = (f"{int(away_ml):+d}" if away_ml > 0 else str(int(away_ml))) if pd.notna(away_ml) else None
 
-    # Model-implied labels (fallback when Vegas hasn't posted yet)
     # pred_sp = home margin (positive = home wins); betting spread is opposite sign
     mdl_sp_h  = f"{-pred_sp:+.1f}" if pd.notna(pred_sp) else None
     mdl_sp_a  = f"{pred_sp:+.1f}"  if pd.notna(pred_sp) else None
@@ -866,32 +1020,29 @@ def render_all_game_card(row, season, week):
     mdl_hml_s = (f"{int(mdl_hml):+d}" if mdl_hml > 0 else str(int(mdl_hml))) if pd.notna(mdl_hml) else None
     mdl_aml_s = (f"{int(mdl_aml):+d}" if mdl_aml > 0 else str(int(mdl_aml))) if pd.notna(mdl_aml) else None
 
-    with st.expander(f"🏈 {matchup}{win_str}{unrated_badge}"):
-        # Unrated opponent warning — model projection is unreliable for FCS games
+    with st.expander(f"{matchup}{win_str}{unrated_badge}"):
         if unrated_team:
             st.warning(
-                f"⚠️ **{unrated_team}** has no SP+/FPI/SRS ratings (likely FCS or untracked program). "
-                f"Model spread projection is **not reliable** for this game — "
-                f"trust the Vegas line only.",
+                f"**{unrated_team}** has no SP+/FPI/SRS ratings (likely FCS or untracked). "
+                f"Model projection is unreliable — use the Vegas line only.",
                 icon=None,
             )
         c1, c2, c3 = st.columns(3)
 
         with c1:
-            st.markdown("**📊 Spread**")
+            st.markdown("**Spread**")
             if spread_h:
                 st.caption(f"Vegas: {row['home_team']} {spread_h} / {row['away_team']} {spread_a}")
                 if mdl_sp_h and not unrated_team:
                     st.caption(f"Model: {row['home_team']} {mdl_sp_h}")
                 elif mdl_sp_h and unrated_team:
-                    st.caption(f"Model: {row['home_team']} {mdl_sp_h} _(unreliable — FCS opp)_")
+                    st.caption(f"Model: {row['home_team']} {mdl_sp_h} (unreliable)")
                 track_button(f"{row['home_team']} {spread_h}", matchup, "Spread",
                              f"{row['home_team']} {spread_h}", spread_h, 1, season, week, key_prefix="ag_")
                 track_button(f"{row['away_team']} {spread_a}", matchup, "Spread",
                              f"{row['away_team']} {spread_a}", spread_a, 1, season, week, key_prefix="ag_")
             elif mdl_sp_h and not unrated_team:
-                st.caption(f"📋 Model projects: {row['home_team']} {mdl_sp_h}")
-                st.caption("_Vegas line not posted yet — tracking will use model projection_")
+                st.caption(f"Model: {row['home_team']} {mdl_sp_h} (no Vegas line yet)")
                 track_button(f"{row['home_team']} {mdl_sp_h} (model)", matchup, "Spread",
                              f"{row['home_team']} {mdl_sp_h}", mdl_sp_h, 1, season, week, key_prefix="ag_")
                 track_button(f"{row['away_team']} {mdl_sp_a} (model)", matchup, "Spread",
@@ -900,18 +1051,15 @@ def render_all_game_card(row, season, week):
                 st.caption("No line yet")
 
         with c2:
-            st.markdown("**🎯 Total**")
+            st.markdown("**Total**")
             if ou_str:
-                st.caption(f"Vegas O/U: {ou_str}")
-                if mdl_tot:
-                    st.caption(f"Model: {mdl_tot} pts")
+                st.caption(f"O/U: {ou_str}" + (f"  ·  Model: {mdl_tot}" if mdl_tot else ""))
                 track_button(f"OVER {ou_str}", matchup, "Total",
                              f"OVER {ou_str}", ou_str, 1, season, week, key_prefix="ag_")
                 track_button(f"UNDER {ou_str}", matchup, "Total",
                              f"UNDER {ou_str}", ou_str, 1, season, week, key_prefix="ag_")
             elif mdl_tot:
-                st.caption(f"📋 Model projects: {mdl_tot} pts")
-                st.caption("_Vegas total not posted yet — tracking will use model projection_")
+                st.caption(f"Model: {mdl_tot} pts (no Vegas total yet)")
                 track_button(f"OVER {mdl_tot} (model)", matchup, "Total",
                              f"OVER {mdl_tot}", mdl_tot, 1, season, week, key_prefix="ag_")
                 track_button(f"UNDER {mdl_tot} (model)", matchup, "Total",
@@ -920,11 +1068,10 @@ def render_all_game_card(row, season, week):
                 st.caption("No total yet")
 
         with c3:
-            st.markdown("**💰 Moneyline**")
+            st.markdown("**Moneyline**")
             if hml_str:
-                st.caption(f"Vegas: {row['home_team']} {hml_str} / {row['away_team']} {aml_str or '—'}")
-                if mdl_hml_s:
-                    st.caption(f"Model implied: {row['home_team']} {mdl_hml_s}")
+                st.caption(f"{row['home_team']} {hml_str} / {row['away_team']} {aml_str or '—'}"
+                           + (f"  ·  Model: {row['home_team']} {mdl_hml_s}" if mdl_hml_s else ""))
                 track_button(f"{row['home_team']} {hml_str}", matchup, "Moneyline",
                              f"{row['home_team']} {hml_str}", hml_str, 1, season, week, key_prefix="ag_")
             if aml_str:
@@ -932,8 +1079,7 @@ def render_all_game_card(row, season, week):
                              f"{row['away_team']} {aml_str}", aml_str, 1, season, week, key_prefix="ag_")
             if not hml_str and not aml_str:
                 if mdl_hml_s:
-                    st.caption(f"📋 Model implied: {row['home_team']} {mdl_hml_s} / {row['away_team']} {mdl_aml_s or '—'}")
-                    st.caption("_Vegas ML not posted yet_")
+                    st.caption(f"Model: {row['home_team']} {mdl_hml_s} / {row['away_team']} {mdl_aml_s or '—'}")
                 else:
                     st.caption("No ML yet")
 
@@ -941,48 +1087,52 @@ def render_all_game_card(row, season, week):
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def main():
+    inject_css()
+
     # ── Sidebar ───────────────────────────────────────────────────────────
     with st.sidebar:
-        st.image("https://img.icons8.com/emoji/96/american-football-emoji.png", width=64)
-        st.title("CFB Picks")
-        st.caption("Built with ❤️ — powered by real data")
+        st.markdown("""
+        <div style="padding:16px 0 8px 0">
+            <div style="color:#ffffff;font-size:1.1em;font-weight:700;
+                        letter-spacing:0.04em">CFB Picks</div>
+            <div style="color:#5c6680;font-size:0.75em;margin-top:2px">
+                Powered by SP+ · FPI · Elo · EPA
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         st.divider()
 
         season = st.selectbox("Season", [2026, 2025], index=0)
         week   = st.slider("Week", min_value=0, max_value=15, value=1)
-
-        bettor = st.selectbox("🙋 Betting as", BETTORS,
+        bettor = st.selectbox("Betting as", BETTORS,
                               index=BETTORS.index(st.session_state.get("bettor", BETTORS[0])))
         st.session_state["bettor"] = bettor
         st.divider()
 
-        run = st.button("🔍 Get This Week's Picks", type="primary", use_container_width=True)
+        run = st.button("Load Picks", type="primary", use_container_width=True)
         if run:
-            st.session_state["has_run"]     = True
-            st.session_state["run_season"]  = season
-            st.session_state["run_week"]    = week
+            st.session_state["has_run"]    = True
+            st.session_state["run_season"] = season
+            st.session_state["run_week"]   = week
 
-        st.divider()
-        st.markdown("**How it works**")
-        st.caption(
-            "The model compares its predicted score to the Vegas line. "
-            "When they disagree by 3–6 points, that's a flagged bet. "
-            "Historically the totals model wins **54.7%** of bets — "
-            "above the 52.4% needed to profit."
-        )
-        st.caption("🔽 **Unders win 59%** — the model tends to lean toward unders.")
-
-        # Pending bets count badge
+        # Pending bets badge
         pending = [b for b in load_bets() if b["status"] == "Pending"]
         if pending:
             st.divider()
-            st.markdown(f"**📋 {len(pending)} pending bet{'s' if len(pending) != 1 else ''}**")
-            st.caption("Switch to My Bets tab to mark results.")
+            n = len(pending)
+            st.markdown(f'<div style="color:#f0a500;font-size:0.82em;font-weight:600">'
+                        f'{n} pending bet{"s" if n != 1 else ""}</div>', unsafe_allow_html=True)
+            st.caption("Go to My Bets to mark results.")
 
-    # ── Main area ─────────────────────────────────────────────────────────
-    st.title("🏈 CFB Bet Recommendations")
+    # ── Page header ───────────────────────────────────────────────────────
+    st.markdown("""
+    <div style="padding:8px 0 4px 0;border-bottom:1px solid #2d3340;margin-bottom:4px">
+        <span style="color:#ffffff;font-size:1.4em;font-weight:700;
+                     letter-spacing:0.02em">CFB Bet Recommendations</span>
+    </div>
+    """, unsafe_allow_html=True)
 
-    picks_tab, bets_tab = st.tabs(["📊 This Week's Picks", "📋 My Bets"])
+    picks_tab, bets_tab = st.tabs(["This Week's Picks", "My Bets"])
 
     # ── MY BETS TAB ───────────────────────────────────────────────────────
     with bets_tab:
@@ -991,36 +1141,31 @@ def main():
     # ── PICKS TAB ─────────────────────────────────────────────────────────
     with picks_tab:
         if not st.session_state.get("has_run"):
-            st.info("👈 Select a season and week in the sidebar, then hit **Get This Week's Picks**.")
+            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
             col1, col2, col3, col4 = st.columns(4)
             col1.metric("Totals Win Rate", "54.7%", "+2.3% above breakeven")
             col2.metric("Under Win Rate",  "59.0%", "Primary edge")
             col3.metric("Spread Win Rate", "50.4%", "Informational only")
-            col4.metric("Moneyline EV Min","4%",    "Per $1 bet threshold")
-            st.divider()
-            st.subheader("📋 How to read the picks")
-            st.markdown("""
-**Totals (most reliable)**
-- ⭐⭐⭐ = edge ≥ 5.5 pts · ⭐⭐ = 4.5–5.5 pts · ⭐ = 3–4.5 pts
-- Unders win 59% historically — lean under when in doubt
-- Hit **➕ Track** on any pick to add it to **My Bets**
+            col4.metric("ML EV Min",       "4%",    "Threshold")
 
-**Moneylines** — ⭐⭐⭐ = EV ≥ 7% · ⭐⭐ = 5–7% · ⭐ = 4–5%
-
-**Spreads** — informational only, near breakeven
-
-*Always check injuries, weather, and current lines before betting.*
-            """)
+            section_header("How It Works")
+            st.markdown(
+                "The model predicts a final score and compares it to the Vegas line. "
+                "When they disagree by 3–6 points on a total, or 4–8% on a moneyline, "
+                "it flags a bet. **Unders win 59% historically** — the primary edge. "
+                "Spreads are near breakeven and shown for reference only. "
+                "Always check injuries and current lines before placing a bet."
+            )
+            st.info("Select a season and week in the sidebar, then hit **Load Picks**.")
             return
 
-        # Use the season/week that were active when Run was last clicked
         season = st.session_state.get("run_season", season)
         week   = st.session_state.get("run_week",   week)
 
         # ── Load everything ───────────────────────────────────────────────
         spread_model, totals_model, win_prob_model, feature_lists = load_models()
         if spread_model is None:
-            st.error("❌ Model files not found. Run `python3 src/model.py` first.")
+            st.error("Model files not found. Run `python3 src/model.py` first.")
             return
 
         ratings = load_team_ratings(season)
@@ -1040,9 +1185,7 @@ def main():
                                       spread_model, totals_model, win_prob_model,
                                       feature_lists)
 
-        # ── Header metrics ────────────────────────────────────────────────
-        st.subheader(f"Season {season} — Week {week}")
-
+        # ── Filter picks ──────────────────────────────────────────────────
         ml_bets = preds[
             preds["ml_ev"].notna() &
             (preds["ml_ev"] >= MONEYLINE_EV_MIN) &
@@ -1053,65 +1196,95 @@ def main():
             preds["totals_edge"].notna() &
             (preds["totals_edge"].abs() >= TOTALS_EDGE_MIN) &
             (preds["totals_edge"].abs() <= TOTALS_EDGE_MAX)
-        ]
+        ].sort_values("totals_edge", key=abs, ascending=False)
+
         sp_bets = preds[
             preds["spread_edge"].notna() &
             (preds["spread_edge"].abs() >= SPREAD_EDGE_MIN) &
             (preds["spread_edge"].abs() <= SPREAD_EDGE_MAX)
         ]
 
+        # ── Week header + summary tiles ───────────────────────────────────
+        st.markdown(f"""
+        <div style="display:flex;align-items:baseline;gap:10px;
+                    padding:12px 0 4px 0">
+            <span style="color:#ffffff;font-size:1em;font-weight:700">
+                {season} · Week {week}
+            </span>
+            <span style="color:#5c6680;font-size:0.82em">
+                {len(preds)} games
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric("💰 Moneyline Bets", len(ml_bets))
-        col2.metric("🎯 Totals Bets",    len(tot_bets))
-        col3.metric("📊 Spread Bets",    len(sp_bets))
-        col4.metric("🏈 Games",          len(preds))
+        col1.metric("Moneyline Bets", len(ml_bets))
+        col2.metric("Totals Bets",    len(tot_bets))
+        col3.metric("Spread Bets",    len(sp_bets))
+        col4.metric("Model Accuracy", "54.7%", "Totals win rate")
 
         if not has_lines:
-            st.warning("⚠️ No Vegas lines yet — lines usually appear 7–10 days before kickoff.")
+            st.warning("No Vegas lines yet — lines usually appear 7–10 days before kickoff.")
+
+        # ── Best Bets (top picks across all categories) ───────────────────
+        best_tot  = tot_bets.head(3) if not tot_bets.empty else pd.DataFrame()
+        best_ml   = ml_bets.head(2)  if not ml_bets.empty  else pd.DataFrame()
+        has_best  = not best_tot.empty or not best_ml.empty
+
+        if has_best:
+            section_header("Best Bets", "Highest-confidence picks this week")
+            if not best_tot.empty:
+                for _, row in best_tot.iterrows():
+                    render_totals_card(row, season, week)
+            if not best_ml.empty:
+                for _, row in best_ml.iterrows():
+                    render_moneyline_card(row, season, week)
 
         # ── Moneyline section ─────────────────────────────────────────────
-        st.divider()
-        st.subheader("💰 Moneyline Picks")
-        st.caption("🐶 Underdogs drive the edge — +52.7% historical ROI. Hit ➕ Track to save a bet.")
+        section_header("Moneyline", "Underdogs drive +52.7% historical ROI")
         if not has_lines or preds["home_moneyline"].isna().all():
             st.info("No moneyline data yet — appears closer to kickoff.")
         elif ml_bets.empty:
             st.info("No +EV moneyline bets this week.")
         else:
+            remaining_ml = ml_bets.iloc[2:] if has_best else ml_bets
             dog_bets = ml_bets[ml_bets["ml_book_odds"] > 0]
             fav_bets = ml_bets[ml_bets["ml_book_odds"] <= 0]
             if not dog_bets.empty:
-                st.markdown("**🐶 Underdogs with value**")
+                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
+                            'text-transform:uppercase;letter-spacing:0.07em">'
+                            'Underdogs</span>', unsafe_allow_html=True)
                 for _, row in dog_bets.iterrows():
                     render_moneyline_card(row, season, week)
             if not fav_bets.empty:
-                st.markdown("**🏆 Favorites with value**")
+                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
+                            'text-transform:uppercase;letter-spacing:0.07em">'
+                            'Favorites</span>', unsafe_allow_html=True)
                 for _, row in fav_bets.iterrows():
                     render_moneyline_card(row, season, week)
 
         # ── Totals section ────────────────────────────────────────────────
-        st.divider()
-        st.subheader("🎯 Totals Picks")
-        st.caption("Under bets win 59% historically. Hit ➕ Track to save a bet.")
+        section_header("Totals", "Unders win 59% historically")
         if tot_bets.empty:
             st.info("No totals bets meet the threshold this week.")
         else:
-            tot_sorted = tot_bets.sort_values("totals_edge", key=abs, ascending=False)
-            under_bets = tot_sorted[tot_sorted["totals_edge"] < 0]
-            over_bets  = tot_sorted[tot_sorted["totals_edge"] > 0]
+            under_bets = tot_bets[tot_bets["totals_edge"] < 0]
+            over_bets  = tot_bets[tot_bets["totals_edge"] > 0]
             if not under_bets.empty:
-                st.markdown("**Unders 🔽**")
+                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
+                            'text-transform:uppercase;letter-spacing:0.07em">'
+                            'Unders</span>', unsafe_allow_html=True)
                 for _, row in under_bets.iterrows():
                     render_totals_card(row, season, week)
             if not over_bets.empty:
-                st.markdown("**Overs 🔼**")
+                st.markdown('<span style="color:#8b9bb4;font-size:0.82em;'
+                            'text-transform:uppercase;letter-spacing:0.07em">'
+                            'Overs</span>', unsafe_allow_html=True)
                 for _, row in over_bets.iterrows():
                     render_totals_card(row, season, week)
 
         # ── Spreads section ───────────────────────────────────────────────
-        st.divider()
-        st.subheader("📊 Spread Picks  *(informational)*")
-        st.caption("Near breakeven — use as secondary signal only.")
+        section_header("Spreads", "Informational only · near breakeven")
         if sp_bets.empty:
             st.info("No spread bets meet the threshold this week.")
         else:
@@ -1123,29 +1296,40 @@ def main():
             sp_display["Model"]      = sp_display["pred_spread"].apply(lambda x: f"{-x:+.1f}")
             sp_display["Edge"]       = sp_display["spread_edge"].apply(lambda x: f"{x:+.1f}")
             sp_display["Matchup"]    = sp_display["home_team"] + " vs " + sp_display["away_team"]
-            sp_display["⭐"]          = sp_display["spread_edge"].abs().apply(confidence_stars)
-            # Track buttons for spreads
+            sp_display["Stars"]      = sp_display["spread_edge"].abs().apply(confidence_stars)
             for _, row in sp_display.iterrows():
                 bet_on  = row["Bet on"]
                 vl      = row["Vegas line"]
                 edge_s  = row["Edge"]
                 matchup = row["Matchup"]
-                stars   = row["⭐"]
-                st.markdown(f"**{stars} {bet_on}** &nbsp; Vegas: `{vl}` &nbsp; Edge: `{edge_s}` &nbsp; _{matchup}_")
+                stars   = row["Stars"]
+                st.markdown(
+                    f'<div style="color:#cdd6e4;font-size:0.9em;padding:4px 0">'
+                    f'<span style="color:#53d337;font-weight:700">{stars}</span>'
+                    f'&nbsp; <b>{bet_on}</b>'
+                    f'&nbsp;<span style="color:#5c6680">·</span>&nbsp;'
+                    f'Vegas <code>{vl}</code>'
+                    f'&nbsp;<span style="color:#5c6680">·</span>&nbsp;'
+                    f'Edge <code>{edge_s}</code>'
+                    f'&nbsp;<span style="color:#5c6680;font-size:0.88em">{matchup}</span>'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
                 track_button(f"{bet_on} {vl}", matchup, "Spread",
                              f"{bet_on} {vl}", vl, 1, season, week, f"{edge_s}")
 
-        # ── All games — expandable cards with Track buttons ───────────────
-        st.divider()
-        st.subheader(f"🏈 All {len(preds)} Games This Week")
-        st.caption("Expand any game to track a spread, total, or moneyline bet.")
+        # ── All Games ─────────────────────────────────────────────────────
+        section_header(f"All Games — Week {week}",
+                       "Expand any game to track a spread, total, or moneyline bet")
         for _, row in preds.iterrows():
             render_all_game_card(row, season, week)
 
-        st.divider()
-        st.caption(
-            "📌 Always verify before betting: check injuries, weather, and current lines. "
-            "This model is a tool, not a guarantee."
+        st.markdown(
+            '<div style="color:#5c6680;font-size:0.78em;padding:16px 0 8px 0">'
+            'Always verify before betting — check injuries, weather, and current lines. '
+            'This model is a tool, not a guarantee.'
+            '</div>',
+            unsafe_allow_html=True
         )
 
 
