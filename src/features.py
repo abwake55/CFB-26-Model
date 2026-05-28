@@ -955,9 +955,23 @@ def build_feature_matrix() -> pd.DataFrame:
         want_weather = [c for c in ["game_id", "wind_speed", "temp_avg",
                                      "precipitation", "is_dome"] if c in weather.columns]
         final = final.merge(weather[want_weather], on="game_id", how="left")
-        print(f"  Weather coverage: {final['wind_speed'].notna().mean():.1%} of games")
+        # Dome games have no wind — hard-zero so model learns the true signal
+        if "is_dome" in final.columns and "wind_speed" in final.columns:
+            final["is_dome"] = final["is_dome"].fillna(0).astype(int)
+            final.loc[final["is_dome"] == 1, "wind_speed"] = 0.0
+        outdoor_cov = (
+            final.loc[final["is_dome"] == 0, "wind_speed"].notna().mean()
+            if "is_dome" in final.columns else final["wind_speed"].notna().mean()
+        )
+        dome_pct = final["is_dome"].mean() if "is_dome" in final.columns else 0
+        print(f"  Weather coverage (outdoor games): {outdoor_cov:.1%}")
+        print(f"  Dome games: {dome_pct:.1%} of all games")
     else:
         print("  (no weather data — run src/weather.py to add wind/temp features)")
+        # Ensure columns exist as NaN so TOTALS_FEATURES references don't fail
+        for col in ["wind_speed", "is_dome"]:
+            if col not in final.columns:
+                final[col] = np.nan
 
     # Drop rows missing spread or total (can't train/backtest without them)
     before = len(final)

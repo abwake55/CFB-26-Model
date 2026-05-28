@@ -358,6 +358,130 @@ def fetch_schedule(season: int, week: int) -> pd.DataFrame:
             seen_teams.update([h, a])
     df = pd.DataFrame(clean).reset_index(drop=True)
 
+    # Capture venue_id for weather lookup (CFBD returns venueId on each game)
+    venue_ids = {g.get("id"): g.get("venueId") for g in data}
+    df["venue_id"] = df["game_id"].map(venue_ids)
+
+    return df
+
+
+# ─── VENUE & WEATHER ──────────────────────────────────────────────────────────
+
+@st.cache_data(show_spinner=False, ttl=86400)  # cache venues for 24 h
+def fetch_venues() -> pd.DataFrame:
+    """
+    Pull all CFB venues from CFBD. Returns DataFrame with:
+      venue_id (int), name, lat, lon, is_dome (bool)
+    Cached for 24 hours since venues rarely change.
+    """
+    try:
+        data = cfb_get("venues")
+    except Exception:
+        return pd.DataFrame()
+    if not data:
+        return pd.DataFrame()
+    rows = []
+    for v in data:
+        loc = v.get("location") or {}
+        # CFBD venue roof types that count as enclosed/domed
+        dome_roofs = {"dome", "retractable dome", "closed"}
+        roof = (v.get("roofType") or "").lower()
+        rows.append({
+            "venue_id": v.get("id"),
+            "venue_name": v.get("name"),
+            "lat": loc.get("lat") or loc.get("x"),
+            "lon": loc.get("lon") or loc.get("y"),
+            "is_dome": int(roof in dome_roofs),
+        })
+    df = pd.DataFrame(rows)
+    df["venue_id"] = pd.to_numeric(df["venue_id"], errors="coerce")
+    df["lat"]      = pd.to_numeric(df["lat"],      errors="coerce")
+    df["lon"]      = pd.to_numeric(df["lon"],      errors="coerce")
+    return df
+
+
+@st.cache_data(show_spinner=False, ttl=3600)  # re-fetch weather every hour
+def fetch_game_weather(game_id: int, lat: float, lon: float,
+                       game_date: str, is_dome: int) -> dict:
+    """
+    Fetch wind speed for a single game via Open-Meteo (free, no API key).
+    game_date: ISO date string 'YYYY-MM-DD' or full ISO timestamp.
+    Returns dict with wind_speed (mph) and is_dome.
+    """
+    if is_dome:
+        return {"wind_speed": 0.0, "is_dome": 1}
+    if not lat or not lon or pd.isna(lat) or pd.isna(lon):
+        return {"wind_speed": None, "is_dome": 0}
+
+    try:
+        date_str = str(game_date)[:10]  # 'YYYY-MM-DD'
+        today    = date.today().isoformat()
+        if date_str <= today:
+            # Historical — use archive endpoint
+            url = (f"https://archive-api.open-meteo.com/v1/archive"
+                   f"?latitude={lat}&longitude={lon}"
+                   f"&start_date={date_str}&end_date={date_str}"
+                   f"&hourly=wind_speed_10m&wind_speed_unit=mph&timezone=auto")
+        else:
+            # Future — use forecast endpoint
+            url = (f"https://api.open-meteo.com/v1/forecast"
+                   f"?latitude={lat}&longitude={lon}"
+                   f"&hourly=wind_speed_10m&wind_speed_unit=mph&timezone=auto"
+                   f"&forecast_days=16")
+        resp = requests.get(url, timeout=8)
+        if resp.status_code != 200:
+            return {"wind_speed": None, "is_dome": 0}
+        j = resp.json()
+        speeds = j.get("hourly", {}).get("wind_speed_10m", [])
+        times  = j.get("hourly", {}).get("time", [])
+        if not speeds:
+            return {"wind_speed": None, "is_dome": 0}
+        # Pick the hour closest to 3 PM local (typical CFB kickoff window)
+        target_hour = f"{date_str}T15:00"
+        if target_hour in times:
+            idx = times.index(target_hour)
+        else:
+            # Fall back to afternoon average (hours 12-20)
+            afternoon = [s for t, s in zip(times, speeds)
+                         if t.startswith(date_str) and "T12" <= t <= "T20"]
+            if afternoon:
+                return {"wind_speed": round(sum(afternoon) / len(afternoon), 1), "is_dome": 0}
+            idx = len(speeds) // 2  # midday fallback
+        return {"wind_speed": round(float(speeds[idx]), 1), "is_dome": 0}
+    except Exception:
+        return {"wind_speed": None, "is_dome": 0}
+
+
+def attach_weather_to_games(games: pd.DataFrame) -> pd.DataFrame:
+    """
+    Given the schedule DataFrame, fetch venue lat/lon and wind speed for
+    each game. Adds 'wind_speed' and 'is_dome' columns in-place.
+    Returns a copy with weather columns attached.
+    """
+    df = games.copy()
+    venues = fetch_venues()
+
+    if not venues.empty and "venue_id" in df.columns:
+        df["venue_id"] = pd.to_numeric(df["venue_id"], errors="coerce")
+        df = df.merge(venues[["venue_id", "lat", "lon", "is_dome"]],
+                      on="venue_id", how="left")
+    else:
+        df["lat"] = df["lon"] = df["is_dome"] = np.nan
+
+    df["is_dome"]    = pd.to_numeric(df.get("is_dome", 0), errors="coerce").fillna(0).astype(int)
+    df["wind_speed"] = np.nan
+
+    for idx, row in df.iterrows():
+        w = fetch_game_weather(
+            game_id  = row.get("game_id", 0),
+            lat      = row.get("lat"),
+            lon      = row.get("lon"),
+            game_date= str(row.get("start_date", ""))[:10],
+            is_dome  = int(row.get("is_dome", 0)),
+        )
+        df.at[idx, "wind_speed"] = w.get("wind_speed")
+        df.at[idx, "is_dome"]    = w.get("is_dome", 0)
+
     return df
 
 
@@ -475,10 +599,12 @@ def fetch_lines(games_df: pd.DataFrame) -> pd.DataFrame:
 # ─── FEATURE BUILDING & PREDICTION ───────────────────────────────────────────
 
 def build_and_predict(games, lines, ratings, epa, elo,
-                      spread_model, totals_model, win_prob_model, feature_lists):
+                      spread_model, totals_model, win_prob_model, feature_lists,
+                      weather: pd.DataFrame | None = None):
     """
     Merge lines onto games, build feature vectors via feature_builder, run
     the three models, and return a predictions DataFrame.
+    weather: optional DataFrame with game_id, wind_speed, is_dome columns.
     """
     # ── Merge lines ───────────────────────────────────────────────────────
     if not lines.empty:
@@ -502,6 +628,20 @@ def build_and_predict(games, lines, ratings, epa, elo,
     # ── Build all team features via shared feature_builder ────────────────
     df = attach_team_features(df, ratings, epa, elo if not elo.empty else None)
 
+    # ── Merge weather (wind_speed, is_dome) ──────────────────────────────
+    if weather is not None and not weather.empty:
+        wcols = [c for c in ["game_id", "wind_speed", "is_dome"] if c in weather.columns]
+        df = df.merge(weather[wcols], on="game_id", how="left")
+        # Dome games: hard-zero wind so model gets the same signal as training
+        if "is_dome" in df.columns and "wind_speed" in df.columns:
+            df["is_dome"] = df["is_dome"].fillna(0).astype(int)
+            df.loc[df["is_dome"] == 1, "wind_speed"] = 0.0
+    else:
+        if "wind_speed" not in df.columns:
+            df["wind_speed"] = np.nan
+        if "is_dome" not in df.columns:
+            df["is_dome"] = 0
+
     # ── Assemble feature matrices for each model ──────────────────────────
     def make_feat(feat_names):
         out = pd.DataFrame(index=df.index)
@@ -517,7 +657,8 @@ def build_and_predict(games, lines, ratings, epa, elo,
     out_cols = ["game_id", "season", "week", "home_team", "away_team",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline",
-                "home_unrated", "away_unrated", "has_unrated_opponent"]
+                "home_unrated", "away_unrated", "has_unrated_opponent",
+                "wind_speed", "is_dome"]
     out = df[[c for c in out_cols if c in df.columns]].copy()
     if "provider" in df.columns:
         out["provider"] = df["provider"]
@@ -854,6 +995,31 @@ def render_totals_card(row, season, week):
     left_color = "#06b6d4" if is_under else "#f97316"
     edge_color = "#22c55e" if edge_abs >= 4.5 else "#9ca3af"
 
+    # ── Weather badge ──────────────────────────────────────────────────────
+    wind_mph = row.get("wind_speed")
+    is_dome  = int(row.get("is_dome", 0))
+    if is_dome:
+        weather_badge = ('<span style="background:#1e2537;color:#6b7280;font-size:0.63em;'
+                         'font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px">'
+                         '🏟️ DOME</span>')
+        weather_note  = ""
+    elif pd.notna(wind_mph) and wind_mph is not None:
+        mph = float(wind_mph)
+        if mph >= 20:
+            wind_color, wind_label = "#ef4444", f"💨 {mph:.0f} mph — strong under lean"
+        elif mph >= 12:
+            wind_color, wind_label = "#f97316", f"💨 {mph:.0f} mph — mild under lean"
+        else:
+            wind_color, wind_label = "#6b7280", f"💨 {mph:.0f} mph"
+        weather_badge = (f'<span style="background:#1e2537;color:{wind_color};font-size:0.63em;'
+                         f'font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px">'
+                         f'💨 {mph:.0f} mph</span>')
+        weather_note  = (f'<div style="color:{wind_color};font-size:0.75em;margin-top:3px;'
+                         f'font-weight:600">{wind_label}</div>')
+    else:
+        weather_badge = ""
+        weather_note  = ""
+
     st.html(f"""
     <div style="background:#1a1f2e;border-left:4px solid {left_color};
                 border-top:1px solid #252d3d;border-right:1px solid #252d3d;
@@ -867,6 +1033,7 @@ def render_totals_card(row, season, week):
                 <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
                              font-weight:700;letter-spacing:0.08em;padding:3px 7px;
                              border-radius:4px">TOTAL</span>
+                {weather_badge}
             </div>
             <div style="display:flex;align-items:center;gap:8px">
                 <span style="color:{edge_color};font-size:0.82em;font-weight:700">Edge {edge_str}</span>
@@ -879,6 +1046,7 @@ def render_totals_card(row, season, week):
                          font-variant-numeric:tabular-nums">{ou_str}</span>
         </div>
         <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{neutral_tag}</div>
+        {weather_note}
         <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
             <div style="flex:1;text-align:center">
                 <div style="color:#4b5563;font-size:0.63em;font-weight:700;
@@ -1936,10 +2104,18 @@ def main():
         lines     = fetch_lines(games)
         has_lines = not lines.empty and lines["spread"].notna().any()
 
+        with st.spinner("Fetching weather forecasts..."):
+            games_with_wx = attach_weather_to_games(games)
+            # Extract just the weather columns as a lookup table
+            weather_df = games_with_wx[
+                [c for c in ["game_id", "wind_speed", "is_dome"]
+                 if c in games_with_wx.columns]
+            ].copy()
+
         with st.spinner("Running models..."):
             preds = build_and_predict(games, lines, ratings, epa, elo,
                                       spread_model, totals_model, win_prob_model,
-                                      feature_lists)
+                                      feature_lists, weather=weather_df)
 
         # ── Feature coverage report ───────────────────────────────────────
         # Show which data sources are actually present for this week's games
