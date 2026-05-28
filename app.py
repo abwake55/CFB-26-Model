@@ -2273,13 +2273,17 @@ def render_history_tab():
         """)
 
     # ── Weekly summary ────────────────────────────────────────────────────────
-    flagged_all = week_df[
-        (week_df["totals_edge"].abs() >= TOTALS_EDGE_MIN) |
-        (week_df["spread_edge"].abs() >= SPREAD_EDGE_MIN)
-    ]
+    summary_mask = pd.Series(False, index=week_df.index)
+    if "totals_edge" in week_df.columns:
+        summary_mask = summary_mask | (week_df["totals_edge"].abs() >= TOTALS_EDGE_MIN)
+    if "spread_edge" in week_df.columns:
+        summary_mask = summary_mask | (week_df["spread_edge"].abs() >= SPREAD_EDGE_MIN)
+    flagged_all = week_df[summary_mask]
     if not flagged_all.empty:
-        tot_picks = flagged_all[flagged_all["totals_edge"].abs() >= TOTALS_EDGE_MIN]
-        sp_picks  = flagged_all[flagged_all["spread_edge"].abs() >= SPREAD_EDGE_MIN]
+        tot_picks = flagged_all[flagged_all["totals_edge"].abs() >= TOTALS_EDGE_MIN] \
+            if "totals_edge" in flagged_all.columns else flagged_all.iloc[0:0]
+        sp_picks  = flagged_all[flagged_all["spread_edge"].abs() >= SPREAD_EDGE_MIN] \
+            if "spread_edge" in flagged_all.columns else flagged_all.iloc[0:0]
 
         def hit_rate(picks, col, hit_val):
             settled = picks[picks[col].notna()]
