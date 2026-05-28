@@ -1672,10 +1672,12 @@ def render_history_tab():
 
     # Filter to flagged picks if requested
     if view_mode == "Flagged Picks":
-        flagged = week_df[
-            (week_df["totals_edge"].abs() >= TOTALS_EDGE_MIN) |
-            (week_df["spread_edge"].abs() >= SPREAD_EDGE_MIN)
-        ]
+        mask = pd.Series(False, index=week_df.index)
+        if "totals_edge" in week_df.columns:
+            mask = mask | (week_df["totals_edge"].abs() >= TOTALS_EDGE_MIN)
+        if "spread_edge" in week_df.columns:
+            mask = mask | (week_df["spread_edge"].abs() >= SPREAD_EDGE_MIN)
+        flagged = week_df[mask]
         if flagged.empty:
             st.info("No picks met the edge threshold this week.")
             return
@@ -1685,7 +1687,9 @@ def render_history_tab():
 
     # ── Render each game ──────────────────────────────────────────────────────
     for _, row in display_df.iterrows():
-        matchup    = f"{row['home_team']} vs {row['away_team']}"
+        home = row["home_team"] if "home_team" in row.index else row.get("home_team", "Home")
+        away = row["away_team"] if "away_team" in row.index else row.get("away_team", "Away")
+        matchup    = f"{home} vs {away}"
         actual_mg  = row.get("point_diff")   # home margin
         actual_tot = row.get("total_points")
         pred_sp    = row.get("pred_spread")
