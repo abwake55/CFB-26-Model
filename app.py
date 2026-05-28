@@ -101,20 +101,25 @@ def kelly_units_spread(edge_abs: float, fraction: float = 0.25) -> int:
     """
     Quarter-Kelly bet sizing for ATS bets at standard -110 juice.
 
-    Empirical calibration: each point of spread edge ≈ 2% improvement
-    in ATS cover probability beyond the 50% baseline.
+    Realistic calibration: each point of spread edge ≈ 0.5% improvement
+    in ATS cover probability beyond the 52.38% breakeven baseline.
+    (Model spread direction accuracy is ~51–53%, not 58%.)
 
     Full Kelly formula at -110:
         b = 100/110 ≈ 0.909 (net payout per unit)
         f = (p·b − q) / b  where q = 1 − p
 
-    Uses quarter-Kelly (25%) as a conservative default. Capped at 4 units.
+    Uses quarter-Kelly (25%) as a conservative default. Capped at 3 units.
+    Tiered output:
+      4–5.9 pt edge → 1u
+      6–7.9 pt edge → 2u
+      8+ pt edge    → 3u
     """
-    win_prob = min(0.50 + edge_abs * 0.02, 0.70)
+    win_prob = min(0.5238 + edge_abs * 0.005, 0.60)
     b = 100 / 110  # -110 payout
     kelly_f = max((win_prob * b - (1 - win_prob)) / b, 0.0)
     units = kelly_f * fraction * 100  # bankroll assumed = 100 units
-    return max(1, min(4, round(units)))
+    return max(1, min(3, round(units)))
 
 
 def kelly_units_ml(ev: float, fraction: float = 0.25) -> int:
