@@ -338,7 +338,15 @@ def load_havoc() -> pd.DataFrame:
     havoc_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
                   "rush_success_rate", "pass_success_rate",
                   "explosiveness_off", "explosiveness_off_rush",
-                  "explosiveness_off_pass", "explosiveness_def"]
+                  "explosiveness_off_pass", "explosiveness_def",
+                  # Tempo / pace
+                  "plays_per_drive", "rush_rate",
+                  # Red zone / scoring efficiency
+                  "points_per_opp", "def_points_per_opp",
+                  # Field position
+                  "avg_field_pos",
+                  # Defensive tempo allowed
+                  "def_plays_per_drive"]
     keep = [c for c in ["season", "team"] + havoc_cols if c in df.columns]
     df = df[keep].dropna(subset=["team"]).copy()
     df["season"] = pd.to_numeric(df["season"], errors="coerce")
@@ -850,7 +858,10 @@ def build_feature_matrix() -> pd.DataFrame:
     havoc_stat_cols = ["havoc_total", "havoc_front_seven", "havoc_db",
                        "rush_success_rate", "pass_success_rate",
                        "explosiveness_off", "explosiveness_off_rush",
-                       "explosiveness_off_pass", "explosiveness_def"]
+                       "explosiveness_off_pass", "explosiveness_def",
+                       "plays_per_drive", "rush_rate",
+                       "points_per_opp", "def_points_per_opp",
+                       "avg_field_pos", "def_plays_per_drive"]
     if len(havoc) > 0 and "havoc_total" in havoc.columns:
         avail_havoc = [c for c in havoc_stat_cols if c in havoc.columns]
         games_feat = games_feat.merge(
@@ -890,10 +901,52 @@ def build_feature_matrix() -> pd.DataFrame:
             away_net = (games_feat["away_explosiveness_off"].fillna(0) -
                         games_feat["away_explosiveness_def"].fillna(0))
             games_feat["explosiveness_net_diff"] = home_net - away_net
+        # ── Tempo differentials ───────────────────────────────────────────
+        # plays_per_drive_diff: positive = home team runs more plays per drive
+        #   High combined plays_per_drive → more possessions → more total points
+        if "home_plays_per_drive" in games_feat.columns:
+            games_feat["plays_per_drive_diff"] = (
+                games_feat["home_plays_per_drive"] - games_feat["away_plays_per_drive"])
+            # Combined tempo: sum of both teams' plays per drive predicts total scoring pace
+            games_feat["tempo_combined"] = (
+                games_feat["home_plays_per_drive"].fillna(0) +
+                games_feat["away_plays_per_drive"].fillna(0))
+
+        # rush_rate_diff: positive = home team rushes more
+        #   High combined rush rate → slower game → fewer total points (under lean)
+        if "home_rush_rate" in games_feat.columns:
+            games_feat["rush_rate_diff"] = (
+                games_feat["home_rush_rate"] - games_feat["away_rush_rate"])
+            games_feat["rush_rate_combined"] = (
+                games_feat["home_rush_rate"].fillna(0) +
+                games_feat["away_rush_rate"].fillna(0))
+
+        # ── Red zone / scoring efficiency differentials ───────────────────
+        # points_per_opp: how many pts a team scores per red zone trip
+        if "home_points_per_opp" in games_feat.columns:
+            games_feat["points_per_opp_diff"] = (
+                games_feat["home_points_per_opp"] - games_feat["away_points_per_opp"])
+            games_feat["points_per_opp_combined"] = (
+                games_feat["home_points_per_opp"].fillna(0) +
+                games_feat["away_points_per_opp"].fillna(0))
+
+        # def_points_per_opp: lower = better red zone defense
+        if "home_def_points_per_opp" in games_feat.columns:
+            games_feat["def_points_per_opp_combined"] = (
+                games_feat["home_def_points_per_opp"].fillna(0) +
+                games_feat["away_def_points_per_opp"].fillna(0))
+
+        # ── Field position ────────────────────────────────────────────────
+        if "home_avg_field_pos" in games_feat.columns:
+            games_feat["field_pos_diff"] = (
+                games_feat["home_avg_field_pos"] - games_feat["away_avg_field_pos"])
+
         cov = games_feat["home_havoc_total"].notna().mean()
         exp_cov = games_feat["home_explosiveness_off"].notna().mean() if "home_explosiveness_off" in games_feat.columns else 0
+        tempo_cov = games_feat["home_plays_per_drive"].notna().mean() if "home_plays_per_drive" in games_feat.columns else 0
         print(f"  Havoc coverage: {cov:.1%} of games")
         print(f"  Explosiveness coverage: {exp_cov:.1%} of games")
+        print(f"  Tempo coverage: {tempo_cov:.1%} of games")
 
     # ── Merge Transfer Portal features (home and away) ────────────────────
     PORTAL_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",

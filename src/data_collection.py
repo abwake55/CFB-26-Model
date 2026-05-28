@@ -485,6 +485,34 @@ def collect_havoc(season: int) -> pd.DataFrame:
             df["explosiveness_off_rush"] = df["offense"].apply(lambda x: _exp(x, "rushing"))
             df["explosiveness_off_pass"] = df["offense"].apply(lambda x: _exp(x, "passing"))
 
+            # ── Tempo & pace features (same endpoint, no extra API call) ──────
+            # plays_per_drive: how many plays a team runs per possession
+            #   High = slow methodical offense (uses clock). Low = quick tempo.
+            df["off_plays"]  = df["offense"].apply(
+                lambda x: x.get("plays")  if isinstance(x, dict) else None)
+            df["off_drives"] = df["offense"].apply(
+                lambda x: x.get("drives") if isinstance(x, dict) else None)
+            df["off_plays"]  = pd.to_numeric(df["off_plays"],  errors="coerce")
+            df["off_drives"] = pd.to_numeric(df["off_drives"], errors="coerce")
+            df["plays_per_drive"] = df["off_plays"] / df["off_drives"].replace(0, float("nan"))
+
+            # rush_rate: fraction of plays that are rushes
+            #   High rush-rate teams (option, ground-and-pound) produce fewer scoring plays
+            #   → strong under lean, especially in bad weather
+            df["rush_rate"] = df["offense"].apply(
+                lambda x: x.get("rushingPlays", {}).get("rate") if isinstance(x, dict) else None)
+
+            # points_per_opportunity: scoring efficiency in the red zone
+            #   High = converts possessions to TDs, low = settles for FGs
+            df["points_per_opp"] = df["offense"].apply(
+                lambda x: x.get("pointsPerOpportunity") if isinstance(x, dict) else None)
+
+            # avg_field_pos_start: average starting field position (yards from own goal)
+            #   Higher = better field position → more total scoring
+            df["avg_field_pos"] = df["offense"].apply(
+                lambda x: x.get("fieldPosition", {}).get("averageStart")
+                if isinstance(x, dict) else None)
+
         # Defensive explosiveness allowed (lower = better D vs. big plays)
         if "defense" in df.columns:
             def _exp_def(obj):
@@ -495,6 +523,19 @@ def collect_havoc(season: int) -> pd.DataFrame:
                     return val.get("total")
                 return val  # plain float
             df["explosiveness_def"] = df["defense"].apply(_exp_def)
+
+            # Defensive red zone efficiency allowed
+            df["def_points_per_opp"] = df["defense"].apply(
+                lambda x: x.get("pointsPerOpportunity") if isinstance(x, dict) else None)
+
+            # Defensive plays per drive allowed (how fast do opponents move?)
+            df["def_plays"]  = df["defense"].apply(
+                lambda x: x.get("plays")  if isinstance(x, dict) else None)
+            df["def_drives"] = df["defense"].apply(
+                lambda x: x.get("drives") if isinstance(x, dict) else None)
+            df["def_plays"]  = pd.to_numeric(df["def_plays"],  errors="coerce")
+            df["def_drives"] = pd.to_numeric(df["def_drives"], errors="coerce")
+            df["def_plays_per_drive"] = df["def_plays"] / df["def_drives"].replace(0, float("nan"))
 
         # Normalize column names
         if "school" in df.columns and "team" not in df.columns:
@@ -508,14 +549,18 @@ def collect_havoc(season: int) -> pd.DataFrame:
                              "havoc_total", "havoc_front_seven", "havoc_db",
                              "rush_success_rate", "pass_success_rate",
                              "explosiveness_off", "explosiveness_off_rush",
-                             "explosiveness_off_pass", "explosiveness_def"]
+                             "explosiveness_off_pass", "explosiveness_def",
+                             "plays_per_drive", "rush_rate",
+                             "points_per_opp", "avg_field_pos",
+                             "def_points_per_opp", "def_plays_per_drive"]
                 if c in df.columns]
         result = df[keep].copy()
         # Convert to numeric
         for col in keep:
             if col not in ("season", "team"):
                 result[col] = pd.to_numeric(result[col], errors="coerce")
-        print(f"    {len(result)} havoc rows for {season}")
+        print(f"    {len(result)} havoc rows for {season} "
+              f"(tempo coverage: {result['plays_per_drive'].notna().mean():.0%})")
         return result
 
     except Exception as e:

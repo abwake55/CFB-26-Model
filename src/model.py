@@ -293,17 +293,33 @@ TOTALS_FEATURES = [
     "home_rush_success_rate", "away_rush_success_rate",
     "home_pass_success_rate", "away_pass_success_rate",
 
-    # ── Explosive play rate (primary totals signal) ────────────────────────
-    # Totals: both teams' absolute explosiveness matters independently.
-    # High-explosiveness offenses vs. high-explosiveness-allowed defenses → Overs.
-    # This is the main channel through which explosive play rate affects scoring totals.
-    "home_explosiveness_off", "away_explosiveness_off",   # raw big-play rates
+    # ── Explosive play rate ───────────────────────────────────────────────────
+    "home_explosiveness_off", "away_explosiveness_off",
     "home_explosiveness_off_rush", "away_explosiveness_off_rush",
     "home_explosiveness_off_pass", "away_explosiveness_off_pass",
-    "home_explosiveness_def", "away_explosiveness_def",   # allowed big-play rates
-    "explosiveness_off_diff",   # net offensive big-play advantage
-    "explosiveness_def_diff",   # net defensive big-play exposure
-    "explosiveness_net_diff",   # combined net signal
+    "home_explosiveness_def", "away_explosiveness_def",
+    "explosiveness_off_diff", "explosiveness_def_diff", "explosiveness_net_diff",
+
+    # ── Tempo & pace ─────────────────────────────────────────────────────────
+    # plays_per_drive: how many plays per possession (higher = methodical, uses clock)
+    # tempo_combined: both teams' pace summed — predicts total number of possessions
+    # rush_rate: high combined rush rate → fewer scoring plays → under lean
+    "home_plays_per_drive", "away_plays_per_drive",
+    "plays_per_drive_diff", "tempo_combined",
+    "home_rush_rate", "away_rush_rate",
+    "rush_rate_diff", "rush_rate_combined",
+
+    # ── Red zone / scoring efficiency ─────────────────────────────────────────
+    # points_per_opp: red zone scoring rate — direct total scoring signal
+    # combined: sum of both offenses' red zone efficiency predicts total score
+    "home_points_per_opp", "away_points_per_opp",
+    "points_per_opp_diff", "points_per_opp_combined",
+    "home_def_points_per_opp", "away_def_points_per_opp",
+    "def_points_per_opp_combined",
+
+    # ── Field position ────────────────────────────────────────────────────────
+    "home_avg_field_pos", "away_avg_field_pos", "field_pos_diff",
+    "home_def_plays_per_drive", "away_def_plays_per_drive",
 ]
 
 WIN_PROB_FEATURES = SPREAD_FEATURES  # same features, different target
