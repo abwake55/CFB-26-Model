@@ -234,6 +234,16 @@ SPREAD_FEATURES = [
     "explosiveness_net_diff",   # combined net (off advantage minus def disadvantage)
     "home_explosiveness_off", "away_explosiveness_off",
     "home_explosiveness_def", "away_explosiveness_def",
+
+    # ── Turnover margin ────────────────────────────────────────────────────
+    # One of the strongest predictors in CFB — teams with positive margins
+    # consistently win more games than their efficiency metrics predict.
+    # Normalized per game to control for scheduling differences.
+    # turnover_margin_diff: home margin - away margin → direct spread signal
+    "home_turnover_margin", "away_turnover_margin",
+    "home_turnovers_off_pg", "away_turnovers_off_pg",
+    "home_turnovers_def_pg", "away_turnovers_def_pg",
+    "turnover_margin_diff",
 ]
 
 # Totals model uses both teams' offense AND defense independently
@@ -320,6 +330,17 @@ TOTALS_FEATURES = [
     # ── Field position ────────────────────────────────────────────────────────
     "home_avg_field_pos", "away_avg_field_pos", "field_pos_diff",
     "home_def_plays_per_drive", "away_def_plays_per_drive",
+
+    # ── Turnover margin ───────────────────────────────────────────────────────
+    # Turnovers directly affect possessions and scoring opportunities.
+    # turnovers_combined: total giveaways per game across both teams
+    #   High combined turnovers → fewer clean drives → under lean
+    # turnover_margin_diff: spread signal (home margin advantage)
+    "home_turnover_margin", "away_turnover_margin",
+    "home_turnovers_off_pg", "away_turnovers_off_pg",
+    "home_turnovers_def_pg", "away_turnovers_def_pg",
+    "turnover_margin_diff",
+    "turnovers_combined",
 ]
 
 WIN_PROB_FEATURES = SPREAD_FEATURES  # same features, different target

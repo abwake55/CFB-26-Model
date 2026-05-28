@@ -545,6 +545,44 @@ def collect_havoc(season: int) -> pd.DataFrame:
         if "season" not in df.columns:
             df["season"] = season
 
+        # ── Turnover margin (from /stats/season regular stats) ────────────
+        # turnovers          = offensive giveaways (fumbles lost + INTs thrown)
+        # turnoversOpponent  = defensive takeaways forced by this team
+        # Normalized per game to make seasons with different game counts comparable.
+        # turnover_margin = takeaways_per_game - giveaways_per_game
+        #   Positive = team takes care of ball and/or forces turnovers → strong spread lean
+        try:
+            stats_raw = cfb_get("stats/season",
+                                params={"year": season, "seasonType": "regular"})
+            if stats_raw:
+                stats_pivot = (
+                    pd.DataFrame(stats_raw)
+                      .pivot_table(index="team", columns="statName",
+                                   values="statValue", aggfunc="first")
+                      .reset_index()
+                )
+                if "games" in stats_pivot.columns and "turnovers" in stats_pivot.columns:
+                    g = pd.to_numeric(stats_pivot["games"], errors="coerce").replace(0, float("nan"))
+                    stats_pivot["turnovers_off_pg"] = (
+                        pd.to_numeric(stats_pivot["turnovers"], errors="coerce") / g)
+                    opp_col = "turnoversOpponent" if "turnoversOpponent" in stats_pivot.columns else None
+                    stats_pivot["turnovers_def_pg"] = (
+                        pd.to_numeric(stats_pivot[opp_col], errors="coerce") / g
+                        if opp_col else float("nan"))
+                    stats_pivot["turnover_margin"] = (
+                        stats_pivot["turnovers_def_pg"] - stats_pivot["turnovers_off_pg"])
+                    df = df.merge(
+                        stats_pivot[["team", "turnovers_off_pg",
+                                     "turnovers_def_pg", "turnover_margin"]],
+                        on="team", how="left")
+                    print(f"    Turnover coverage: "
+                          f"{df['turnover_margin'].notna().mean():.0%}")
+        except Exception as e:
+            print(f"    Warning: turnover fetch failed for {season}: {e}")
+            df["turnovers_off_pg"] = float("nan")
+            df["turnovers_def_pg"] = float("nan")
+            df["turnover_margin"]  = float("nan")
+
         keep = [c for c in ["season", "team",
                              "havoc_total", "havoc_front_seven", "havoc_db",
                              "rush_success_rate", "pass_success_rate",
@@ -552,7 +590,9 @@ def collect_havoc(season: int) -> pd.DataFrame:
                              "explosiveness_off_pass", "explosiveness_def",
                              "plays_per_drive", "rush_rate",
                              "points_per_opp", "avg_field_pos",
-                             "def_points_per_opp", "def_plays_per_drive"]
+                             "def_points_per_opp", "def_plays_per_drive",
+                             "turnovers_off_pg", "turnovers_def_pg",
+                             "turnover_margin"]
                 if c in df.columns]
         result = df[keep].copy()
         # Convert to numeric

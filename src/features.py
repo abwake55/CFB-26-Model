@@ -346,7 +346,9 @@ def load_havoc() -> pd.DataFrame:
                   # Field position
                   "avg_field_pos",
                   # Defensive tempo allowed
-                  "def_plays_per_drive"]
+                  "def_plays_per_drive",
+                  # Turnover margin (per game)
+                  "turnovers_off_pg", "turnovers_def_pg", "turnover_margin"]
     keep = [c for c in ["season", "team"] + havoc_cols if c in df.columns]
     df = df[keep].dropna(subset=["team"]).copy()
     df["season"] = pd.to_numeric(df["season"], errors="coerce")
@@ -861,7 +863,8 @@ def build_feature_matrix() -> pd.DataFrame:
                        "explosiveness_off_pass", "explosiveness_def",
                        "plays_per_drive", "rush_rate",
                        "points_per_opp", "def_points_per_opp",
-                       "avg_field_pos", "def_plays_per_drive"]
+                       "avg_field_pos", "def_plays_per_drive",
+                       "turnovers_off_pg", "turnovers_def_pg", "turnover_margin"]
     if len(havoc) > 0 and "havoc_total" in havoc.columns:
         avail_havoc = [c for c in havoc_stat_cols if c in havoc.columns]
         games_feat = games_feat.merge(
@@ -941,12 +944,26 @@ def build_feature_matrix() -> pd.DataFrame:
             games_feat["field_pos_diff"] = (
                 games_feat["home_avg_field_pos"] - games_feat["away_avg_field_pos"])
 
+        # ── Turnover margin ───────────────────────────────────────────────
+        # turnover_margin_diff: home margin minus away margin
+        #   Positive = home team has a better turnover margin → spread lean toward home
+        # turnovers_combined: sum of both teams' giveaways per game
+        #   High = sloppy game with lots of turnovers → fewer scoring drives → under lean
+        if "home_turnover_margin" in games_feat.columns:
+            games_feat["turnover_margin_diff"] = (
+                games_feat["home_turnover_margin"] - games_feat["away_turnover_margin"])
+            games_feat["turnovers_combined"] = (
+                games_feat["home_turnovers_off_pg"].fillna(0) +
+                games_feat["away_turnovers_off_pg"].fillna(0))
+
         cov = games_feat["home_havoc_total"].notna().mean()
         exp_cov = games_feat["home_explosiveness_off"].notna().mean() if "home_explosiveness_off" in games_feat.columns else 0
         tempo_cov = games_feat["home_plays_per_drive"].notna().mean() if "home_plays_per_drive" in games_feat.columns else 0
+        to_cov = games_feat["home_turnover_margin"].notna().mean() if "home_turnover_margin" in games_feat.columns else 0
         print(f"  Havoc coverage: {cov:.1%} of games")
         print(f"  Explosiveness coverage: {exp_cov:.1%} of games")
         print(f"  Tempo coverage: {tempo_cov:.1%} of games")
+        print(f"  Turnover margin coverage: {to_cov:.1%} of games")
 
     # ── Merge Transfer Portal features (home and away) ────────────────────
     PORTAL_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",

@@ -122,7 +122,14 @@
     "home_explosiveness_off",
     "away_explosiveness_off",
     "home_explosiveness_def",
-    "away_explosiveness_def"
+    "away_explosiveness_def",
+    "home_turnover_margin",
+    "away_turnover_margin",
+    "home_turnovers_off_pg",
+    "away_turnovers_off_pg",
+    "home_turnovers_def_pg",
+    "away_turnovers_def_pg",
+    "turnover_margin_diff"
   ],
   "totals": [
     "home_sp_offense",
@@ -230,7 +237,15 @@
     "away_avg_field_pos",
     "field_pos_diff",
     "home_def_plays_per_drive",
-    "away_def_plays_per_drive"
+    "away_def_plays_per_drive",
+    "home_turnover_margin",
+    "away_turnover_margin",
+    "home_turnovers_off_pg",
+    "away_turnovers_off_pg",
+    "home_turnovers_def_pg",
+    "away_turnovers_def_pg",
+    "turnover_margin_diff",
+    "turnovers_combined"
   ],
   "win_prob": [
     "sp_diff",
@@ -355,6 +370,13 @@
     "home_explosiveness_off",
     "away_explosiveness_off",
     "home_explosiveness_def",
-    "away_explosiveness_def"
+    "away_explosiveness_def",
+    "home_turnover_margin",
+    "away_turnover_margin",
+    "home_turnovers_off_pg",
+    "away_turnovers_off_pg",
+    "home_turnovers_def_pg",
+    "away_turnovers_def_pg",
+    "turnover_margin_diff"
   ]
 }
