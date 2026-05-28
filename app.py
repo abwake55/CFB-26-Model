@@ -1731,6 +1731,265 @@ Vegas totals tend to be set slightly high because casual bettors like Overs (mor
         """)
 
 
+# ─── BACKTESTER TAB ──────────────────────────────────────────────────────────
+
+def render_backtester_tab():
+    """
+    Backtester — simulate historical betting at configurable edge thresholds.
+
+    Panels:
+      1. Summary metrics   — total bets, win %, flat profit, ROI, max drawdown
+      2. Profit curve      — cumulative units over time, flat vs Kelly
+      3. Threshold sweep   — win rate + ROI at every edge cutoff (find the sweet spot)
+      4. Bet type breakdown — spreads vs overs vs unders, side by side
+    """
+    import plotly.graph_objects as go
+
+    results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
+    if not results_path.exists():
+        st.warning("⚠️  No model_results.csv found — run the model to generate predictions.")
+        return
+
+    df = pd.read_csv(results_path)
+
+    # Compute totals edge if not already saved
+    if "totals_edge" not in df.columns:
+        df["totals_edge"] = (pd.to_numeric(df["pred_total"],  errors="coerce") -
+                             pd.to_numeric(df["over_under"],  errors="coerce"))
+
+    # Keep only completed games with outcomes
+    df = df.dropna(subset=["covered_spread", "went_over", "spread_edge"]).copy()
+    df["spread_edge"]    = pd.to_numeric(df["spread_edge"],    errors="coerce")
+    df["totals_edge"]    = pd.to_numeric(df["totals_edge"],    errors="coerce")
+    df["covered_spread"] = df["covered_spread"].astype(int)
+    df["went_over"]      = df["went_over"].astype(int)
+    df["season"]         = pd.to_numeric(df["season"], errors="coerce")
+    df["week"]           = pd.to_numeric(df["week"],   errors="coerce")
+    df = df.sort_values(["season", "week"]).reset_index(drop=True)
+    df["_idx"] = range(len(df))   # chronological index for profit curve
+
+    WIN_U  = 1.0    # win 1 unit (betting -110)
+    LOSE_U = 1.1   # lose 1.1 units (juice)
+
+    def _kelly(edge_abs: float) -> float:
+        """Quarter-Kelly units, capped 0.5–3.0, rounded to nearest 0.5."""
+        win_p = min(0.5238 + edge_abs * 0.005, 0.60)
+        b = 100 / 110
+        k = max((win_p * b - (1 - win_p)) / b, 0.0)
+        u = k * 0.25 * 100
+        return max(0.5, min(3.0, round(u * 2) / 2))
+
+    def _simulate(data: pd.DataFrame, sp_min: float, tot_min: float) -> pd.DataFrame:
+        """Build a row-per-bet DataFrame with flat and Kelly P&L columns."""
+        rows = []
+        for _, r in data.iterrows():
+            sp_e  = r["spread_edge"]
+            tot_e = r.get("totals_edge", float("nan"))
+            base  = {"season": r["season"], "week": r["week"],
+                     "_idx": r["_idx"],
+                     "matchup": f"{r['home_team']} vs {r['away_team']}"}
+
+            # Spread bet
+            if pd.notna(sp_e) and abs(sp_e) >= sp_min:
+                home_bet = (sp_e > 0)
+                won      = (r["covered_spread"] == 1) if home_bet else (r["covered_spread"] == 0)
+                ku       = _kelly(abs(sp_e))
+                rows.append({**base,
+                    "type": "Spread",
+                    "direction": "Home" if home_bet else "Away",
+                    "edge": round(sp_e, 1), "won": int(won),
+                    "flat_pnl":  WIN_U if won else -LOSE_U,
+                    "kelly_pnl": ku * WIN_U if won else -ku * LOSE_U,
+                    "kelly_u": ku,
+                })
+
+            # Totals bet
+            if pd.notna(tot_e) and abs(tot_e) >= tot_min:
+                over_bet = (tot_e > 0)
+                won      = (r["went_over"] == 1) if over_bet else (r["went_over"] == 0)
+                ku       = _kelly(abs(tot_e))
+                rows.append({**base,
+                    "type": "Over" if over_bet else "Under",
+                    "direction": "Over" if over_bet else "Under",
+                    "edge": round(tot_e, 1), "won": int(won),
+                    "flat_pnl":  WIN_U if won else -LOSE_U,
+                    "kelly_pnl": ku * WIN_U if won else -ku * LOSE_U,
+                    "kelly_u": ku,
+                })
+        return pd.DataFrame(rows)
+
+    # ── Controls ──────────────────────────────────────────────────────────────
+    st.markdown("#### ⚙️ Simulation Settings")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        sp_thresh = st.slider(
+            "Spread edge minimum (pts)", 1.0, 8.0, 3.0, 0.5,
+            help="Flag a spread bet only when model vs Vegas gap ≥ this value")
+    with c2:
+        tot_thresh = st.slider(
+            "Totals edge minimum (pts)", 0.5, 6.0, 2.0, 0.5,
+            help="Flag an over/under bet only when model vs O/U gap ≥ this value")
+    with c3:
+        season_opts = ["All seasons"] + [
+            str(int(s)) for s in sorted(df["season"].dropna().unique(), reverse=True)]
+        sel_s = st.selectbox("Season filter", season_opts)
+
+    filt = df.copy()
+    if sel_s != "All seasons":
+        filt = filt[filt["season"] == int(sel_s)]
+
+    bets = _simulate(filt, sp_thresh, tot_thresh)
+    if bets.empty:
+        st.warning("No qualifying bets at these thresholds — try lowering the edge minimums.")
+        return
+
+    bets = bets.sort_values("_idx").reset_index(drop=True)
+    bets["bet_num"]   = range(1, len(bets) + 1)
+    bets["cum_flat"]  = bets["flat_pnl"].cumsum()
+    bets["cum_kelly"] = bets["kelly_pnl"].cumsum()
+
+    # ── Summary metrics ───────────────────────────────────────────────────────
+    n_bets    = len(bets)
+    win_pct   = bets["won"].mean() * 100
+    flat_tot  = bets["flat_pnl"].sum()
+    flat_roi  = flat_tot / (n_bets * LOSE_U) * 100
+    kelly_tot = bets["kelly_pnl"].sum()
+    max_dd    = (bets["cum_flat"] - bets["cum_flat"].cummax()).min()
+
+    be_color = "normal" if win_pct >= 52.38 else "inverse"
+    m1, m2, m3, m4, m5 = st.columns(5)
+    m1.metric("Total Bets",    f"{n_bets:,}")
+    m2.metric("Win Rate",      f"{win_pct:.1f}%",
+              f"{win_pct - 52.38:+.1f}% vs break-even", delta_color=be_color)
+    m3.metric("Flat Profit",   f"{flat_tot:+.1f}u")
+    m4.metric("ROI (flat)",    f"{flat_roi:+.1f}%")
+    m5.metric("Max Drawdown",  f"{max_dd:.1f}u")
+
+    # ── Profit curve ──────────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("#### 📈 Cumulative Profit — Flat vs Kelly Sizing")
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=bets["bet_num"], y=bets["cum_flat"].round(2),
+        mode="lines", name="Flat (1u per bet)",
+        line=dict(color="#3b82f6", width=2),
+        hovertemplate="Bet #%{x}<br><b>%{y:+.1f}u</b><extra>Flat</extra>",
+    ))
+    fig.add_trace(go.Scatter(
+        x=bets["bet_num"], y=bets["cum_kelly"].round(2),
+        mode="lines", name="Kelly (0.5–3u)",
+        line=dict(color="#eab308", width=2),
+        hovertemplate="Bet #%{x}<br><b>%{y:+.1f}u</b><extra>Kelly</extra>",
+    ))
+    fig.add_hline(y=0, line_dash="dash",
+                  line_color="rgba(255,255,255,0.25)", line_width=1)
+    fig.update_layout(
+        xaxis_title="Bet # (chronological)",
+        yaxis_title="Cumulative Units",
+        plot_bgcolor="#0f1117", paper_bgcolor="#0f1117",
+        font=dict(color="#e5e7eb", size=12),
+        legend=dict(bgcolor="rgba(0,0,0,0)", orientation="h",
+                    yanchor="bottom", y=1.02, xanchor="right", x=1),
+        height=300,
+        margin=dict(l=0, r=0, t=10, b=0),
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("---")
+    left_col, right_col = st.columns(2)
+
+    # ── Threshold sweep ───────────────────────────────────────────────────────
+    with left_col:
+        st.markdown("#### 🎯 Threshold Sweep")
+        st.caption("Same threshold applied to spreads and totals. Find the edge cutoff with the best ROI.")
+        sweep_rows = []
+        for t in [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0]:
+            b = _simulate(filt, t, t)
+            if b.empty:
+                continue
+            n   = len(b)
+            wp  = b["won"].mean() * 100
+            fp  = b["flat_pnl"].sum()
+            roi = fp / (n * LOSE_U) * 100
+            kp  = b["kelly_pnl"].sum()
+            is_current = (t == sp_thresh)
+            sweep_rows.append({
+                "Edge ≥": f"{t:.1f} pts",
+                "# Bets": n,
+                "Win %": f"{wp:.1f}%",
+                "Flat P&L": f"{fp:+.1f}u",
+                "ROI": f"{roi:+.1f}%",
+                "Kelly P&L": f"{kp:+.1f}u",
+                "_is_current": is_current,
+            })
+        if sweep_rows:
+            sweep_df = pd.DataFrame(sweep_rows)
+            # Highlight current threshold row
+            def _hl(row):
+                if row["_is_current"]:
+                    return ["background-color: rgba(59,130,246,0.15)"] * len(row)
+                return [""] * len(row)
+            styled = (sweep_df.drop(columns=["_is_current"])
+                               .style.apply(_hl, axis=1, subset=None))
+            # Re-add _is_current to subset apply
+            st.dataframe(
+                sweep_df.drop(columns=["_is_current"]),
+                use_container_width=True, hide_index=True)
+
+    # ── Bet type breakdown ────────────────────────────────────────────────────
+    with right_col:
+        st.markdown("#### 🔍 Bet Type Breakdown")
+        st.caption("Performance split by bet category at the selected thresholds above.")
+        type_rows = []
+        for bet_type, label in [("Spread","📏 Spread"), ("Over","⬆️ Over"), ("Under","⬇️ Under")]:
+            sub = bets[bets["type"] == bet_type]
+            if sub.empty:
+                continue
+            n   = len(sub)
+            wp  = sub["won"].mean() * 100
+            fp  = sub["flat_pnl"].sum()
+            roi = fp / (n * LOSE_U) * 100
+            type_rows.append({
+                "Type": label, "Bets": n,
+                "Win %": f"{wp:.1f}%",
+                "Flat P&L": f"{fp:+.1f}u",
+                "ROI": f"{roi:+.1f}%",
+            })
+        # All combined
+        type_rows.append({
+            "Type": "🔢 All", "Bets": n_bets,
+            "Win %": f"{win_pct:.1f}%",
+            "Flat P&L": f"{flat_tot:+.1f}u",
+            "ROI": f"{flat_roi:+.1f}%",
+        })
+        if type_rows:
+            st.dataframe(pd.DataFrame(type_rows),
+                         use_container_width=True, hide_index=True)
+
+        # Win rate context
+        st.markdown("---")
+        st.markdown("**Break-even reference**")
+        st.caption(
+            "At standard -110 juice you need **52.4%** to break even on flat betting. "
+            "Kelly sizing outperforms flat when win rate is consistently above that threshold "
+            "but adds variance — if the edge estimates are off, Kelly loses more."
+        )
+
+    # ── Recent flagged bets detail ─────────────────────────────────────────────
+    with st.expander("📋 All qualifying bets (most recent first)"):
+        display = bets[["season","week","matchup","type","direction",
+                         "edge","won","flat_pnl","kelly_u"]].copy()
+        display.columns = ["Season","Wk","Matchup","Type","Side",
+                            "Edge","Won","Flat P&L","Kelly u"]
+        display["Won"]     = display["Won"].map({1:"✅",0:"❌"})
+        display["Flat P&L"] = display["Flat P&L"].apply(lambda x: f"{x:+.1f}u")
+        display["Edge"]    = display["Edge"].apply(lambda x: f"{x:+.1f}")
+        display["Kelly u"] = display["Kelly u"].apply(lambda x: f"{x:.1f}u")
+        st.dataframe(display.sort_values(["Season","Wk"], ascending=False),
+                     use_container_width=True, hide_index=True)
+
+
 # ─── MODEL ANALYSIS TAB ──────────────────────────────────────────────────────
 
 def render_analysis_tab():
@@ -2367,9 +2626,9 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    picks_tab, bets_tab, standings_tab, clv_tab, history_tab, analysis_tab, guide_tab = st.tabs([
+    picks_tab, bets_tab, standings_tab, clv_tab, history_tab, backtest_tab, analysis_tab, guide_tab = st.tabs([
         "This Week's Picks", "My Bets", "Season Standings", "CLV Tracker",
-        "Historical Picks", "Model Analysis", "How It Works"
+        "Historical Picks", "Backtester", "Model Analysis", "How It Works"
     ])
 
     # ── MY BETS TAB ───────────────────────────────────────────────────────
@@ -2387,6 +2646,10 @@ def main():
     # ── HISTORICAL PICKS TAB ──────────────────────────────────────────────
     with history_tab:
         render_history_tab()
+
+    # ── BACKTESTER TAB ────────────────────────────────────────────────────
+    with backtest_tab:
+        render_backtester_tab()
 
     # ── MODEL ANALYSIS TAB ────────────────────────────────────────────────
     with analysis_tab:
