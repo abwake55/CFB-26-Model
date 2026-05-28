@@ -1367,12 +1367,33 @@ def render_standings_tab():
     """
     section_header("Season Standings", "Model picks vs. tracked bets")
 
-    # ── Model record from model_results.csv ──────────────────────────────────
+    # ── Season selector ───────────────────────────────────────────────────────
     results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
-    model_rows = []
+    available_seasons = []
+    res_all = None
     if results_path.exists():
         try:
-            res = pd.read_csv(results_path)
+            res_all = pd.read_csv(results_path)
+            if "season" in res_all.columns:
+                res_all["season"] = pd.to_numeric(res_all["season"], errors="coerce")
+                available_seasons = sorted(res_all["season"].dropna().unique().astype(int), reverse=True)
+        except Exception:
+            pass
+
+    bets_all = load_bets()
+    bet_seasons = sorted({int(b["season"]) for b in bets_all if "season" in b and str(b["season"]).isdigit()}, reverse=True)
+    all_seasons = sorted(set(available_seasons) | set(bet_seasons), reverse=True)
+
+    if all_seasons:
+        sel_season = st.selectbox("Season", all_seasons, index=0, key="standings_season")
+    else:
+        sel_season = date.today().year
+
+    # ── Model record — filtered to selected season ────────────────────────────
+    model_rows = []
+    if res_all is not None:
+        try:
+            res = res_all[res_all["season"] == sel_season].copy() if "season" in res_all.columns else res_all.copy()
             for col in ["spread_edge", "totals_edge", "covered_spread", "went_over",
                         "over_under", "pred_total", "spread", "pred_spread"]:
                 if col in res.columns:
@@ -1384,8 +1405,9 @@ def render_standings_tab():
                 for _, r in tot.iterrows():
                     is_over  = r["totals_edge"] > 0
                     won      = (is_over and r["went_over"] == 1) or (not is_over and r["went_over"] == 0)
-                    model_rows.append({"source": "Model", "bet_type": "Total",
-                                       "won": won, "units": 1, "status": "Won" if won else "Lost"})
+                    if pd.notna(r["went_over"]):
+                        model_rows.append({"source": "Model", "bet_type": "Total",
+                                           "won": won, "units": 1, "status": "Won" if won else "Lost"})
 
             # Spread picks
             if "spread_edge" in res.columns and "covered_spread" in res.columns:
@@ -1394,14 +1416,17 @@ def render_standings_tab():
                     bet_home = r["spread_edge"] > 0
                     won      = (bet_home and r["covered_spread"] == 1) or \
                                (not bet_home and r["covered_spread"] == 0)
-                    model_rows.append({"source": "Model", "bet_type": "Spread",
-                                       "won": won, "units": 1, "status": "Won" if won else "Lost"})
+                    if pd.notna(r["covered_spread"]):
+                        model_rows.append({"source": "Model", "bet_type": "Spread",
+                                           "won": won, "units": 1, "status": "Won" if won else "Lost"})
         except Exception as e:
             st.caption(f"Could not load model results: {e}")
 
-    # ── Bettor records from tracked_bets.json ─────────────────────────────────
+    # ── Bettor records — filtered to selected season ──────────────────────────
     bets     = load_bets()
-    settled  = [b for b in bets if b["status"] in ("Won", "Lost", "Push")]
+    settled  = [b for b in bets
+                if b["status"] in ("Won", "Lost", "Push")
+                and str(b.get("season", "")).strip() == str(sel_season)]
 
     def record_for(source_bets):
         wins   = sum(1 for b in source_bets if b["status"] == "Won")
