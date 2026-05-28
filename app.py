@@ -1745,12 +1745,28 @@ def render_backtester_tab():
     """
     import plotly.graph_objects as go
 
-    results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
-    if not results_path.exists():
-        st.warning("⚠️  No model_results.csv found — run the model to generate predictions.")
+    wf_path      = ROOT_DIR / "outputs" / "predictions" / "walk_forward_results.csv"
+    model_path   = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
+
+    # Prefer walk-forward (OOS for all seasons) over single-season test set
+    if wf_path.exists():
+        df = pd.read_csv(wf_path)
+        data_label = (f"Walk-forward OOS  ·  {int(df['season'].min())}–{int(df['season'].max())}"
+                      f"  ·  {len(df):,} games")
+        data_source = "walk_forward"
+    elif model_path.exists():
+        df = pd.read_csv(model_path)
+        data_label = f"2025 test set only  ·  {len(df):,} games  (run walk_forward.py for full history)"
+        data_source = "test_only"
+    else:
+        st.warning("⚠️  No prediction data found. Run `src/model.py` or `scripts/walk_forward.py` first.")
         return
 
-    df = pd.read_csv(results_path)
+    st.info(f"📊 **Data source:** {data_label}", icon=None)
+    if data_source == "test_only":
+        st.caption(
+            "⚡ For statistically meaningful results, run the walk-forward script first:  \n"
+            "`/opt/homebrew/bin/python3 scripts/walk_forward.py`  (~5 min)")
 
     # Compute totals edge if not already saved
     if "totals_edge" not in df.columns:
@@ -1976,7 +1992,32 @@ def render_backtester_tab():
             "but adds variance — if the edge estimates are off, Kelly loses more."
         )
 
-    # ── Recent flagged bets detail ─────────────────────────────────────────────
+    # ── Season-by-season breakdown ────────────────────────────────────────────
+    seasons_in_data = sorted(bets["season"].dropna().unique().astype(int))
+    if len(seasons_in_data) > 1:
+        with st.expander("📅 Season-by-season breakdown"):
+            szn_rows = []
+            for szn in seasons_in_data:
+                sub = bets[bets["season"] == szn]
+                if sub.empty:
+                    continue
+                n   = len(sub)
+                wp  = sub["won"].mean() * 100
+                fp  = sub["flat_pnl"].sum()
+                roi = fp / (n * LOSE_U) * 100
+                kp  = sub["kelly_pnl"].sum()
+                szn_rows.append({
+                    "Season": int(szn), "Bets": n,
+                    "Win %": f"{wp:.1f}%",
+                    "Flat P&L": f"{fp:+.1f}u",
+                    "ROI": f"{roi:+.1f}%",
+                    "Kelly P&L": f"{kp:+.1f}u",
+                })
+            if szn_rows:
+                st.dataframe(pd.DataFrame(szn_rows),
+                             use_container_width=True, hide_index=True)
+
+    # ── All qualifying bets detail ─────────────────────────────────────────────
     with st.expander("📋 All qualifying bets (most recent first)"):
         display = bets[["season","week","matchup","type","direction",
                          "edge","won","flat_pnl","kelly_u"]].copy()
