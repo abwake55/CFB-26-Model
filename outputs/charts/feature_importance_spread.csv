@@ -1,51 +1,124 @@
 feature,importance,model
-elo_diff,6.138646240271961,Ridge
-recruiting_diff,4.983837859150539,Ridge
-home_pregame_elo,4.505633783792298,Ridge
-away_pregame_elo,2.943275722364029,Ridge
-home_fpi,2.392622859310667,Ridge
-home_off_epa_roll3,1.5427293397586033,Ridge
-home_srs,1.2732558926115056,Ridge
-home_off_epa_roll5,1.1958745020680674,Ridge
-neutral_site,1.1942848031362043,Ridge
-away_fpi,1.1428053165289214,Ridge
-away_recruiting_4yr,1.028644200258563,Ridge
-home_recruiting_4yr,0.9929706729919332,Ridge
-home_off_epa_pass_roll3,0.9437444795852195,Ridge
-home_def_epa_roll5,0.9116216384046445,Ridge
-away_def_epa_roll5,0.8975832325007803,Ridge
-epa_def_diff_roll3,0.827313204280122,Ridge
-home_sp_rating,0.7942579971327328,Ridge
-home_def_epa_ytd,0.7856304930634341,Ridge
-away_def_epa_ytd,0.7820808442870228,Ridge
-sp_diff,0.780123261241518,Ridge
-away_off_epa_pass_roll3,0.6953716608175785,Ridge
-home_off_epa_ytd,0.6724924927756796,Ridge
-away_off_epa_ytd,0.5591576511462055,Ridge
-sp_def_diff,0.5307764914318192,Ridge
-fpi_diff,0.5090342105314387,Ridge
-conference_game,0.5078899454016287,Ridge
-away_sp_defense,0.3544628313600677,Ridge
-epa_off_diff_roll3,0.3204975886086189,Ridge
-line_movement,0.3175599498408971,Ridge
-home_sp_defense,0.315241531361622,Ridge
-line_moved_away,0.2954562371105117,Ridge
-home_sp_offense,0.2858285832692229,Ridge
-rest_diff,0.283067289926381,Ridge
-away_off_epa_roll3,0.25970737679836997,Ridge
-away_srs,0.24984180540988865,Ridge
-srs_diff,0.228526976778271,Ridge
-away_off_epa_roll5,0.22373662663813565,Ridge
-home_rest_days,0.21657859713361544,Ridge
-sp_off_diff,0.1706897416875006,Ridge
-home_def_epa_roll3,0.1598100092692322,Ridge
-away_sp_rating,0.1483319723549111,Ridge
-home_hfa,0.1236227630754133,Ridge
-away_hfa,0.11294132061086404,Ridge
-away_off_epa_rush_roll3,0.09368952452810081,Ridge
-away_sp_offense,0.07065427823948355,Ridge
-line_moved_home,0.06679469945381661,Ridge
-away_def_epa_roll3,0.05885223836252422,Ridge
-home_off_epa_rush_roll3,0.018989564644531748,Ridge
-away_rest_days,0.014051748594445452,Ridge
-hfa_diff,0.007663248368636078,Ridge
+elo_diff,548,GBM component
+recruiting_diff,479,GBM component
+havoc_diff,462,GBM component
+away_wepa_explosiveness_def,442,GBM component
+away_off_epa_rush_roll3,436,GBM component
+hfa_diff,435,GBM component
+home_adj_off_epa_rush_roll3,435,GBM component
+talent_diff,428,GBM component
+epa_def_diff_roll3,417,GBM component
+explosiveness_def_diff,411,GBM component
+wepa_explosiveness_diff,402,GBM component
+home_pass_success_rate,392,GBM component
+away_pass_success_rate,386,GBM component
+away_off_epa_pass_roll3,381,GBM component
+home_wepa_explosiveness_def,375,GBM component
+away_adj_off_epa_rush_roll3,375,GBM component
+home_off_epa_rush_roll3,372,GBM component
+away_explosiveness_off,369,GBM component
+away_explosiveness_def,366,GBM component
+home_adj_off_epa_roll3,360,GBM component
+away_adj_def_epa_roll5,360,GBM component
+explosiveness_off_diff,359,GBM component
+away_def_epa_roll3,358,GBM component
+home_adj_off_epa_pass_roll3,357,GBM component
+home_wepa_explosiveness,356,GBM component
+home_off_epa_roll3,350,GBM component
+wepa_success_off_diff,349,GBM component
+srs_diff,348,GBM component
+home_explosiveness_def,345,GBM component
+wepa_success_def_diff,344,GBM component
+home_def_epa_roll3,341,GBM component
+away_hfa,341,GBM component
+away_adj_def_epa_roll3,341,GBM component
+home_adj_def_epa_ytd,329,GBM component
+rush_sr_diff,327,GBM component
+home_pregame_elo,326,GBM component
+away_rush_success_rate,322,GBM component
+home_rush_success_rate,320,GBM component
+home_explosiveness_off,320,GBM component
+away_wepa_explosiveness,316,GBM component
+home_hfa,315,GBM component
+wepa_def_diff,314,GBM component
+home_off_epa_roll5,310,GBM component
+home_off_epa_ytd,310,GBM component
+away_adj_off_epa_roll3,301,GBM component
+epa_off_diff_roll3,301,GBM component
+away_recruiting_4yr,300,GBM component
+home_def_epa_ytd,298,GBM component
+sp_off_diff,297,GBM component
+home_wepa_success_def,296,GBM component
+home_def_epa_roll5,293,GBM component
+away_havoc_front_seven,293,GBM component
+sp_def_diff,291,GBM component
+wepa_off_diff,290,GBM component
+home_adj_off_epa_ytd,290,GBM component
+away_adj_off_epa_ytd,290,GBM component
+home_off_epa_pass_roll3,289,GBM component
+away_def_epa_ytd,288,GBM component
+home_srs,287,GBM component
+away_adj_def_epa_ytd,285,GBM component
+away_def_epa_roll5,281,GBM component
+away_adj_off_epa_roll5,281,GBM component
+away_adj_off_epa_pass_roll3,281,GBM component
+away_havoc_total,278,GBM component
+away_wepa_success_def,277,GBM component
+home_adj_off_epa_roll5,275,GBM component
+away_pregame_elo,275,GBM component
+home_havoc_front_seven,274,GBM component
+home_adj_def_epa_roll5,273,GBM component
+away_off_epa_roll3,270,GBM component
+away_srs,270,GBM component
+away_wepa_defense,262,GBM component
+home_adj_def_epa_roll3,261,GBM component
+away_off_epa_roll5,260,GBM component
+explosiveness_net_diff,254,GBM component
+away_off_epa_ytd,253,GBM component
+home_havoc_total,242,GBM component
+away_wepa_offense,238,GBM component
+away_talent,231,GBM component
+home_talent,230,GBM component
+away_sp_offense,224,GBM component
+away_wepa_success_off,223,GBM component
+away_fpi,219,GBM component
+home_sp_defense,216,GBM component
+home_wepa_defense,214,GBM component
+away_sp_defense,211,GBM component
+sp_diff,209,GBM component
+fpi_diff,207,GBM component
+portal_net_rating_diff,206,GBM component
+home_wepa_success_off,205,GBM component
+home_wepa_offense,189,GBM component
+home_sp_rating,183,GBM component
+home_recruiting_4yr,182,GBM component
+home_sp_offense,179,GBM component
+away_sp_rating,176,GBM component
+home_fpi,159,GBM component
+away_rest_days,128,GBM component
+away_portal_net_rating,121,GBM component
+home_portal_stars_in_avg,116,GBM component
+home_rest_days,113,GBM component
+spread_open_val,112,GBM component
+home_portal_talent_in,110,GBM component
+away_portal_stars_in_avg,89,GBM component
+home_portal_talent_out,89,GBM component
+away_portal_net_count,84,GBM component
+home_portal_net_rating,82,GBM component
+rest_diff,81,GBM component
+away_portal_talent_in,74,GBM component
+away_portal_talent_out,71,GBM component
+home_portal_net_count,67,GBM component
+line_movement,65,GBM component
+conference_game,28,GBM component
+line_movement_abs,23,GBM component
+away_portal_qb_out,15,GBM component
+neutral_site,14,GBM component
+home_portal_qb_in,12,GBM component
+home_portal_qb_out,10,GBM component
+away_portal_qb_in,6,GBM component
+sharp_move_home,3,GBM component
+sharp_move_away,1,GBM component
+line_moved_home,0,GBM component
+has_line_data,0,GBM component
+line_moved_away,0,GBM component

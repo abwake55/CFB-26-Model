@@ -1406,6 +1406,331 @@ def render_all_game_card(row, season, week):
                     st.caption("No ML yet")
 
 
+# ─── HOW IT WORKS TAB ────────────────────────────────────────────────────────
+
+def render_guide_tab():
+    """Plain-English guide: what the model does and how to use it."""
+
+    # ── Quick-reference card row ──────────────────────────────────────────────
+    st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+    st.html("""
+    <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:12px;
+                padding:20px 24px;margin-bottom:20px">
+        <div style="color:#eab308;font-size:0.65em;font-weight:800;letter-spacing:.1em;
+                    text-transform:uppercase;margin-bottom:12px">Quick Reference</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+            <div>
+                <div style="color:#06b6d4;font-size:1em;font-weight:800">★★★</div>
+                <div style="color:#e5e7eb;font-size:0.82em;font-weight:600;margin-top:2px">Strong edge</div>
+                <div style="color:#6b7280;font-size:0.75em;margin-top:1px">Model disagrees with Vegas by 6+ pts on totals or 8+ pts on spreads</div>
+            </div>
+            <div>
+                <div style="color:#22c55e;font-size:1em;font-weight:800">UNDER / OVER</div>
+                <div style="color:#e5e7eb;font-size:0.82em;font-weight:600;margin-top:2px">Totals bet</div>
+                <div style="color:#6b7280;font-size:0.75em;margin-top:1px">Primary edge. Unders win ~59% historically — the model's strongest signal</div>
+            </div>
+            <div>
+                <div style="color:#a78bfa;font-size:1em;font-weight:800">1u / 2u / 3u</div>
+                <div style="color:#e5e7eb;font-size:0.82em;font-weight:600;margin-top:2px">Kelly bet size</div>
+                <div style="color:#6b7280;font-size:0.75em;margin-top:1px">How much to bet relative to your bankroll. 1 unit = 1% of total bankroll</div>
+            </div>
+            <div>
+                <div style="color:#f97316;font-size:1em;font-weight:800">CLV</div>
+                <div style="color:#e5e7eb;font-size:0.82em;font-weight:600;margin-top:2px">Closing line value</div>
+                <div style="color:#6b7280;font-size:0.75em;margin-top:1px">Did you beat the closing line? More important than W/L for long-run edge</div>
+            </div>
+        </div>
+    </div>
+    """)
+
+    # ── Section 1: What is this? ──────────────────────────────────────────────
+    section_header("What Is This Model?")
+    st.markdown(
+        "This is a college football prediction model that analyzes hundreds of data points "
+        "per game — team efficiency, recruiting quality, recent form, line movement, weather, "
+        "and more — and compares its own predicted score to the Vegas line. "
+        "When the model's prediction disagrees with Vegas by enough, it flags a bet."
+        "\n\n"
+        "The model **does not** claim to beat Vegas consistently on spreads. It does have a "
+        "demonstrated edge on **totals (Unders in particular)** and occasionally on "
+        "**moneylines** when there's strong expected value. Spreads are shown for reference only."
+    )
+
+    # ── Section 2: The three bet types ───────────────────────────────────────
+    section_header("The Three Bet Types")
+    st.html("""
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px">
+        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;padding:16px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                <span style="background:#06b6d4;color:#0f1117;font-size:0.63em;font-weight:800;
+                             padding:2px 8px;border-radius:4px">TOTALS</span>
+                <span style="color:#22c55e;font-size:0.7em;font-weight:700">PRIMARY EDGE</span>
+            </div>
+            <div style="color:#e5e7eb;font-size:0.85em;line-height:1.5">
+                Bet on whether the combined score goes Over or Under the Vegas total.
+                The model targets <strong>Unders</strong> — it finds games where Vegas
+                has the total set too high.
+            </div>
+            <div style="color:#6b7280;font-size:0.75em;margin-top:8px">
+                ✅ Bet these confidently (★★ or higher)
+            </div>
+        </div>
+        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;padding:16px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                <span style="background:#a78bfa;color:#0f1117;font-size:0.63em;font-weight:800;
+                             padding:2px 8px;border-radius:4px">MONEYLINE</span>
+                <span style="color:#f0b429;font-size:0.7em;font-weight:700">SECONDARY EDGE</span>
+            </div>
+            <div style="color:#e5e7eb;font-size:0.85em;line-height:1.5">
+                Bet on which team wins outright. The model flags these when it finds
+                <strong>positive expected value</strong> — the book's implied odds are worse
+                than the model's predicted win probability.
+            </div>
+            <div style="color:#6b7280;font-size:0.75em;margin-top:8px">
+                ✅ Bet at 4%+ EV. Be selective — variance is high.
+            </div>
+        </div>
+        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;padding:16px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                <span style="background:#4b5563;color:#e5e7eb;font-size:0.63em;font-weight:800;
+                             padding:2px 8px;border-radius:4px">SPREADS</span>
+                <span style="color:#6b7280;font-size:0.7em;font-weight:700">REFERENCE ONLY</span>
+            </div>
+            <div style="color:#e5e7eb;font-size:0.85em;line-height:1.5">
+                Bet on the margin of victory. The model's spread predictions are shown
+                for context, but <strong>do not bet these</strong> — the model's spread
+                accuracy is near breakeven after juice.
+            </div>
+            <div style="color:#6b7280;font-size:0.75em;margin-top:8px">
+                ⚠️ Use to understand game context only.
+            </div>
+        </div>
+    </div>
+    """)
+
+    # ── Section 3: Reading a pick card ───────────────────────────────────────
+    section_header("How to Read a Pick Card")
+    st.html("""
+    <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;padding:18px 22px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span style="background:#06b6d4;color:#0f1117;font-size:0.63em;font-weight:800;
+                         padding:3px 8px;border-radius:4px">UNDER</span>
+            <span style="background:#252d3d;color:#6b7280;font-size:0.63em;font-weight:700;
+                         padding:3px 7px;border-radius:4px">TOTAL</span>
+            <span style="background:#1e2537;color:#ef4444;font-size:0.63em;font-weight:700;
+                         padding:2px 7px;border-radius:4px">💨 23 mph</span>
+            <span style="flex:1"></span>
+            <span style="color:#22c55e;font-size:0.82em;font-weight:700">Edge −6.2</span>
+            <span style="color:#eab308;font-size:0.88em">★★★</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="color:#ffffff;font-size:1.1em;font-weight:700">UNDER 48.5</span>
+        </div>
+        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">Alabama vs Auburn  ·  Iron Bowl</div>
+        <div style="color:#ef4444;font-size:0.75em;margin-top:3px;font-weight:600">
+            💨 23 mph — strong under lean
+        </div>
+        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
+            <div style="flex:1;text-align:center">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">Line</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">48.5</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">Model</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">42.3</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">Edge</div>
+                <div style="color:#22c55e;font-size:0.88em;font-weight:700">−6.2 pts</div>
+            </div>
+            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
+                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
+                            text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">Kelly</div>
+                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">2u</div>
+            </div>
+        </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div style="background:#111827;border-radius:8px;padding:12px 14px">
+            <span style="color:#eab308;font-weight:700">★ Stars</span>
+            <span style="color:#6b7280;font-size:0.85em"> — Confidence level.</span>
+            <div style="color:#9ca3af;font-size:0.8em;margin-top:4px;line-height:1.5">
+                ★ = edge 4–5 pts &nbsp;·&nbsp; ★★ = 5–6 pts &nbsp;·&nbsp; ★★★ = 6+ pts<br>
+                More stars = model is more confident. Still do your own homework.
+            </div>
+        </div>
+        <div style="background:#111827;border-radius:8px;padding:12px 14px">
+            <span style="color:#a78bfa;font-weight:700">Edge</span>
+            <span style="color:#6b7280;font-size:0.85em"> — Points of disagreement with Vegas.</span>
+            <div style="color:#9ca3af;font-size:0.8em;margin-top:4px;line-height:1.5">
+                UNDER 48.5 with Edge −6.2 means the model predicts 42.3.
+                Negative edge = bet the Under. Positive = bet the Over.
+            </div>
+        </div>
+        <div style="background:#111827;border-radius:8px;padding:12px 14px">
+            <span style="color:#a78bfa;font-weight:700">Kelly (1u / 2u / 3u)</span>
+            <span style="color:#6b7280;font-size:0.85em"> — Recommended bet size.</span>
+            <div style="color:#9ca3af;font-size:0.8em;margin-top:4px;line-height:1.5">
+                1 unit = 1% of your total bankroll. So if you have $500 to bet with,
+                1u = $5, 2u = $10, 3u = $15. Never bet more than 3u on any single game.
+            </div>
+        </div>
+        <div style="background:#111827;border-radius:8px;padding:12px 14px">
+            <span style="color:#ef4444;font-weight:700">💨 Wind badge</span>
+            <span style="color:#6b7280;font-size:0.85em"> — Weather context for totals.</span>
+            <div style="color:#9ca3af;font-size:0.8em;margin-top:4px;line-height:1.5">
+                High wind reduces scoring. A model Under that also has 20+ mph wind
+                is doubly confirmed. Dome games show 🏟️ DOME — weather irrelevant.
+            </div>
+        </div>
+    </div>
+    """)
+
+    # ── Section 4: Step-by-step workflow ─────────────────────────────────────
+    section_header("Weekly Workflow")
+    st.html("""
+    <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;
+                padding:18px 22px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+                <span style="background:#eab308;color:#0f1117;font-size:0.72em;font-weight:800;
+                             padding:3px 9px;border-radius:20px;min-width:24px;text-align:center">1</span>
+                <div>
+                    <div style="color:#e5e7eb;font-weight:600;font-size:0.9em">Load picks on Tuesday or Wednesday</div>
+                    <div style="color:#6b7280;font-size:0.8em;margin-top:2px">
+                        Select the current season and week in the sidebar, hit Load Picks.
+                        Lines are still moving — earlier in the week = more time to shop.
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+                <span style="background:#eab308;color:#0f1117;font-size:0.72em;font-weight:800;
+                             padding:3px 9px;border-radius:20px;min-width:24px;text-align:center">2</span>
+                <div>
+                    <div style="color:#e5e7eb;font-weight:600;font-size:0.9em">Focus on ★★ and ★★★ totals picks</div>
+                    <div style="color:#6b7280;font-size:0.8em;margin-top:2px">
+                        These are the highest-confidence bets. Skip ★ picks if the card
+                        shows low data coverage or the game has injury news the model can't see.
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+                <span style="background:#eab308;color:#0f1117;font-size:0.72em;font-weight:800;
+                             padding:3px 9px;border-radius:20px;min-width:24px;text-align:center">3</span>
+                <div>
+                    <div style="color:#e5e7eb;font-weight:600;font-size:0.9em">Check the coverage warning</div>
+                    <div style="color:#6b7280;font-size:0.8em;margin-top:2px">
+                        If the yellow "Data coverage" banner appears, some data sources are
+                        missing for that week. Treat those picks with more skepticism.
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+                <span style="background:#eab308;color:#0f1117;font-size:0.72em;font-weight:800;
+                             padding:3px 9px;border-radius:20px;min-width:24px;text-align:center">4</span>
+                <div>
+                    <div style="color:#e5e7eb;font-weight:600;font-size:0.9em">Track every bet in My Bets</div>
+                    <div style="color:#6b7280;font-size:0.8em;margin-top:2px">
+                        Hit "Track This Bet" under any pick. Record the actual line you got
+                        when you placed the bet — that's what CLV is calculated from.
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+                <span style="background:#eab308;color:#0f1117;font-size:0.72em;font-weight:800;
+                             padding:3px 9px;border-radius:20px;min-width:24px;text-align:center">5</span>
+                <div>
+                    <div style="color:#e5e7eb;font-weight:600;font-size:0.9em">Review CLV Tracker weekly, not W/L</div>
+                    <div style="color:#6b7280;font-size:0.8em;margin-top:2px">
+                        Week-to-week wins/losses are noisy. Positive average CLV means you're
+                        getting value — stick with the process even through losing streaks.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    """)
+
+    # ── Section 5: Bankroll basics ────────────────────────────────────────────
+    section_header("Bankroll Management")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.html("""
+        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;padding:16px">
+            <div style="color:#22c55e;font-weight:700;margin-bottom:8px">✅ Do</div>
+            <div style="color:#9ca3af;font-size:0.83em;line-height:1.8">
+                Decide on a fixed bankroll (e.g. $500) before the season<br>
+                Keep 1u = 1% of that bankroll throughout<br>
+                Bet the Kelly-suggested size (1u / 2u / 3u) only<br>
+                Track every bet — wins AND losses<br>
+                Shop lines across multiple books<br>
+                Take a week off if on a 5+ game skid
+            </div>
+        </div>
+        """)
+    with col2:
+        st.html("""
+        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;padding:16px">
+            <div style="color:#ef4444;font-weight:700;margin-bottom:8px">❌ Don't</div>
+            <div style="color:#9ca3af;font-size:0.83em;line-height:1.8">
+                Chase losses by doubling up<br>
+                Bet more than 3u on any single game<br>
+                Bet spreads — the model has no edge there<br>
+                Ignore injury news (the model can't see it)<br>
+                Bet games with ⚠️ low coverage and only ★<br>
+                Bet money you can't afford to lose
+            </div>
+        </div>
+        """)
+
+    # ── Deep-dive: Under the Hood ─────────────────────────────────────────────
+    with st.expander("🔬 Under the Hood — How the Model Actually Works"):
+        st.markdown("""
+**Data sources (updated before each season)**
+
+The model pulls from the CollegeFootballData API and combines:
+- **SP+ ratings** — Bill Connelly's opponent-adjusted efficiency metric (offense + defense)
+- **EPA (Expected Points Added)** — rolling 3-game and 5-game windows, adjusted for opponent strength
+- **WEPA** — a third-party opponent-adjusted efficiency metric that captures explosiveness
+- **Elo ratings** — win-probability-based power ratings updated after every game
+- **Recruiting rankings** — 247Sports composite, 4-year rolling average
+- **Havoc rates** — how often a defense disrupts plays (sacks, TFLs, PBUs)
+- **Transfer portal** — net talent in/out each offseason
+- **Line movement** — how much the spread and total have moved since opening
+- **Weather** — wind speed from Open-Meteo for outdoor games
+
+**Three models**
+
+1. **Spread model** (Ridge 60% + LightGBM 40%) — predicts the home team's margin of victory
+2. **Totals model** (same ensemble) — predicts the combined score
+3. **Win probability model** (Logistic 40% + LightGBM 60%) — predicts home win probability, cross-calibrated with the spread model
+
+**How edge is calculated**
+
+- Totals edge = Model predicted total − Vegas total line
+- Spread edge = Model predicted spread − Vegas spread (home perspective)
+- Moneyline EV = (Model win prob × payout) − (Model loss prob × stake)
+
+**Thresholds for flagging picks**
+
+The model only surfaces picks when the edge exceeds a minimum threshold, validated on 2024 holdout data:
+- Totals: **≥ 3 points** of edge (absolute value)
+- Spreads: **≥ 4 points** of edge
+- Moneyline: **≥ 4% expected value**
+
+**Walk-forward validation**
+
+The model was trained on 2017–2023 games, tuned on 2024, and the reported win rates reflect 2025 test-set performance only — games the model never saw during training.
+
+**Why Unders?**
+
+Vegas totals tend to be set slightly high because casual bettors like Overs (more exciting). The market corrects by Saturday but not fully. The model exploits this systematic bias, which is why Unders win at ~59% historically vs. the 52.4% needed to break even at -110 juice.
+        """)
+
+
 # ─── MODEL ANALYSIS TAB ──────────────────────────────────────────────────────
 
 def render_analysis_tab():
@@ -2038,8 +2363,9 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    picks_tab, bets_tab, standings_tab, clv_tab, history_tab, analysis_tab = st.tabs([
-        "This Week's Picks", "My Bets", "Season Standings", "CLV Tracker", "Historical Picks", "Model Analysis"
+    picks_tab, bets_tab, standings_tab, clv_tab, history_tab, analysis_tab, guide_tab = st.tabs([
+        "This Week's Picks", "My Bets", "Season Standings", "CLV Tracker",
+        "Historical Picks", "Model Analysis", "How It Works"
     ])
 
     # ── MY BETS TAB ───────────────────────────────────────────────────────
@@ -2061,6 +2387,10 @@ def main():
     # ── MODEL ANALYSIS TAB ────────────────────────────────────────────────
     with analysis_tab:
         render_analysis_tab()
+
+    # ── HOW IT WORKS TAB ──────────────────────────────────────────────────
+    with guide_tab:
+        render_guide_tab()
 
     # ── PICKS TAB ─────────────────────────────────────────────────────────
     with picks_tab:
