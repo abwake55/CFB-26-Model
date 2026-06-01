@@ -2187,65 +2187,54 @@ def render_analysis_tab():
 
 def render_standings_tab():
     """
-    Season Standings — model's full pick record (all flagged bets from
-    model_results.csv) shown side-by-side with each bettor's tracked record.
+    Season Standings — live season model record (from weekly picks archive)
+    shown side-by-side with each bettor's tracked record.
+
+    The model record reflects only picks made during the current live season —
+    not historical backtest data. It starts at 0-0 and accumulates as weeks
+    are played. Historical walk-forward data lives in the Research → Backtester tab.
     """
-    section_header("Season Standings", "Model picks vs. tracked bets")
+    import json as _json
+    from datetime import date as _date
 
-    # ── Season selector ───────────────────────────────────────────────────────
-    results_path = ROOT_DIR / "outputs" / "predictions" / "model_results.csv"
-    available_seasons = []
-    res_all = None
-    if results_path.exists():
-        try:
-            res_all = pd.read_csv(results_path)
-            if "season" in res_all.columns:
-                res_all["season"] = pd.to_numeric(res_all["season"], errors="coerce")
-                available_seasons = sorted(res_all["season"].dropna().unique().astype(int), reverse=True)
-        except Exception:
-            pass
+    current_season = _date.today().year if _date.today().month >= 7 else _date.today().year - 1
+    section_header("Season Standings", f"{current_season} Season — Live Record")
 
-    bets_all = load_bets()
-    bet_seasons = sorted({int(b["season"]) for b in bets_all if "season" in b and str(b["season"]).isdigit()}, reverse=True)
-    all_seasons = sorted(set(available_seasons) | set(bet_seasons), reverse=True)
+    # ── Season selector (for bettor bets only — model record is always current) ─
+    bets_all  = load_bets()
+    bet_seasons = sorted(
+        {int(b["season"]) for b in bets_all if "season" in b and str(b["season"]).isdigit()},
+        reverse=True)
+    all_seasons = sorted(set(bet_seasons) | {current_season}, reverse=True)
+    sel_season  = st.selectbox("Season", all_seasons, index=0, key="standings_season")
 
-    if all_seasons:
-        sel_season = st.selectbox("Season", all_seasons, index=0, key="standings_season")
-    else:
-        sel_season = date.today().year
-
-    # ── Model record — filtered to selected season ────────────────────────────
+    # ── Model record — from weekly picks archive (live season only) ───────────
+    # Picks are saved to outputs/picks/YYYY_W{wk}.json by the newsletter generator.
+    # This reflects the model's actual in-season calls, not historical backtest data.
+    picks_dir  = ROOT_DIR / "outputs" / "picks"
     model_rows = []
-    if res_all is not None:
+
+    for picks_file in sorted(picks_dir.glob(f"{sel_season}_W*.json")):
         try:
-            res = res_all[res_all["season"] == sel_season].copy() if "season" in res_all.columns else res_all.copy()
-            for col in ["spread_edge", "totals_edge", "covered_spread", "went_over",
-                        "over_under", "pred_total", "spread", "pred_spread"]:
-                if col in res.columns:
-                    res[col] = pd.to_numeric(res[col], errors="coerce")
+            with open(picks_file) as f:
+                week_picks = _json.load(f)
+            for p in week_picks:
+                outcome = p.get("outcome", "pending")
+                if outcome in ("win", "loss"):
+                    model_rows.append({
+                        "won":    outcome == "win",
+                        "status": "Won" if outcome == "win" else "Lost",
+                    })
+        except Exception:
+            continue
 
-            # Totals picks — model flags games where edge >= TOTALS_EDGE_MIN
-            if "totals_edge" in res.columns and "went_over" in res.columns:
-                tot = res[res["totals_edge"].abs() >= TOTALS_EDGE_MIN].copy()
-                for _, r in tot.iterrows():
-                    is_over  = r["totals_edge"] > 0
-                    won      = (is_over and r["went_over"] == 1) or (not is_over and r["went_over"] == 0)
-                    if pd.notna(r["went_over"]):
-                        model_rows.append({"source": "Model", "bet_type": "Total",
-                                           "won": won, "units": 1, "status": "Won" if won else "Lost"})
-
-            # Spread picks
-            if "spread_edge" in res.columns and "covered_spread" in res.columns:
-                sp = res[res["spread_edge"].abs() >= SPREAD_EDGE_MIN].copy()
-                for _, r in sp.iterrows():
-                    bet_home = r["spread_edge"] > 0
-                    won      = (bet_home and r["covered_spread"] == 1) or \
-                               (not bet_home and r["covered_spread"] == 0)
-                    if pd.notna(r["covered_spread"]):
-                        model_rows.append({"source": "Model", "bet_type": "Spread",
-                                           "won": won, "units": 1, "status": "Won" if won else "Lost"})
-        except Exception as e:
-            st.caption(f"Could not load model results: {e}")
+    if sel_season == current_season and not model_rows:
+        st.info(
+            f"The {current_season} model record starts at 0–0. "
+            f"Once the season begins, picks are tracked automatically each Tuesday. "
+            f"Historical backtest data is in **Research → Backtester**.",
+            icon="🏈"
+        )
 
     # ── Bettor records — filtered to selected season ──────────────────────────
     bets     = load_bets()
@@ -2694,34 +2683,30 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    picks_tab, bets_tab, standings_tab, clv_tab, history_tab, backtest_tab, analysis_tab, guide_tab = st.tabs([
-        "This Week's Picks", "My Bets", "Season Standings", "CLV Tracker",
-        "Historical Picks", "Backtester", "Model Analysis", "How It Works"
+    picks_tab, bets_tab, standings_tab, research_tab, guide_tab = st.tabs([
+        "This Week's Picks", "My Bets", "Season Standings", "Research", "How It Works"
     ])
 
     # ── MY BETS TAB ───────────────────────────────────────────────────────
     with bets_tab:
         render_bets_tab()
+        st.markdown("---")
+        with st.expander("📈 Closing Line Value Tracker"):
+            render_clv_tab()
 
     # ── SEASON STANDINGS TAB ──────────────────────────────────────────────
     with standings_tab:
         render_standings_tab()
 
-    # ── CLV TRACKER TAB ───────────────────────────────────────────────────
-    with clv_tab:
-        render_clv_tab()
-
-    # ── HISTORICAL PICKS TAB ──────────────────────────────────────────────
-    with history_tab:
-        render_history_tab()
-
-    # ── BACKTESTER TAB ────────────────────────────────────────────────────
-    with backtest_tab:
-        render_backtester_tab()
-
-    # ── MODEL ANALYSIS TAB ────────────────────────────────────────────────
-    with analysis_tab:
-        render_analysis_tab()
+    # ── RESEARCH TAB (Backtester + Historical Picks + Model Analysis) ──────
+    with research_tab:
+        r1, r2, r3 = st.tabs(["Backtester", "Historical Picks", "Model Analysis"])
+        with r1:
+            render_backtester_tab()
+        with r2:
+            render_history_tab()
+        with r3:
+            render_analysis_tab()
 
     # ── HOW IT WORKS TAB ──────────────────────────────────────────────────
     with guide_tab:
