@@ -199,6 +199,80 @@ def load_ppa_games() -> pd.DataFrame:
     return pd.read_csv(PROC_DIR / "master_ppa_games.csv")
 
 
+def load_conference_familiarity() -> pd.DataFrame:
+    """
+    Build a (season, team, p4_conf_years) lookup from master_games.csv.
+
+    Tracks how many consecutive years each FBS team has been in their current
+    Power 4 conference (Big Ten, SEC, Big 12, ACC, Pac-12).
+
+    Why this matters:
+      Teams in their first 1-2 years in a new P4 conference often underperform
+      road spreads. The market prices this correctly but our SP+/EPA-based model
+      uses prior-season ratings that don't account for conference unfamiliarity.
+      The walk-forward analysis showed:
+        - New-P4 AWAY teams (year 1-2): home team covers 57% ATS
+        - Year-2 new-P4 AWAY: model direction accuracy drops to 39% (worse than random)
+
+    Returns a DataFrame with (season, team, p4_conf_years):
+      p4_conf_years = 0 → not currently in a P4 conference
+      p4_conf_years = 1 → first season in this P4 conference
+      p4_conf_years = 2 → second season
+      p4_conf_years ≥ 3 → established member
+    """
+    path = PROC_DIR / "master_games.csv"
+    if not path.exists():
+        return pd.DataFrame(columns=["season", "team", "p4_conf_years"])
+
+    df = pd.read_csv(path)
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+
+    POWER4 = {"Big Ten", "SEC", "Big 12", "ACC", "Pac-12"}
+
+    # Build team-season conference table
+    home = df[["season", "home_team", "home_conference"]].rename(
+        columns={"home_team": "team", "home_conference": "conference"})
+    away = df[["season", "away_team", "away_conference"]].rename(
+        columns={"away_team": "team", "away_conference": "conference"})
+
+    tc = (pd.concat([home, away])
+            .dropna(subset=["conference"])
+            .drop_duplicates(subset=["season", "team"])
+            .sort_values(["team", "season"])
+            .reset_index(drop=True))
+
+    tc["is_p4"]    = tc["conference"].isin(POWER4)
+    tc["prev_conf"] = tc.groupby("team")["conference"].shift(1)
+    tc["changed"]   = (
+        tc["is_p4"] &
+        (tc["conference"] != tc["prev_conf"]) &
+        tc["prev_conf"].notna()
+    )
+
+    # Count consecutive seasons in current P4 conference
+    def streak(group):
+        result, count = [], 0
+        for is_p4, changed in zip(group["is_p4"].values, group["changed"].values):
+            if changed:
+                count = 1
+            elif is_p4:
+                count += 1
+            else:
+                count = 0
+            result.append(count)
+        return result
+
+    all_streaks = []
+    for _, grp in tc.groupby("team"):
+        all_streaks.extend(streak(grp))
+    tc["p4_conf_years"] = all_streaks
+
+    result = tc[["season", "team", "p4_conf_years"]].copy()
+    print(f"  Conference familiarity: {len(result):,} team-season rows "
+          f"({result['p4_conf_years'].between(1,2).sum()} new-P4 entrants)")
+    return result
+
+
 def load_portal_features() -> pd.DataFrame:
     """
     Load pre-computed transfer portal team features.
@@ -752,6 +826,7 @@ def build_feature_matrix() -> pd.DataFrame:
     wepa       = load_wepa()
     talent     = load_talent()
     havoc      = load_havoc()
+    conf_fam   = load_conference_familiarity()
 
     print(f"  Games:       {len(games):,}")
     print(f"  Lines:       {len(lines):,} (one per game)")
@@ -974,6 +1049,41 @@ def build_feature_matrix() -> pd.DataFrame:
         print(f"  Explosiveness coverage: {exp_cov:.1%} of games")
         print(f"  Tempo coverage: {tempo_cov:.1%} of games")
         print(f"  Turnover margin coverage: {to_cov:.1%} of games")
+
+    # ── Merge Conference Familiarity features ─────────────────────────────
+    # p4_conf_years = consecutive seasons in current Power 4 conference.
+    # Key signal: new-P4 away teams (year 1-2) systematically underperform
+    # road spreads (home ATS 57%), but the model over-rates them because it
+    # uses prior-season SP+ from their old conference. No year-shift needed —
+    # the current-season conference membership is available pre-game.
+    if len(conf_fam) > 0 and "p4_conf_years" in conf_fam.columns:
+        games_feat = games_feat.merge(
+            conf_fam.rename(columns={"team": "home_team",
+                                     "p4_conf_years": "home_p4_conf_years"}),
+            on=["season", "home_team"], how="left"
+        )
+        games_feat = games_feat.merge(
+            conf_fam.rename(columns={"team": "away_team",
+                                     "p4_conf_years": "away_p4_conf_years"}),
+            on=["season", "away_team"], how="left"
+        )
+        # Fill 0 for non-P4 teams (not in a Power 4 conference)
+        games_feat["home_p4_conf_years"] = games_feat["home_p4_conf_years"].fillna(0)
+        games_feat["away_p4_conf_years"] = games_feat["away_p4_conf_years"].fillna(0)
+
+        # Binary flags: is this team new to their P4 conference (year 1 or 2)?
+        games_feat["home_new_p4_conf"] = (
+            games_feat["home_p4_conf_years"].between(1, 2)).astype(float)
+        games_feat["away_new_p4_conf"] = (
+            games_feat["away_p4_conf_years"].between(1, 2)).astype(float)
+
+        # Familiarity differential: positive = home team is more established
+        # Captures the home team advantage of knowing the conference better
+        games_feat["conf_newness_diff"] = (
+            games_feat["away_p4_conf_years"] - games_feat["home_p4_conf_years"])
+
+        n_new = games_feat["home_new_p4_conf"].sum() + games_feat["away_new_p4_conf"].sum()
+        print(f"  Conference familiarity: {int(n_new)} new-P4 team appearances")
 
     # ── Merge Transfer Portal features (home and away) ────────────────────
     PORTAL_COLS = ["portal_net_rating", "portal_qb_in", "portal_qb_out",

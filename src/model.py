@@ -244,6 +244,19 @@ SPREAD_FEATURES = [
     "home_turnovers_off_pg", "away_turnovers_off_pg",
     "home_turnovers_def_pg", "away_turnovers_def_pg",
     "turnover_margin_diff",
+
+    # ── Conference familiarity (realignment signal) ────────────────────────
+    # NOTE: These features are computed in features.py but intentionally
+    # excluded from the model for now. The signal is real (new-P4 away teams
+    # cover only 43% ATS vs 57% for established home teams) but the training
+    # data only has ~150 examples from 2023, which isn't enough for the GBM
+    # to learn the pattern reliably. Adding them degraded OOS MAE by 0.1 pts.
+    # By 2027-2028 (3-4 seasons of post-realignment data) this will be learnable.
+    # For now, use as a MANUAL OVERLAY when betting on games involving Texas/OU
+    # in the SEC or Oregon/USC/UCLA/Washington in the Big Ten road games.
+    # "home_p4_conf_years", "away_p4_conf_years",
+    # "home_new_p4_conf", "away_new_p4_conf",
+    # "conf_newness_diff",
 ]
 
 # Totals model uses both teams' offense AND defense independently
