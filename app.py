@@ -654,7 +654,8 @@ def build_and_predict(games, lines, ratings, epa, elo,
     feat_win = make_feat(feature_lists["win_prob"])
 
     # ── Build output frame ────────────────────────────────────────────────
-    out_cols = ["game_id", "season", "week", "home_team", "away_team",
+    out_cols = ["game_id", "season", "week", "start_date",
+                "home_team", "away_team",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline",
                 "home_unrated", "away_unrated", "has_unrated_opponent",
@@ -893,6 +894,26 @@ def confidence_stars(edge_abs: float) -> str:
     if edge_abs >= 4.5: return "★★"
     return "★"
 
+def format_kickoff(start_date) -> str:
+    """Format ISO start_date → 'Sat 8/30 · 3:30 PM ET' for card display."""
+    if not start_date or pd.isna(start_date):
+        return ""
+    try:
+        import datetime as _dt
+        # API returns ISO string like "2026-08-30T19:30:00.000Z" (UTC)
+        ts = pd.to_datetime(start_date, utc=True)
+        # Convert UTC → Eastern Time (ET = UTC-4 in summer, UTC-5 in winter)
+        # CFB season runs Aug-Jan; most games are EDT (UTC-4)
+        et = ts - _dt.timedelta(hours=4)
+        day_name = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][et.weekday()]
+        hour, minute = et.hour, et.minute
+        am_pm = "AM" if hour < 12 else "PM"
+        hour12 = hour % 12 or 12
+        time_str = f"{hour12}:{minute:02d} {am_pm} ET"
+        return f"{day_name} {et.month}/{et.day} · {time_str}"
+    except Exception:
+        return ""
+
 def ev_stars(ev: float) -> str:
     if ev >= 0.07: return "★★★"
     if ev >= 0.05: return "★★"
@@ -990,6 +1011,9 @@ def render_totals_card(row, season, week):
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
     neutral_tag = "  ·  Neutral" if row.get("neutral_site") else ""
     edge_str = f"{row['totals_edge']:+.1f}"
+    kickoff  = format_kickoff(row.get("start_date"))
+    kickoff_html = (f'<span style="color:#6b7280;font-size:0.75em;margin-left:6px">⏰ {kickoff}</span>'
+                    if kickoff else "")
 
     # Under = cyan, Over = orange
     left_color = "#06b6d4" if is_under else "#f97316"
@@ -1045,7 +1069,7 @@ def render_totals_card(row, season, week):
             <span style="color:{left_color};font-size:1.3em;font-weight:800;
                          font-variant-numeric:tabular-nums">{ou_str}</span>
         </div>
-        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{neutral_tag}</div>
+        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{neutral_tag}{kickoff_html}</div>
         {weather_note}
         <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
             <div style="flex:1;text-align:center">
@@ -1086,6 +1110,9 @@ def render_spread_card(row, season, week):
     matchup  = f"{row['home_team']} vs {row['away_team']}"
     stars    = confidence_stars(abs(edge))
     edge_str = f"{edge:+.1f}"
+    kickoff  = format_kickoff(row.get("start_date"))
+    kickoff_html = (f'<span style="color:#6b7280;font-size:0.75em;margin-left:6px">⏰ {kickoff}</span>'
+                    if kickoff else "")
 
     # Vegas line from bet_on's perspective
     if pd.notna(spread):
@@ -1125,7 +1152,7 @@ def render_spread_card(row, season, week):
             <span style="color:#8b5cf6;font-size:1.3em;font-weight:800;
                          font-variant-numeric:tabular-nums">{vl_bet}</span>
         </div>
-        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}</div>
+        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{kickoff_html}</div>
         <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
             <div style="flex:1;text-align:center">
                 <div style="color:#4b5563;font-size:0.63em;font-weight:700;
