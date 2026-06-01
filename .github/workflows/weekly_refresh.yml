@@ -114,7 +114,18 @@ jobs:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
         run: python scripts/walk_forward.py
 
-      # ── 10. Commit & push results back to repo ────────────────────────────────
+      # ── 10. Generate and email weekly newsletter ──────────────────────────────
+      # Fetches this week's schedule, runs predictions, compares last week's picks
+      # to actual results, and emails a formatted HTML newsletter.
+      - name: Generate and send weekly newsletter
+        env:
+          CFB_API_KEY:          ${{ secrets.CFB_API_KEY }}
+          SENDER_EMAIL:         ${{ secrets.SENDER_EMAIL }}
+          SENDER_APP_PASSWORD:  ${{ secrets.SENDER_APP_PASSWORD }}
+          RECIPIENT_EMAIL:      ${{ secrets.RECIPIENT_EMAIL }}
+        run: python scripts/generate_newsletter.py
+
+      # ── 11. Commit & push results back to repo ────────────────────────────────
       # Streamlit Cloud auto-redeploys when main branch is updated.
       - name: Commit and push updated data & models
         run: |
