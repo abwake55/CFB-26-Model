@@ -736,6 +736,31 @@ def add_targets_and_context(df: pd.DataFrame) -> pd.DataFrame:
     df["neutral_site"]     = df["neutral_site"].fillna(False).astype(int)
     df["conference_game"]  = df["conference_game"].fillna(False).astype(int)
 
+    # ── Week / season-phase features ─────────────────────────────────────────
+    # Residual analysis showed week 10/13/14 have +3-4pt home bias.
+    # Adding week directly lets the model learn late-season difficulty.
+    df["week_num"] = pd.to_numeric(df["week"], errors="coerce").fillna(0)
+
+    # is_postseason: bowl games and playoff games — played 4-6 weeks after regular
+    # season ends, so rolling EPA/form features are stale. ALL 10 biggest model
+    # errors in the walk-forward were postseason games (2023 season bowls).
+    df["is_postseason"] = (
+        df["season_type"].str.lower().str.contains("post", na=False)
+        if "season_type" in df.columns else 0
+    ).astype(int)
+
+    # late_season: weeks 11+ where rivalry games, injuries, motivation vary more
+    df["late_season"] = (df["week_num"] >= 11).astype(int)
+
+    # ── Vegas spread magnitude ────────────────────────────────────────────────
+    # Residual analysis showed big favorites (14+ pt) have +5.92pt over-prediction.
+    # Adding spread magnitude lets GBM learn to regress toward mean for blowouts.
+    # Only available when we have a line (na otherwise — handled by imputer).
+    if "spread" in df.columns:
+        df["spread_magnitude"] = pd.to_numeric(df["spread"], errors="coerce").abs()
+        df["is_big_favorite"]  = (df["spread_magnitude"] >= 14).astype(float)
+        df["is_big_favorite"]  = df["is_big_favorite"].where(df["spread_magnitude"].notna())
+
     # SP+ differential (home advantage in ratings)
     df["sp_diff"]          = df["home_sp_rating"] - df["away_sp_rating"]
     df["sp_off_diff"]      = df["home_sp_offense"] - df["away_sp_offense"]

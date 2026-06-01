@@ -164,6 +164,17 @@ SPREAD_FEATURES = [
     # Game context
     "neutral_site", "conference_game",
 
+    # ── Week / season phase ───────────────────────────────────────────────────
+    # Residual analysis: week 10/13/14 have +3-4pt systematic home over-prediction.
+    # Postseason: all 10 biggest walk-forward errors were bowl/playoff games —
+    # form features are stale after 4-6 week layoff.
+    "week_num", "late_season", "is_postseason",
+
+    # ── Vegas spread magnitude ─────────────────────────────────────────────────
+    # Big home favorites (14+ pts) over-predicted by +5.92pts — ATS only 44.6%.
+    # Model needs to learn to regress predictions toward the mean on blowouts.
+    "spread_magnitude", "is_big_favorite",
+
     # Home field advantage (team-specific, computed from historical margins)
     "home_hfa", "away_hfa", "hfa_diff",
 
@@ -284,6 +295,8 @@ TOTALS_FEATURES = [
     "home_sp_rating", "away_sp_rating",
     "home_hfa", "away_hfa",
     "neutral_site", "conference_game",
+    "week_num", "late_season", "is_postseason",
+    "spread_magnitude",
 
     # Weather (outdoor games only — big effect on totals)
     "wind_speed", "temp_avg", "precipitation", "is_dome",
