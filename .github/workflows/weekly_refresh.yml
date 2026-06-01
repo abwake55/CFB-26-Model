@@ -1,0 +1,133 @@
+name: CFB Model — Weekly Data Refresh & Retrain
+
+# ── Schedule ──────────────────────────────────────────────────────────────────
+# Runs every Tuesday at 8 AM UTC (4 AM ET) — after all Monday Night games finish.
+# Also triggerable manually from the GitHub Actions tab with optional overrides.
+on:
+  schedule:
+    - cron: '0 8 * * 2'
+  workflow_dispatch:
+    inputs:
+      force_retrain:
+        description: 'Force model retrain even in offseason'
+        type: boolean
+        default: false
+      refresh_mode:
+        description: 'What to refresh'
+        type: choice
+        default: auto
+        options:
+          - auto        # detect season/offseason automatically
+          - preseason   # portal, talent, SP+ only (no games)
+          - full        # games + lines + EPA + all stats + retrain
+
+# ── Permissions ────────────────────────────────────────────────────────────────
+permissions:
+  contents: write   # needed to push updated CSVs and model files back
+
+jobs:
+  refresh:
+    name: Refresh data & retrain
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Python setup ──────────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── 3. Detect season mode ─────────────────────────────────────────────────
+      # Sep–Jan = in-season (full refresh + retrain)
+      # Feb–Aug = offseason (preseason data only, no retrain unless forced)
+      - name: Detect season mode
+        id: season
+        run: |
+          MONTH=$(date +%-m)
+          MODE="${{ inputs.refresh_mode }}"
+          FORCE="${{ inputs.force_retrain }}"
+
+          if [ "$MODE" = "auto" ] || [ -z "$MODE" ]; then
+            if [ "$MONTH" -ge 9 ] || [ "$MONTH" -le 1 ]; then
+              echo "mode=full" >> $GITHUB_OUTPUT
+              echo "retrain=true" >> $GITHUB_OUTPUT
+              echo "📅 In-season detected (month $MONTH) → full refresh + retrain"
+            else
+              echo "mode=preseason" >> $GITHUB_OUTPUT
+              echo "retrain=false" >> $GITHUB_OUTPUT
+              echo "📅 Offseason detected (month $MONTH) → preseason refresh only"
+            fi
+          else
+            echo "mode=$MODE" >> $GITHUB_OUTPUT
+            if [ "$MODE" = "full" ] || [ "$FORCE" = "true" ]; then
+              echo "retrain=true" >> $GITHUB_OUTPUT
+            else
+              echo "retrain=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      # ── 4. Preseason data (always runs) ───────────────────────────────────────
+      # Pulls: portal, talent, SP+ (when available), FPI, recruiting
+      - name: Refresh preseason data (portal, talent, SP+)
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+        run: python scripts/refresh_2026.py
+
+      # ── 5. In-season data (Sep–Jan only) ─────────────────────────────────────
+      # Pulls: game results, betting lines, per-game EPA for 2026
+      - name: Refresh in-season data (games, lines, EPA)
+        if: steps.season.outputs.mode == 'full'
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+        run: python scripts/refresh_in_season.py
+
+      # ── 6. Havoc / tempo / turnover stats ─────────────────────────────────────
+      - name: Refresh havoc, tempo, and turnover stats
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+        run: python scripts/refresh_havoc.py
+
+      # ── 7. Rebuild feature matrix ─────────────────────────────────────────────
+      - name: Rebuild feature matrix
+        run: python src/features.py
+
+      # ── 8. Retrain model (in-season or forced) ────────────────────────────────
+      - name: Retrain spread, totals, and win-prob models
+        if: steps.season.outputs.retrain == 'true'
+        run: python src/model.py
+
+      # ── 9. Update walk-forward results ────────────────────────────────────────
+      - name: Update walk-forward OOS predictions
+        if: steps.season.outputs.retrain == 'true'
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+        run: python scripts/walk_forward.py
+
+      # ── 10. Commit & push results back to repo ────────────────────────────────
+      # Streamlit Cloud auto-redeploys when main branch is updated.
+      - name: Commit and push updated data & models
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          # Only commit if something actually changed
+          if git diff --staged --quiet; then
+            echo "✅ No changes to commit — data already up to date"
+          else
+            STAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+            MODE="${{ steps.season.outputs.mode }}"
+            git commit -m "Auto-refresh [$MODE] $STAMP"
+            git push
+            echo "✅ Pushed updated data — Streamlit Cloud will redeploy automatically"
+          fi
