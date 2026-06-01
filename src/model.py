@@ -507,14 +507,30 @@ def train_and_evaluate():
     y_test_sp  = test["point_diff"]
 
     X_train_tot = train[totals_feats]
-    y_train_tot = train["total_points"]
     X_test_tot  = test[totals_feats]
-    y_test_tot  = test["total_points"]
-
     X_val_sp    = val[spread_feats]
     y_val_sp    = val["point_diff"]
     X_val_tot   = val[totals_feats]
-    y_val_tot   = val["total_points"]
+
+    # ── Totals target: deviation from Vegas line (not raw total) ──────────────
+    # Predicting (actual_total - over_under) rather than actual_total directly.
+    #
+    # Why this is better:
+    #   Vegas is already very good at setting the total (R²=0.114 baseline).
+    #   Predicting raw totals means ~90% of signal is "points are usually ~48".
+    #   Predicting deviation focuses entirely on what WE know beyond the line:
+    #   weather, tempo, rush rate, red zone efficiency, turnovers, etc.
+    #   The deviation target is zero-centered, lower variance, and easier to learn.
+    #
+    # At prediction time we add the line back: pred_total = over_under + deviation
+    # so pred_total stays interpretable and totals_edge = pred_total - ou = deviation.
+    ou_train = pd.to_numeric(train["over_under"], errors="coerce")
+    ou_val   = pd.to_numeric(val["over_under"],   errors="coerce")
+    ou_test  = pd.to_numeric(test["over_under"],  errors="coerce")
+
+    y_train_tot = train["total_points"] - ou_train   # deviation: train target
+    y_val_tot   = val["total_points"]   - ou_val     # deviation: val target (blend tuning)
+    y_test_tot  = test["total_points"]               # actual total: final eval display
 
     X_train_win = train[win_feats]
     y_train_win = train["home_win"]
@@ -555,8 +571,9 @@ def train_and_evaluate():
 
     results_tot = []
     for pipe, label in [(ridge_tot, "Ridge"), (gbm_tot, "GradientBoost")]:
-        preds = pipe.predict(X_test_tot)
-        results_tot.append(evaluate_totals(y_test_tot, preds, label))
+        # Model predicts deviation; add line back for interpretable evaluation
+        pred_total = ou_test + pipe.predict(X_test_tot)
+        results_tot.append(evaluate_totals(y_test_tot, pred_total, label))
     results_tot.append(vegas_totals_baseline(test))
 
     print(pd.DataFrame(results_tot).to_string(index=False))
@@ -687,7 +704,8 @@ def train_and_evaluate():
 
     # Evaluate best ensembles on test set
     ens_sp_preds  = ensemble_sp.predict(X_test_sp)
-    ens_tot_preds = ensemble_tot.predict(X_test_tot)
+    ens_tot_dev   = ensemble_tot.predict(X_test_tot)          # deviation from line
+    ens_tot_preds = ou_test + ens_tot_dev                     # add line back → pred total
     ens_sp_label  = f"Ensemble ({best_sp_w1:.0%}/{best_sp_w2:.0%})"
     ens_tot_label = f"Ensemble ({best_tot_w1:.0%}/{best_tot_w2:.0%})"
     ens_sp_result  = evaluate_spread(y_test_sp,  ens_sp_preds,  ens_sp_label)
@@ -730,7 +748,9 @@ def train_and_evaluate():
     results_df = test[base_cols + ml_cols].copy()
 
     results_df["pred_spread"]      = best_sp_pipe.predict(X_test_sp)
-    results_df["pred_total"]       = best_tot_pipe.predict(X_test_tot)
+    # Totals model predicts deviation from line; add ou back so pred_total is
+    # the expected actual combined score (same meaning as before, cleaner signal)
+    results_df["pred_total"]       = ou_test.values + best_tot_pipe.predict(X_test_tot)
     results_df["pred_home_win_p"]  = gbm_win.predict_proba(X_test_win)[:, 1]
 
     # Model edge vs Vegas line.

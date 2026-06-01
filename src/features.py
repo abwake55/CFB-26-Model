@@ -697,6 +697,15 @@ def add_targets_and_context(df: pd.DataFrame) -> pd.DataFrame:
         df["line_movement"]      = spread - spread_open
         df["line_movement_abs"]  = df["line_movement"].abs()
 
+        # ── Clip line movement to physically meaningful range ─────────────────
+        # A CFB spread legitimately moves 0–5 points; anything beyond ~7 is a
+        # data error (e.g. Colorado–Oregon State 2023 showed 36.5 pt movement,
+        # causing the GBM to predict +280 point wins for that game).
+        # Clipping here fixes the outlier before it enters the model.
+        MOVE_CAP = 7.0
+        df["line_movement"]     = df["line_movement"].clip(-MOVE_CAP, MOVE_CAP)
+        df["line_movement_abs"] = df["line_movement"].abs()
+
         # Sharp-money flags: 2+ point moves are typically sharp, not public
         # Negative move = home team got more expensive = sharp money on HOME side
         # Positive move = home team got cheaper      = sharp money on AWAY side
@@ -709,11 +718,12 @@ def add_targets_and_context(df: pd.DataFrame) -> pd.DataFrame:
 
         # Opening spread itself — the "sharp-only" estimate before public money
         # Only populated where we have it; NaN elsewhere (handled by imputer/LightGBM)
-        df["spread_open_val"] = spread_open   # renamed to avoid collision
+        # Clip to ±45 — any larger value is a blowout FCS opponent with bad data.
+        df["spread_open_val"] = spread_open.clip(-45, 45)
 
         # Totals movement (same logic as spread)
         if ou_open.notna().any():
-            df["total_movement"]     = ou - ou_open
+            df["total_movement"]     = (ou - ou_open).clip(-MOVE_CAP, MOVE_CAP)
             df["total_movement_abs"] = df["total_movement"].abs()
             # Sharp-money flags for totals: 2+ pt move suggests sharp interest
             df["sharp_total_under"] = (df["total_movement"] <= -2.0).astype(int)

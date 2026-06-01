@@ -102,9 +102,17 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     X_val_sp, y_val_sp = val[spread_feats],   val["point_diff"]
     X_te_sp            = test[spread_feats]
 
-    X_tr_tot,  y_tr_tot  = train[totals_feats], train["total_points"]
-    X_val_tot, y_val_tot = val[totals_feats],   val["total_points"]
-    X_te_tot              = test[totals_feats]
+    X_tr_tot  = train[totals_feats]
+    X_val_tot = val[totals_feats]
+    X_te_tot  = test[totals_feats]
+
+    # Totals target: deviation from line (same reframe as model.py)
+    ou_tr  = pd.to_numeric(train["over_under"], errors="coerce")
+    ou_val = pd.to_numeric(val["over_under"],   errors="coerce")
+    ou_te  = pd.to_numeric(test["over_under"],  errors="coerce")
+    y_tr_tot  = train["total_points"] - ou_tr   # deviation: train
+    y_val_tot = val["total_points"]   - ou_val  # deviation: val (blend tuning)
+    # y_test_tot = test["total_points"]          # actual: final eval (below)
 
     X_tr_win,  y_tr_win  = train[win_feats], train["home_win"]
     X_val_win, y_val_win = val[win_feats],   val["home_win"]
@@ -162,11 +170,10 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     out = test[base_cols + ml_cols].copy()
 
     out["pred_spread"]     = ens_sp.predict(X_te_sp)
-    out["pred_total"]      = ens_tot.predict(X_te_tot)
+    out["pred_total"]      = ou_te.values + ens_tot.predict(X_te_tot)  # deviation → actual
     out["pred_home_win_p"] = ens_win.predict_proba(X_te_win)[:, 1]
     out["spread_edge"]     = out["pred_spread"] - out["vegas_home_margin"]
-    out["totals_edge"]     = (out["pred_total"]
-                              - pd.to_numeric(out["over_under"], errors="coerce"))
+    out["totals_edge"]     = out["pred_total"] - ou_te.values           # = deviation
     out["training_cutoff"] = val_season  # last season in training window
 
     # ── Per-fold metrics ──────────────────────────────────────────────────────
