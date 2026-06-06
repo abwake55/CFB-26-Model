@@ -1,0 +1,793 @@
+{
+  "run_at": "2026-06-06T12:14:04.819619",
+  "season": 2026,
+  "week": 1,
+  "picks": {
+    "spreads": [
+      {
+        "game": "Colorado @ Georgia Tech",
+        "pick": "Colorado -7.0",
+        "edge_pts": -6.2,
+        "units": 4,
+        "model_spread": 0.8,
+        "vegas_spread": -7.0
+      },
+      {
+        "game": "Wyoming @ Colorado State",
+        "pick": "Wyoming -4.0",
+        "edge_pts": -6.1,
+        "units": 4,
+        "model_spread": -2.1,
+        "vegas_spread": -4.0
+      },
+      {
+        "game": "Toledo @ Michigan State",
+        "pick": "Toledo -10.5",
+        "edge_pts": -5.8,
+        "units": 4,
+        "model_spread": 4.7,
+        "vegas_spread": -10.5
+      },
+      {
+        "game": "NC State @ Virginia",
+        "pick": "NC State -4.5",
+        "edge_pts": -4.4,
+        "units": 3,
+        "model_spread": 0.1,
+        "vegas_spread": -4.5
+      },
+      {
+        "game": "UCLA @ California",
+        "pick": "UCLA -1.5",
+        "edge_pts": -4.1,
+        "units": 3,
+        "model_spread": -2.6,
+        "vegas_spread": -1.5
+      }
+    ],
+    "totals": [
+      {
+        "game": "Clemson @ LSU",
+        "pick": "OVER 50.5",
+        "edge_pts": 4.7,
+        "units": 4,
+        "model_total": 55.2,
+        "vegas_total": 50.5
+      },
+      {
+        "game": "UCLA @ California",
+        "pick": "OVER 53.5",
+        "edge_pts": 3.3,
+        "units": 2,
+        "model_total": 56.8,
+        "vegas_total": 53.5
+      },
+      {
+        "game": "Louisville @ Ole Miss",
+        "pick": "UNDER 55.5",
+        "edge_pts": -3.1,
+        "units": 2,
+        "model_total": 52.4,
+        "vegas_total": 55.5
+      }
+    ],
+    "moneylines": [],
+    "all_games": [
+      {
+        "game": "Hawai'i @ Stanford",
+        "pred_spread": 10.7,
+        "vegas_spread": -3.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 74.8
+      },
+      {
+        "game": "Jacksonville State @ North Dakota State",
+        "pred_spread": 2.7,
+        "vegas_spread": -10.0,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 64.4
+      },
+      {
+        "game": "Sacramento State @ Eastern Michigan",
+        "pred_spread": 8.2,
+        "vegas_spread": -8.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 61.8
+      },
+      {
+        "game": "Memphis @ UNLV",
+        "pred_spread": 0.7,
+        "vegas_spread": -3.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 57.4
+      },
+      {
+        "game": "San Jos\u00e9 State @ USC",
+        "pred_spread": 10.0,
+        "vegas_spread": -35.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 69.3
+      },
+      {
+        "game": "New Mexico State @ Florida State",
+        "pred_spread": 9.3,
+        "vegas_spread": -29.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 69.7
+      },
+      {
+        "game": "North Carolina @ TCU",
+        "pred_spread": -3.5,
+        "vegas_spread": -6.5,
+        "pred_total": 50.0,
+        "vegas_total": 49.5,
+        "home_win_pct": 43.6
+      },
+      {
+        "game": "NC State @ Virginia",
+        "pred_spread": 0.1,
+        "vegas_spread": -4.5,
+        "pred_total": 52.5,
+        "vegas_total": 54.5,
+        "home_win_pct": 50.9
+      },
+      {
+        "game": "UAlbany @ Buffalo",
+        "pred_spread": 9.9,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 61.3
+      },
+      {
+        "game": "Bethune-Cookman @ UCF",
+        "pred_spread": 11.5,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 65.4
+      },
+      {
+        "game": "Arkansas-Pine Bluff @ Missouri",
+        "pred_spread": 13.1,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 66.3
+      },
+      {
+        "game": "Idaho @ Utah",
+        "pred_spread": 15.5,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 76.4
+      },
+      {
+        "game": "Akron @ Wake Forest",
+        "pred_spread": 6.7,
+        "vegas_spread": -22.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 67.4
+      },
+      {
+        "game": "Eastern Illinois @ Minnesota",
+        "pred_spread": 17.1,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 78.2
+      },
+      {
+        "game": "Massachusetts @ Rutgers",
+        "pred_spread": 4.7,
+        "vegas_spread": -30.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 59.8
+      },
+      {
+        "game": "Merrimack @ Delaware",
+        "pred_spread": 11.6,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 65.4
+      },
+      {
+        "game": "West Georgia @ Kennesaw State",
+        "pred_spread": 12.8,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 68.8
+      },
+      {
+        "game": "Colorado @ Georgia Tech",
+        "pred_spread": 0.8,
+        "vegas_spread": -7.0,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 55.1
+      },
+      {
+        "game": "North Carolina A&T @ Georgia State",
+        "pred_spread": 9.2,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 60.7
+      },
+      {
+        "game": "Toledo @ Michigan State",
+        "pred_spread": 4.7,
+        "vegas_spread": -10.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 61.1
+      },
+      {
+        "game": "Long Island University @ Kansas",
+        "pred_spread": 9.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 61.9
+      },
+      {
+        "game": "Towson @ Navy",
+        "pred_spread": 9.0,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 65.5
+      },
+      {
+        "game": "Houston Christian @ Rice",
+        "pred_spread": 13.7,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 73.2
+      },
+      {
+        "game": "Rhode Island @ Temple",
+        "pred_spread": 14.9,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 73.8
+      },
+      {
+        "game": "Florida International @ South Florida",
+        "pred_spread": 4.4,
+        "vegas_spread": -12.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 60.4
+      },
+      {
+        "game": "The Citadel @ Charlotte",
+        "pred_spread": 6.4,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 56.5
+      },
+      {
+        "game": "Austin Peay @ Vanderbilt",
+        "pred_spread": 19.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 80.0
+      },
+      {
+        "game": "Abilene Christian @ Texas Tech",
+        "pred_spread": 12.9,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 69.2
+      },
+      {
+        "game": "Nicholls @ Kansas State",
+        "pred_spread": 15.4,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 71.8
+      },
+      {
+        "game": "Oklahoma State @ Tulsa",
+        "pred_spread": -5.2,
+        "vegas_spread": 12.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 45.6
+      },
+      {
+        "game": "Northern Arizona @ Arizona",
+        "pred_spread": 17.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 77.0
+      },
+      {
+        "game": "Morgan State @ Arizona State",
+        "pred_spread": 18.0,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 77.8
+      },
+      {
+        "game": "Utah Tech @ BYU",
+        "pred_spread": 18.0,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 78.0
+      },
+      {
+        "game": "Boston College @ Cincinnati",
+        "pred_spread": 0.5,
+        "vegas_spread": -9.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 56.3
+      },
+      {
+        "game": "Oregon State @ Houston",
+        "pred_spread": 3.6,
+        "vegas_spread": -18.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 58.7
+      },
+      {
+        "game": "New Hampshire @ Syracuse",
+        "pred_spread": 15.0,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 72.6
+      },
+      {
+        "game": "Tulane @ Duke",
+        "pred_spread": 5.6,
+        "vegas_spread": -8.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 63.9
+      },
+      {
+        "game": "UCLA @ California",
+        "pred_spread": -2.6,
+        "vegas_spread": -1.5,
+        "pred_total": 56.8,
+        "vegas_total": 53.5,
+        "home_win_pct": 49.1
+      },
+      {
+        "game": "VMI @ Virginia Tech",
+        "pred_spread": 14.4,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 70.6
+      },
+      {
+        "game": "UAB @ Illinois",
+        "pred_spread": 4.2,
+        "vegas_spread": -27.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 56.4
+      },
+      {
+        "game": "North Texas @ Indiana",
+        "pred_spread": 8.5,
+        "vegas_spread": -40.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 70.2
+      },
+      {
+        "game": "Northern Illinois @ Iowa",
+        "pred_spread": 10.2,
+        "vegas_spread": -29.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 63.6
+      },
+      {
+        "game": "Howard @ Maryland",
+        "pred_spread": 17.0,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 76.4
+      },
+      {
+        "game": "Western Michigan @ Michigan",
+        "pred_spread": 6.7,
+        "vegas_spread": -26.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 68.0
+      },
+      {
+        "game": "Ohio @ Nebraska",
+        "pred_spread": 11.6,
+        "vegas_spread": -23.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 66.9
+      },
+      {
+        "game": "South Dakota State @ Northwestern",
+        "pred_spread": 16.0,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 75.7
+      },
+      {
+        "game": "Ball State @ Ohio State",
+        "pred_spread": 14.5,
+        "vegas_spread": -50.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 76.5
+      },
+      {
+        "game": "Boise State @ Oregon",
+        "pred_spread": 8.8,
+        "vegas_spread": -24.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 68.6
+      },
+      {
+        "game": "Marshall @ Penn State",
+        "pred_spread": 13.1,
+        "vegas_spread": -23.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 75.4
+      },
+      {
+        "game": "Alcorn State @ Southern Miss",
+        "pred_spread": 15.5,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 75.3
+      },
+      {
+        "game": "Northwestern State @ Louisiana Tech",
+        "pred_spread": 17.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 77.6
+      },
+      {
+        "game": "Lamar @ Louisiana",
+        "pred_spread": 15.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 75.6
+      },
+      {
+        "game": "Liberty @ James Madison",
+        "pred_spread": -3.2,
+        "vegas_spread": -6.0,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 43.5
+      },
+      {
+        "game": "Sam Houston @ Troy",
+        "pred_spread": -0.3,
+        "vegas_spread": -17.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 53.3
+      },
+      {
+        "game": "North Alabama @ Arkansas",
+        "pred_spread": 10.4,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 62.5
+      },
+      {
+        "game": "Florida Atlantic @ Florida",
+        "pred_spread": 10.0,
+        "vegas_spread": -26.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 74.6
+      },
+      {
+        "game": "Tennessee State @ Georgia",
+        "pred_spread": 20.7,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 79.7
+      },
+      {
+        "game": "Youngstown State @ Kentucky",
+        "pred_spread": 19.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 78.9
+      },
+      {
+        "game": "UL Monroe @ Mississippi State",
+        "pred_spread": 7.3,
+        "vegas_spread": -28.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 65.8
+      },
+      {
+        "game": "UTEP @ Oklahoma",
+        "pred_spread": 8.3,
+        "vegas_spread": -40.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 67.5
+      },
+      {
+        "game": "Kent State @ South Carolina",
+        "pred_spread": 10.6,
+        "vegas_spread": -34.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 72.5
+      },
+      {
+        "game": "Furman @ Tennessee",
+        "pred_spread": 19.9,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 79.1
+      },
+      {
+        "game": "Texas State @ Texas",
+        "pred_spread": 14.2,
+        "vegas_spread": -30.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 77.3
+      },
+      {
+        "game": "Missouri State @ Texas A&M",
+        "pred_spread": 15.4,
+        "vegas_spread": -38.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 77.5
+      },
+      {
+        "game": "Southeast Missouri State @ Iowa State",
+        "pred_spread": 18.1,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 77.6
+      },
+      {
+        "game": "Coastal Carolina @ West Virginia",
+        "pred_spread": 1.5,
+        "vegas_spread": -17.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 61.7
+      },
+      {
+        "game": "Miami (OH) @ Pittsburgh",
+        "pred_spread": 1.5,
+        "vegas_spread": -16.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 52.6
+      },
+      {
+        "game": "Indiana State @ Purdue",
+        "pred_spread": 17.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 76.6
+      },
+      {
+        "game": "Washington State @ Washington",
+        "pred_spread": 3.1,
+        "vegas_spread": -21.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 59.1
+      },
+      {
+        "game": "Wyoming @ Colorado State",
+        "pred_spread": -2.1,
+        "vegas_spread": -4.0,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 54.2
+      },
+      {
+        "game": "Portland State @ San Diego State",
+        "pred_spread": 17.4,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 76.3
+      },
+      {
+        "game": "Idaho State @ Utah State",
+        "pred_spread": 14.4,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 72.1
+      },
+      {
+        "game": "Lafayette @ UConn",
+        "pred_spread": 17.6,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 78.3
+      },
+      {
+        "game": "UT Rio Grande Valley @ UTSA",
+        "pred_spread": 11.1,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 63.1
+      },
+      {
+        "game": "Bryant @ Army",
+        "pred_spread": 10.9,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 70.1
+      },
+      {
+        "game": "Western Kentucky @ Nevada",
+        "pred_spread": 3.7,
+        "vegas_spread": 3.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 64.2
+      },
+      {
+        "game": "Duquesne @ Air Force",
+        "pred_spread": 12.5,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 71.5
+      },
+      {
+        "game": "Central Michigan @ New Mexico",
+        "pred_spread": -5.8,
+        "vegas_spread": -12.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 39.7
+      },
+      {
+        "game": "Tarleton State @ Bowling Green",
+        "pred_spread": 10.3,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 63.5
+      },
+      {
+        "game": "Maine @ App State",
+        "pred_spread": 13.5,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 71.3
+      },
+      {
+        "game": "Murray State @ Middle Tennessee",
+        "pred_spread": 14.1,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 74.8
+      },
+      {
+        "game": "Norfolk State @ Old Dominion",
+        "pred_spread": 11.9,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 64.3
+      },
+      {
+        "game": "Charleston Southern @ Georgia Southern",
+        "pred_spread": 13.6,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 72.4
+      },
+      {
+        "game": "SE Louisiana @ South Alabama",
+        "pred_spread": 9.1,
+        "vegas_spread": null,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 63.7
+      },
+      {
+        "game": "East Carolina @ Alabama",
+        "pred_spread": 12.8,
+        "vegas_spread": -26.5,
+        "pred_total": NaN,
+        "vegas_total": null,
+        "home_win_pct": 76.8
+      },
+      {
+        "game": "Baylor @ Auburn",
+        "pred_spread": 7.2,
+        "vegas_spread": -7.0,
+        "pred_total": 57.2,
+        "vegas_total": 59.5,
+        "home_win_pct": 65.1
+      },
+      {
+        "game": "Clemson @ LSU",
+        "pred_spread": 1.3,
+        "vegas_spread": -10.5,
+        "pred_total": 55.2,
+        "vegas_total": 50.5,
+        "home_win_pct": 52.2
+      },
+      {
+        "game": "Louisville @ Ole Miss",
+        "pred_spread": 4.7,
+        "vegas_spread": -6.5,
+        "pred_total": 52.4,
+        "vegas_total": 55.5,
+        "home_win_pct": 62.4
+      },
+      {
+        "game": "Notre Dame @ Wisconsin",
+        "pred_spread": 2.5,
+        "vegas_spread": 20.5,
+        "pred_total": 47.8,
+        "vegas_total": 47.5,
+        "home_win_pct": 49.6
+      }
+    ]
+  },
+  "imessage_text": "\ud83c\udfc8 CFB Model \u2014 Week 1, 2026\nGenerated Sat Jun 6 @ 12:14 PM\n\n\ud83d\udcca SPREAD (5)\n  Colorado -7.0  |  edge -6.2  |  4u\n  Wyoming -4.0  |  edge -6.1  |  4u\n  Toledo -10.5  |  edge -5.8  |  4u\n  NC State -4.5  |  edge -4.4  |  3u\n  UCLA -1.5  |  edge -4.1  |  3u\n\n\ud83d\udd22 TOTALS (3)\n  OVER 50.5 (Clemson @ LSU)  |  edge +4.7  |  4u\n  OVER 53.5 (UCLA @ California)  |  edge +3.3  |  2u\n  UNDER 55.5 (Louisville @ Ole Miss)  |  edge -3.1  |  2u\n\n8 total picks. Check the app for full details.",
+  "games_count": 89,
+  "lines_count": 51
+}

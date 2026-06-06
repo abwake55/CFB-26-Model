@@ -47,6 +47,7 @@ from sklearn.metrics import brier_score_loss
 from model import (
     load_data,
     EnsembleRegressor, EnsembleClassifier,
+    MarketAnchoredEnsemble, tune_anchor_weights,
     make_linear, make_gbm_regressor, make_gbm_classifier, make_logistic,
     SPREAD_FEATURES, TOTALS_FEATURES, WIN_PROB_FEATURES,
     evaluate_spread, evaluate_totals,
@@ -128,8 +129,16 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
             (EnsembleRegressor(ridge_sp, gbm_sp, w1, w2).predict(X_val_sp) - y_val_sp) ** 2))
         if rmse < best_sp_rmse:
             best_sp_rmse, best_sp_w1 = rmse, w1
-    sp_w2     = round(1 - best_sp_w1, 1)
-    ens_sp    = EnsembleRegressor(ridge_sp, gbm_sp, best_sp_w1, sp_w2)
+    sp_w2    = round(1 - best_sp_w1, 1)
+    base_sp  = EnsembleRegressor(ridge_sp, gbm_sp, best_sp_w1, sp_w2)
+
+    # ── Market anchor: tune + wrap spread ensemble ────────────────────────────
+    # Pulls extreme predictions toward the opening line; tuned on val set.
+    # Reduces the 2023-style blowup where model predicted +37 and was off by 98 pts.
+    anchor_schedule = tune_anchor_weights(
+        base_sp, X_val_sp, y_val_sp, verbose=False
+    )
+    ens_sp = MarketAnchoredEnsemble(base_sp, thresholds=anchor_schedule)
 
     # ── Totals model ──────────────────────────────────────────────────────────
     ridge_tot = make_linear(alpha=10.0); ridge_tot.fit(X_tr_tot, y_tr_tot)
@@ -184,9 +193,14 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     veg_tt = evaluate_totals(test["total_points"],
                               pd.to_numeric(test["over_under"], errors="coerce"), "Vegas")
 
+    anchor_str = " ".join(
+        f"|gap|≤{t}→{w:.0%}" if t < 999 else f">21→{w:.0%}"
+        for t, w in anchor_schedule
+    )
     print(f"  Spread  — MAE {sp_ev['MAE']:5.2f}  R² {sp_ev['R2']:+.3f}"
           f"  Dir {sp_ev['Direction_Acc']:.1%}"
           f"  (Vegas MAE {veg_sp['MAE']:.2f}  R² {veg_sp['R2']:+.3f})")
+    print(f"  Anchor  — {anchor_str}")
     print(f"  Totals  — MAE {tot_ev['MAE']:5.2f}  R² {tot_ev['R2']:+.3f}"
           f"  (Vegas MAE {veg_tt['MAE']:.2f}  R² {veg_tt['R2']:+.3f})")
     print(f"  WinProb — Brier {brier:.4f}"

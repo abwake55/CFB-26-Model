@@ -47,10 +47,11 @@ OUTPUT_FILE = ROOT_DIR / "scripts" / "pipeline_output.json"
 sys.path.insert(0, str(SRC_DIR))
 
 # ── joblib unpickling requires the ensemble classes in __main__ ───────────────
-from model import EnsembleRegressor, EnsembleClassifier  # noqa: E402
+from model import EnsembleRegressor, EnsembleClassifier, MarketAnchoredEnsemble  # noqa: E402
 import __main__
-__main__.EnsembleRegressor  = EnsembleRegressor
-__main__.EnsembleClassifier = EnsembleClassifier
+__main__.EnsembleRegressor       = EnsembleRegressor
+__main__.EnsembleClassifier      = EnsembleClassifier
+__main__.MarketAnchoredEnsemble  = MarketAnchoredEnsemble
 
 from feature_builder import (         # noqa: E402
     load_rating_sources,
@@ -395,7 +396,10 @@ def build_predictions(games, lines, spread_model, totals_model,
         out["provider"] = df["provider"]
 
     out["pred_spread"] = spread_model.predict(make_feat(feature_lists["spread"]))
-    out["pred_total"]  = totals_model.predict(make_feat(feature_lists["totals"]))
+    # Totals model predicts deviation from the O/U line (not the raw total).
+    # Add the opening O/U back so pred_total is the expected combined score.
+    ou_vals = pd.to_numeric(out["over_under"], errors="coerce")
+    out["pred_total"]  = ou_vals + totals_model.predict(make_feat(feature_lists["totals"]))
     out["pred_win_p"]  = win_prob_model.predict_proba(make_feat(feature_lists["win_prob"]))[:, 1]
 
     # Cross-calibration: spread-implied win probability
