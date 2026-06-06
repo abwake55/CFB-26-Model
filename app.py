@@ -2485,6 +2485,10 @@ def render_history_tab():
                     "covered_spread", "went_over", "week", "season"]:
             if col in res.columns:
                 res[col] = pd.to_numeric(res[col], errors="coerce")
+        # Compute totals_edge if not saved in the CSV
+        if "totals_edge" not in res.columns and "pred_total" in res.columns and "over_under" in res.columns:
+            res["totals_edge"] = (pd.to_numeric(res["pred_total"], errors="coerce")
+                                  - pd.to_numeric(res["over_under"], errors="coerce"))
     except Exception as e:
         st.error(f"Could not load model results: {e}")
         return
@@ -2604,11 +2608,12 @@ def render_history_tab():
         def hit_rate(picks, col, hit_val):
             settled = picks[picks[col].notna()]
             if settled.empty: return None
-            hits = ((settled["totals_edge"] < 0) & (settled["went_over"] == 0)).sum() + \
-                   ((settled["totals_edge"] > 0) & (settled["went_over"] == 1)).sum() \
-                   if col == "went_over" else \
-                   ((settled["spread_edge"] > 0) & (settled["covered_spread"] == 1)).sum() + \
-                   ((settled["spread_edge"] < 0) & (settled["covered_spread"] == 0)).sum()
+            if col == "went_over" and "totals_edge" in settled.columns:
+                hits = (((settled["totals_edge"] < 0) & (settled["went_over"] == 0)).sum() +
+                        ((settled["totals_edge"] > 0) & (settled["went_over"] == 1)).sum())
+            else:
+                hits = (((settled["spread_edge"] > 0) & (settled["covered_spread"] == 1)).sum() +
+                        ((settled["spread_edge"] < 0) & (settled["covered_spread"] == 0)).sum())
             return hits / len(settled)
 
         st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
