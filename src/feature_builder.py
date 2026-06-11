@@ -263,6 +263,27 @@ def load_rating_sources(pred_season: int, data_dir: Path) -> dict:
         except Exception as exc:
             print(f"  ⚠️  Havoc loader failed: {exc}")
 
+    # ── Returning production (no shift — describes the upcoming roster) ──────
+    # NO stale-season fallback on purpose: 2025's returning numbers describe
+    # 2025 rosters and would be wrong for 2026. Missing season → NaN → imputed.
+    ret_path = data_dir / "master_returning.csv"
+    if ret_path.exists():
+        try:
+            ret = pd.read_csv(ret_path)
+            ret["season"] = pd.to_numeric(ret["season"], errors="coerce")
+            for col in ["ret_ppa_pct", "ret_pass_ppa_pct"]:
+                if col in ret.columns:
+                    ret[col] = pd.to_numeric(ret[col], errors="coerce").clip(0, 1.2)
+            avail = [c for c in ["ret_ppa_pct", "ret_pass_ppa_pct"] if c in ret.columns]
+            cur = ret[ret["season"] == pred_season]
+            if not cur.empty and avail:
+                ratings["returning"] = cur[["team"] + avail].set_index("team")
+            elif avail:
+                print(f"  ⚠️  Returning production: no {pred_season} data yet "
+                      f"(CFBD publishes in summer) — feature will be imputed")
+        except Exception as exc:
+            print(f"  ⚠️  Returning-production loader failed: {exc}")
+
     # ── HFA — computed fresh from master_games.csv ───────────────────────────
     # We derive each team's home-field advantage from the 2 most recently
     # completed seasons (< pred_season) rather than reading the stale
@@ -480,6 +501,17 @@ def attach_team_features(
             if (talent_src is not None and t in talent_src.index)
             else np.nan)
 
+        # Returning production
+        ret_src = ratings.get("returning")
+        for col in ["ret_ppa_pct", "ret_pass_ppa_pct"]:
+            df[f"{side}_{col}"] = ts.map(
+                lambda t, c=col: float(ret_src.loc[t, c])
+                if (ret_src is not None
+                    and t in ret_src.index
+                    and c in ret_src.columns
+                    and pd.notna(ret_src.loc[t, c]))
+                else np.nan)
+
         # Havoc / advanced stats
         havoc_src = ratings.get("havoc")
         for col in HAVOC_COLS:
@@ -503,6 +535,11 @@ def attach_team_features(
 
     df["portal_net_rating_diff"] = (
         df["home_portal_net_rating"] - df["away_portal_net_rating"])
+
+    df["ret_ppa_diff"] = df["home_ret_ppa_pct"] - df["away_ret_ppa_pct"]
+    if "home_ret_pass_ppa_pct" in df.columns:
+        df["ret_pass_ppa_diff"] = (df["home_ret_pass_ppa_pct"]
+                                   - df["away_ret_pass_ppa_pct"])
 
     if ratings.get("wepa") is not None:
         df["wepa_off_diff"]           = df["home_wepa_offense"]       - df["away_wepa_offense"]

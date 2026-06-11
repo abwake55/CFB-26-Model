@@ -28,6 +28,11 @@
     "portal_net_rating_diff",
     "home_portal_qb_in",
     "away_portal_qb_in",
+    "home_ret_ppa_pct",
+    "away_ret_ppa_pct",
+    "ret_ppa_diff",
+    "home_ret_pass_ppa_pct",
+    "away_ret_pass_ppa_pct",
     "havoc_diff",
     "explosiveness_net_diff",
     "turnover_margin_diff",
@@ -41,8 +46,7 @@
     "is_postseason",
     "rest_diff",
     "hfa_diff",
-    "spread_magnitude",
-    "spread_open_val"
+    "spread_magnitude"
   ],
   "totals": [
     "home_sp_offense",
@@ -81,6 +85,8 @@
     "talent_diff",
     "home_havoc_total",
     "away_havoc_total",
+    "home_ret_ppa_pct",
+    "away_ret_ppa_pct",
     "neutral_site",
     "conference_game",
     "week_num",
@@ -118,6 +124,11 @@
     "portal_net_rating_diff",
     "home_portal_qb_in",
     "away_portal_qb_in",
+    "home_ret_ppa_pct",
+    "away_ret_ppa_pct",
+    "ret_ppa_diff",
+    "home_ret_pass_ppa_pct",
+    "away_ret_pass_ppa_pct",
     "havoc_diff",
     "explosiveness_net_diff",
     "turnover_margin_diff",
@@ -132,5 +143,8 @@
     "rest_diff",
     "hfa_diff",
     "spread_magnitude"
-  ]
+  ],
+  "spread_target": "margin_residual",
+  "totals_target": "ou_deviation",
+  "trained_through": 2025
 }

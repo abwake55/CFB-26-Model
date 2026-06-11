@@ -99,14 +99,15 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     totals_feats = [f for f in TOTALS_FEATURES if f in df.columns]
     win_feats    = [f for f in WIN_PROB_FEATURES if f in df.columns]
 
-    X_tr_sp,  y_tr_sp  = train[spread_feats], train["point_diff"]
-    X_val_sp, y_val_sp = val[spread_feats],   val["point_diff"]
+    # Spread target: residual vs Vegas line (same reframe as model.py).
+    # pred_spread = vegas_home_margin + predicted_residual.
+    vm_tr  = pd.to_numeric(train["vegas_home_margin"], errors="coerce")
+    vm_val = pd.to_numeric(val["vegas_home_margin"],   errors="coerce")
+    vm_te  = pd.to_numeric(test["vegas_home_margin"],  errors="coerce")
 
-    # Anchored frame: spread features plus the opening line, which
-    # MarketAnchoredEnsemble strips before calling the base models. Without
-    # this column the anchor silently never fires (predictions stay raw).
-    anchor_extra = ["spread_open_val"] if "spread_open_val" in df.columns else []
-    X_te_sp            = test[spread_feats + anchor_extra]
+    X_tr_sp,  y_tr_sp  = train[spread_feats], train["point_diff"] - vm_tr
+    X_val_sp, y_val_sp = val[spread_feats],   val["point_diff"]   - vm_val
+    X_te_sp            = test[spread_feats]
 
     X_tr_tot  = train[totals_feats]
     X_val_tot = val[totals_feats]
@@ -135,15 +136,9 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
         if rmse < best_sp_rmse:
             best_sp_rmse, best_sp_w1 = rmse, w1
     sp_w2    = round(1 - best_sp_w1, 1)
-    base_sp  = EnsembleRegressor(ridge_sp, gbm_sp, best_sp_w1, sp_w2)
-
-    # ── Market anchor: tune + wrap spread ensemble ────────────────────────────
-    # Pulls extreme predictions toward the opening line; tuned on val set.
-    # Reduces the 2023-style blowup where model predicted +37 and was off by 98 pts.
-    anchor_schedule = tune_anchor_weights(
-        base_sp, X_val_sp, y_val_sp, verbose=False
-    )
-    ens_sp = MarketAnchoredEnsemble(base_sp, thresholds=anchor_schedule)
+    # Residual target is anchored to the market by construction — no
+    # MarketAnchoredEnsemble wrapper needed.
+    ens_sp   = EnsembleRegressor(ridge_sp, gbm_sp, best_sp_w1, sp_w2)
 
     # ── Totals model ──────────────────────────────────────────────────────────
     ridge_tot = make_linear(alpha=10.0); ridge_tot.fit(X_tr_tot, y_tr_tot)
@@ -183,7 +178,7 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     ml_cols = [c for c in ["home_moneyline", "away_moneyline"] if c in test.columns]
     out = test[base_cols + ml_cols].copy()
 
-    out["pred_spread"]     = ens_sp.predict(X_te_sp)
+    out["pred_spread"]     = vm_te.values + ens_sp.predict(X_te_sp)  # residual → margin
     out["pred_total"]      = ou_te.values + ens_tot.predict(X_te_tot)  # deviation → actual
     out["pred_home_win_p"] = ens_win.predict_proba(X_te_win)[:, 1]
     out["spread_edge"]     = out["pred_spread"] - out["vegas_home_margin"]
@@ -198,14 +193,9 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     veg_tt = evaluate_totals(test["total_points"],
                               pd.to_numeric(test["over_under"], errors="coerce"), "Vegas")
 
-    anchor_str = " ".join(
-        f"|gap|≤{t}→{w:.0%}" if t < 999 else f">21→{w:.0%}"
-        for t, w in anchor_schedule
-    )
     print(f"  Spread  — MAE {sp_ev['MAE']:5.2f}  R² {sp_ev['R2']:+.3f}"
           f"  Dir {sp_ev['Direction_Acc']:.1%}"
           f"  (Vegas MAE {veg_sp['MAE']:.2f}  R² {veg_sp['R2']:+.3f})")
-    print(f"  Anchor  — {anchor_str}")
     print(f"  Totals  — MAE {tot_ev['MAE']:5.2f}  R² {tot_ev['R2']:+.3f}"
           f"  (Vegas MAE {veg_tt['MAE']:.2f}  R² {veg_tt['R2']:+.3f})")
     print(f"  WinProb — Brier {brier:.4f}"

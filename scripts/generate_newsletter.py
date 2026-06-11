@@ -237,7 +237,13 @@ def predict_games(games: list, lines: dict) -> list:
     tot_feats = make_simple_features(df, feature_lists.get("totals", []))
     win_feats = make_simple_features(df, feature_lists.get("win_prob", []))
 
-    df["pred_spread"]    = spread_model.predict(sp_feats)
+    # Spread model: current models predict the residual vs the Vegas line
+    # (feature_lists.json: spread_target=margin_residual) — add the line back.
+    sp_raw = spread_model.predict(sp_feats)
+    if feature_lists.get("spread_target") == "margin_residual":
+        df["pred_spread"] = df["vegas_home_margin"] + sp_raw
+    else:
+        df["pred_spread"] = sp_raw
     df["pred_total_dev"] = totals_model.predict(tot_feats)
     df["pred_total"]     = df["over_under"] + df["pred_total_dev"]
     df["pred_win_p"]     = win_prob_model.predict_proba(win_feats)[:, 1]

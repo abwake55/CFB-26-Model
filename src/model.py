@@ -331,6 +331,14 @@ SPREAD_FEATURES = [
     "home_portal_qb_in",      # home team brought in a new QB via portal (binary/rating)
     "away_portal_qb_in",      # away team brought in a new QB via portal
 
+    # ── Returning production (preseason roster continuity) ───────────────────
+    # Share of last season's PPA back on the roster — SP+'s core preseason
+    # ingredient. Directly targets early-season error, when prior-season
+    # ratings haven't adjusted to roster turnover yet.
+    "home_ret_ppa_pct", "away_ret_ppa_pct",
+    "ret_ppa_diff",
+    "home_ret_pass_ppa_pct", "away_ret_pass_ppa_pct",  # QB-room continuity proxy
+
     # ── Defensive disruption ──────────────────────────────────────────────────
     "havoc_diff",             # TFLs + sacks + PBUs per play — net disruption edge
     "explosiveness_net_diff", # big-play rate: off upside minus def vulnerability
@@ -396,6 +404,9 @@ TOTALS_FEATURES = [
     # ── Talent & disruption ───────────────────────────────────────────────────
     "talent_diff",
     "home_havoc_total", "away_havoc_total",
+
+    # ── Roster continuity (offense returning → early-season scoring) ─────────
+    "home_ret_ppa_pct", "away_ret_ppa_pct",
 
     # ── Game context ──────────────────────────────────────────────────────────
     "neutral_site",
@@ -563,23 +574,27 @@ def train_and_evaluate():
     totals_feats = [f for f in TOTALS_FEATURES if f in df.columns]
     win_feats    = [f for f in WIN_PROB_FEATURES if f in df.columns]
 
-    X_train_sp = train[spread_feats]
-    y_train_sp = train["point_diff"]
-    X_test_sp  = test[spread_feats]
-    y_test_sp  = test["point_diff"]
+    # ── Spread target: residual vs the Vegas line (not raw margin) ────────────
+    # Same reframe that made the totals model competitive: Vegas margin is the
+    # baseline (MAE ~11.8), and the model learns only the correction
+    #     residual = actual_margin − vegas_home_margin
+    # At prediction time: pred_spread = vegas_home_margin + pred_residual.
+    # This replaces the MarketAnchoredEnsemble — anchoring to the market is now
+    # built into the target itself. (The class is kept above only so joblib can
+    # unpickle models saved by older versions.)
+    vm_train = pd.to_numeric(train["vegas_home_margin"], errors="coerce")
+    vm_val   = pd.to_numeric(val["vegas_home_margin"],   errors="coerce")
+    vm_test  = pd.to_numeric(test["vegas_home_margin"],  errors="coerce")
 
-    # Anchored feature frames: same features plus the opening line, which
-    # MarketAnchoredEnsemble strips before calling the base models. Without
-    # this column the anchor silently never fires (predictions stay raw).
-    anchor_extra = ["spread_open_val"] if "spread_open_val" in df.columns else []
-    spread_feats_anchor = spread_feats + anchor_extra
-    X_test_sp_anchor = test[spread_feats_anchor]
-    X_val_sp_anchor  = val[spread_feats_anchor]
+    X_train_sp = train[spread_feats]
+    y_train_sp = train["point_diff"] - vm_train      # residual: train target
+    X_test_sp  = test[spread_feats]
+    y_test_sp  = test["point_diff"]                  # actual margin: eval display
 
     X_train_tot = train[totals_feats]
     X_test_tot  = test[totals_feats]
     X_val_sp    = val[spread_feats]
-    y_val_sp    = val["point_diff"]
+    y_val_sp    = val["point_diff"] - vm_val     # residual: val target (blend tuning)
     X_val_tot   = val[totals_feats]
 
     # ── Totals target: deviation from Vegas line (not raw total) ──────────────
@@ -611,7 +626,7 @@ def train_and_evaluate():
 
     # ── Train spread models ────────────────────────────────────────────────
     print("\n" + "="*55)
-    print("SPREAD MODEL  (predicting home team point differential)")
+    print("SPREAD MODEL  (predicting residual vs Vegas line)")
     print("="*55)
 
     ridge_sp = make_linear(alpha=10.0)
@@ -622,7 +637,8 @@ def train_and_evaluate():
 
     results_sp = []
     for pipe, label in [(ridge_sp, "Ridge"), (gbm_sp, "GradientBoost")]:
-        preds = pipe.predict(X_test_sp)
+        # Model predicts residual; add the line back for interpretable evaluation
+        preds = vm_test + pipe.predict(X_test_sp)
         results_sp.append(evaluate_spread(y_test_sp, preds, label))
     results_sp.append(vegas_spread_baseline(test))
 
@@ -723,16 +739,9 @@ def train_and_evaluate():
         if val_rmse < best_sp_rmse:
             best_sp_rmse, best_sp_w1 = val_rmse, w1
     best_sp_w2 = round(1 - best_sp_w1, 1)
-    base_ens_sp = EnsembleRegressor(ridge_sp, gbm_sp, w1=best_sp_w1, w2=best_sp_w2)
-
-    # ── Market anchor: tune shrinkage schedule on val set ─────────────────
-    # Pulls extreme predictions toward the opening line. Auto-tuned on val.
-    # See MarketAnchoredEnsemble docstring for full motivation.
-    print("\n  Tuning market anchor shrinkage schedule on val set...")
-    anchor_schedule = tune_anchor_weights(
-        base_ens_sp, X_val_sp, y_val_sp, verbose=True
-    )
-    ensemble_sp = MarketAnchoredEnsemble(base_ens_sp, thresholds=anchor_schedule)
+    # No market anchor needed: the residual target is anchored to the line by
+    # construction (predicting 0 = agreeing with Vegas exactly).
+    ensemble_sp = EnsembleRegressor(ridge_sp, gbm_sp, w1=best_sp_w1, w2=best_sp_w2)
 
     # ── Cross-calibrate win probability with spread-implied probability ────────
     # Spread model and win prob classifier are trained independently and can give
@@ -745,8 +754,9 @@ def train_and_evaluate():
     from math import erf as _erf, sqrt as _msqrt
     def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
 
-    sp_val_preds       = ensemble_sp.predict(X_val_sp_anchor)
-    spread_sigma       = float(np.std(sp_val_preds - y_val_sp.values))
+    sp_val_preds       = (vm_val + ensemble_sp.predict(X_val_sp)).values
+    # Sigma on the margin scale (preds and actual margins, not residuals)
+    spread_sigma       = float(np.std(sp_val_preds - val["point_diff"].values))
     spread_implied_val = np.array([_norm_cdf(p / spread_sigma) for p in sp_val_preds])
     classifier_val     = gbm_win.predict_proba(X_val_win)[:, 1]
     y_val_win_arr      = y_val_win.values
@@ -781,11 +791,11 @@ def train_and_evaluate():
     print(f"  Totals ensemble: best val blend = Ridge {best_tot_w1:.0%} / GBM {best_tot_w2:.0%}"
           f"  (val RMSE {best_tot_rmse:.3f})")
 
-    # Evaluate best ensembles on test set (anchored X so the market anchor fires)
-    ens_sp_preds  = ensemble_sp.predict(X_test_sp_anchor)
+    # Evaluate best ensembles on test set (residual/deviation → add line back)
+    ens_sp_preds  = vm_test + ensemble_sp.predict(X_test_sp)
     ens_tot_dev   = ensemble_tot.predict(X_test_tot)          # deviation from line
     ens_tot_preds = ou_test + ens_tot_dev                     # add line back → pred total
-    ens_sp_label  = f"Ensemble+Anchor ({best_sp_w1:.0%}/{best_sp_w2:.0%})"
+    ens_sp_label  = f"Ensemble residual ({best_sp_w1:.0%}/{best_sp_w2:.0%})"
     ens_tot_label = f"Ensemble ({best_tot_w1:.0%}/{best_tot_w2:.0%})"
     ens_sp_result  = evaluate_spread(y_test_sp,  ens_sp_preds,  ens_sp_label)
     ens_tot_result = evaluate_totals(y_test_tot, ens_tot_preds, ens_tot_label)
@@ -828,7 +838,8 @@ def train_and_evaluate():
     ml_cols = [c for c in ["home_moneyline", "away_moneyline"] if c in test.columns]
     results_df = test[base_cols + ml_cols].copy()
 
-    results_df["pred_spread"]      = best_sp_pipe.predict(X_test_sp_anchor)
+    # Residual → margin reconstruction for the saved per-game predictions
+    results_df["pred_spread"]      = (vm_test + best_sp_pipe.predict(X_test_sp)).values
     # Totals model predicts deviation from line; add ou back so pred_total is
     # the expected actual combined score (same meaning as before, cleaner signal)
     results_df["pred_total"]       = ou_test.values + best_tot_pipe.predict(X_test_tot)
@@ -850,23 +861,62 @@ def train_and_evaluate():
     except OSError:
         print(f"\n⚠️  Could not write model_results.csv (filesystem issue) — models will still save")
 
-    # ── Save models ────────────────────────────────────────────────────────
-    joblib.dump(best_sp_pipe,  MODELS_DIR / "spread_model.pkl")
-    joblib.dump(best_tot_pipe, MODELS_DIR / "totals_model.pkl")
-    joblib.dump(gbm_win,       MODELS_DIR / "win_prob_model.pkl")
+    # ── Production refit: all non-COVID seasons through the latest data ────
+    # Everything above is the SELECTION stage: architecture + blend weights +
+    # calibration are chosen on val and honestly evaluated on test. For the
+    # deployed model we refit the same architecture on ALL available data —
+    # including val, test, and any completed current-season games in the
+    # feature matrix. The weekly Actions retrain therefore genuinely learns
+    # from each new week. The walk-forward script remains the honest scorecard.
+    print("\n" + "="*55)
+    print("PRODUCTION REFIT  (all seasons through latest data)")
+    print("="*55)
+    prod = df[df["season"] != 2020].copy()
+    trained_through = int(prod["season"].max())
+    vm_prod = pd.to_numeric(prod["vegas_home_margin"], errors="coerce")
+    ou_prod = pd.to_numeric(prod["over_under"],        errors="coerce")
+    print(f"  {len(prod):,} games · seasons {int(prod['season'].min())}–{trained_through} (excl. 2020)")
 
-    # Also save the feature lists so we know what to feed the models later
+    ridge_sp_prod = make_linear(alpha=10.0)
+    ridge_sp_prod.fit(prod[spread_feats], prod["point_diff"] - vm_prod)
+    gbm_sp_prod = make_gbm_regressor()
+    gbm_sp_prod.fit(prod[spread_feats], prod["point_diff"] - vm_prod)
+    prod_sp = EnsembleRegressor(ridge_sp_prod, gbm_sp_prod, w1=best_sp_w1, w2=best_sp_w2)
+
+    ridge_tot_prod = make_linear(alpha=10.0)
+    ridge_tot_prod.fit(prod[totals_feats], prod["total_points"] - ou_prod)
+    gbm_tot_prod = make_gbm_regressor()
+    gbm_tot_prod.fit(prod[totals_feats], prod["total_points"] - ou_prod)
+    prod_tot = EnsembleRegressor(ridge_tot_prod, gbm_tot_prod, w1=best_tot_w1, w2=best_tot_w2)
+
+    gbm_win_prod = CalibratedClassifierCV(make_gbm_classifier(), method="isotonic", cv=5)
+    gbm_win_prod.fit(prod[win_feats], prod["home_win"])
+    logit_win_prod = make_logistic(C=0.3)
+    logit_win_prod.fit(prod[win_feats], prod["home_win"])
+    prod_win = EnsembleClassifier(gbm_win_prod, logit_win_prod, w1=best_w1, w2=best_w2)
+    print(f"  Blends carried from val tuning: spread {best_sp_w1:.0%}/{best_sp_w2:.0%}, "
+          f"totals {best_tot_w1:.0%}/{best_tot_w2:.0%}, win {best_w1:.0%}/{best_w2:.0%}")
+
+    # ── Save models ────────────────────────────────────────────────────────
+    joblib.dump(prod_sp,  MODELS_DIR / "spread_model.pkl")
+    joblib.dump(prod_tot, MODELS_DIR / "totals_model.pkl")
+    joblib.dump(prod_win, MODELS_DIR / "win_prob_model.pkl")
+
+    # Feature lists + target metadata: serving code branches on the targets,
+    # so a stale pkl with new serve code (or vice versa) fails loudly rather
+    # than silently producing wrong numbers.
     import json
     with open(MODELS_DIR / "feature_lists.json", "w") as f:
         json.dump({
-            # spread list includes spread_open_val so serving code feeds the
-            # opening line to MarketAnchoredEnsemble (stripped before base models)
-            "spread":   spread_feats_anchor,
+            "spread":   spread_feats,
             "totals":   totals_feats,
             "win_prob": win_feats,
+            "spread_target": "margin_residual",   # pred_spread = -spread + model output
+            "totals_target": "ou_deviation",      # pred_total  = over_under + model output
+            "trained_through": trained_through,
         }, f, indent=2)
 
-    print(f"✅ Saved models → models/")
+    print(f"✅ Saved PRODUCTION models (trained through {trained_through}) → models/")
     print(f"\nNext step: run python3 src/backtester.py to simulate historical betting performance.")
 
     return results_df

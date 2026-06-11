@@ -395,7 +395,15 @@ def build_predictions(games, lines, spread_model, totals_model,
     if "provider" in df.columns:
         out["provider"] = df["provider"]
 
-    out["pred_spread"] = spread_model.predict(make_feat(feature_lists["spread"]))
+    # Spread model: current models predict the residual vs the Vegas line
+    # (feature_lists.json: spread_target=margin_residual) — add the line back.
+    # Legacy models predicted the raw home margin directly.
+    sp_raw = spread_model.predict(make_feat(feature_lists["spread"]))
+    if feature_lists.get("spread_target") == "margin_residual":
+        vm = -pd.to_numeric(out["spread"], errors="coerce")
+        out["pred_spread"] = vm + sp_raw     # NaN when no line posted yet
+    else:
+        out["pred_spread"] = sp_raw
     # Totals model predicts deviation from the O/U line (not the raw total).
     # Add the opening O/U back so pred_total is the expected combined score.
     ou_vals = pd.to_numeric(out["over_under"], errors="coerce")
@@ -408,8 +416,11 @@ def build_predictions(games, lines, spread_model, totals_model,
         calib  = json.loads(calib_path.read_text())
         sigma  = calib["spread_sigma"]
         alpha  = calib["blend_alpha"]
-        s_impl = out["pred_spread"].apply(lambda s: norm_cdf(s / sigma))
-        out["pred_win_p"] = (alpha * s_impl + (1 - alpha) * out["pred_win_p"]).clip(0.01, 0.99)
+        s_impl = out["pred_spread"].apply(
+            lambda s: norm_cdf(s / sigma) if pd.notna(s) else np.nan)
+        blend  = alpha * s_impl + (1 - alpha) * out["pred_win_p"]
+        # No line → no spread-implied prob → keep classifier-only probability
+        out["pred_win_p"] = blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
     out["pred_away_win_p"] = 1 - out["pred_win_p"]
 
     # Edge calculations

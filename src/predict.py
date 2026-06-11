@@ -465,6 +465,7 @@ def generate_predictions(
     feature_df_tot:pd.DataFrame,
     feature_df_win:pd.DataFrame,
     spread_model, totals_model, win_prob_model,
+    feature_lists: dict | None = None,
 ) -> pd.DataFrame:
     """Run all three models and attach predictions to the games DataFrame."""
     base_cols = ["game_id","season","week","home_team","away_team",
@@ -479,7 +480,15 @@ def generate_predictions(
     if "away_moneyline" not in out.columns:
         out["away_moneyline"] = np.nan
 
-    out["pred_spread"] = spread_model.predict(feature_df_sp)
+    # Spread model: current models predict the residual vs the Vegas line
+    # (feature_lists.json: spread_target=margin_residual) — add the line back.
+    # Legacy models predicted the raw home margin directly.
+    sp_raw = spread_model.predict(feature_df_sp)
+    if (feature_lists or {}).get("spread_target") == "margin_residual":
+        vm = -pd.to_numeric(out["spread"], errors="coerce")
+        out["pred_spread"] = vm + sp_raw     # NaN when no line posted yet
+    else:
+        out["pred_spread"] = sp_raw
     # Totals model predicts deviation from the O/U line, not the raw total.
     # Add the line back so pred_total is the expected combined score
     # (same handling as weekly_pipeline.py; NaN when no line is posted yet).
@@ -495,9 +504,12 @@ def generate_predictions(
         from math import erf as _erf, sqrt as _msqrt
         def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
         calib  = json.loads(calib_path.read_text())
-        s_impl = out["pred_spread"].apply(lambda s: _norm_cdf(s / calib["spread_sigma"]))
+        s_impl = out["pred_spread"].apply(
+            lambda s: _norm_cdf(s / calib["spread_sigma"]) if pd.notna(s) else np.nan)
         alpha  = calib["blend_alpha"]
-        out["pred_win_p"] = (alpha * s_impl + (1 - alpha) * out["pred_win_p"]).clip(0.01, 0.99)
+        blend  = alpha * s_impl + (1 - alpha) * out["pred_win_p"]
+        # No line → no spread-implied prob → keep classifier-only probability
+        out["pred_win_p"] = blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
     out["pred_away_win_p"] = 1 - out["pred_win_p"]
 
     out["vegas_home_margin"] = -out["spread"]
@@ -561,12 +573,13 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
         print("\n  Model projections (no edge calc without lines):")
         print(f"\n  {'Home Team':22s}  {'Away Team':22s}  {'Proj Spread':>12}  {'Proj Total':>10}  {'Home Win%':>10}")
         print("  " + "─"*80)
-        for _, r in preds.sort_values("pred_spread", ascending=False).iterrows():
-            sign = "+" if r["pred_spread"] > 0 else ""
-            # pred_total is line-relative — without a posted O/U it's undefined
-            tot_str = f"{r['pred_total']:>8.1f}" if pd.notna(r["pred_total"]) else "     N/A"
+        for _, r in preds.sort_values("pred_win_p", ascending=False).iterrows():
+            # pred_spread / pred_total are line-relative — undefined with no line.
+            # Win probability still works (classifier needs no line).
+            sp_str  = f"{r['pred_spread']:>+9.1f}" if pd.notna(r["pred_spread"]) else "      N/A"
+            tot_str = f"{r['pred_total']:>8.1f}"   if pd.notna(r["pred_total"])  else "     N/A"
             print(f"  {r['home_team']:22s}  {r['away_team']:22s}  "
-                  f"{sign}{r['pred_spread']:>8.1f}      "
+                  f"{sp_str}      "
                   f"{tot_str}      "
                   f"{r['pred_win_p']:>8.1%}")
         return
@@ -671,7 +684,7 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
         print("  " + "─"*78)
         for _, r in preds.sort_values("spread_edge", key=abs, ascending=False).iterrows():
             sp_str  = f"{r['spread']:>+6.1f}" if not pd.isna(r["spread"]) else "  N/A "
-            mod_str = f"{r['pred_spread']:>+6.1f}"
+            mod_str = f"{r['pred_spread']:>+6.1f}" if not pd.isna(r["pred_spread"]) else "   N/A"
             edg_str = f"{r['spread_edge']:>+5.1f}" if not pd.isna(r["spread_edge"]) else "  N/A"
             ou_str  = f"{r['over_under']:>5.1f}" if not pd.isna(r["over_under"]) else "  N/A"
             pt_str  = f"{r['pred_total']:>6.1f}" if not pd.isna(r["pred_total"]) else "   N/A"
@@ -766,7 +779,7 @@ def main():
     print("Running models...")
     preds = generate_predictions(
         games_df, feat_sp, feat_tot, feat_win,
-        spread_model, totals_model, win_prob_model)
+        spread_model, totals_model, win_prob_model, feature_lists)
 
     # ── Print recommendations ─────────────────────────────────────────────
     print_recommendations(preds, show_all=args.show_all)

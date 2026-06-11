@@ -37,3 +37,6 @@ env/
 # ── NOTE: data/ and models/ are intentionally committed.
 # All files are under 10 MB each — well within GitHub limits.
 # The Streamlit app needs them at runtime.
+
+# Local dev tooling
+.claude/

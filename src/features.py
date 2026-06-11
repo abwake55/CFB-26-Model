@@ -436,6 +436,36 @@ def load_havoc() -> pd.DataFrame:
     return df
 
 
+def load_returning() -> pd.DataFrame:
+    """
+    Load returning-production data (share of last season's PPA back on roster).
+
+    NO year shift: returning[season=N] describes the roster entering season N —
+    known before any games are played. This is the core ingredient of SP+'s
+    preseason projections and targets early-season error specifically.
+
+    ret_ppa_pct:      share of total PPA returning      (clipped 0–1.2)
+    ret_pass_ppa_pct: share of passing PPA returning    (clipped 0–1.2) — raw
+                      ratio explodes when prior passing PPA ≈ 0, hence the clip
+    """
+    path = PROC_DIR / "master_returning.csv"
+    if not path.exists():
+        print("  ⚠️  Returning production not found — run scripts/refresh_returning.py")
+        return pd.DataFrame(columns=["season", "team", "ret_ppa_pct"])
+
+    df = pd.read_csv(path)
+    df["season"] = pd.to_numeric(df["season"], errors="coerce")
+    for col in ["ret_ppa_pct", "ret_pass_ppa_pct"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").clip(0, 1.2)
+    keep = [c for c in ["season", "team", "ret_ppa_pct", "ret_pass_ppa_pct"]
+            if c in df.columns]
+    df = df[keep].dropna(subset=["team"])
+    print(f"  Returning production rows: {len(df):,} "
+          f"(seasons {df['season'].min():.0f}–{df['season'].max():.0f})")
+    return df
+
+
 def build_home_field_advantage(games: pd.DataFrame) -> pd.DataFrame:
     """
     Compute each team's home field advantage (HFA) estimate from historical data.
@@ -852,6 +882,7 @@ def build_feature_matrix() -> pd.DataFrame:
     talent     = load_talent()
     havoc      = load_havoc()
     conf_fam   = load_conference_familiarity()
+    returning  = load_returning()
 
     print(f"  Games:       {len(games):,}")
     print(f"  Lines:       {len(lines):,} (one per game)")
@@ -1074,6 +1105,24 @@ def build_feature_matrix() -> pd.DataFrame:
         print(f"  Explosiveness coverage: {exp_cov:.1%} of games")
         print(f"  Tempo coverage: {tempo_cov:.1%} of games")
         print(f"  Turnover margin coverage: {to_cov:.1%} of games")
+
+    # ── Merge Returning Production (home and away, no shift) ──────────────
+    if len(returning) > 0 and "ret_ppa_pct" in returning.columns:
+        ret_cols = [c for c in ["ret_ppa_pct", "ret_pass_ppa_pct"] if c in returning.columns]
+        for side in ("home", "away"):
+            games_feat = games_feat.merge(
+                returning[["season", "team"] + ret_cols].rename(
+                    columns={"team": f"{side}_team",
+                             **{c: f"{side}_{c}" for c in ret_cols}}),
+                on=["season", f"{side}_team"], how="left"
+            )
+        games_feat["ret_ppa_diff"] = (
+            games_feat["home_ret_ppa_pct"] - games_feat["away_ret_ppa_pct"])
+        if "home_ret_pass_ppa_pct" in games_feat.columns:
+            games_feat["ret_pass_ppa_diff"] = (
+                games_feat["home_ret_pass_ppa_pct"] - games_feat["away_ret_pass_ppa_pct"])
+        cov = games_feat["home_ret_ppa_pct"].notna().mean()
+        print(f"  Returning production coverage: {cov:.1%} of games")
 
     # ── Merge Conference Familiarity features ─────────────────────────────
     # p4_conf_years = consecutive seasons in current Power 4 conference.

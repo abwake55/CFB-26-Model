@@ -84,6 +84,14 @@ jobs:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
         run: python scripts/refresh_2026.py
 
+      # Returning production (share of last season's PPA back on the roster).
+      # CFBD publishes the upcoming season's numbers in summer — this step
+      # picks them up automatically as soon as they appear.
+      - name: Refresh returning production
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+        run: python scripts/refresh_returning.py
+
       # ── 5. In-season data (Sep–Jan only) ─────────────────────────────────────
       # Pulls: game results, betting lines, per-game EPA for 2026
       - name: Refresh in-season data (games, lines, EPA)

@@ -671,7 +671,15 @@ def build_and_predict(games, lines, ratings, epa, elo,
     if "provider" in df.columns:
         out["provider"] = df["provider"]
 
-    out["pred_spread"]     = spread_model.predict(feat_sp)
+    # Spread model: legacy models predict the raw home margin; current models
+    # (feature_lists.json: spread_target=margin_residual) predict the residual
+    # vs the Vegas line, so the line is added back here. NaN when no line yet.
+    _sp_raw = spread_model.predict(feat_sp)
+    if feature_lists.get("spread_target") == "margin_residual":
+        _vm = -pd.to_numeric(out["spread"], errors="coerce")
+        out["pred_spread"] = _vm + _sp_raw
+    else:
+        out["pred_spread"] = _sp_raw
     # Totals model predicts deviation from the O/U line, not the raw total.
     # Add the line back so pred_total is the expected combined score
     # (same handling as weekly_pipeline.py; NaN when no line is posted yet).
@@ -691,8 +699,11 @@ def build_and_predict(games, lines, ratings, epa, elo,
         _calib  = _json.load(open(_calib_path))
         _sigma  = _calib["spread_sigma"]
         _alpha  = _calib["blend_alpha"]
-        _s_impl = out["pred_spread"].apply(lambda s: _norm_cdf(s / _sigma))
-        out["pred_win_p"]      = (_alpha * _s_impl + (1 - _alpha) * out["pred_win_p"]).clip(0.01, 0.99)
+        _s_impl = out["pred_spread"].apply(
+            lambda s: _norm_cdf(s / _sigma) if pd.notna(s) else np.nan)
+        _blend  = _alpha * _s_impl + (1 - _alpha) * out["pred_win_p"]
+        # Games without a line have no spread-implied prob — keep classifier-only
+        out["pred_win_p"]      = _blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
         out["pred_away_win_p"] = 1 - out["pred_win_p"]
 
     out["spread_edge"]     = out["pred_spread"] - (-out["spread"])
@@ -720,6 +731,76 @@ def build_and_predict(games, lines, ratings, epa, elo,
 
     out[["ml_team", "ml_ev", "ml_book_odds", "ml_model_odds"]] = out.apply(best_ml, axis=1)
     return out
+
+
+def apply_qb_adjustments(preds: pd.DataFrame, qb_out_teams: list,
+                         pts_per_team: float) -> pd.DataFrame:
+    """
+    Shift predictions for teams whose starting QB is out/doubtful.
+
+    The model cannot see injury news — the market prices a backup QB at
+    roughly 4–7 points, so an unadjusted model produces false 'edges' on
+    exactly the games where it knows the least. This overlay:
+      • shifts pred_spread by ±pts (home margin down if home QB out, up if away)
+      • shifts win probability by the EXACT spread-implied blend amount:
+            Δwp = α · [Φ((s+δ)/σ) − Φ(s/σ)]
+        using the σ/α saved by model.py's cross-calibration
+      • recomputes spread_edge and all moneyline EV columns
+      • tags rows with qb_adjustment so cards can show why
+    """
+    preds = preds.copy()
+    delta = pd.Series(0.0, index=preds.index)
+    for team in qb_out_teams:
+        delta = delta - pts_per_team * (preds["home_team"] == team).astype(float)
+        delta = delta + pts_per_team * (preds["away_team"] == team).astype(float)
+
+    affected = delta != 0
+    if not affected.any():
+        return preds
+
+    # Win probability: exact blend shift (needs original pred_spread + σ/α)
+    calib_path = MODEL_DIR / "win_prob_calibration.json"
+    if calib_path.exists() and preds["pred_spread"].notna().any():
+        from math import erf as _erf, sqrt as _msqrt
+        def _ncdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
+        calib = json.loads(calib_path.read_text())
+        sigma, alpha = calib["spread_sigma"], calib["blend_alpha"]
+        s = preds["pred_spread"]
+        shift = pd.Series([
+            alpha * (_ncdf((sv + dv) / sigma) - _ncdf(sv / sigma))
+            if pd.notna(sv) and dv != 0 else 0.0
+            for sv, dv in zip(s, delta)
+        ], index=preds.index)
+        preds["pred_win_p"]      = (preds["pred_win_p"] + shift).clip(0.01, 0.99)
+        preds["pred_away_win_p"] = 1 - preds["pred_win_p"]
+
+    preds["pred_spread"] = preds["pred_spread"] + delta.where(preds["pred_spread"].notna(), 0)
+    preds["spread_edge"] = preds["pred_spread"] - (-preds["spread"])
+    preds["qb_adjustment"] = delta
+
+    # Recompute moneyline EV / model odds with the shifted win prob
+    preds["home_ml_ev"] = preds.apply(
+        lambda r: ml_ev(r["pred_win_p"], r["home_moneyline"]), axis=1)
+    preds["away_ml_ev"] = preds.apply(
+        lambda r: ml_ev(r["pred_away_win_p"], r["away_moneyline"]), axis=1)
+    preds["model_home_ml"] = preds["pred_win_p"].apply(prob_to_american)
+    preds["model_away_ml"] = preds["pred_away_win_p"].apply(prob_to_american)
+
+    def _best_ml(r):
+        h, a = r["home_ml_ev"], r["away_ml_ev"]
+        if pd.isna(h) and pd.isna(a):
+            return pd.Series({"ml_team": None, "ml_ev": np.nan,
+                               "ml_book_odds": np.nan, "ml_model_odds": np.nan})
+        if pd.isna(a) or (not pd.isna(h) and h >= a):
+            return pd.Series({"ml_team": r["home_team"], "ml_ev": h,
+                               "ml_book_odds": r["home_moneyline"],
+                               "ml_model_odds": r["model_home_ml"]})
+        return pd.Series({"ml_team": r["away_team"], "ml_ev": a,
+                           "ml_book_odds": r["away_moneyline"],
+                           "ml_model_odds": r["model_away_ml"]})
+    preds[["ml_team", "ml_ev", "ml_book_odds", "ml_model_odds"]] = preds.apply(_best_ml, axis=1)
+
+    return preds
 
 
 # ─── UI HELPERS ───────────────────────────────────────────────────────────────
@@ -1154,6 +1235,9 @@ def _driver_chips_html(row, kind: str) -> str:
         add("📈", f"Line moved {abs(lm):.1f} toward {toward}", "var(--blue)")
     if bool(row.get("has_unrated_opponent", False)):
         add("❓", "Unrated opponent — low data confidence", "var(--red)")
+    qb_adj = _get("qb_adjustment")
+    if qb_adj is not None and qb_adj != 0:
+        add("🏥", f"QB-out adjustment {qb_adj:+.1f} pts applied", "var(--orange)")
 
     return ("<div style='margin-top:12px'>" + "".join(chips[:5]) + "</div>") if chips else ""
 
@@ -1367,11 +1451,30 @@ def render_bets_tab():
               help="Closing Line Value — how much better your line was vs. the closing line. "
                    "Positive = beat the close. Enter closing lines on each bet below.")
 
-    # ── Filters ──────────────────────────────────────────────────────────
+    # ── Filters + CLV auto-fill ──────────────────────────────────────────
     section_header("Bet History")
-    col_f1, col_f2, _ = st.columns([1, 1, 2])
+    col_f1, col_f2, col_clv, _ = st.columns([1, 1, 1.2, 0.8])
     status_filter = col_f1.selectbox("Status", ["All", "Pending", "Won", "Lost", "Push"])
     bettor_filter = col_f2.selectbox("Bettor",  ["All"] + BETTORS)
+    with col_clv:
+        st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
+        if st.button("⚡ Auto-fill closing lines",
+                     help="Fetch closing lines from CFBD for completed games and "
+                          "fill CLV on every bet missing one"):
+            import importlib.util as _ilu
+            _spec = _ilu.spec_from_file_location(
+                "capture_closing_lines", ROOT_DIR / "scripts" / "capture_closing_lines.py")
+            _ccl = _ilu.module_from_spec(_spec)
+            _spec.loader.exec_module(_ccl)
+            with st.spinner("Fetching closing lines from CFBD..."):
+                updated, n_filled, notes = _ccl.fill_closing_lines(bets, _cfb_api_key())
+            if n_filled:
+                save_bets(updated)
+                st.toast(f"Filled closing lines on {n_filled} bet(s)", icon="⚡")
+                st.rerun()
+            else:
+                st.toast("No closing lines to fill yet (games not completed, "
+                         "or all bets already filled)", icon="ℹ️")
 
     filtered = bets
     if status_filter != "All":
@@ -2954,6 +3057,30 @@ def main():
             preds = build_and_predict(games, lines, ratings, epa, elo,
                                       spread_model, totals_model, win_prob_model,
                                       feature_lists, weather=weather_df)
+
+        # ── QB / availability adjustments ─────────────────────────────────
+        # The model can't see injury news — its biggest info gap vs the
+        # market. Mark teams whose starting QB is out and every dependent
+        # number (spread, win prob, EV, edges) shifts accordingly.
+        all_teams = sorted(set(preds["home_team"]) | set(preds["away_team"]))
+        n_qb_out  = len(st.session_state.get("qb_out", []))
+        with st.expander(f"🏥 QB & availability adjustments"
+                         + (f" — {n_qb_out} active" if n_qb_out else ""),
+                         expanded=False):
+            st.caption(
+                "Mark teams whose starting QB is **out or doubtful**. The market "
+                "prices a backup QB at roughly 4–7 points; the model can't see "
+                "injury news, so unadjusted it produces false edges on exactly "
+                "these games. Adjusted picks carry a 🏥 chip.")
+            qc1, qc2 = st.columns([3, 1])
+            qb_out = qc1.multiselect("Teams with QB out / doubtful",
+                                     all_teams, key="qb_out")
+            qb_pts = qc2.slider("Points per team", 2.0, 9.0, 5.0, 0.5,
+                                key="qb_pts",
+                                help="How much to move each affected line. "
+                                     "Star QB on a P4 team ≈ 6–7; game-manager ≈ 3–4.")
+        if qb_out:
+            preds = apply_qb_adjustments(preds, qb_out, qb_pts)
 
         # ── Feature coverage report ───────────────────────────────────────
         # Show which data sources are actually present for this week's games
