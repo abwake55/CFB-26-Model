@@ -64,6 +64,14 @@ WEPA_COLS = [
 HAVOC_COLS = [
     "havoc_total", "havoc_front_seven", "havoc_db",
     "rush_success_rate", "pass_success_rate",
+    # Extra advanced-stat columns needed by the trained models' derived
+    # features (explosiveness_net_diff, tempo_combined, turnover_margin_diff,
+    # points_per_opp_combined, …) — must match what features.py merges in
+    # training, otherwise these are silently NaN at prediction time.
+    "explosiveness_off", "explosiveness_def",
+    "plays_per_drive", "rush_rate",
+    "points_per_opp", "def_points_per_opp",
+    "turnovers_off_pg", "turnovers_def_pg", "turnover_margin",
 ]
 
 
@@ -294,12 +302,21 @@ def load_rating_sources(pred_season: int, data_dir: Path) -> dict:
 
 def load_recent_epa(pred_season: int, data_dir: Path) -> pd.DataFrame:
     """
-    Return each team's rolling EPA averages from their last 3 and 5 games
-    of pred_season − 1.  Used as a form proxy before in-season games exist.
+    Return each team's current-form EPA features for predicting pred_season games.
+
+    In-season aware: once pred_season games exist in master_ppa_games.csv
+    (refresh_in_season.py appends them weekly), the rolling windows use them;
+    pre-season they fall back to the tail of pred_season − 1. This mirrors the
+    training features, where roll3/ytd are computed from prior games of the
+    same season.
+
+    Also computes the opponent-adjusted EPA features used by the models
+    (adj_off_epa_roll3, adj_def_epa_roll3), de-meaned by the opponent's
+    prior-season average — same formula as features.py build_rolling_epa().
 
     Returns a DataFrame indexed by team with columns:
-        off_epa_roll3, def_epa_roll3, off_epa_pass_roll3, off_epa_rush_roll3
-        off_epa_roll5, def_epa_roll5, off_epa_pass_roll5, off_epa_rush_roll5
+        off_epa_roll3/5, def_epa_roll3/5, off_epa_pass_roll3/5, off_epa_rush_roll3/5,
+        adj_off_epa_roll3, adj_def_epa_roll3, off_epa_ytd, def_epa_ytd
     """
     data_dir = Path(data_dir)
     ppa_path = data_dir / "master_ppa_games.csv"
@@ -307,33 +324,56 @@ def load_recent_epa(pred_season: int, data_dir: Path) -> pd.DataFrame:
         return pd.DataFrame()
 
     ppa = pd.read_csv(ppa_path)
-    last = ppa[ppa["season"] == pred_season - 1].copy()
-    if last.empty:
-        return pd.DataFrame()
-
-    last = last.sort_values(["team", "week"])
     cols = ["off_epa", "def_epa", "off_epa_pass", "off_epa_rush"]
-    available = [c for c in cols if c in last.columns]
+    available = [c for c in cols if c in ppa.columns]
     if not available:
         return pd.DataFrame()
 
-    last3 = (
-        last.groupby("team")
-            .tail(3)
-            .groupby("team")[available]
-            .mean()
-    )
+    # Pool current + prior season so early-season windows can reach back
+    pool = ppa[ppa["season"].isin([pred_season - 1, pred_season])].copy()
+    if pool.empty:
+        return pd.DataFrame()
+    pool = pool.sort_values(["team", "season", "week"])
+
+    # ── Opponent-adjusted EPA (training formula: raw − opponent prior-season avg) ──
+    if "opponent" in pool.columns and "def_epa" in pool.columns:
+        prior_means = (
+            ppa.groupby(["season", "team"])[["off_epa", "def_epa"]]
+               .mean().reset_index()
+               .rename(columns={"team": "opponent",
+                                "off_epa": "opp_prior_off_epa",
+                                "def_epa": "opp_prior_def_epa"})
+        )
+        prior_means["season"] = prior_means["season"] + 1   # season N stats adjust season N+1 games
+        pool = pool.merge(
+            prior_means[["season", "opponent", "opp_prior_off_epa", "opp_prior_def_epa"]],
+            on=["season", "opponent"], how="left",
+        )
+        pool["adj_off_epa"] = pool["off_epa"] - pool["opp_prior_def_epa"].fillna(0)
+        pool["adj_def_epa"] = pool["def_epa"] - pool["opp_prior_off_epa"].fillna(0)
+        available = available + ["adj_off_epa", "adj_def_epa"]
+
+    last3 = pool.groupby("team").tail(3).groupby("team")[available].mean()
     last3.columns = [f"{c}_roll3" for c in available]
 
-    last5 = (
-        last.groupby("team")
-            .tail(5)
-            .groupby("team")[available]
-            .mean()
-    )
+    last5 = pool.groupby("team").tail(5).groupby("team")[available].mean()
     last5.columns = [f"{c}_roll5" for c in available]
 
-    return last3.join(last5, how="outer")
+    # ── Season-to-date baseline ────────────────────────────────────────────────
+    # In-season: mean over the team's pred_season games played so far.
+    # Pre-season fallback: full prior-season mean (best available proxy).
+    ytd_cols = [c for c in ["off_epa", "def_epa"] if c in pool.columns]
+    cur   = pool[pool["season"] == pred_season]
+    prior = pool[pool["season"] == pred_season - 1]
+    ytd = (
+        prior.groupby("team")[ytd_cols].mean()
+        if cur.empty else
+        cur.groupby("team")[ytd_cols].mean()
+            .combine_first(prior.groupby("team")[ytd_cols].mean())
+    )
+    ytd.columns = [f"{c}_ytd" for c in ytd_cols]
+
+    return last3.join(last5, how="outer").join(ytd, how="outer")
 
 
 # ─── 3. ATTACH TEAM FEATURES ─────────────────────────────────────────────────
@@ -476,6 +516,32 @@ def attach_team_features(
         df["havoc_diff"]   = df["home_havoc_total"]       - df["away_havoc_total"]
         df["rush_sr_diff"] = df["home_rush_success_rate"] - df["away_rush_success_rate"]
 
+        # Derived combos — identical formulas to features.py (training) so the
+        # models see the same distributions at prediction time.
+        if "home_explosiveness_off" in df.columns and "home_explosiveness_def" in df.columns:
+            home_net = (df["home_explosiveness_off"].fillna(0) -
+                        df["home_explosiveness_def"].fillna(0))
+            away_net = (df["away_explosiveness_off"].fillna(0) -
+                        df["away_explosiveness_def"].fillna(0))
+            df["explosiveness_net_diff"] = home_net - away_net
+        if "home_plays_per_drive" in df.columns:
+            df["tempo_combined"] = (df["home_plays_per_drive"].fillna(0) +
+                                    df["away_plays_per_drive"].fillna(0))
+        if "home_rush_rate" in df.columns:
+            df["rush_rate_combined"] = (df["home_rush_rate"].fillna(0) +
+                                        df["away_rush_rate"].fillna(0))
+        if "home_points_per_opp" in df.columns:
+            df["points_per_opp_combined"] = (df["home_points_per_opp"].fillna(0) +
+                                             df["away_points_per_opp"].fillna(0))
+        if "home_def_points_per_opp" in df.columns:
+            df["def_points_per_opp_combined"] = (df["home_def_points_per_opp"].fillna(0) +
+                                                 df["away_def_points_per_opp"].fillna(0))
+        if "home_turnover_margin" in df.columns:
+            df["turnover_margin_diff"] = (df["home_turnover_margin"] -
+                                          df["away_turnover_margin"])
+            df["turnovers_combined"] = (df["home_turnovers_off_pg"].fillna(0) +
+                                        df["away_turnovers_off_pg"].fillna(0))
+
     if "home_off_epa_roll3" in df.columns and "away_off_epa_roll3" in df.columns:
         df["epa_off_diff_roll3"] = df["home_off_epa_roll3"] - df["away_off_epa_roll3"]
         df["epa_def_diff_roll3"] = df["home_def_epa_roll3"] - df["away_def_epa_roll3"]
@@ -493,10 +559,30 @@ def attach_team_features(
     df["over_under"]  = pd.to_numeric(df.get("over_under",  pd.Series(dtype=float)), errors="coerce")
     df["spread_open"] = pd.to_numeric(df.get("spread_open", pd.Series(dtype=float)), errors="coerce")
 
-    df["vegas_home_margin"] = -df["spread"].fillna(0)
+    df["vegas_home_margin"] = -df["spread"]   # NaN when no line — don't fabricate a pick'em
     df["line_movement"]     = df["spread"] - df["spread_open"]
     df["line_moved_home"]   = (df["line_movement"] < -1.0).astype(int)
     df["line_moved_away"]   = (df["line_movement"] >  1.0).astype(int)
+
+    # spread_magnitude: |expected margin| — top GBM feature in training, must
+    # exist at prediction time. NaN when no line (imputer/LightGBM handle it).
+    df["spread_magnitude"] = df["spread"].abs()
+
+    # Clipped opening line used by MarketAnchoredEnsemble for shrinkage
+    # (same ±45 clip as features.py applies in training).
+    df["spread_open_val"] = df["spread_open"].clip(-45, 45)
+
+    # ── Season-phase context (same definitions as features.py) ────────────────
+    if "week_num" not in df.columns:
+        df["week_num"] = (pd.to_numeric(df["week"], errors="coerce").fillna(0)
+                          if "week" in df.columns else 0)
+    if "late_season" not in df.columns:
+        df["late_season"] = (df["week_num"] >= 11).astype(int)
+    if "is_postseason" not in df.columns:
+        df["is_postseason"] = (
+            df["season_type"].astype(str).str.lower().str.contains("post", na=False).astype(int)
+            if "season_type" in df.columns else 0
+        )
 
     # ── Unrated-opponent flag ──────────────────────────────────────────────────
     # When a team has no SP+, FPI, or SRS, the model imputes medians and

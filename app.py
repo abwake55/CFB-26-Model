@@ -19,10 +19,11 @@ warnings.filterwarnings("ignore")
 
 # ── Shared feature builder (single source of truth for feature construction) ──
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent / "src"))
-from model import EnsembleRegressor, EnsembleClassifier  # required so joblib can unpickle saved models
+from model import EnsembleRegressor, EnsembleClassifier, MarketAnchoredEnsemble  # required so joblib can unpickle saved models
 import __main__
-__main__.EnsembleRegressor  = EnsembleRegressor   # joblib looks in __main__ when model was trained via python3 src/model.py
-__main__.EnsembleClassifier = EnsembleClassifier
+__main__.EnsembleRegressor       = EnsembleRegressor   # joblib looks in __main__ when model was trained via python3 src/model.py
+__main__.EnsembleClassifier      = EnsembleClassifier
+__main__.MarketAnchoredEnsemble  = MarketAnchoredEnsemble
 from feature_builder import (
     load_rating_sources,
     load_recent_epa    as _fb_load_recent_epa,
@@ -280,10 +281,11 @@ def cfb_get(endpoint: str, params: dict = None) -> list:
 
 @st.cache_resource(show_spinner="Loading models...")
 def load_models():
-    # Ensure both ensemble classes are findable in __main__ before joblib unpickling
+    # Ensure all ensemble classes are findable in __main__ before joblib unpickling
     import sys
-    sys.modules["__main__"].__dict__.setdefault("EnsembleRegressor",  EnsembleRegressor)
-    sys.modules["__main__"].__dict__.setdefault("EnsembleClassifier", EnsembleClassifier)
+    sys.modules["__main__"].__dict__.setdefault("EnsembleRegressor",       EnsembleRegressor)
+    sys.modules["__main__"].__dict__.setdefault("EnsembleClassifier",      EnsembleClassifier)
+    sys.modules["__main__"].__dict__.setdefault("MarketAnchoredEnsemble",  MarketAnchoredEnsemble)
     missing = [f for f in ["spread_model.pkl", "totals_model.pkl",
                             "win_prob_model.pkl", "feature_lists.json"]
                if not (MODEL_DIR / f).exists()]
@@ -659,19 +661,28 @@ def build_and_predict(games, lines, ratings, epa, elo,
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline",
                 "home_unrated", "away_unrated", "has_unrated_opponent",
-                "wind_speed", "is_dome"]
+                "wind_speed", "is_dome",
+                # Driver columns — power the "why this pick" chips on cards
+                "sp_diff", "elo_diff", "fpi_diff", "srs_diff",
+                "wepa_off_diff", "wepa_def_diff", "rest_diff", "hfa_diff",
+                "talent_diff", "portal_net_rating_diff", "line_movement",
+                "tempo_combined", "rush_rate_combined"]
     out = df[[c for c in out_cols if c in df.columns]].copy()
     if "provider" in df.columns:
         out["provider"] = df["provider"]
 
     out["pred_spread"]     = spread_model.predict(feat_sp)
-    out["pred_total"]      = totals_model.predict(feat_tot)
+    # Totals model predicts deviation from the O/U line, not the raw total.
+    # Add the line back so pred_total is the expected combined score
+    # (same handling as weekly_pipeline.py; NaN when no line is posted yet).
+    _ou_vals = pd.to_numeric(out["over_under"], errors="coerce")
+    out["pred_total"]      = _ou_vals + totals_model.predict(feat_tot)
     out["pred_win_p"]      = win_prob_model.predict_proba(feat_win)[:, 1]
     out["pred_away_win_p"] = 1 - out["pred_win_p"]
 
     # ── Cross-calibration: blend spread-implied win prob with classifier ──────
     # Ensures spread prediction and win probability are internally consistent.
-    # Parameters (sigma, alpha) are tuned on the 2023 validation set in model.py.
+    # Parameters (sigma, alpha) are tuned on the validation season in model.py.
     _calib_path = MODEL_DIR / "win_prob_calibration.json"
     if _calib_path.exists():
         import json as _json
@@ -716,161 +727,248 @@ def build_and_predict(games, lines, ratings, epa, elo,
 def inject_css():
     st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
+    :root {
+        --bg:        #0b0e14;
+        --bg-raised: #11151f;
+        --card:      #161b28;
+        --card-hi:   #1c2333;
+        --line:      #232b3d;
+        --line-hi:   #2e3950;
+        --ink:       #f3f5f9;
+        --ink-2:     #aab4c5;
+        --ink-3:     #67738a;
+        --ink-4:     #454f63;
+        --gold:      #f5c518;
+        --gold-deep: #b8930a;
+        --green:     #34d399;
+        --red:       #f87171;
+        --cyan:      #22d3ee;
+        --orange:    #fb923c;
+        --blue:      #60a5fa;
+        --violet:    #a78bfa;
+        --mono:      'JetBrains Mono', ui-monospace, monospace;
+    }
+
     /* ── Base ── */
-    [data-testid="stAppViewContainer"],
+    html, body, [data-testid="stAppViewContainer"],
     [data-testid="stMain"], .main {
-        background-color: #0f1117;
-        color: #ffffff;
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family: 'Inter', -apple-system, sans-serif;
+    }
+    [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(1200px 500px at 75% -10%, rgba(245,197,24,0.05), transparent 60%),
+            radial-gradient(900px 400px at 10% -5%, rgba(96,165,250,0.04), transparent 55%),
+            var(--bg);
     }
     [data-testid="stHeader"] {
-        background-color: #0f1117;
-        border-bottom: 1px solid #1e2537;
+        background-color: transparent;
+        border-bottom: none;
     }
+
     /* ── Sidebar ── */
     [data-testid="stSidebar"] {
-        background-color: #0b0e14;
-        border-right: 1px solid #1e2537;
+        background-color: var(--bg-raised);
+        border-right: 1px solid var(--line);
     }
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] .stSelectbox label {
-        color: #6b7280 !important;
+        color: var(--ink-3) !important;
+        font-size: 0.78em !important;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700 !important;
     }
-    /* ── Tabs ── */
+
+    /* ── Tabs: underline style ── */
     .stTabs [data-baseweb="tab-list"] {
-        background: #0b0e14;
-        border-radius: 8px;
-        padding: 4px 8px;
-        gap: 20px;
-        border: 1px solid #1e2537;
+        background: transparent;
+        border-radius: 0;
+        padding: 0;
+        gap: 26px;
+        border: none;
+        border-bottom: 1px solid var(--line);
     }
     .stTabs [data-baseweb="tab"] {
-        color: #6b7280;
+        color: var(--ink-3);
         background: transparent;
-        border-radius: 6px;
+        border-radius: 0;
         font-weight: 600;
-        font-size: 0.88em;
+        font-size: 0.9em;
+        padding: 10px 2px;
+        border-bottom: 2px solid transparent;
+        transition: color 0.15s;
     }
+    .stTabs [data-baseweb="tab"]:hover { color: var(--ink-2); }
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: #1a1f2e;
-        color: #ffffff;
+        background: transparent;
+        color: var(--gold);
+        border-bottom: 2px solid var(--gold);
     }
-    /* ── Sub-nav radio as pills ── */
+    .stTabs [data-baseweb="tab-highlight"] { background: transparent; }
+
+    /* ── Sub-nav radio as segmented pills ── */
     .stRadio > label { display: none !important; }
     .stRadio > div {
         flex-direction: row !important;
         flex-wrap: wrap !important;
         gap: 6px !important;
-        padding: 6px 0 10px 0 !important;
+        padding: 8px 0 12px 0 !important;
     }
     .stRadio > div > label {
-        background: #1a1f2e !important;
-        border: 1px solid #252d3d !important;
-        border-radius: 20px !important;
-        padding: 5px 16px !important;
+        background: var(--card) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: 999px !important;
+        padding: 6px 18px !important;
         cursor: pointer !important;
         font-size: 0.82em !important;
         font-weight: 600 !important;
-        color: #6b7280 !important;
+        color: var(--ink-3) !important;
         margin: 0 !important;
         transition: all 0.15s !important;
     }
+    .stRadio > div > label:hover {
+        border-color: var(--line-hi) !important;
+        color: var(--ink-2) !important;
+        transform: translateY(-1px);
+    }
     .stRadio > div > label:has(input:checked) {
-        background: #eab308 !important;
-        border-color: #eab308 !important;
-        color: #0f1117 !important;
+        background: linear-gradient(135deg, var(--gold), #e3ae09) !important;
+        border-color: var(--gold) !important;
+        color: #0b0e14 !important;
+        font-weight: 800 !important;
+        box-shadow: 0 2px 14px rgba(245,197,24,0.25);
     }
     .stRadio > div > label > div:first-child { display: none !important; }
-    /* ── Metrics ── */
+
+    /* ── Metric tiles ── */
     [data-testid="metric-container"] {
-        background: #1a1f2e;
-        border-radius: 10px;
+        background: linear-gradient(180deg, var(--card-hi), var(--card));
+        border-radius: 14px;
         padding: 16px 20px;
-        border: 1px solid #252d3d;
+        border: 1px solid var(--line);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 8px 24px rgba(0,0,0,0.25);
     }
     [data-testid="metric-container"] label {
-        color: #6b7280 !important;
-        font-size: 0.72em !important;
+        color: var(--ink-3) !important;
+        font-size: 0.7em !important;
         text-transform: uppercase;
-        letter-spacing: 0.07em;
-    }
-    [data-testid="metric-container"] [data-testid="stMetricValue"] {
-        color: #ffffff !important;
-        font-size: 1.5em !important;
+        letter-spacing: 0.1em;
         font-weight: 700 !important;
     }
+    [data-testid="metric-container"] [data-testid="stMetricValue"] {
+        color: var(--ink) !important;
+        font-size: 1.6em !important;
+        font-weight: 800 !important;
+        font-family: var(--mono);
+    }
+
     /* ── Expanders ── */
     [data-testid="stExpander"] {
-        background: #1a1f2e;
-        border: 1px solid #252d3d !important;
-        border-radius: 10px !important;
-        margin-bottom: 6px;
+        background: var(--card);
+        border: 1px solid var(--line) !important;
+        border-radius: 12px !important;
+        margin-bottom: 8px;
+        transition: border-color 0.15s;
     }
+    [data-testid="stExpander"]:hover { border-color: var(--line-hi) !important; }
     [data-testid="stExpander"] summary {
-        color: #d1d5db;
+        color: var(--ink-2);
         font-weight: 600;
         font-size: 0.92em;
     }
-    [data-testid="stExpander"] summary:hover { color: #eab308; }
+    [data-testid="stExpander"] summary:hover { color: var(--gold); }
+
     /* ── Buttons ── */
     [data-testid="stButton"] > button {
-        background: #1a1f2e;
-        color: #6b7280;
-        border: 1px solid #252d3d;
-        border-radius: 6px;
+        background: var(--card);
+        color: var(--ink-3);
+        border: 1px solid var(--line);
+        border-radius: 8px;
         font-size: 0.8em;
-        padding: 4px 12px;
+        font-weight: 600;
+        padding: 4px 14px;
         transition: all 0.15s;
     }
     [data-testid="stButton"] > button:hover {
-        background: #252d3d;
-        color: #ffffff;
-        border-color: #374151;
+        background: var(--card-hi);
+        color: var(--ink);
+        border-color: var(--line-hi);
+        transform: translateY(-1px);
     }
     [data-testid="stButton"] > button[kind="primary"] {
-        background: #eab308;
-        color: #0f1117;
+        background: linear-gradient(135deg, var(--gold), #e3ae09);
+        color: #0b0e14;
         border: none;
-        font-weight: 700;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        box-shadow: 0 2px 14px rgba(245,197,24,0.25);
     }
     [data-testid="stButton"] > button[kind="primary"]:hover {
-        background: #ca8a04;
+        background: linear-gradient(135deg, #ffd83d, var(--gold));
+        box-shadow: 0 4px 20px rgba(245,197,24,0.35);
     }
-    /* ── Selects / Slider ── */
+
+    /* ── Selects / Slider / Inputs ── */
     [data-baseweb="select"] > div {
-        background: #1a1f2e !important;
-        border-color: #252d3d !important;
-        color: #ffffff !important;
+        background: var(--card) !important;
+        border-color: var(--line) !important;
+        color: var(--ink) !important;
+        border-radius: 8px !important;
     }
-    [data-testid="stSlider"] > div > div > div {
-        background: #eab308 !important;
-    }
-    /* ── Alerts ── */
-    [data-testid="stAlert"] {
-        background: #1a1f2e;
-        border-radius: 10px;
-    }
-    /* ── Dividers ── */
-    hr { border-color: #252d3d !important; margin: 16px 0 !important; }
-    /* ── Typography ── */
-    h1, h2, h3, h4 { color: #ffffff !important; }
-    p, li, .stMarkdown { color: #d1d5db; }
-    [data-testid="stCaptionContainer"] { color: #4b5563 !important; }
-    /* ── Download button ── */
-    [data-testid="stDownloadButton"] > button {
-        background: #1a1f2e;
-        color: #6b7280;
-        border: 1px solid #252d3d;
-        border-radius: 6px;
-    }
-    /* ── Code blocks ── */
-    code { background: #1a1f2e; color: #eab308; border-radius: 4px; padding: 1px 5px; }
-    /* ── Text inputs ── */
+    [data-testid="stSlider"] > div > div > div { background: var(--gold) !important; }
     [data-testid="stTextInput"] input {
-        background: #1a1f2e !important;
-        border-color: #252d3d !important;
-        color: #ffffff !important;
+        background: var(--card) !important;
+        border-color: var(--line) !important;
+        color: var(--ink) !important;
+        border-radius: 8px !important;
     }
+
+    /* ── Alerts / dividers / typography ── */
+    [data-testid="stAlert"] { background: var(--card); border-radius: 12px; }
+    hr { border-color: var(--line) !important; margin: 16px 0 !important; }
+    h1, h2, h3, h4 { color: var(--ink) !important; letter-spacing: -0.01em; }
+    p, li, .stMarkdown { color: var(--ink-2); }
+    [data-testid="stCaptionContainer"] { color: var(--ink-4) !important; }
+    [data-testid="stDownloadButton"] > button {
+        background: var(--card); color: var(--ink-3);
+        border: 1px solid var(--line); border-radius: 8px;
+    }
+    code { background: var(--card); color: var(--gold); border-radius: 4px; padding: 1px 5px; }
+
+    /* ── Pick cards ── */
+    .pick-card {
+        background: linear-gradient(180deg, var(--card-hi), var(--card));
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px 20px 14px 20px;
+        margin-bottom: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+    .pick-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--line-hi);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    }
+    .pick-card .accent {
+        position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    }
+    .chip {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--line);
+        color: var(--ink-2);
+        font-size: 0.7em; font-weight: 600;
+        padding: 3px 9px; border-radius: 999px;
+        margin: 2px 4px 2px 0; white-space: nowrap;
+    }
+    .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -924,80 +1022,220 @@ def track_button(label: str, game: str, bet_type: str, pick: str,
     """Render a small Track button. Returns True if clicked."""
     key = f"{key_prefix}track_{game}_{bet_type}_{pick}".replace(" ", "_")
     bettor = st.session_state.get("bettor", BETTORS[0])
-    if st.button(f"+ Track  {label}", key=key, use_container_width=False):
+    if st.button(f"+ Track  {label}", key=key, width='content'):
         add_bet(game, bet_type, pick, line, units, season, week, edge, bettor)
         st.toast(f"Added: {pick} — {bettor}", icon="✅")
         return True
     return False
+
+# ─── UNIFIED PICK CARD ────────────────────────────────────────────────────────
+# One renderer for all bet types. Design goals:
+#   1. Show WHY the pick exists (driver chips computed from model features)
+#   2. Show model-vs-market visually (edge meter) instead of just a number
+#   3. Confidence tiers grounded in the actual 2025 holdout backtest —
+#      the UI itself encodes which bet types have historically worked.
+
+def _tier_badge(kind: str, row) -> tuple[str, str]:
+    """Return (label, color) tier grounded in 2025 holdout results."""
+    if kind == "total":
+        if row["totals_edge"] < 0:
+            return "CORE PLAY", "var(--green)"      # unders = only positive totals pocket
+        return "CAUTION · OVERS 41% IN '25", "var(--orange)"
+    if kind == "spread":
+        return "INFO ONLY · ~50% ATS", "var(--ink-3)"
+    # moneyline
+    if row.get("ml_book_odds", 0) > 0:
+        return "HIGH VARIANCE · DOGS −17% '25", "var(--orange)"
+    return "SELECTIVE", "var(--blue)"
+
+
+def _winprob_bar_html(row) -> str:
+    """Horizontal home/away win probability bar."""
+    p = row.get("pred_win_p")
+    if pd.isna(p):
+        return ""
+    p = float(p)
+    home, away = row["home_team"], row["away_team"]
+    home_pct, away_pct = p * 100, (1 - p) * 100
+    hc, ac = ("var(--gold)", "var(--line-hi)") if p >= 0.5 else ("var(--line-hi)", "var(--gold)")
+    return f"""
+    <div style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;font-size:0.72em;margin-bottom:4px">
+        <span style="color:var(--ink-2);font-weight:600">{home} <span class="num" style="color:var(--ink)">{home_pct:.0f}%</span></span>
+        <span style="color:var(--ink-2);font-weight:600"><span class="num" style="color:var(--ink)">{away_pct:.0f}%</span> {away}</span>
+      </div>
+      <div style="display:flex;height:6px;border-radius:999px;overflow:hidden;background:var(--line)">
+        <div style="width:{home_pct:.1f}%;background:{hc}"></div>
+        <div style="width:{away_pct:.1f}%;background:{ac}"></div>
+      </div>
+    </div>"""
+
+
+def _edge_meter_html(market_val: float, model_val: float, color: str,
+                     market_label: str = "Vegas", model_label: str = "Model",
+                     span: float = 8.0, unit: str = "") -> str:
+    """
+    Number-line showing where the model's number sits relative to the market.
+    Market anchors the center; the model dot is offset by the edge (clamped).
+    """
+    if pd.isna(market_val) or pd.isna(model_val):
+        return ""
+    diff = float(model_val) - float(market_val)
+    off  = max(-span, min(span, diff)) / span * 44   # ±44% from center
+    mpct = 50 + off
+    lo, hi = min(50.0, mpct), max(50.0, mpct)
+    return f"""
+    <div style="margin-top:12px">
+      <div style="position:relative;height:6px;border-radius:999px;background:var(--line)">
+        <div style="position:absolute;left:{lo:.1f}%;width:{hi - lo:.1f}%;top:0;bottom:0;
+                    background:{color};opacity:0.35;border-radius:999px"></div>
+        <div style="position:absolute;left:50%;top:50%;width:2px;height:14px;
+                    transform:translate(-50%,-50%);background:var(--ink-3);border-radius:2px"></div>
+        <div style="position:absolute;left:{mpct:.1f}%;top:50%;width:12px;height:12px;
+                    transform:translate(-50%,-50%);background:{color};border-radius:50%;
+                    box-shadow:0 0 8px {color}"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:0.68em;margin-top:5px;color:var(--ink-4)">
+        <span>{market_label} <span class="num" style="color:var(--ink-2)">{market_val:.1f}{unit}</span></span>
+        <span style="color:{color};font-weight:700">{model_label} <span class="num">{model_val:.1f}{unit}</span> ({diff:+.1f})</span>
+      </div>
+    </div>"""
+
+
+def _driver_chips_html(row, kind: str) -> str:
+    """Plain-English 'why this pick' chips computed from the model's inputs."""
+    chips: list[str] = []
+
+    def _get(col):
+        v = row.get(col)
+        return float(v) if v is not None and pd.notna(v) else None
+
+    def add(icon, text, color="var(--ink-2)"):
+        chips.append(f'<span class="chip" style="color:{color}">{icon} {text}</span>')
+
+    def team_for(diff):  # positive diff favors home
+        return row["home_team"] if diff > 0 else row["away_team"]
+
+    if kind == "total":
+        wind = _get("wind_speed")
+        if int(row.get("is_dome", 0) or 0):
+            add("🏟", "Dome — weather neutral")
+        elif wind is not None and wind >= 12:
+            add("💨", f"{wind:.0f} mph wind → under lean",
+                "var(--red)" if wind >= 20 else "var(--orange)")
+        rr = _get("rush_rate_combined")
+        if rr is not None and rr > 0:
+            if rr >= 1.12: add("🏃", "Run-heavy matchup → shorter game")
+            elif rr <= 0.88: add("🎯", "Pass-heavy matchup → longer game")
+        tempo = _get("tempo_combined")
+        if tempo is not None and tempo >= 13.5:
+            add("⚡", "Both offenses sustain drives")
+    else:
+        sp  = _get("sp_diff");  elo = _get("elo_diff");  fpi = _get("fpi_diff")
+        if sp is not None and abs(sp) >= 4:
+            add("📊", f"SP+ favors {team_for(sp)} by {abs(sp):.1f}")
+        if elo is not None and abs(elo) >= 80:
+            add("♟", f"Elo gap {abs(elo):.0f} → {team_for(elo)}")
+        if fpi is not None and abs(fpi) >= 4 and (sp is None or (fpi > 0) != (sp > 0)):
+            add("⚠️", f"FPI disagrees — favors {team_for(fpi)}", "var(--orange)")
+        rest = _get("rest_diff")
+        if rest is not None and abs(rest) >= 3:
+            add("🛌", f"{team_for(rest)} +{abs(rest):.0f} days rest")
+        hfa = _get("hfa_diff")
+        if hfa is not None and abs(hfa) >= 2.5:
+            add("🏟", f"Venue edge {team_for(hfa)} ({abs(hfa):.1f} pts)")
+        portal = _get("portal_net_rating_diff")
+        if portal is not None and abs(portal) >= 8:
+            add("🔄", f"Portal winner: {team_for(portal)}")
+
+    lm = _get("line_movement")
+    if lm is not None and abs(lm) >= 1.5:
+        toward = row["home_team"] if lm < 0 else row["away_team"]
+        add("📈", f"Line moved {abs(lm):.1f} toward {toward}", "var(--blue)")
+    if bool(row.get("has_unrated_opponent", False)):
+        add("❓", "Unrated opponent — low data confidence", "var(--red)")
+
+    return ("<div style='margin-top:12px'>" + "".join(chips[:5]) + "</div>") if chips else ""
+
+
+def _stat_footer_html(cells: list[tuple[str, str, str]]) -> str:
+    """cells = [(label, value, color)]"""
+    cols = []
+    for i, (label, value, color) in enumerate(cells):
+        border = "border-left:1px solid var(--line);" if i else ""
+        cols.append(f"""
+        <div style="flex:1;text-align:center;{border}">
+            <div style="color:var(--ink-4);font-size:0.62em;font-weight:700;
+                        letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px">{label}</div>
+            <div class="num" style="color:{color};font-size:0.9em;font-weight:700">{value}</div>
+        </div>""")
+    return ('<div style="display:flex;margin-top:12px;border-top:1px solid var(--line);'
+            'padding-top:10px">' + "".join(cols) + "</div>")
+
+
+def _pick_card_html(*, accent: str, kind_badge: str, kind_color: str,
+                    tier: tuple[str, str], headline: str, big_num: str,
+                    sub: str, meters: str, chips: str, footer: str,
+                    metric_html: str) -> str:
+    tier_label, tier_color = tier
+    return f"""
+    <div class="pick-card">
+        <div class="accent" style="background:{accent}"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span style="background:{kind_color};color:#0b0e14;font-size:0.62em;
+                             font-weight:800;letter-spacing:0.1em;padding:3px 9px;
+                             border-radius:5px">{kind_badge}</span>
+                <span style="border:1px solid {tier_color};color:{tier_color};font-size:0.6em;
+                             font-weight:800;letter-spacing:0.08em;padding:2px 8px;
+                             border-radius:5px">{tier_label}</span>
+            </div>
+            {metric_html}
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="color:var(--ink);font-size:1.15em;font-weight:800;letter-spacing:-0.01em">{headline}</span>
+            <span class="num" style="color:{accent};font-size:1.35em;font-weight:800">{big_num}</span>
+        </div>
+        <div style="color:var(--ink-4);font-size:0.78em;margin-top:3px">{sub}</div>
+        {meters}{chips}{footer}
+    </div>"""
+
 
 def render_moneyline_card(row, season, week):
     ev      = row["ml_ev"]
     team    = row["ml_team"]
     book_ml = row["ml_book_odds"]
     mdl_ml  = row["ml_model_odds"]
-    stars   = ev_stars(ev)
     is_dog  = book_ml > 0
     label   = f"+{int(book_ml)}" if is_dog else str(int(book_ml))
     model_label = (f"+{int(mdl_ml)}" if (not pd.isna(mdl_ml) and mdl_ml > 0)
                    else str(int(mdl_ml)) if not pd.isna(mdl_ml) else "—")
-    dog_tag = "DOG" if is_dog else "FAV"
-    matchup = f"{row['home_team']} vs {row['away_team']}"
+    matchup = f"{row['away_team']} @ {row['home_team']}"
+    kickoff = format_kickoff(row.get("start_date"))
+    sub     = matchup + (f" &nbsp;·&nbsp; {kickoff}" if kickoff else "")
     units   = kelly_units_ml(ev)
     ev_str  = f"{ev:+.1%}"
+    ev_color = "var(--green)" if ev >= 0.05 else "var(--ink-2)"
+    accent   = "var(--gold)" if ev >= 0.07 else "var(--blue)"
 
-    # Yellow border = high-EV hot pick, blue = standard
-    left_color = "#eab308" if ev >= 0.07 else "#3b82f6"
-    ev_color   = "#22c55e" if ev >= 0.05 else "#9ca3af"
+    metric = (f'<div style="display:flex;align-items:center;gap:8px">'
+              f'<span class="num" style="color:{ev_color};font-size:0.85em;font-weight:800">EV {ev_str}</span>'
+              f'<span style="color:var(--gold);font-size:0.88em">{ev_stars(ev)}</span></div>')
 
-    st.html(f"""
-    <div style="background:#1a1f2e;border-left:4px solid {left_color};
-                border-top:1px solid #252d3d;border-right:1px solid #252d3d;
-                border-bottom:1px solid #252d3d;
-                border-radius:10px;padding:14px 18px;margin-bottom:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:8px">
-                <span style="background:#3b82f6;color:#ffffff;font-size:0.63em;
-                             font-weight:800;letter-spacing:0.1em;padding:3px 8px;
-                             border-radius:4px">MONEYLINE</span>
-                <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
-                             font-weight:700;letter-spacing:0.08em;padding:3px 7px;
-                             border-radius:4px">{dog_tag}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px">
-                <span style="color:{ev_color};font-size:0.82em;font-weight:700">EV {ev_str}</span>
-                <span style="color:#eab308;font-size:0.88em">{stars}</span>
-            </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:flex-center">
-            <span style="color:#ffffff;font-size:1.1em;font-weight:700">{team}</span>
-            <span style="color:{left_color};font-size:1.3em;font-weight:800;
-                         font-variant-numeric:tabular-nums">{label}</span>
-        </div>
-        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}</div>
-        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
-            <div style="flex:1;text-align:center">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Book</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{label}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Model</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{model_label}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">EV</div>
-                <div style="color:{ev_color};font-size:0.88em;font-weight:700">{ev_str}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Kelly</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{units}u</div>
-            </div>
-        </div>
-    </div>
-    """)
+    st.html(_pick_card_html(
+        accent=accent, kind_badge="MONEYLINE", kind_color="var(--blue)",
+        tier=_tier_badge("moneyline", row),
+        headline=f"{team} ML", big_num=label, sub=sub,
+        meters=_winprob_bar_html(row),
+        chips=_driver_chips_html(row, "moneyline"),
+        footer=_stat_footer_html([
+            ("Book", label, "var(--ink)"),
+            ("Model fair", model_label, "var(--ink)"),
+            ("EV", ev_str, ev_color),
+            ("Kelly", f"{units}u", "var(--ink)"),
+        ]),
+        metric_html=metric,
+    ))
     track_button(f"{team} ML {label}", matchup, "Moneyline", f"{team} ML {label}",
                  label, units, season, week, f"EV {ev:+.1%}")
 
@@ -1005,178 +1243,90 @@ def render_totals_card(row, season, week):
     is_under = row["totals_edge"] < 0
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
-    stars    = confidence_stars(edge_abs)
     units    = kelly_units_spread(edge_abs)
-    matchup  = f"{row['home_team']} vs {row['away_team']}"
+    matchup  = f"{row['away_team']} @ {row['home_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
-    neutral_tag = "  ·  Neutral" if row.get("neutral_site") else ""
     edge_str = f"{row['totals_edge']:+.1f}"
     kickoff  = format_kickoff(row.get("start_date"))
-    kickoff_html = (f'<span style="color:#6b7280;font-size:0.75em;margin-left:6px">⏰ {kickoff}</span>'
-                    if kickoff else "")
+    sub = matchup
+    if row.get("neutral_site"):
+        sub += " &nbsp;·&nbsp; Neutral site"
+    if kickoff:
+        sub += f" &nbsp;·&nbsp; {kickoff}"
 
-    # Under = cyan, Over = orange
-    left_color = "#06b6d4" if is_under else "#f97316"
-    edge_color = "#22c55e" if edge_abs >= 4.5 else "#9ca3af"
+    accent     = "var(--cyan)" if is_under else "var(--orange)"
+    edge_color = "var(--green)" if edge_abs >= 4.5 else "var(--ink-2)"
 
-    # ── Weather badge ──────────────────────────────────────────────────────
-    wind_mph = row.get("wind_speed")
-    is_dome  = int(row.get("is_dome", 0))
-    if is_dome:
-        weather_badge = ('<span style="background:#1e2537;color:#6b7280;font-size:0.63em;'
-                         'font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px">'
-                         '🏟️ DOME</span>')
-        weather_note  = ""
-    elif pd.notna(wind_mph) and wind_mph is not None:
-        mph = float(wind_mph)
-        if mph >= 20:
-            wind_color, wind_label = "#ef4444", f"💨 {mph:.0f} mph — strong under lean"
-        elif mph >= 12:
-            wind_color, wind_label = "#f97316", f"💨 {mph:.0f} mph — mild under lean"
-        else:
-            wind_color, wind_label = "#6b7280", f"💨 {mph:.0f} mph"
-        weather_badge = (f'<span style="background:#1e2537;color:{wind_color};font-size:0.63em;'
-                         f'font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px">'
-                         f'💨 {mph:.0f} mph</span>')
-        weather_note  = (f'<div style="color:{wind_color};font-size:0.75em;margin-top:3px;'
-                         f'font-weight:600">{wind_label}</div>')
-    else:
-        weather_badge = ""
-        weather_note  = ""
+    metric = (f'<div style="display:flex;align-items:center;gap:8px">'
+              f'<span class="num" style="color:{edge_color};font-size:0.85em;font-weight:800">'
+              f'Edge {edge_str}</span>'
+              f'<span style="color:var(--gold);font-size:0.88em">{confidence_stars(edge_abs)}</span></div>')
 
-    st.html(f"""
-    <div style="background:#1a1f2e;border-left:4px solid {left_color};
-                border-top:1px solid #252d3d;border-right:1px solid #252d3d;
-                border-bottom:1px solid #252d3d;
-                border-radius:10px;padding:14px 18px;margin-bottom:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:8px">
-                <span style="background:{left_color};color:#0f1117;font-size:0.63em;
-                             font-weight:800;letter-spacing:0.1em;padding:3px 8px;
-                             border-radius:4px">{side_str}</span>
-                <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
-                             font-weight:700;letter-spacing:0.08em;padding:3px 7px;
-                             border-radius:4px">TOTAL</span>
-                {weather_badge}
-            </div>
-            <div style="display:flex;align-items:center;gap:8px">
-                <span style="color:{edge_color};font-size:0.82em;font-weight:700">Edge {edge_str}</span>
-                <span style="color:#eab308;font-size:0.88em">{stars}</span>
-            </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-            <span style="color:#ffffff;font-size:1.1em;font-weight:700">{side_str} {ou_str}</span>
-            <span style="color:{left_color};font-size:1.3em;font-weight:800;
-                         font-variant-numeric:tabular-nums">{ou_str}</span>
-        </div>
-        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{neutral_tag}{kickoff_html}</div>
-        {weather_note}
-        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
-            <div style="flex:1;text-align:center">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Line</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{ou_str}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Model</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{row['pred_total']:.1f}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Edge</div>
-                <div style="color:{edge_color};font-size:0.88em;font-weight:700">{edge_str} pts</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Kelly</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{units}u</div>
-            </div>
-        </div>
-    </div>
-    """)
+    st.html(_pick_card_html(
+        accent=accent, kind_badge=f"TOTAL · {side_str}", kind_color=accent,
+        tier=_tier_badge("total", row),
+        headline=f"{side_str} {ou_str}", big_num=ou_str, sub=sub,
+        meters=_edge_meter_html(
+            row["over_under"], row["pred_total"], accent,
+            market_label="Market total", model_label="Model total", span=8.0),
+        chips=_driver_chips_html(row, "total"),
+        footer=_stat_footer_html([
+            ("Line", ou_str, "var(--ink)"),
+            ("Model", f"{row['pred_total']:.1f}" if pd.notna(row["pred_total"]) else "—", "var(--ink)"),
+            ("Edge", f"{edge_str} pts", edge_color),
+            ("Kelly", f"{units}u", "var(--ink)"),
+        ]),
+        metric_html=metric,
+    ))
     track_button(f"{side_str} {ou_str}", matchup, "Total",
                  f"{side_str} {ou_str}", ou_str, units, season, week,
                  f"{row['totals_edge']:+.1f} pts")
 
 
 def render_spread_card(row, season, week):
-    """Sportsbook-style spread card (reference only)."""
+    """Spread card (reference only — near breakeven historically)."""
     is_home  = row["spread_edge"] > 0
     bet_on   = row["home_team"] if is_home else row["away_team"]
     edge     = row["spread_edge"]
     spread   = row["spread"]
     pred_sp  = row["pred_spread"]
-    matchup  = f"{row['home_team']} vs {row['away_team']}"
-    stars    = confidence_stars(abs(edge))
+    matchup  = f"{row['away_team']} @ {row['home_team']}"
     edge_str = f"{edge:+.1f}"
     kickoff  = format_kickoff(row.get("start_date"))
-    kickoff_html = (f'<span style="color:#6b7280;font-size:0.75em;margin-left:6px">⏰ {kickoff}</span>'
-                    if kickoff else "")
+    sub      = matchup + (f" &nbsp;·&nbsp; {kickoff}" if kickoff else "")
 
-    # Vegas line from bet_on's perspective
-    if pd.notna(spread):
-        vl_bet = f"{spread:+.1f}" if is_home else f"{-spread:+.1f}"
-    else:
-        vl_bet = "N/A"
+    # Vegas / model lines from bet_on's perspective
+    vl_bet  = (f"{spread:+.1f}" if is_home else f"{-spread:+.1f}") if pd.notna(spread) else "N/A"
+    mdl_str = (f"{-pred_sp:+.1f}" if is_home else f"{pred_sp:+.1f}") if pd.notna(pred_sp) else "—"
 
-    # Model line from bet_on's perspective
-    if pd.notna(pred_sp):
-        mdl_str = f"{-pred_sp:+.1f}" if is_home else f"{pred_sp:+.1f}"
-    else:
-        mdl_str = "—"
+    edge_color = "var(--green)" if abs(edge) >= 5.5 else "var(--ink-2)"
+    accent     = "var(--violet)"
 
-    edge_color = "#22c55e" if abs(edge) >= 5.5 else "#9ca3af"
+    metric = (f'<div style="display:flex;align-items:center;gap:8px">'
+              f'<span class="num" style="color:{edge_color};font-size:0.85em;font-weight:800">'
+              f'Edge {edge_str}</span>'
+              f'<span style="color:var(--gold);font-size:0.88em">{confidence_stars(abs(edge))}</span></div>')
 
-    st.html(f"""
-    <div style="background:#1a1f2e;border-left:4px solid #8b5cf6;
-                border-top:1px solid #252d3d;border-right:1px solid #252d3d;
-                border-bottom:1px solid #252d3d;
-                border-radius:10px;padding:14px 18px;margin-bottom:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:8px">
-                <span style="background:#8b5cf6;color:#ffffff;font-size:0.63em;
-                             font-weight:800;letter-spacing:0.1em;padding:3px 8px;
-                             border-radius:4px">SPREAD</span>
-                <span style="background:#252d3d;color:#6b7280;font-size:0.63em;
-                             font-weight:700;letter-spacing:0.08em;padding:3px 7px;
-                             border-radius:4px">REF ONLY</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px">
-                <span style="color:{edge_color};font-size:0.82em;font-weight:700">Edge {edge_str}</span>
-                <span style="color:#eab308;font-size:0.88em">{stars}</span>
-            </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-            <span style="color:#ffffff;font-size:1.1em;font-weight:700">{bet_on}</span>
-            <span style="color:#8b5cf6;font-size:1.3em;font-weight:800;
-                         font-variant-numeric:tabular-nums">{vl_bet}</span>
-        </div>
-        <div style="color:#4b5563;font-size:0.8em;margin-top:4px">{matchup}{kickoff_html}</div>
-        <div style="display:flex;margin-top:12px;border-top:1px solid #252d3d;padding-top:10px">
-            <div style="flex:1;text-align:center">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Vegas</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{vl_bet}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Model</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">{mdl_str}</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Edge</div>
-                <div style="color:{edge_color};font-size:0.88em;font-weight:700">{edge_str} pts</div>
-            </div>
-            <div style="flex:1;text-align:center;border-left:1px solid #252d3d">
-                <div style="color:#4b5563;font-size:0.63em;font-weight:700;
-                            letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px">Kelly</div>
-                <div style="color:#e5e7eb;font-size:0.88em;font-weight:700">1u</div>
-            </div>
-        </div>
-    </div>
-    """)
+    # Edge meter on the home-margin scale (positive = home better)
+    vegas_margin = -float(spread) if pd.notna(spread) else np.nan
+    meters = _edge_meter_html(vegas_margin, pred_sp, accent,
+                              market_label="Vegas margin", model_label="Model margin",
+                              span=7.0) + _winprob_bar_html(row)
+
+    st.html(_pick_card_html(
+        accent=accent, kind_badge="SPREAD", kind_color=accent,
+        tier=_tier_badge("spread", row),
+        headline=f"{bet_on} {vl_bet}", big_num=vl_bet, sub=sub,
+        meters=meters,
+        chips=_driver_chips_html(row, "spread"),
+        footer=_stat_footer_html([
+            ("Vegas", vl_bet, "var(--ink)"),
+            ("Model", mdl_str, "var(--ink)"),
+            ("Edge", f"{edge_str} pts", edge_color),
+            ("Kelly", "1u", "var(--ink)"),
+        ]),
+        metric_html=metric,
+    ))
     track_button(f"{bet_on} {vl_bet}", matchup, "Spread",
                  f"{bet_on} {vl_bet}", vl_bet, 1, season, week, edge_str)
 
@@ -1234,54 +1384,55 @@ def render_bets_tab():
         return
 
     # ── Bet rows ─────────────────────────────────────────────────────────
-    status_left = {"Pending": "#252d3d", "Won": "#22c55e", "Lost": "#ef4444", "Push": "#f97316"}
-    status_bg   = {"Pending": "#1a1f2e", "Won": "#0f1f14", "Lost": "#1f0f0f", "Push": "#1f1608"}
-    status_label = {"Pending": "PENDING", "Won": "WON", "Lost": "LOST", "Push": "PUSH"}
+    status_accent = {"Pending": "var(--ink-4)", "Won": "var(--green)",
+                     "Lost": "var(--red)", "Push": "var(--orange)"}
+    status_label  = {"Pending": "PENDING", "Won": "WON", "Lost": "LOST", "Push": "PUSH"}
 
     for bet in reversed(filtered):
-        left    = status_left.get(bet["status"], "#2d3340")
-        bg      = status_bg.get(bet["status"],   "#23272b")
+        accent  = status_accent.get(bet["status"], "var(--ink-4)")
         slabel  = status_label.get(bet["status"], bet["status"])
+        pending = bet["status"] == "Pending"
         pnl     = bet_pnl(bet)
-        pnl_str = f"{pnl:+.2f}u" if bet["status"] != "Pending" else "—"
-        pnl_col = "#53d337" if pnl > 0 else "#e74c3c" if pnl < 0 else "#8b9bb4"
+        pnl_str = f"{pnl:+.2f}u" if not pending else "—"
+        pnl_col = ("var(--green)" if pnl > 0 else "var(--red)" if pnl < 0
+                   else "var(--ink-3)")
         bettor  = bet.get("bettor", "—")
         edge_tag = f" · {bet['edge']}" if bet.get("edge") else ""
 
         clv      = compute_clv(bet)
-        clv_col  = "#53d337" if (clv or 0) > 0 else "#e74c3c" if (clv or 0) < 0 else "#8b9bb4"
+        clv_col  = ("var(--green)" if (clv or 0) > 0 else "var(--red)" if (clv or 0) < 0
+                    else "var(--ink-3)")
         clv_unit = "ppts" if bet.get("bet_type") == "Moneyline" else "pts"
         clv_html = (
-            f'<span style="color:{clv_col};font-size:0.78em;font-weight:700;'
-            f'margin-left:10px">CLV {clv:+.1f}{clv_unit}</span>'
-            if clv is not None else ""
+            f'<span class="chip num" style="color:{clv_col};border-color:{clv_col}">'
+            f'CLV {clv:+.1f}{clv_unit}</span>'
+            if clv is not None else
+            ('<span class="chip" style="color:var(--ink-4)">no closing line yet</span>'
+             if not pending else "")
         )
 
         st.html(f"""
-        <div style="background:{bg};border-left:3px solid {left};
-                    border-top:1px solid #2d3340;border-right:1px solid #2d3340;
-                    border-bottom:1px solid #2d3340;
-                    border-radius:8px;padding:12px 16px;margin-bottom:4px;">
+        <div class="pick-card" style="padding:13px 18px 12px 18px">
+            <div class="accent" style="background:{accent}"></div>
             <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                    <span style="color:#ffffff;font-weight:700;font-size:0.98em">{bet['pick']}</span>
-                    <span style="background:#2d3340;color:#8b9bb4;font-size:0.68em;
-                                 font-weight:700;letter-spacing:0.07em;padding:2px 6px;
-                                 border-radius:4px;margin-left:8px">{bet['bet_type'].upper()}</span>
-                    <span style="color:#8b9bb4;font-size:0.82em;margin-left:8px">{bet['units']}u</span>
-                    <span style="color:#5c6680;font-size:0.8em;margin-left:8px">{bettor}</span>
+                <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                    <span style="border:1px solid {accent};color:{accent};font-size:0.6em;
+                                 font-weight:800;letter-spacing:0.1em;padding:2px 8px;
+                                 border-radius:5px">{slabel}</span>
+                    <span style="color:var(--ink);font-weight:800;font-size:1em;
+                                 letter-spacing:-0.01em">{bet['pick']}</span>
+                    <span style="background:rgba(255,255,255,0.05);color:var(--ink-3);
+                                 font-size:0.64em;font-weight:700;letter-spacing:0.08em;
+                                 padding:2px 7px;border-radius:4px">{bet['bet_type'].upper()}</span>
+                    <span class="num" style="color:var(--ink-3);font-size:0.8em">{bet['units']}u</span>
                     {clv_html}
                 </div>
-                <div style="text-align:right">
-                    <span style="color:{pnl_col};font-weight:700;font-size:0.95em">{pnl_str}</span>
-                    <span style="background:{left};color:#1a1d21;font-size:0.68em;
-                                 font-weight:700;letter-spacing:0.07em;padding:2px 7px;
-                                 border-radius:4px;margin-left:8px">{slabel}</span>
-                </div>
+                <span class="num" style="color:{pnl_col};font-weight:800;font-size:1em">{pnl_str}</span>
             </div>
-            <div style="color:#8b9bb4;font-size:0.82em;margin-top:5px">{bet['game']}</div>
-            <div style="color:#5c6680;font-size:0.76em;margin-top:2px">
-                Wk {bet['week']} · {bet['date']} · Line: {bet['line']}{edge_tag}
+            <div style="color:var(--ink-3);font-size:0.8em;margin-top:6px">{bet['game']}</div>
+            <div style="color:var(--ink-4);font-size:0.72em;margin-top:2px">
+                {bettor} · Wk {bet['week']} · {bet['date']} ·
+                Line <span class="num">{bet['line']}</span>{edge_tag}
             </div>
         </div>
         """)
@@ -1376,6 +1527,8 @@ def render_all_game_card(row, season, week):
                 f"Model projection is unreliable — use the Vegas line only.",
                 icon=None,
             )
+        if pd.notna(win_p) and not unrated_team:
+            st.html("<div style='margin:-4px 0 8px 0'>" + _winprob_bar_html(row) + "</div>")
         c1, c2, c3 = st.columns(3)
 
         with c1:
@@ -1862,7 +2015,7 @@ def render_backtester_tab():
         return pd.DataFrame(rows)
 
     # ── Controls ──────────────────────────────────────────────────────────────
-    st.markdown("#### ⚙️ Simulation Settings")
+    section_header("Simulation Settings", "Pick edge thresholds, then watch the P&L curve")
     c1, c2, c3 = st.columns(3)
     with c1:
         sp_thresh = st.slider(
@@ -1909,20 +2062,19 @@ def render_backtester_tab():
     m5.metric("Max Drawdown",  f"{max_dd:.1f}u")
 
     # ── Profit curve ──────────────────────────────────────────────────────────
-    st.markdown("---")
-    st.markdown("#### 📈 Cumulative Profit — Flat vs Kelly Sizing")
+    section_header("Cumulative Profit", "Flat 1u vs quarter-Kelly sizing, chronological")
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(
         x=bets["bet_num"], y=bets["cum_flat"].round(2),
         mode="lines", name="Flat (1u per bet)",
-        line=dict(color="#3b82f6", width=2),
+        line=dict(color="#60a5fa", width=2),
         hovertemplate="Bet #%{x}<br><b>%{y:+.1f}u</b><extra>Flat</extra>",
     ))
     fig.add_trace(go.Scatter(
         x=bets["bet_num"], y=bets["cum_kelly"].round(2),
         mode="lines", name="Kelly (0.5–3u)",
-        line=dict(color="#eab308", width=2),
+        line=dict(color="#f5c518", width=2),
         hovertemplate="Bet #%{x}<br><b>%{y:+.1f}u</b><extra>Kelly</extra>",
     ))
     fig.add_hline(y=0, line_dash="dash",
@@ -1930,14 +2082,16 @@ def render_backtester_tab():
     fig.update_layout(
         xaxis_title="Bet # (chronological)",
         yaxis_title="Cumulative Units",
-        plot_bgcolor="#0f1117", paper_bgcolor="#0f1117",
-        font=dict(color="#e5e7eb", size=12),
+        plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#aab4c5", size=12, family="Inter, sans-serif"),
+        xaxis=dict(gridcolor="#232b3d", zerolinecolor="#232b3d"),
+        yaxis=dict(gridcolor="#232b3d", zerolinecolor="#232b3d"),
         legend=dict(bgcolor="rgba(0,0,0,0)", orientation="h",
                     yanchor="bottom", y=1.02, xanchor="right", x=1),
         height=300,
         margin=dict(l=0, r=0, t=10, b=0),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     st.markdown("---")
     left_col, right_col = st.columns(2)
@@ -1978,7 +2132,7 @@ def render_backtester_tab():
             # Re-add _is_current to subset apply
             st.dataframe(
                 sweep_df.drop(columns=["_is_current"]),
-                use_container_width=True, hide_index=True)
+                width='stretch', hide_index=True)
 
     # ── Bet type breakdown ────────────────────────────────────────────────────
     with right_col:
@@ -2008,7 +2162,7 @@ def render_backtester_tab():
         })
         if type_rows:
             st.dataframe(pd.DataFrame(type_rows),
-                         use_container_width=True, hide_index=True)
+                         width='stretch', hide_index=True)
 
         # Win rate context
         st.markdown("---")
@@ -2042,7 +2196,7 @@ def render_backtester_tab():
                 })
             if szn_rows:
                 st.dataframe(pd.DataFrame(szn_rows),
-                             use_container_width=True, hide_index=True)
+                             width='stretch', hide_index=True)
 
     # ── All qualifying bets detail ─────────────────────────────────────────────
     with st.expander("📋 All qualifying bets (most recent first)"):
@@ -2055,7 +2209,7 @@ def render_backtester_tab():
         display["Edge"]    = display["Edge"].apply(lambda x: f"{x:+.1f}")
         display["Kelly u"] = display["Kelly u"].apply(lambda x: f"{x:.1f}u")
         st.dataframe(display.sort_values(["Season","Wk"], ascending=False),
-                     use_container_width=True, hide_index=True)
+                     width='stretch', hide_index=True)
 
 
 # ─── MODEL ANALYSIS TAB ──────────────────────────────────────────────────────
@@ -2133,7 +2287,7 @@ def render_analysis_tab():
     # ── Chart 1: Predicted vs. actual spread ─────────────────────────────
     section_header("Predicted vs. Actual Margin",
                    "Green = correct direction · Dashed = perfect prediction")
-    st.plotly_chart(fig_scatter_spread(df), use_container_width=True, config=plotly_cfg)
+    st.plotly_chart(fig_scatter_spread(df), width='stretch', config=plotly_cfg)
 
     # ── Chart 2 + 3 side-by-side ─────────────────────────────────────────
     col_l, col_r = st.columns([3, 2])
@@ -2143,12 +2297,12 @@ def render_analysis_tab():
                        "+pts = model overestimates team · −pts = underestimates")
         st.caption("Only teams with ≥ 3 games in the selected season. "
                    "Large bars surface systematic biases (e.g. service academies, run-heavy offenses).")
-        st.plotly_chart(fig_team_residuals(df), use_container_width=True, config=plotly_cfg)
+        st.plotly_chart(fig_team_residuals(df), width='stretch', config=plotly_cfg)
 
     with col_r:
         section_header("MAE by Week",
                        "Early = small sample noise · Late = fatigue / garbage time")
-        st.plotly_chart(fig_mae_by_week(df), use_container_width=True, config=plotly_cfg)
+        st.plotly_chart(fig_mae_by_week(df), width='stretch', config=plotly_cfg)
 
     # ── Chart 4: Totals ───────────────────────────────────────────────────
     fig_tot = fig_scatter_totals(df)
@@ -2160,7 +2314,7 @@ def render_analysis_tab():
                 f"O/U accuracy: **{stats['totals_acc']:.1%}** · "
                 f"MAE: **{stats['totals_mae']:.1f} pts**"
             )
-        st.plotly_chart(fig_tot, use_container_width=True, config=plotly_cfg)
+        st.plotly_chart(fig_tot, width='stretch', config=plotly_cfg)
 
     # ── Residual table ────────────────────────────────────────────────────
     section_header("Raw Predictions", "Sortable — click any column header")
@@ -2171,7 +2325,7 @@ def render_analysis_tab():
     disp.columns = [c.replace("_", " ").title() for c in disp.columns]
     st.dataframe(
         disp.sort_values("Week").reset_index(drop=True),
-        use_container_width=True,
+        width='stretch',
         height=320,
     )
 
@@ -2298,50 +2452,60 @@ def render_standings_tab():
         return
 
     # ── Render leaderboard cards ──────────────────────────────────────────────
+    BREAKEVEN = 0.5238
+    BAR_MAX   = 0.70   # win-rate bar scale: 0–70%
     for i, row in enumerate(sorted(rows, key=lambda x: x["_pnl"], reverse=True)):
-        rank_color = ["#eab308", "#9ca3af", "#b45309"] if i < 3 else ["#374151"]
-        color = rank_color[min(i, len(rank_color)-1)]
+        medal = "🥇" if i == 0 else "🥈" if i == 1 else "🥉" if i == 2 else f"#{i+1}"
+        rank_color = ("var(--gold)" if i == 0 else "var(--ink-2)" if i == 1
+                      else "#b45309" if i == 2 else "var(--ink-4)")
         pnl_val = row["_pnl"]
-        pnl_color = "#22c55e" if pnl_val > 0 else "#ef4444" if pnl_val < 0 else "#6b7280"
+        pnl_color = ("var(--green)" if pnl_val > 0 else "var(--red)" if pnl_val < 0
+                     else "var(--ink-3)")
+
+        # Win-rate bar with the 52.4% breakeven line marked
+        wr = row["_wr"]
+        wr_pct   = min(wr / BAR_MAX, 1.0) * 100
+        be_pct   = BREAKEVEN / BAR_MAX * 100
+        wr_color = "var(--green)" if wr >= BREAKEVEN else "var(--orange)" if wr > 0 else "var(--line-hi)"
+        wr_bar = f"""
+        <div style="margin-top:10px">
+          <div style="position:relative;height:5px;border-radius:999px;background:var(--line)">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:{wr_pct:.1f}%;
+                        background:{wr_color};border-radius:999px"></div>
+            <div style="position:absolute;left:{be_pct:.1f}%;top:-3px;width:2px;height:11px;
+                        background:var(--ink-3);border-radius:2px" title="52.4% breakeven"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.62em;
+                      color:var(--ink-4);margin-top:3px">
+            <span>win rate vs <span style="color:var(--ink-3)">52.4% breakeven</span></span>
+            <span class="num" style="color:{wr_color}">{row['Win Rate']}</span>
+          </div>
+        </div>"""
+
+        def cell(label, value, color="var(--ink)"):
+            return (f'<div style="text-align:center;min-width:64px">'
+                    f'<div style="color:var(--ink-4);font-size:0.6em;font-weight:700;'
+                    f'text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px">{label}</div>'
+                    f'<div class="num" style="color:{color};font-size:0.92em;font-weight:800">{value}</div></div>')
 
         st.html(f"""
-        <div style="background:#1a1f2e;border-left:4px solid {color};
-                    border-top:1px solid #252d3d;border-right:1px solid #252d3d;
-                    border-bottom:1px solid #252d3d;
-                    border-radius:10px;padding:14px 20px;margin-bottom:8px;
-                    display:flex;justify-content:space-between;align-items:center">
-            <div style="display:flex;align-items:center;gap:14px">
-                <span style="color:{color};font-size:1.1em;font-weight:800;
-                             min-width:24px;text-align:center">{"🥇" if i==0 else "🥈" if i==1 else "🥉" if i==2 else f"#{i+1}"}</span>
-                <span style="color:#ffffff;font-size:1.05em;font-weight:700">{row['Who']}</span>
-            </div>
-            <div style="display:flex;gap:28px;align-items:center">
-                <div style="text-align:center">
-                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
-                                text-transform:uppercase;letter-spacing:.08em">Record</div>
-                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['Record']}</div>
+        <div class="pick-card" style="padding:15px 20px 13px 20px">
+            <div class="accent" style="background:{rank_color}"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+                <div style="display:flex;align-items:center;gap:13px;min-width:0">
+                    <span style="font-size:1.15em;min-width:30px;text-align:center;
+                                 color:{rank_color};font-weight:800">{medal}</span>
+                    <span style="color:var(--ink);font-size:1.05em;font-weight:800;
+                                 letter-spacing:-0.01em">{row['Who']}</span>
                 </div>
-                <div style="text-align:center">
-                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
-                                text-transform:uppercase;letter-spacing:.08em">Win Rate</div>
-                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['Win Rate']}</div>
-                </div>
-                <div style="text-align:center">
-                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
-                                text-transform:uppercase;letter-spacing:.08em">Units P&L</div>
-                    <div style="color:{pnl_color};font-size:0.9em;font-weight:700">{row['Units P&L']}</div>
-                </div>
-                <div style="text-align:center">
-                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
-                                text-transform:uppercase;letter-spacing:.08em">ROI</div>
-                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['ROI']}</div>
-                </div>
-                <div style="text-align:center">
-                    <div style="color:#4b5563;font-size:0.62em;font-weight:700;
-                                text-transform:uppercase;letter-spacing:.08em">Avg CLV</div>
-                    <div style="color:#e5e7eb;font-size:0.9em;font-weight:700">{row['Avg CLV']}</div>
+                <div style="display:flex;gap:22px;align-items:center">
+                    {cell("Record", row['Record'])}
+                    {cell("Units P&L", row['Units P&L'], pnl_color)}
+                    {cell("ROI", row['ROI'])}
+                    {cell("Avg CLV", row['Avg CLV'])}
                 </div>
             </div>
+            {wr_bar}
         </div>
         """)
 
@@ -2394,11 +2558,10 @@ def render_clv_tab():
     # ── Per-bettor CLV chart ──────────────────────────────────────────────────
     section_header("CLV Over Time", "Cumulative closing line value per bettor")
 
-    DARK_BG  = "#0f1117"
-    PANEL_BG = "#1a1f2e"
-    BORDER   = "#252d3d"
-    TEXT     = "#d1d5db"
-    COLORS   = ["#eab308", "#3b82f6", "#22c55e", "#f97316", "#8b5cf6"]
+    PANEL_BG = "rgba(0,0,0,0)"
+    BORDER   = "#232b3d"
+    TEXT     = "#aab4c5"
+    COLORS   = ["#f5c518", "#60a5fa", "#34d399", "#fb923c", "#a78bfa"]
 
     fig = go.Figure()
     bettor_filter = ["All"] + BETTORS
@@ -2421,17 +2584,17 @@ def render_clv_tab():
             hovertemplate=f"{bettor}<br>Bet %{{x}}<br>Cumulative CLV: %{{y:+.2f}}<extra></extra>",
         ))
 
-    fig.add_hline(y=0, line_color="#374151", line_width=1, line_dash="dash")
+    fig.add_hline(y=0, line_color="#454f63", line_width=1, line_dash="dash")
     fig.update_layout(
         paper_bgcolor=PANEL_BG, plot_bgcolor=PANEL_BG,
-        font=dict(color=TEXT, size=11),
+        font=dict(color=TEXT, size=11, family="Inter, sans-serif"),
         xaxis=dict(title="Bet #", gridcolor=BORDER, zerolinecolor=BORDER),
         yaxis=dict(title="Cumulative CLV", gridcolor=BORDER, zerolinecolor=BORDER),
         legend=dict(bgcolor=PANEL_BG, bordercolor=BORDER),
         margin=dict(l=50, r=20, t=20, b=50),
         height=340,
     )
-    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+    st.plotly_chart(fig, width='stretch', config={"displayModeBar": False})
 
     # ── CLV by bet type breakdown ─────────────────────────────────────────────
     section_header("CLV by Bet Type")
@@ -2466,7 +2629,7 @@ def render_clv_tab():
         })
     if rows:
         clv_df = pd.DataFrame(rows)
-        st.dataframe(clv_df, use_container_width=True, height=300)
+        st.dataframe(clv_df, width='stretch', height=300)
 
 
 # ─── HISTORICAL PICKS TAB ─────────────────────────────────────────────────────
@@ -2544,20 +2707,27 @@ def render_history_tab():
 
         picks_html = ""
 
+        accent = "var(--line-hi)"   # neutral until a pick decides hit/miss
+
+        def _pick_badge(label: str, badge_color: str, correct: bool, detail: str) -> str:
+            res_color = "var(--green)" if correct else "var(--red)"
+            res_label = "✓ HIT" if correct else "✗ MISS"
+            return f"""
+            <span style="background:{badge_color};color:#0b0e14;font-size:0.63em;font-weight:800;
+                         padding:2px 8px;border-radius:5px;margin-right:6px">{label}</span>
+            <span class="num" style="color:{res_color};font-size:0.76em;font-weight:800;margin-right:14px">
+                {res_label} <span style="color:var(--ink-4);font-weight:600">({detail})</span></span>"""
+
         # Totals pick
         if pd.notna(t_edge) and abs(t_edge) >= TOTALS_EDGE_MIN:
             is_under   = t_edge < 0
             side       = "UNDER" if is_under else "OVER"
             ou_str     = f"{row['over_under']:.1f}" if pd.notna(row.get("over_under")) else "?"
             correct    = (is_under and went_over == 0) or (not is_under and went_over == 1)
-            res_color  = "#22c55e" if correct else "#ef4444"
-            res_label  = "✓ HIT" if correct else "✗ MISS"
+            accent     = "var(--green)" if correct else "var(--red)"
             actual_str = f"{actual_tot:.0f}" if pd.notna(actual_tot) else "?"
-            picks_html += f"""
-            <span style="background:#06b6d4;color:#0f1117;font-size:0.63em;font-weight:800;
-                         padding:2px 7px;border-radius:4px;margin-right:6px">{side} {ou_str}</span>
-            <span style="color:{res_color};font-size:0.78em;font-weight:700;margin-right:12px">
-                {res_label} (actual: {actual_str})</span>"""
+            picks_html += _pick_badge(f"{side} {ou_str}", "var(--cyan)", correct,
+                                      f"actual {actual_str}")
 
         # Spread pick
         if pd.notna(s_edge) and abs(s_edge) >= SPREAD_EDGE_MIN:
@@ -2567,26 +2737,22 @@ def render_history_tab():
             vl_str     = (f"{vl:+.1f}" if pd.notna(vl) and bet_home
                           else f"{-vl:+.1f}" if pd.notna(vl) else "?")
             correct    = (bet_home and covered == 1) or (not bet_home and covered == 0)
-            res_color  = "#22c55e" if correct else "#ef4444"
-            res_label  = "✓ HIT" if correct else "✗ MISS"
+            accent     = "var(--green)" if correct else "var(--red)"
             actual_str = f"{actual_mg:+.0f}" if pd.notna(actual_mg) else "?"
-            picks_html += f"""
-            <span style="background:#8b5cf6;color:#ffffff;font-size:0.63em;font-weight:800;
-                         padding:2px 7px;border-radius:4px;margin-right:6px">{team} {vl_str}</span>
-            <span style="color:{res_color};font-size:0.78em;font-weight:700;margin-right:12px">
-                {res_label} (actual margin: {actual_str})</span>"""
+            picks_html += _pick_badge(f"{team} {vl_str}", "var(--violet)", correct,
+                                      f"margin {actual_str}")
 
         if not picks_html and view_mode == "All Games":
-            picks_html = '<span style="color:#4b5563;font-size:0.78em">No flagged pick</span>'
+            picks_html = '<span style="color:var(--ink-4);font-size:0.78em">No flagged pick</span>'
 
         actual_display = f"Final: {actual_mg:+.0f} pts" if pd.notna(actual_mg) else "No result"
 
         st.html(f"""
-        <div style="background:#1a1f2e;border:1px solid #252d3d;border-radius:10px;
-                    padding:12px 16px;margin-bottom:6px">
+        <div class="pick-card" style="padding:12px 18px 11px 18px">
+            <div class="accent" style="background:{accent}"></div>
             <div style="display:flex;justify-content:space-between;align-items:center">
-                <span style="color:#ffffff;font-weight:700;font-size:0.95em">{matchup}</span>
-                <span style="color:#6b7280;font-size:0.78em">{actual_display}</span>
+                <span style="color:var(--ink);font-weight:800;font-size:0.95em">{matchup}</span>
+                <span class="num" style="color:var(--ink-4);font-size:0.76em">{actual_display}</span>
             </div>
             <div style="margin-top:8px">{picks_html}</div>
         </div>
@@ -2633,11 +2799,13 @@ def main():
     with st.sidebar:
         st.markdown("""
         <div style="padding:16px 0 8px 0">
-            <div style="color:#ffffff;font-size:1.1em;font-weight:800;
-                        letter-spacing:0.02em">CFB Picks</div>
-            <div style="color:#eab308;font-size:0.68em;font-weight:700;
-                        letter-spacing:0.1em;text-transform:uppercase;margin-top:2px">
-                SP+ · FPI · Elo · EPA
+            <div style="font-size:1.15em;font-weight:900;letter-spacing:-0.01em;
+                        background:linear-gradient(135deg,#f3f5f9 30%,#f5c518);
+                        -webkit-background-clip:text;background-clip:text;
+                        -webkit-text-fill-color:transparent">CFB EDGE</div>
+            <div style="color:#67738a;font-size:0.64em;font-weight:700;
+                        letter-spacing:0.14em;text-transform:uppercase;margin-top:3px">
+                Model vs Market
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -2660,7 +2828,7 @@ def main():
         st.session_state["bettor"] = bettor
         st.divider()
 
-        run = st.button("Load Picks", type="primary", use_container_width=True)
+        run = st.button("Load Picks", type="primary", width='stretch')
         if run:
             st.session_state["has_run"]    = True
             st.session_state["run_season"] = season
@@ -2677,14 +2845,18 @@ def main():
 
     # ── Page header ───────────────────────────────────────────────────────
     st.markdown("""
-    <div style="padding:10px 0 6px 0;border-bottom:1px solid #1e2537;margin-bottom:6px;
+    <div style="padding:12px 0 10px 0;margin-bottom:4px;
                 display:flex;align-items:baseline;gap:14px">
-        <span style="color:#ffffff;font-size:1.4em;font-weight:800;
-                     letter-spacing:0.01em">CFB Picks</span>
-        <span style="color:#eab308;font-size:0.75em;font-weight:700;
-                     letter-spacing:0.08em;text-transform:uppercase">Model-Powered</span>
-        <span style="color:#252d3d;flex:1;height:1px;display:inline-block;
-                     vertical-align:middle;margin-left:4px"></span>
+        <span style="font-size:1.5em;font-weight:900;letter-spacing:-0.02em;
+                     background:linear-gradient(135deg,#f3f5f9 30%,#f5c518);
+                     -webkit-background-clip:text;background-clip:text;
+                     -webkit-text-fill-color:transparent">CFB EDGE</span>
+        <span style="color:#67738a;font-size:0.72em;font-weight:700;
+                     letter-spacing:0.16em;text-transform:uppercase">
+            Model vs Market</span>
+        <span style="flex:1"></span>
+        <span style="color:#454f63;font-size:0.7em;font-weight:600">
+            SP+ · FPI · Elo · EPA · Weather</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -2720,21 +2892,32 @@ def main():
     # ── PICKS TAB ─────────────────────────────────────────────────────────
     with picks_tab:
         if not st.session_state.get("has_run"):
-            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+            st.html("""
+            <div style="padding:36px 8px 28px 8px;text-align:center">
+                <div style="font-size:0.68em;font-weight:800;letter-spacing:0.22em;
+                            color:var(--gold);text-transform:uppercase;margin-bottom:10px">
+                    SP+ · FPI · Elo · EPA · Weather · Portal</div>
+                <div style="font-size:2em;font-weight:900;color:var(--ink);
+                            letter-spacing:-0.02em;line-height:1.15">
+                    Find where the model and<br>the market disagree.</div>
+                <div style="color:var(--ink-3);font-size:0.92em;max-width:540px;
+                            margin:14px auto 0 auto;line-height:1.6">
+                    Every game gets a predicted score, total, and win probability from an
+                    ensemble trained on seven seasons. Picks appear only where the model's
+                    number diverges from Vegas — each one shows <i>why</i>, and how that
+                    bet type has actually performed.</div>
+            </div>""")
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("Totals Win Rate", "54.7%", "+2.3% above breakeven")
-            col2.metric("Under Win Rate",  "59.0%", "Primary edge")
-            col3.metric("Spread Win Rate", "50.4%", "Informational only")
-            col4.metric("ML EV Min",       "4%",    "Threshold")
-
-            section_header("How It Works")
-            st.markdown(
-                "The model predicts a final score and compares it to the Vegas line. "
-                "When they disagree by 3–6 points on a total, or 4–8% on a moneyline, "
-                "it flags a bet. **Unders win 59% historically** — the primary edge. "
-                "Spreads are near breakeven and shown for reference only. "
-                "Always check injuries and current lines before placing a bet."
-            )
+            col1.metric("Spread MAE", "12.3 pts", "Vegas: 11.8", delta_color="off")
+            col2.metric("Best pocket", "Unders", "calm-weather games", delta_color="off")
+            col3.metric("Spreads ATS", "50.7%", "info only · '25 holdout", delta_color="off")
+            col4.metric("North star", "CLV", "beat the close", delta_color="off")
+            st.html("""
+            <div style="background:var(--card);border:1px solid var(--line);border-radius:12px;
+                        padding:12px 18px;margin-top:14px;color:var(--ink-3);font-size:0.82em">
+                ⚖️ <b style="color:var(--ink-2)">Honesty note:</b> on the 2025 holdout the model
+                was not yet profitable overall. Treat flags as research leads — the tiers on each
+                card tell you which bet types have historically held up.</div>""")
             st.info("Select a season and week in the sidebar, then hit **Load Picks**.")
             return
 
@@ -2809,53 +2992,92 @@ def main():
             (preds["spread_edge"].abs() <= SPREAD_EDGE_MAX)
         ]
 
+        # ── Unified play ranking ──────────────────────────────────────────
+        # Score every flagged pick on one 0–100 scale, weighted by how each
+        # bet type actually performed on the 2025 holdout (unders > selective
+        # ML > overs > spreads). The board surfaces the strongest leads first.
+        plays: list[dict] = []
+        for _, r in tot_bets.iterrows():
+            is_under = r["totals_edge"] < 0
+            base = min(abs(r["totals_edge"]) / TOTALS_EDGE_MAX, 1.0)
+            reliability = 1.0 if is_under else 0.45
+            wind = r.get("wind_speed")
+            if is_under and pd.notna(wind) and float(wind) >= 12:
+                reliability = 1.15   # wind-backed unders: the proven pocket
+            plays.append({"kind": "total", "row": r, "score": 100 * base * reliability})
+        for _, r in ml_bets.iterrows():
+            base = min(float(r["ml_ev"]) / MONEYLINE_EV_MAX, 1.0)
+            reliability = 0.8 if r["ml_book_odds"] <= 0 else 0.5
+            plays.append({"kind": "ml", "row": r, "score": 100 * base * reliability})
+        for _, r in sp_bets.iterrows():
+            base = min(abs(r["spread_edge"]) / SPREAD_EDGE_MAX, 1.0)
+            plays.append({"kind": "spread", "row": r, "score": 100 * base * 0.35})
+        plays.sort(key=lambda p: p["score"], reverse=True)
+        n_strong = sum(1 for p in plays if p["score"] >= 60)
+
         # ── Week header + summary tiles ───────────────────────────────────
-        st.markdown(f"""
-        <div style="display:flex;align-items:baseline;gap:10px;padding:12px 0 4px 0">
-            <span style="color:#ffffff;font-size:1.05em;font-weight:700">
-                {season} · Week {week}
-            </span>
-            <span style="color:#4b5563;font-size:0.82em">{len(preds)} games</span>
-        </div>
-        """, unsafe_allow_html=True)
+        st.html(f"""
+        <div style="display:flex;align-items:baseline;gap:12px;padding:14px 0 6px 0">
+            <span style="color:var(--ink);font-size:1.3em;font-weight:900;letter-spacing:-0.02em">
+                Week {week}</span>
+            <span style="color:var(--gold);font-size:0.7em;font-weight:800;
+                         letter-spacing:0.14em;text-transform:uppercase">{season} season</span>
+            <span style="color:var(--ink-4);font-size:0.82em">{len(preds)} games ·
+                {len(plays)} flagged · {n_strong} strong</span>
+        </div>""")
 
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric("Moneyline Bets", len(ml_bets))
-        col2.metric("Totals Bets",    len(tot_bets))
-        col3.metric("Spread Bets",    len(sp_bets))
-        col4.metric("Model Accuracy", "54.7%", "Totals win rate")
+        col1.metric("Strong Plays", n_strong, "score ≥ 60")
+        col2.metric("Totals", len(tot_bets),
+                    f"{(tot_bets['totals_edge'] < 0).sum()} unders" if not tot_bets.empty else "—",
+                    delta_color="off")
+        col3.metric("Moneylines", len(ml_bets))
+        col4.metric("Spreads", len(sp_bets), "info only", delta_color="off")
 
         if not has_lines:
             st.warning("No Vegas lines yet — lines usually appear 7–10 days before kickoff.")
 
-        # ── Sub-navigation pill tabs ──────────────────────────────────────
-        best_tot = tot_bets.head(3) if not tot_bets.empty else pd.DataFrame()
-        best_ml  = ml_bets.head(2)  if not ml_bets.empty  else pd.DataFrame()
-        has_best = not best_tot.empty or not best_ml.empty
-
         view = st.radio(
             "View",
-            ["Best Bets", "Totals", "Spreads", "Moneylines", "All Games"],
+            ["Top Plays", "Totals", "Spreads", "Moneylines", "All Games"],
             horizontal=True,
             label_visibility="collapsed",
         )
 
-        # ── Best Bets ─────────────────────────────────────────────────────
-        if view == "Best Bets":
-            if not has_best:
-                st.info("No high-confidence picks this week.")
+        # ── Top Plays: one ranked board across all bet types ──────────────
+        if view == "Top Plays":
+            if not plays:
+                st.info("No picks clear the edge thresholds this week — that's the model "
+                        "telling you to keep your bankroll. Check All Games for projections.")
             else:
-                section_header("Best Bets", "Highest-confidence picks this week")
-                if not best_tot.empty:
-                    for _, row in best_tot.iterrows():
-                        render_totals_card(row, season, week)
-                if not best_ml.empty:
-                    for _, row in best_ml.iterrows():
-                        render_moneyline_card(row, season, week)
+                section_header("Top Plays",
+                               "Ranked by edge × how this bet type performs historically")
+                for rank, play in enumerate(plays[:8], start=1):
+                    score = play["score"]
+                    score_color = ("var(--green)" if score >= 60
+                                   else "var(--gold)" if score >= 40 else "var(--ink-3)")
+                    st.html(f"""
+                    <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px 2px">
+                        <span class="num" style="color:var(--ink-4);font-size:0.95em;
+                              font-weight:800">#{rank}</span>
+                        <div style="flex:1;height:4px;border-radius:999px;background:var(--line);
+                                    position:relative;max-width:160px">
+                            <div style="position:absolute;left:0;top:0;bottom:0;border-radius:999px;
+                                        width:{min(score, 100):.0f}%;background:{score_color}"></div>
+                        </div>
+                        <span class="num" style="color:{score_color};font-size:0.72em;
+                              font-weight:800">{score:.0f}</span>
+                    </div>""")
+                    if play["kind"] == "total":
+                        render_totals_card(play["row"], season, week)
+                    elif play["kind"] == "ml":
+                        render_moneyline_card(play["row"], season, week)
+                    else:
+                        render_spread_card(play["row"], season, week)
 
         # ── Totals ────────────────────────────────────────────────────────
         elif view == "Totals":
-            section_header("Totals", "Unders win 59% historically")
+            section_header("Totals", "Unders are the proven pocket — treat overs with caution")
             if tot_bets.empty:
                 st.info("No totals bets meet the threshold this week.")
             else:
@@ -2887,7 +3109,7 @@ def main():
 
         # ── Moneylines ────────────────────────────────────────────────────
         elif view == "Moneylines":
-            section_header("Moneylines", "Underdogs drive +52.7% historical ROI")
+            section_header("Moneylines", "Selective favorites held up in '25 — dogs are high variance")
             if not has_lines or preds["home_moneyline"].isna().all():
                 st.info("No moneyline data yet — appears closer to kickoff.")
             elif ml_bets.empty:
@@ -2924,7 +3146,7 @@ def main():
                     key="team_search",
                 )
             with clear_col:
-                if st.button("Clear", key="clear_search", use_container_width=True):
+                if st.button("Clear", key="clear_search", width='stretch'):
                     st.session_state["team_search"] = ""
                     st.rerun()
 

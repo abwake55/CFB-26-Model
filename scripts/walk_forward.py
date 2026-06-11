@@ -101,7 +101,12 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
 
     X_tr_sp,  y_tr_sp  = train[spread_feats], train["point_diff"]
     X_val_sp, y_val_sp = val[spread_feats],   val["point_diff"]
-    X_te_sp            = test[spread_feats]
+
+    # Anchored frame: spread features plus the opening line, which
+    # MarketAnchoredEnsemble strips before calling the base models. Without
+    # this column the anchor silently never fires (predictions stay raw).
+    anchor_extra = ["spread_open_val"] if "spread_open_val" in df.columns else []
+    X_te_sp            = test[spread_feats + anchor_extra]
 
     X_tr_tot  = train[totals_feats]
     X_val_tot = val[totals_feats]

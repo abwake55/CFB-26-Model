@@ -41,7 +41,8 @@
     "is_postseason",
     "rest_diff",
     "hfa_diff",
-    "spread_magnitude"
+    "spread_magnitude",
+    "spread_open_val"
   ],
   "totals": [
     "home_sp_offense",

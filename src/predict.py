@@ -480,8 +480,24 @@ def generate_predictions(
         out["away_moneyline"] = np.nan
 
     out["pred_spread"] = spread_model.predict(feature_df_sp)
-    out["pred_total"]  = totals_model.predict(feature_df_tot)
+    # Totals model predicts deviation from the O/U line, not the raw total.
+    # Add the line back so pred_total is the expected combined score
+    # (same handling as weekly_pipeline.py; NaN when no line is posted yet).
+    ou_vals = pd.to_numeric(out["over_under"], errors="coerce")
+    out["pred_total"]  = ou_vals + totals_model.predict(feature_df_tot)
     out["pred_win_p"]  = win_prob_model.predict_proba(feature_df_win)[:, 1]
+
+    # ── Cross-calibration: blend spread-implied win prob with classifier ──────
+    # Same blend applied in app.py and weekly_pipeline.py — keeps the three
+    # serve paths consistent. Parameters tuned on the validation set in model.py.
+    calib_path = MODEL_DIR / "win_prob_calibration.json"
+    if calib_path.exists():
+        from math import erf as _erf, sqrt as _msqrt
+        def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
+        calib  = json.loads(calib_path.read_text())
+        s_impl = out["pred_spread"].apply(lambda s: _norm_cdf(s / calib["spread_sigma"]))
+        alpha  = calib["blend_alpha"]
+        out["pred_win_p"] = (alpha * s_impl + (1 - alpha) * out["pred_win_p"]).clip(0.01, 0.99)
     out["pred_away_win_p"] = 1 - out["pred_win_p"]
 
     out["vegas_home_margin"] = -out["spread"]
@@ -547,9 +563,11 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
         print("  " + "─"*80)
         for _, r in preds.sort_values("pred_spread", ascending=False).iterrows():
             sign = "+" if r["pred_spread"] > 0 else ""
+            # pred_total is line-relative — without a posted O/U it's undefined
+            tot_str = f"{r['pred_total']:>8.1f}" if pd.notna(r["pred_total"]) else "     N/A"
             print(f"  {r['home_team']:22s}  {r['away_team']:22s}  "
                   f"{sign}{r['pred_spread']:>8.1f}      "
-                  f"{r['pred_total']:>8.1f}      "
+                  f"{tot_str}      "
                   f"{r['pred_win_p']:>8.1%}")
         return
 
@@ -562,7 +580,7 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
 
     print(f"\n{'─'*78}")
     print(f"  MONEYLINES  ({len(ml_bets)} +EV bets | {MONEYLINE_EV_MIN:.0%}–{MONEYLINE_EV_MAX:.0%} EV window)")
-    print(f"  Note: Underdogs dominate the edge (+52.7% ROI historical) — favorites rarely +EV")
+    print(f"  Note: 2025 holdout shows underdog EV bets LOSING (-17% ROI) — treat as informational")
     print(f"{'─'*78}")
 
     if ml_bets.empty:
@@ -592,7 +610,7 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
 
     print(f"\n{'─'*78}")
     print(f"  TOTALS  ({len(tot_bets)} bets flagged | 3–6pt edge window)")
-    print(f"  Note: model leans UNDER — unders win 59% historically")
+    print(f"  Note: 2025 holdout shows OVER flags losing badly (41% win) — UNDER flags only")
     print(f"{'─'*78}")
 
     if tot_bets.empty:
@@ -656,15 +674,16 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
             mod_str = f"{r['pred_spread']:>+6.1f}"
             edg_str = f"{r['spread_edge']:>+5.1f}" if not pd.isna(r["spread_edge"]) else "  N/A"
             ou_str  = f"{r['over_under']:>5.1f}" if not pd.isna(r["over_under"]) else "  N/A"
-            pt_str  = f"{r['pred_total']:>6.1f}"
+            pt_str  = f"{r['pred_total']:>6.1f}" if not pd.isna(r["pred_total"]) else "   N/A"
             wp_str  = f"{r['pred_win_p']:.0%}"
             print(f"  {r['home_team']:22s}  {r['away_team']:22s}  "
                   f"{sp_str}  {mod_str}  {edg_str}  "
                   f"{ou_str}  {pt_str}  {wp_str}")
 
     print("\n" + "═"*78)
-    print("  Moneyline ★ = EV ≥ 7%  |  Totals ★ = edge ≥ 5pts  |  UNDER bias: +59% historical")
-    print("  EV >3% = worth considering  |  EV >7% = strong signal  |  EV <3% = skip")
+    print("  Moneyline ★ = EV ≥ 7%  |  Totals ★ = edge ≥ 5pts")
+    print("  ⚠️  2025 holdout: spreads 50.7% ATS, totals overs 41%, ML dogs -17% ROI —")
+    print("  treat all flags as research leads, not auto-bets.")
     print("  Always cross-check: injuries, weather forecast, line movement direction")
     print("═"*78 + "\n")
 

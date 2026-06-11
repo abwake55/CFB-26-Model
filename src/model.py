@@ -150,9 +150,9 @@ class MarketAnchoredEnsemble:
 
     # ------------------------------------------------------------------
     def predict(self, X) -> np.ndarray:
-        raw = np.array(self.base.predict(X))
-
         # Extract opening line — supports both DataFrame and ndarray input.
+        # The opening-line column rides along in X purely for anchoring and is
+        # stripped before calling the base models (they were trained without it).
         # Sign convention: spread_open_val follows CFBD convention where
         # NEGATIVE = home favored (e.g., -7 means home wins by 7).
         # pred_spread uses home-margin convention: POSITIVE = home wins.
@@ -163,9 +163,10 @@ class MarketAnchoredEnsemble:
             opening = -pd.to_numeric(
                 X[self.opening_line_col], errors="coerce"
             ).values   # negated: now positive = home favored (margin convention)
+            raw = np.array(self.base.predict(X.drop(columns=[self.opening_line_col])))
         else:
             # No line data available — return raw predictions unchanged
-            return raw
+            return np.array(self.base.predict(X))
 
         anchored = raw.copy()
         for i, (r, ol) in enumerate(zip(raw, opening)):
@@ -567,6 +568,14 @@ def train_and_evaluate():
     X_test_sp  = test[spread_feats]
     y_test_sp  = test["point_diff"]
 
+    # Anchored feature frames: same features plus the opening line, which
+    # MarketAnchoredEnsemble strips before calling the base models. Without
+    # this column the anchor silently never fires (predictions stay raw).
+    anchor_extra = ["spread_open_val"] if "spread_open_val" in df.columns else []
+    spread_feats_anchor = spread_feats + anchor_extra
+    X_test_sp_anchor = test[spread_feats_anchor]
+    X_val_sp_anchor  = val[spread_feats_anchor]
+
     X_train_tot = train[totals_feats]
     X_test_tot  = test[totals_feats]
     X_val_sp    = val[spread_feats]
@@ -659,9 +668,9 @@ def train_and_evaluate():
                                            method="isotonic", cv=5)
     gbm_win_calib.fit(X_train_win, y_train_win)
 
-    # Auto-tune ensemble weights on the VALIDATION set (2023) only.
-    # The test set (2024-2025) is never used for any tuning decision — it is the
-    # final, clean holdout for honest evaluation of the chosen model.
+    # Auto-tune ensemble weights on the VALIDATION set (VAL_SEASONS) only.
+    # The test set (TEST_SEASONS) is never used for any tuning decision — it is
+    # the final, clean holdout for honest evaluation of the chosen model.
     best_brier, best_w1, best_ensemble = 999, 0.5, None
     weight_candidates = [(0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5),
                          (0.6, 0.4), (0.7, 0.3), (0.8, 0.2)]
@@ -700,7 +709,7 @@ def train_and_evaluate():
 
     gbm_win = best_ensemble  # use best calibrated ensemble going forward
 
-    # ── Auto-tune ensemble blend weights on validation set (2023) ─────────
+    # ── Auto-tune ensemble blend weights on validation set (VAL_SEASONS) ──
     # Same discipline as win-prob: pick the blend on val, evaluate on test.
     # RMSE on val is minimised — lower = better calibrated predictions.
     weight_candidates = [(0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5),
@@ -736,7 +745,7 @@ def train_and_evaluate():
     from math import erf as _erf, sqrt as _msqrt
     def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
 
-    sp_val_preds       = ensemble_sp.predict(X_val_sp)
+    sp_val_preds       = ensemble_sp.predict(X_val_sp_anchor)
     spread_sigma       = float(np.std(sp_val_preds - y_val_sp.values))
     spread_implied_val = np.array([_norm_cdf(p / spread_sigma) for p in sp_val_preds])
     classifier_val     = gbm_win.predict_proba(X_val_win)[:, 1]
@@ -772,8 +781,8 @@ def train_and_evaluate():
     print(f"  Totals ensemble: best val blend = Ridge {best_tot_w1:.0%} / GBM {best_tot_w2:.0%}"
           f"  (val RMSE {best_tot_rmse:.3f})")
 
-    # Evaluate best ensembles on test set
-    ens_sp_preds  = ensemble_sp.predict(X_test_sp)
+    # Evaluate best ensembles on test set (anchored X so the market anchor fires)
+    ens_sp_preds  = ensemble_sp.predict(X_test_sp_anchor)
     ens_tot_dev   = ensemble_tot.predict(X_test_tot)          # deviation from line
     ens_tot_preds = ou_test + ens_tot_dev                     # add line back → pred total
     ens_sp_label  = f"Ensemble+Anchor ({best_sp_w1:.0%}/{best_sp_w2:.0%})"
@@ -819,7 +828,7 @@ def train_and_evaluate():
     ml_cols = [c for c in ["home_moneyline", "away_moneyline"] if c in test.columns]
     results_df = test[base_cols + ml_cols].copy()
 
-    results_df["pred_spread"]      = best_sp_pipe.predict(X_test_sp)
+    results_df["pred_spread"]      = best_sp_pipe.predict(X_test_sp_anchor)
     # Totals model predicts deviation from line; add ou back so pred_total is
     # the expected actual combined score (same meaning as before, cleaner signal)
     results_df["pred_total"]       = ou_test.values + best_tot_pipe.predict(X_test_tot)
@@ -850,7 +859,9 @@ def train_and_evaluate():
     import json
     with open(MODELS_DIR / "feature_lists.json", "w") as f:
         json.dump({
-            "spread":   spread_feats,
+            # spread list includes spread_open_val so serving code feeds the
+            # opening line to MarketAnchoredEnsemble (stripped before base models)
+            "spread":   spread_feats_anchor,
             "totals":   totals_feats,
             "win_prob": win_feats,
         }, f, indent=2)
