@@ -730,6 +730,11 @@ def build_and_predict(games, lines, ratings, epa, elo,
                            "ml_model_odds": r["model_away_ml"]})
 
     out[["ml_team", "ml_ev", "ml_book_odds", "ml_model_odds"]] = out.apply(best_ml, axis=1)
+
+    # Coverage must be measured on the FULL feature frame (df) — `out` keeps
+    # only prediction columns, so checking it would misreport every rating
+    # source as 0%. Stash the report in attrs for the picks tab to read.
+    out.attrs["coverage"] = feature_coverage_report(df)
     return out
 
 
@@ -3085,7 +3090,9 @@ def main():
         # ── Feature coverage report ───────────────────────────────────────
         # Show which data sources are actually present for this week's games
         # so users know when predictions are flying partially blind.
-        cov = feature_coverage_report(preds)
+        # Coverage computed inside build_and_predict on the full feature frame
+        # (preds itself is trimmed to prediction columns — would show 0%)
+        cov = preds.attrs.get("coverage") or feature_coverage_report(preds)
         COVERAGE_WARN = {"HFA", "Talent", "WEPA", "Havoc", "Portal", "Line Move"}
         missing = [g for g, pct in cov.items() if pct < 0.5 and g in COVERAGE_WARN]
         if missing:
