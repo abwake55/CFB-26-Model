@@ -46,7 +46,9 @@
     "is_postseason",
     "rest_diff",
     "hfa_diff",
-    "spread_magnitude"
+    "spread_magnitude",
+    "travel_disadvantage",
+    "long_haul_away"
   ],
   "totals": [
     "home_sp_offense",
@@ -93,7 +95,9 @@
     "late_season",
     "is_postseason",
     "rest_diff",
-    "spread_magnitude"
+    "spread_magnitude",
+    "travel_disadvantage",
+    "long_haul_away"
   ],
   "win_prob": [
     "sp_diff",
@@ -142,7 +146,9 @@
     "is_postseason",
     "rest_diff",
     "hfa_diff",
-    "spread_magnitude"
+    "spread_magnitude",
+    "travel_disadvantage",
+    "long_haul_away"
   ],
   "spread_target": "margin_residual",
   "totals_target": "ou_deviation",

@@ -16,6 +16,9 @@ Output:
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from team_locations import travel_miles
 
 DATA_DIR  = Path(__file__).parent.parent / "data"
 PROC_DIR  = DATA_DIR / "processed"
@@ -546,6 +549,50 @@ def build_rest_features(games: pd.DataFrame) -> pd.DataFrame:
     )
 
     return flat[["game_id", "team", "rest_days"]]
+
+
+def build_travel_features(games: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute travel distance (miles) for each team heading into each game.
+
+    For a normal home game the home team travels ~0 miles; the away team
+    travels from their home stadium to the opponent's stadium.
+    For neutral-site games both teams travel.
+
+    Features produced per game:
+      away_travel_miles  – how far the away team had to travel
+      home_travel_miles  – how far the home team had to travel (0 for true home)
+      travel_disadvantage – away_travel - home_travel (positive = away disadvantaged)
+      long_haul_away     – 1 if away team traveled >1000 miles (Hawaii, cross-coast)
+    """
+    rows = []
+    for _, g in games.iterrows():
+        home = g["home_team"]
+        away = g["away_team"]
+        neutral = bool(g.get("neutral_site", False))
+
+        if neutral:
+            # Both teams traveling — use distance from each team's home to the other's
+            # as a proxy (we don't always know the exact neutral venue).
+            # If we have location data use it; otherwise leave as NaN.
+            away_dist = travel_miles(away, home)  # approximate
+            home_dist = travel_miles(home, away)  # approximate (could be same game)
+        else:
+            away_dist = travel_miles(away, home)
+            home_dist = 0.0                        # true home game
+
+        rows.append({
+            "game_id":            g["game_id"],
+            "away_travel_miles":  away_dist,
+            "home_travel_miles":  home_dist,
+        })
+
+    df = pd.DataFrame(rows)
+    df["away_travel_miles"] = pd.to_numeric(df["away_travel_miles"], errors="coerce")
+    df["home_travel_miles"] = pd.to_numeric(df["home_travel_miles"], errors="coerce")
+    df["travel_disadvantage"] = df["away_travel_miles"] - df["home_travel_miles"]
+    df["long_haul_away"] = (df["away_travel_miles"] > 1000).astype(float)
+    return df
 
 
 # ─── 2. ROLLING EPA FEATURES ─────────────────────────────────────────────────
@@ -1203,6 +1250,12 @@ def build_feature_matrix() -> pd.DataFrame:
     games_feat["rest_diff"] = (
         games_feat["home_rest_days"].fillna(14) - games_feat["away_rest_days"].fillna(14)
     )
+
+    print("Building travel distance features...")
+    travel = build_travel_features(games)
+    games_feat = games_feat.merge(travel, on="game_id", how="left")
+    covered = games_feat["away_travel_miles"].notna().mean()
+    print(f"  Travel coverage: {covered:.1%} of games")
 
     print("Merging betting lines (filtering to FBS games with lines)...")
     games_with_lines = attach_lines(games_feat, lines)

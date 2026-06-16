@@ -34,6 +34,13 @@ from sklearn.impute import SimpleImputer
 from sklearn.calibration import CalibratedClassifierCV, calibration_curve
 import lightgbm as lgb
 
+try:
+    import optuna
+    optuna.logging.set_verbosity(optuna.logging.WARNING)
+    OPTUNA_AVAILABLE = True
+except ImportError:
+    OPTUNA_AVAILABLE = False
+
 # ─── ENSEMBLE MODEL ──────────────────────────────────────────────────────────
 
 class EnsembleRegressor:
@@ -359,6 +366,10 @@ SPREAD_FEATURES = [
     "rest_diff",              # days since last game (short week = fatigue/prep hit)
     "hfa_diff",               # team-specific home field advantage differential
     "spread_magnitude",       # absolute size of expected margin (blowout indicator)
+
+    # ── Travel ────────────────────────────────────────────────────────────────
+    "travel_disadvantage",    # away_travel_miles − home_travel_miles
+    "long_haul_away",         # 1 if away team flew >1000 miles (Hawaii, cross-coast)
 ]
 
 # Totals model: both teams' offense AND defense kept as individual values
@@ -414,6 +425,10 @@ TOTALS_FEATURES = [
     "week_num", "late_season", "is_postseason",
     "rest_diff",
     "spread_magnitude",
+
+    # ── Travel ────────────────────────────────────────────────────────────────
+    "travel_disadvantage",
+    "long_haul_away",
 ]
 
 WIN_PROB_FEATURES = SPREAD_FEATURES  # same features, different target
@@ -428,6 +443,81 @@ def make_linear(alpha: float = 1.0):
         ("scaler",  StandardScaler()),
         ("model",   Ridge(alpha=alpha)),
     ])
+
+
+def make_sample_weights(seasons: pd.Series, decay: float = 0.3) -> np.ndarray:
+    """
+    Exponential time-decay weights so recent seasons matter more.
+
+    decay=0.3 → each season is e^0.3 ≈ 1.35x more important than the prior one.
+    decay=0.5 → each season is e^0.5 ≈ 1.65x more important.
+
+    Weights are normalized to sum to len(seasons) so total gradient scale
+    is unchanged (same as no weighting on average).
+    """
+    seasons = pd.to_numeric(seasons, errors="coerce").fillna(seasons.min())
+    min_season = seasons.min()
+    raw = np.exp(decay * (seasons - min_season))
+    return (raw / raw.mean()).values
+
+
+def tune_gbm_params(X_train, y_train, X_val, y_val,
+                    sample_weight=None, n_trials: int = 50,
+                    task: str = "regression") -> dict:
+    """
+    Use Optuna to find the best LightGBM hyperparameters.
+
+    Searches over learning rate, tree depth, regularisation, and subsampling.
+    Optimises validation MAE (regression) or log-loss (classification).
+
+    Returns a dict of kwargs ready to pass to lgb.LGBMRegressor / LGBMClassifier.
+    Falls back to hand-tuned defaults if Optuna isn't installed.
+    """
+    defaults = dict(
+        n_estimators=500,
+        learning_rate=0.03,
+        num_leaves=63,
+        min_child_samples=20,
+        subsample=0.8,
+        colsample_bytree=0.7,
+        reg_lambda=1.0,
+        verbose=-1,
+    )
+
+    if not OPTUNA_AVAILABLE:
+        print("  [Optuna not installed — using default GBM params]")
+        return defaults
+
+    def objective(trial):
+        params = dict(
+            n_estimators=trial.suggest_int("n_estimators", 200, 800),
+            learning_rate=trial.suggest_float("learning_rate", 0.01, 0.10, log=True),
+            num_leaves=trial.suggest_int("num_leaves", 15, 127),
+            min_child_samples=trial.suggest_int("min_child_samples", 10, 50),
+            subsample=trial.suggest_float("subsample", 0.6, 1.0),
+            colsample_bytree=trial.suggest_float("colsample_bytree", 0.5, 1.0),
+            reg_lambda=trial.suggest_float("reg_lambda", 0.1, 10.0, log=True),
+            verbose=-1,
+        )
+        if task == "regression":
+            m = lgb.LGBMRegressor(**params)
+            m.fit(X_train, y_train, sample_weight=sample_weight)
+            preds = m.predict(X_val)
+            return mean_absolute_error(y_val, preds)
+        else:
+            m = lgb.LGBMClassifier(**params)
+            m.fit(X_train, y_train, sample_weight=sample_weight)
+            preds = m.predict_proba(X_val)[:, 1]
+            return log_loss(y_val, preds)
+
+    study = optuna.create_study(direction="minimize")
+    study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
+    best = study.best_params
+    best["verbose"] = -1
+    print(f"  Optuna best val {'MAE' if task=='regression' else 'log-loss'}: "
+          f"{study.best_value:.4f}  (lr={best.get('learning_rate', '?'):.4f}, "
+          f"leaves={best.get('num_leaves', '?')})")
+    return best
 
 
 def make_gbm_regressor():
@@ -624,6 +714,9 @@ def train_and_evaluate():
     X_test_win  = test[win_feats]
     y_test_win  = test["home_win"]
 
+    # ── Time-decay sample weights (recent seasons matter more) ────────────────
+    sw_train = make_sample_weights(train["season"], decay=0.3)
+
     # ── Train spread models ────────────────────────────────────────────────
     print("\n" + "="*55)
     print("SPREAD MODEL  (predicting residual vs Vegas line)")
@@ -632,8 +725,11 @@ def train_and_evaluate():
     ridge_sp = make_linear(alpha=10.0)
     ridge_sp.fit(X_train_sp, y_train_sp)
 
-    gbm_sp = make_gbm_regressor()
-    gbm_sp.fit(X_train_sp, y_train_sp)
+    print("  Tuning GBM hyperparameters with Optuna (50 trials)...")
+    sp_params = tune_gbm_params(X_train_sp, y_train_sp, X_val_sp, y_val_sp,
+                                sample_weight=sw_train, n_trials=50)
+    gbm_sp = lgb.LGBMRegressor(**sp_params)
+    gbm_sp.fit(X_train_sp, y_train_sp, sample_weight=sw_train)
 
     results_sp = []
     for pipe, label in [(ridge_sp, "Ridge"), (gbm_sp, "GradientBoost")]:
@@ -652,8 +748,11 @@ def train_and_evaluate():
     ridge_tot = make_linear(alpha=10.0)
     ridge_tot.fit(X_train_tot, y_train_tot)
 
-    gbm_tot = make_gbm_regressor()
-    gbm_tot.fit(X_train_tot, y_train_tot)
+    print("  Tuning GBM hyperparameters with Optuna (50 trials)...")
+    tot_params = tune_gbm_params(X_train_tot, y_train_tot, X_val_tot, y_val_tot,
+                                 sample_weight=sw_train, n_trials=50)
+    gbm_tot = lgb.LGBMRegressor(**tot_params)
+    gbm_tot.fit(X_train_tot, y_train_tot, sample_weight=sw_train)
 
     results_tot = []
     for pipe, label in [(ridge_tot, "Ridge"), (gbm_tot, "GradientBoost")]:
@@ -669,18 +768,21 @@ def train_and_evaluate():
     print("WIN PROBABILITY MODEL  (predicting home win %)")
     print("="*55)
 
-    # Base classifiers
-    gbm_win_base  = make_gbm_classifier()
+    # Base classifiers — Optuna-tuned hyperparameters
+    print("  Tuning GBM hyperparameters with Optuna (50 trials)...")
+    win_params = tune_gbm_params(X_train_win, y_train_win, X_val_win, y_val_win,
+                                 sample_weight=sw_train, n_trials=50, task="classification")
+    gbm_win_base  = lgb.LGBMClassifier(**win_params)
     logit_win     = make_logistic(C=0.3)
-    gbm_win_base.fit(X_train_win,  y_train_win)
-    logit_win.fit(X_train_win,     y_train_win)
+    gbm_win_base.fit(X_train_win, y_train_win, sample_weight=sw_train)
+    logit_win.fit(X_train_win,    y_train_win)
 
     # Calibrate GBM with isotonic regression using 5-fold CV on training data.
     # Isotonic calibration learns a monotone mapping from raw scores → calibrated probs,
     # fixing the systematic underestimation of high-confidence predictions.
     # cv=5 ensures we never calibrate on the same data used to train the base model.
     print("  Calibrating GBM with isotonic regression (5-fold CV)...")
-    gbm_win_calib = CalibratedClassifierCV(make_gbm_classifier(),
+    gbm_win_calib = CalibratedClassifierCV(lgb.LGBMClassifier(**win_params),
                                            method="isotonic", cv=5)
     gbm_win_calib.fit(X_train_win, y_train_win)
 
