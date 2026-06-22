@@ -98,6 +98,16 @@ BETTORS = ["Alex", "Joe", "Zou", "Pat"]
 
 # ─── KELLY CRITERION SIZING ───────────────────────────────────────────────────
 
+def unit_dollar_label(units: int) -> str:
+    """Return '2u ≈ $200' string using the bankroll from session state."""
+    bankroll = st.session_state.get("bankroll", 1000)
+    unit_val = bankroll / 100
+    dollars  = units * unit_val
+    if dollars >= 1000:
+        return f"{units}u ≈ ${dollars:,.0f}"
+    return f"{units}u ≈ ${dollars:.0f}"
+
+
 def kelly_units_spread(edge_abs: float, fraction: float = 0.25) -> int:
     """
     Quarter-Kelly bet sizing for ATS bets at standard -110 juice.
@@ -1321,7 +1331,7 @@ def render_moneyline_card(row, season, week):
             ("Book", label, "var(--ink)"),
             ("Model fair", model_label, "var(--ink)"),
             ("EV", ev_str, ev_color),
-            ("Kelly", f"{units}u", "var(--ink)"),
+            ("Kelly", unit_dollar_label(units), "var(--ink)"),
         ]),
         metric_html=metric,
     ))
@@ -1353,6 +1363,7 @@ def render_totals_card(row, season, week):
 
     st.html(_pick_card_html(
         accent=accent, kind_badge=f"TOTAL · {side_str}", kind_color=accent,
+
         tier=_tier_badge("total", row),
         headline=f"{side_str} {ou_str}", big_num=ou_str, sub=sub,
         meters=_edge_meter_html(
@@ -1363,7 +1374,7 @@ def render_totals_card(row, season, week):
             ("Line", ou_str, "var(--ink)"),
             ("Model", f"{row['pred_total']:.1f}" if pd.notna(row["pred_total"]) else "—", "var(--ink)"),
             ("Edge", f"{edge_str} pts", edge_color),
-            ("Kelly", f"{units}u", "var(--ink)"),
+            ("Kelly", unit_dollar_label(units), "var(--ink)"),
         ]),
         metric_html=metric,
     ))
@@ -1412,7 +1423,7 @@ def render_spread_card(row, season, week):
             ("Vegas", vl_bet, "var(--ink)"),
             ("Model", mdl_str, "var(--ink)"),
             ("Edge", f"{edge_str} pts", edge_color),
-            ("Kelly", "1u", "var(--ink)"),
+            ("Kelly", unit_dollar_label(1), "var(--ink)"),
         ]),
         metric_html=metric,
     ))
@@ -2201,6 +2212,122 @@ def render_backtester_tab():
     )
     st.plotly_chart(fig, width='stretch')
 
+    # ── Rolling win rate ──────────────────────────────────────────────────────
+    section_header("Rolling Win Rate", "20-bet moving average — is the edge holding?")
+    _WINDOW = 20
+    if len(bets) >= _WINDOW:
+        bets["roll_wr"] = bets["won"].rolling(_WINDOW, min_periods=_WINDOW).mean() * 100
+        roll_valid = bets.dropna(subset=["roll_wr"])
+
+        fig_roll = go.Figure()
+        # Breakeven reference band
+        fig_roll.add_hrect(y0=0, y1=52.38, line_width=0,
+                           fillcolor="rgba(239,68,68,0.06)")
+        fig_roll.add_hline(y=52.38, line_dash="dash",
+                           line_color="rgba(239,68,68,0.45)", line_width=1,
+                           annotation_text="52.4% break-even",
+                           annotation_position="top right",
+                           annotation_font_color="#ef4444",
+                           annotation_font_size=10)
+        fig_roll.add_hline(y=50, line_dash="dot",
+                           line_color="rgba(255,255,255,0.1)", line_width=1)
+
+        # Color the line: green above breakeven, red below
+        x_vals  = roll_valid["bet_num"].tolist()
+        y_vals  = roll_valid["roll_wr"].tolist()
+        fig_roll.add_trace(go.Scatter(
+            x=x_vals, y=y_vals,
+            mode="lines",
+            name=f"{_WINDOW}-bet rolling win rate",
+            line=dict(color="#60a5fa", width=2.5),
+            fill="tozeroy",
+            fillcolor="rgba(96,165,250,0.07)",
+            hovertemplate="Bet #%{x}<br><b>%{y:.1f}%</b> win rate (last 20)<extra></extra>",
+        ))
+
+        # Mark best / worst windows
+        best_idx  = roll_valid["roll_wr"].idxmax()
+        worst_idx = roll_valid["roll_wr"].idxmin()
+        for idx, sym, col, label in [
+            (best_idx,  "star", "#34d399", "Best run"),
+            (worst_idx, "x",    "#f87171", "Worst run"),
+        ]:
+            r = roll_valid.loc[idx]
+            fig_roll.add_trace(go.Scatter(
+                x=[r["bet_num"]], y=[r["roll_wr"]],
+                mode="markers+text",
+                marker=dict(symbol=sym, size=12, color=col),
+                text=[f"{r['roll_wr']:.0f}%"],
+                textposition="top center",
+                textfont=dict(size=10, color=col),
+                showlegend=False,
+                hovertemplate=f"{label}: %{{y:.1f}}%<extra></extra>",
+            ))
+
+        # Season boundary lines
+        if "season" in bets.columns:
+            for szn in bets["season"].dropna().unique():
+                first_in_szn = bets[bets["season"] == szn]["bet_num"].min()
+                if pd.notna(first_in_szn) and first_in_szn > 1:
+                    fig_roll.add_vline(
+                        x=first_in_szn,
+                        line_color="rgba(245,197,24,0.25)", line_width=1,
+                        annotation_text=str(int(szn)),
+                        annotation_position="top left",
+                        annotation_font_size=9,
+                        annotation_font_color="#f5c518",
+                    )
+
+        fig_roll.update_layout(
+            xaxis_title="Bet # (chronological)",
+            yaxis_title="Win Rate (%)",
+            yaxis_range=[30, 80],
+            plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#aab4c5", size=12, family="Inter, sans-serif"),
+            xaxis=dict(gridcolor="#232b3d", zerolinecolor="#232b3d"),
+            yaxis=dict(gridcolor="#232b3d", zerolinecolor="#232b3d",
+                       ticksuffix="%"),
+            legend=dict(bgcolor="rgba(0,0,0,0)", orientation="h",
+                        yanchor="bottom", y=1.02, xanchor="left", x=0),
+            height=260,
+            margin=dict(l=0, r=0, t=24, b=0),
+        )
+        st.plotly_chart(fig_roll, width='stretch', config={"displayModeBar": False})
+
+        # Trend indicator: compare last 20 bets to overall average
+        last20_wr = bets.tail(20)["won"].mean() * 100
+        overall_wr = bets["won"].mean() * 100
+        trend_delta = last20_wr - overall_wr
+        trend_color = "var(--green)" if trend_delta >= 0 else "var(--red)"
+        trend_arrow = "↑" if trend_delta >= 0 else "↓"
+        st.html(f"""
+        <div style="display:flex;gap:24px;padding:6px 2px 2px 2px">
+            <div>
+                <span style="color:var(--ink-4);font-size:0.68em;font-weight:700;
+                             text-transform:uppercase;letter-spacing:.08em">Last 20 bets</span>
+                <span class="num" style="color:{trend_color};font-weight:800;
+                                          font-size:0.92em;margin-left:8px">
+                    {last20_wr:.1f}% {trend_arrow}</span>
+            </div>
+            <div>
+                <span style="color:var(--ink-4);font-size:0.68em;font-weight:700;
+                             text-transform:uppercase;letter-spacing:.08em">vs. overall</span>
+                <span class="num" style="color:{trend_color};font-weight:800;
+                                          font-size:0.92em;margin-left:8px">
+                    {trend_delta:+.1f}pp</span>
+            </div>
+            <div>
+                <span style="color:var(--ink-4);font-size:0.68em;font-weight:700;
+                             text-transform:uppercase;letter-spacing:.08em">Break-even gap</span>
+                <span class="num" style="color:{'var(--green)' if last20_wr >= 52.38 else 'var(--red)'};
+                                          font-weight:800;font-size:0.92em;margin-left:8px">
+                    {last20_wr - 52.38:+.1f}pp</span>
+            </div>
+        </div>
+        """)
+    else:
+        st.caption(f"Need at least {_WINDOW} bets for rolling window — lower edge thresholds or use all seasons.")
+
     st.markdown("---")
     left_col, right_col = st.columns(2)
 
@@ -2942,6 +3069,27 @@ def main():
             st.session_state["run_season"] = season
             st.session_state["run_week"]   = week
 
+        # ── Bankroll calculator ───────────────────────────────────────────
+        st.divider()
+        st.markdown(
+            '<div style="color:#67738a;font-size:0.7em;font-weight:700;'
+            'letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px">'
+            'Bankroll</div>', unsafe_allow_html=True)
+        bankroll = st.number_input(
+            "Bankroll ($)",
+            min_value=100, max_value=1_000_000,
+            value=st.session_state.get("bankroll", 1000),
+            step=100,
+            label_visibility="collapsed",
+            help="Your total betting bankroll. 1 unit = 1% of this amount.",
+        )
+        st.session_state["bankroll"] = bankroll
+        unit_val = bankroll / 100
+        st.markdown(
+            f'<div style="color:#67738a;font-size:0.72em;margin-top:2px">'
+            f'1u = <b style="color:#f3f5f9">${unit_val:,.0f}</b></div>',
+            unsafe_allow_html=True)
+
         # Pending bets badge
         pending = [b for b in load_bets() if b["status"] == "Pending"]
         if pending:
@@ -3305,6 +3453,65 @@ def main():
             else:
                 for _, row in preds.iterrows():
                     render_all_game_card(row, season, week)
+
+        # ── Bankroll summary for this week ────────────────────────────────
+        if plays:
+            bankroll_val = st.session_state.get("bankroll", 1000)
+            unit_val     = bankroll_val / 100
+            with st.expander("💰 This week's bet sizes", expanded=False):
+                st.caption(
+                    f"Based on your bankroll of **${bankroll_val:,}** · 1u = ${unit_val:.0f} · "
+                    f"Quarter-Kelly sizing · Max 3u per game"
+                )
+                bk_rows = []
+                for play in plays[:8]:
+                    r = play["row"]
+                    if play["kind"] == "total":
+                        is_under = r["totals_edge"] < 0
+                        edge_abs = abs(r["totals_edge"])
+                        u = kelly_units_spread(edge_abs)
+                        side = "UNDER" if is_under else "OVER"
+                        line_str = f"{r['over_under']:.1f}" if pd.notna(r.get("over_under")) else "TBD"
+                        pick_str = f"{side} {line_str}"
+                        bet_type = "Total"
+                        edge_str = f"{r['totals_edge']:+.1f} pts"
+                    elif play["kind"] == "ml":
+                        u = kelly_units_ml(r["ml_ev"])
+                        ml_odds = r["ml_book_odds"]
+                        label   = f"+{int(ml_odds)}" if ml_odds > 0 else str(int(ml_odds))
+                        pick_str = f"{r['ml_team']} ML {label}"
+                        bet_type = "ML"
+                        edge_str = f"EV {r['ml_ev']:+.1%}"
+                    else:
+                        u = 1
+                        is_home = r["spread_edge"] > 0
+                        team    = r["home_team"] if is_home else r["away_team"]
+                        sp      = r["spread"]
+                        sp_str  = (f"{sp:+.1f}" if is_home else f"{-sp:+.1f}") if pd.notna(sp) else ""
+                        pick_str = f"{team} {sp_str}"
+                        bet_type = "Spread"
+                        edge_str = f"{r['spread_edge']:+.1f} pts"
+
+                    bk_rows.append({
+                        "Matchup": f"{r['away_team']} @ {r['home_team']}",
+                        "Pick":    pick_str,
+                        "Type":    bet_type,
+                        "Edge":    edge_str,
+                        "Kelly":   f"{u}u",
+                        "$ Amount": f"${u * unit_val:,.0f}",
+                    })
+
+                if bk_rows:
+                    bk_df = pd.DataFrame(bk_rows)
+                    total_exposure = sum(int(r["Kelly"][0]) * unit_val for r in bk_rows)
+                    st.dataframe(bk_df, width="stretch", hide_index=True)
+                    st.markdown(
+                        f'<div style="color:var(--ink-4);font-size:0.76em;margin-top:6px">'
+                        f'Total exposure if all placed: '
+                        f'<b style="color:var(--ink-2)">${total_exposure:,.0f}</b> '
+                        f'({total_exposure / bankroll_val:.1%} of bankroll)</div>',
+                        unsafe_allow_html=True
+                    )
 
         st.markdown(
             '<div style="color:#4b5563;font-size:0.78em;padding:16px 0 8px 0">'

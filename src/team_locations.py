@@ -4,9 +4,33 @@ Used to compute travel distance (away team home → game venue).
 
 Coordinates are approximate lat/lon of each team's home stadium.
 Unknown teams get a fallback of (None, None) and travel features are NaN.
+
+Priority:
+  1. data/processed/team_locations_cfbd.json  (CFBD API — run fetch_team_locations.py)
+  2. STADIUM_COORDS dict below                (hardcoded fallback ~130 teams)
+
+Run `python3 scripts/fetch_team_locations.py` to refresh the API cache.
 """
 
+import json
 from math import radians, sin, cos, sqrt, atan2
+from pathlib import Path
+
+# ── Load CFBD API cache (if it exists) ───────────────────────────────────────
+
+def _load_cfbd_cache() -> dict[str, tuple[float, float]]:
+    """Load team → (lat, lon) from the CFBD-fetched JSON cache."""
+    cache_path = Path(__file__).parent.parent / "data" / "processed" / "team_locations_cfbd.json"
+    if not cache_path.exists():
+        return {}
+    try:
+        raw: dict = json.loads(cache_path.read_text())
+        return {team: tuple(coords) for team, coords in raw.items()
+                if isinstance(coords, list) and len(coords) == 2}
+    except Exception:
+        return {}
+
+_CFBD_COORDS: dict[str, tuple[float, float]] = _load_cfbd_cache()
 
 # team name → (latitude, longitude)
 STADIUM_COORDS: dict[str, tuple[float, float]] = {
@@ -173,7 +197,12 @@ def haversine_miles(lat1: float, lon1: float, lat2: float, lon2: float) -> float
 
 
 def get_coords(team: str) -> tuple[float, float] | tuple[None, None]:
-    """Return (lat, lon) for a team, or (None, None) if unknown."""
+    """
+    Return (lat, lon) for a team, or (None, None) if unknown.
+    Checks CFBD API cache first, then falls back to hardcoded STADIUM_COORDS.
+    """
+    if team in _CFBD_COORDS:
+        return _CFBD_COORDS[team]
     return STADIUM_COORDS.get(team, (None, None))
 
 
