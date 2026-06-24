@@ -1065,6 +1065,44 @@ def inject_css():
         margin: 2px 4px 2px 0; white-space: nowrap;
     }
     .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+    /* ── Panel cards (right column) ── */
+    .panel-card {
+        background: linear-gradient(180deg, var(--card-hi), var(--card));
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 16px 12px 16px;
+        margin-bottom: 10px;
+    }
+    .panel-card .panel-label {
+        color: var(--ink-4);
+        font-size: 0.62em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+    .panel-bet-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 5px 0;
+        border-bottom: 1px solid var(--line);
+    }
+    .panel-bet-row:last-child { border-bottom: none; }
+
+    /* ── Edge strength bar on pick cards ── */
+    .edge-bar-track {
+        height: 3px;
+        background: var(--line);
+        border-radius: 999px;
+        margin: 6px 0 10px 0;
+        overflow: hidden;
+    }
+    .edge-bar-fill {
+        height: 100%;
+        border-radius: 999px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -1275,12 +1313,15 @@ def _stat_footer_html(cells: list[tuple[str, str, str]]) -> str:
 def _pick_card_html(*, accent: str, kind_badge: str, kind_color: str,
                     tier: tuple[str, str], headline: str, big_num: str,
                     sub: str, meters: str, chips: str, footer: str,
-                    metric_html: str) -> str:
+                    metric_html: str, edge_pct: float = 0.0) -> str:
+    """edge_pct 0-100: drives the thin strength bar under the badge row."""
     tier_label, tier_color = tier
+    bar_color = ("var(--green)" if edge_pct >= 60 else
+                 "var(--gold)"  if edge_pct >= 35 else "var(--ink-3)")
     return f"""
     <div class="pick-card">
         <div class="accent" style="background:{accent}"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
                 <span style="background:{kind_color};color:#0b0e14;font-size:0.62em;
                              font-weight:800;letter-spacing:0.1em;padding:3px 9px;
@@ -1290,6 +1331,9 @@ def _pick_card_html(*, accent: str, kind_badge: str, kind_color: str,
                              border-radius:5px">{tier_label}</span>
             </div>
             {metric_html}
+        </div>
+        <div class="edge-bar-track">
+            <div class="edge-bar-fill" style="width:{min(edge_pct,100):.0f}%;background:{bar_color}"></div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="color:var(--ink);font-size:1.15em;font-weight:800;letter-spacing:-0.01em">{headline}</span>
@@ -1321,6 +1365,7 @@ def render_moneyline_card(row, season, week):
               f'<span class="num" style="color:{ev_color};font-size:0.85em;font-weight:800">EV {ev_str}</span>'
               f'<span style="color:var(--gold);font-size:0.88em">{ev_stars(ev)}</span></div>')
 
+    _ev_pct = min(float(ev) / 0.07 * 100, 100) if ev else 0
     st.html(_pick_card_html(
         accent=accent, kind_badge="MONEYLINE", kind_color="var(--blue)",
         tier=_tier_badge("moneyline", row),
@@ -1334,6 +1379,7 @@ def render_moneyline_card(row, season, week):
             ("Kelly", unit_dollar_label(units), "var(--ink)"),
         ]),
         metric_html=metric,
+        edge_pct=_ev_pct,
     ))
     track_button(f"{team} ML {label}", matchup, "Moneyline", f"{team} ML {label}",
                  label, units, season, week, f"EV {ev:+.1%}")
@@ -1361,9 +1407,10 @@ def render_totals_card(row, season, week):
               f'Edge {edge_str}</span>'
               f'<span style="color:var(--gold);font-size:0.88em">{confidence_stars(edge_abs)}</span></div>')
 
+    _tot_pct = min(edge_abs / 8.0 * 100, 100)
     st.html(_pick_card_html(
         accent=accent, kind_badge=f"TOTAL · {side_str}", kind_color=accent,
-
+        edge_pct=_tot_pct,
         tier=_tier_badge("total", row),
         headline=f"{side_str} {ou_str}", big_num=ou_str, sub=sub,
         meters=_edge_meter_html(
@@ -1413,8 +1460,10 @@ def render_spread_card(row, season, week):
                               market_label="Vegas margin", model_label="Model margin",
                               span=7.0) + _winprob_bar_html(row)
 
+    _sp_pct = min(abs(edge) / 10.0 * 100, 100)
     st.html(_pick_card_html(
         accent=accent, kind_badge="SPREAD", kind_color=accent,
+        edge_pct=_sp_pct,
         tier=_tier_badge("spread", row),
         headline=f"{bet_on} {vl_bet}", big_num=vl_bet, sub=sub,
         meters=meters,
@@ -3025,6 +3074,144 @@ def render_history_tab():
         c3.metric("Spread Picks",  len(sp_picks))
 
 
+# ─── RIGHT BANKROLL PANEL ────────────────────────────────────────────────────
+
+def _render_right_panel(plays: list, n_strong: int, week: int):
+    """Compact right column: bankroll card, week snapshot, top bets, season form."""
+    bankroll_val = st.session_state.get("bankroll", 1000)
+    unit_val     = bankroll_val / 100
+
+    # Bankroll card
+    st.html(f"""
+    <div class="panel-card">
+        <div class="panel-label">Bankroll</div>
+        <div class="num" style="color:var(--ink);font-size:1.6em;font-weight:800;
+                                line-height:1">${bankroll_val:,}</div>
+        <div style="color:var(--ink-4);font-size:0.72em;margin-top:6px">
+            1u = <b style="color:var(--gold)">${unit_val:,.0f}</b>
+            &nbsp;·&nbsp; Quarter-Kelly sizing
+        </div>
+    </div>""")
+
+    if not plays:
+        return
+
+    def _play_units(p):
+        r = p["row"]
+        if p["kind"] == "total":
+            return kelly_units_spread(abs(r["totals_edge"]))
+        if p["kind"] == "ml":
+            return kelly_units_ml(r["ml_ev"])
+        return 1
+
+    top8      = plays[:8]
+    t_units   = sum(_play_units(p) for p in top8)
+    t_dollars = t_units * unit_val
+    pct_risk  = t_dollars / bankroll_val if bankroll_val else 0
+    pct_color = ("var(--red)"   if pct_risk > 0.12 else
+                 "var(--gold)"  if pct_risk > 0.07 else "var(--green)")
+
+    # Week snapshot card
+    st.html(f"""
+    <div class="panel-card">
+        <div class="panel-label">Week {week} Snapshot</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <div>
+                <div class="num" style="color:var(--ink);font-size:1.3em;font-weight:800">{len(plays)}</div>
+                <div style="color:var(--ink-4);font-size:0.65em;font-weight:600;
+                            text-transform:uppercase;letter-spacing:0.08em">flagged</div>
+            </div>
+            <div>
+                <div class="num" style="color:var(--green);font-size:1.3em;font-weight:800">{n_strong}</div>
+                <div style="color:var(--ink-4);font-size:0.65em;font-weight:600;
+                            text-transform:uppercase;letter-spacing:0.08em">strong</div>
+            </div>
+        </div>
+        <div style="border-top:1px solid var(--line);padding-top:8px">
+            <div style="display:flex;justify-content:space-between;font-size:0.78em">
+                <span style="color:var(--ink-3)">Total if all placed</span>
+                <span class="num" style="color:var(--ink);font-weight:700">{t_units}u &middot; ${t_dollars:,.0f}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.78em;margin-top:3px">
+                <span style="color:var(--ink-3)">% at risk</span>
+                <span class="num" style="color:{pct_color};font-weight:700">{pct_risk:.1%}</span>
+            </div>
+        </div>
+    </div>""")
+
+    # Top bets list
+    rows_html = ""
+    for i, p in enumerate(top8[:5], start=1):
+        r  = p["row"]
+        u  = _play_units(p)
+        sc = p["score"]
+        sc_col = ("var(--green)" if sc >= 60 else
+                  "var(--gold)"  if sc >= 40 else "var(--ink-3)")
+        if p["kind"] == "total":
+            is_under   = r["totals_edge"] < 0
+            ou_str     = f"{r['over_under']:.1f}" if pd.notna(r.get("over_under")) else "TBD"
+            label_str  = f"{'UNDER' if is_under else 'OVER'} {ou_str}"
+            dot_col    = "var(--cyan)" if is_under else "var(--orange)"
+        elif p["kind"] == "ml":
+            odds_str   = (f"+{int(r['ml_book_odds'])}" if r["ml_book_odds"] > 0
+                          else str(int(r["ml_book_odds"])))
+            label_str  = f"{r['ml_team']} {odds_str}"
+            dot_col    = "var(--blue)"
+        else:
+            is_home    = r["spread_edge"] > 0
+            team       = r["home_team"] if is_home else r["away_team"]
+            sp         = r.get("spread")
+            sp_str     = (f"{sp:+.1f}" if is_home else f"{-sp:+.1f}") if pd.notna(sp) else ""
+            label_str  = f"{team} {sp_str}"
+            dot_col    = "var(--violet)"
+        rows_html += f"""
+        <div class="panel-bet-row">
+            <div style="display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden">
+                <span style="color:var(--ink-4);font-size:0.65em;font-weight:700;min-width:14px">#{i}</span>
+                <div style="width:7px;height:7px;border-radius:50%;background:{dot_col};flex-shrink:0"></div>
+                <span style="color:var(--ink-2);font-size:0.75em;font-weight:600;
+                             overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{label_str}</span>
+            </div>
+            <div style="flex-shrink:0;padding-left:6px;text-align:right">
+                <span class="num" style="color:{sc_col};font-size:0.72em;font-weight:700">{u}u</span>
+                <span style="color:var(--ink-4);font-size:0.68em;margin-left:3px">${u * unit_val:,.0f}</span>
+            </div>
+        </div>"""
+
+    st.html(f"""
+    <div class="panel-card">
+        <div class="panel-label">Top Bets</div>
+        {rows_html}
+    </div>""")
+
+    # Season form (if settled bets exist)
+    all_bets = load_bets()
+    settled  = [b for b in all_bets if b["status"] in ("Won", "Lost")]
+    if settled:
+        wins     = sum(1 for b in settled if b["status"] == "Won")
+        losses   = len(settled) - wins
+        wr       = wins / len(settled)
+        wr_col   = "var(--green)" if wr >= 0.55 else "var(--red)" if wr < 0.45 else "var(--gold)"
+        pnl      = sum(bet_pnl(b) for b in settled)
+        pnl_col  = "var(--green)" if pnl > 0 else "var(--red)" if pnl < 0 else "var(--ink-3)"
+        st.html(f"""
+        <div class="panel-card">
+            <div class="panel-label">Season Form</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div>
+                    <div class="num" style="color:{wr_col};font-size:1.25em;font-weight:800">{wr:.0%}</div>
+                    <div style="color:var(--ink-4);font-size:0.65em;font-weight:600;
+                                text-transform:uppercase">{wins}-{losses}</div>
+                </div>
+                <div>
+                    <div class="num" style="color:{pnl_col};font-size:1.25em;font-weight:800">{pnl:+.1f}u</div>
+                    <div style="color:var(--ink-4);font-size:0.65em;font-weight:600;
+                                text-transform:uppercase">net units</div>
+                </div>
+            </div>
+        </div>""")
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -3319,140 +3506,145 @@ def main():
         if not has_lines:
             st.warning("No Vegas lines yet — lines usually appear 7–10 days before kickoff.")
 
-        view = st.radio(
-            "View",
-            ["Top Plays", "Totals", "Spreads", "Moneylines", "All Games"],
-            horizontal=True,
-            label_visibility="collapsed",
-        )
+        # ── Two-column: picks feed (3/4) + bankroll panel (1/4) ──────────
+        _feed_col, _panel_col = st.columns([3, 1], gap="large")
+        with _panel_col:
+            _render_right_panel(plays, n_strong, week)
+        with _feed_col:
+            view = st.radio(
+                "View",
+                ["Top Plays", "Totals", "Spreads", "Moneylines", "All Games"],
+                horizontal=True,
+                label_visibility="collapsed",
+            )
 
-        # ── Top Plays: one ranked board across all bet types ──────────────
-        if view == "Top Plays":
-            if not plays:
-                st.info("No picks clear the edge thresholds this week — that's the model "
-                        "telling you to keep your bankroll. Check All Games for projections.")
-            else:
-                section_header("Top Plays",
-                               "Ranked by edge × how this bet type performs historically")
-                for rank, play in enumerate(plays[:8], start=1):
-                    score = play["score"]
-                    score_color = ("var(--green)" if score >= 60
-                                   else "var(--gold)" if score >= 40 else "var(--ink-3)")
-                    st.html(f"""
-                    <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px 2px">
-                        <span class="num" style="color:var(--ink-4);font-size:0.95em;
-                              font-weight:800">#{rank}</span>
-                        <div style="flex:1;height:4px;border-radius:999px;background:var(--line);
-                                    position:relative;max-width:160px">
-                            <div style="position:absolute;left:0;top:0;bottom:0;border-radius:999px;
-                                        width:{min(score, 100):.0f}%;background:{score_color}"></div>
-                        </div>
-                        <span class="num" style="color:{score_color};font-size:0.72em;
-                              font-weight:800">{score:.0f}</span>
-                    </div>""")
-                    if play["kind"] == "total":
-                        render_totals_card(play["row"], season, week)
-                    elif play["kind"] == "ml":
-                        render_moneyline_card(play["row"], season, week)
-                    else:
-                        render_spread_card(play["row"], season, week)
-
-        # ── Totals ────────────────────────────────────────────────────────
-        elif view == "Totals":
-            section_header("Totals", "Unders are the proven pocket — treat overs with caution")
-            if tot_bets.empty:
-                st.info("No totals bets meet the threshold this week.")
-            else:
-                under_bets = tot_bets[tot_bets["totals_edge"] < 0]
-                over_bets  = tot_bets[tot_bets["totals_edge"] > 0]
-                if not under_bets.empty:
-                    st.markdown(
-                        '<span style="color:#06b6d4;font-size:0.75em;font-weight:700;'
-                        'text-transform:uppercase;letter-spacing:0.1em">Unders</span>',
-                        unsafe_allow_html=True)
-                    for _, row in under_bets.iterrows():
-                        render_totals_card(row, season, week)
-                if not over_bets.empty:
-                    st.markdown(
-                        '<span style="color:#f97316;font-size:0.75em;font-weight:700;'
-                        'text-transform:uppercase;letter-spacing:0.1em">Overs</span>',
-                        unsafe_allow_html=True)
-                    for _, row in over_bets.iterrows():
-                        render_totals_card(row, season, week)
-
-        # ── Spreads ───────────────────────────────────────────────────────
-        elif view == "Spreads":
-            section_header("Spreads", "Informational only · near breakeven")
-            if sp_bets.empty:
-                st.info("No spread bets meet the threshold this week.")
-            else:
-                for _, row in sp_bets.iterrows():
-                    render_spread_card(row, season, week)
-
-        # ── Moneylines ────────────────────────────────────────────────────
-        elif view == "Moneylines":
-            section_header("Moneylines", "Selective favorites held up in '25 — dogs are high variance")
-            if not has_lines or preds["home_moneyline"].isna().all():
-                st.info("No moneyline data yet — appears closer to kickoff.")
-            elif ml_bets.empty:
-                st.info("No +EV moneyline bets this week.")
-            else:
-                dog_bets = ml_bets[ml_bets["ml_book_odds"] > 0]
-                fav_bets = ml_bets[ml_bets["ml_book_odds"] <= 0]
-                if not dog_bets.empty:
-                    st.markdown(
-                        '<span style="color:#3b82f6;font-size:0.75em;font-weight:700;'
-                        'text-transform:uppercase;letter-spacing:0.1em">Underdogs</span>',
-                        unsafe_allow_html=True)
-                    for _, row in dog_bets.iterrows():
-                        render_moneyline_card(row, season, week)
-                if not fav_bets.empty:
-                    st.markdown(
-                        '<span style="color:#6b7280;font-size:0.75em;font-weight:700;'
-                        'text-transform:uppercase;letter-spacing:0.1em">Favorites</span>',
-                        unsafe_allow_html=True)
-                    for _, row in fav_bets.iterrows():
-                        render_moneyline_card(row, season, week)
-
-        # ── All Games ─────────────────────────────────────────────────────
-        if view == "All Games":
-            section_header(f"All Games — Week {week}",
-                           "Expand any game to track a spread, total, or moneyline bet")
-
-            search_col, clear_col = st.columns([4, 1])
-            with search_col:
-                team_search = st.text_input(
-                    "Search teams",
-                    placeholder="e.g. Ohio State, Michigan, Alabama…",
-                    label_visibility="collapsed",
-                    key="team_search",
-                )
-            with clear_col:
-                if st.button("Clear", key="clear_search", width='stretch'):
-                    st.session_state["team_search"] = ""
-                    st.rerun()
-
-            query = team_search.strip().lower()
-            if query:
-                filtered_preds = preds[
-                    preds["home_team"].str.lower().str.contains(query, na=False) |
-                    preds["away_team"].str.lower().str.contains(query, na=False)
-                ]
-                if filtered_preds.empty:
-                    st.info(f'No games found matching "{team_search}" this week.')
+            # ── Top Plays: one ranked board across all bet types ──────────
+            if view == "Top Plays":
+                if not plays:
+                    st.info("No picks clear the edge thresholds this week — that's the model "
+                            "telling you to keep your bankroll. Check All Games for projections.")
                 else:
-                    match_word = "game" if len(filtered_preds) == 1 else "games"
-                    st.markdown(
-                        f'<div style="color:#4b5563;font-size:0.8em;margin-bottom:6px">'
-                        f'{len(filtered_preds)} {match_word} matching '
-                        f'<span style="color:#ffffff">"{team_search}"</span></div>',
-                        unsafe_allow_html=True,
+                    section_header("Top Plays",
+                                   "Ranked by edge × how this bet type performs historically")
+                    for rank, play in enumerate(plays[:8], start=1):
+                        score = play["score"]
+                        score_color = ("var(--green)" if score >= 60
+                                       else "var(--gold)" if score >= 40 else "var(--ink-3)")
+                        st.html(f"""
+                        <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px 2px">
+                            <span class="num" style="color:var(--ink-4);font-size:0.95em;
+                                  font-weight:800">#{rank}</span>
+                            <div style="flex:1;height:4px;border-radius:999px;background:var(--line);
+                                        position:relative;max-width:160px">
+                                <div style="position:absolute;left:0;top:0;bottom:0;border-radius:999px;
+                                            width:{min(score, 100):.0f}%;background:{score_color}"></div>
+                            </div>
+                            <span class="num" style="color:{score_color};font-size:0.72em;
+                                  font-weight:800">{score:.0f}</span>
+                        </div>""")
+                        if play["kind"] == "total":
+                            render_totals_card(play["row"], season, week)
+                        elif play["kind"] == "ml":
+                            render_moneyline_card(play["row"], season, week)
+                        else:
+                            render_spread_card(play["row"], season, week)
+
+            # ── Totals ────────────────────────────────────────────────────────
+            elif view == "Totals":
+                section_header("Totals", "Unders are the proven pocket — treat overs with caution")
+                if tot_bets.empty:
+                    st.info("No totals bets meet the threshold this week.")
+                else:
+                    under_bets = tot_bets[tot_bets["totals_edge"] < 0]
+                    over_bets  = tot_bets[tot_bets["totals_edge"] > 0]
+                    if not under_bets.empty:
+                        st.markdown(
+                            '<span style="color:#06b6d4;font-size:0.75em;font-weight:700;'
+                            'text-transform:uppercase;letter-spacing:0.1em">Unders</span>',
+                            unsafe_allow_html=True)
+                        for _, row in under_bets.iterrows():
+                            render_totals_card(row, season, week)
+                    if not over_bets.empty:
+                        st.markdown(
+                            '<span style="color:#f97316;font-size:0.75em;font-weight:700;'
+                            'text-transform:uppercase;letter-spacing:0.1em">Overs</span>',
+                            unsafe_allow_html=True)
+                        for _, row in over_bets.iterrows():
+                            render_totals_card(row, season, week)
+
+            # ── Spreads ───────────────────────────────────────────────────────
+            elif view == "Spreads":
+                section_header("Spreads", "Informational only · near breakeven")
+                if sp_bets.empty:
+                    st.info("No spread bets meet the threshold this week.")
+                else:
+                    for _, row in sp_bets.iterrows():
+                        render_spread_card(row, season, week)
+
+            # ── Moneylines ────────────────────────────────────────────────────
+            elif view == "Moneylines":
+                section_header("Moneylines", "Selective favorites held up in '25 — dogs are high variance")
+                if not has_lines or preds["home_moneyline"].isna().all():
+                    st.info("No moneyline data yet — appears closer to kickoff.")
+                elif ml_bets.empty:
+                    st.info("No +EV moneyline bets this week.")
+                else:
+                    dog_bets = ml_bets[ml_bets["ml_book_odds"] > 0]
+                    fav_bets = ml_bets[ml_bets["ml_book_odds"] <= 0]
+                    if not dog_bets.empty:
+                        st.markdown(
+                            '<span style="color:#3b82f6;font-size:0.75em;font-weight:700;'
+                            'text-transform:uppercase;letter-spacing:0.1em">Underdogs</span>',
+                            unsafe_allow_html=True)
+                        for _, row in dog_bets.iterrows():
+                            render_moneyline_card(row, season, week)
+                    if not fav_bets.empty:
+                        st.markdown(
+                            '<span style="color:#6b7280;font-size:0.75em;font-weight:700;'
+                            'text-transform:uppercase;letter-spacing:0.1em">Favorites</span>',
+                            unsafe_allow_html=True)
+                        for _, row in fav_bets.iterrows():
+                            render_moneyline_card(row, season, week)
+
+            # ── All Games ─────────────────────────────────────────────────────
+            if view == "All Games":
+                section_header(f"All Games — Week {week}",
+                               "Expand any game to track a spread, total, or moneyline bet")
+
+                search_col, clear_col = st.columns([4, 1])
+                with search_col:
+                    team_search = st.text_input(
+                        "Search teams",
+                        placeholder="e.g. Ohio State, Michigan, Alabama…",
+                        label_visibility="collapsed",
+                        key="team_search",
                     )
-                    for _, row in filtered_preds.iterrows():
+                with clear_col:
+                    if st.button("Clear", key="clear_search", width='stretch'):
+                        st.session_state["team_search"] = ""
+                        st.rerun()
+
+                query = team_search.strip().lower()
+                if query:
+                    filtered_preds = preds[
+                        preds["home_team"].str.lower().str.contains(query, na=False) |
+                        preds["away_team"].str.lower().str.contains(query, na=False)
+                    ]
+                    if filtered_preds.empty:
+                        st.info(f'No games found matching "{team_search}" this week.')
+                    else:
+                        match_word = "game" if len(filtered_preds) == 1 else "games"
+                        st.markdown(
+                            f'<div style="color:#4b5563;font-size:0.8em;margin-bottom:6px">'
+                            f'{len(filtered_preds)} {match_word} matching '
+                            f'<span style="color:#ffffff">"{team_search}"</span></div>',
+                            unsafe_allow_html=True,
+                        )
+                        for _, row in filtered_preds.iterrows():
+                            render_all_game_card(row, season, week)
+                else:
+                    for _, row in preds.iterrows():
                         render_all_game_card(row, season, week)
-            else:
-                for _, row in preds.iterrows():
-                    render_all_game_card(row, season, week)
 
         # ── Bankroll summary for this week ────────────────────────────────
         if plays:
