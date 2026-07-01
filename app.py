@@ -667,7 +667,7 @@ def build_and_predict(games, lines, ratings, epa, elo,
 
     # ── Build output frame ────────────────────────────────────────────────
     out_cols = ["game_id", "season", "week", "start_date",
-                "home_team", "away_team",
+                "home_team", "away_team", "home_conference", "away_conference",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline",
                 "home_unrated", "away_unrated", "has_unrated_opponent",
@@ -676,6 +676,9 @@ def build_and_predict(games, lines, ratings, epa, elo,
                 "sp_diff", "elo_diff", "fpi_diff", "srs_diff",
                 "wepa_off_diff", "wepa_def_diff", "rest_diff", "hfa_diff",
                 "talent_diff", "portal_net_rating_diff", "line_movement",
+                "sharp_move_home", "sharp_move_away",
+                "sharp_total_under", "sharp_total_over",
+                "spread_open_val", "total_movement",
                 "tempo_combined", "rush_rate_combined"]
     out = df[[c for c in out_cols if c in df.columns]].copy()
     if "provider" in df.columns:
@@ -1169,13 +1172,40 @@ def track_button(label: str, game: str, bet_type: str, pick: str,
 #   3. Confidence tiers grounded in the actual 2025 holdout backtest —
 #      the UI itself encodes which bet types have historically worked.
 
+# Power-4 (and legacy power) conferences for segment gating. Walk-forward
+# 2019-25: totals edge only exists when a power team is involved — G5vG5
+# totals hit 48.2% and are excluded from CORE.
+_POWER_CONFS = {"SEC", "Big Ten", "Big 12", "ACC", "Pac-12", "Pac-10",
+                "Big East", "FBS Independents"}
+
+def _power_involved(row) -> bool:
+    return (row.get("home_conference") in _POWER_CONFS
+            or row.get("away_conference") in _POWER_CONFS)
+
+
 def _tier_badge(kind: str, row) -> tuple[str, str]:
-    """Return (label, color) tier grounded in 2025 holdout results."""
+    """Return (label, color) tier gated by walk-forward results 2019-25
+    (5,100 games). Segments below are the only ones that cleared breakeven:
+      - Unders, edge>=2, power-conf involved: 55.8% (n=868, +6.4% ROI)
+      - Everything else totals: no edge (overs 49.4%, G5vG5 48.2%)
+      - Spreads wk10+: 44.7% at edge>=3 — actively bad, flagged PASS
+      - Spreads wk1-3 edge>=3: 53.5% (n=484) — marginal, watch-list only
+    """
     if kind == "total":
-        if row["totals_edge"] < 0:
-            return "CORE PLAY", "var(--green)"      # unders = only positive totals pocket
-        return "CAUTION · OVERS 41% IN '25", "var(--orange)"
+        edge = row["totals_edge"]
+        if edge < 0:  # under pick
+            if abs(edge) >= 2 and _power_involved(row):
+                return "CORE PLAY · 55.8% '19-'25", "var(--green)"
+            if abs(edge) >= 2:
+                return "MARGINAL · G5 NO EDGE", "var(--ink-3)"
+            return "LEAN · BELOW EDGE MIN", "var(--ink-3)"
+        return "CAUTION · OVERS 49% '19-'25", "var(--orange)"
     if kind == "spread":
+        wk = int(row.get("week", 0) or 0)
+        if wk >= 10:
+            return "PASS · 44.7% ATS WK10+", "var(--red)"
+        if wk <= 3 and abs(row.get("spread_edge", 0) or 0) >= 3:
+            return "WATCH · 53.5% EARLY SZN", "var(--blue)"
         return "INFO ONLY · ~50% ATS", "var(--ink-3)"
     # moneyline
     if row.get("ml_book_odds", 0) > 0:
@@ -1282,10 +1312,18 @@ def _driver_chips_html(row, kind: str) -> str:
         if portal is not None and abs(portal) >= 8:
             add("🔄", f"Portal winner: {team_for(portal)}")
 
+    # Line movement shown as neutral fact only. Walk-forward validation
+    # (2023-25 openers, n=2353) found movement-agrees-with-pick adds no edge
+    # on spreads and is *inverted* on totals — never present it as confirmation.
     lm = _get("line_movement")
     if lm is not None and abs(lm) >= 1.5:
         toward = row["home_team"] if lm < 0 else row["away_team"]
         add("📈", f"Line moved {abs(lm):.1f} toward {toward}", "var(--blue)")
+    if kind == "total":
+        tm = _get("total_movement")
+        if tm is not None and abs(tm) >= 2.0:
+            direction = "Over" if tm > 0 else "Under"
+            add("📈", f"Total moved {abs(tm):.1f} toward {direction}", "var(--blue)")
     if bool(row.get("has_unrated_opponent", False)):
         add("❓", "Unrated opponent — low data confidence", "var(--red)")
     qb_adj = _get("qb_adjustment")
@@ -3164,6 +3202,22 @@ def _render_right_panel(plays: list, n_strong: int, week: int):
             sp_str     = (f"{sp:+.1f}" if is_home else f"{-sp:+.1f}") if pd.notna(sp) else ""
             label_str  = f"{team} {sp_str}"
             dot_col    = "var(--violet)"
+        # Sharp confirmation check for this play
+        _sh = False
+        if p["kind"] == "total":
+            is_un  = r["totals_edge"] < 0
+            _sh = bool(int(r.get("sharp_total_under", 0) or 0) if is_un
+                       else int(r.get("sharp_total_over", 0) or 0))
+        elif p["kind"] == "ml":
+            _ml_home = (r.get("ml_team") == r.get("home_team"))
+            _sh = bool(int(r.get("sharp_move_home", 0) or 0) if _ml_home
+                       else int(r.get("sharp_move_away", 0) or 0))
+        else:
+            is_h_sp = r["spread_edge"] > 0
+            _sh = bool(int(r.get("sharp_move_home", 0) or 0) if is_h_sp
+                       else int(r.get("sharp_move_away", 0) or 0))
+        sharp_pip = ('<span style="color:var(--gold);font-size:0.75em;margin-left:2px" '
+                     'title="Sharp money confirmed">⚡</span>' if _sh else "")
         rows_html += f"""
         <div class="panel-bet-row">
             <div style="display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden">
@@ -3171,6 +3225,7 @@ def _render_right_panel(plays: list, n_strong: int, week: int):
                 <div style="width:7px;height:7px;border-radius:50%;background:{dot_col};flex-shrink:0"></div>
                 <span style="color:var(--ink-2);font-size:0.75em;font-weight:600;
                              overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{label_str}</span>
+                {sharp_pip}
             </div>
             <div style="flex-shrink:0;padding-left:6px;text-align:right">
                 <span class="num" style="color:{sc_col};font-size:0.72em;font-weight:700">{u}u</span>
