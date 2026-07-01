@@ -56,8 +56,15 @@ def load_api_key() -> str:
 CFB_KEY      = load_api_key()
 CFB_BASE     = "https://api.collegefootballdata.com"
 EDGE_MIN_SP  = 3.0   # minimum spread edge to flag as a pick
-EDGE_MIN_TOT = 2.5   # minimum totals edge to flag
+EDGE_MIN_TOT = 2.0   # minimum totals edge (CORE gate: unders, power-conf)
+ML_EV_MIN    = 0.04  # minimum moneyline EV (matches app MONEYLINE_EV_MIN)
+SPREAD_MAX_WEEK = 9  # spreads hit 44.7% ATS wk10+ in walk-forward — no picks
 RECIPIENT    = os.getenv("RECIPIENT_EMAIL", "alexwaked@me.com")
+
+# Walk-forward 2019-25: totals edge only exists on unders in games with a
+# power-conference team (55.8%, n=868). Same gate as the app's CORE PLAY.
+POWER_CONFS = {"SEC", "Big Ten", "Big 12", "ACC", "Pac-12", "Pac-10",
+               "Big East", "FBS Independents"}
 
 def cfb_get(endpoint, params=None):
     headers = {"Authorization": f"Bearer {CFB_KEY}"}
@@ -86,170 +93,28 @@ def current_cfb_week(season: int) -> int:
 def last_cfb_week(season: int) -> int:
     return max(1, current_cfb_week(season) - 1)
 
-# ── Fetch schedule and lines ──────────────────────────────────────────────────
-
-def fetch_week_games(season: int, week: int, season_type: str = "regular") -> list:
-    """Fetch scheduled games for a given week."""
-    try:
-        data = cfb_get("games", params={
-            "year": season, "week": week, "seasonType": season_type,
-            "division": "fbs"
-        })
-        return data or []
-    except Exception as e:
-        print(f"  Warning: could not fetch games for week {week}: {e}")
-        return []
-
-def fetch_week_lines(season: int, week: int) -> dict:
-    """Fetch betting lines keyed by game_id."""
-    try:
-        data = cfb_get("lines", params={"year": season, "week": week})
-        lines = {}
-        priority = ["consensus", "Bovada", "DraftKings", "ESPN Bet"]
-        for game in data:
-            gid = game.get("id")
-            best = None
-            best_rank = 999
-            for line in game.get("lines", []):
-                rank = next((i for i, p in enumerate(priority)
-                             if p.lower() in (line.get("provider") or "").lower()), 999)
-                if rank < best_rank and line.get("spread") is not None:
-                    best_rank = rank
-                    best = line
-            if best:
-                lines[gid] = {
-                    "spread":       best.get("spread"),
-                    "over_under":   best.get("overUnder"),
-                    "home_ml":      best.get("homeMoneyline"),
-                    "away_ml":      best.get("awayMoneyline"),
-                }
-        return lines
-    except Exception as e:
-        print(f"  Warning: could not fetch lines: {e}")
-        return {}
-
 # ── Model prediction ─────────────────────────────────────────────────────────
+# Predictions come from weekly_pipeline's full feature stack (ratings, EPA,
+# Elo, travel, portal, etc.). The old inline path here fed mostly-NaN feature
+# frames to the models and produced absurd edges on nearly every game.
 
-def load_models():
-    """Load trained models and feature lists."""
-    import joblib
-    models_dir = ROOT / "models"
-    spread_model   = joblib.load(models_dir / "spread_model.pkl")
-    totals_model   = joblib.load(models_dir / "totals_model.pkl")
-    win_prob_model = joblib.load(models_dir / "win_prob_model.pkl")
-    with open(models_dir / "feature_lists.json") as f:
-        feature_lists = json.load(f)
-    return spread_model, totals_model, win_prob_model, feature_lists
-
-def make_simple_features(games_df: pd.DataFrame, feature_names: list) -> pd.DataFrame:
-    """Build feature matrix from available columns, filling NaN for missing."""
-    out = pd.DataFrame(index=games_df.index)
-    for f in feature_names:
-        out[f] = games_df[f] if f in games_df.columns else np.nan
-    return out
-
-def predict_games(games: list, lines: dict) -> list:
+def predict_games(season: int, week: int) -> list:
     """
-    Run model predictions on a list of game dicts.
-    Returns list of pick dicts for games meeting edge threshold.
+    Fetch schedule + lines and run the full weekly_pipeline prediction path.
+    Returns list of pick dicts for games meeting the gated thresholds.
     """
-    if not games or not lines:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import weekly_pipeline as wp
+
+    games = wp.fetch_schedule(season, week)
+    if games.empty:
         return []
-
-    try:
-        sys.path.insert(0, str(ROOT / "src"))
-        from features import (load_sp_ratings, load_wepa, load_talent, load_havoc,
-                               load_fpi_ratings, load_srs_ratings,
-                               load_conference_familiarity)
-        sp     = load_sp_ratings()
-        wepa   = load_wepa()
-        talent = load_talent()
-        havoc  = load_havoc()
-    except Exception as e:
-        print(f"  Warning: could not load features: {e}")
-        sp = wepa = talent = havoc = pd.DataFrame()
-
-    spread_model, totals_model, win_prob_model, feature_lists = load_models()
-
-    # Build minimal game DataFrame
-    rows = []
-    for g in games:
-        gid  = g.get("id")
-        line = lines.get(gid, {})
-        spread   = line.get("spread")
-        over_under = line.get("over_under")
-        if spread is None and over_under is None:
-            continue   # no line data yet
-        rows.append({
-            "game_id":        gid,
-            "season":         g.get("season"),
-            "week":           g.get("week"),
-            "home_team":      g.get("homeTeam"),
-            "away_team":      g.get("awayTeam"),
-            "neutral_site":   int(g.get("neutralSite") or False),
-            "conference_game": int(g.get("conferenceGame") or False),
-            "start_date":     g.get("startDate"),
-            "spread":         spread,
-            "over_under":     over_under,
-            "home_moneyline": line.get("home_ml"),
-            "away_moneyline": line.get("away_ml"),
-            "home_pregame_elo": g.get("homePregameElo"),
-            "away_pregame_elo": g.get("awayPregameElo"),
-        })
-
-    if not rows:
-        return []
-
-    df = pd.DataFrame(rows)
-    df["spread"]     = pd.to_numeric(df["spread"],     errors="coerce")
-    df["over_under"] = pd.to_numeric(df["over_under"], errors="coerce")
-    df["season"]     = pd.to_numeric(df["season"],     errors="coerce")
-    df["week"]       = pd.to_numeric(df["week"],       errors="coerce")
-
-    # Add week/postseason/magnitude context features
-    df["week_num"]        = df["week"].fillna(0)
-    df["is_postseason"]   = 0
-    df["late_season"]     = (df["week_num"] >= 11).astype(int)
-    df["spread_magnitude"] = df["spread"].abs()
-    df["is_big_favorite"]  = (df["spread_magnitude"] >= 14).astype(float)
-    df["vegas_home_margin"] = -df["spread"]
-    df["elo_diff"] = (pd.to_numeric(df["home_pregame_elo"], errors="coerce") -
-                      pd.to_numeric(df["away_pregame_elo"], errors="coerce"))
-
-    # Merge SP+ ratings
-    season = int(df["season"].iloc[0]) if len(df) > 0 else 2026
-    if len(sp) > 0:
-        for side in ["home", "away"]:
-            team_col = f"{side}_team"
-            sp_sub = sp[sp["season"] == season][["team", "sp_rating", "sp_offense", "sp_defense"]]
-            df = df.merge(sp_sub.rename(columns={
-                "team": team_col,
-                "sp_rating": f"{side}_sp_rating",
-                "sp_offense": f"{side}_sp_offense",
-                "sp_defense": f"{side}_sp_defense",
-            }), on=team_col, how="left")
-
-    if "home_sp_rating" in df.columns and "away_sp_rating" in df.columns:
-        df["sp_diff"] = df["home_sp_rating"] - df["away_sp_rating"]
-
-    # Generate predictions
-    sp_feats  = make_simple_features(df, feature_lists.get("spread", []))
-    tot_feats = make_simple_features(df, feature_lists.get("totals", []))
-    win_feats = make_simple_features(df, feature_lists.get("win_prob", []))
-
-    # Spread model: current models predict the residual vs the Vegas line
-    # (feature_lists.json: spread_target=margin_residual) — add the line back.
-    sp_raw = spread_model.predict(sp_feats)
-    if feature_lists.get("spread_target") == "margin_residual":
-        df["pred_spread"] = df["vegas_home_margin"] + sp_raw
-    else:
-        df["pred_spread"] = sp_raw
-    df["pred_total_dev"] = totals_model.predict(tot_feats)
-    df["pred_total"]     = df["over_under"] + df["pred_total_dev"]
-    df["pred_win_p"]     = win_prob_model.predict_proba(win_feats)[:, 1]
-
-    df["spread_edge"] = df["pred_spread"] - df["vegas_home_margin"]
-    df["totals_edge"] = df["pred_total"]  - df["over_under"]
+    lines = wp.fetch_lines(games, season, week)
+    spread_model, totals_model, win_prob_model, feature_lists = wp.load_models()
+    df = wp.build_predictions(games, lines, spread_model, totals_model,
+                              win_prob_model, feature_lists,
+                              pred_season=season)
+    df["vegas_home_margin"] = -pd.to_numeric(df["spread"], errors="coerce")
 
     # Build picks list
     picks = []
@@ -257,14 +122,20 @@ def predict_games(games: list, lines: dict) -> list:
         start = row.get("start_date", "")
         kickoff = _format_kickoff(start)
 
-        # Spread pick
+        week_n = int(row["week"]) if pd.notna(row["week"]) else 0
+        power_involved = (row.get("home_conference") in POWER_CONFS
+                          or row.get("away_conference") in POWER_CONFS)
+
+        # Spread pick — weeks 1-9 only (wk10+ hit 44.7% ATS in walk-forward)
         sp_edge = row["spread_edge"]
-        if pd.notna(sp_edge) and abs(sp_edge) >= EDGE_MIN_SP:
+        if (pd.notna(sp_edge) and abs(sp_edge) >= EDGE_MIN_SP
+                and 1 <= week_n <= SPREAD_MAX_WEEK):
             home_bet = sp_edge > 0
             bet_team = row["home_team"] if home_bet else row["away_team"]
             vl = row["spread"] if home_bet else -row["spread"]
             picks.append({
                 "type":      "SPREAD",
+                "tier":      "WATCH" if week_n <= 3 else "INFO",
                 "game_id":   row["game_id"],
                 "week":      int(row["week"]) if pd.notna(row["week"]) else 0,
                 "matchup":   f"{row['home_team']} vs {row['away_team']}",
@@ -283,13 +154,15 @@ def predict_games(games: list, lines: dict) -> list:
                 "neutral":    bool(row.get("neutral_site", 0)),
             })
 
-        # Totals pick
+        # Totals pick — CORE gate only: unders, edge>=2, power-conf involved.
+        # Overs (49.4%) and G5vG5 (48.2%) had no walk-forward edge.
         tot_edge = row["totals_edge"]
         ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
-        if pd.notna(tot_edge) and abs(tot_edge) >= EDGE_MIN_TOT:
-            over_bet = tot_edge > 0
+        if (pd.notna(tot_edge) and tot_edge <= -EDGE_MIN_TOT and power_involved):
+            over_bet = False
             picks.append({
                 "type":      "TOTAL",
+                "tier":      "CORE",
                 "game_id":   row["game_id"],
                 "week":      int(row["week"]) if pd.notna(row["week"]) else 0,
                 "matchup":   f"{row['home_team']} vs {row['away_team']}",
@@ -308,8 +181,57 @@ def predict_games(games: list, lines: dict) -> list:
                 "neutral":    bool(row.get("neutral_site", 0)),
             })
 
-    picks.sort(key=lambda p: (-abs(p["edge"])))
+        # Moneyline pick — best-EV side, threshold matches the app
+        win_p = row["pred_win_p"]
+        if pd.notna(win_p):
+            home_ml = pd.to_numeric(row.get("home_moneyline"), errors="coerce")
+            away_ml = pd.to_numeric(row.get("away_moneyline"), errors="coerce")
+            h_ev = _ml_ev(win_p, home_ml)
+            a_ev = _ml_ev(1 - win_p, away_ml)
+            best = max([(h_ev, row["home_team"], home_ml, win_p),
+                        (a_ev, row["away_team"], away_ml, 1 - win_p)],
+                       key=lambda t: (t[0] if not pd.isna(t[0]) else -9))
+            ev, ml_team, ml_odds, ml_p = best
+            # Odds band guard: tail miscalibration dominates apparent EV on
+            # long odds, so only quote prices a subscriber can sanely bet.
+            if (not pd.isna(ev) and ev >= ML_EV_MIN
+                    and -300 <= ml_odds <= 300):
+                odds_str = f"+{int(ml_odds)}" if ml_odds > 0 else str(int(ml_odds))
+                picks.append({
+                    "type":      "MONEYLINE",
+                    "tier":      "SELECTIVE" if ml_odds < 0 else "HIGH VAR",
+                    "game_id":   row["game_id"],
+                    "week":      week_n,
+                    "matchup":   f"{row['home_team']} vs {row['away_team']}",
+                    "home_team": row["home_team"],
+                    "away_team": row["away_team"],
+                    "bet_on":    ml_team,
+                    "line":      odds_str,
+                    "odds":      float(ml_odds),
+                    "edge":      round(float(ev) * 100, 1),   # EV in % for display/sort
+                    "pred":      round(float(ml_p) * 100, 1), # model win prob %
+                    "kickoff":   kickoff,
+                    "stars":     "★★★" if ev >= 0.07 else ("★★" if ev >= 0.05 else "★"),
+                    "kelly":     1,
+                    "start_date": str(start),
+                    "wind_speed": row.get("wind_speed"),
+                    "is_dome":    row.get("is_dome", 0),
+                    "neutral":    bool(row.get("neutral_site", 0)),
+                })
+
+    # CORE totals lead, then spreads, then moneylines; edge desc within each
+    # (edge is points for spread/total but EV% for ML — never sort across types)
+    type_rank = {"TOTAL": 0, "SPREAD": 1, "MONEYLINE": 2}
+    picks.sort(key=lambda p: (type_rank.get(p["type"], 9), -abs(p["edge"])))
     return picks
+
+
+def _ml_ev(model_prob, american_odds):
+    """Expected value of a 1u moneyline bet (same formula as app.py)."""
+    if pd.isna(model_prob) or pd.isna(american_odds) or american_odds == 0:
+        return np.nan
+    payout = 100 / abs(american_odds) if american_odds < 0 else american_odds / 100
+    return model_prob * payout - (1 - model_prob)
 
 def _format_kickoff(start_date) -> str:
     if not start_date or pd.isna(start_date):
@@ -363,9 +285,18 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
     except Exception:
         return saved_picks, {}
 
-    wins = losses = pushes = 0
-    units = 0.0
+    stats = {t: {"wins": 0, "losses": 0, "pushes": 0, "units": 0.0}
+             for t in ("SPREAD", "TOTAL", "MONEYLINE")}
     annotated = []
+
+    def grade(pick, outcome, pnl=0.0):
+        s = stats.get(pick["type"])
+        pick["outcome"] = outcome
+        pick["pnl"] = round(pnl, 2)
+        if s is not None and outcome in ("win", "loss", "push"):
+            key = {"win": "wins", "loss": "losses", "push": "pushes"}[outcome]
+            s[key] += 1
+            s["units"] += pnl
 
     for pick in saved_picks:
         gid  = pick.get("game_id")
@@ -385,44 +316,58 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
         pick["actual_diff"]  = diff
         pick["actual_total"] = total
 
-        spread_val = float(pick.get("line", 0).replace("+","") or 0)
-
         if pick["type"] == "SPREAD":
+            spread_val = float(str(pick.get("line", 0)).replace("+", "") or 0)
             home_bet = pick["edge"] > 0
             covered = (diff + spread_val > 0) if home_bet else (diff + spread_val < 0)
             if diff + spread_val == 0:
-                pick["outcome"] = "push"; pushes += 1
+                grade(pick, "push")
             elif covered:
-                pick["outcome"] = "win"; wins += 1; units += 1.0
+                grade(pick, "win", 1.0)
             else:
-                pick["outcome"] = "loss"; losses += 1; units -= 1.1
+                grade(pick, "loss", -1.1)
         elif pick["type"] == "TOTAL":
             ou = float(pick["line"]) if pick["line"] != "TBD" else None
             if ou is None:
                 pick["outcome"] = "pending"
-            elif total > ou and pick["bet_on"] == "OVER":
-                pick["outcome"] = "win"; wins += 1; units += 1.0
-            elif total < ou and pick["bet_on"] == "UNDER":
-                pick["outcome"] = "win"; wins += 1; units += 1.0
             elif total == ou:
-                pick["outcome"] = "push"; pushes += 1
+                grade(pick, "push")
+            elif (total > ou) == (pick["bet_on"] == "OVER"):
+                grade(pick, "win", 1.0)
             else:
-                pick["outcome"] = "loss"; losses += 1; units -= 1.1
+                grade(pick, "loss", -1.1)
+        elif pick["type"] == "MONEYLINE":
+            odds = float(pick.get("odds") or
+                         str(pick.get("line", "0")).replace("+", "") or 0)
+            bet_home = pick["bet_on"] == pick.get("home_team")
+            if diff == 0:
+                grade(pick, "push")
+            elif (diff > 0) == bet_home:
+                payout = 100 / abs(odds) if odds < 0 else odds / 100
+                grade(pick, "win", payout)
+            else:
+                grade(pick, "loss", -1.0)
 
         annotated.append(pick)
 
-    stats = {"wins": wins, "losses": losses, "pushes": pushes,
-             "units": round(units, 1)}
+    for s in stats.values():
+        s["units"] = round(s["units"], 1)
+    stats["all"] = {
+        k: round(sum(stats[t][k] for t in ("SPREAD", "TOTAL", "MONEYLINE")), 1)
+        for k in ("wins", "losses", "pushes", "units")
+    }
     return annotated, stats
 
 # ── Season record ─────────────────────────────────────────────────────────────
 
 def compute_season_record(season: int) -> dict:
     """
-    Compute cumulative season record from saved weekly picks files.
+    Cumulative season record from saved weekly picks files, kept separate
+    per market (SPREAD / TOTAL / MONEYLINE) — each market's record reflects
+    its own validated edge and is never blended into one number.
     """
-    total_wins = total_losses = total_pushes = 0
-    total_units = 0.0
+    markets = ("SPREAD", "TOTAL", "MONEYLINE")
+    agg = {t: {"wins": 0, "losses": 0, "pushes": 0, "units": 0.0} for t in markets}
     weeks_counted = 0
 
     for f in sorted(PICKS_DIR.glob(f"{season}_W*.json")):
@@ -431,21 +376,24 @@ def compute_season_record(season: int) -> dict:
         except Exception:
             continue
         picks, stats = load_last_week_results(season, week_num)
-        if stats:
-            total_wins   += stats["wins"]
-            total_losses += stats["losses"]
-            total_pushes += stats["pushes"]
-            total_units  += stats["units"]
-            weeks_counted += 1
+        if not stats:
+            continue
+        weeks_counted += 1
+        for t in markets:
+            for k in ("wins", "losses", "pushes"):
+                agg[t][k] += stats.get(t, {}).get(k, 0)
+            agg[t]["units"] += stats.get(t, {}).get("units", 0.0)
 
-    total_bets = total_wins + total_losses
-    win_pct = (total_wins / total_bets * 100) if total_bets > 0 else 0
+    for t in markets:
+        bets = agg[t]["wins"] + agg[t]["losses"]
+        agg[t]["bets"]    = bets
+        agg[t]["win_pct"] = round(agg[t]["wins"] / bets * 100, 1) if bets else 0.0
+        agg[t]["units"]   = round(agg[t]["units"], 1)
 
-    return {
-        "wins": total_wins, "losses": total_losses, "pushes": total_pushes,
-        "units": round(total_units, 1), "win_pct": round(win_pct, 1),
-        "bets": total_bets, "weeks": weeks_counted,
-    }
+    agg["weeks"] = weeks_counted
+    agg["bets"]  = sum(agg[t]["bets"] for t in markets)
+    agg["units"] = round(sum(agg[t]["units"] for t in markets), 1)
+    return agg
 
 # ── Context notes ─────────────────────────────────────────────────────────────
 
@@ -528,9 +476,12 @@ def build_html(season: int, this_week: int, picks: list,
 
     # ── Picks table rows ──────────────────────────────────────────────────────
     def pick_row(p: dict) -> str:
+        is_ml = p["type"] == "MONEYLINE"
         edge_color = "#22c55e" if abs(p["edge"]) >= 4.5 else "#94a3b8"
-        type_color = "#8b5cf6" if p["type"] == "SPREAD" else (
-                     "#06b6d4" if p["bet_on"] == "UNDER" else "#f97316")
+        type_color = ("#eab308" if is_ml else
+                      "#8b5cf6" if p["type"] == "SPREAD" else
+                      "#06b6d4" if p["bet_on"] == "UNDER" else "#f97316")
+        edge_str = f"EV +{p['edge']:.1f}%" if is_ml else f"{p['edge']:+.1f}"
         wind_note = ""
         ws = p.get("wind_speed")
         if ws and not p.get("is_dome") and float(ws) >= 15:
@@ -551,7 +502,7 @@ def build_html(season: int, this_week: int, picks: list,
           </td>
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
                      text-align:center;color:{edge_color};font-weight:700">
-            {p['edge']:+.1f}
+            {edge_str}
           </td>
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
                      text-align:center;color:#eab308">{p['stars']}</td>
@@ -567,7 +518,7 @@ def build_html(season: int, this_week: int, picks: list,
         outcome = p.get("outcome", "pending")
         icon = {"win":"✅","loss":"❌","push":"➖","pending":"⏳"}.get(outcome, "⏳")
         score = p.get("score", "Pending")
-        pnl   = "+1.0u" if outcome == "win" else ("-1.1u" if outcome == "loss" else "—")
+        pnl   = f"{p['pnl']:+.1f}u" if outcome in ("win", "loss") and "pnl" in p else "—"
         pnl_color = "#22c55e" if outcome == "win" else ("#ef4444" if outcome == "loss" else "#94a3b8")
         return f"""
         <tr>
@@ -576,17 +527,30 @@ def build_html(season: int, this_week: int, picks: list,
           <td style="padding:8px;border-bottom:1px solid #e2e8f0;color:{pnl_color};font-weight:700;text-align:center">{pnl}</td>
         </tr>"""
 
+    MARKET_LABELS = [("TOTAL", "O/U"), ("SPREAD", "Spread"), ("MONEYLINE", "ML")]
+
+    def market_summary(stats: dict) -> str:
+        parts = []
+        for key, label in MARKET_LABELS:
+            s = stats.get(key, {})
+            if (s.get("wins", 0) + s.get("losses", 0) + s.get("pushes", 0)) == 0:
+                continue
+            parts.append(f"{label} {s['wins']}–{s['losses']}"
+                         + (f"–{s['pushes']}" if s.get("pushes") else ""))
+        return " &nbsp;·&nbsp; ".join(parts)
+
     results_section = ""
     if has_results:
         results_rows = "".join(result_row(p) for p in last_results)
-        units_color = "#22c55e" if last_stats["units"] >= 0 else "#ef4444"
+        all_units = last_stats.get("all", {}).get("units", 0.0)
+        units_color = "#22c55e" if all_units >= 0 else "#ef4444"
         results_section = f"""
         <h2 style="color:#1e293b;font-size:1.1em;margin:28px 0 4px 0">
           📊 Last Week's Results — Week {last_week}
         </h2>
         <p style="color:#64748b;margin:0 0 12px 0;font-size:0.9em">
-          {last_stats['wins']}W – {last_stats['losses']}L
-          &nbsp;|&nbsp; <span style="color:{units_color};font-weight:700">{last_stats['units']:+.1f}u</span>
+          {market_summary(last_stats)}
+          &nbsp;|&nbsp; <span style="color:{units_color};font-weight:700">{all_units:+.1f}u</span>
         </p>
         <table width="100%" cellpadding="0" cellspacing="0"
                style="border-collapse:collapse;font-size:0.9em">
@@ -600,23 +564,38 @@ def build_html(season: int, this_week: int, picks: list,
           <tbody>{results_rows}</tbody>
         </table>"""
 
-    # ── Season record ─────────────────────────────────────────────────────────
+    # ── Season record — one line per market, never blended ───────────────────
     sr = season_record
-    sr_color = "#22c55e" if sr.get("units", 0) >= 0 else "#ef4444"
     record_section = ""
     if sr.get("bets", 0) > 0:
+        market_rows = []
+        for key, label in [("TOTAL", "Over/Under"), ("SPREAD", "Spread"),
+                           ("MONEYLINE", "Moneyline")]:
+            m = sr.get(key, {})
+            if m.get("bets", 0) == 0:
+                continue
+            push_str = f"–{m['pushes']}" if m.get("pushes") else ""
+            u_color = "#22c55e" if m["units"] >= 0 else "#ef4444"
+            market_rows.append(f"""
+            <tr>
+              <td style="padding:6px 8px;color:#64748b;font-weight:600">{label}</td>
+              <td style="padding:6px 8px;text-align:center">
+                <strong>{m['wins']}–{m['losses']}{push_str}</strong>
+                <span style="color:#94a3b8;font-size:0.85em"> ({m['win_pct']:.1f}%)</span></td>
+              <td style="padding:6px 8px;text-align:right;font-weight:700;
+                         color:{u_color}">{m['units']:+.1f}u</td>
+            </tr>""")
         record_section = f"""
         <div style="background:#f8fafc;border-radius:8px;padding:16px;margin:24px 0">
-          <h2 style="color:#1e293b;font-size:1.0em;margin:0 0 12px 0">📈 {season} Season Record</h2>
-          <div style="display:flex;gap:24px;flex-wrap:wrap">
-            <div><span style="color:#64748b;font-size:0.8em">RECORD</span><br>
-              <strong style="font-size:1.2em">{sr['wins']}–{sr['losses']}</strong>
-              <span style="color:#94a3b8;font-size:0.85em"> ({sr['win_pct']:.1f}%)</span></div>
-            <div><span style="color:#64748b;font-size:0.8em">UNITS</span><br>
-              <strong style="font-size:1.2em;color:{sr_color}">{sr['units']:+.1f}u</strong></div>
-            <div><span style="color:#64748b;font-size:0.8em">WEEKS TRACKED</span><br>
-              <strong style="font-size:1.2em">{sr['weeks']}</strong></div>
-          </div>
+          <h2 style="color:#1e293b;font-size:1.0em;margin:0 0 10px 0">
+            📈 {season} Season Record
+            <span style="color:#94a3b8;font-size:0.75em;font-weight:400">
+              · {sr['weeks']} week{'s' if sr['weeks'] != 1 else ''} tracked · graded at published lines</span>
+          </h2>
+          <table width="100%" cellpadding="0" cellspacing="0"
+                 style="border-collapse:collapse;font-size:0.92em">
+            {''.join(market_rows)}
+          </table>
         </div>"""
 
     # ── Context notes ─────────────────────────────────────────────────────────
@@ -654,7 +633,9 @@ def build_html(season: int, this_week: int, picks: list,
       🏈 This Week's Top Picks — Week {this_week}
     </h2>
     <p style="color:#64748b;margin:0 0 12px 0;font-size:0.85em">
-      Minimum edge: {EDGE_MIN_SP:.1f} pts (spread) / {EDGE_MIN_TOT:.1f} pts (totals) · Standard -110 juice
+      O/U: unders only, {EDGE_MIN_TOT:.0f}+ pt edge, power-conf games (55.8% in '19–'25 backtest) ·
+      Spread: {EDGE_MIN_SP:.0f}+ pts, weeks 1–{SPREAD_MAX_WEEK} only ·
+      ML: {ML_EV_MIN:.0%}+ EV · -110 juice unless noted
     </p>
     <table width="100%" cellpadding="0" cellspacing="0"
            style="border-collapse:collapse;font-size:0.9em">
@@ -745,16 +726,8 @@ def main():
             print("❌ CFB_API_KEY not found")
             sys.exit(1)
 
-        print(f"\nFetching week {this_week} schedule...")
-        games = fetch_week_games(season, this_week)
-        print(f"  {len(games)} games found")
-
-        print(f"Fetching betting lines...")
-        lines = fetch_week_lines(season, this_week)
-        print(f"  {len(lines)} games with lines")
-
-        print(f"Running predictions...")
-        picks = predict_games(games, lines)
+        print(f"Running predictions (full weekly_pipeline feature stack)...")
+        picks = predict_games(season, this_week)
         print(f"  {len(picks)} picks meet edge threshold")
 
         if picks:
@@ -762,15 +735,20 @@ def main():
 
         print(f"\nLoading last week's results (week {last_week})...")
         last_results, last_stats = load_last_week_results(season, last_week)
-        print(f"  {last_stats.get('wins',0)}W – {last_stats.get('losses',0)}L "
-              f"({last_stats.get('units',0):+.1f}u)")
+        _all = last_stats.get("all", {})
+        print(f"  {_all.get('wins',0)}W – {_all.get('losses',0)}L "
+              f"({_all.get('units',0):+.1f}u)")
 
         notes = generate_context_notes(picks)
 
     print(f"\nComputing {season} season record...")
     season_record = compute_season_record(season)
-    print(f"  {season_record['wins']}W – {season_record['losses']}L "
-          f"({season_record['units']:+.1f}u) over {season_record['weeks']} weeks")
+    for mkt, label in [("TOTAL", "O/U"), ("SPREAD", "Spread"), ("MONEYLINE", "ML")]:
+        m = season_record.get(mkt, {})
+        if m.get("bets", 0):
+            print(f"  {label}: {m['wins']}–{m['losses']} "
+                  f"({m['win_pct']:.1f}%, {m['units']:+.1f}u)")
+    print(f"  {season_record['weeks']} weeks tracked")
 
     html = build_html(season, this_week, picks, last_results, last_stats,
                       season_record, notes)

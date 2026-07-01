@@ -389,6 +389,7 @@ def build_predictions(games, lines, spread_model, totals_model,
         return out
 
     out_cols = ["game_id", "season", "week", "home_team", "away_team",
+                "home_conference", "away_conference", "start_date",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline"]
     out = df[[c for c in out_cols if c in df.columns]].copy()
