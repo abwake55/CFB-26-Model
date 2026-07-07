@@ -1207,10 +1207,20 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
         if wk <= 3 and abs(row.get("spread_edge", 0) or 0) >= 3:
             return "WATCH · 53.5% EARLY SZN", "var(--blue)"
         return "INFO ONLY · ~50% ATS", "var(--ink-3)"
-    # moneyline
-    if row.get("ml_book_odds", 0) > 0:
-        return "HIGH VARIANCE · DOGS −17% '25", "var(--orange)"
-    return "SELECTIVE", "var(--blue)"
+    # moneyline — EV>=4% strategy backtested on walk-forward 2023-25 (n=868):
+    # +13.5% ROI in 2023, +0.6% in 2024, −3.7% in 2025, z=0.77. Not validated;
+    # tracked as a paper record only, never sized.
+    return "PAPER · '25 −4% ROI", "var(--orange)"
+
+
+def _is_play(kind: str, row) -> bool:
+    """True when the pick's segment has a validated walk-forward edge.
+    Non-plays render with 0u — shown for research, not sized."""
+    if kind == "total":
+        return bool(row["totals_edge"] <= -2 and _power_involved(row))
+    if kind == "spread":
+        return int(row.get("week", 0) or 0) <= 9
+    return False  # moneyline: paper record only
 
 
 def _winprob_bar_html(row) -> str:
@@ -1394,7 +1404,7 @@ def render_moneyline_card(row, season, week):
     matchup = f"{row['away_team']} @ {row['home_team']}"
     kickoff = format_kickoff(row.get("start_date"))
     sub     = matchup + (f" &nbsp;·&nbsp; {kickoff}" if kickoff else "")
-    units   = kelly_units_ml(ev)
+    units   = 0   # paper record only — ML EV strategy unvalidated ('25 −4%)
     ev_str  = f"{ev:+.1%}"
     ev_color = "var(--green)" if ev >= 0.05 else "var(--ink-2)"
     accent   = "var(--gold)" if ev >= 0.07 else "var(--blue)"
@@ -1414,7 +1424,7 @@ def render_moneyline_card(row, season, week):
             ("Book", label, "var(--ink)"),
             ("Model fair", model_label, "var(--ink)"),
             ("EV", ev_str, ev_color),
-            ("Kelly", unit_dollar_label(units), "var(--ink)"),
+            ("Kelly", "0u · paper", "var(--ink-3)"),
         ]),
         metric_html=metric,
         edge_pct=_ev_pct,
@@ -1426,7 +1436,8 @@ def render_totals_card(row, season, week):
     is_under = row["totals_edge"] < 0
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
-    units    = kelly_units_spread(edge_abs)
+    _play    = _is_play("total", row)
+    units    = kelly_units_spread(edge_abs) if _play else 0
     matchup  = f"{row['away_team']} @ {row['home_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
     edge_str = f"{row['totals_edge']:+.1f}"
@@ -1459,7 +1470,7 @@ def render_totals_card(row, season, week):
             ("Line", ou_str, "var(--ink)"),
             ("Model", f"{row['pred_total']:.1f}" if pd.notna(row["pred_total"]) else "—", "var(--ink)"),
             ("Edge", f"{edge_str} pts", edge_color),
-            ("Kelly", unit_dollar_label(units), "var(--ink)"),
+            ("Kelly", unit_dollar_label(units) if _play else "0u · pass", "var(--ink)" if _play else "var(--ink-3)"),
         ]),
         metric_html=metric,
     ))
@@ -1486,6 +1497,8 @@ def render_spread_card(row, season, week):
 
     edge_color = "var(--green)" if abs(edge) >= 5.5 else "var(--ink-2)"
     accent     = "var(--violet)"
+    _play      = _is_play("spread", row)
+    _units     = 1 if _play else 0
 
     metric = (f'<div style="display:flex;align-items:center;gap:8px">'
               f'<span class="num" style="color:{edge_color};font-size:0.85em;font-weight:800">'
@@ -1510,12 +1523,12 @@ def render_spread_card(row, season, week):
             ("Vegas", vl_bet, "var(--ink)"),
             ("Model", mdl_str, "var(--ink)"),
             ("Edge", f"{edge_str} pts", edge_color),
-            ("Kelly", unit_dollar_label(1), "var(--ink)"),
+            ("Kelly", unit_dollar_label(_units) if _play else "0u · pass", "var(--ink)" if _play else "var(--ink-3)"),
         ]),
         metric_html=metric,
     ))
     track_button(f"{bet_on} {vl_bet}", matchup, "Spread",
-                 f"{bet_on} {vl_bet}", vl_bet, 1, season, week, edge_str)
+                 f"{bet_on} {vl_bet}", vl_bet, _units, season, week, edge_str)
 
 
 # ─── MY BETS TAB ──────────────────────────────────────────────────────────────

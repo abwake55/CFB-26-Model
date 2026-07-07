@@ -194,12 +194,15 @@ def predict_games(season: int, week: int) -> list:
             ev, ml_team, ml_odds, ml_p = best
             # Odds band guard: tail miscalibration dominates apparent EV on
             # long odds, so only quote prices a subscriber can sanely bet.
+            # Walk-forward 2023-25 (n=868): +13.5% ROI in '23, +0.6% '24,
+            # -3.7% '25, z=0.77 — unvalidated. Tracked as a PAPER record
+            # (graded at flat 1u to keep the ROI history) but never sized.
             if (not pd.isna(ev) and ev >= ML_EV_MIN
                     and -300 <= ml_odds <= 300):
                 odds_str = f"+{int(ml_odds)}" if ml_odds > 0 else str(int(ml_odds))
                 picks.append({
                     "type":      "MONEYLINE",
-                    "tier":      "SELECTIVE" if ml_odds < 0 else "HIGH VAR",
+                    "tier":      "PAPER",
                     "game_id":   row["game_id"],
                     "week":      week_n,
                     "matchup":   f"{row['home_team']} vs {row['away_team']}",
@@ -212,7 +215,7 @@ def predict_games(season: int, week: int) -> list:
                     "pred":      round(float(ml_p) * 100, 1), # model win prob %
                     "kickoff":   kickoff,
                     "stars":     "★★★" if ev >= 0.07 else ("★★" if ev >= 0.05 else "★"),
-                    "kelly":     1,
+                    "kelly":     0,   # paper — displayed as "paper", graded at 1u nominal
                     "start_date": str(start),
                     "wind_speed": row.get("wind_speed"),
                     "is_dome":    row.get("is_dome", 0),
@@ -507,7 +510,7 @@ def build_html(season: int, this_week: int, picks: list,
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
                      text-align:center;color:#eab308">{p['stars']}</td>
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
-                     text-align:center;font-weight:700">{p['kelly']}u</td>
+                     text-align:center;font-weight:700">{'paper' if is_ml else f"{p['kelly']}u"}</td>
         </tr>"""
 
     picks_rows = "".join(pick_row(p) for p in picks[:12]) if has_picks else \
@@ -570,7 +573,7 @@ def build_html(season: int, this_week: int, picks: list,
     if sr.get("bets", 0) > 0:
         market_rows = []
         for key, label in [("TOTAL", "Over/Under"), ("SPREAD", "Spread"),
-                           ("MONEYLINE", "Moneyline")]:
+                           ("MONEYLINE", "Moneyline (paper)")]:
             m = sr.get(key, {})
             if m.get("bets", 0) == 0:
                 continue
@@ -635,7 +638,7 @@ def build_html(season: int, this_week: int, picks: list,
     <p style="color:#64748b;margin:0 0 12px 0;font-size:0.85em">
       O/U: unders only, {EDGE_MIN_TOT:.0f}+ pt edge, power-conf games (55.8% in '19–'25 backtest) ·
       Spread: {EDGE_MIN_SP:.0f}+ pts, weeks 1–{SPREAD_MAX_WEEK} only ·
-      ML: {ML_EV_MIN:.0%}+ EV · -110 juice unless noted
+      ML: {ML_EV_MIN:.0%}+ EV, paper record only · -110 juice unless noted
     </p>
     <table width="100%" cellpadding="0" cellspacing="0"
            style="border-collapse:collapse;font-size:0.9em">
