@@ -263,6 +263,79 @@ def _kelly(edge_abs: float) -> int:
 
 # ── Last week results ─────────────────────────────────────────────────────────
 
+def _fetch_closing_lines(season: int, week: int) -> dict:
+    """
+    Closing lines keyed by game_id. CFBD lines stop updating at kickoff, so
+    fetched after the games they ARE the closing numbers. Same provider
+    priority as pick generation.
+    """
+    try:
+        data = cfb_get("lines", params={"year": season, "week": week})
+    except Exception as e:
+        print(f"  Warning: could not fetch closing lines: {e}")
+        return {}
+    priority = ["consensus", "Bovada", "DraftKings", "ESPN Bet"]
+    out = {}
+    for game in data:
+        best, best_rank = None, 999
+        for line in game.get("lines", []):
+            rank = next((i for i, p in enumerate(priority)
+                         if p.lower() in (line.get("provider") or "").lower()), 999)
+            if rank < best_rank and line.get("spread") is not None:
+                best_rank, best = rank, line
+        if best:
+            out[game.get("id")] = {
+                "spread":     best.get("spread"),
+                "over_under": best.get("overUnder"),
+                "home_ml":    best.get("homeMoneyline"),
+                "away_ml":    best.get("awayMoneyline"),
+            }
+    return out
+
+
+def _attach_clv(pick: dict, close: dict) -> None:
+    """
+    Set clv (points; positive = published number beat the close) and
+    clv_beat on the pick, in place. ML uses payout comparison instead of
+    points. No-ops when the closing number is missing.
+    """
+    if not close:
+        return
+    try:
+        if pick["type"] == "SPREAD":
+            if close.get("spread") is None:
+                return
+            home_bet = pick["edge"] > 0
+            pick_vl  = float(str(pick["line"]).replace("+", ""))
+            close_vl = float(close["spread"]) if home_bet else -float(close["spread"])
+            pick["closing_line"] = f"{close_vl:+.1f}"
+            pick["clv"] = round(pick_vl - close_vl, 1)   # -7 vs close -8.5 → +1.5
+            pick["clv_beat"] = pick["clv"] > 0
+        elif pick["type"] == "TOTAL":
+            if close.get("over_under") is None or pick["line"] == "TBD":
+                return
+            close_ou = float(close["over_under"])
+            pick_ou  = float(pick["line"])
+            pick["closing_line"] = f"{close_ou:.1f}"
+            clv = (pick_ou - close_ou) if pick["bet_on"] == "UNDER" else (close_ou - pick_ou)
+            pick["clv"] = round(clv, 1)
+            pick["clv_beat"] = clv > 0
+        elif pick["type"] == "MONEYLINE":
+            key = "home_ml" if pick["bet_on"] == pick.get("home_team") else "away_ml"
+            if close.get(key) is None:
+                return
+            close_ml = float(close[key])
+            pick_ml  = float(pick.get("odds") or 0)
+            if not pick_ml or not close_ml:
+                return
+            pay = lambda o: 100 / abs(o) if o < 0 else o / 100
+            pick["closing_line"] = f"+{int(close_ml)}" if close_ml > 0 else str(int(close_ml))
+            pick["clv"] = round((pay(pick_ml) - pay(close_ml)) * 100, 1)  # payout cents
+            pick["clv_beat"] = pick["clv"] > 0
+    except (TypeError, ValueError):
+        return
+
+
 def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
     """
     Load saved picks from last week and fetch actual results.
@@ -277,6 +350,20 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
 
     if not saved_picks:
         return [], {}
+
+    # Capture closing lines once, persist into the picks file so re-grades
+    # (season record recomputes every week) never refetch or drift.
+    if any("closing_line" not in p for p in saved_picks):
+        closing = _fetch_closing_lines(season, week)
+        if closing:
+            for p in saved_picks:
+                if "closing_line" not in p:
+                    _attach_clv(p, closing.get(p.get("game_id"), {}))
+            try:
+                with open(picks_file, "w") as f:
+                    json.dump(saved_picks, f, indent=2)
+            except OSError as e:
+                print(f"  Warning: could not persist closing lines: {e}")
 
     # Fetch actual results from CFBD
     try:
@@ -359,6 +446,9 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
         k: round(sum(stats[t][k] for t in ("SPREAD", "TOTAL", "MONEYLINE")), 1)
         for k in ("wins", "losses", "pushes", "units")
     }
+    clv_graded = [p for p in annotated if p.get("clv_beat") is not None]
+    stats["clv"] = {"beat": sum(1 for p in clv_graded if p["clv_beat"]),
+                    "n": len(clv_graded)}
     return annotated, stats
 
 # ── Season record ─────────────────────────────────────────────────────────────
@@ -372,6 +462,7 @@ def compute_season_record(season: int) -> dict:
     markets = ("SPREAD", "TOTAL", "MONEYLINE")
     agg = {t: {"wins": 0, "losses": 0, "pushes": 0, "units": 0.0} for t in markets}
     weeks_counted = 0
+    clv_beat = clv_total = 0
 
     for f in sorted(PICKS_DIR.glob(f"{season}_W*.json")):
         try:
@@ -386,6 +477,8 @@ def compute_season_record(season: int) -> dict:
             for k in ("wins", "losses", "pushes"):
                 agg[t][k] += stats.get(t, {}).get(k, 0)
             agg[t]["units"] += stats.get(t, {}).get("units", 0.0)
+        clv_beat  += stats.get("clv", {}).get("beat", 0)
+        clv_total += stats.get("clv", {}).get("n", 0)
 
     for t in markets:
         bets = agg[t]["wins"] + agg[t]["losses"]
@@ -396,6 +489,7 @@ def compute_season_record(season: int) -> dict:
     agg["weeks"] = weeks_counted
     agg["bets"]  = sum(agg[t]["bets"] for t in markets)
     agg["units"] = round(sum(agg[t]["units"] for t in markets), 1)
+    agg["clv"]   = {"beat": clv_beat, "n": clv_total}
     return agg
 
 # ── Context notes ─────────────────────────────────────────────────────────────
@@ -523,10 +617,17 @@ def build_html(season: int, this_week: int, picks: list,
         score = p.get("score", "Pending")
         pnl   = f"{p['pnl']:+.1f}u" if outcome in ("win", "loss") and "pnl" in p else "—"
         pnl_color = "#22c55e" if outcome == "win" else ("#ef4444" if outcome == "loss" else "#94a3b8")
+        if p.get("clv_beat") is None:
+            clv_str, clv_color = "—", "#94a3b8"
+        else:
+            unit = "¢" if p["type"] == "MONEYLINE" else ""
+            clv_str = f"{p['clv']:+.1f}{unit}"
+            clv_color = "#22c55e" if p["clv_beat"] else "#ef4444"
         return f"""
         <tr>
           <td style="padding:8px;border-bottom:1px solid #e2e8f0">{icon} <strong>{p['bet_on']}</strong> {p['line']} &nbsp;<span style="color:#64748b;font-size:0.85em">{p['matchup']}</span></td>
           <td style="padding:8px;border-bottom:1px solid #e2e8f0;color:#64748b;font-size:0.85em">{score}</td>
+          <td style="padding:8px;border-bottom:1px solid #e2e8f0;color:{clv_color};font-weight:600;text-align:center;font-size:0.85em">{clv_str}</td>
           <td style="padding:8px;border-bottom:1px solid #e2e8f0;color:{pnl_color};font-weight:700;text-align:center">{pnl}</td>
         </tr>"""
 
@@ -547,13 +648,16 @@ def build_html(season: int, this_week: int, picks: list,
         results_rows = "".join(result_row(p) for p in last_results)
         all_units = last_stats.get("all", {}).get("units", 0.0)
         units_color = "#22c55e" if all_units >= 0 else "#ef4444"
+        clv = last_stats.get("clv", {})
+        clv_str = (f' &nbsp;|&nbsp; Beat close: <strong>{clv["beat"]}/{clv["n"]}</strong>'
+                   if clv.get("n") else "")
         results_section = f"""
         <h2 style="color:#1e293b;font-size:1.1em;margin:28px 0 4px 0">
           📊 Last Week's Results — Week {last_week}
         </h2>
         <p style="color:#64748b;margin:0 0 12px 0;font-size:0.9em">
           {market_summary(last_stats)}
-          &nbsp;|&nbsp; <span style="color:{units_color};font-weight:700">{all_units:+.1f}u</span>
+          &nbsp;|&nbsp; <span style="color:{units_color};font-weight:700">{all_units:+.1f}u</span>{clv_str}
         </p>
         <table width="100%" cellpadding="0" cellspacing="0"
                style="border-collapse:collapse;font-size:0.9em">
@@ -561,6 +665,7 @@ def build_html(season: int, this_week: int, picks: list,
             <tr style="background:#f8fafc">
               <th style="padding:8px;text-align:left;color:#64748b;font-weight:600">Pick</th>
               <th style="padding:8px;text-align:left;color:#64748b;font-weight:600">Result</th>
+              <th style="padding:8px;text-align:center;color:#64748b;font-weight:600">CLV</th>
               <th style="padding:8px;text-align:center;color:#64748b;font-weight:600">P&L</th>
             </tr>
           </thead>
@@ -588,6 +693,18 @@ def build_html(season: int, this_week: int, picks: list,
               <td style="padding:6px 8px;text-align:right;font-weight:700;
                          color:{u_color}">{m['units']:+.1f}u</td>
             </tr>""")
+        sclv = sr.get("clv", {})
+        clv_line = ""
+        if sclv.get("n"):
+            pct = sclv["beat"] / sclv["n"] * 100
+            clv_color = "#22c55e" if pct >= 50 else "#ef4444"
+            clv_line = f"""
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;
+                      color:#64748b;font-size:0.85em">
+            Closing line value: beat the close on
+            <strong style="color:{clv_color}">{sclv['beat']}/{sclv['n']} ({pct:.0f}%)</strong>
+            of picks — the strongest long-run indicator of real edge
+          </div>"""
         record_section = f"""
         <div style="background:#f8fafc;border-radius:8px;padding:16px;margin:24px 0">
           <h2 style="color:#1e293b;font-size:1.0em;margin:0 0 10px 0">
@@ -598,7 +715,7 @@ def build_html(season: int, this_week: int, picks: list,
           <table width="100%" cellpadding="0" cellspacing="0"
                  style="border-collapse:collapse;font-size:0.92em">
             {''.join(market_rows)}
-          </table>
+          </table>{clv_line}
         </div>"""
 
     # ── Context notes ─────────────────────────────────────────────────────────
