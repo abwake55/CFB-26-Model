@@ -158,7 +158,11 @@ def predict_games(season: int, week: int) -> list:
         # Overs (49.4%) and G5vG5 (48.2%) had no walk-forward edge.
         tot_edge = row["totals_edge"]
         ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
-        if (pd.notna(tot_edge) and tot_edge <= -EDGE_MIN_TOT and power_involved):
+        # Edge capped at 7: walk-forward hit rate FALLS with edge size
+        # (59.9% at 2-3 pts, 50.7% at 7+ — winner's curse). Wind>=15 is
+        # gated in the app at kickoff; forecast isn't available here.
+        if (pd.notna(tot_edge) and -7.0 <= tot_edge <= -EDGE_MIN_TOT
+                and power_involved):
             over_bet = False
             picks.append({
                 "type":      "TOTAL",
@@ -174,7 +178,7 @@ def predict_games(season: int, week: int) -> list:
                 "pred":      round(float(row["pred_total"]), 1),
                 "kickoff":   kickoff,
                 "stars":     _stars(abs(tot_edge)),
-                "kelly":     _kelly(abs(tot_edge)),
+                "kelly":     2,   # flat 2u ≈ quarter-Kelly on measured 56.7%
                 "start_date": str(start),
                 "wind_speed": row.get("wind_speed"),
                 "is_dome":    row.get("is_dome", 0),
@@ -753,7 +757,7 @@ def build_html(season: int, this_week: int, picks: list,
       🏈 This Week's Top Picks — Week {this_week}
     </h2>
     <p style="color:#64748b;margin:0 0 12px 0;font-size:0.85em">
-      O/U: unders only, {EDGE_MIN_TOT:.0f}+ pt edge, power-conf games (55.8% in '19–'25 backtest) ·
+      O/U: unders only, {EDGE_MIN_TOT:.0f}–7 pt edge, power-conf games (56.7% in '19–'25 backtest) ·
       Spread: {EDGE_MIN_SP:.0f}+ pts, weeks 1–{SPREAD_MAX_WEEK} only ·
       ML: {ML_EV_MIN:.0%}+ EV, paper record only · -110 juice unless noted
     </p>

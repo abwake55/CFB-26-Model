@@ -1183,6 +1183,24 @@ def _power_involved(row) -> bool:
             or row.get("away_conference") in _POWER_CONFS)
 
 
+def _wind15(row) -> bool:
+    """Forecast wind >= 15 mph outdoors. CORE unders hit only 50.0% in
+    high wind (n=88) — the market prices obvious weather itself."""
+    ws = row.get("wind_speed")
+    if pd.isna(ws) or bool(row.get("is_dome", 0)):
+        return False
+    return float(ws) >= 15
+
+
+def _core_total(row) -> bool:
+    """Refined CORE gate, walk-forward 2019-25: under, edge 2-7 pts,
+    power-conf involved, wind < 15 → 56.7% (n=707, +8.3% ROI), profitable
+    every season. Edges >7 pts hit 50.7% (winner's curse) and are out."""
+    edge = row["totals_edge"]
+    return bool(edge <= -2 and edge >= -7
+                and _power_involved(row) and not _wind15(row))
+
+
 def _tier_badge(kind: str, row) -> tuple[str, str]:
     """Return (label, color) tier gated by walk-forward results 2019-25
     (5,100 games). Segments below are the only ones that cleared breakeven:
@@ -1194,8 +1212,12 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
     if kind == "total":
         edge = row["totals_edge"]
         if edge < 0:  # under pick
-            if abs(edge) >= 2 and _power_involved(row):
-                return "CORE PLAY · 55.8% '19-'25", "var(--green)"
+            if _core_total(row):
+                return "CORE PLAY · 56.7% '19-'25", "var(--green)"
+            if abs(edge) > 7:
+                return "CAUTION · 7+PT EDGES 51%", "var(--orange)"
+            if _wind15(row):
+                return "CAUTION · WIND PRICED IN", "var(--orange)"
             if abs(edge) >= 2:
                 return "MARGINAL · G5 NO EDGE", "var(--ink-3)"
             return "LEAN · BELOW EDGE MIN", "var(--ink-3)"
@@ -1217,7 +1239,7 @@ def _is_play(kind: str, row) -> bool:
     """True when the pick's segment has a validated walk-forward edge.
     Non-plays render with 0u — shown for research, not sized."""
     if kind == "total":
-        return bool(row["totals_edge"] <= -2 and _power_involved(row))
+        return _core_total(row)
     if kind == "spread":
         return int(row.get("week", 0) or 0) <= 9
     return False  # moneyline: paper record only
@@ -1437,7 +1459,10 @@ def render_totals_card(row, season, week):
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
     _play    = _is_play("total", row)
-    units    = kelly_units_spread(edge_abs) if _play else 0
+    # Flat 2u on CORE: hit rate does NOT rise with edge size (59.9% at 2-3
+    # pts vs 50.7% at 7+), so edge-scaled Kelly is backwards here. 2u ≈
+    # quarter-Kelly on the measured 56.7% at -110.
+    units    = 2 if _play else 0
     matchup  = f"{row['away_team']} @ {row['home_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
     edge_str = f"{row['totals_edge']:+.1f}"
@@ -3401,6 +3426,49 @@ def main():
         render_guide_tab()
 
     # ── PICKS TAB ─────────────────────────────────────────────────────────
+    def render_core_equity_curve():
+        """Out-of-sample equity curve of the CORE totals portfolio.
+        Data: outputs/predictions/core_history.csv (built by
+        scripts/build_core_history.py after each walk-forward rerun)."""
+        hist_path = Path("outputs/predictions/core_history.csv")
+        if not hist_path.exists():
+            return
+        import plotly.graph_objects as go
+        h = pd.read_csv(hist_path)
+        if h.empty:
+            return
+        h = h.reset_index(drop=True)
+        # First bet of each season anchors the x-axis ticks
+        season_starts = h.groupby("season").head(1)
+        fig = go.Figure(go.Scatter(
+            x=h.index, y=h["cum_units"], mode="lines",
+            line=dict(color="#34d399", width=2),
+            fill="tozeroy", fillcolor="rgba(52,211,153,0.08)",
+            customdata=h[["season", "week", "home_team", "away_team",
+                          "over_under", "pnl"]],
+            hovertemplate=("%{customdata[0]} wk %{customdata[1]} · "
+                           "%{customdata[3]} @ %{customdata[2]}<br>"
+                           "UNDER %{customdata[4]:.1f} → %{customdata[5]:+.1f}u"
+                           "<br>Total: %{y:+.1f}u<extra></extra>"),
+        ))
+        final = float(h["cum_units"].iloc[-1])
+        fig.add_annotation(x=h.index[-1], y=final, text=f"<b>{final:+.0f}u</b>",
+                           showarrow=False, xanchor="left", xshift=6,
+                           font=dict(color="#f3f5f9", size=13))
+        fig.update_layout(
+            title=dict(text="CORE unders · cumulative units, out-of-sample 2019–25",
+                       font=dict(size=13, color="#9aa5b8")),
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            height=240, margin=dict(l=8, r=52, t=36, b=8),
+            xaxis=dict(tickvals=season_starts.index.tolist(),
+                       ticktext=[str(int(s)) for s in season_starts["season"]],
+                       showgrid=False, color="#67738a"),
+            yaxis=dict(gridcolor="#1a2130", zerolinecolor="#232b3d",
+                       color="#67738a", ticksuffix="u"),
+            showlegend=False, hoverlabel=dict(bgcolor="#151a26"),
+        )
+        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+
     with picks_tab:
         if not st.session_state.get("has_run"):
             st.html("""
@@ -3419,16 +3487,18 @@ def main():
                     bet type has actually performed.</div>
             </div>""")
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("Spread MAE", "12.3 pts", "Vegas: 11.8", delta_color="off")
-            col2.metric("Best pocket", "Unders", "calm-weather games", delta_color="off")
-            col3.metric("Spreads ATS", "50.7%", "info only · '25 holdout", delta_color="off")
+            col1.metric("CORE unders", "56.7%", "719 bets · '19–'25 walk-forward", delta_color="off")
+            col2.metric("CORE ROI", "+8.3%", "at -110 · profitable all 7 seasons", delta_color="off")
+            col3.metric("Spreads ATS", "~50%", "info only · no validated edge", delta_color="off")
             col4.metric("North star", "CLV", "beat the close", delta_color="off")
+            render_core_equity_curve()
             st.html("""
             <div style="background:var(--card);border:1px solid var(--line);border-radius:12px;
                         padding:12px 18px;margin-top:14px;color:var(--ink-3);font-size:0.82em">
-                ⚖️ <b style="color:var(--ink-2)">Honesty note:</b> on the 2025 holdout the model
-                was not yet profitable overall. Treat flags as research leads — the tiers on each
-                card tell you which bet types have historically held up.</div>""")
+                ⚖️ <b style="color:var(--ink-2)">Honesty note:</b> the model does not beat the
+                market overall — spreads run ~50% ATS and moneylines are a paper record. The one
+                validated pocket is CORE unders (edge 2–7 pts, power-conf, wind &lt; 15), shown
+                above out-of-sample. Only CORE picks carry units; every other card is research.</div>""")
             st.info("Select a season and week in the sidebar, then hit **Load Picks**.")
             return
 

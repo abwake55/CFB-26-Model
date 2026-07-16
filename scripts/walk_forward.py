@@ -301,4 +301,16 @@ if __name__ == "__main__":
     print(f"   Runtime: {elapsed/60:.1f} minutes")
 
     print_backtest_summary(master)
+
+    # Regenerate the CORE portfolio history so the app's landing-page
+    # equity curve always reflects the latest walk-forward run.
+    try:
+        import subprocess
+        subprocess.run([sys.executable,
+                        str(Path(__file__).parent / "build_core_history.py")],
+                       check=True)
+    except Exception as e:
+        print(f"[WARN] core_history rebuild failed: {e} — "
+              f"run scripts/build_core_history.py manually")
+
     print(f"\n→ Open the Streamlit app → Backtester tab to explore interactively.")

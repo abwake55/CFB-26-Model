@@ -86,8 +86,13 @@ def _odds_key() -> str: return SECRETS.get("ODDSBLAZE_KEY", "")
 # ─── Constants ────────────────────────────────────────────────────────────────
 
 CFB_BASE      = "https://api.collegefootballdata.com"
-OB_BASE       = "https://data.oddsblaze.com/v1/odds"
-OB_BOOKS      = ["draftkings_ncaaf", "fanduel_ncaaf", "betmgm_ncaaf", "caesars_ncaaf"]
+# OddsBlaze migrated data.oddsblaze.com → odds.oddsblaze.com (2026 API):
+# sportsbook/league are query params and the line value moved into
+# odds[].selection.line. Requires an active key (checked 2026-07-14: the
+# stored key is expired — CFBD fallback carries lines until renewed).
+OB_BASE       = "https://odds.oddsblaze.com/"
+OB_BOOKS      = ["draftkings", "fanduel", "betmgm", "caesars"]
+OB_LEAGUE     = "ncaaf"
 
 ODDS_TO_CFBD  = {
     "Louisiana State": "LSU",
@@ -257,8 +262,9 @@ def fetch_lines(games_df: pd.DataFrame, season: int, week: int) -> pd.DataFrame:
         try:
             for book_id in OB_BOOKS:
                 resp = requests.get(
-                    f"{OB_BASE}/{book_id}.json",
-                    params={"key": key,
+                    OB_BASE,
+                    params={"key": key, "sportsbook": book_id,
+                            "league": OB_LEAGUE,
                             "market": "Moneyline,Point Spread,Total Points",
                             "main": "true", "price": "american"},
                     timeout=15)
@@ -278,17 +284,24 @@ def fetch_lines(games_df: pd.DataFrame, season: int, week: int) -> pd.DataFrame:
                     spread = over_under = home_ml = away_ml = None
                     for odd in event.get("odds", []):
                         market = odd.get("market", "")
-                        name   = odd.get("name", "")
-                        price  = odd.get("price")
-                        line   = odd.get("line")
+                        sel    = odd.get("selection") or {}
+                        name   = sel.get("name") or odd.get("name", "")
+                        side   = sel.get("side")
+                        line   = sel.get("line", odd.get("line"))
+                        try:
+                            price = float(odd.get("price"))
+                        except (TypeError, ValueError):
+                            price = None
                         if market == "Moneyline":
-                            if name == home_raw:  home_ml = price
-                            elif name == away_raw: away_ml = price
+                            if side == "home" or name == home_raw:
+                                home_ml = price
+                            elif side == "away" or name == away_raw:
+                                away_ml = price
                         elif market == "Point Spread":
-                            if name == home_raw and line is not None:
+                            if (side == "home" or name == home_raw) and line is not None:
                                 spread = line
                         elif market == "Total Points":
-                            if "Over" in name and line is not None:
+                            if (side == "over" or "Over" in str(name)) and line is not None:
                                 over_under = line
                     odds_rows.append({"odds_home": home, "odds_away": away,
                                       "spread": spread, "over_under": over_under,
@@ -323,7 +336,7 @@ def fetch_lines(games_df: pd.DataFrame, season: int, week: int) -> pd.DataFrame:
                     print(f"✅ Lines from OddsBlaze ({book_name}): {len(df)} games matched")
                     return df
         except Exception as e:
-            print(f"[WARN] OddsBlaze failed: {e} — falling back to CFBD")
+            print(f"[WARN] OddsBlaze unavailable ({type(e).__name__}) — falling back to CFBD")
 
     # Fallback: CFBD lines API
     try:
