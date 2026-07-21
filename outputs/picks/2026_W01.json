@@ -13,11 +13,14 @@
     "pred": 45.7,
     "kickoff": "Fri 9/4 \u00b7 8:00 PM ET",
     "stars": "\u2605",
-    "kelly": 1,
+    "kelly": 2,
     "start_date": "2026-09-05T00:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "49.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -37,7 +40,10 @@
     "start_date": "2026-09-05T20:15:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-30.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -48,16 +54,19 @@
     "home_team": "Texas A&M",
     "away_team": "Missouri State",
     "bet_on": "Texas A&M",
-    "line": "-38.5",
+    "line": "-39.5",
     "edge": 5.5,
-    "pred": 44.0,
+    "pred": 45.0,
     "kickoff": "Sat 9/5 \u00b7 7:00 PM ET",
     "stars": "\u2605\u2605",
     "kelly": 1,
     "start_date": "2026-09-05T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-39.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -77,7 +86,10 @@
     "start_date": "2026-08-29T22:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-7.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -97,7 +109,10 @@
     "start_date": "2026-09-05T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-40.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -117,7 +132,10 @@
     "start_date": "2026-09-05T23:45:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-26.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -137,7 +155,10 @@
     "start_date": "2026-09-06T02:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+3.0",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -157,7 +178,10 @@
     "start_date": "2026-08-29T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-30.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -177,7 +201,10 @@
     "start_date": "2026-09-05T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+18.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -197,7 +224,10 @@
     "start_date": "2026-09-05T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": true
+    "neutral": true,
+    "closing_line": "-7.0",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -208,16 +238,19 @@
     "home_team": "North Dakota State",
     "away_team": "Jacksonville State",
     "bet_on": "North Dakota State",
-    "line": "-8.5",
+    "line": "-7.5",
     "edge": 3.7,
-    "pred": 12.2,
+    "pred": 11.2,
     "kickoff": "Sat 8/29 \u00b7 5:30 PM ET",
     "stars": "\u2605",
     "kelly": 1,
     "start_date": "2026-08-29T21:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-7.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -237,6 +270,9 @@
     "start_date": "2026-09-05T16:45:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-34.5",
+    "clv": 0.0,
+    "clv_beat": false
   }
 ]
