@@ -1192,13 +1192,23 @@ def _wind15(row) -> bool:
     return float(ws) >= 15
 
 
+def _low_total(row) -> bool:
+    """Market total < 48. Low-total games have no over-bias to fade — CORE
+    unders there hit ~49%. The inflation the edge exploits lives in higher
+    totals (public backs overs in expected shootouts)."""
+    ou = row.get("over_under")
+    return pd.notna(ou) and float(ou) < 48
+
+
 def _core_total(row) -> bool:
     """Refined CORE gate, walk-forward 2019-25: under, edge 2-7 pts,
-    power-conf involved, wind < 15 → 56.7% (n=707, +8.3% ROI), profitable
-    every season. Edges >7 pts hit 50.7% (winner's curse) and are out."""
+    power-conf involved, wind < 15, market total >= 48 → 58.5% (n=564,
+    +11.7% ROI), profitable every season. Excluded because they add no
+    edge: edges >7 pts (50.7%, winner's curse), wind>=15 (50.0%, priced
+    in), totals <48 (49%, no over-bias to fade)."""
     edge = row["totals_edge"]
-    return bool(edge <= -2 and edge >= -7
-                and _power_involved(row) and not _wind15(row))
+    return bool(edge <= -2 and edge >= -7 and _power_involved(row)
+                and not _wind15(row) and not _low_total(row))
 
 
 def _tier_badge(kind: str, row) -> tuple[str, str]:
@@ -1213,13 +1223,18 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
         edge = row["totals_edge"]
         if edge < 0:  # under pick
             if _core_total(row):
-                return "CORE PLAY · 56.7% '19-'25", "var(--green)"
+                return "CORE PLAY · 58.5% '19-'25", "var(--green)"
+            # Explain the specific disqualifier
             if abs(edge) > 7:
                 return "CAUTION · 7+PT EDGES 51%", "var(--orange)"
             if _wind15(row):
                 return "CAUTION · WIND PRICED IN", "var(--orange)"
-            if abs(edge) >= 2:
+            if _low_total(row):
+                return "CAUTION · LOW TOTAL 49%", "var(--orange)"
+            if not _power_involved(row):
                 return "MARGINAL · G5 NO EDGE", "var(--ink-3)"
+            if abs(edge) >= 2:
+                return "MARGINAL · BELOW GATE", "var(--ink-3)"
             return "LEAN · BELOW EDGE MIN", "var(--ink-3)"
         return "CAUTION · OVERS 49% '19-'25", "var(--orange)"
     if kind == "spread":
@@ -3487,8 +3502,8 @@ def main():
                     bet type has actually performed.</div>
             </div>""")
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("CORE unders", "56.7%", "719 bets · '19–'25 walk-forward", delta_color="off")
-            col2.metric("CORE ROI", "+8.3%", "at -110 · profitable all 7 seasons", delta_color="off")
+            col1.metric("CORE unders", "58.5%", "564 bets · '19–'25 walk-forward", delta_color="off")
+            col2.metric("CORE ROI", "+11.7%", "at -110 · profitable all 7 seasons", delta_color="off")
             col3.metric("Spreads ATS", "~50%", "info only · no validated edge", delta_color="off")
             col4.metric("North star", "CLV", "beat the close", delta_color="off")
             render_core_equity_curve()
@@ -3497,8 +3512,8 @@ def main():
                         padding:12px 18px;margin-top:14px;color:var(--ink-3);font-size:0.82em">
                 ⚖️ <b style="color:var(--ink-2)">Honesty note:</b> the model does not beat the
                 market overall — spreads run ~50% ATS and moneylines are a paper record. The one
-                validated pocket is CORE unders (edge 2–7 pts, power-conf, wind &lt; 15), shown
-                above out-of-sample. Only CORE picks carry units; every other card is research.</div>""")
+                validated pocket is CORE unders (edge 2–7 pts, power-conf, wind &lt; 15, total ≥ 48),
+                shown above out-of-sample. Only CORE picks carry units; every other card is research.</div>""")
             st.info("Select a season and week in the sidebar, then hit **Load Picks**.")
             return
 

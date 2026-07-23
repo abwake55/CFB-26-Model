@@ -3,8 +3,8 @@
 Build the CORE totals portfolio history from walk-forward results.
 
 Applies the validated CORE gate (under, edge 2-7 pts, power-conf involved,
-wind < 15 mph) to every out-of-sample walk-forward prediction 2019-25 and
-writes one row per bet with P&L at -110 to:
+wind < 15 mph, market total >= 48) to every out-of-sample walk-forward
+prediction 2019-25 and writes one row per bet with P&L at -110 to:
 
     outputs/predictions/core_history.csv
 
@@ -40,7 +40,8 @@ def main() -> None:
                   & (t["wind_speed"].fillna(0) >= 15))
 
     core = t[(t["totals_edge"] <= -2) & (t["totals_edge"] >= -7)
-             & t["power"] & ~t["windy"]].copy()
+             & t["power"] & ~t["windy"]
+             & (t["over_under"] >= 48)].copy()
 
     push = core["total_points"] == core["over_under"]
     win = core["total_points"] < core["over_under"]
