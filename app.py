@@ -72,7 +72,9 @@ def _theodds_api_key()  -> str: return get_secret("ODDS_API_KEY",  "")   # the-o
 CFB_BASE_URL  = "https://api.collegefootballdata.com"
 
 SPREAD_EDGE_MIN, SPREAD_EDGE_MAX = 4.0, 7.0
-TOTALS_EDGE_MIN, TOTALS_EDGE_MAX = 3.0, 6.0
+# Totals flag range must span the validated CORE gate (under, edge 2-7): a
+# 3.0 floor silently dropped CORE unders at edge 2-3 before they could render.
+TOTALS_EDGE_MIN, TOTALS_EDGE_MAX = 2.0, 7.0
 MONEYLINE_EV_MIN = 0.04
 MONEYLINE_EV_MAX = 0.08
 
@@ -3535,13 +3537,17 @@ def main():
         # ML > overs > spreads). The board surfaces the strongest leads first.
         plays: list[dict] = []
         for _, r in tot_bets.iterrows():
-            is_under = r["totals_edge"] < 0
-            base = min(abs(r["totals_edge"]) / TOTALS_EDGE_MAX, 1.0)
-            reliability = 1.0 if is_under else 0.45
-            wind = r.get("wind_speed")
-            if is_under and pd.notna(wind) and float(wind) >= 12:
-                reliability = 1.15   # wind-backed unders: the proven pocket
-            plays.append({"kind": "total", "row": r, "score": 100 * base * reliability})
+            # CORE unders (edge 2-7, power-conf, wind<15, total>=48) are the one
+            # validated pocket — surface them at the top regardless of edge size,
+            # since hit rate is flat-to-decreasing with edge (don't reward
+            # magnitude, and high wind is excluded, not rewarded). Everything else
+            # (overs, low-total/G5/big-edge unders) is research-only.
+            if _core_total(r):
+                score = 90.0
+            else:
+                base = min(abs(r["totals_edge"]) / TOTALS_EDGE_MAX, 1.0)
+                score = 100 * base * 0.4
+            plays.append({"kind": "total", "row": r, "score": score})
         for _, r in ml_bets.iterrows():
             base = min(float(r["ml_ev"]) / MONEYLINE_EV_MAX, 1.0)
             reliability = 0.8 if r["ml_book_odds"] <= 0 else 0.5
