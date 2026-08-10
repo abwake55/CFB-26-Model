@@ -538,7 +538,14 @@ def build_and_predict(games, lines, ratings, epa, elo,
     # ── Merge lines ───────────────────────────────────────────────────────
     if not lines.empty:
         ml_avail = [c for c in ["home_moneyline", "away_moneyline"] if c in lines.columns]
-        line_cols = ["game_id", "spread", "over_under", "spread_open"] + ml_avail
+        # Best-available numbers for line shopping (present when lines came
+        # from The Odds API; absent for CFBD-fill games).
+        best_cols = [c for c in ["best_under_total", "best_under_book",
+                                 "best_over_total", "best_over_book",
+                                 "best_home_ml", "best_home_ml_book",
+                                 "best_away_ml", "best_away_ml_book", "n_books"]
+                     if c in lines.columns]
+        line_cols = ["game_id", "spread", "over_under", "spread_open"] + ml_avail + best_cols
         if "provider" in lines.columns:
             line_cols.append("provider")
         df = games.merge(
@@ -587,6 +594,9 @@ def build_and_predict(games, lines, ratings, epa, elo,
                 "home_team", "away_team", "home_conference", "away_conference",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline",
+                "best_under_total", "best_under_book", "best_over_total",
+                "best_over_book", "best_home_ml", "best_home_ml_book",
+                "best_away_ml", "best_away_ml_book", "n_books",
                 "home_unrated", "away_unrated", "has_unrated_opponent",
                 "wind_speed", "is_dome",
                 # Driver columns — power the "why this pick" chips on cards
@@ -1346,6 +1356,66 @@ def _pick_card_html(*, accent: str, kind_badge: str, kind_color: str,
     </div>"""
 
 
+# ─── LINE SHOPPING ────────────────────────────────────────────────────────────
+# Model edges are computed vs the consensus (median) line — the validated
+# reference. These helpers surface the single best number available across the
+# 11 US books so the user bets the best price, not the average. Betting the
+# best total (median book-to-book gap is ~1 pt) is free ROI on a validated pick.
+
+_BOOK_NAMES = {
+    "draftkings": "DraftKings", "fanduel": "FanDuel", "betmgm": "BetMGM",
+    "caesars": "Caesars", "williamhill_us": "Caesars", "pointsbetus": "PointsBet",
+    "betrivers": "BetRivers", "bovada": "Bovada", "betonlineag": "BetOnline",
+    "mybookieag": "MyBookie", "lowvig": "LowVig", "espnbet": "ESPN BET",
+    "hardrockbet": "Hard Rock", "fanatics": "Fanatics", "unibet_us": "Unibet",
+    "superbook": "SuperBook", "wynnbet": "WynnBET", "ballybet": "Bally Bet",
+}
+
+
+def _book_name(k) -> str:
+    if k is None or k == "" or (isinstance(k, float) and pd.isna(k)):
+        return ""
+    return _BOOK_NAMES.get(str(k), str(k).replace("_", " ").title())
+
+
+def _shop_chip(text: str, color: str) -> str:
+    return (f"<div style='margin-top:12px'><span class=\"chip\" "
+            f"style=\"color:{color}\">{text}</span></div>")
+
+
+def _line_shop_total_html(row, is_under: bool) -> str:
+    """Chip: best available total + book for the picked side, vs consensus."""
+    cons = row.get("over_under")
+    best = row.get("best_under_total" if is_under else "best_over_total")
+    book = _book_name(row.get("best_under_book" if is_under else "best_over_book"))
+    if pd.isna(cons) or best is None or pd.isna(best) or not book:
+        return ""
+    side = "U" if is_under else "O"
+    better = (float(best) > float(cons)) if is_under else (float(best) < float(cons))
+    if better:
+        gain = abs(float(best) - float(cons))
+        return _shop_chip(
+            f"🛒 Best number: {side}{float(best):.1f} at {book} "
+            f"<b style='color:var(--green)'>+{gain:.1f} pts</b> vs {float(cons):.1f} consensus",
+            "var(--ink-2)")
+    return _shop_chip(f"🛒 Best number: {side}{float(best):.1f} at {book} "
+                      f"(matches consensus)", "var(--ink-3)")
+
+
+def _line_shop_ml_html(row, is_home: bool) -> str:
+    """Chip: best available moneyline price + book for the picked side."""
+    best = row.get("best_home_ml" if is_home else "best_away_ml")
+    book = _book_name(row.get("best_home_ml_book" if is_home else "best_away_ml_book"))
+    cons = row.get("home_moneyline" if is_home else "away_moneyline")
+    if best is None or pd.isna(best) or not book:
+        return ""
+    best_s = f"+{int(best)}" if best > 0 else str(int(best))
+    better = pd.notna(cons) and float(best) > float(cons)
+    tag = (f" <b style='color:var(--green)'>best price</b>" if better
+           else " (matches consensus)")
+    return _shop_chip(f"🛒 Best price: {best_s} at {book}{tag}", "var(--ink-2)")
+
+
 def render_moneyline_card(row, season, week):
     ev      = row["ml_ev"]
     team    = row["ml_team"]
@@ -1373,7 +1443,8 @@ def render_moneyline_card(row, season, week):
         tier=_tier_badge("moneyline", row),
         headline=f"{team} ML", big_num=label, sub=sub,
         meters=_winprob_bar_html(row),
-        chips=_driver_chips_html(row, "moneyline"),
+        chips=_line_shop_ml_html(row, team == row["home_team"])
+              + _driver_chips_html(row, "moneyline"),
         footer=_stat_footer_html([
             ("Book", label, "var(--ink)"),
             ("Model fair", model_label, "var(--ink)"),
@@ -1422,7 +1493,7 @@ def render_totals_card(row, season, week):
         meters=_edge_meter_html(
             row["over_under"], row["pred_total"], accent,
             market_label="Market total", model_label="Model total", span=8.0),
-        chips=_driver_chips_html(row, "total"),
+        chips=_line_shop_total_html(row, is_under) + _driver_chips_html(row, "total"),
         footer=_stat_footer_html([
             ("Line", ou_str, "var(--ink)"),
             ("Model", f"{row['pred_total']:.1f}" if pd.notna(row["pred_total"]) else "—", "var(--ink)"),

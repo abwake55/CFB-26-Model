@@ -45,16 +45,29 @@ def fetch_ncaaf_events(api_key: str, timeout: int = 25) -> list:
 
 
 def events_to_consensus(events: list) -> pd.DataFrame:
-    """Collapse events to one consensus row per game.
+    """Collapse events to one consensus row per game, plus the best available
+    number per side for line shopping.
 
-    Columns: odds_home, odds_away, spread (home), over_under,
-    home_moneyline, away_moneyline, provider, commence_time.
+    The model classifies edges against the CONSENSUS (median) — the stable,
+    validated reference. The ``best_*`` columns capture the single best number
+    a bettor could actually take across all US books, for execution: the
+    highest total to bet UNDER, the lowest to bet OVER, the best price per
+    moneyline side. Betting the best number instead of consensus is free ROI
+    on an already-validated pick.
+
+    Columns: odds_home, odds_away, spread, over_under, home_moneyline,
+    away_moneyline, provider, commence_time, and best_under_total/_book,
+    best_over_total/_book, best_home_ml/_book, best_away_ml/_book.
     """
     rows = []
     for e in events:
         home, away = e.get("home_team"), e.get("away_team")
         spreads, totals, home_mls, away_mls = [], [], [], []
+        # per-book records for best-number capture
+        tot_by_book = []       # (book, point, over_price, under_price)
+        h_ml_by_book, a_ml_by_book = [], []   # (book, price)
         for bk in e.get("bookmakers", []):
+            bkey = bk.get("key", "")
             for m in bk.get("markets", []):
                 k, outs = m.get("key"), m.get("outcomes", [])
                 if k == "spreads":
@@ -62,19 +75,38 @@ def events_to_consensus(events: list) -> pd.DataFrame:
                         if o.get("name") == home and o.get("point") is not None:
                             spreads.append(float(o["point"]))
                 elif k == "totals":
+                    point = over_price = under_price = None
                     for o in outs:
-                        if o.get("name") == "Over" and o.get("point") is not None:
-                            totals.append(float(o["point"]))
+                        if o.get("point") is None:
+                            continue
+                        point = float(o["point"])
+                        if o.get("name") == "Over":
+                            totals.append(point)
+                            over_price = o.get("price")
+                        elif o.get("name") == "Under":
+                            under_price = o.get("price")
+                    if point is not None:
+                        tot_by_book.append((bkey, point, over_price, under_price))
                 elif k == "h2h":
                     for o in outs:
                         if o.get("price") is None:
                             continue
                         if o.get("name") == home:
                             home_mls.append(float(o["price"]))
+                            h_ml_by_book.append((bkey, float(o["price"])))
                         elif o.get("name") == away:
                             away_mls.append(float(o["price"]))
+                            a_ml_by_book.append((bkey, float(o["price"])))
         if not (spreads or totals):
             continue
+
+        # Best UNDER = highest total (tie: better under price); best OVER =
+        # lowest total (tie: better over price). Prices are american.
+        best_u = max(tot_by_book, key=lambda t: (t[1], t[3] or -1e9), default=None)
+        best_o = min(tot_by_book, key=lambda t: (t[1], -(t[2] or -1e9)), default=None)
+        best_h = max(h_ml_by_book, key=lambda t: t[1], default=None)
+        best_a = max(a_ml_by_book, key=lambda t: t[1], default=None)
+
         rows.append({
             "odds_home": home, "odds_away": away,
             "spread": _round_half(statistics.median(spreads)) if spreads else None,
@@ -82,8 +114,23 @@ def events_to_consensus(events: list) -> pd.DataFrame:
             "home_moneyline": round(statistics.median(home_mls)) if home_mls else None,
             "away_moneyline": round(statistics.median(away_mls)) if away_mls else None,
             "provider": "consensus", "commence_time": e.get("commence_time"),
+            "n_books": len(tot_by_book),
+            "best_under_total": best_u[1] if best_u else None,
+            "best_under_book":  best_u[0] if best_u else None,
+            "best_over_total":  best_o[1] if best_o else None,
+            "best_over_book":   best_o[0] if best_o else None,
+            "best_home_ml":     round(best_h[1]) if best_h else None,
+            "best_home_ml_book": best_h[0] if best_h else None,
+            "best_away_ml":     round(best_a[1]) if best_a else None,
+            "best_away_ml_book": best_a[0] if best_a else None,
         })
     return pd.DataFrame(rows)
+
+
+# Columns carried from consensus rows through to matched CFBD lines.
+_BEST_COLS = ["best_under_total", "best_under_book", "best_over_total",
+              "best_over_book", "best_home_ml", "best_home_ml_book",
+              "best_away_ml", "best_away_ml_book", "n_books"]
 
 
 def _tokens(s) -> list:
@@ -146,13 +193,16 @@ def match_to_games(odds_df: pd.DataFrame, games_df: pd.DataFrame,
             if score > best_score:
                 best_score, best_id = score, gid
         if best_id is not None:
-            matched.append({
+            row = {
                 "game_id": best_id, "spread": r["spread"],
                 "over_under": r["over_under"],
                 "home_moneyline": r["home_moneyline"],
                 "away_moneyline": r["away_moneyline"],
                 "spread_open": None, "provider": r["provider"],
-            })
+            }
+            for c in _BEST_COLS:
+                row[c] = r.get(c)
+            matched.append(row)
     if not matched:
         return pd.DataFrame()
     # If two odds events map to the same game, keep the best-scoring one
