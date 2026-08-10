@@ -31,6 +31,7 @@ from feature_builder import (
     attach_team_features,
     feature_coverage_report,
 )
+import odds_api   # The Odds API line fetcher (the-odds-api.com)
 
 import joblib
 import numpy as np
@@ -38,7 +39,6 @@ import pandas as pd
 import requests
 import streamlit as st
 from pathlib import Path
-from difflib import SequenceMatcher
 from datetime import date
 
 # ─── PAGE CONFIG ─────────────────────────────────────────────────────────────
@@ -67,26 +67,9 @@ def get_secret(key: str, fallback: str = "") -> str:
 
 # Keys are read at call-time (not module load) so Streamlit secrets are always initialised first
 def _cfb_api_key()      -> str: return get_secret("CFB_API_KEY",   "")
-def _odds_api_key()     -> str: return get_secret("ODDSBLAZE_KEY", "")
+def _theodds_api_key()  -> str: return get_secret("ODDS_API_KEY",  "")   # the-odds-api.com
 
 CFB_BASE_URL  = "https://api.collegefootballdata.com"
-ODDSBLAZE_BASE  = "https://data.oddsblaze.com/v1/odds"
-ODDSBLAZE_BOOKS = ["draftkings_ncaaf", "fanduel_ncaaf", "betmgm_ncaaf", "caesars_ncaaf"]
-
-ODDS_TO_CFBD = {
-    "Louisiana State": "LSU",
-    "Mississippi": "Ole Miss",
-    "Southern California": "USC",
-    "Central Florida": "UCF",
-    "Southern Methodist": "SMU",
-    "Texas Christian": "TCU",
-    "Brigham Young": "BYU",
-    "Nevada Las Vegas": "UNLV",
-    "Massachusetts": "UMass",
-    "Florida International": "FIU",
-    "Middle Tennessee State": "Middle Tennessee",
-    "North Carolina State": "NC State",
-}
 
 SPREAD_EDGE_MIN, SPREAD_EDGE_MAX = 4.0, 7.0
 TOTALS_EDGE_MIN, TOTALS_EDGE_MAX = 3.0, 6.0
@@ -500,112 +483,44 @@ def attach_weather_to_games(games: pd.DataFrame) -> pd.DataFrame:
 @st.cache_data(show_spinner="Fetching odds...", ttl=1800)
 def fetch_lines(games_df: pd.DataFrame) -> pd.DataFrame:
     """
-    Fetches live lines from OddsBlaze (DraftKings primary, others as fallback).
-    Falls back to CFBD lines API if OddsBlaze key is missing or returns no data.
-
-    OddsBlaze response shape:
-      { "sportsbook": {...}, "events": [
-          { "teams": {"home": {"name": "..."}, "away": {"name": "..."}},
-            "odds": [{"market": "Moneyline"|"Point Spread"|"Total Points",
-                      "name": "<team or Over/Under>", "price": <int>, "line": <float>}]
-          }, ...
-      ]}
+    Consensus lines from The Odds API (median across US books), backed by
+    CFBD for any game it doesn't cover. CFBD alone if the key is missing/down.
     """
-    key = _odds_api_key()
+    odds_df = pd.DataFrame()
+    key = _theodds_api_key()
     if key:
         try:
-            data = None
-            book_name = None
-            for book_id in ODDSBLAZE_BOOKS:
-                resp = requests.get(
-                    f"{ODDSBLAZE_BASE}/{book_id}.json",
-                    params={"key": key,
-                            "market": "Moneyline,Point Spread,Total Points",
-                            "main": "true", "price": "american"},
-                    timeout=15)
-                if resp.status_code == 200:
-                    payload = resp.json()
-                    if payload.get("events"):
-                        data = payload
-                        book_name = (payload.get("sportsbook") or {}).get("name", book_id)
-                        break
-
-            if data and data.get("events"):
-                odds_rows = []
-                for event in data["events"]:
-                    teams    = event.get("teams", {})
-                    home_raw = teams.get("home", {}).get("name", "")
-                    away_raw = teams.get("away", {}).get("name", "")
-                    home = ODDS_TO_CFBD.get(home_raw, home_raw)
-                    away = ODDS_TO_CFBD.get(away_raw, away_raw)
-                    spread = over_under = home_ml = away_ml = None
-                    for odd in event.get("odds", []):
-                        market = odd.get("market", "")
-                        name   = odd.get("name", "")
-                        price  = odd.get("price")
-                        line   = odd.get("line")
-                        if market == "Moneyline":
-                            if name == home_raw:  home_ml = price
-                            elif name == away_raw: away_ml = price
-                        elif market == "Point Spread":
-                            if name == home_raw and line is not None:
-                                spread = line
-                        elif market == "Total Points":
-                            if "Over" in name and line is not None:
-                                over_under = line
-                    odds_rows.append({"odds_home": home, "odds_away": away,
-                                      "spread": spread, "over_under": over_under,
-                                      "home_moneyline": home_ml, "away_moneyline": away_ml,
-                                      "provider": book_name})
-
-                if odds_rows:
-                    odds_df = pd.DataFrame(odds_rows)
-                    def sim(a, b):
-                        return SequenceMatcher(None, str(a).lower(), str(b).lower()).ratio()
-                    matched = []
-                    cfbd = list(zip(games_df["game_id"], games_df["home_team"], games_df["away_team"]))
-                    for _, r in odds_df.iterrows():
-                        best_id, best_score = None, 0.0
-                        for gid, ch, ca in cfbd:
-                            score = (sim(r["odds_home"], ch) + sim(r["odds_away"], ca)) / 2
-                            if score > best_score: best_score, best_id = score, gid
-                        if best_score >= 0.70:
-                            matched.append({"game_id": best_id,
-                                            "spread": r["spread"],
-                                            "over_under": r["over_under"],
-                                            "home_moneyline": r["home_moneyline"],
-                                            "away_moneyline": r["away_moneyline"],
-                                            "spread_open": None,
-                                            "provider": r["provider"]})
-                    if matched:
-                        return pd.DataFrame(matched).drop_duplicates("game_id")
+            odds_df = odds_api.fetch_lines(key, games_df)
         except Exception as exc:
-            print(f"OddsBlaze unavailable — using CFBD lines: {exc}")
+            print(f"The Odds API unavailable — using CFBD lines: {exc}")
 
-    # ── Fallback: CFBD lines API ──────────────────────────────────────────────
+    # ── CFBD lines (fill gaps / full fallback) ────────────────────────────────
     season = int(games_df["season"].iloc[0])
     week   = int(games_df["week"].iloc[0])
+    cfbd_df = pd.DataFrame()
     try:
         data = cfb_get("lines", params={"year": season, "week": week})
+        priority = ["consensus", "Bovada", "DraftKings", "ESPN Bet"]
+        rank_map = {p: i for i, p in enumerate(priority)}
+        rows = []
+        for game in data:
+            for line in game.get("lines", []):
+                rows.append({"game_id": game.get("id"),
+                             "spread": line.get("spread"),
+                             "over_under": line.get("overUnder"),
+                             "spread_open": line.get("spreadOpen"),
+                             "home_moneyline": line.get("homeMoneyline"),
+                             "away_moneyline": line.get("awayMoneyline"),
+                             "provider": line.get("provider"),
+                             "_rank": rank_map.get(line.get("provider", ""), 99)})
+        if rows:
+            cfbd_df = (pd.DataFrame(rows).sort_values("_rank")
+                       .drop_duplicates("game_id", keep="first")
+                       .drop(columns=["_rank"]))
     except Exception:
-        return pd.DataFrame()
-    priority = ["consensus", "Bovada", "DraftKings", "ESPN Bet"]
-    rank_map = {p: i for i, p in enumerate(priority)}
-    rows = []
-    for game in data:
-        for line in game.get("lines", []):
-            rows.append({"game_id": game.get("id"),
-                         "spread": line.get("spread"),
-                         "over_under": line.get("overUnder"),
-                         "spread_open": line.get("spreadOpen"),
-                         "provider": line.get("provider"),
-                         "_rank": rank_map.get(line.get("provider", ""), 99)})
-    if not rows:
-        return pd.DataFrame()
-    df = pd.DataFrame(rows)
-    return (df.sort_values("_rank")
-              .drop_duplicates("game_id", keep="first")
-              .drop(columns=["_rank"]))
+        cfbd_df = pd.DataFrame()
+
+    return odds_api.merge_lines(odds_df, cfbd_df)
 
 
 # ─── FEATURE BUILDING & PREDICTION ───────────────────────────────────────────
