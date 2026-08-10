@@ -61,13 +61,30 @@ def cfb_get(endpoint: str, params: dict = None) -> list:
 
 def update_master(new_df: pd.DataFrame, master_path: Path,
                   season_col: str = "season") -> None:
-    """Replace rows for SEASON in master CSV; create file if missing."""
+    """Replace rows for SEASON in master CSV; create file if missing.
+
+    Existing master files are inconsistent about the season key: SP+, FPI,
+    and recruiting use ``year`` while talent/returning use ``season``. Detect
+    whichever column the file on disk actually uses and align new_df to it,
+    so a refresh never throws KeyError when the new season first appears.
+    """
     if new_df.empty:
         print(f"   (no data returned — skipping {master_path.name})")
         return
     if master_path.exists():
         master = pd.read_csv(master_path)
-        master = master[master[season_col] != SEASON].copy()
+        # Pick the season column the existing file is keyed on.
+        existing_col = next((c for c in (season_col, "year", "season")
+                             if c in master.columns), season_col)
+        # Align new_df to that column name.
+        if existing_col not in new_df.columns:
+            src = next((c for c in (season_col, "year", "season")
+                        if c in new_df.columns), None)
+            if src:
+                new_df = new_df.rename(columns={src: existing_col})
+            else:
+                new_df[existing_col] = SEASON
+        master = master[master[existing_col] != SEASON].copy()
         updated = pd.concat([master, new_df], ignore_index=True)
     else:
         updated = new_df.copy()
