@@ -390,20 +390,6 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
     if not saved_picks:
         return [], {}
 
-    # Capture closing lines once, persist into the picks file so re-grades
-    # (season record recomputes every week) never refetch or drift.
-    if any("closing_line" not in p for p in saved_picks):
-        closing = _fetch_closing_lines(season, week)
-        if closing:
-            for p in saved_picks:
-                if "closing_line" not in p:
-                    _attach_clv(p, closing.get(p.get("game_id"), {}))
-            try:
-                with open(picks_file, "w") as f:
-                    json.dump(saved_picks, f, indent=2)
-            except OSError as e:
-                print(f"  Warning: could not persist closing lines: {e}")
-
     # Fetch actual results from CFBD
     try:
         games_data = cfb_get("games", params={
@@ -413,6 +399,31 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
         results = {g["id"]: g for g in games_data}
     except Exception:
         return saved_picks, {}
+
+    # Capture closing lines once, then persist into the picks file so re-grades
+    # (the season record recomputes every week) never refetch or drift.
+    #
+    # ONLY for games that have finished. CFBD lines freeze at kickoff, so they
+    # are the true closing numbers *after* the game — but a CFBD week can span
+    # nine days (2026 week 1 runs Aug 29 - Sep 6), so grading mid-week would
+    # otherwise capture a still-moving line for the not-yet-played games and
+    # persist it permanently as their "close". Unfinished games simply get
+    # picked up on a later run.
+    def _completed(p) -> bool:
+        return bool(results.get(p.get("game_id"), {}).get("completed"))
+
+    pending_clv = [p for p in saved_picks
+                   if "closing_line" not in p and _completed(p)]
+    if pending_clv:
+        closing = _fetch_closing_lines(season, week)
+        if closing:
+            for p in pending_clv:
+                _attach_clv(p, closing.get(p.get("game_id"), {}))
+            try:
+                with open(picks_file, "w") as f:
+                    json.dump(saved_picks, f, indent=2)
+            except OSError as e:
+                print(f"  Warning: could not persist closing lines: {e}")
 
     stats = {t: {"wins": 0, "losses": 0, "pushes": 0, "units": 0.0}
              for t in ("SPREAD", "TOTAL", "TOTAL_HT", "MONEYLINE")}
