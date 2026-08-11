@@ -162,24 +162,58 @@ def predict_games(season: int, week: int) -> list:
         # 50.7% at 7+), power-conf, market total >= 48 (low totals have no
         # over-bias to fade, ~49%). Wind>=15 is gated app-side at kickoff.
         _ou = pd.to_numeric(row.get("over_under"), errors="coerce")
-        if (pd.notna(tot_edge) and -7.0 <= tot_edge <= -EDGE_MIN_TOT
-                and power_involved and pd.notna(_ou) and _ou >= 48):
-            over_bet = False
+        both_power = (row.get("home_conference") in POWER_CONFS
+                      and row.get("away_conference") in POWER_CONFS)
+        is_core = (pd.notna(tot_edge) and -7.0 <= tot_edge <= -EDGE_MIN_TOT
+                   and power_involved and pd.notna(_ou) and _ou >= 48)
+        if is_core:
             picks.append({
                 "type":      "TOTAL",
-                "tier":      "CORE",
+                # Both-power CORE measures 59.8% (n=413) vs 55.0% (n=151) for
+                # power-vs-G5 — marquee games draw the most public over money.
+                "tier":      "CORE+" if both_power else "CORE",
                 "game_id":   row["game_id"],
                 "week":      int(row["week"]) if pd.notna(row["week"]) else 0,
                 "matchup":   f"{row['home_team']} vs {row['away_team']}",
                 "home_team": row["home_team"],
                 "away_team": row["away_team"],
-                "bet_on":    "OVER" if over_bet else "UNDER",
+                "bet_on":    "UNDER",
                 "line":      ou_str,
                 "edge":      round(float(tot_edge), 1),
                 "pred":      round(float(row["pred_total"]), 1),
                 "kickoff":   kickoff,
                 "stars":     _stars(abs(tot_edge)),
-                "kelly":     2,   # flat 2u ≈ quarter-Kelly on measured 56.7%
+                # 2u portfolio base (quarter-Kelly on 58.5% ≈ 3.2%); the
+                # both-power slice earns 3u (its own quarter-Kelly is 3.9%).
+                "kelly":     3 if both_power else 2,
+                "start_date": str(start),
+                "wind_speed": row.get("wind_speed"),
+                "is_dome":    row.get("is_dome", 0),
+                "neutral":    bool(row.get("neutral_site", 0)),
+            })
+
+        # High-total fade — PAPER only. Bet UNDER whenever the market total is
+        # >= 60, independent of the model: walk-forward 2019-25 (excluding CORE)
+        # 53.8% over 974 bets, +2.7% ROI, p=0.019, 5/7 seasons. Edge is uniform
+        # whether the model leans under (53.5%) or over (54.0%), so this is
+        # market over-inflation on shootout games, not model skill. Thin, so 0u
+        # until a live season corroborates it.
+        elif pd.notna(_ou) and _ou >= 60:
+            picks.append({
+                "type":      "TOTAL_HT",
+                "tier":      "PAPER",
+                "game_id":   row["game_id"],
+                "week":      int(row["week"]) if pd.notna(row["week"]) else 0,
+                "matchup":   f"{row['home_team']} vs {row['away_team']}",
+                "home_team": row["home_team"],
+                "away_team": row["away_team"],
+                "bet_on":    "UNDER",
+                "line":      ou_str,
+                "edge":      round(float(tot_edge), 1) if pd.notna(tot_edge) else 0.0,
+                "pred":      round(float(row["pred_total"]), 1) if pd.notna(row["pred_total"]) else 0.0,
+                "kickoff":   kickoff,
+                "stars":     "",
+                "kelly":     0,   # paper — graded at nominal 1u for the record
                 "start_date": str(start),
                 "wind_speed": row.get("wind_speed"),
                 "is_dome":    row.get("is_dome", 0),
@@ -229,7 +263,7 @@ def predict_games(season: int, week: int) -> list:
 
     # CORE totals lead, then spreads, then moneylines; edge desc within each
     # (edge is points for spread/total but EV% for ML — never sort across types)
-    type_rank = {"TOTAL": 0, "SPREAD": 1, "MONEYLINE": 2}
+    type_rank = {"TOTAL": 0, "SPREAD": 1, "MONEYLINE": 2, "TOTAL_HT": 3}
     picks.sort(key=lambda p: (type_rank.get(p["type"], 9), -abs(p["edge"])))
     return picks
 
@@ -316,7 +350,7 @@ def _attach_clv(pick: dict, close: dict) -> None:
             pick["closing_line"] = f"{close_vl:+.1f}"
             pick["clv"] = round(pick_vl - close_vl, 1)   # -7 vs close -8.5 → +1.5
             pick["clv_beat"] = pick["clv"] > 0
-        elif pick["type"] == "TOTAL":
+        elif pick["type"] in ("TOTAL", "TOTAL_HT"):
             if close.get("over_under") is None or pick["line"] == "TBD":
                 return
             close_ou = float(close["over_under"])
@@ -381,7 +415,7 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
         return saved_picks, {}
 
     stats = {t: {"wins": 0, "losses": 0, "pushes": 0, "units": 0.0}
-             for t in ("SPREAD", "TOTAL", "MONEYLINE")}
+             for t in ("SPREAD", "TOTAL", "TOTAL_HT", "MONEYLINE")}
     annotated = []
 
     def grade(pick, outcome, pnl=0.0):
@@ -421,7 +455,7 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
                 grade(pick, "win", 1.0)
             else:
                 grade(pick, "loss", -1.1)
-        elif pick["type"] == "TOTAL":
+        elif pick["type"] in ("TOTAL", "TOTAL_HT"):
             ou = float(pick["line"]) if pick["line"] != "TBD" else None
             if ou is None:
                 pick["outcome"] = "pending"
@@ -448,7 +482,8 @@ def load_last_week_results(season: int, week: int) -> tuple[list, dict]:
     for s in stats.values():
         s["units"] = round(s["units"], 1)
     stats["all"] = {
-        k: round(sum(stats[t][k] for t in ("SPREAD", "TOTAL", "MONEYLINE")), 1)
+        k: round(sum(stats[t][k] for t in ("SPREAD", "TOTAL", "TOTAL_HT",
+                                           "MONEYLINE")), 1)
         for k in ("wins", "losses", "pushes", "units")
     }
     clv_graded = [p for p in annotated if p.get("clv_beat") is not None]
@@ -464,7 +499,7 @@ def compute_season_record(season: int) -> dict:
     per market (SPREAD / TOTAL / MONEYLINE) — each market's record reflects
     its own validated edge and is never blended into one number.
     """
-    markets = ("SPREAD", "TOTAL", "MONEYLINE")
+    markets = ("SPREAD", "TOTAL", "TOTAL_HT", "MONEYLINE")
     agg = {t: {"wins": 0, "losses": 0, "pushes": 0, "units": 0.0} for t in markets}
     weeks_counted = 0
     clv_beat = clv_total = 0
@@ -579,11 +614,15 @@ def build_html(season: int, this_week: int, picks: list,
     # ── Picks table rows ──────────────────────────────────────────────────────
     def pick_row(p: dict) -> str:
         is_ml = p["type"] == "MONEYLINE"
+        is_ht = p["type"] == "TOTAL_HT"
         edge_color = "#22c55e" if abs(p["edge"]) >= 4.5 else "#94a3b8"
         type_color = ("#eab308" if is_ml else
                       "#8b5cf6" if p["type"] == "SPREAD" else
                       "#06b6d4" if p["bet_on"] == "UNDER" else "#f97316")
-        edge_str = f"EV +{p['edge']:.1f}%" if is_ml else f"{p['edge']:+.1f}"
+        # The high-total fade ignores the model, so an edge number would imply
+        # model support it does not have.
+        edge_str = ("market fade" if is_ht else
+                    f"EV +{p['edge']:.1f}%" if is_ml else f"{p['edge']:+.1f}")
         wind_note = ""
         ws = p.get("wind_speed")
         if ws and not p.get("is_dome") and float(ws) >= 15:
@@ -609,7 +648,7 @@ def build_html(season: int, this_week: int, picks: list,
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
                      text-align:center;color:#eab308">{p['stars']}</td>
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
-                     text-align:center;font-weight:700">{'paper' if is_ml else f"{p['kelly']}u"}</td>
+                     text-align:center;font-weight:700">{'paper' if (is_ml or is_ht) else f"{p['kelly']}u"}</td>
         </tr>"""
 
     picks_rows = "".join(pick_row(p) for p in picks[:12]) if has_picks else \
@@ -636,7 +675,8 @@ def build_html(season: int, this_week: int, picks: list,
           <td style="padding:8px;border-bottom:1px solid #e2e8f0;color:{pnl_color};font-weight:700;text-align:center">{pnl}</td>
         </tr>"""
 
-    MARKET_LABELS = [("TOTAL", "O/U"), ("SPREAD", "Spread"), ("MONEYLINE", "ML")]
+    MARKET_LABELS = [("TOTAL", "O/U"), ("SPREAD", "Spread"),
+                     ("TOTAL_HT", "High-tot"), ("MONEYLINE", "ML")]
 
     def market_summary(stats: dict) -> str:
         parts = []
@@ -682,7 +722,8 @@ def build_html(season: int, this_week: int, picks: list,
     record_section = ""
     if sr.get("bets", 0) > 0:
         market_rows = []
-        for key, label in [("TOTAL", "Over/Under"), ("SPREAD", "Spread"),
+        for key, label in [("TOTAL", "Over/Under (CORE)"), ("SPREAD", "Spread"),
+                           ("TOTAL_HT", "High-total unders (paper)"),
                            ("MONEYLINE", "Moneyline (paper)")]:
             m = sr.get(key, {})
             if m.get("bets", 0) == 0:
@@ -758,7 +799,8 @@ def build_html(season: int, this_week: int, picks: list,
       🏈 This Week's Top Picks — Week {this_week}
     </h2>
     <p style="color:#64748b;margin:0 0 12px 0;font-size:0.85em">
-      O/U: unders, {EDGE_MIN_TOT:.0f}–7 pt edge, power-conf, total ≥ 48 (58.5% in '19–'25 backtest) ·
+      O/U CORE: unders, {EDGE_MIN_TOT:.0f}–7 pt edge, power-conf, total ≥ 48 (58.5% in '19–'25;
+      both-power 59.8% = 3u) · High-total unders ≥ 60: paper only (53.8%) ·
       Spread: {EDGE_MIN_SP:.0f}+ pts, weeks 1–{SPREAD_MAX_WEEK} only ·
       ML: {ML_EV_MIN:.0%}+ EV, paper record only · -110 juice unless noted
     </p>
@@ -868,7 +910,8 @@ def main():
 
     print(f"\nComputing {season} season record...")
     season_record = compute_season_record(season)
-    for mkt, label in [("TOTAL", "O/U"), ("SPREAD", "Spread"), ("MONEYLINE", "ML")]:
+    for mkt, label in [("TOTAL", "O/U"), ("SPREAD", "Spread"),
+                       ("TOTAL_HT", "High-tot"), ("MONEYLINE", "ML")]:
         m = season_record.get(mkt, {})
         if m.get("bets", 0):
             print(f"  {label}: {m['wins']}–{m['losses']} "

@@ -1138,6 +1138,31 @@ def _core_total(row) -> bool:
                 and not _wind15(row) and not _low_total(row))
 
 
+def _both_power(row) -> bool:
+    return (row.get("home_conference") in _POWER_CONFS
+            and row.get("away_conference") in _POWER_CONFS)
+
+
+def _core_premium(row) -> bool:
+    """CORE picks where BOTH teams are power-conf. Walk-forward 2019-25 splits
+    CORE into 59.8% (n=413, +14.2% ROI) for both-power vs 55.0% (n=151, +4.9%)
+    for power-vs-G5 — marquee games draw the most public over money. Sizing
+    refinement only; the CORE gate itself is unchanged."""
+    return _core_total(row) and _both_power(row)
+
+
+def _high_total_paper(row) -> bool:
+    """Pure market-bias play, PAPER only: bet UNDER whenever the market total
+    is >= 60, independent of the model. Walk-forward 2019-25 (excluding games
+    already in CORE): 53.8% over 974 bets, +2.7% ROI, p=0.019, profitable 5/7
+    seasons. The edge is uniform whether the model leans under (53.5%) or over
+    (54.0%), confirming it is book/public over-inflation on shootout-hyped
+    games, not model skill. Thin (~1.4 pts above breakeven) and it failed two
+    seasons, so it is tracked at 0u until a live season corroborates it."""
+    ou = row.get("over_under")
+    return bool(pd.notna(ou) and float(ou) >= 60 and not _core_total(row))
+
+
 def _tier_badge(kind: str, row) -> tuple[str, str]:
     """Return (label, color) tier gated by walk-forward results 2019-25
     (5,100 games). Segments below are the only ones that cleared breakeven:
@@ -1148,9 +1173,13 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
     """
     if kind == "total":
         edge = row["totals_edge"]
+        if row.get("_force_under") and not _core_total(row):
+            return "PAPER · HIGH-TOTAL 53.8%", "var(--orange)"
         if edge < 0:  # under pick
+            if _core_premium(row):
+                return "CORE+ · 59.8% '19-'25", "var(--green)"
             if _core_total(row):
-                return "CORE PLAY · 58.5% '19-'25", "var(--green)"
+                return "CORE PLAY · 55.0% '19-'25", "var(--green)"
             # Explain the specific disqualifier
             if abs(edge) > 7:
                 return "CAUTION · 7+PT EDGES 51%", "var(--orange)"
@@ -1458,14 +1487,19 @@ def render_moneyline_card(row, season, week):
                  label, units, season, week, f"EV {ev:+.1%}")
 
 def render_totals_card(row, season, week):
-    is_under = row["totals_edge"] < 0
+    # High-total paper picks are always UNDER regardless of model direction —
+    # the edge is market over-inflation, not a model read.
+    force_under = bool(row.get("_force_under"))
+    is_under = force_under or row["totals_edge"] < 0
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
     _play    = _is_play("total", row)
-    # Flat 2u on CORE: hit rate does NOT rise with edge size (59.9% at 2-3
-    # pts vs 50.7% at 7+), so edge-scaled Kelly is backwards here. 2u ≈
-    # quarter-Kelly on the measured 56.7% at -110.
-    units    = 2 if _play else 0
+    # Flat sizing within CORE: hit rate does NOT rise with edge size (59.9% at
+    # 2-3 pts vs 50.7% at 7+), so edge-scaled Kelly is backwards. 2u is the
+    # conservative portfolio base (quarter-Kelly on 58.5% ≈ 3.2%); the
+    # both-power slice measures 59.8% and earns 3u (still under its own
+    # quarter-Kelly of 3.9%). Non-CORE totals are research only.
+    units    = (3 if _core_premium(row) else 2) if _play else 0
     matchup  = f"{row['away_team']} @ {row['home_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
     edge_str = f"{row['totals_edge']:+.1f}"
@@ -1479,12 +1513,18 @@ def render_totals_card(row, season, week):
     accent     = "var(--cyan)" if is_under else "var(--orange)"
     edge_color = "var(--green)" if edge_abs >= 4.5 else "var(--ink-2)"
 
-    metric = (f'<div style="display:flex;align-items:center;gap:8px">'
-              f'<span class="num" style="color:{edge_color};font-size:0.85em;font-weight:800">'
-              f'Edge {edge_str}</span>'
-              f'<span style="color:var(--gold);font-size:0.88em">{confidence_stars(edge_abs)}</span></div>')
-
-    _tot_pct = min(edge_abs / 8.0 * 100, 100)
+    if force_under and not _play:
+        # Paper high-total fade: the model's edge is irrelevant to the play,
+        # so don't imply model support with an edge number or stars.
+        metric = ('<div style="color:var(--ink-3);font-size:0.78em;'
+                  'font-weight:700;letter-spacing:0.06em">MARKET FADE</div>')
+        _tot_pct = 0.0
+    else:
+        metric = (f'<div style="display:flex;align-items:center;gap:8px">'
+                  f'<span class="num" style="color:{edge_color};font-size:0.85em;font-weight:800">'
+                  f'Edge {edge_str}</span>'
+                  f'<span style="color:var(--gold);font-size:0.88em">{confidence_stars(edge_abs)}</span></div>')
+        _tot_pct = min(edge_abs / 8.0 * 100, 100)
     st.html(_pick_card_html(
         accent=accent, kind_badge=f"TOTAL · {side_str}", kind_color=accent,
         edge_pct=_tot_pct,
@@ -1497,8 +1537,10 @@ def render_totals_card(row, season, week):
         footer=_stat_footer_html([
             ("Line", ou_str, "var(--ink)"),
             ("Model", f"{row['pred_total']:.1f}" if pd.notna(row["pred_total"]) else "—", "var(--ink)"),
-            ("Edge", f"{edge_str} pts", edge_color),
-            ("Kelly", unit_dollar_label(units) if _play else "0u · pass", "var(--ink)" if _play else "var(--ink-3)"),
+            ("Edge", "n/a" if (force_under and not _play) else f"{edge_str} pts", edge_color),
+            ("Kelly", unit_dollar_label(units) if _play
+             else ("0u · paper" if force_under else "0u · pass"),
+             "var(--ink)" if _play else "var(--ink-3)"),
         ]),
         metric_html=metric,
     ))
@@ -3596,6 +3638,19 @@ def main():
             (preds["totals_edge"].abs() <= TOTALS_EDGE_MAX)
         ].sort_values("totals_edge", key=abs, ascending=False)
 
+        # High-total paper fades (total >= 60, under, not already CORE). These
+        # need no model edge, so they are collected separately from tot_bets —
+        # the edge filter above would drop most of them. _force_under tells the
+        # card renderer to show UNDER regardless of the model's direction.
+        ht_bets = preds[
+            preds["over_under"].notna() & (preds["over_under"] >= 60)
+        ].copy()
+        if not ht_bets.empty:
+            ht_bets = ht_bets[~ht_bets.apply(_core_total, axis=1)]
+        if not ht_bets.empty:
+            ht_bets = ht_bets[~ht_bets["game_id"].isin(tot_bets["game_id"])]
+            ht_bets["_force_under"] = True
+
         sp_bets = preds[
             preds["spread_edge"].notna() &
             (preds["spread_edge"].abs() >= SPREAD_EDGE_MIN) &
@@ -3613,12 +3668,17 @@ def main():
             # since hit rate is flat-to-decreasing with edge (don't reward
             # magnitude, and high wind is excluded, not rewarded). Everything else
             # (overs, low-total/G5/big-edge unders) is research-only.
-            if _core_total(r):
+            if _core_premium(r):
+                score = 95.0
+            elif _core_total(r):
                 score = 90.0
             else:
                 base = min(abs(r["totals_edge"]) / TOTALS_EDGE_MAX, 1.0)
                 score = 100 * base * 0.4
             plays.append({"kind": "total", "row": r, "score": score})
+        # ht_bets are deliberately NOT added to `plays` — they are 0u paper
+        # picks and get their own section, so they never occupy a ranked slot
+        # or appear in the bankroll sizing table.
         for _, r in ml_bets.iterrows():
             base = min(float(r["ml_ev"]) / MONEYLINE_EV_MAX, 1.0)
             reliability = 0.8 if r["ml_book_odds"] <= 0 else 0.5
@@ -3693,6 +3753,24 @@ def main():
                             render_moneyline_card(play["row"], season, week)
                         else:
                             render_spread_card(play["row"], season, week)
+
+                    # Paper experiment: kept out of the ranked board so it never
+                    # competes with real plays, but visible so the tracked record
+                    # is auditable week to week.
+                    if not ht_bets.empty:
+                        with st.expander(
+                            f"🧪 Paper watchlist — {len(ht_bets)} high-total fade"
+                            f"{'s' if len(ht_bets) != 1 else ''} (0u, tracking only)",
+                            expanded=False,
+                        ):
+                            st.caption(
+                                "Bet UNDER whenever the market total is ≥ 60, independent "
+                                "of the model: 53.8% over 974 walk-forward bets (+2.7% ROI, "
+                                "p=0.019), profitable 5 of 7 seasons. Thin and unproven live, "
+                                "so it carries no units until a season corroborates it."
+                            )
+                            for _, row in ht_bets.iterrows():
+                                render_totals_card(row, season, week)
 
             # ── Totals ────────────────────────────────────────────────────────
             elif view == "Totals":
