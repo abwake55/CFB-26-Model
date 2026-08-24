@@ -754,10 +754,18 @@ def train_and_evaluate():
     ridge_tot.fit(X_train_tot, y_train_tot)
 
     print("  Tuning GBM hyperparameters with Optuna (50 trials)...")
+    # NO time-decay weights on totals. scripts/config_headtohead.py walk-forwards
+    # the 2x2 {fixed,Optuna} x {unweighted,time-decay} over 6 folds and scores it
+    # on the CORE unders portfolio: weighting hurts in BOTH pairs — unweighted
+    # 56.3% -> 55.3% weighted, and with Optuna 57.9% -> 54.4% — and the weighted
+    # arm is worst on raw totals MAE too (14.33 vs 13.40). Optuna alone is the
+    # best config (57.9%, +10.6% ROI, profitable 6 of 6 seasons).
+    # Spread and win-prob still use sw_train: the test covered totals only, and
+    # CORE is a totals-only strategy, so there is no evidence to act on there.
     tot_params = tune_gbm_params(X_train_tot, y_train_tot, X_val_tot, y_val_tot,
-                                 sample_weight=sw_train, n_trials=50)
+                                 sample_weight=None, n_trials=50)
     gbm_tot = lgb.LGBMRegressor(**tot_params)
-    gbm_tot.fit(X_train_tot, y_train_tot, sample_weight=sw_train)
+    gbm_tot.fit(X_train_tot, y_train_tot)
 
     results_tot = []
     for pipe, label in [(ridge_tot, "Ridge"), (gbm_tot, "GradientBoost")]:
