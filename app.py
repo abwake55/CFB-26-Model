@@ -1129,8 +1129,8 @@ def _low_total(row) -> bool:
 
 def _core_total(row) -> bool:
     """Refined CORE gate, walk-forward 2019-25: under, edge 2-7 pts,
-    power-conf involved, wind < 15, market total >= 48 → 58.5% (n=564,
-    +11.7% ROI), profitable every season. Excluded because they add no
+    power-conf involved, wind < 15, market total >= 48 → 54.9% (n=559,
+    +4.8% ROI, z=2.33), profitable 6 of 7 seasons. Excluded because they add no
     edge: edges >7 pts (50.7%, winner's curse), wind>=15 (50.0%, priced
     in), totals <48 (49%, no over-bias to fade)."""
     edge = row["totals_edge"]
@@ -1144,11 +1144,12 @@ def _both_power(row) -> bool:
 
 
 def _core_premium(row) -> bool:
-    """CORE picks where BOTH teams are power-conf. Walk-forward 2019-25 splits
-    CORE into 59.8% (n=413, +14.2% ROI) for both-power vs 55.0% (n=151, +4.9%)
-    for power-vs-G5 — marquee games draw the most public over money. Sizing
-    refinement only; the CORE gate itself is unchanged."""
-    return _core_total(row) and _both_power(row)
+    """RETIRED 2026-08-24. A both-power CORE tier looked strong on the Jul-01
+    feature matrix (59.8% vs 55.0%), but after CFBD revised returning-production
+    for 1,227 historical rows the split collapsed to 55.1% vs 54.5% — i.e. it
+    was an artifact of stale inputs, not a real effect. Kept as a stub returning
+    False so CORE sizes uniformly; do not re-add without fresh validation."""
+    return False
 
 
 def _high_total_paper(row) -> bool:
@@ -1174,12 +1175,10 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
     if kind == "total":
         edge = row["totals_edge"]
         if row.get("_force_under") and not _core_total(row):
-            return "PAPER · HIGH-TOTAL 53.8%", "var(--orange)"
+            return "PAPER · HIGH-TOTAL 54.3%", "var(--orange)"
         if edge < 0:  # under pick
-            if _core_premium(row):
-                return "CORE+ · 59.8% '19-'25", "var(--green)"
             if _core_total(row):
-                return "CORE PLAY · 55.0% '19-'25", "var(--green)"
+                return "CORE PLAY · 54.9% '19-'25", "var(--green)"
             # Explain the specific disqualifier
             if abs(edge) > 7:
                 return "CAUTION · 7+PT EDGES 51%", "var(--orange)"
@@ -1494,12 +1493,10 @@ def render_totals_card(row, season, week):
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
     _play    = _is_play("total", row)
-    # Flat sizing within CORE: hit rate does NOT rise with edge size (59.9% at
-    # 2-3 pts vs 50.7% at 7+), so edge-scaled Kelly is backwards. 2u is the
-    # conservative portfolio base (quarter-Kelly on 58.5% ≈ 3.2%); the
-    # both-power slice measures 59.8% and earns 3u (still under its own
-    # quarter-Kelly of 3.9%). Non-CORE totals are research only.
-    units    = (3 if _core_premium(row) else 2) if _play else 0
+    # Flat 1u on CORE: hit rate does NOT rise with edge size, so edge-scaled
+    # Kelly is backwards. At the measured 54.9% quarter-Kelly is ~1.3% of
+    # bankroll, so 1u (=1%) is the conservative size. Non-CORE = research only.
+    units    = 1 if _play else 0
     matchup  = f"{row['away_team']} @ {row['home_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
     edge_str = f"{row['totals_edge']:+.1f}"
@@ -3532,8 +3529,8 @@ def main():
                     bet type has actually performed.</div>
             </div>""")
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("CORE unders", "58.5%", "564 bets · '19–'25 walk-forward", delta_color="off")
-            col2.metric("CORE ROI", "+11.7%", "at -110 · profitable all 7 seasons", delta_color="off")
+            col1.metric("CORE unders", "54.9%", "559 bets · '19–'25 walk-forward", delta_color="off")
+            col2.metric("CORE ROI", "+4.8%", "at -110 · profitable 6 of 7 seasons", delta_color="off")
             col3.metric("Spreads ATS", "~50%", "info only · no validated edge", delta_color="off")
             col4.metric("North star", "CLV", "beat the close", delta_color="off")
             render_core_equity_curve()
@@ -3668,9 +3665,7 @@ def main():
             # since hit rate is flat-to-decreasing with edge (don't reward
             # magnitude, and high wind is excluded, not rewarded). Everything else
             # (overs, low-total/G5/big-edge unders) is research-only.
-            if _core_premium(r):
-                score = 95.0
-            elif _core_total(r):
+            if _core_total(r):
                 score = 90.0
             else:
                 base = min(abs(r["totals_edge"]) / TOTALS_EDGE_MAX, 1.0)
@@ -3765,8 +3760,8 @@ def main():
                         ):
                             st.caption(
                                 "Bet UNDER whenever the market total is ≥ 60, independent "
-                                "of the model: 53.8% over 974 walk-forward bets (+2.7% ROI, "
-                                "p=0.019), profitable 5 of 7 seasons. Thin and unproven live, "
+                                "of the model: 54.3% over 978 walk-forward bets (+3.6% ROI, "
+                                "z=2.69), profitable 4 of 7 seasons. Thin and unproven live, "
                                 "so it carries no units until a season corroborates it."
                             )
                             for _, row in ht_bets.iterrows():

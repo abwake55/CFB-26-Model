@@ -162,16 +162,15 @@ def predict_games(season: int, week: int) -> list:
         # 50.7% at 7+), power-conf, market total >= 48 (low totals have no
         # over-bias to fade, ~49%). Wind>=15 is gated app-side at kickoff.
         _ou = pd.to_numeric(row.get("over_under"), errors="coerce")
-        both_power = (row.get("home_conference") in POWER_CONFS
-                      and row.get("away_conference") in POWER_CONFS)
         is_core = (pd.notna(tot_edge) and -7.0 <= tot_edge <= -EDGE_MIN_TOT
                    and power_involved and pd.notna(_ou) and _ou >= 48)
         if is_core:
             picks.append({
                 "type":      "TOTAL",
-                # Both-power CORE measures 59.8% (n=413) vs 55.0% (n=151) for
-                # power-vs-G5 — marquee games draw the most public over money.
-                "tier":      "CORE+" if both_power else "CORE",
+                # A both-power CORE tier was retired 2026-08-24: it looked like
+                # 59.8% vs 55.0% on the Jul-01 feature matrix, but collapsed to
+                # 55.1% vs 54.5% once CFBD revised returning production.
+                "tier":      "CORE",
                 "game_id":   row["game_id"],
                 "week":      int(row["week"]) if pd.notna(row["week"]) else 0,
                 "matchup":   f"{row['home_team']} vs {row['away_team']}",
@@ -183,9 +182,9 @@ def predict_games(season: int, week: int) -> list:
                 "pred":      round(float(row["pred_total"]), 1),
                 "kickoff":   kickoff,
                 "stars":     _stars(abs(tot_edge)),
-                # 2u portfolio base (quarter-Kelly on 58.5% ≈ 3.2%); the
-                # both-power slice earns 3u (its own quarter-Kelly is 3.9%).
-                "kelly":     3 if both_power else 2,
+                # Quarter-Kelly on the measured 54.9% is ~1.3% of bankroll,
+                # so 1u (=1%) is the conservative flat size.
+                "kelly":     1,
                 "start_date": str(start),
                 "wind_speed": row.get("wind_speed"),
                 "is_dome":    row.get("is_dome", 0),
@@ -194,7 +193,7 @@ def predict_games(season: int, week: int) -> list:
 
         # High-total fade — PAPER only. Bet UNDER whenever the market total is
         # >= 60, independent of the model: walk-forward 2019-25 (excluding CORE)
-        # 53.8% over 974 bets, +2.7% ROI, p=0.019, 5/7 seasons. Edge is uniform
+        # 54.3% over 978 bets, +3.6% ROI, z=2.69, 4/7 seasons. Edge is uniform
         # whether the model leans under (53.5%) or over (54.0%), so this is
         # market over-inflation on shootout games, not model skill. Thin, so 0u
         # until a live season corroborates it.
@@ -810,8 +809,8 @@ def build_html(season: int, this_week: int, picks: list,
       🏈 This Week's Top Picks — Week {this_week}
     </h2>
     <p style="color:#64748b;margin:0 0 12px 0;font-size:0.85em">
-      O/U CORE: unders, {EDGE_MIN_TOT:.0f}–7 pt edge, power-conf, total ≥ 48 (58.5% in '19–'25;
-      both-power 59.8% = 3u) · High-total unders ≥ 60: paper only (53.8%) ·
+      O/U CORE: unders, {EDGE_MIN_TOT:.0f}–7 pt edge, power-conf, total ≥ 48
+      (54.9% in '19–'25 walk-forward) · High-total unders ≥ 60: paper only (54.3%) ·
       Spread: {EDGE_MIN_SP:.0f}+ pts, weeks 1–{SPREAD_MAX_WEEK} only ·
       ML: {ML_EV_MIN:.0%}+ EV, paper record only · -110 juice unless noted
     </p>

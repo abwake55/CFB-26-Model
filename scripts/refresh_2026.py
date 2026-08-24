@@ -67,15 +67,27 @@ def update_master(new_df: pd.DataFrame, master_path: Path,
     and recruiting use ``year`` while talent/returning use ``season``. Detect
     whichever column the file on disk actually uses and align new_df to it,
     so a refresh never throws KeyError when the new season first appears.
+
+    The master must end up with EXACTLY ONE season key. Several callers set
+    ``df["season"] = SEASON`` before calling here, so a year-keyed master would
+    otherwise gain a second, mostly-empty ``season`` column — and
+    feature_builder renames ``year``->``season`` on load, producing duplicate
+    columns and a TypeError that takes down every prediction path. Any
+    redundant alias is therefore dropped from both frames (this also repairs a
+    master that was already polluted by an earlier run).
     """
     if new_df.empty:
         print(f"   (no data returned — skipping {master_path.name})")
         return
     if master_path.exists():
         master = pd.read_csv(master_path)
-        # Pick the season column the existing file is keyed on.
-        existing_col = next((c for c in (season_col, "year", "season")
-                             if c in master.columns), season_col)
+        # Pick the season column the existing file is keyed on. If a stray
+        # alias is present from an earlier buggy run, the REAL key is the
+        # fully-populated one (the stray is empty for every historical row),
+        # so choose by completeness rather than by name order.
+        candidates = [c for c in ("year", "season") if c in master.columns]
+        existing_col = (min(candidates, key=lambda c: master[c].isna().sum())
+                        if candidates else season_col)
         # Align new_df to that column name.
         if existing_col not in new_df.columns:
             src = next((c for c in (season_col, "year", "season")
@@ -84,6 +96,10 @@ def update_master(new_df: pd.DataFrame, master_path: Path,
                 new_df = new_df.rename(columns={src: existing_col})
             else:
                 new_df[existing_col] = SEASON
+        # Collapse to a single season key on both sides.
+        redundant = [c for c in ("season", "year") if c != existing_col]
+        new_df = new_df.drop(columns=[c for c in redundant if c in new_df.columns])
+        master = master.drop(columns=[c for c in redundant if c in master.columns])
         master = master[master[existing_col] != SEASON].copy()
         updated = pd.concat([master, new_df], ignore_index=True)
     else:
