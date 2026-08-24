@@ -510,7 +510,12 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
             preds = m.predict_proba(X_val)[:, 1]
             return log_loss(y_val, preds)
 
-    study = optuna.create_study(direction="minimize")
+    # Seeded sampler: without it every retrain explores a different search
+    # path and ships different hyperparameters, so the deployed model drifts
+    # week to week for no reason and a bad run can't be reproduced. Does not
+    # affect any already-trained model — only future retrains.
+    study = optuna.create_study(direction="minimize",
+                                sampler=optuna.samplers.TPESampler(seed=42))
     study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
     best = study.best_params
     best["verbose"] = -1
