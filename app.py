@@ -419,6 +419,90 @@ def fetch_schedule(season: int, week: int) -> pd.DataFrame:
     return df
 
 
+# ─── LINE SNAPSHOTS (stale-edge detection) ────────────────────────────────────
+# data/lines_snapshots/ is written daily in-season by scripts/snapshot_lines.py
+# (GitHub Action). It records the lines as they were when each game was first
+# seen, so the app can warn when the market has since bet a flagged edge away.
+
+@st.cache_data(show_spinner=False, ttl=1800)
+def load_line_snapshot(season: int, week: int) -> dict:
+    path = ROOT_DIR / "data" / "lines_snapshots" / f"lines_{season}_W{week:02d}.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text())
+    except Exception:
+        return {}
+
+
+def attach_line_snapshot(preds: pd.DataFrame, snap: dict) -> pd.DataFrame:
+    """Add snap_first_spread / snap_first_total / snap_seen_label per game."""
+    games = (snap or {}).get("games") or {}
+    if not games:
+        return preds
+    preds = preds.copy()
+
+    def _rec(gid):
+        return games.get(str(gid)) or {}
+
+    def _first(gid, key):
+        return (_rec(gid).get("first") or {}).get(key)
+
+    def _seen_label(gid):
+        ts = _rec(gid).get("first_seen")
+        if not ts:
+            return None
+        try:
+            return pd.Timestamp(ts).strftime("%a")   # e.g. "Tue"
+        except Exception:
+            return None
+
+    preds["snap_first_spread"] = preds["game_id"].map(lambda g: _first(g, "spread"))
+    preds["snap_first_total"]  = preds["game_id"].map(lambda g: _first(g, "over_under"))
+    preds["snap_seen_label"]   = preds["game_id"].map(_seen_label)
+    return preds
+
+
+def find_stale_picks(preds: pd.DataFrame) -> list[str]:
+    """Games whose line has moved so far since first snapshot that the pick the
+    model flagged then no longer clears the edge gate now."""
+    if "snap_first_total" not in preds.columns:
+        return []
+    stale: list[str] = []
+    for _, r in preds.iterrows():
+        matchup = f"{r['away_team']} @ {r['home_team']}"
+        seen = r.get("snap_seen_label") or "first snapshot"
+
+        first_ou = r.get("snap_first_total")
+        cur_ou   = r.get("over_under")
+        if (pd.notna(first_ou) and pd.notna(cur_ou)
+                and pd.notna(r.get("pred_total")) and first_ou != cur_ou):
+            first_edge = r["pred_total"] - first_ou
+            cur_edge   = r.get("totals_edge")
+            if (abs(first_edge) >= TOTALS_EDGE_MIN
+                    and (pd.isna(cur_edge) or abs(cur_edge) < TOTALS_EDGE_MIN)):
+                side = "UNDER" if first_edge < 0 else "OVER"
+                ce = "no edge left" if pd.isna(cur_edge) else f"edge now {cur_edge:+.1f}"
+                stale.append(f"{matchup} — {side} {first_ou:.1f} → {cur_ou:.1f} "
+                             f"(was {first_edge:+.1f} on {seen}, {ce})")
+
+        first_sp = r.get("snap_first_spread")
+        cur_sp   = r.get("spread")
+        if (pd.notna(first_sp) and pd.notna(cur_sp)
+                and pd.notna(r.get("pred_spread")) and first_sp != cur_sp):
+            # spread is home-perspective (negative = home favored);
+            # spread_edge = pred_spread + spread (see build_and_predict)
+            first_edge = r["pred_spread"] + first_sp
+            cur_edge   = r.get("spread_edge")
+            if (abs(first_edge) >= SPREAD_EDGE_MIN
+                    and (pd.isna(cur_edge) or abs(cur_edge) < SPREAD_EDGE_MIN)):
+                team = r["home_team"] if first_edge > 0 else r["away_team"]
+                ce = "no edge left" if pd.isna(cur_edge) else f"edge now {cur_edge:+.1f}"
+                stale.append(f"{matchup} — {team} spread {first_sp:+.1f} → {cur_sp:+.1f} "
+                             f"(was {first_edge:+.1f} on {seen}, {ce})")
+    return stale
+
+
 # ─── VENUE & WEATHER ──────────────────────────────────────────────────────────
 
 @st.cache_data(show_spinner=False, ttl=86400)  # cache venues for 24 h
@@ -1388,6 +1472,30 @@ def _driver_chips_html(row, kind: str) -> str:
     qb_adj = _get("qb_adjustment")
     if qb_adj is not None and qb_adj != 0:
         add("🏥", f"QB-out adjustment {qb_adj:+.1f} pts applied", "var(--orange)")
+
+    # Line drift since first snapshot — a flagged edge the market is betting
+    # away. This is a warning, not a signal: movement itself is not predictive
+    # (see line_movement note above), but a smaller line means a smaller edge.
+    seen = row.get("snap_seen_label")
+    if seen:
+        if kind == "total":
+            first_ou = _get("snap_first_total")
+            cur_ou   = _get("over_under")
+            if first_ou is not None and cur_ou is not None and first_ou != cur_ou:
+                under = (_get("totals_edge") or 0) < 0 or bool(row.get("_force_under"))
+                against = (first_ou - cur_ou) if under else (cur_ou - first_ou)
+                if against >= 1.0:
+                    add("⚠️", f"Total moved against pick: {first_ou:.1f} → {cur_ou:.1f} "
+                              f"since {seen}", "var(--orange)")
+        else:
+            first_sp = _get("snap_first_spread")
+            cur_sp   = _get("spread")
+            if first_sp is not None and cur_sp is not None and first_sp != cur_sp:
+                bet_home = (_get("spread_edge") or 0) > 0
+                against = ((first_sp - cur_sp) if bet_home else (cur_sp - first_sp))
+                if against >= 1.0:
+                    add("⚠️", f"Spread moved against pick: {first_sp:+.1f} → {cur_sp:+.1f} "
+                              f"since {seen}", "var(--orange)")
 
     return ("<div style='margin-top:12px'>" + "".join(chips[:5]) + "</div>") if chips else ""
 
@@ -3665,6 +3773,10 @@ def main():
         if qb_out:
             preds = apply_qb_adjustments(preds, qb_out, qb_pts)
 
+        # ── Line snapshots: warn when the market has bet a flagged edge away ──
+        preds = attach_line_snapshot(preds, load_line_snapshot(season, week))
+        stale_picks = find_stale_picks(preds)
+
         # ── Feature coverage report ───────────────────────────────────────
         # Show which data sources are actually present for this week's games
         # so users know when predictions are flying partially blind.
@@ -3757,6 +3869,11 @@ def main():
             <span style="color:var(--ink-4);font-size:0.82em">{len(preds)} games ·
                 {len(plays)} flagged · {n_strong} strong</span>
         </div>""")
+
+        if stale_picks:
+            st.warning("⚠️ **Stale picks** — the line has moved since these were first "
+                       "flagged and the edge is gone:\n\n" +
+                       "\n".join(f"- {s}" for s in stale_picks))
 
         col1, col2, col3, col4 = st.columns(4)
         col1.metric("Strong Plays", n_strong, "score ≥ 60")

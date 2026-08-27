@@ -1,0 +1,53 @@
+name: Line Snapshots (daily)
+
+# ── Why ───────────────────────────────────────────────────────────────────────
+# Totals move all week. The app flags picks against the line it first saw; this
+# workflow snapshots consensus lines once a day so the app can warn when the
+# market has bet a flagged edge away ("UNDER 59 on Tue, now 56 — edge gone").
+# The snapshot script no-ops in the offseason or before books post lines, so
+# the daily cron can stay on year-round.
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # 6 AM Pacific, daily
+  workflow_dispatch:
+
+permissions:
+  contents: write   # push updated snapshots back to the repo
+
+jobs:
+  snapshot:
+    name: Snapshot current-week lines
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Snapshot lines
+        env:
+          CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/snapshot_lines.py
+
+      - name: Commit and push snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/lines_snapshots
+          if git diff --staged --quiet; then
+            echo "✅ No line movement to commit"
+          else
+            git commit -m "Line snapshot $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+            echo "✅ Pushed snapshots — Streamlit Cloud will redeploy automatically"
+          fi
