@@ -2840,6 +2840,129 @@ def render_backtester_tab():
         st.dataframe(display.sort_values(["Season","Wk"], ascending=False),
                      width='stretch', hide_index=True)
 
+    # ── Probability calibration (Brier score tracking) ───────────────────────
+    render_calibration_section(df)
+
+
+def render_calibration_section(df: pd.DataFrame):
+    """
+    Brier score tracking — how honest the model's win probabilities are.
+
+    Panels:
+      1. Headline metrics — overall Brier, vs always-50%, skill vs base rate
+      2. Brier by season — calibration trend over time
+      3. Brier by week bucket — early-season (shrunk) vs late-season
+      4. Calibration curve — predicted probability deciles vs actual win rate
+
+    Brier = mean((predicted_prob − actual)^2); lower is better, 0.25 is the
+    always-50% score, and a perfectly calibrated coin-flip league sits ~0.21.
+    """
+    if "pred_home_win_p" not in df.columns or "home_win" not in df.columns:
+        return
+    import plotly.graph_objects as go
+
+    w = df.dropna(subset=["pred_home_win_p", "home_win"]).copy()
+    w["pred_home_win_p"] = pd.to_numeric(w["pred_home_win_p"], errors="coerce")
+    w["home_win"] = w["home_win"].astype(int)
+    w = w.dropna(subset=["pred_home_win_p"])
+    if len(w) < 100:
+        return
+
+    brier       = float(np.mean((w["home_win"] - w["pred_home_win_p"]) ** 2))
+    base_rate   = float(w["home_win"].mean())
+    brier_naive = float(np.mean((w["home_win"] - base_rate) ** 2))  # climatology
+    skill       = 1 - brier / brier_naive if brier_naive else 0.0
+
+    # Per-season Brier
+    szn = (w.groupby("season")
+             .apply(lambda g: float(np.mean((g["home_win"] - g["pred_home_win_p"]) ** 2)),
+                    include_groups=False))
+    best_szn, best_szn_brier = int(szn.idxmin()), float(szn.min())
+
+    st.markdown("---")
+    section_header("Probability Calibration — Brier Score",
+                   "Are 70% picks actually winning 70% of the time? Lower Brier = better-calibrated probabilities")
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Model Brier", f"{brier:.4f}",
+              f"{len(w):,} games · walk-forward OOS", delta_color="off")
+    c2.metric("Always-50% Brier", "0.2500",
+              f"model is {(0.25 - brier) / 0.25:.0%} better", delta_color="off")
+    c3.metric("Skill vs base rate", f"{skill:+.1%}",
+              f"vs always predicting {base_rate:.0%} home win", delta_color="off")
+    c4.metric("Best season", f"{best_szn}", f"Brier {best_szn_brier:.4f}",
+              delta_color="off")
+
+    col_l, col_r = st.columns(2)
+
+    with col_l:
+        # Brier by season — calibration over time
+        fig = go.Figure(go.Bar(
+            x=[int(s) for s in szn.index], y=szn.values,
+            marker_color="#58a6ff",
+            text=[f"{v:.3f}" for v in szn.values], textposition="outside",
+            hovertemplate="Season %{x} · Brier %{y:.4f}<extra></extra>"))
+        fig.update_layout(
+            title="Brier score by season",
+            yaxis=dict(range=[0, max(szn.values) * 1.25]),
+            margin=dict(t=40, b=30), height=300,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#8b9bb4"))
+        st.plotly_chart(fig, width='stretch', config={"displayModeBar": False})
+
+    with col_r:
+        # Brier by week bucket — early (preseason-shrunk) vs late season
+        w["wk_bucket"] = pd.cut(w["week"], [0, 3, 6, 9, 20],
+                                labels=["Wk 1–3 (shrunk)", "Wk 4–6", "Wk 7–9", "Wk 10+"])
+        wb = (w.groupby("wk_bucket", observed=True)
+                .apply(lambda g: float(np.mean((g["home_win"] - g["pred_home_win_p"]) ** 2)),
+                       include_groups=False))
+        fig2 = go.Figure(go.Bar(
+            x=[str(b) for b in wb.index], y=wb.values,
+            marker_color=["#f5c518", "#58a6ff", "#58a6ff", "#58a6ff"],
+            text=[f"{v:.3f}" for v in wb.values], textposition="outside",
+            hovertemplate="%{x} · Brier %{y:.4f}<extra></extra>"))
+        fig2.update_layout(
+            title="Brier score by week bucket",
+            yaxis=dict(range=[0, max(wb.values) * 1.25]),
+            margin=dict(t=40, b=30), height=300,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#8b9bb4"))
+        st.plotly_chart(fig2, width='stretch', config={"displayModeBar": False})
+
+    # Calibration curve — predicted deciles vs actual win rate
+    bins   = np.linspace(0, 1, 11)
+    w["prob_bucket"] = pd.cut(w["pred_home_win_p"], bins=bins, include_lowest=True)
+    cal = (w.groupby("prob_bucket", observed=True)
+             .agg(pred=("pred_home_win_p", "mean"),
+                  actual=("home_win", "mean"),
+                  n=("home_win", "size"))
+             .dropna())
+    fig3 = go.Figure()
+    fig3.add_trace(go.Scatter(x=[0, 1], y=[0, 1], mode="lines",
+                              line=dict(color="#454f63", dash="dash"),
+                              name="Perfect calibration", hoverinfo="skip"))
+    fig3.add_trace(go.Scatter(
+        x=cal["pred"], y=cal["actual"], mode="markers+lines",
+        marker=dict(size=[max(6, min(18, np.log2(n + 1) * 2)) for n in cal["n"]],
+                    color="#34d399"),
+        name="Model", customdata=cal[["n"]],
+        hovertemplate=("Predicted %{x:.0%} · actual %{y:.0%} "
+                       "(%{customdata[0]:,} games)<extra></extra>")))
+    fig3.update_layout(
+        title="Calibration curve — predicted vs actual home win rate (marker size = # games)",
+        xaxis=dict(tickformat=".0%", title="Model predicted win probability"),
+        yaxis=dict(tickformat=".0%", title="Actual win rate"),
+        margin=dict(t=40, b=30), height=340,
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#8b9bb4"),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02))
+    st.plotly_chart(fig3, width='stretch', config={"displayModeBar": False})
+    st.caption(
+        "Points on the dashed line are perfectly calibrated. Above the line = the model "
+        "was *under*-confident (teams won more often than predicted); below = over-confident. "
+        "Weeks 1–3 run preseason-shrunk probabilities (60/75/90% model) — the bucket chart "
+        "shows whether the shrinkage is keeping early-season calibration honest.")
+
 
 # ─── MODEL ANALYSIS TAB ──────────────────────────────────────────────────────
 
