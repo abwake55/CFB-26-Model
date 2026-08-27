@@ -371,6 +371,23 @@ def load_recent_epa(pred_season: int) -> pd.DataFrame:
 
 # ─── SCHEDULE & LINES ─────────────────────────────────────────────────────────
 
+@st.cache_data(show_spinner=False, ttl=86400)
+def fetch_season_calendar(season: int) -> list[int]:
+    """Regular-season weeks that actually exist upstream, per CFBD /calendar.
+
+    CFBD labels the whole opening slate Week 1 in seasons with no true Week 0
+    (e.g. 2026: Stanford @ Hawai'i on Aug 29 is week=1 in CFBD's data), and
+    querying week=0 there returns Week 1's games — which made the Week 0 and
+    Week 1 views show identical picks. The calendar is the source of truth for
+    which week numbers exist."""
+    try:
+        data = cfb_get("calendar", params={"year": season})
+        return sorted({int(e["week"]) for e in data
+                       if e.get("seasonType") == "regular" and e.get("week") is not None})
+    except Exception:
+        return []
+
+
 @st.cache_data(show_spinner="Fetching schedule...", ttl=3600)
 def fetch_schedule(season: int, week: int) -> pd.DataFrame:
     try:
@@ -411,6 +428,17 @@ def fetch_schedule(season: int, week: int) -> pd.DataFrame:
             clean.append(row)
             seen_teams.update([h, a])
     df = pd.DataFrame(clean).reset_index(drop=True)
+
+    # Week guards: (1) if the calendar is known and this week doesn't exist in
+    # it (e.g. Week 0 in a season with no Week 0), return nothing regardless of
+    # what the API sent back; (2) otherwise keep only games the API actually
+    # labeled as this week, so a mislabeled/ignored week param can't leak the
+    # opening slate (or the whole season) into the wrong week view.
+    cal_weeks = fetch_season_calendar(season)
+    if cal_weeks and week not in cal_weeks:
+        return df.iloc[0:0]
+    if "week" in df.columns:
+        df = df[df["week"] == week].reset_index(drop=True)
 
     # Capture venue_id for weather lookup (CFBD returns venueId on each game)
     venue_ids = {g.get("id"): g.get("venueId") for g in data}
@@ -3550,7 +3578,12 @@ def main():
             format_func=lambda y: f"{y}–{str(y + 1)[-2:]}",
             index=0,
         )
-        week   = st.slider("Week", min_value=0, max_value=15, value=1)
+        # Only offer weeks CFBD actually has for this season — seasons without
+        # a true Week 0 upstream start at Week 1 (opening slate is labeled W1).
+        _cal_weeks = fetch_season_calendar(season)
+        _min_week  = min(_cal_weeks) if _cal_weeks else 1
+        week   = st.slider("Week", min_value=_min_week, max_value=15,
+                           value=max(1, _min_week))
         bettor = st.selectbox("Betting as", BETTORS,
                               index=BETTORS.index(st.session_state.get("bettor", BETTORS[0])))
         st.session_state["bettor"] = bettor
