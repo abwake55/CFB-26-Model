@@ -419,17 +419,14 @@ def fetch_schedule(season: int, week: int) -> pd.DataFrame:
         (df["home_conference"] == df["away_conference"])
     ).astype(int)
 
-    # Deduplicate — a team can only play one game per week.
-    # CFBD occasionally returns duplicate entries for Week 1 / neutral-site games.
-    df = df.drop_duplicates(subset=["home_team", "away_team"])
-    seen_teams: set = set()
-    clean: list = []
-    for _, row in df.iterrows():
-        h, a = row["home_team"], row["away_team"]
-        if h not in seen_teams and a not in seen_teams:
-            clean.append(row)
-            seen_teams.update([h, a])
-    df = pd.DataFrame(clean).reset_index(drop=True)
+    # Deduplicate identical listings only, keyed on matchup + kickoff.
+    # CFBD occasionally returns duplicate entries for Week 1 / neutral-site
+    # games, but a team CAN play twice in one CFBD week: 2026 Week 1 spans two
+    # weekends (Aug 29 + Sep 3-7), and ~50 teams have two games in it. The old
+    # one-game-per-team-per-week filter silently dropped every second game —
+    # including 52 lined ones (LSU-Clemson, Auburn-Baylor, ...).
+    df = df.drop_duplicates(subset=["home_team", "away_team", "start_date"])
+    df = df.reset_index(drop=True)
 
     # Week guards: (1) if the calendar is known and this week doesn't exist in
     # it (e.g. Week 0 in a season with no Week 0), return nothing regardless of
