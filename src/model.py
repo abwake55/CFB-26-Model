@@ -261,6 +261,11 @@ def load_data() -> pd.DataFrame:
     # Add Elo differential (pre-game Elo from CFBD API)
     df["elo_diff"] = df["home_pregame_elo"] - df["away_pregame_elo"]
 
+    # Situational spot features (lookahead / sandwich / altitude) — see
+    # src/situational.py for definitions and walk-forward validation.
+    from situational import add_situational_features
+    df = add_situational_features(df)
+
     # Numeric coercion
     for col in ["spread", "over_under", "home_pregame_elo", "away_pregame_elo"]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
@@ -370,6 +375,15 @@ SPREAD_FEATURES = [
     # ── Travel ────────────────────────────────────────────────────────────────
     "travel_disadvantage",    # away_travel_miles − home_travel_miles
     "long_haul_away",         # 1 if away team flew >1000 miles (Hawaii, cross-coast)
+
+    # ── Situational spots (src/situational.py) ─────────────────────────────
+    # Walk-forward 2019-25: spread ATS edge≥3 50.8% → 54.5%, ROI −3.0% → +4.1%.
+    "home_lookahead",         # next opp SP+ minus this opp SP+ (distraction spot)
+    "away_lookahead",
+    "home_sandwich",          # weak opp between two much stronger ones
+    "away_sandwich",
+    "alt_shock_away",         # lowlander visitor at ≥4000 ft venue
+    "altitude_diff",          # home venue elevation minus away (neutral = 0)
 ]
 
 # Totals model: both teams' offense AND defense kept as individual values

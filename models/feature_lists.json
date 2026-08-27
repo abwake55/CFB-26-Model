@@ -48,7 +48,13 @@
     "hfa_diff",
     "spread_magnitude",
     "travel_disadvantage",
-    "long_haul_away"
+    "long_haul_away",
+    "home_lookahead",
+    "away_lookahead",
+    "home_sandwich",
+    "away_sandwich",
+    "alt_shock_away",
+    "altitude_diff"
   ],
   "totals": [
     "home_sp_offense",
@@ -148,7 +154,13 @@
     "hfa_diff",
     "spread_magnitude",
     "travel_disadvantage",
-    "long_haul_away"
+    "long_haul_away",
+    "home_lookahead",
+    "away_lookahead",
+    "home_sandwich",
+    "away_sandwich",
+    "alt_shock_away",
+    "altitude_diff"
   ],
   "spread_target": "margin_residual",
   "totals_target": "ou_deviation",
