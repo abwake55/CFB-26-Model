@@ -32,6 +32,8 @@ from feature_builder import (
     feature_coverage_report,
 )
 import odds_api   # The Odds API line fetcher (the-odds-api.com)
+from preseason import (apply_preseason_shrinkage, shrinkage_factor,
+                       sample_badge, DEFAULT_SPREAD_SIGMA)
 
 import joblib
 import numpy as np
@@ -800,6 +802,7 @@ def build_and_predict(games, lines, ratings, epa, elo,
     # ── Cross-calibration: blend spread-implied win prob with classifier ──────
     # Ensures spread prediction and win probability are internally consistent.
     # Parameters (sigma, alpha) are tuned on the validation season in model.py.
+    _sigma = DEFAULT_SPREAD_SIGMA
     _calib_path = MODEL_DIR / "win_prob_calibration.json"
     if _calib_path.exists():
         import json as _json
@@ -814,6 +817,19 @@ def build_and_predict(games, lines, ratings, epa, elo,
         # Games without a line have no spread-implied prob — keep classifier-only
         out["pred_win_p"]      = _blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
         out["pred_away_win_p"] = 1 - out["pred_win_p"]
+
+    # ── Preseason shrinkage: blend early-season outputs toward market priors ──
+    # Weeks 1-3 keep 60/75/90% of the model signal so tiny samples don't swing
+    # picks; week 4+ is full model. Validated on the 2019-25 walk-forward
+    # (CORE 54.9% → 56.4%, +4.8% → +7.7% ROI). See src/preseason.py.
+    out["_vegas_margin"] = -pd.to_numeric(out["spread"], errors="coerce")
+    out = apply_preseason_shrinkage(
+        out, week_col="week", pred_spread_col="pred_spread",
+        market_margin="_vegas_margin", over_under_col="over_under",
+        pred_total_col="pred_total", pred_win_col="pred_win_p",
+        sigma=_sigma)
+    out["pred_away_win_p"] = 1 - out["pred_win_p"]
+    out = out.drop(columns=["_vegas_margin"])
 
     out["spread_edge"]     = out["pred_spread"] - (-out["spread"])
     out["totals_edge"]     = out["pred_total"]  - out["over_under"]
@@ -1298,8 +1314,8 @@ def _low_total(row) -> bool:
 
 def _core_total(row) -> bool:
     """Refined CORE gate, walk-forward 2019-25: under, edge 2-7 pts,
-    power-conf involved, wind < 15, market total >= 48 → 54.9% (n=559,
-    +4.8% ROI, z=2.33), profitable 6 of 7 seasons. Excluded because they add no
+    power-conf involved, wind < 15, market total >= 48 → 56.4% (n=530,
+    +7.7% ROI), profitable 6 of 7 seasons. Excluded because they add no
     edge: edges >7 pts (50.7%, winner's curse), wind>=15 (50.0%, priced
     in), totals <48 (49%, no over-bias to fade)."""
     edge = row["totals_edge"]
@@ -1347,7 +1363,7 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
             return "PAPER · HIGH-TOTAL 54.3%", "var(--orange)"
         if edge < 0:  # under pick
             if _core_total(row):
-                return "CORE PLAY · 54.9% '19-'25", "var(--green)"
+                return "CORE PLAY · 56.4% '19-'25", "var(--green)"
             # Explain the specific disqualifier
             if abs(edge) > 7:
                 return "CAUTION · 7+PT EDGES 51%", "var(--orange)"
@@ -1546,9 +1562,17 @@ def _stat_footer_html(cells: list[tuple[str, str, str]]) -> str:
 def _pick_card_html(*, accent: str, kind_badge: str, kind_color: str,
                     tier: tuple[str, str], headline: str, big_num: str,
                     sub: str, meters: str, chips: str, footer: str,
-                    metric_html: str, edge_pct: float = 0.0) -> str:
-    """edge_pct 0-100: drives the thin strength bar under the badge row."""
+                    metric_html: str, edge_pct: float = 0.0,
+                    sample: tuple[str, str] | None = None) -> str:
+    """edge_pct 0-100: drives the thin strength bar under the badge row.
+    sample: optional (label, color) preseason-sample confidence badge."""
     tier_label, tier_color = tier
+    sample_html = ""
+    if sample:
+        s_label, s_color = sample
+        sample_html = (f'<span style="border:1px dashed {s_color};color:{s_color};'
+                       f'font-size:0.6em;font-weight:800;letter-spacing:0.08em;'
+                       f'padding:2px 8px;border-radius:5px">{s_label}</span>')
     bar_color = ("var(--green)" if edge_pct >= 60 else
                  "var(--gold)"  if edge_pct >= 35 else "var(--ink-3)")
     return f"""
@@ -1562,6 +1586,7 @@ def _pick_card_html(*, accent: str, kind_badge: str, kind_color: str,
                 <span style="border:1px solid {tier_color};color:{tier_color};font-size:0.6em;
                              font-weight:800;letter-spacing:0.08em;padding:2px 8px;
                              border-radius:5px">{tier_label}</span>
+                {sample_html}
             </div>
             {metric_html}
         </div>
@@ -1662,6 +1687,7 @@ def render_moneyline_card(row, season, week):
     st.html(_pick_card_html(
         accent=accent, kind_badge="MONEYLINE", kind_color="var(--blue)",
         tier=_tier_badge("moneyline", row),
+        sample=sample_badge(int(row.get("week", 0) or 0)),
         headline=f"{team} ML", big_num=label, sub=sub,
         meters=_winprob_bar_html(row),
         chips=_line_shop_ml_html(row, team == row["home_team"])
@@ -1719,6 +1745,7 @@ def render_totals_card(row, season, week):
         accent=accent, kind_badge=f"TOTAL · {side_str}", kind_color=accent,
         edge_pct=_tot_pct,
         tier=_tier_badge("total", row),
+        sample=sample_badge(int(row.get("week", 0) or 0)),
         headline=f"{side_str} {ou_str}", big_num=ou_str, sub=sub,
         meters=_edge_meter_html(
             row["over_under"], row["pred_total"], accent,
@@ -1776,6 +1803,7 @@ def render_spread_card(row, season, week):
         accent=accent, kind_badge="SPREAD", kind_color=accent,
         edge_pct=_sp_pct,
         tier=_tier_badge("spread", row),
+        sample=sample_badge(int(row.get("week", 0) or 0)),
         headline=f"{bet_on} {vl_bet}", big_num=vl_bet, sub=sub,
         meters=meters,
         chips=_driver_chips_html(row, "spread"),
@@ -3733,8 +3761,8 @@ def main():
                     bet type has actually performed.</div>
             </div>""")
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("CORE unders", "54.9%", "559 bets · '19–'25 walk-forward", delta_color="off")
-            col2.metric("CORE ROI", "+4.8%", "at -110 · profitable 6 of 7 seasons", delta_color="off")
+            col1.metric("CORE unders", "56.4%", "530 bets · '19–'25 walk-forward", delta_color="off")
+            col2.metric("CORE ROI", "+7.7%", "at -110 · profitable 6 of 7 seasons", delta_color="off")
             col3.metric("Spreads ATS", "~50%", "info only · no validated edge", delta_color="off")
             col4.metric("North star", "CLV", "beat the close", delta_color="off")
             render_core_equity_curve()
@@ -3805,6 +3833,19 @@ def main():
                                      "Star QB on a P4 team ≈ 6–7; game-manager ≈ 3–4.")
         if qb_out:
             preds = apply_qb_adjustments(preds, qb_out, qb_pts)
+
+        # ── Early-season mode banner (preseason shrinkage active wks 1-3) ────
+        _f = shrinkage_factor(week)
+        if _f < 1.0:
+            st.html(f'''
+            <div style="background:var(--card);border:1px solid var(--gold);
+                        border-radius:12px;padding:10px 18px;margin:6px 0 12px 0;
+                        color:var(--ink-3);font-size:0.82em">
+                🌱 <b style="color:var(--ink-2)">Early-season mode:</b> Week {week}
+                projections are {_f:.0%} model / {1-_f:.0%} preseason priors, so a
+                couple of games of tiny-sample stats can't swing a pick. Cards
+                carry a <i>sample</i> badge until Week 4, when the model runs on
+                full signal.</div>''')
 
         # ── Line snapshots: warn when the market has bet a flagged edge away ──
         preds = attach_line_snapshot(preds, load_line_snapshot(season, week))

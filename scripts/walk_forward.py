@@ -44,6 +44,7 @@ if not os.getenv("CFB_API_KEY"):
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import brier_score_loss
 
+from preseason import apply_preseason_shrinkage, DEFAULT_SPREAD_SIGMA
 from model import (
     load_data,
     EnsembleRegressor, EnsembleClassifier,
@@ -181,6 +182,17 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     out["pred_spread"]     = vm_te.values + ens_sp.predict(X_te_sp)  # residual → margin
     out["pred_total"]      = ou_te.values + ens_tot.predict(X_te_tot)  # deviation → actual
     out["pred_home_win_p"] = ens_win.predict_proba(X_te_win)[:, 1]
+
+    # ── Preseason shrinkage: blend early-season outputs toward market priors ──
+    # Weeks 1-3 keep 60/75/90% of the model signal; week 4+ is full model.
+    # Edges below are computed AFTER shrinkage so the backtest measures what
+    # the app actually bets. See src/preseason.py for validation numbers.
+    out = apply_preseason_shrinkage(
+        out, week_col="week", pred_spread_col="pred_spread",
+        market_margin="vegas_home_margin", over_under_col="over_under",
+        pred_total_col="pred_total", pred_win_col="pred_home_win_p",
+        sigma=DEFAULT_SPREAD_SIGMA)
+
     out["spread_edge"]     = out["pred_spread"] - out["vegas_home_margin"]
     out["totals_edge"]     = out["pred_total"] - ou_te.values           # = deviation
     out["training_cutoff"] = val_season  # last season in training window
