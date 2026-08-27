@@ -122,6 +122,16 @@ jobs:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
         run: python scripts/walk_forward.py
 
+      # ── 9b. Fill closing lines on tracked bets (CLV) ─────────────────────────
+      # tracked_bets.json lives in the repo (the app syncs it back via the
+      # GITHUB_TOKEN secret). CFBD lines freeze at kickoff, so once games are
+      # final the fetched lines ARE the closing lines — this fills CLV on every
+      # settled bet for free, and the commit step below pushes it back.
+      - name: Fill closing lines on tracked bets (CLV)
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+        run: python scripts/capture_closing_lines.py
+
       # ── 10. Generate and email weekly newsletter ──────────────────────────────
       # Fetches this week's schedule, runs predictions, compares last week's picks
       # to actual results, and emails a formatted HTML newsletter.

@@ -144,6 +144,63 @@ def load_bets() -> list:
 
 def save_bets(bets: list):
     BETS_FILE.write_text(json.dumps(bets, indent=2))
+    sync_bets_to_github()
+
+
+# ─── GITHUB PERSISTENCE ─────────────────────────────────────────────────────
+# Streamlit Cloud's filesystem is ephemeral: tracked_bets.json written at
+# runtime is wiped on every redeploy, and the weekly refresh workflow pushes
+# a commit (triggering a redeploy) every Tuesday. To keep bet + CLV history
+# durable, every save also commits tracked_bets.json back to the repo when a
+# GITHUB_TOKEN secret is configured (Streamlit Cloud -> Settings -> Secrets;
+# use a fine-grained PAT with Contents: read/write on this repo only).
+# Without the token everything still works locally; history just is not
+# backed up between deploys, and My Bets shows a reminder.
+
+GITHUB_REPO      = "abwake55/CFB-26-Model"
+GITHUB_BETS_PATH = "tracked_bets.json"
+
+
+def _github_token() -> str:
+    return get_secret("GITHUB_TOKEN", "")
+
+
+def github_backup_configured() -> bool:
+    return bool(_github_token())
+
+
+def sync_bets_to_github() -> tuple[bool, str]:
+    """Commit the current tracked_bets.json to the repo. Best-effort: any
+    failure returns (False, reason) and never breaks a local save."""
+    token = _github_token()
+    if not token:
+        return False, "no GITHUB_TOKEN secret"
+    import base64
+    api = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_BETS_PATH}"
+    headers = {"Authorization": f"Bearer {token}",
+               "Accept": "application/vnd.github+json"}
+    try:
+        content = BETS_FILE.read_text()
+        cur = requests.get(api, headers=headers, timeout=15)
+        sha = None
+        if cur.status_code == 200:
+            sha = cur.json().get("sha")
+            existing = base64.b64decode(cur.json().get("content", "")).decode()
+            if existing.strip() == content.strip():
+                return True, "already in sync"
+        payload = {
+            "message": "Update tracked bets from app",
+            "content": base64.b64encode(content.encode()).decode(),
+            "branch": "main",
+        }
+        if sha:
+            payload["sha"] = sha
+        resp = requests.put(api, headers=headers, json=payload, timeout=15)
+        if resp.status_code in (200, 201):
+            return True, "synced"
+        return False, f"github sync failed: HTTP {resp.status_code}"
+    except Exception as exc:
+        return False, f"github sync failed: {exc}"
 
 def add_bet(game: str, bet_type: str, pick: str, line: str,
             units: int, season: int, week: int, edge: str = "", bettor: str = ""):
@@ -1602,6 +1659,12 @@ def render_spread_card(row, season, week):
 
 def render_bets_tab():
     bets = load_bets()
+
+    if not github_backup_configured():
+        st.caption("⚠️ Bet history is only stored on this app's temporary filesystem and is "
+                   "wiped on every weekly redeploy. Add a `GITHUB_TOKEN` secret (fine-grained "
+                   "token, Contents read/write on this repo) in Streamlit Cloud → Settings → "
+                   "Secrets to back it up to GitHub on every change.")
 
     if not bets:
         st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
