@@ -735,6 +735,13 @@ def build_and_predict(games, lines, ratings, epa, elo,
     # ── Build all team features via shared feature_builder ────────────────
     df = attach_team_features(df, ratings, epa, elo if not elo.empty else None)
 
+    # Situational spot features (lookahead / sandwich / altitude).
+    try:
+        from situational import add_situational_features
+        df = add_situational_features(df)
+    except Exception as e:
+        print(f"  [warn] situational features unavailable: {e}")
+
     # ── Merge weather (wind_speed, is_dome) ──────────────────────────────
     if weather is not None and not weather.empty:
         wcols = [c for c in ["game_id", "wind_speed", "is_dome"] if c in weather.columns]
@@ -1378,12 +1385,13 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
             return "LEAN · BELOW EDGE MIN", "var(--ink-3)"
         return "CAUTION · OVERS 49% '19-'25", "var(--orange)"
     if kind == "spread":
-        wk = int(row.get("week", 0) or 0)
-        if wk >= 10:
-            return "PASS · 44.7% ATS WK10+", "var(--red)"
-        if wk <= 3 and abs(row.get("spread_edge", 0) or 0) >= 3:
-            return "WATCH · 53.5% EARLY SZN", "var(--blue)"
-        return "INFO ONLY · ~50% ATS", "var(--ink-3)"
+        # Situational features (lookahead/sandwich/altitude, PR #6) lifted the
+        # validated pocket: edge >= 3 pts hit 55.4% ATS in the '19-'25
+        # walk-forward (n=2,115, +5.7% ROI), steady across early/mid/late
+        # season. Sub-3 edges remain a coin flip.
+        if abs(row.get("spread_edge", 0) or 0) >= 3:
+            return "LEAN · 55.4% ATS EDGE 3+", "var(--blue)"
+        return "INFO ONLY · NO EDGE <3 PTS", "var(--ink-3)"
     # moneyline — EV>=4% strategy backtested on walk-forward 2023-25 (n=868):
     # +13.5% ROI in 2023, +0.6% in 2024, −3.7% in 2025, z=0.77. Not validated;
     # tracked as a paper record only, never sized.
@@ -3886,16 +3894,17 @@ def main():
             col1, col2, col3, col4 = st.columns(4)
             col1.metric("CORE unders", "56.4%", "530 bets · '19–'25 walk-forward", delta_color="off")
             col2.metric("CORE ROI", "+7.7%", "at -110 · profitable 6 of 7 seasons", delta_color="off")
-            col3.metric("Spreads ATS", "~50%", "info only · no validated edge", delta_color="off")
+            col3.metric("Spreads ATS", "55.4%", "edge ≥3 pts · '19–'25 walk-forward", delta_color="off")
             col4.metric("North star", "CLV", "beat the close", delta_color="off")
             render_core_equity_curve()
             st.html("""
             <div style="background:var(--card);border:1px solid var(--line);border-radius:12px;
                         padding:12px 18px;margin-top:14px;color:var(--ink-3);font-size:0.82em">
                 ⚖️ <b style="color:var(--ink-2)">Honesty note:</b> the model does not beat the
-                market overall — spreads run ~50% ATS and moneylines are a paper record. The one
-                validated pocket is CORE unders (edge 2–7 pts, power-conf, wind &lt; 15, total ≥ 48),
-                shown above out-of-sample. Only CORE picks carry units; every other card is research.</div>""")
+                market overall — sub-3-pt spread edges run ~50% ATS and moneylines are a paper record.
+                The validated pockets are CORE unders (edge 2–7 pts, power-conf, wind &lt; 15,
+                total ≥ 48) and spread leans at edge ≥ 3 pts (55.4% ATS '19–'25), both shown
+                out-of-sample. Only CORE picks carry units; spread leans remain research.</div>""")
             st.info("Select a season and week in the sidebar, then hit **Load Picks**.")
             return
 

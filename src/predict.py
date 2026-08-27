@@ -449,6 +449,13 @@ def build_features(
         elo if (elo is not None and not elo.empty) else None,
     )
 
+    # Situational spot features (lookahead / sandwich / altitude).
+    try:
+        from situational import add_situational_features
+        df = add_situational_features(df)
+    except Exception as e:
+        print(f"  ⚠️  situational features unavailable: {e}")
+
     # ── Extract the exact columns the model expects ────────────────────────
     feature_df = pd.DataFrame(index=df.index)
     for f in feature_names:
