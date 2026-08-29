@@ -42,6 +42,7 @@ from pathlib import Path
 _SRC_DIR = Path(__file__).parent
 if str(_SRC_DIR) not in sys.path:
     sys.path.insert(0, str(_SRC_DIR))
+from model import patch_sklearn_compat
 from feature_builder import (
     load_rating_sources,
     load_recent_epa    as _fb_load_recent_epa,
@@ -290,9 +291,9 @@ def load_models():
             print(f"❌ Missing {f} — run python3 src/model.py first.")
             sys.exit(1)
 
-    spread_model   = joblib.load(MODEL_DIR / "spread_model.pkl")
-    totals_model   = joblib.load(MODEL_DIR / "totals_model.pkl")
-    win_prob_model = joblib.load(MODEL_DIR / "win_prob_model.pkl")
+    spread_model   = patch_sklearn_compat(joblib.load(MODEL_DIR / "spread_model.pkl"))
+    totals_model   = patch_sklearn_compat(joblib.load(MODEL_DIR / "totals_model.pkl"))
+    win_prob_model = patch_sklearn_compat(joblib.load(MODEL_DIR / "win_prob_model.pkl"))
 
     with open(MODEL_DIR / "feature_lists.json") as f:
         feature_lists = json.load(f)
