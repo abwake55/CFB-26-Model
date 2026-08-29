@@ -569,38 +569,71 @@ def fetch_venues() -> pd.DataFrame:
 def fetch_game_weather(game_id: int, lat: float, lon: float,
                        game_date: str, is_dome: int) -> dict:
     """
-    Fetch wind speed for a single game via Open-Meteo (free, no API key).
+    Fetch weather for a single game via Open-Meteo (free, no API key).
     game_date: ISO date string 'YYYY-MM-DD' or full ISO timestamp.
-    Returns dict with wind_speed (mph) and is_dome.
+    Returns dict with wind_speed (mph), temp_avg (F), precipitation (in),
+    and is_dome. temp_avg / precipitation use the same daily semantics as
+    training (src/weather.py): (tmax+tmin)/2 and daily precipitation_sum.
+    Dome games get the training-time constants (wind 0, temp 68, precip 0).
+    None on any field means "unknown" — the model's imputer handles it.
     """
     if is_dome:
-        return {"wind_speed": 0.0, "is_dome": 1}
+        # Match the training rows exactly (see build_game_weather in
+        # src/weather.py): domes are weather-neutral at 68F, no precip.
+        return {"wind_speed": 0.0, "temp_avg": 68.0,
+                "precipitation": 0.0, "is_dome": 1}
     if not lat or not lon or pd.isna(lat) or pd.isna(lon):
-        return {"wind_speed": None, "is_dome": 0}
+        return {"wind_speed": None, "temp_avg": None,
+                "precipitation": None, "is_dome": 0}
 
     try:
         date_str = str(game_date)[:10]  # 'YYYY-MM-DD'
         today    = date.today().isoformat()
+        # One call, both resolutions: hourly wind (kickoff-window snapshot,
+        # as before) + daily temp/precip (training semantics, src/weather.py).
+        daily = ("&daily=temperature_2m_max,temperature_2m_min,"
+                 "precipitation_sum&temperature_unit=fahrenheit"
+                 "&precipitation_unit=inch")
         if date_str <= today:
             # Historical — use archive endpoint
             url = (f"https://archive-api.open-meteo.com/v1/archive"
                    f"?latitude={lat}&longitude={lon}"
                    f"&start_date={date_str}&end_date={date_str}"
-                   f"&hourly=wind_speed_10m&wind_speed_unit=mph&timezone=auto")
+                   f"&hourly=wind_speed_10m&wind_speed_unit=mph&timezone=auto"
+                   + daily)
         else:
             # Future — use forecast endpoint
             url = (f"https://api.open-meteo.com/v1/forecast"
                    f"?latitude={lat}&longitude={lon}"
                    f"&hourly=wind_speed_10m&wind_speed_unit=mph&timezone=auto"
-                   f"&forecast_days=16")
+                   f"&forecast_days=16" + daily)
         resp = requests.get(url, timeout=8)
         if resp.status_code != 200:
-            return {"wind_speed": None, "is_dome": 0}
+            return {"wind_speed": None, "temp_avg": None,
+                    "precipitation": None, "is_dome": 0}
         j = resp.json()
+        # Daily temp / precip for the game date — same aggregation the
+        # training pipeline used, so serve-time values are in-distribution.
+        temp_avg, precip = None, None
+        d = j.get("daily", {})
+        dtimes = d.get("time", [])
+        if date_str in dtimes:
+            di = dtimes.index(date_str)
+            tmax = (d.get("temperature_2m_max") or [None])[di]                 if d.get("temperature_2m_max") else None
+            tmin = (d.get("temperature_2m_min") or [None])[di]                 if d.get("temperature_2m_min") else None
+            pr   = (d.get("precipitation_sum") or [None])[di]                 if d.get("precipitation_sum") else None
+            # No rounding — training kept full precision (src/weather.py).
+            if tmax is not None and tmin is not None:
+                temp_avg = (float(tmax) + float(tmin)) / 2
+            if pr is not None:
+                precip = float(pr)
+
         speeds = j.get("hourly", {}).get("wind_speed_10m", [])
         times  = j.get("hourly", {}).get("time", [])
+        result = {"wind_speed": None, "temp_avg": temp_avg,
+                  "precipitation": precip, "is_dome": 0}
         if not speeds:
-            return {"wind_speed": None, "is_dome": 0}
+            return result
         # Pick the hour closest to 3 PM local (typical CFB kickoff window)
         target_hour = f"{date_str}T15:00"
         if target_hour in times:
@@ -610,17 +643,21 @@ def fetch_game_weather(game_id: int, lat: float, lon: float,
             afternoon = [s for t, s in zip(times, speeds)
                          if t.startswith(date_str) and "T12" <= t <= "T20"]
             if afternoon:
-                return {"wind_speed": round(sum(afternoon) / len(afternoon), 1), "is_dome": 0}
+                result["wind_speed"] = round(sum(afternoon) / len(afternoon), 1)
+                return result
             idx = len(speeds) // 2  # midday fallback
-        return {"wind_speed": round(float(speeds[idx]), 1), "is_dome": 0}
+        result["wind_speed"] = round(float(speeds[idx]), 1)
+        return result
     except Exception:
-        return {"wind_speed": None, "is_dome": 0}
+        return {"wind_speed": None, "temp_avg": None,
+                "precipitation": None, "is_dome": 0}
 
 
 def attach_weather_to_games(games: pd.DataFrame) -> pd.DataFrame:
     """
-    Given the schedule DataFrame, fetch venue lat/lon and wind speed for
-    each game. Adds 'wind_speed' and 'is_dome' columns in-place.
+    Given the schedule DataFrame, fetch venue lat/lon and weather for
+    each game. Adds 'wind_speed', 'temp_avg', 'precipitation', and
+    'is_dome' columns in-place.
     Returns a copy with weather columns attached.
     """
     df = games.copy()
@@ -635,6 +672,7 @@ def attach_weather_to_games(games: pd.DataFrame) -> pd.DataFrame:
 
     df["is_dome"]    = pd.to_numeric(df.get("is_dome", 0), errors="coerce").fillna(0).astype(int)
     df["wind_speed"] = np.nan
+    df["temp_avg"] = df["precipitation"] = np.nan
 
     for idx, row in df.iterrows():
         w = fetch_game_weather(
@@ -644,8 +682,10 @@ def attach_weather_to_games(games: pd.DataFrame) -> pd.DataFrame:
             game_date= str(row.get("start_date", ""))[:10],
             is_dome  = int(row.get("is_dome", 0)),
         )
-        df.at[idx, "wind_speed"] = w.get("wind_speed")
-        df.at[idx, "is_dome"]    = w.get("is_dome", 0)
+        df.at[idx, "wind_speed"]    = w.get("wind_speed")
+        df.at[idx, "temp_avg"]      = w.get("temp_avg")
+        df.at[idx, "precipitation"] = w.get("precipitation")
+        df.at[idx, "is_dome"]       = w.get("is_dome", 0)
 
     return df
 
@@ -701,7 +741,8 @@ def build_and_predict(games, lines, ratings, epa, elo,
     """
     Merge lines onto games, build feature vectors via feature_builder, run
     the three models, and return a predictions DataFrame.
-    weather: optional DataFrame with game_id, wind_speed, is_dome columns.
+    weather: optional DataFrame with game_id, wind_speed, temp_avg,
+        precipitation, is_dome columns.
     """
     # ── Merge lines ───────────────────────────────────────────────────────
     if not lines.empty:
@@ -739,14 +780,22 @@ def build_and_predict(games, lines, ratings, epa, elo,
     except Exception as e:
         print(f"  [warn] situational features unavailable: {e}")
 
-    # ── Merge weather (wind_speed, is_dome) ──────────────────────────────
+    # ── Merge weather (wind_speed, temp_avg, precipitation, is_dome) ─────
     if weather is not None and not weather.empty:
-        wcols = [c for c in ["game_id", "wind_speed", "is_dome"] if c in weather.columns]
+        wcols = [c for c in ["game_id", "wind_speed", "temp_avg",
+                             "precipitation", "is_dome"] if c in weather.columns]
         df = df.merge(weather[wcols], on="game_id", how="left")
-        # Dome games: hard-zero wind so model gets the same signal as training
-        if "is_dome" in df.columns and "wind_speed" in df.columns:
+        # Dome games: hard-set the same constants training used (wind 0,
+        # 68F, no precip) so the model gets an identical signal at serve.
+        if "is_dome" in df.columns:
             df["is_dome"] = df["is_dome"].fillna(0).astype(int)
-            df.loc[df["is_dome"] == 1, "wind_speed"] = 0.0
+            dome = df["is_dome"] == 1
+            if "wind_speed" in df.columns:
+                df.loc[dome, "wind_speed"] = 0.0
+            if "temp_avg" in df.columns:
+                df.loc[dome, "temp_avg"] = 68.0
+            if "precipitation" in df.columns:
+                df.loc[dome, "precipitation"] = 0.0
     else:
         if "wind_speed" not in df.columns:
             df["wind_speed"] = np.nan
@@ -3930,7 +3979,8 @@ def main():
             games_with_wx = attach_weather_to_games(games)
             # Extract just the weather columns as a lookup table
             weather_df = games_with_wx[
-                [c for c in ["game_id", "wind_speed", "is_dome"]
+                [c for c in ["game_id", "wind_speed", "temp_avg",
+                             "precipitation", "is_dome"]
                  if c in games_with_wx.columns]
             ].copy()
 
