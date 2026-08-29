@@ -531,6 +531,12 @@ def attach_team_features(
     df["elo_diff"]         = df["home_pregame_elo"]    - df["away_pregame_elo"]
     df["recruiting_diff"]  = df["home_recruiting_4yr"] - df["away_recruiting_4yr"]
     df["hfa_diff"]         = df["home_hfa"].fillna(0)  - df["away_hfa"].fillna(0)
+    # Neutral-site games get no home-field edge for either team — zero the
+    # differential so the designated "home" team doesn't collect phantom
+    # points. Mirrors model.load_data() (training) and features.py (matrix).
+    if "neutral_site" in df.columns:
+        _ns = pd.to_numeric(df["neutral_site"], errors="coerce").fillna(0)
+        df.loc[_ns == 1, "hfa_diff"] = 0.0
     df["talent_diff"]      = df["home_talent"]         - df["away_talent"]
 
     df["portal_net_rating_diff"] = (

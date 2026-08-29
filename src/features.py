@@ -965,6 +965,11 @@ def build_feature_matrix() -> pd.DataFrame:
     )
     # Net HFA: home team's advantage minus away team's away-game penalty
     games_feat["hfa_diff"] = games_feat["home_hfa"].fillna(0) - games_feat["away_hfa"].fillna(0)
+    # Neutral-site games: no home-field edge for either side — zero the
+    # differential (mirrors model.load_data and feature_builder serve path).
+    if "neutral_site" in games_feat.columns:
+        _ns = pd.to_numeric(games_feat["neutral_site"], errors="coerce").fillna(0)
+        games_feat.loc[_ns == 1, "hfa_diff"] = 0.0
 
     # ── Merge FPI (home and away) ──────────────────────────────────────────
     if len(fpi) > 0 and "fpi" in fpi.columns:
