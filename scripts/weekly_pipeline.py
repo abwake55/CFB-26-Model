@@ -47,7 +47,7 @@ OUTPUT_FILE = ROOT_DIR / "scripts" / "pipeline_output.json"
 sys.path.insert(0, str(SRC_DIR))
 
 # ── joblib unpickling requires the ensemble classes in __main__ ───────────────
-from model import EnsembleRegressor, EnsembleClassifier, MarketAnchoredEnsemble  # noqa: E402
+from model import EnsembleRegressor, EnsembleClassifier, MarketAnchoredEnsemble, patch_sklearn_compat  # noqa: E402
 import __main__
 __main__.EnsembleRegressor       = EnsembleRegressor
 __main__.EnsembleClassifier      = EnsembleClassifier
@@ -187,9 +187,9 @@ def load_models():
     missing = [f for f in required if not (MODEL_DIR / f).exists()]
     if missing:
         raise FileNotFoundError(f"Missing model files: {missing}")
-    spread   = joblib.load(MODEL_DIR / "spread_model.pkl")
-    totals   = joblib.load(MODEL_DIR / "totals_model.pkl")
-    win_prob = joblib.load(MODEL_DIR / "win_prob_model.pkl")
+    spread   = patch_sklearn_compat(joblib.load(MODEL_DIR / "spread_model.pkl"))
+    totals   = patch_sklearn_compat(joblib.load(MODEL_DIR / "totals_model.pkl"))
+    win_prob = patch_sklearn_compat(joblib.load(MODEL_DIR / "win_prob_model.pkl"))
     with open(MODEL_DIR / "feature_lists.json") as f:
         feat_lists = json.load(f)
     print("✅ Models loaded")

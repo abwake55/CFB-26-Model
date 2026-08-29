@@ -19,7 +19,7 @@ warnings.filterwarnings("ignore")
 
 # ── Shared feature builder (single source of truth for feature construction) ──
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent / "src"))
-from model import EnsembleRegressor, EnsembleClassifier, MarketAnchoredEnsemble  # required so joblib can unpickle saved models
+from model import EnsembleRegressor, EnsembleClassifier, MarketAnchoredEnsemble, patch_sklearn_compat  # required so joblib can unpickle saved models
 import __main__
 __main__.EnsembleRegressor       = EnsembleRegressor   # joblib looks in __main__ when model was trained via python3 src/model.py
 __main__.EnsembleClassifier      = EnsembleClassifier
@@ -345,9 +345,9 @@ def load_models():
                if not (MODEL_DIR / f).exists()]
     if missing:
         return None, None, None, None
-    spread   = joblib.load(MODEL_DIR / "spread_model.pkl")
-    totals   = joblib.load(MODEL_DIR / "totals_model.pkl")
-    win_prob = joblib.load(MODEL_DIR / "win_prob_model.pkl")
+    spread   = patch_sklearn_compat(joblib.load(MODEL_DIR / "spread_model.pkl"))
+    totals   = patch_sklearn_compat(joblib.load(MODEL_DIR / "totals_model.pkl"))
+    win_prob = patch_sklearn_compat(joblib.load(MODEL_DIR / "win_prob_model.pkl"))
     with open(MODEL_DIR / "feature_lists.json") as f:
         feat_lists = json.load(f)
     return spread, totals, win_prob, feat_lists

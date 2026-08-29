@@ -1079,3 +1079,41 @@ def show_sample_predictions(results_df: pd.DataFrame, n: int = 15):
 if __name__ == "__main__":
     results = train_and_evaluate()
     show_sample_predictions(results)
+
+
+# ─── SKLEARN VERSION COMPATIBILITY ───────────────────────────────────────────
+
+def patch_sklearn_compat(model):
+    """Backfill attributes newer scikit-learn expects but old pickles lack.
+
+    The saved models were fitted under scikit-learn <= 1.7. sklearn 1.8 added
+    ``SimpleImputer._fill_dtype`` (assigned during ``fit``), so calling
+    ``transform``/``predict`` on a pre-1.8 pickle raises
+    ``AttributeError: 'SimpleImputer' object has no attribute '_fill_dtype'``.
+    This recomputes the attribute exactly the way 1.8's ``fit`` does
+    (``self._fill_dtype = X.dtype``; the training matrices are numeric, so the
+    fitted ``statistics_`` dtype is the same dtype fit would have seen).
+
+    Walks the ensemble wrappers, sklearn Pipelines, and calibrated
+    classifiers. Safe no-op when the attribute already exists.
+    """
+    import numpy as _np
+    _seen = set()
+
+    def _walk(obj):
+        if obj is None or id(obj) in _seen:
+            return
+        _seen.add(id(obj))
+        if type(obj).__name__ == "SimpleImputer" and not hasattr(obj, "_fill_dtype"):
+            _stats = getattr(obj, "statistics_", None)
+            obj._fill_dtype = getattr(_stats, "dtype", _np.float64)
+        for _attr in ("m1", "m2", "estimator", "base_estimator"):
+            _walk(getattr(obj, _attr, None))
+        for _attr in ("estimators_", "calibrated_classifiers_"):
+            for _child in getattr(obj, _attr, None) or []:
+                _walk(_child)
+        for _, _step in getattr(obj, "steps", None) or []:
+            _walk(_step)
+
+    _walk(model)
+    return model
