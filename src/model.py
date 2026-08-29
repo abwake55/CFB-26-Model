@@ -261,6 +261,15 @@ def load_data() -> pd.DataFrame:
     # Add Elo differential (pre-game Elo from CFBD API)
     df["elo_diff"] = df["home_pregame_elo"] - df["away_pregame_elo"]
 
+    # Neutral-site games: neither team gets its home-field edge. hfa_diff is
+    # home_hfa - away_hfa (each team's home-vs-away split), which is only
+    # meaningful when someone is actually at home. Leaving it populated for
+    # neutral games hands the designated "home" team several phantom points
+    # (607 neutral games in the matrix, mean |hfa_diff| ~8.2). Zero it.
+    if "neutral_site" in df.columns and "hfa_diff" in df.columns:
+        _ns = pd.to_numeric(df["neutral_site"], errors="coerce").fillna(0)
+        df.loc[_ns == 1, "hfa_diff"] = 0.0
+
     # Situational spot features (lookahead / sandwich / altitude) — see
     # src/situational.py for definitions and walk-forward validation.
     from situational import add_situational_features
