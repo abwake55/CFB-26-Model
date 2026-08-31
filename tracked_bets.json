@@ -11,7 +11,8 @@
     "edge": "+5.4 pts (mdl -9.4)",
     "units": 1,
     "status": "Pending",
-    "bettor": "Alex"
+    "bettor": "Alex",
+    "closing_line": "-5.0"
   },
   {
     "id": "5e87eb4f",
@@ -25,21 +26,23 @@
     "edge": "+3.3 pts (mdl -7.3)",
     "units": 1,
     "status": "Pending",
-    "bettor": "Alex"
+    "bettor": "Alex",
+    "closing_line": "-4.0"
   },
   {
     "id": "ab2f271c",
     "date": "2026-08-27",
     "season": 2026,
     "week": 1,
-    "game": "San José State @ USC",
+    "game": "San Jos\u00e9 State @ USC",
     "bet_type": "Spread",
     "pick": "USC -39.0",
     "line": "-39.0",
     "edge": "+3.1 pts (mdl -42.1)",
     "units": 1,
     "status": "Pending",
-    "bettor": "Alex"
+    "bettor": "Alex",
+    "closing_line": "-37.0"
   },
   {
     "id": "bd525ffc",
