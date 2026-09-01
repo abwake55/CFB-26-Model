@@ -17760,3 +17760,19 @@ game_id,season,week,team,conference,opponent,off_epa,off_epa_pass,off_epa_rush,d
 401778308,2025,1,Washington State,,Utah State,0.31,0.41,0.21,-0.05,0.09,-0.05
 401778310,2025,1,Western Kentucky,,Southern Miss,0.06,0.04,0.15,0.05,0.02,0.2
 401778306,2025,1,Western Michigan,,Kennesaw State,0.23,0.3,0.21,-0.24,-0.18,-0.09
+401866408,2026,1,Eastern Michigan,,Sacramento State,0.06,0.28,-0.23,-0.08,-0.08,-0.05
+401864570,2026,1,Florida State,,New Mexico State,0.29,0.38,0.33,0.16,0.41,-0.07
+401858201,2026,1,Hawai'i,,Stanford,0.05,0.14,-0.08,0.33,0.42,0.22
+401864577,2026,1,Jacksonville State,,North Dakota State,-0.32,-0.33,-0.3,0.22,0.41,0.11
+401862693,2026,1,Memphis,,UNLV,0.29,0.41,0.19,0.09,0.07,0.19
+401858202,2026,1,NC State,,Virginia,-0.14,-0.08,-0.21,0.27,0.86,0.19
+401864570,2026,1,New Mexico State,,Florida State,0.16,0.41,-0.07,0.29,0.38,0.33
+401856766,2026,1,North Carolina,,TCU,0.11,0.27,-0.09,-0.05,0.02,-0.03
+401864577,2026,1,North Dakota State,,Jacksonville State,0.22,0.41,0.11,-0.32,-0.33,-0.3
+401866408,2026,1,Sacramento State,,Eastern Michigan,-0.08,-0.08,-0.05,0.06,0.28,-0.23
+401864494,2026,1,San José State,,USC,0.22,0.32,0.07,0.39,0.39,0.39
+401858201,2026,1,Stanford,,Hawai'i,0.33,0.42,0.22,0.05,0.14,-0.08
+401856766,2026,1,TCU,,North Carolina,-0.05,0.02,-0.03,0.11,0.27,-0.09
+401862693,2026,1,UNLV,,Memphis,0.09,0.07,0.19,0.29,0.41,0.19
+401864494,2026,1,USC,,San José State,0.39,0.39,0.39,0.22,0.32,0.07
+401858202,2026,1,Virginia,,NC State,0.27,0.86,0.19,-0.14,-0.08,-0.21

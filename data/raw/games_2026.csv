@@ -1,1 +1,127 @@
 game_id,season,week,season_type,start_date,neutral_site,conference_game,home_team,home_conference,home_points,away_team,away_conference,away_points,home_pregame_elo,away_pregame_elo,excitement_index,point_diff,total_points
+401896383,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Morehead State,Pioneer,40.0,Ohio Dominican,Great Midwest Athletic,42.0,,,8.587875294220844,-2.0,82.0
+401906048,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Tusculum,South Atlantic,42.0,Bluefield State,CIAA,7.0,,,,35.0,49.0
+401906193,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,UNC Pembroke,Carolinas,21.0,Wingate,South Atlantic,13.0,,,,8.0,34.0
+401866615,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Delaware State,MEAC,41.0,Stony Brook,Coastal Athletic,34.0,,,7.1742761048504935,7.0,75.0
+401866532,2026,1,regular,2026-08-27T22:00:00.000Z,False,True,Towson,Coastal Athletic,18.0,Maine,Coastal Athletic,21.0,,,5.4929132792564115,-3.0,39.0
+401867894,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Youngstown State,MVFC,43.0,Mercyhurst,NEC,10.0,,,3.3789330666717694,33.0,53.0
+401907002,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Charleston (WV),Mountain East,10.0,Grand Valley State,GLIAC,38.0,,,,-28.0,48.0
+401907643,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Slippery Rock,Pennsylvania State Athletic,45.0,Minnesota Duluth,Northern Sun,43.0,,,,2.0,88.0
+401906139,2026,1,regular,2026-08-27T22:00:00.000Z,False,False,Virginia State,CIAA,44.0,Barton,Carolinas,17.0,,,,27.0,61.0
+401906631,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Carson Newman,South Atlantic,41.0,Tiffin,Great Midwest Athletic,38.0,,,,3.0,79.0
+401906620,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,West Liberty,Mountain East,27.0,Walsh,Great Midwest Athletic,30.0,,,,-3.0,57.0
+401906602,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Valdosta State,Gulf South,38.0,Emory & Henry,South Atlantic,10.0,,,,28.0,48.0
+401906943,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Minnesota St Moorhead,Northern Sun,41.0,Northern Michigan,GLIAC,19.0,,,,22.0,60.0
+401906902,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Saginaw Valley State,GLIAC,48.0,McKendree,Great Lakes,24.0,,,,24.0,72.0
+401867865,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Murray State,MVFC,14.0,Eastern Illinois,OVC,28.0,,,6.2095589679910175,-14.0,42.0
+401868060,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Austin Peay,UAC,35.0,Gardner-Webb,OVC,17.0,,,5.358827484865738,18.0,52.0
+401906993,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Bemidji State,Northern Sun,29.0,Michigan Tech,GLIAC,31.0,,,,-2.0,60.0
+401907346,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Texas Wesleyan,,7.0,Central Oklahoma,Mid America,59.0,,,,-52.0,66.0
+401868962,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Nicholls,Southland,44.0,Mississippi Valley State,SWAC,10.0,,,3.7521056899140985,34.0,54.0
+401907110,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Sioux Falls,Northern Sun,21.0,Black Hills State,Rocky Mountain,24.0,,,,-3.0,45.0
+401868373,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Furman,Southern,20.0,Anderson (SC),South Atlantic,3.0,,,3.9161292380886805,17.0,23.0
+401868315,2026,1,regular,2026-08-27T23:00:00.000Z,False,True,SE Louisiana,Southland,28.0,Houston Christian,Southland,34.0,,,4.689075828649628,-6.0,62.0
+401868279,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,St. Thomas (MN),Pioneer,15.0,Winona State,Northern Sun,9.0,,,5.794131368026688,6.0,24.0
+401874035,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,West Florida,UAC,34.0,Southern Illinois,MVFC,31.0,,,5.892216810822841,3.0,65.0
+401868273,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Presbyterian,Pioneer,47.0,UVA Wise,South Atlantic,37.0,,,7.757148783501308,10.0,84.0
+401896384,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Davidson,Pioneer,35.0,Concord,Mountain East,41.0,,,7.11714099016085,-6.0,76.0
+401907120,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Northern State,Northern Sun,42.0,Chadron State,Rocky Mountain,17.0,,,,25.0,59.0
+401868204,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Western Illinois,OVC,65.0,Northwestern (IA),,14.0,,,4.074014236673057,51.0,79.0
+401907381,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Nebraska Kearney,Mid America,20.0,Wayne State (NE),Northern Sun,21.0,,,,-1.0,41.0
+401868169,2026,1,regular,2026-08-27T23:00:00.000Z,False,True,Lindenwood,OVC,20.0,Charleston Southern,OVC,17.0,,,4.946406516642886,3.0,37.0
+401907239,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Southwest Baptist,Great Lakes,63.0,William Woods,,6.0,,,,57.0,69.0
+401907356,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Minot State,Northern Sun,30.0,Emporia State,Mid America,36.0,,,,-6.0,66.0
+401868240,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,West Georgia,UAC,10.0,Chattanooga,Southern,24.0,,,4.338639277500752,-14.0,34.0
+401866614,2026,1,regular,2026-08-27T23:00:00.000Z,False,False,Elon,Coastal Athletic,42.0,Glenville State,Mountain East,7.0,,,3.0969638826237325,35.0,49.0
+401907234,2026,1,regular,2026-08-27T23:30:00.000Z,False,False,Concordia St. Paul,Northern Sun,38.0,Quincy,Great Lakes,21.0,,,,17.0,59.0
+401868254,2026,1,regular,2026-08-27T23:30:00.000Z,False,False,Drake,Pioneer,35.0,South Dakota Mines,Rocky Mountain,38.0,,,6.059550204859821,-3.0,73.0
+401868070,2026,1,regular,2026-08-27T23:30:00.000Z,False,False,UT Martin,OVC,24.0,Central Arkansas,UAC,36.0,,,5.481780420907878,-12.0,60.0
+401907161,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,West Texas,Lone Star,21.0,Western Colorado,Rocky Mountain,52.0,,,,-31.0,73.0
+401867874,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,North Dakota,MVFC,42.0,Long Island University,NEC,21.0,,,2.8256171279276794,21.0,63.0
+401907099,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Adams State,Rocky Mountain,45.0,Western New Mexico,Lone Star,62.0,,,,-17.0,107.0
+401907275,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Angelo State,Lone Star,14.0,Fort Hays,Mid America,35.0,,,,-21.0,49.0
+401907376,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Missouri Western,Mid America,58.0,Augustana (SD),Northern Sun,63.0,,,,-5.0,121.0
+401907144,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,CSU Pueblo,Rocky Mountain,44.0,Central Missouri,Mid America,25.0,,,,19.0,69.0
+401907155,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,New Mexico Highlands,Rocky Mountain,35.0,Eastern New Mexico,Lone Star,34.0,,,,1.0,69.0
+401907007,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Pittsburg State,Mid America,14.0,Ferris State,GLIAC,42.0,,,,-28.0,56.0
+401907129,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Colorado Mesa,Rocky Mountain,14.0,Minnesota State,Northern Sun,38.0,,,,-24.0,52.0
+401907724,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Southwest Minnesota State,Northern Sun,10.0,Valley City State,,7.0,,,,3.0,17.0
+401869128,2026,1,regular,2026-08-28T00:00:00.000Z,False,False,Northwestern State,Southland,37.0,Louisiana Christian,,42.0,,,5.8085634766541,-5.0,79.0
+401907702,2026,1,regular,2026-08-28T00:30:00.000Z,True,False,University of Mary,Northern Sun,10.0,Rocky Mountain,,23.0,,,,-13.0,33.0
+401866617,2026,1,regular,2026-08-28T22:00:00.000Z,False,False,Merrimack,FCS Independents,7.0,Rhode Island,Coastal Athletic,34.0,,,3.7978919513639418,-27.0,41.0
+401868261,2026,1,regular,2026-08-28T22:00:00.000Z,False,False,New Haven,NEC,22.0,Marist,Pioneer,21.0,,,5.404688853181937,1.0,43.0
+401906145,2026,1,regular,2026-08-28T22:00:00.000Z,False,False,Lenoir Rhyne,South Atlantic,45.0,Virginia Union,CIAA,3.0,,,,42.0,48.0
+401868040,2026,1,regular,2026-08-28T22:00:00.000Z,False,True,Villanova,Patriot,32.0,William & Mary,Patriot,35.0,,,8.731585628207727,-3.0,67.0
+401868007,2026,1,regular,2026-08-28T22:00:00.000Z,False,True,Fordham,Patriot,14.0,Colgate,Patriot,24.0,,,4.859701298471837,-10.0,38.0
+401866616,2026,1,regular,2026-08-28T23:00:00.000Z,False,True,UAlbany,Coastal Athletic,28.0,New Hampshire,Coastal Athletic,14.0,,,4.383504536069686,14.0,42.0
+401868129,2026,1,regular,2026-08-29T01:00:00.000Z,False,True,Northern Colorado,Big Sky,29.0,Weber State,Big Sky,30.0,,,7.003749184389798,-1.0,59.0
+401868073,2026,1,regular,2026-08-29T02:00:00.000Z,False,True,Cal Poly,Big Sky,38.0,Idaho,Big Sky,34.0,,,7.5766352156496355,4.0,72.0
+401906177,2026,1,regular,2026-08-29T16:00:00.000Z,False,False,West Virginia State,Mountain East,56.0,Chowan,Carolinas,24.0,,,,32.0,80.0
+401907012,2026,1,regular,2026-08-29T16:00:00.000Z,False,False,Davenport,GLIAC,32.0,Gannon,Pennsylvania State Athletic,20.0,,,,12.0,52.0
+401856766,2026,1,regular,2026-08-29T16:00:00.000Z,True,False,TCU,Big 12,10.0,North Carolina,ACC,15.0,1613.0,1380.0,6.501938416580931,-5.0,25.0
+401867916,2026,1,regular,2026-08-29T16:00:00.000Z,False,True,Wagner,NEC,7.0,Robert Morris,NEC,28.0,,,3.7151837255713245,-21.0,35.0
+401906641,2026,1,regular,2026-08-29T16:00:00.000Z,False,False,Wheeling,Mountain East,27.0,Thomas More,Great Midwest Athletic,10.0,,,,17.0,37.0
+401868792,2026,1,regular,2026-08-29T16:00:00.000Z,False,False,Dayton,Pioneer,43.0,Fairmont State,Mountain East,20.0,,,3.860213232114816,23.0,63.0
+401907631,2026,1,regular,2026-08-29T17:00:00.000Z,False,True,Shippensburg,Pennsylvania State Athletic,16.0,Lock Haven,Pennsylvania State Athletic,24.0,,,,-8.0,40.0
+401906205,2026,1,regular,2026-08-29T17:00:00.000Z,False,False,Shorter,Carolinas,65.0,Andrew,,6.0,,,,59.0,71.0
+401907576,2026,1,regular,2026-08-29T17:00:00.000Z,False,False,West Virginia Wesleyan,Mountain East,31.0,Post,Northeast 10,13.0,,,,18.0,44.0
+401869156,2026,1,regular,2026-08-29T17:00:00.000Z,False,False,Chicago State,FCS Independents,28.0,Roosevelt,GLIAC,44.0,,,3.9935477483515367,-16.0,72.0
+401907454,2026,1,regular,2026-08-29T17:00:00.000Z,False,False,American International,Northeast 10,17.0,Monroe,,3.0,,,,14.0,20.0
+401868209,2026,1,regular,2026-08-29T17:00:00.000Z,False,False,Butler,Pioneer,27.0,Georgetown College Kentucky,,23.0,,,,4.0,50.0
+401906588,2026,1,regular,2026-08-29T17:00:00.000Z,False,False,Northeastern State,Independent DII,52.0,Delta State,Gulf South,,,,,,
+401867882,2026,1,regular,2026-08-29T18:00:00.000Z,False,False,South Dakota,MVFC,59.0,Central Connecticut,NEC,20.0,,,4.256094500735783,39.0,79.0
+401907137,2026,1,regular,2026-08-29T18:00:00.000Z,False,False,Colorado School of Mines,Rocky Mountain,20.0,Western Oregon,Lone Star,22.0,,,,-2.0,42.0
+401868288,2026,1,regular,2026-08-29T18:00:00.000Z,False,False,Valparaiso,Pioneer,59.0,Lawrence Tech,,13.0,,,3.0652446764600474,46.0,72.0
+401868324,2026,1,regular,2026-08-29T19:00:00.000Z,True,True,Alabama State,SWAC,30.0,Southern,SWAC,17.0,,,6.5728079613392625,13.0,47.0
+401868154,2026,1,regular,2026-08-29T19:00:00.000Z,False,True,Portland State,Big Sky,24.0,UC Davis,Big Sky,31.0,,,4.789272099230701,-7.0,55.0
+401907246,2026,1,regular,2026-08-29T19:00:00.000Z,False,False,Upper Iowa,Great Lakes,30.0,Jamestown,Northern Sun,13.0,,,,17.0,43.0
+401864494,2026,1,regular,2026-08-29T19:00:00.000Z,False,False,USC,Big Ten,42.0,San José State,Mountain West,26.0,1747.0,1411.0,3.0862318483027362,16.0,68.0
+401906949,2026,1,regular,2026-08-29T19:00:00.000Z,False,True,Central State,SIAC,14.0,Kentucky State,SIAC,41.0,,,,-27.0,55.0
+401868022,2026,1,regular,2026-08-29T19:30:00.000Z,False,True,Holy Cross,Patriot,10.0,Lehigh,Patriot,35.0,,,2.553763961081132,-25.0,45.0
+401858202,2026,1,regular,2026-08-29T19:30:00.000Z,False,True,Virginia,ACC,34.0,NC State,ACC,8.0,1591.0,1570.0,3.250138883732314,26.0,42.0
+401868084,2026,1,regular,2026-08-29T21:00:00.000Z,False,True,Northern Arizona,Big Sky,34.0,Eastern Washington,Big Sky,27.0,,,6.279525145244338,7.0,61.0
+401906157,2026,1,regular,2026-08-29T21:00:00.000Z,False,False,Benedict,SIAC,32.0,Johnson C. Smith,CIAA,10.0,,,,22.0,42.0
+401866620,2026,1,regular,2026-08-29T21:30:00.000Z,False,False,East Tennessee State,Southern,37.0,Campbell,Coastal Athletic,49.0,,,8.046744288326673,-12.0,86.0
+401864577,2026,1,regular,2026-08-29T21:30:00.000Z,False,False,North Dakota State,Mountain West,33.0,Jacksonville State,Conference USA,7.0,1500.0,1494.0,3.9305937665231743,26.0,40.0
+401867988,2026,1,regular,2026-08-29T22:00:00.000Z,False,True,Richmond,Patriot,35.0,Bucknell,Patriot,14.0,,,3.277355862206096,21.0,49.0
+401867982,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,South Carolina State,MEAC,87.0,Savannah State,SIAC,0.0,,,2.4993946241530685,87.0,87.0
+401867972,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Norfolk State,MEAC,56.0,Winston-Salem State,CIAA,0.0,,,2.7420516100648156,56.0,56.0
+401868101,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Idaho State,Big Sky,38.0,VMI,Southern,10.0,,,3.76537668586907,28.0,48.0
+401906162,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Livingstone,CIAA,16.0,Allen,SIAC,37.0,,,,-21.0,53.0
+401866613,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Hampton,Coastal Athletic,45.0,Virginia Lynchburg,,0.0,,,3.3453605753893783,45.0,45.0
+401867855,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Indiana State,MVFC,21.0,Southeast Missouri State,OVC,23.0,,,6.394337360254957,-2.0,44.0
+401868394,2026,1,regular,2026-08-29T22:00:00.000Z,False,True,Wofford,Southern,42.0,The Citadel,Southern,14.0,,,3.397680214014024,28.0,56.0
+401906956,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Edward Waters,SIAC,42.0,Florida Memorial University,,28.0,,,,14.0,70.0
+401866618,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,North Carolina A&T,Coastal Athletic,7.0,Morgan State,MEAC,17.0,,,4.558640296710313,-10.0,24.0
+401907403,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Ferrum,Carolinas,7.0,Catawba,South Atlantic,13.0,,,,-6.0,20.0
+401906151,2026,1,regular,2026-08-29T22:00:00.000Z,False,True,Fayetteville State,CIAA,33.0,Shaw,CIAA,20.0,,,,13.0,53.0
+401866619,2026,1,regular,2026-08-29T22:00:00.000Z,False,False,Stonehill,NEC,6.0,Bryant,Coastal Athletic,24.0,,,3.8056484841920404,-18.0,30.0
+401866408,2026,1,regular,2026-08-29T22:30:00.000Z,False,True,Eastern Michigan,Mid-American,28.0,Sacramento State,Mid-American,17.0,1326.0,1500.0,4.438013062049562,11.0,45.0
+401868934,2026,1,regular,2026-08-29T23:00:00.000Z,True,False,Arkansas-Pine Bluff,SWAC,35.0,Morehouse,SIAC,15.0,,,4.014093968844684,20.0,50.0
+401868305,2026,1,regular,2026-08-29T23:00:00.000Z,False,True,McNeese,Southland,27.0,Stephen F. Austin,Southland,38.0,,,3.4819009133300023,-11.0,65.0
+401891332,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Illinois State,MVFC,76.0,St. Francis (IL),,0.0,,,2.810823229382605,76.0,76.0
+401864570,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Florida State,ACC,34.0,New Mexico State,Conference USA,17.0,1537.0,1281.0,4.624194922647494,17.0,51.0
+401867977,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Texas Southern,SWAC,42.0,North Carolina Central,MEAC,30.0,,,6.272457719446903,12.0,72.0
+401868149,2026,1,regular,2026-08-29T23:00:00.000Z,True,False,North Alabama,UAC,22.0,Samford,Southern,10.0,,,5.172575451896864,12.0,32.0
+401907204,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Lincoln (MO),Great Lakes,27.0,Central Methodist,,11.0,,,,16.0,38.0
+401907243,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Truman State,Great Lakes,21.0,Washburn,Mid America,27.0,,,,-6.0,48.0
+401907297,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Midwestern State,Lone Star,30.0,Missouri Southern State,Mid America,23.0,,,,7.0,53.0
+401896385,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Alcorn State,SWAC,56.0,Miles,SIAC,7.0,,,4.029682373191179,49.0,63.0
+401868948,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Florida A&M,SWAC,20.0,Albany State,SIAC,7.0,,,3.8661591891402836,13.0,27.0
+401868049,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Lamar,Southland,21.0,Abilene Christian,UAC,14.0,,,5.042418009464074,7.0,35.0
+401868952,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Grambling,SWAC,49.0,Clark Atlanta,SIAC,7.0,,,2.9330723745561893,42.0,56.0
+401866621,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Tennessee Tech,Southern,38.0,Monmouth,Coastal Athletic,14.0,,,4.399867997589201,24.0,52.0
+401872615,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,South Dakota State,MVFC,70.0,Stetson,Pioneer,7.0,,,2.9805360727069226,63.0,77.0
+401874042,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Mercer,Southern,23.0,East Texas A&M,Southland,15.0,,,4.715683602660047,8.0,38.0
+401858201,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Stanford,ACC,37.0,Hawai'i,Mountain West,27.0,1390.0,1472.0,6.770253187027743,10.0,64.0
+401913104,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Incarnate Word,Southland,76.0,Oklahoma Panhandle,Independent DII,14.0,,,2.3384126370504807,62.0,90.0
+401868139,2026,1,regular,2026-08-29T23:00:00.000Z,False,False,Western Carolina,Southern,45.0,Eastern Kentucky,UAC,21.0,,,7.09907591716027,24.0,66.0
+401867935,2026,1,regular,2026-08-29T23:30:00.000Z,True,False,Howard,MEAC,31.0,Alabama A&M,SWAC,24.0,,,7.097015059744049,7.0,55.0
+401907308,2026,1,regular,2026-08-30T00:00:00.000Z,False,False,Texas A&M-Kingsville,Lone Star,3.0,Northwest Missouri State,Mid America,48.0,,,,-45.0,51.0
+401868245,2026,1,regular,2026-08-30T00:00:00.000Z,False,False,UT Rio Grande Valley,Southland,44.0,UT Permian Basin,Lone Star,0.0,,,3.7159076611102866,44.0,44.0
+401868194,2026,1,regular,2026-08-30T00:30:00.000Z,False,False,Tennessee State,OVC,24.0,Jackson State,SWAC,26.0,,,5.755094315086749,-2.0,50.0
+401868110,2026,1,regular,2026-08-30T01:00:00.000Z,False,True,Montana,Big Sky,28.0,Southern Utah,Big Sky,21.0,,,6.809761125837663,7.0,49.0
+401868235,2026,1,regular,2026-08-30T01:00:00.000Z,False,False,Tarleton State,UAC,49.0,Prairie View A&M,SWAC,30.0,,,4.958835868180616,19.0,79.0
+401868118,2026,1,regular,2026-08-30T02:00:00.000Z,False,True,Utah Tech,Big Sky,0.0,Montana State,Big Sky,54.0,,,2.585958049903859,-54.0,54.0
+401862693,2026,1,regular,2026-08-30T02:00:00.000Z,False,False,UNLV,Mountain West,21.0,Memphis,American Athletic,27.0,1581.0,1526.0,6.40825618898589,-6.0,48.0
+401906596,2026,1,regular,2026-08-31T00:00:00.000Z,True,False,Tuskegee,SIAC,17.0,West Alabama,Gulf South,27.0,,,,-10.0,44.0
