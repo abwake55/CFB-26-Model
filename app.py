@@ -497,6 +497,11 @@ def find_stale_picks(preds: pd.DataFrame) -> list[str]:
         return []
     stale: list[str] = []
     for _, r in preds.iterrows():
+        # Skip games that already kicked off — line moves on completed games
+        # are noise, not actionable staleness.
+        kickoff = pd.to_datetime(r.get("start_date"), utc=True, errors="coerce")
+        if pd.notna(kickoff) and kickoff < pd.Timestamp.utcnow():
+            continue
         matchup = f"{r['away_team']} @ {r['home_team']}"
         seen = r.get("snap_seen_label") or "first snapshot"
 
@@ -912,7 +917,11 @@ def build_and_predict(games, lines, ratings, epa, elo,
     # Coverage must be measured on the FULL feature frame (df) — `out` keeps
     # only prediction columns, so checking it would misreport every rating
     # source as 0%. Stash the report in attrs for the picks tab to read.
-    out.attrs["coverage"] = feature_coverage_report(df)
+    # Scope coverage to games with a posted line: FCS/D2 opponents have no
+    # SP+/FPI/talent rows by definition, so an all-division week reads as
+    # structurally low coverage even when every bettable game is covered.
+    cov_df = df[df["spread"].notna()] if "spread" in df.columns else df
+    out.attrs["coverage"] = feature_coverage_report(cov_df if len(cov_df) else df)
     return out
 
 
