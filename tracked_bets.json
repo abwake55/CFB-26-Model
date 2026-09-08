@@ -139,7 +139,7 @@
     "status": "Won",
     "bettor": "Alex",
     "current_line": "-31.5",
-    "closing_line": ""
+    "closing_line": "-32.0"
   },
   {
     "id": "c74518e3",
@@ -155,6 +155,6 @@
     "status": "Dropped",
     "bettor": "Alex",
     "note": "dropped - line moved",
-    "closing_line": ""
+    "closing_line": "+20.5"
   }
 ]
