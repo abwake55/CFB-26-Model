@@ -32,6 +32,7 @@ from feature_builder import (
     feature_coverage_report,
 )
 import odds_api   # The Odds API line fetcher (the-odds-api.com)
+import gates      # unified recommendation gate — single source of truth
 from preseason import (apply_preseason_shrinkage, shrinkage_factor,
                        sample_badge, DEFAULT_SPREAD_SIGMA)
 
@@ -1353,36 +1354,22 @@ _POWER_CONFS = {"SEC", "Big Ten", "Big 12", "ACC", "Pac-12", "Pac-10",
                 "Big East", "FBS Independents"}
 
 def _power_involved(row) -> bool:
-    return (row.get("home_conference") in _POWER_CONFS
-            or row.get("away_conference") in _POWER_CONFS)
+    return gates.power_involved(row)
 
 
 def _wind15(row) -> bool:
-    """Forecast wind >= 15 mph outdoors. CORE unders hit only 50.0% in
-    high wind (n=88) — the market prices obvious weather itself."""
-    ws = row.get("wind_speed")
-    if pd.isna(ws) or bool(row.get("is_dome", 0)):
-        return False
-    return float(ws) >= 15
+    return gates.wind15(row)
 
 
 def _low_total(row) -> bool:
-    """Market total < 48. Low-total games have no over-bias to fade — CORE
-    unders there hit ~49%. The inflation the edge exploits lives in higher
-    totals (public backs overs in expected shootouts)."""
-    ou = row.get("over_under")
-    return pd.notna(ou) and float(ou) < 48
+    return gates.low_total(row)
 
 
 def _core_total(row) -> bool:
-    """Refined CORE gate, walk-forward 2019-25: under, edge 2-7 pts,
-    power-conf involved, wind < 15, market total >= 48 → 56.4% (n=530,
-    +7.7% ROI), profitable 6 of 7 seasons. Excluded because they add no
-    edge: edges >7 pts (50.7%, winner's curse), wind>=15 (50.0%, priced
-    in), totals <48 (49%, no over-bias to fade)."""
-    edge = row["totals_edge"]
-    return bool(edge <= -2 and edge >= -7 and _power_involved(row)
-                and not _wind15(row) and not _low_total(row))
+    """The CORE gate — logic lives in src/gates.py (shared with the weekly
+    pipeline). Walk-forward numbers are generated into
+    outputs/predictions/core_metrics.json by scripts/build_core_history.py."""
+    return gates.core_total(row)
 
 
 def _both_power(row) -> bool:
@@ -1411,6 +1398,20 @@ def _high_total_paper(row) -> bool:
     return bool(pd.notna(ou) and float(ou) >= 60 and not _core_total(row))
 
 
+
+def _core_metrics() -> dict:
+    """Generated CORE walk-forward metrics (scripts/build_core_history.py →
+    outputs/predictions/core_metrics.json). App copy reads from here so the
+    numbers can never drift from the CSV. Falls back to the last known
+    values if the file is missing."""
+    try:
+        p = Path("outputs/predictions/core_metrics.json")
+        if p.exists():
+            return json.loads(p.read_text())
+    except Exception:
+        pass
+    return {"bets": 530, "hit_rate": 0.564, "roi": 0.077, "units": 44.9}
+
 def _tier_badge(kind: str, row) -> tuple[str, str]:
     """Return (label, color) tier gated by walk-forward results 2019-25
     (5,100 games). Segments below are the only ones that cleared breakeven:
@@ -1425,7 +1426,9 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
             return "PAPER · HIGH-TOTAL 54.3%", "var(--orange)"
         if edge < 0:  # under pick
             if _core_total(row):
-                return "CORE PLAY · 56.4% '19-'25", "var(--green)"
+                _m = _core_metrics()
+                return (f"CORE PLAY · {_m['hit_rate']*100:.1f}% '19-'25",
+                        "var(--green)")
             # Explain the specific disqualifier
             if abs(edge) > 7:
                 return "CAUTION · 7+PT EDGES 51%", "var(--orange)"
@@ -1455,12 +1458,10 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
 
 def _is_play(kind: str, row) -> bool:
     """True when the pick's segment has a validated walk-forward edge.
-    Non-plays render with 0u — shown for research, not sized."""
-    if kind == "total":
-        return _core_total(row)
-    if kind == "spread":
-        return int(row.get("week", 0) or 0) <= 9
-    return False  # moneyline: paper record only
+    Non-plays render with 0u — shown for research, not sized.
+    Logic lives in src/gates.py; spreads/ML are paper-only everywhere
+    (the weeks<=9 spread sizing path was removed 2026-09-10)."""
+    return gates.is_play(kind, row)
 
 
 def _winprob_bar_html(row) -> str:
@@ -3947,7 +3948,10 @@ def main():
                     bet type has actually performed.</div>
             </div>""")
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("CORE unders", "56.4%", "530 bets · '19–'25 walk-forward", delta_color="off")
+            _m = _core_metrics()
+            col1.metric("CORE unders", f"{_m['hit_rate']*100:.1f}%",
+                        f"{_m.get('graded', _m['bets'])} graded bets · '19–'25 walk-forward",
+                        delta_color="off")
             col2.metric("CORE ROI", "+7.7%", "at -110 · profitable 6 of 7 seasons", delta_color="off")
             col3.metric("Spreads ATS", "55.4%", "edge ≥3 pts · '19–'25 walk-forward", delta_color="off")
             col4.metric("North star", "CLV", "beat the close", delta_color="off")

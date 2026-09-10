@@ -60,6 +60,7 @@ from feature_builder import (         # noqa: E402
     attach_team_features,
 )
 import odds_api                        # noqa: E402  — The Odds API line fetcher
+import gates                           # noqa: E402  — unified recommendation gate (src/gates.py)
 
 # ─── Secrets ─────────────────────────────────────────────────────────────────
 
@@ -92,10 +93,12 @@ CFB_BASE      = "https://api.collegefootballdata.com"
 # books). The retired OddsBlaze integration and its team-name map were removed
 # 2026-08-10; the ODDS_API_KEY secret holds the the-odds-api.com key.
 
-SPREAD_EDGE_MIN   = 4.0
-SPREAD_EDGE_MAX   = 7.0
-TOTALS_EDGE_MIN   = 3.0
-MONEYLINE_EV_MIN  = 0.04
+# RETIRED 2026-09-10: the local edge thresholds below used to size spread,
+# totals, and ML picks independently of the app's validated CORE gate —
+# the two surfaces disagreed (app copy said spreads are reference-only while
+# this pipeline shipped 4-7pt spread edges with units). One rule everywhere
+# now, from src/gates.py: CORE unders = 1u; everything else is paper-only.
+# SPREAD_EDGE_MIN / _MAX, TOTALS_EDGE_MIN, MONEYLINE_EV_MIN removed.
 
 # ─── Season / week helpers ────────────────────────────────────────────────────
 
@@ -377,15 +380,18 @@ def build_predictions(games, lines, spread_model, totals_model,
 # ─── Step 6: Filter picks & format summary ────────────────────────────────────
 
 def filter_picks(predictions: pd.DataFrame) -> dict:
-    """Apply edge thresholds and return categorised picks."""
-    picks: dict = {"spreads": [], "totals": [], "moneylines": [], "all_games": []}
+    """Apply the unified gate (src/gates.py) and return categorised picks.
+
+    Only CORE unders are real plays (flat 1u). Spread / totals / moneyline
+    flags that fail the gate are kept under "paper" for research, with no
+    units — the weekly text must never present them as bets."""
+    picks: dict = {"core": [], "paper": [], "all_games": []}
 
     for _, r in predictions.iterrows():
         game_label = f"{r['away_team']} @ {r['home_team']}"
         spread_val = r.get("spread")
         ou_val     = r.get("over_under")
 
-        # All games summary (for context)
         picks["all_games"].append({
             "game": game_label,
             "pred_spread":  round(float(r["pred_spread"]), 1),
@@ -395,94 +401,92 @@ def filter_picks(predictions: pd.DataFrame) -> dict:
             "home_win_pct": round(float(r["pred_win_p"]) * 100, 1),
         })
 
-        # Spread picks
-        edge = r.get("spread_edge")
-        if pd.notna(edge) and pd.notna(spread_val):
-            if SPREAD_EDGE_MIN <= abs(float(edge)) <= SPREAD_EDGE_MAX:
-                team = r["home_team"] if float(edge) > 0 else r["away_team"]
-                vegas_line = (-float(spread_val)) if float(edge) > 0 else float(spread_val)
-                picks["spreads"].append({
-                    "game": game_label,
-                    "pick": f"{team} {vegas_line:+.1f}",
-                    "edge_pts": round(float(edge), 1),
-                    "units": kelly_spread(float(edge)),
-                    "model_spread": round(float(r["pred_spread"]), 1),
-                    "vegas_spread": round(float(spread_val), 1),
-                })
+        row = r.to_dict()
 
-        # Totals picks
+        # Totals: the only surface with a validated edge (CORE unders, 1u)
         t_edge = r.get("totals_edge")
         if pd.notna(t_edge) and pd.notna(ou_val):
-            if abs(float(t_edge)) >= TOTALS_EDGE_MIN:
-                direction = "OVER" if float(t_edge) > 0 else "UNDER"
-                picks["totals"].append({
+            if gates.core_total(row):
+                picks["core"].append({
                     "game": game_label,
-                    "pick": f"{direction} {float(ou_val):.1f}",
+                    "pick": f"UNDER {float(ou_val):.1f}",
                     "edge_pts": round(float(t_edge), 1),
-                    "units": kelly_spread(float(t_edge)),
+                    "units": gates.CORE_UNITS,
                     "model_total": round(float(r["pred_total"]), 1),
                     "vegas_total": round(float(ou_val), 1),
                 })
+            elif abs(float(t_edge)) >= 2:
+                direction = "OVER" if float(t_edge) > 0 else "UNDER"
+                picks["paper"].append({
+                    "type": "total",
+                    "game": game_label,
+                    "pick": f"{direction} {float(ou_val):.1f}",
+                    "edge_pts": round(float(t_edge), 1),
+                    "why_paper": "fails CORE gate (overs / G5 / wind / total<48 / edge>7)",
+                })
 
-        # Moneyline picks
-        for side, ev_col, odds_col, pct_col in [
-            ("home", "home_ml_ev", "home_moneyline", "pred_win_p"),
-            ("away", "away_ml_ev", "away_moneyline",  "pred_away_win_p"),
+        # Spreads: no validated edge at any week — paper record only
+        s_edge = r.get("spread_edge")
+        if pd.notna(s_edge) and pd.notna(spread_val) and abs(float(s_edge)) >= 3:
+            team = r["home_team"] if float(s_edge) > 0 else r["away_team"]
+            vegas_line = (-float(spread_val)) if float(s_edge) > 0 else float(spread_val)
+            picks["paper"].append({
+                "type": "spread",
+                "game": game_label,
+                "pick": f"{team} {vegas_line:+.1f}",
+                "edge_pts": round(float(s_edge), 1),
+                "why_paper": "spreads ~50% ATS '19-'25 — reference only",
+            })
+
+        # Moneylines: EV flags are a paper record only (2025: -4% ROI)
+        for side, ev_col, pct_col in [
+            ("home", "home_ml_ev", "pred_win_p"),
+            ("away", "away_ml_ev", "pred_away_win_p"),
         ]:
-            ev   = r.get(ev_col)
-            odds = r.get(odds_col)
-            if pd.notna(ev) and float(ev) >= MONEYLINE_EV_MIN:
+            ev = r.get(ev_col)
+            if pd.notna(ev) and float(ev) >= 0.04:
                 team = r["home_team"] if side == "home" else r["away_team"]
-                picks["moneylines"].append({
+                picks["paper"].append({
+                    "type": "moneyline",
                     "game": game_label,
                     "pick": team,
                     "ev_pct": round(float(ev) * 100, 1),
-                    "book_odds": int(odds) if pd.notna(odds) else None,
                     "model_win_pct": round(float(r[pct_col]) * 100, 1),
-                    "units": kelly_ml(float(ev)),
+                    "why_paper": "ML EV strategy not validated ('25 -4% ROI)",
                 })
 
-    # Sort by edge desc
-    picks["spreads"].sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
-    picks["totals"].sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
-    picks["moneylines"].sort(key=lambda x: x["ev_pct"], reverse=True)
-
+    picks["core"].sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
     return picks
 
 
 def format_imessage(picks: dict, season: int, week: int) -> str:
-    """
-    Format a compact iMessage text with all actionable picks for the week.
-    Keeps it readable on a phone screen.
-    """
+    """Compact iMessage text. Only CORE plays are presented as bets (1u).
+    Paper flags are listed separately for research — never with units."""
     lines = [
         f"🏈 CFB Model — Week {week}, {season}",
         f"Generated {datetime.now().strftime('%a %b %-d @ %-I:%M %p')}",
         "",
     ]
 
-    total = len(picks["spreads"]) + len(picks["totals"]) + len(picks["moneylines"])
-    if total == 0:
+    if not picks["core"] and not picks["paper"]:
         lines.append("No picks above threshold this week.")
         return "\n".join(lines)
 
-    if picks["spreads"]:
-        lines.append(f"📊 SPREAD ({len(picks['spreads'])})")
-        for p in picks["spreads"][:5]:
-            lines.append(f"  {p['pick']}  |  edge {p['edge_pts']:+.1f}  |  {p['units']}u")
+    if picks["core"]:
+        lines.append(f"✅ CORE PLAYS — 1u each ({len(picks['core'])})")
+        for cp in picks["core"][:8]:
+            lines.append(f"  {cp['pick']} ({cp['game']})  |  edge {cp['edge_pts']:+.1f}")
+    else:
+        lines.append("✅ CORE PLAYS: none this week.")
 
-    if picks["totals"]:
-        lines.append(f"\n🔢 TOTALS ({len(picks['totals'])})")
-        for p in picks["totals"][:5]:
-            lines.append(f"  {p['pick']} ({p['game'].split('@')[0].strip()} @ {p['game'].split('@')[1].strip()})  |  edge {p['edge_pts']:+.1f}  |  {p['units']}u")
+    if picks["paper"]:
+        lines.append(f"\n📝 PAPER ONLY — no units ({len(picks['paper'])})")
+        for pp in picks["paper"][:8]:
+            detail = (f"edge {pp['edge_pts']:+.1f}" if "edge_pts" in pp
+                      else f"EV {pp.get('ev_pct', 0):+.1f}%")
+            lines.append(f"  {pp['pick']} ({pp['game']})  |  {detail}")
 
-    if picks["moneylines"]:
-        lines.append(f"\n💵 MONEYLINE ({len(picks['moneylines'])})")
-        for p in picks["moneylines"][:5]:
-            odds_str = f"{p['book_odds']:+d}" if p["book_odds"] else "N/A"
-            lines.append(f"  {p['pick']} ({odds_str})  |  EV {p['ev_pct']:+.1f}%  |  {p['units']}u")
-
-    lines.append(f"\n{total} total picks. Check the app for full details.")
+    lines.append(f"\n{len(picks['core'])} real play(s). Check the app for full details.")
     return "\n".join(lines)
 
 

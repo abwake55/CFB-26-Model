@@ -58,8 +58,26 @@ def main() -> None:
 
     graded = out[out["result"] != "push"]
     hit = (graded["result"] == "win").mean()
+    units = float(out["pnl"].sum())
+    roi = units / (len(out) * 1.1) if len(out) else 0.0
+
+    # Single generated metrics source — the app reads its CORE copy
+    # (badge text, metric tiles) from this file so UI numbers can never
+    # drift from the CSV.
+    import json
+    metrics = {
+        "bets": int(len(out)),
+        "graded": int(len(graded)),
+        "hit_rate": round(float(hit), 4),
+        "units": round(units, 1),
+        "roi": round(roi, 4),
+        "seasons": sorted(int(s) for s in out["season"].unique()),
+        "generated_by": "scripts/build_core_history.py",
+    }
+    (ROOT / "outputs/predictions/core_metrics.json").write_text(
+        json.dumps(metrics, indent=2))
     print(f"CORE history: {len(out)} bets, hit {hit:.1%}, "
-          f"{out['pnl'].sum():+.1f}u -> {dest.name}")
+          f"{units:+.1f}u -> {dest.name} (+ core_metrics.json)")
 
 
 if __name__ == "__main__":
