@@ -290,82 +290,21 @@ def _build_summary(df: pd.DataFrame) -> None:
           f"core={summary['core_unders']}")
 
 
-def seed(season: int, weeks: list) -> None:
-    """One-time backfill from the saved week CSVs
-    (outputs/predictions/week_{season}_w{ww}_predictions.csv) so weeks played
-    before this script existed still enter the ledger. Predictions are the
-    honest record of what the model said; market lines were largely absent
-    from those files, so gate flags are computed where lines exist and CLV
-    will be sparse for seeded rows. Grading fills results automatically."""
-    frames = []
-    for w in weeks:
-        f = (ROOT_DIR / "outputs" / "predictions"
-             / f"week_{season}_w{w:02d}_predictions.csv")
-        if not f.exists():
-            print(f"[seed] {f.name} missing — skipped")
-            continue
-        d = pd.read_csv(f)
-        rows = []
-        for _, r in d.iterrows():
-            row = r.to_dict()
-            rows.append({
-                "game_id": r["game_id"], "season": season, "week": w,
-                "home_team": r["home_team"], "away_team": r["away_team"],
-                "home_conference": row.get("home_conference"),
-                "away_conference": row.get("away_conference"),
-                "neutral_site": row.get("neutral_site"),
-                "start_date": None,
-                "recorded_at": "seeded-from-week-csv",
-                "pred_spread": row.get("pred_spread"),
-                "pred_total": row.get("pred_total"),
-                "pred_win_p": row.get("pred_win_p"),
-                "spread": row.get("spread"),
-                "over_under": row.get("over_under"),
-                "spread_open": row.get("spread_open"),
-                "home_moneyline": None, "away_moneyline": None,
-                "spread_edge": row.get("spread_edge"),
-                "totals_edge": row.get("totals_edge"),
-                "flag_core": bool(gates.core_total(row)),
-                "flag_spread": bool(pd.notna(row.get("spread_edge"))
-                                    and abs(float(row["spread_edge"])) >= 3),
-                "flag_ml": False,
-            })
-        frames.append(pd.DataFrame(rows, columns=LEDGER_COLS))
-        print(f"[seed] {f.name}: {len(rows)} rows")
-    if not frames:
-        return
-    new = pd.concat(frames, ignore_index=True)
-    if LEDGER.exists():
-        old_df = pd.read_csv(LEDGER)
-        new = new[~new["game_id"].isin(old_df["game_id"])]
-        new = pd.concat([old_df, new], ignore_index=True)
-    new = new.sort_values(["season", "week", "game_id"])
-    LEDGER.parent.mkdir(parents=True, exist_ok=True)
-    new.to_csv(LEDGER, index=False)
-    print(f"[seed] ledger now {len(new)} rows -> {LEDGER.name}")
-
-
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["record", "grade", "seed"])
-    ap.add_argument("--weeks", type=int, nargs="*", default=None,
-                    help="seed mode: weeks to backfill (default 1 2)")
+    ap.add_argument("mode", choices=["record", "grade"])
     ap.add_argument("--season", type=int, default=None)
     ap.add_argument("--week", type=int, default=None)
     args = ap.parse_args()
 
     if args.season and args.week:
         season, week = args.season, args.week
-    elif args.mode == "seed" and args.season:
-        season, week = args.season, None
     else:
         import weekly_pipeline as wp
         season, week = wp.current_cfb_week()
 
     if args.mode == "record":
         record(season, week)
-    elif args.mode == "seed":
-        seed(season, args.weeks or [1, 2])
     else:
         grade(season)
 
