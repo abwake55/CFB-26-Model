@@ -2907,6 +2907,85 @@ def render_backtester_tab():
     # ── Probability calibration (Brier score tracking) ───────────────────────
     render_calibration_section(df)
 
+    # ── 2026 live scorecard (every prediction, not just tracked bets) ───────
+    render_live_scorecard()
+
+
+def render_redeal_banner(season: int, week: int):
+    """Saturday re-deal verdicts for the selected week, if the Saturday job
+    (scripts/saturday_redeal.py) has run. Drops mean the current line no
+    longer passes the unified gate — the bet's history is untouched."""
+    p = Path(f"outputs/picks/redeal_{season}_w{week:02d}.json")
+    if not p.exists():
+        return
+    try:
+        data = json.loads(p.read_text())
+    except Exception:
+        return
+    drops = [d for d in data.get("decisions", []) if d.get("decision") == "drop"]
+    news  = data.get("new_qualifiers", [])
+    if not drops and not news:
+        st.success(f"Saturday re-deal ({data.get('run_at','')[:10]}): "
+                   "every flagged bet still passes the gate at current lines.")
+        return
+    if drops:
+        with st.expander(f"🔁 Saturday re-deal — {len(drops)} drop(s) at current lines",
+                         expanded=True):
+            for d in drops:
+                st.markdown(f"- **DROP** {d.get('pick','')} ({d.get('game','')}) — {d.get('reason','')}")
+    if news:
+        with st.expander(f"🔁 Saturday re-deal — {len(news)} new CORE qualifier(s)",
+                         expanded=True):
+            for q in news:
+                st.markdown(f"- **NEW** {q.get('pick','')} ({q.get('game','')}) — {q.get('reason','')}")
+
+
+def render_live_scorecard():
+    """Live 2026 scorecard from the prediction ledger
+    (scripts/prediction_ledger.py → outputs/predictions/ledger_2026_summary.json).
+
+    Grades EVERY prediction the model made this season — win-prob Brier over
+    all games, plus per-bucket results for CORE plays vs paper flags. This is
+    the honest in-season counterpart to the 2019-25 walk-forward numbers."""
+    p = Path("outputs/predictions/ledger_2026_summary.json")
+    if not p.exists():
+        return
+    try:
+        s = json.loads(p.read_text())
+    except Exception:
+        return
+    if not s.get("games_completed"):
+        return
+
+    st.markdown("---")
+    section_header(f"{s.get('season', '')} Live Scorecard",
+                   "Every prediction graded against finals — not just the bets that made the card")
+    c1, c2, c3, c4 = st.columns(4)
+    brier = s.get("live_brier")
+    c1.metric("Live Brier", f"{brier:.4f}" if brier is not None else "—",
+              f"{s.get('live_brier_n', 0)} games · 0.25 = coin flip",
+              delta_color="off")
+    core = s.get("core_unders") or {}
+    c2.metric("CORE unders",
+              f"{core.get('wins', 0)}-{core.get('losses', 0)}"
+              + (f" ({core['pushes']}p)" if core.get("pushes") else ""),
+              f"{core.get('units', 0):+.1f}u · CLV {core.get('avg_clv_pts')} pts"
+              if core.get("n") else "no CORE plays graded yet",
+              delta_color="off")
+    sp = s.get("spread_flags") or {}
+    c3.metric("Spread flags (paper)",
+              f"{sp.get('wins', 0)}-{sp.get('losses', 0)}"
+              + (f" ({sp['pushes']}p)" if sp.get("pushes") else ""),
+              f"would be {sp.get('units', 0):+.1f}u · CLV {sp.get('avg_clv_pts')} pts"
+              if sp.get("n") else "no spread flags graded yet",
+              delta_color="off")
+    c4.metric("Games tracked",
+              f"{s.get('games_completed', 0)} / {s.get('games_tracked', 0)}",
+              "finals / predictions recorded", delta_color="off")
+    st.caption("Source: prediction ledger (every weekly prediction persisted "
+               "with market lines at record time, graded against CFBD finals "
+               "and closing lines each Tuesday).")
+
 
 def render_calibration_section(df: pd.DataFrame):
     """
@@ -4042,6 +4121,9 @@ def main():
         # ── Line snapshots: warn when the market has bet a flagged edge away ──
         preds = attach_line_snapshot(preds, load_line_snapshot(season, week))
         stale_picks = find_stale_picks(preds)
+
+        # ── Saturday re-deal verdicts (auto-drops at current lines) ────────
+        render_redeal_banner(season, week)
 
         # ── Feature coverage report ───────────────────────────────────────
         # Show which data sources are actually present for this week's games
