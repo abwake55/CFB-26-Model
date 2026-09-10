@@ -1,0 +1,38 @@
+name: Saturday Re-deal
+
+on:
+  schedule:
+    - cron: '0 15 * * 6'   # 8 AM Pacific, Saturdays
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  redeal:
+    name: Re-deal flagged bets at current lines
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Re-deal at current lines
+        env:
+          CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/saturday_redeal.py
+      - name: Commit re-deal verdicts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add outputs/picks
+          if git diff --staged --quiet; then
+            echo "No re-deal changes"
+          else
+            git commit -m "Saturday re-deal $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
