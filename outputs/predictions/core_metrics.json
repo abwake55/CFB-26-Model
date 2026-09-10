@@ -1,0 +1,17 @@
+{
+  "bets": 539,
+  "graded": 530,
+  "hit_rate": 0.5642,
+  "units": 44.9,
+  "roi": 0.0757,
+  "seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "generated_by": "scripts/build_core_history.py"
+}
