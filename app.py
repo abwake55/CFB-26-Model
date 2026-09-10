@@ -2911,6 +2911,35 @@ def render_backtester_tab():
     render_live_scorecard()
 
 
+def render_redeal_banner(season: int, week: int):
+    """Saturday re-deal verdicts for the selected week, if the Saturday job
+    (scripts/saturday_redeal.py) has run. Drops mean the current line no
+    longer passes the unified gate — the bet's history is untouched."""
+    p = Path(f"outputs/picks/redeal_{season}_w{week:02d}.json")
+    if not p.exists():
+        return
+    try:
+        data = json.loads(p.read_text())
+    except Exception:
+        return
+    drops = [d for d in data.get("decisions", []) if d.get("decision") == "drop"]
+    news  = data.get("new_qualifiers", [])
+    if not drops and not news:
+        st.success(f"Saturday re-deal ({data.get('run_at','')[:10]}): "
+                   "every flagged bet still passes the gate at current lines.")
+        return
+    if drops:
+        with st.expander(f"🔁 Saturday re-deal — {len(drops)} drop(s) at current lines",
+                         expanded=True):
+            for d in drops:
+                st.markdown(f"- **DROP** {d.get('pick','')} ({d.get('game','')}) — {d.get('reason','')}")
+    if news:
+        with st.expander(f"🔁 Saturday re-deal — {len(news)} new CORE qualifier(s)",
+                         expanded=True):
+            for q in news:
+                st.markdown(f"- **NEW** {q.get('pick','')} ({q.get('game','')}) — {q.get('reason','')}")
+
+
 def render_live_scorecard():
     """Live 2026 scorecard from the prediction ledger
     (scripts/prediction_ledger.py → outputs/predictions/ledger_2026_summary.json).
@@ -4092,6 +4121,9 @@ def main():
         # ── Line snapshots: warn when the market has bet a flagged edge away ──
         preds = attach_line_snapshot(preds, load_line_snapshot(season, week))
         stale_picks = find_stale_picks(preds)
+
+        # ── Saturday re-deal verdicts (auto-drops at current lines) ────────
+        render_redeal_banner(season, week)
 
         # ── Feature coverage report ───────────────────────────────────────
         # Show which data sources are actually present for this week's games
