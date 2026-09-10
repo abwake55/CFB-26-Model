@@ -1,0 +1,25 @@
+# ── Ledger steps for .github/workflows/weekly_refresh.yml ────────────────────
+# The automation token used for agent PRs lacks the `workflow` OAuth scope, so
+# this file ships as a template. To activate: paste these two steps into
+# .github/workflows/weekly_refresh.yml between "Fill closing lines on tracked
+# bets (CLV)" and "Generate and send weekly newsletter", then delete this file.
+
+      # ── 9c. 2026 live prediction ledger ─────────────────────────────────────
+      # Record every prediction for the current week (probability + market
+      # lines at record time), then grade completed weeks with finals and
+      # closing lines. Powers the app's live 2026 scorecard: honest live
+      # Brier, CLV, and per-bucket performance (CORE vs paper flags).
+      - name: Record this week's predictions into the 2026 ledger
+        if: steps.season.outputs.mode == 'full'
+        continue-on-error: true
+        env:
+          CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/prediction_ledger.py record
+
+      - name: Grade completed ledger weeks (finals + closing lines)
+        if: steps.season.outputs.mode == 'full'
+        continue-on-error: true
+        env:
+          CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
+        run: python scripts/prediction_ledger.py grade
