@@ -104,14 +104,29 @@ CFB_BASE      = "https://api.collegefootballdata.com"
 
 def current_cfb_week() -> tuple[int, int]:
     """
-    Return (season, week) for the upcoming game week.
-    CFB regular season runs roughly weeks 1–15, September–November.
-    Preseason (off-season) returns week 1 of the upcoming season.
+    Return (season, week) for the current/upcoming game week, resolved from
+    CFBD's official calendar so the pipeline, newsletter, and ledger always
+    agree with the games actually being played. (The old date-math estimate
+    ran one week ahead of CFBD all season, so the Tuesday ledger snapshot
+    recorded the slate 11 days out — before lines existed.) Falls back to
+    date math if the calendar endpoint is unreachable.
     """
     today = date.today()
     year  = today.year
-    # Regular season typically starts Labor Day weekend (first Saturday in Sep)
-    # Approximate: season weeks start ~Aug 24 each year
+    try:
+        now = pd.Timestamp.now(tz="UTC")
+        for wk in cfb_get("calendar", params={"year": year}):
+            if wk.get("seasonType") != "regular":
+                continue
+            end = pd.to_datetime(wk.get("lastGameStart"), errors="coerce", utc=True)
+            # First regular-season week whose games have not all kicked off:
+            # mid-week that's the upcoming Saturday's slate; once the week's
+            # last game has started it rolls to the next week.
+            if pd.notna(end) and end >= now:
+                return year, int(wk["week"])
+    except Exception as e:
+        print(f"[WARN] CFBD calendar unavailable ({type(e).__name__}: {e}) — date-math fallback")
+    # Fallback: rough mapping (CFB week 1 typically starts last week of August)
     season_start = date(year, 8, 24)
     if today < season_start:
         return year, 1  # pre-season — return week 1 of upcoming season
