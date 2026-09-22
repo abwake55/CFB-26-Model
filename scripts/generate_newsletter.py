@@ -80,15 +80,12 @@ def current_cfb_season() -> int:
     return today.year if today.month >= 7 else today.year - 1
 
 def current_cfb_week(season: int) -> int:
-    """Estimate the upcoming game week based on today's date."""
-    today = dt.date.today()
-    # CFB Week 1 typically starts last week of August
-    # Use a rough mapping: week = floor((today - Aug 24) / 7) + 1
-    season_start = dt.date(season, 8, 24)
-    if today < season_start:
-        return 1
-    weeks_elapsed = (today - season_start).days // 7
-    return min(weeks_elapsed + 1, 16)
+    """Upcoming CFBD week — delegates to weekly_pipeline's calendar-based
+    resolver so the newsletter, pipeline, and ledger never drift (the local
+    date-math estimate ran one week ahead of CFBD's official numbering)."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import weekly_pipeline as wp
+    return wp.current_cfb_week()[1]
 
 def last_cfb_week(season: int) -> int:
     return max(1, current_cfb_week(season) - 1)
