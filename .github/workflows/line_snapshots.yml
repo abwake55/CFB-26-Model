@@ -39,11 +39,21 @@ jobs:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python scripts/snapshot_lines.py
 
+      # Re-record the 2026 ledger's current-week snapshot at the latest lines.
+      # prediction_ledger.record replaces only ungraded rows for the week and
+      # skips entirely once the slate has kicked off, so this just keeps the
+      # dealt-lines snapshot fresh as books post through the week.
+      - name: Re-record ledger snapshot at current lines
+        env:
+          CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/prediction_ledger.py record
+
       - name: Commit and push snapshots
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/lines_snapshots
+          git add data/lines_snapshots outputs/predictions
           if git diff --staged --quiet; then
             echo "✅ No line movement to commit"
           else
