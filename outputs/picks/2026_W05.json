@@ -1,0 +1,23 @@
+[
+  {
+    "type": "MONEYLINE",
+    "tier": "PAPER",
+    "game_id": 401858249,
+    "week": 5,
+    "matchup": "Clemson vs Miami",
+    "home_team": "Clemson",
+    "away_team": "Miami",
+    "bet_on": "Clemson",
+    "line": "+260",
+    "odds": 260.0,
+    "edge": 58.9,
+    "pred": 44.1,
+    "kickoff": "Sat 10/3 \u00b7 12:00 AM ET",
+    "stars": "\u2605\u2605\u2605",
+    "kelly": 0,
+    "start_date": "2026-10-03T04:00:00.000Z",
+    "wind_speed": null,
+    "is_dome": 0,
+    "neutral": false
+  }
+]
