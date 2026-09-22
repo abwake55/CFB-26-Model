@@ -64,6 +64,16 @@ def record(season: int, week: int) -> None:
     if games.empty:
         print(f"[record] no games for {season} wk{week} — nothing to do")
         return
+
+    # Once a week has kicked off, keep the existing snapshot: the recorded
+    # lines are the dealt lines CLV is measured against — re-recording with
+    # post-kickoff (frozen/closing) lines would zero out the CLV signal.
+    first_kick = pd.to_datetime(games["start_date"], errors="coerce", utc=True).min()
+    if LEDGER.exists() and pd.notna(first_kick) \
+            and pd.Timestamp.now(tz="UTC") > first_kick:
+        print(f"[record] {season} wk{week} has kicked off — keeping existing snapshot")
+        return
+
     lines = wp.fetch_lines(games, season, week)
     spread_m, totals_m, win_prob_m, feat_lists = wp.load_models()
     preds = wp.build_predictions(games, lines, spread_m, totals_m,
@@ -181,6 +191,13 @@ def grade(season: int) -> None:
         print("[grade] no ledger yet — run record first")
         return
     df = pd.read_csv(LEDGER)
+    # An ungraded ledger round-trips `completed` as all-NaN float64, and newer
+    # pandas raises TypeError ("Invalid value 'True' for dtype 'float64'")
+    # instead of warning when we later set True into it. Normalize to real
+    # bools up front, tolerating bool / float / string round-trips.
+    c = df["completed"]
+    df["completed"] = c.notna() & c.astype(str).str.strip().str.lower().isin(
+        ["true", "1", "1.0"])
 
     key = ""
     sec = ROOT_DIR / ".streamlit" / "secrets.toml"
