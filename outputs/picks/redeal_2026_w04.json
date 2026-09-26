@@ -1,14 +1,19 @@
 {
-  "run_at": "2026-09-19T17:49:23+00:00",
+  "run_at": "2026-09-26T18:24:45+00:00",
   "season": 2026,
   "week": 4,
   "decisions": [],
   "new_qualifiers": [
     {
-      "game": "Oregon @ USC",
-      "pick": "UNDER 62.5",
-      "reason": "still CORE at 62.5 (edge -4.6)"
+      "game": "Clemson @ California",
+      "pick": "UNDER 52.0",
+      "reason": "still CORE at 52.0 (edge -2.6)"
+    },
+    {
+      "game": "Howard @ Rutgers",
+      "pick": "UNDER 57.5",
+      "reason": "still CORE at 57.5 (edge -2.5)"
     }
   ],
-  "summary": "0 keep / 0 drop / 1 new"
+  "summary": "0 keep / 0 drop / 2 new"
 }
