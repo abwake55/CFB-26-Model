@@ -52,7 +52,8 @@ class IntegrityTests(unittest.TestCase):
             clean_games(pd.concat([g, extra]))
 
     def test_invalid_targets_removed(self):
-        g = self.games(); g.loc[0, "total_points"] = np.inf
+        g = self.games().astype({"total_points": float})
+        g.loc[0, "total_points"] = np.inf
         self.assertEqual(len(clean_games(g)), 2)
 
     def test_stale_feature_matrix_cannot_be_trained(self):
