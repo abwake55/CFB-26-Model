@@ -1,0 +1,215 @@
+{
+  "evaluation_version": "season_holdout_v2",
+  "optimizer": [
+    "fixed_fallback"
+  ],
+  "assumed_odds": -110,
+  "limitations": [
+    "CORE rules were selected retrospectively; confidence intervals do not correct strategy selection bias.",
+    "Historical market-line timestamps are unavailable; ROI is not proof of decision-time profitability.",
+    "Historical weather is observed weather, not archived forecasts.",
+    "Model architecture was developed using these seasons; this is not an untouched research holdout."
+  ],
+  "overall": {
+    "games": 5184,
+    "spread_mae": 12.16405161129243,
+    "market_spread_mae": 12.196373456790123,
+    "totals_mae": 12.755880500497799,
+    "market_totals_mae": 12.668016975308642,
+    "brier": 0.1728291501570523,
+    "core": {
+      "bets": 413,
+      "wins": 228,
+      "losses": 182,
+      "pushes": 3,
+      "profit_units": 27.799999999999983,
+      "roi": 0.061193044243891666,
+      "win_rate": 0.5560975609756098,
+      "win_rate_95pct_wilson": [
+        0.5077054475610923,
+        0.6034482298183665
+      ],
+      "roi_95pct_week_block_bootstrap": [
+        -0.03030502392344501,
+        0.1573494530718657
+      ]
+    }
+  },
+  "by_season": {
+    "2019": {
+      "games": 773,
+      "spread_mae": 12.376820916695861,
+      "market_spread_mae": 12.141009055627425,
+      "totals_mae": 13.150560660513873,
+      "market_totals_mae": 12.842173350582147,
+      "brier": 0.1610723268010675,
+      "core": {
+        "bets": 99,
+        "wins": 59,
+        "losses": 40,
+        "pushes": 0,
+        "profit_units": 14.999999999999996,
+        "roi": 0.13774104683195587,
+        "win_rate": 0.5959595959595959,
+        "win_rate_95pct_wilson": [
+          0.4974689618257938,
+          0.6872814318177548
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.0762463343108505,
+          0.40909090909090895
+        ]
+      }
+    },
+    "2020": {
+      "games": 534,
+      "spread_mae": 13.055145804874583,
+      "market_spread_mae": 12.894194756554308,
+      "totals_mae": 13.686056186927775,
+      "market_totals_mae": 13.615168539325843,
+      "brier": 0.17674039576508532,
+      "core": {
+        "bets": 62,
+        "wins": 30,
+        "losses": 30,
+        "pushes": 2,
+        "profit_units": -3.0000000000000027,
+        "roi": -0.043988269794721445,
+        "win_rate": 0.5,
+        "win_rate_95pct_wilson": [
+          0.37735024241556087,
+          0.6226497575844392
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.20741330329153607,
+          0.1087662337662337
+        ]
+      }
+    },
+    "2021": {
+      "games": 770,
+      "spread_mae": 12.305996250071665,
+      "market_spread_mae": 12.564935064935066,
+      "totals_mae": 12.683126766847451,
+      "market_totals_mae": 12.57987012987013,
+      "brier": 0.17258057127568077,
+      "core": {
+        "bets": 93,
+        "wins": 48,
+        "losses": 45,
+        "pushes": 0,
+        "profit_units": -1.500000000000004,
+        "roi": -0.014662756598240506,
+        "win_rate": 0.5161290322580645,
+        "win_rate_95pct_wilson": [
+          0.415955492487227,
+          0.615022975170459
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.22604422604422608,
+          0.16273416592328246
+        ]
+      }
+    },
+    "2022": {
+      "games": 766,
+      "spread_mae": 11.959374209302466,
+      "market_spread_mae": 11.949738903394255,
+      "totals_mae": 12.103116720423545,
+      "market_totals_mae": 12.099216710182768,
+      "brier": 0.18245691511628706,
+      "core": {
+        "bets": 46,
+        "wins": 30,
+        "losses": 16,
+        "pushes": 0,
+        "profit_units": 12.399999999999999,
+        "roi": 0.24505928853754938,
+        "win_rate": 0.6521739130434783,
+        "win_rate_95pct_wilson": [
+          0.5077005884206316,
+          0.7731900662924538
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.018218673218673258,
+          0.5366177014042866
+        ]
+      }
+    },
+    "2023": {
+      "games": 770,
+      "spread_mae": 11.989594265709673,
+      "market_spread_mae": 12.144155844155843,
+      "totals_mae": 12.73467946764562,
+      "market_totals_mae": 12.67012987012987,
+      "brier": 0.16827265012486092,
+      "core": {
+        "bets": 77,
+        "wins": 40,
+        "losses": 36,
+        "pushes": 1,
+        "profit_units": 0.3999999999999968,
+        "roi": 0.004722550177095594,
+        "win_rate": 0.5263157894736842,
+        "win_rate_95pct_wilson": [
+          0.41552028690262977,
+          0.634578998093942
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.23641633728590258,
+          0.1729281751511976
+        ]
+      }
+    },
+    "2024": {
+      "games": 787,
+      "spread_mae": 11.958266360042284,
+      "market_spread_mae": 12.044472681067344,
+      "totals_mae": 12.690315704779776,
+      "market_totals_mae": 12.73125794155019,
+      "brier": 0.17910251181983228,
+      "core": {
+        "bets": 26,
+        "wins": 14,
+        "losses": 12,
+        "pushes": 0,
+        "profit_units": 0.7999999999999989,
+        "roi": 0.027972027972027934,
+        "win_rate": 0.5384615384615384,
+        "win_rate_95pct_wilson": [
+          0.35457938746859247,
+          0.7124414646960837
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.3422413793103448,
+          0.3824451410658307
+        ]
+      }
+    },
+    "2025": {
+      "games": 784,
+      "spread_mae": 11.785806323597496,
+      "market_spread_mae": 11.858418367346939,
+      "totals_mae": 12.529043944028249,
+      "market_totals_mae": 12.427933673469388,
+      "brier": 0.17077216862076197,
+      "core": {
+        "bets": 10,
+        "wins": 7,
+        "losses": 3,
+        "pushes": 0,
+        "profit_units": 3.6999999999999997,
+        "roi": 0.33636363636363636,
+        "win_rate": 0.7,
+        "win_rate_95pct_wilson": [
+          0.3967781474611528,
+          0.8922087325936959
+        ],
+        "roi_95pct_week_block_bootstrap": [
+          -0.0454545454545455,
+          0.6969696969696971
+        ]
+      }
+    }
+  }
+}

@@ -354,7 +354,14 @@ def load_recent_epa(pred_season: int, data_dir: Path) -> pd.DataFrame:
     pool = ppa[ppa["season"].isin([pred_season - 1, pred_season])].copy()
     if pool.empty:
         return pd.DataFrame()
-    pool = pool.sort_values(["team", "season", "week"])
+    dates = pd.read_csv(data_dir / "master_games.csv", usecols=["game_id", "start_date"])
+    dates = dates.drop_duplicates()
+    pool = pool.merge(dates, on="game_id", how="left", validate="many_to_one")
+    pool["start_date"] = pd.to_datetime(pool["start_date"], utc=True,
+                                         errors="coerce", format="mixed")
+    if pool["start_date"].isna().any():
+        raise ValueError("Missing kickoff date in live EPA source")
+    pool = pool.sort_values(["team", "season", "start_date", "game_id"])
 
     # ── Opponent-adjusted EPA (training formula: raw − opponent prior-season avg) ──
     if "opponent" in pool.columns and "def_epa" in pool.columns:

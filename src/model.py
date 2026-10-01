@@ -18,6 +18,7 @@ Outputs:
     models/ (saved model files)
 """
 
+import os
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -33,6 +34,8 @@ from sklearn.metrics import mean_absolute_error, r2_score, log_loss, brier_score
 from sklearn.impute import SimpleImputer
 from sklearn.calibration import CalibratedClassifierCV, calibration_curve
 import lightgbm as lgb
+from validation import clean_games, temporal_calibrator
+from inference import adjust_predictions
 
 try:
     import optuna
@@ -254,9 +257,13 @@ TEST_SEASONS  = [2025]        # final holdout — most recent full season, best 
 
 def load_data() -> pd.DataFrame:
     df = pd.read_csv(DATA_DIR / "feature_matrix.csv")
+    if "epa_chronology_version" not in df or not df["epa_chronology_version"].eq("kickoff_v1").all():
+        raise ValueError("Stale EPA chronology. Rebuild with: python src/features.py")
 
     # Filter to FBS-vs-FBS only
     df = df.dropna(subset=["home_sp_rating", "away_sp_rating"]).copy()
+
+    df = clean_games(df)
 
     # Add Elo differential (pre-game Elo from CFBD API)
     df["elo_diff"] = df["home_pregame_elo"] - df["away_pregame_elo"]
@@ -502,8 +509,11 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
         num_leaves=63,
         min_child_samples=20,
         subsample=0.8,
+        subsample_freq=1,
         colsample_bytree=0.7,
         reg_lambda=1.0,
+        random_state=42,
+        n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
         verbose=-1,
     )
 
@@ -520,6 +530,9 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
             subsample=trial.suggest_float("subsample", 0.6, 1.0),
             colsample_bytree=trial.suggest_float("colsample_bytree", 0.5, 1.0),
             reg_lambda=trial.suggest_float("reg_lambda", 0.1, 10.0, log=True),
+            subsample_freq=1,
+            random_state=42,
+            n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
             verbose=-1,
         )
         if task == "regression":
@@ -541,7 +554,8 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
                                 sampler=optuna.samplers.TPESampler(seed=42))
     study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
     best = study.best_params
-    best["verbose"] = -1
+    best.update(subsample_freq=1, random_state=42,
+                n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")), verbose=-1)
     print(f"  Optuna best val {'MAE' if task=='regression' else 'log-loss'}: "
           f"{study.best_value:.4f}  (lr={best.get('learning_rate', '?'):.4f}, "
           f"leaves={best.get('num_leaves', '?')})")
@@ -560,10 +574,11 @@ def make_gbm_regressor():
         num_leaves=63,
         min_child_samples=20,
         subsample=0.8,
+        subsample_freq=1,
         colsample_bytree=0.8,
         reg_lambda=2.0,
         random_state=42,
-        n_jobs=-1,
+        n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
         verbose=-1,
     )
 
@@ -575,10 +590,11 @@ def make_gbm_classifier():
         num_leaves=63,
         min_child_samples=20,
         subsample=0.8,
+        subsample_freq=1,
         colsample_bytree=0.8,
         reg_lambda=2.0,
         random_state=42,
-        n_jobs=-1,
+        n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
         verbose=-1,
     )
 
@@ -813,14 +829,10 @@ def train_and_evaluate():
     gbm_win_base.fit(X_train_win, y_train_win, sample_weight=sw_train)
     logit_win.fit(X_train_win,    y_train_win)
 
-    # Calibrate GBM with isotonic regression using 5-fold CV on training data.
-    # Isotonic calibration learns a monotone mapping from raw scores → calibrated probs,
-    # fixing the systematic underestimation of high-confidence predictions.
-    # cv=5 ensures we never calibrate on the same data used to train the base model.
-    print("  Calibrating GBM with isotonic regression (5-fold CV)...")
-    gbm_win_calib = CalibratedClassifierCV(lgb.LGBMClassifier(**win_params),
-                                           method="isotonic", cv=5)
-    gbm_win_calib.fit(X_train_win, y_train_win)
+    # Each calibration fold trains on earlier whole seasons only.
+    print("  Calibrating GBM on subsequent seasons (sigmoid)...")
+    gbm_win_calib = temporal_calibrator(lgb.LGBMClassifier(**win_params), train["season"])
+    gbm_win_calib.fit(X_train_win, y_train_win, sample_weight=sw_train)
 
     # Auto-tune ensemble weights on the VALIDATION set (VAL_SEASONS) only.
     # The test set (TEST_SEASONS) is never used for any tuning decision — it is
@@ -894,7 +906,7 @@ def train_and_evaluate():
 
     sp_val_preds       = (vm_val + ensemble_sp.predict(X_val_sp)).values
     # Sigma on the margin scale (preds and actual margins, not residuals)
-    spread_sigma       = float(np.std(sp_val_preds - val["point_diff"].values))
+    spread_sigma       = max(float(np.std(sp_val_preds - val["point_diff"].values)), 1.0)
     spread_implied_val = np.array([_norm_cdf(p / spread_sigma) for p in sp_val_preds])
     classifier_val     = gbm_win.predict_proba(X_val_win)[:, 1]
     y_val_win_arr      = y_val_win.values
@@ -983,6 +995,10 @@ def train_and_evaluate():
     results_df["pred_total"]       = ou_test.values + best_tot_pipe.predict(X_test_tot)
     results_df["pred_home_win_p"]  = gbm_win.predict_proba(X_test_win)[:, 1]
 
+    results_df = adjust_predictions(
+        results_df, {"spread_sigma": spread_sigma, "blend_alpha": best_alpha},
+        probability_col="pred_home_win_p")
+
     # Model edge vs Vegas line.
     # Convention: pred_spread and vegas_home_margin are both expressed as
     # "home team margin" (positive = home wins). A positive spread_edge means
@@ -1017,18 +1033,20 @@ def train_and_evaluate():
 
     ridge_sp_prod = make_linear(alpha=10.0)
     ridge_sp_prod.fit(prod[spread_feats], prod["point_diff"] - vm_prod)
-    gbm_sp_prod = make_gbm_regressor()
-    gbm_sp_prod.fit(prod[spread_feats], prod["point_diff"] - vm_prod)
+    gbm_sp_prod = lgb.LGBMRegressor(**sp_params)
+    gbm_sp_prod.fit(prod[spread_feats], prod["point_diff"] - vm_prod,
+                    sample_weight=make_sample_weights(prod["season"], decay=0.3))
     prod_sp = EnsembleRegressor(ridge_sp_prod, gbm_sp_prod, w1=best_sp_w1, w2=best_sp_w2)
 
     ridge_tot_prod = make_linear(alpha=10.0)
     ridge_tot_prod.fit(prod[totals_feats], prod["total_points"] - ou_prod)
-    gbm_tot_prod = make_gbm_regressor()
+    gbm_tot_prod = lgb.LGBMRegressor(**tot_params)
     gbm_tot_prod.fit(prod[totals_feats], prod["total_points"] - ou_prod)
     prod_tot = EnsembleRegressor(ridge_tot_prod, gbm_tot_prod, w1=best_tot_w1, w2=best_tot_w2)
 
-    gbm_win_prod = CalibratedClassifierCV(make_gbm_classifier(), method="isotonic", cv=5)
-    gbm_win_prod.fit(prod[win_feats], prod["home_win"])
+    gbm_win_prod = temporal_calibrator(lgb.LGBMClassifier(**win_params), prod["season"])
+    gbm_win_prod.fit(prod[win_feats], prod["home_win"],
+                     sample_weight=make_sample_weights(prod["season"], decay=0.3))
     logit_win_prod = make_logistic(C=0.3)
     logit_win_prod.fit(prod[win_feats], prod["home_win"])
     prod_win = EnsembleClassifier(gbm_win_prod, logit_win_prod, w1=best_w1, w2=best_w2)
@@ -1052,6 +1070,9 @@ def train_and_evaluate():
             "spread_target": "margin_residual",   # pred_spread = -spread + model output
             "totals_target": "ou_deviation",      # pred_total  = over_under + model output
             "trained_through": trained_through,
+            "training_games": len(prod),
+            "calibration_method": "season_forward_sigmoid",
+            "gbm_params": {"spread": sp_params, "totals": tot_params, "win_prob": win_params},
         }, f, indent=2)
 
     print(f"✅ Saved PRODUCTION models (trained through {trained_through}) → models/")

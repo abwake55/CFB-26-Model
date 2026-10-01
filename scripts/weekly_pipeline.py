@@ -346,7 +346,7 @@ def build_predictions(games, lines, spread_model, totals_model,
     out_cols = ["game_id", "season", "week", "home_team", "away_team",
                 "home_conference", "away_conference", "start_date",
                 "neutral_site", "conference_game", "spread", "over_under",
-                "spread_open", "home_moneyline", "away_moneyline"]
+                "spread_open", "home_moneyline", "away_moneyline", "wind_speed", "is_dome"]
     out = df[[c for c in out_cols if c in df.columns]].copy()
     if "provider" in df.columns:
         out["provider"] = df["provider"]
@@ -366,22 +366,10 @@ def build_predictions(games, lines, spread_model, totals_model,
     out["pred_total"]  = ou_vals + totals_model.predict(make_feat(feature_lists["totals"]))
     out["pred_win_p"]  = win_prob_model.predict_proba(make_feat(feature_lists["win_prob"]))[:, 1]
 
-    # Cross-calibration: spread-implied win probability
+    from inference import adjust_predictions
     calib_path = MODEL_DIR / "win_prob_calibration.json"
-    if calib_path.exists():
-        calib  = json.loads(calib_path.read_text())
-        sigma  = calib["spread_sigma"]
-        alpha  = calib["blend_alpha"]
-        s_impl = out["pred_spread"].apply(
-            lambda s: norm_cdf(s / sigma) if pd.notna(s) else np.nan)
-        blend  = alpha * s_impl + (1 - alpha) * out["pred_win_p"]
-        # No line → no spread-implied prob → keep classifier-only probability
-        out["pred_win_p"] = blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
-    out["pred_away_win_p"] = 1 - out["pred_win_p"]
-
-    # Edge calculations
-    out["spread_edge"] = out["pred_spread"] - (-out["spread"])
-    out["totals_edge"] = out["pred_total"]  - out["over_under"]
+    calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
+    out = adjust_predictions(out, calibration)
 
     out["home_ml_ev"] = out.apply(lambda r: ml_ev(r["pred_win_p"],      r["home_moneyline"]), axis=1)
     out["away_ml_ev"] = out.apply(lambda r: ml_ev(r["pred_away_win_p"], r["away_moneyline"]), axis=1)
@@ -444,7 +432,7 @@ def filter_picks(predictions: pd.DataFrame) -> dict:
         s_edge = r.get("spread_edge")
         if pd.notna(s_edge) and pd.notna(spread_val) and abs(float(s_edge)) >= 3:
             team = r["home_team"] if float(s_edge) > 0 else r["away_team"]
-            vegas_line = (-float(spread_val)) if float(s_edge) > 0 else float(spread_val)
+            vegas_line = float(spread_val) if float(s_edge) > 0 else -float(spread_val)
             picks["paper"].append({
                 "type": "spread",
                 "game": game_label,

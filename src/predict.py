@@ -478,6 +478,7 @@ def generate_predictions(
     """Run all three models and attach predictions to the games DataFrame."""
     base_cols = ["game_id","season","week","home_team","away_team",
                  "neutral_site","conference_game",
+                 "home_conference","away_conference","wind_speed","is_dome",
                  "spread","over_under","spread_open",
                  "home_moneyline","away_moneyline"]
     out = df[[c for c in base_cols if c in df.columns]].copy()
@@ -504,25 +505,10 @@ def generate_predictions(
     out["pred_total"]  = ou_vals + totals_model.predict(feature_df_tot)
     out["pred_win_p"]  = win_prob_model.predict_proba(feature_df_win)[:, 1]
 
-    # ── Cross-calibration: blend spread-implied win prob with classifier ──────
-    # Same blend applied in app.py and weekly_pipeline.py — keeps the three
-    # serve paths consistent. Parameters tuned on the validation set in model.py.
+    from inference import adjust_predictions
     calib_path = MODEL_DIR / "win_prob_calibration.json"
-    if calib_path.exists():
-        from math import erf as _erf, sqrt as _msqrt
-        def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
-        calib  = json.loads(calib_path.read_text())
-        s_impl = out["pred_spread"].apply(
-            lambda s: _norm_cdf(s / calib["spread_sigma"]) if pd.notna(s) else np.nan)
-        alpha  = calib["blend_alpha"]
-        blend  = alpha * s_impl + (1 - alpha) * out["pred_win_p"]
-        # No line → no spread-implied prob → keep classifier-only probability
-        out["pred_win_p"] = blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
-    out["pred_away_win_p"] = 1 - out["pred_win_p"]
-
-    out["vegas_home_margin"] = -out["spread"]
-    out["spread_edge"] = out["pred_spread"] - out["vegas_home_margin"]
-    out["totals_edge"] = out["pred_total"]  - out["over_under"]
+    calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
+    out = adjust_predictions(out, calibration)
 
     # ── Moneyline Expected Value ───────────────────────────────────────────────
     # Step 1: implied probs from book (with vig baked in)
@@ -562,151 +548,34 @@ def generate_predictions(
 # ─── 6. PRINT RECOMMENDATIONS ────────────────────────────────────────────────
 
 def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
-    """Print a clean bet recommendation sheet."""
-    if preds.empty:
-        print("No games to display.")
-        return
-
-    has_lines = preds["spread"].notna().any()
-
-    print("\n" + "═"*78)
-    print(f"  CFB BET RECOMMENDATIONS — {int(preds['season'].iloc[0])} Season, "
-          f"Week {int(preds['week'].iloc[0])}")
-    print(f"  Model: spread (2–5pt edge window) | totals (3–6pt edge window)")
-    print("═"*78)
-
-    if not has_lines:
-        print("\n  ⚠️  No Vegas lines found yet for this week.")
-        print("  Lines typically appear 7–10 days before kickoff.")
-        print("\n  Model projections (no edge calc without lines):")
-        print(f"\n  {'Home Team':22s}  {'Away Team':22s}  {'Proj Spread':>12}  {'Proj Total':>10}  {'Home Win%':>10}")
-        print("  " + "─"*80)
-        for _, r in preds.sort_values("pred_win_p", ascending=False).iterrows():
-            # pred_spread / pred_total are line-relative — undefined with no line.
-            # Win probability still works (classifier needs no line).
-            sp_str  = f"{r['pred_spread']:>+9.1f}" if pd.notna(r["pred_spread"]) else "      N/A"
-            tot_str = f"{r['pred_total']:>8.1f}"   if pd.notna(r["pred_total"])  else "     N/A"
-            print(f"  {r['home_team']:22s}  {r['away_team']:22s}  "
-                  f"{sp_str}      "
-                  f"{tot_str}      "
-                  f"{r['pred_win_p']:>8.1%}")
-        return
-
-    # ── Moneyline bets ─────────────────────────────────────────────────────
-    ml_bets = preds[
-        preds["ml_ev"].notna() &
-        (preds["ml_ev"] >= MONEYLINE_EV_MIN) &
-        (preds["ml_ev"] <  MONEYLINE_EV_MAX)
-    ].copy().sort_values("ml_ev", ascending=False)
-
-    print(f"\n{'─'*78}")
-    print(f"  MONEYLINES  ({len(ml_bets)} +EV bets | {MONEYLINE_EV_MIN:.0%}–{MONEYLINE_EV_MAX:.0%} EV window)")
-    print(f"  Note: 2025 holdout shows underdog EV bets LOSING (-17% ROI) — treat as informational")
-    print(f"{'─'*78}")
-
-    if ml_bets.empty:
-        print("  No moneyline bets meet the EV threshold this week.")
-        print("  (Favorites rarely offer +EV — look for underdog value)")
-    else:
-        print(f"  {'Bet on':22s}  {'Book ML':>8}  {'Model ML':>9}  {'EV%':>6}  {'Matchup'}")
-        print("  " + "─"*70)
-        for _, r in ml_bets.iterrows():
-            model_ml_str = f"{int(r['model_home_ml']):>+d}" if r["ml_bet_side"] == r["home_team"] \
-                           else f"{int(r['model_away_ml']):>+d}"
-            book_ml_str  = f"{int(r['ml_odds']):>+d}"
-            ev_str       = f"{r['ml_ev']:>+.1%}"
-            flag         = " ★" if r["ml_ev"] >= 0.07 else ""
-            print(f"  {r['ml_bet_side']:22s}  {book_ml_str:>8}  {model_ml_str:>9}  {ev_str}  "
-                  f"{r['home_team']} vs {r['away_team']}{flag}")
-
-    # ── Totals bets ────────────────────────────────────────────────────────
-    tot_bets = preds[
-        preds["totals_edge"].notna() &
-        (preds["totals_edge"].abs() >= TOTALS_EDGE_MIN) &
-        (preds["totals_edge"].abs() <= TOTALS_EDGE_MAX)
-    ].copy()
-    tot_bets["bet_side"] = tot_bets["totals_edge"].apply(
-        lambda e: "OVER" if e > 0 else "UNDER")
-    tot_bets = tot_bets.sort_values("totals_edge", key=abs, ascending=False)
-
-    print(f"\n{'─'*78}")
-    print(f"  TOTALS  ({len(tot_bets)} bets flagged | 3–6pt edge window)")
-    print(f"  Note: 2025 holdout shows OVER flags losing badly (41% win) — UNDER flags only")
-    print(f"{'─'*78}")
-
-    if tot_bets.empty:
-        print("  No totals bets meet threshold this week.")
-    else:
-        print(f"  {'Side':6s}  {'Total':>6}  {'Model':>7}  {'Edge':>6}  "
-              f"{'Matchup'}")
-        print("  " + "─"*70)
-        for _, r in tot_bets.iterrows():
-            edge_str = f"{r['totals_edge']:>+5.1f}"
-            flag = " ★" if abs(r["totals_edge"]) >= 5.0 else ""
-            print(f"  {r['bet_side']:6s}  "
-                  f"{r['over_under']:>6.1f}  "
-                  f"{r['pred_total']:>7.1f}  "
-                  f"{edge_str}  "
-                  f"{r['home_team']} vs {r['away_team']}{flag}")
-
-    # ── Spread bets ────────────────────────────────────────────────────────
-    sp_bets = preds[
-        preds["spread_edge"].notna() &
-        (preds["spread_edge"].abs() >= SPREAD_EDGE_MIN) &
-        (preds["spread_edge"].abs() <= SPREAD_EDGE_MAX)
-    ].copy()
-    sp_bets["bet_on"] = sp_bets.apply(
-        lambda r: r["home_team"] if r["spread_edge"] > 0 else r["away_team"], axis=1)
-    sp_bets["bet_line"] = sp_bets.apply(
-        lambda r: f"{r['spread']:+.1f}" if not pd.isna(r["spread"]) else "N/A", axis=1)
-    sp_bets = sp_bets.sort_values("spread_edge", key=abs, ascending=False)
-
-    print(f"\n{'─'*78}")
-    print(f"  SPREADS  ({len(sp_bets)} bets flagged | 2–5pt edge window | informational)")
-    print(f"  Note: spread model near breakeven — use as secondary confirmation only")
-    print(f"{'─'*78}")
-
-    if sp_bets.empty:
-        print("  No spread bets meet threshold this week.")
-    else:
-        print(f"  {'Bet on':22s}  {'Line':>6}  {'Model':>7}  {'Edge':>6}  "
-              f"{'Matchup'}")
-        print("  " + "─"*70)
-        for _, r in sp_bets.iterrows():
-            model_str = f"{r['pred_spread']:>+6.1f}"
-            edge_str  = f"{r['spread_edge']:>+5.1f}"
-            print(f"  {r['bet_on']:22s}  "
-                  f"{r['bet_line']:>6}  "
-                  f"{model_str}  "
-                  f"{edge_str}  "
-                  f"{r['home_team']} vs {r['away_team']}")
-
-    # ── Show all games if requested ────────────────────────────────────────
+    """Use the same CORE gate as the app and weekly pipeline."""
+    import gates
+    print("\nCORE unders (flat 1u; prospective validation required)")
+    core = preds[preds.apply(gates.core_total, axis=1)]
+    if core.empty:
+        print("  No qualifying CORE unders.")
+    for _, row in core.iterrows():
+        print(f"  {row['away_team']} @ {row['home_team']}: UNDER {row['over_under']:.1f} "
+              f"| model {row['pred_total']:.1f} | edge {row['totals_edge']:+.1f} | 1u")
+    print("\nPaper signals (no units)")
+    for _, row in preds.iterrows():
+        matchup = f"{row['away_team']} @ {row['home_team']}"
+        edge = row.get("spread_edge")
+        if pd.notna(edge) and abs(edge) >= 3:
+            home = edge > 0
+            team = row['home_team'] if home else row['away_team']
+            line = row['spread'] if home else -row['spread']
+            print(f"  {matchup}: {team} {line:+.1f} | spread edge {edge:+.1f}")
+        edge = row.get("totals_edge")
+        if pd.notna(edge) and abs(edge) >= 2 and not gates.core_total(row):
+            side = "OVER" if edge > 0 else "UNDER"
+            print(f"  {matchup}: {side} {row['over_under']:.1f} | total edge {edge:+.1f}")
+        if pd.notna(row.get("ml_ev")) and row['ml_ev'] >= .04:
+            print(f"  {matchup}: {row['ml_bet_side']} ML | estimated EV {row['ml_ev']:+.1%}")
     if show_all:
-        print(f"\n{'─'*78}")
-        print("  ALL GAMES THIS WEEK")
-        print(f"{'─'*78}")
-        print(f"  {'Home Team':22s}  {'Away Team':22s}  "
-              f"{'Spread':>7}  {'Model':>7}  {'Edge':>6}  "
-              f"{'Total':>6}  {'ProjTot':>7}  {'Win%':>6}")
-        print("  " + "─"*78)
-        for _, r in preds.sort_values("spread_edge", key=abs, ascending=False).iterrows():
-            sp_str  = f"{r['spread']:>+6.1f}" if not pd.isna(r["spread"]) else "  N/A "
-            mod_str = f"{r['pred_spread']:>+6.1f}" if not pd.isna(r["pred_spread"]) else "   N/A"
-            edg_str = f"{r['spread_edge']:>+5.1f}" if not pd.isna(r["spread_edge"]) else "  N/A"
-            ou_str  = f"{r['over_under']:>5.1f}" if not pd.isna(r["over_under"]) else "  N/A"
-            pt_str  = f"{r['pred_total']:>6.1f}" if not pd.isna(r["pred_total"]) else "   N/A"
-            wp_str  = f"{r['pred_win_p']:.0%}"
-            print(f"  {r['home_team']:22s}  {r['away_team']:22s}  "
-                  f"{sp_str}  {mod_str}  {edg_str}  "
-                  f"{ou_str}  {pt_str}  {wp_str}")
-
-    print("\n" + "═"*78)
-    print("  Moneyline ★ = EV ≥ 7%  |  Totals ★ = edge ≥ 5pts")
-    print("  ⚠️  2025 holdout: spreads 50.7% ATS, totals overs 41%, ML dogs -17% ROI —")
-    print("  treat all flags as research leads, not auto-bets.")
-    print("  Always cross-check: injuries, weather forecast, line movement direction")
-    print("═"*78 + "\n")
+        columns = ['away_team', 'home_team', 'spread', 'pred_spread',
+                   'over_under', 'pred_total', 'pred_win_p']
+        print("\n" + preds[[c for c in columns if c in preds]].to_string(index=False))
 
 
 # ─── 7. MAIN ─────────────────────────────────────────────────────────────────
