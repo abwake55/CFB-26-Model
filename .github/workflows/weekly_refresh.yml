@@ -132,6 +132,13 @@ jobs:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
         run: python scripts/capture_closing_lines.py
 
+      - name: Archive pregame weather forecasts
+        run: python scripts/collect_context.py --weather
+
+      - name: Evaluate chronological challenger probabilities
+        if: steps.season.outputs.retrain == 'true'
+        run: python scripts/evaluate_challengers.py
+
       # ── 9c. 2026 live prediction ledger ─────────────────────────────────────
       # Record every prediction for the current week (probability + market
       # lines at record time), then grade completed weeks with finals and
@@ -151,6 +158,9 @@ jobs:
         env:
           CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
         run: python scripts/prediction_ledger.py grade
+
+      - name: Grade immutable decisions and analyst records
+        run: python scripts/decision_report.py
 
       # ── 10. Generate and email weekly newsletter ──────────────────────────────
       # Fetches this week's schedule, runs predictions, compares last week's picks

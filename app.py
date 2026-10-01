@@ -755,7 +755,7 @@ def build_and_predict(games, lines, ratings, epa, elo,
         ml_avail = [c for c in ["home_moneyline", "away_moneyline"] if c in lines.columns]
         # Best-available numbers for line shopping (present when lines came
         # from The Odds API; absent for CFBD-fill games).
-        best_cols = [c for c in ["best_under_total", "best_under_book",
+        best_cols = [c for c in ["book_quotes", "best_under_total", "best_under_book",
                                  "best_over_total", "best_over_book",
                                  "best_home_ml", "best_home_ml_book",
                                  "best_away_ml", "best_away_ml_book", "n_books"]
@@ -815,12 +815,14 @@ def build_and_predict(games, lines, ratings, epa, elo,
             out[f] = df[f] if f in df.columns else np.nan
         return out
 
+    from pregame_context import attach_context
+    df = attach_context(df)
     feat_sp  = make_feat(feature_lists["spread"])
     feat_tot = make_feat(feature_lists["totals"])
     feat_win = make_feat(feature_lists["win_prob"])
 
     # ── Build output frame ────────────────────────────────────────────────
-    out_cols = ["game_id", "season", "week", "start_date",
+    out_cols = ["book_quotes", "weather_source", "weather_observed_at", "availability_status", "availability_observed_at", "game_id", "season", "week", "start_date",
                 "home_team", "away_team", "home_conference", "away_conference",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline",
@@ -863,6 +865,8 @@ def build_and_predict(games, lines, ratings, epa, elo,
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
     out = adjust_predictions(out, calibration)
+    from decision_quality import attach_decisions
+    out = attach_decisions(out, MODEL_DIR, archive=False)
 
     out["spread_edge"]     = out["pred_spread"] - (-out["spread"])
     out["totals_edge"]     = out["pred_total"]  - out["over_under"]
@@ -967,6 +971,9 @@ def apply_qb_adjustments(preds: pd.DataFrame, qb_out_teams: list,
                            "ml_model_odds": r["model_away_ml"]})
     preds[["ml_team", "ml_ev", "ml_book_odds", "ml_model_odds"]] = preds.apply(_best_ml, axis=1)
 
+    from decision_quality import attach_decisions
+    preds.loc[affected, "availability_status"] = "needs_review"
+    preds = attach_decisions(preds, MODEL_DIR)
     return preds
 
 
@@ -1395,6 +1402,8 @@ def _tier_badge(kind: str, row) -> tuple[str, str]:
       - Spreads wk1-3 edge>=3: 53.5% (n=484) — marginal, watch-list only
     """
     if kind == "total":
+        if row.get("decision_status") in ("PAPER", "REVIEW"):
+            return "REVIEW / PAPER · 0u", "var(--orange)"
         edge = row["totals_edge"]
         if row.get("_force_under") and not _core_total(row):
             return "PAPER · HIGH-TOTAL 54.3%", "var(--orange)"
@@ -4059,6 +4068,26 @@ def main():
                                       spread_model, totals_model, win_prob_model,
                                       feature_lists, weather=weather_df)
 
+        with st.expander("Price and data review", expanded=False):
+            st.caption("New price-specific probabilities are being tested. Review and paper signals carry zero units.")
+            review_rows = []
+            for _, prediction in preds.iterrows():
+                decision = prediction.get("decision", {})
+                if decision.get("decision_status") == "PASS":
+                    continue
+                quote = decision.get("quote", {})
+                review_rows.append({
+                    "Game": f"{prediction['away_team']} at {prediction['home_team']}",
+                    "Status": decision.get("decision_status"),
+                    "Book": quote.get("book"), "Total": quote.get("line"), "Odds": quote.get("odds"),
+                    "Estimated EV": decision.get("ev"),
+                    "Minimum total at these odds": decision.get("minimum_total_at_quoted_odds"),
+                    "Needs attention": ", ".join(decision.get("decision_reasons", [])).replace("_", " ")})
+            if review_rows:
+                st.dataframe(pd.DataFrame(review_rows), hide_index=True)
+            else:
+                st.caption("No totals qualify for review at the current consensus lines.")
+
         # ── QB / availability adjustments ─────────────────────────────────
         # The model can't see injury news — its biggest info gap vs the
         # market. Mark teams whose starting QB is out and every dependent
@@ -4070,7 +4099,7 @@ def main():
                          expanded=False):
             st.caption(
                 "Mark teams whose starting QB is **out or doubtful**. The market "
-                "prices a backup QB at roughly 4–7 points; the model can't see "
+                "adjustment below is a user-selected scenario, not a fitted player value. The model cannot verify "
                 "injury news, so unadjusted it produces false edges on exactly "
                 "these games. Adjusted picks carry a 🏥 chip.")
             qc1, qc2 = st.columns([3, 1])

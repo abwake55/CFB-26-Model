@@ -110,7 +110,7 @@ def predict_games(season: int, week: int) -> list:
     spread_model, totals_model, win_prob_model, feature_lists = wp.load_models()
     df = wp.build_predictions(games, lines, spread_model, totals_model,
                               win_prob_model, feature_lists,
-                              pred_season=season)
+                              pred_season=season, archive_decisions=True)
     df["vegas_home_margin"] = -pd.to_numeric(df["spread"], errors="coerce")
 
     # Build picks list
@@ -144,7 +144,7 @@ def predict_games(season: int, week: int) -> list:
                 "pred":      round(float(row["pred_spread"]), 1),
                 "kickoff":   kickoff,
                 "stars":     _stars(abs(sp_edge)),
-                "kelly":     _kelly(abs(sp_edge)),
+                "kelly":     0,
                 "start_date": str(start),
                 "wind_speed": row.get("wind_speed"),
                 "is_dome":    row.get("is_dome", 0),
@@ -159,15 +159,17 @@ def predict_games(season: int, week: int) -> list:
         # 50.7% at 7+), power-conf, market total >= 48 (low totals have no
         # over-bias to fade, ~49%). Wind>=15 is gated app-side at kickoff.
         _ou = pd.to_numeric(row.get("over_under"), errors="coerce")
-        is_core = (pd.notna(tot_edge) and -7.0 <= tot_edge <= -EDGE_MIN_TOT
-                   and power_involved and pd.notna(_ou) and _ou >= 48)
-        if is_core:
+        import gates
+        is_core = gates.core_total(row)
+        is_candidate = gates.core_candidate(row)
+        if is_candidate:
             picks.append({
                 "type":      "TOTAL",
                 # A both-power CORE tier was retired 2026-08-24: it looked like
                 # 59.8% vs 55.0% on the Jul-01 feature matrix, but collapsed to
                 # 55.1% vs 54.5% once CFBD revised returning production.
-                "tier":      "CORE",
+                "tier":      "CORE" if is_core else "REVIEW",
+                "decision": row.get("decision"),
                 "game_id":   row["game_id"],
                 "week":      int(row["week"]) if pd.notna(row["week"]) else 0,
                 "matchup":   f"{row['home_team']} vs {row['away_team']}",
@@ -181,7 +183,7 @@ def predict_games(season: int, week: int) -> list:
                 "stars":     _stars(abs(tot_edge)),
                 # Quarter-Kelly on the measured 54.9% is ~1.3% of bankroll,
                 # so 1u (=1%) is the conservative flat size.
-                "kelly":     1,
+                "kelly":     1 if is_core else 0,
                 "start_date": str(start),
                 "wind_speed": row.get("wind_speed"),
                 "is_dome":    row.get("is_dome", 0),
@@ -655,7 +657,7 @@ def build_html(season: int, this_week: int, picks: list,
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
                      text-align:center;color:#eab308">{p['stars']}</td>
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
-                     text-align:center;font-weight:700">{'paper' if (is_ml or is_ht) else f"{p['kelly']}u"}</td>
+                     text-align:center;font-weight:700">{'paper / review' if p.get('tier') != 'CORE' else f"{p['kelly']}u"}</td>
         </tr>"""
 
     picks_rows = "".join(pick_row(p) for p in picks[:12]) if has_picks else \

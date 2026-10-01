@@ -115,14 +115,14 @@ class IntegrityTests(unittest.TestCase):
 
     def test_missing_line_cannot_be_core(self):
         row = {"totals_edge": -3, "home_conference": "SEC", "over_under": np.nan}
-        self.assertFalse(gates.core_total(row))
+        self.assertFalse(gates.core_candidate(row))
 
     def test_core_boundaries(self):
         row = {"totals_edge": -2, "home_conference": "SEC", "over_under": 48}
-        self.assertTrue(gates.core_total(row))
-        self.assertFalse(gates.core_total({**row, "wind_speed": 15}))
-        self.assertFalse(gates.core_total({**row, "over_under": 47.5}))
-        self.assertFalse(gates.core_total({**row, "totals_edge": -7.01}))
+        self.assertTrue(gates.core_candidate(row))
+        self.assertFalse(gates.core_candidate({**row, "wind_speed": 15}))
+        self.assertFalse(gates.core_candidate({**row, "over_under": 47.5}))
+        self.assertFalse(gates.core_candidate({**row, "totals_edge": -7.01}))
 
     def predictions(self):
         return pd.DataFrame({"week": [1, 2, 3, 4], "spread": [-7.] * 4,

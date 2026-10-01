@@ -16,6 +16,8 @@ Shared by app.py and scripts/weekly_pipeline.py.
 from __future__ import annotations
 
 import re
+from datetime import datetime, timezone
+from decision_quality import append_record, ROOT
 import statistics
 from difflib import SequenceMatcher
 
@@ -52,17 +54,19 @@ def events_to_consensus(events: list) -> pd.DataFrame:
     validated reference. The ``best_*`` columns capture the single best number
     a bettor could actually take across all US books, for execution: the
     highest total to bet UNDER, the lowest to bet OVER, the best price per
-    moneyline side. Betting the best number instead of consensus is free ROI
-    on an already-validated pick.
+    moneyline side. These display numbers are not execution recommendations: odds and freshness
+    must be evaluated together by decision_quality.
 
     Columns: odds_home, odds_away, spread, over_under, home_moneyline,
     away_moneyline, provider, commence_time, and best_under_total/_book,
     best_over_total/_book, best_home_ml/_book, best_away_ml/_book.
     """
     rows = []
+    observed_at = datetime.now(timezone.utc).isoformat()
     for e in events:
         home, away = e.get("home_team"), e.get("away_team")
         spreads, totals, home_mls, away_mls = [], [], [], []
+        quotes = []
         # per-book records for best-number capture
         tot_by_book = []       # (book, point, over_price, under_price)
         h_ml_by_book, a_ml_by_book = [], []   # (book, price)
@@ -70,6 +74,12 @@ def events_to_consensus(events: list) -> pd.DataFrame:
             bkey = bk.get("key", "")
             for m in bk.get("markets", []):
                 k, outs = m.get("key"), m.get("outcomes", [])
+                for outcome in outs:
+                    quotes.append({"event_id": e.get("id"), "book": bkey,
+                                   "market": k, "side": outcome.get("name"),
+                                   "line": outcome.get("point"), "odds": outcome.get("price"),
+                                   "updated_at": m.get("last_update", bk.get("last_update")),
+                                   "observed_at": observed_at, "kickoff": e.get("commence_time")})
                 if k == "spreads":
                     for o in outs:
                         if o.get("name") == home and o.get("point") is not None:
@@ -108,7 +118,7 @@ def events_to_consensus(events: list) -> pd.DataFrame:
         best_a = max(a_ml_by_book, key=lambda t: t[1], default=None)
 
         rows.append({
-            "odds_home": home, "odds_away": away,
+            "odds_home": home, "odds_away": away, "book_quotes": quotes,
             "spread": _round_half(statistics.median(spreads)) if spreads else None,
             "over_under": _round_half(statistics.median(totals)) if totals else None,
             "home_moneyline": round(statistics.median(home_mls)) if home_mls else None,
@@ -128,7 +138,7 @@ def events_to_consensus(events: list) -> pd.DataFrame:
 
 
 # Columns carried from consensus rows through to matched CFBD lines.
-_BEST_COLS = ["best_under_total", "best_under_book", "best_over_total",
+_BEST_COLS = ["book_quotes", "best_under_total", "best_under_book", "best_over_total",
               "best_over_book", "best_home_ml", "best_home_ml_book",
               "best_away_ml", "best_away_ml_book", "n_books"]
 
@@ -217,7 +227,11 @@ def fetch_lines(api_key: str, games_df: pd.DataFrame,
         return pd.DataFrame()
     events = fetch_ncaaf_events(api_key, timeout=timeout)
     consensus = events_to_consensus(events)
-    return match_to_games(consensus, games_df)
+    matched = match_to_games(consensus, games_df)
+    for _, row in matched.iterrows():
+        for quote in row.get("book_quotes", []):
+            append_record(ROOT / "data/lines_snapshots/quotes", {**quote, "game_id": int(row.game_id)})
+    return matched
 
 
 def merge_lines(primary: pd.DataFrame, fill: pd.DataFrame) -> pd.DataFrame:

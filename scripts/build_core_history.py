@@ -49,7 +49,7 @@ def main() -> None:
     t["windy"] = (~t["is_dome"].fillna(0).astype(bool)
                   & (t["wind_speed"].fillna(0) >= 15))
 
-    core = t[t.apply(gates.core_total, axis=1)].copy()
+    core = t[t.apply(gates.core_candidate, axis=1)].copy()
 
     push = core["total_points"] == core["over_under"]
     win = core["total_points"] < core["over_under"]

@@ -311,13 +311,13 @@ def fetch_lines(games_df: pd.DataFrame, season: int, week: int) -> pd.DataFrame:
 
 def build_predictions(games, lines, spread_model, totals_model,
                       win_prob_model, feature_lists,
-                      pred_season: int) -> pd.DataFrame:
+                      pred_season: int, archive_decisions: bool = False) -> pd.DataFrame:
     print("\n🤖 Building predictions...")
 
     # Merge lines
     if not lines.empty:
         ml_cols  = [c for c in ["home_moneyline", "away_moneyline"] if c in lines.columns]
-        keep     = ["game_id", "spread", "over_under", "spread_open"] + ml_cols
+        keep     = ["book_quotes", "game_id", "spread", "over_under", "spread_open"] + ml_cols
         if "provider" in lines.columns:
             keep.append("provider")
         df = games.merge(lines[[c for c in keep if c in lines.columns]],
@@ -335,6 +335,8 @@ def build_predictions(games, lines, spread_model, totals_model,
     epa     = load_recent_epa(pred_season, DATA_DIR)
     elo     = load_current_elo(pred_season, DATA_DIR)
 
+    from pregame_context import attach_context
+    df = attach_context(df)
     df = attach_team_features(df, ratings, epa, elo if not elo.empty else None)
 
     def make_feat(feat_names):
@@ -343,7 +345,7 @@ def build_predictions(games, lines, spread_model, totals_model,
             out[f] = df[f] if f in df.columns else np.nan
         return out
 
-    out_cols = ["game_id", "season", "week", "home_team", "away_team",
+    out_cols = ["book_quotes", "weather_source", "weather_observed_at", "availability_status", "availability_observed_at", "game_id", "season", "week", "home_team", "away_team",
                 "home_conference", "away_conference", "start_date",
                 "neutral_site", "conference_game", "spread", "over_under",
                 "spread_open", "home_moneyline", "away_moneyline", "wind_speed", "is_dome"]
@@ -370,6 +372,10 @@ def build_predictions(games, lines, spread_model, totals_model,
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
     out = adjust_predictions(out, calibration)
+    from decision_quality import attach_decisions
+    from challengers import live_shadow
+    out["shadow_models"] = live_shadow(out, Path(__file__).resolve().parents[1])
+    out = attach_decisions(out, MODEL_DIR, archive=archive_decisions)
 
     out["home_ml_ev"] = out.apply(lambda r: ml_ev(r["pred_win_p"],      r["home_moneyline"]), axis=1)
     out["away_ml_ev"] = out.apply(lambda r: ml_ev(r["pred_away_win_p"], r["away_moneyline"]), axis=1)
