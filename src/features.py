@@ -199,7 +199,9 @@ def load_recruiting() -> pd.DataFrame:
 
 
 def load_ppa_games() -> pd.DataFrame:
-    return pd.read_csv(PROC_DIR / "master_ppa_games.csv")
+    ppa = pd.read_csv(PROC_DIR / "master_ppa_games.csv")
+    dates = load_games()[["game_id", "start_date"]].drop_duplicates()
+    return ppa.merge(dates, on="game_id", how="left", validate="many_to_one")
 
 
 def load_conference_familiarity() -> pd.DataFrame:
@@ -484,7 +486,7 @@ def build_home_field_advantage(games: pd.DataFrame) -> pd.DataFrame:
     # Build per-game home/away margins.
     # Include neutral_site so we can drop those games — neutral venues don't
     # reflect a true home or away environment and would pollute the HFA estimate.
-    ns_col = games["neutral_site"] if "neutral_site" in games.columns else 0
+    ns_col = games["neutral_site"] if "neutral_site" in games.columns else pd.Series(0, index=games.index)
 
     home = games[["season","home_team","point_diff"]].rename(
         columns={"home_team":"team","point_diff":"margin"}).copy()
@@ -612,7 +614,15 @@ def build_rolling_epa(ppa: pd.DataFrame, windows: list = [3, 5]) -> pd.DataFrame
 
     Returns a DataFrame keyed by (game_id, team) with rolling EPA columns.
     """
-    ppa = ppa.sort_values(["season", "team", "week"]).copy()
+    # Bowl/playoff week numbers restart at 1: sorting by week would leak
+    # December/January outcomes into September features.
+    ppa = ppa.copy()
+    if "start_date" not in ppa:
+        raise ValueError("Rolling EPA requires kickoff dates, not week numbers")
+    ppa["start_date"] = pd.to_datetime(ppa["start_date"], utc=True, errors="coerce", format="mixed")
+    if ppa["start_date"].isna().any():
+        raise ValueError("Missing kickoff date in rolling EPA source")
+    ppa = ppa.sort_values(["season", "team", "start_date", "game_id"])
 
     # ── Raw rolling windows ───────────────────────────────────────────────────
     for w in windows:
@@ -806,8 +816,11 @@ def add_targets_and_context(df: pd.DataFrame) -> pd.DataFrame:
     """
     # Targets
     df["home_win"]         = (df["point_diff"] > 0).astype(int)
-    df["covered_spread"]   = (df["point_diff"] + df["spread"].astype(float) > 0).astype(int)
-    df["went_over"]        = (df["total_points"] > df["over_under"].astype(float)).astype(int)
+    # 0.5 explicitly represents pushes; missing lines stay missing.
+    cover = df["point_diff"] + pd.to_numeric(df["spread"], errors="coerce")
+    total = df["total_points"] - pd.to_numeric(df["over_under"], errors="coerce")
+    df["covered_spread"] = np.sign(cover).map({-1: 0., 0: .5, 1: 1.})
+    df["went_over"] = np.sign(total).map({-1: 0., 0: .5, 1: 1.})
 
     # Context
     df["neutral_site"]     = df["neutral_site"].fillna(False).astype(int)
@@ -1298,6 +1311,7 @@ def build_feature_matrix() -> pd.DataFrame:
     # Drop rows missing spread or total (can't train/backtest without them)
     before = len(final)
     final = final.dropna(subset=["spread", "over_under", "point_diff"])
+    final["epa_chronology_version"] = "kickoff_v1"
     print(f"  Dropped {before - len(final)} rows with missing spread/total/score")
     print(f"  Final feature matrix: {len(final):,} rows")
 

@@ -1,9 +1,9 @@
 {
-  "bets": 539,
-  "graded": 530,
-  "hit_rate": 0.5642,
-  "units": 44.9,
-  "roi": 0.0757,
+  "bets": 413,
+  "graded": 410,
+  "hit_rate": 0.5561,
+  "units": 27.8,
+  "roi": 0.0612,
   "seasons": [
     2019,
     2020,
@@ -13,5 +13,8 @@
     2024,
     2025
   ],
+  "evaluation_version": "season_holdout_v2",
+  "line_basis": "historical CFBD lines; decision-time availability unverified",
+  "strategy_status": "retrospectively selected; requires prospective validation",
   "generated_by": "scripts/build_core_history.py"
 }

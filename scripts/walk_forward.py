@@ -51,8 +51,13 @@ from model import (
     MarketAnchoredEnsemble, tune_anchor_weights,
     make_linear, make_gbm_regressor, make_gbm_classifier, make_logistic,
     SPREAD_FEATURES, TOTALS_FEATURES, WIN_PROB_FEATURES,
-    evaluate_spread, evaluate_totals,
+    evaluate_spread, evaluate_totals, make_sample_weights, tune_gbm_params,
 )
+
+from validation import split_seasons, temporal_calibrator
+from inference import adjust_predictions, tune_probability_blend
+from betting import settle
+import lightgbm as lgb
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 
@@ -61,29 +66,23 @@ FIRST_TEST   = 2019          # earliest season we predict (needs 2017+2018 to tr
 LAST_TEST    = 2025
 OUT_PATH     = ROOT / "outputs" / "predictions" / "walk_forward_results.csv"
 
-BLEND_CANDIDATES = [(0.3, 0.7), (0.4, 0.6), (0.5, 0.5), (0.6, 0.4), (0.7, 0.3)]
+BLEND_CANDIDATES = [(w / 10, 1 - w / 10) for w in range(2, 9)]
 
 
 # ─── SINGLE FOLD ──────────────────────────────────────────────────────────────
 
-def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
+def run_fold(df: pd.DataFrame, test_season: int, n_trials: int = 50) -> pd.DataFrame:
     """
     Train on all prior non-COVID seasons, tune on most recent prior season,
     predict on test_season. Returns a DataFrame of per-game predictions.
     """
-    # Training pool: everything before test_season except COVID year
-    train_seasons = sorted(s for s in range(2017, test_season) if s != COVID_SEASON)
-
-    if len(train_seasons) < 2:
-        print(f"  ⚠️  {test_season}: need ≥2 training seasons — skipping")
+    try:
+        train, val, test = split_seasons(df, test_season)
+    except ValueError as exc:
+        print(f"  {test_season}: {exc} — skipping")
         return pd.DataFrame()
-
-    # Val = most recent training season (for blend-weight tuning only)
-    val_season = train_seasons[-1]
-
-    train = df[df["season"].isin(train_seasons)].copy()
-    val   = df[df["season"] == val_season].copy()
-    test  = df[df["season"] == test_season].copy()
+    train_seasons = sorted(train["season"].unique())
+    val_season = int(val["season"].max())
 
     if test.empty:
         print(f"  ⚠️  {test_season}: no test data in feature matrix — skipping")
@@ -128,7 +127,11 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
 
     # ── Spread model ──────────────────────────────────────────────────────────
     ridge_sp = make_linear(alpha=10.0); ridge_sp.fit(X_tr_sp, y_tr_sp)
-    gbm_sp   = make_gbm_regressor();   gbm_sp.fit(X_tr_sp, y_tr_sp)
+    sw = make_sample_weights(train["season"], decay=0.3)
+    sp_params = tune_gbm_params(X_tr_sp, y_tr_sp, X_val_sp, y_val_sp,
+                                sample_weight=sw, n_trials=n_trials)
+    gbm_sp = lgb.LGBMRegressor(**sp_params)
+    gbm_sp.fit(X_tr_sp, y_tr_sp, sample_weight=sw)
 
     best_sp_rmse, best_sp_w1 = 999.0, 0.5
     for w1, w2 in BLEND_CANDIDATES:
@@ -143,7 +146,10 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
 
     # ── Totals model ──────────────────────────────────────────────────────────
     ridge_tot = make_linear(alpha=10.0); ridge_tot.fit(X_tr_tot, y_tr_tot)
-    gbm_tot   = make_gbm_regressor();   gbm_tot.fit(X_tr_tot, y_tr_tot)
+    tot_params = tune_gbm_params(X_tr_tot, y_tr_tot, X_val_tot, y_val_tot,
+                                 n_trials=n_trials)
+    gbm_tot = lgb.LGBMRegressor(**tot_params)
+    gbm_tot.fit(X_tr_tot, y_tr_tot)
 
     best_tot_rmse, best_tot_w1 = 999.0, 0.5
     for w1, w2 in BLEND_CANDIDATES:
@@ -155,12 +161,11 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     ens_tot   = EnsembleRegressor(ridge_tot, gbm_tot, best_tot_w1, tot_w2)
 
     # ── Win-probability model ─────────────────────────────────────────────────
-    gbm_win_base  = make_gbm_classifier(); gbm_win_base.fit(X_tr_win, y_tr_win)
-    logit_win     = make_logistic(C=0.3);  logit_win.fit(X_tr_win,  y_tr_win)
-
-    # Calibrate with isotonic regression (5-fold CV on training data)
-    gbm_win_cal = CalibratedClassifierCV(make_gbm_classifier(), method="isotonic", cv=5)
-    gbm_win_cal.fit(X_tr_win, y_tr_win)
+    win_params = tune_gbm_params(X_tr_win, y_tr_win, X_val_win, y_val_win,
+                                 sample_weight=sw, n_trials=n_trials, task="classification")
+    logit_win = make_logistic(C=0.3); logit_win.fit(X_tr_win, y_tr_win)
+    gbm_win_cal = temporal_calibrator(lgb.LGBMClassifier(**win_params), train["season"])
+    gbm_win_cal.fit(X_tr_win, y_tr_win, sample_weight=sw)
 
     best_brier, best_w_w1 = 999.0, 0.5
     for w1, w2 in BLEND_CANDIDATES:
@@ -183,19 +188,14 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
     out["pred_total"]      = ou_te.values + ens_tot.predict(X_te_tot)  # deviation → actual
     out["pred_home_win_p"] = ens_win.predict_proba(X_te_win)[:, 1]
 
-    # ── Preseason shrinkage: blend early-season outputs toward market priors ──
-    # Weeks 1-3 keep 60/75/90% of the model signal; week 4+ is full model.
-    # Edges below are computed AFTER shrinkage so the backtest measures what
-    # the app actually bets. See src/preseason.py for validation numbers.
-    out = apply_preseason_shrinkage(
-        out, week_col="week", pred_spread_col="pred_spread",
-        market_margin="vegas_home_margin", over_under_col="over_under",
-        pred_total_col="pred_total", pred_win_col="pred_home_win_p",
-        sigma=DEFAULT_SPREAD_SIGMA)
-
-    out["spread_edge"]     = out["pred_spread"] - out["vegas_home_margin"]
-    out["totals_edge"]     = out["pred_total"] - ou_te.values           # = deviation
-    out["training_cutoff"] = val_season  # last season in training window
+    calibration = tune_probability_blend(
+        vm_val.values + ens_sp.predict(X_val_sp), val["point_diff"].values,
+        ens_win.predict_proba(X_val_win)[:, 1], y_val_win.values)
+    out = adjust_predictions(out, calibration, probability_col="pred_home_win_p")
+    out["training_cutoff"] = int(train["season"].max())
+    out["validation_season"] = val_season
+    out["evaluation_version"] = "season_holdout_v2"
+    out["optimizer"] = "optuna" if __import__("model").OPTUNA_AVAILABLE else "fixed_fallback"
 
     # ── Per-fold metrics ──────────────────────────────────────────────────────
     sp_ev  = evaluate_spread(test["point_diff"], out["pred_spread"])
@@ -220,62 +220,26 @@ def run_fold(df: pd.DataFrame, test_season: int) -> pd.DataFrame:
 # ─── BACKTESTING SUMMARY ──────────────────────────────────────────────────────
 
 def print_backtest_summary(df: pd.DataFrame):
-    """Quick ATS & O/U win rates across all thresholds."""
-    df = df.dropna(subset=["covered_spread", "went_over", "spread_edge"]).copy()
-    df["covered_spread"] = df["covered_spread"].astype(int)
-    df["went_over"]      = df["went_over"].astype(int)
-    df["spread_edge"]    = pd.to_numeric(df["spread_edge"], errors="coerce")
-    df["totals_edge"]    = pd.to_numeric(df.get("totals_edge",
-                                                  pd.Series(dtype=float)), errors="coerce")
+    """Price-aware flat-stake summary, treating pushes as returned stakes."""
+    print("\nWALK-FORWARD SUMMARY (-110; pushes excluded from win rate)")
+    for threshold in [2., 3., 4., 5., 6.]:
+        for kind, edge_col, actual_col, line_col in [
+            ("SP", "spread_edge", "point_diff", "vegas_home_margin"),
+            ("TOT", "totals_edge", "total_points", "over_under")]:
+            selected = df[df[edge_col].abs() >= threshold]
+            settled = [settle(r[actual_col], r[line_col], 1 if r[edge_col] > 0 else -1)
+                       for _, r in selected.iterrows()]
+            if not settled:
+                continue
+            wins = sum(r[0] == "win" for r in settled)
+            losses = sum(r[0] == "loss" for r in settled)
+            pushes = sum(r[0] == "push" for r in settled)
+            profit = sum(r[1] for r in settled)
+            risk = sum(r[2] for r in settled)
+            hit = wins / (wins + losses) if wins + losses else float("nan")
+            print(f"  {kind} edge>={threshold:.1f}: {wins}W-{losses}L-{pushes}P "
+                  f"hit={hit:.1%} profit={profit:+.1f}u ROI={profit/risk:+.1%}")
 
-    print("\n" + "="*62)
-    print("WALK-FORWARD BACKTEST SUMMARY  (flat -110 betting)")
-    print("="*62)
-    print(f"  {'Edge ≥':>8}  {'#Bets':>6}  {'Win%':>6}  {'P&L':>8}  {'ROI':>7}")
-    print(f"  {'-'*50}")
-
-    for thresh in [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0]:
-        bets = []
-        for _, r in df.iterrows():
-            sp_e  = r["spread_edge"]
-            tot_e = r.get("totals_edge", float("nan"))
-            if pd.notna(sp_e) and abs(sp_e) >= thresh:
-                home = sp_e > 0
-                won  = (r["covered_spread"] == 1) if home else (r["covered_spread"] == 0)
-                bets.append({"won": won, "pnl": 1.0 if won else -1.1, "type": "SP"})
-            if pd.notna(tot_e) and abs(tot_e) >= thresh:
-                over = tot_e > 0
-                won  = (r["went_over"] == 1) if over else (r["went_over"] == 0)
-                bets.append({"won": won, "pnl": 1.0 if won else -1.1, "type": "TOT"})
-        if not bets:
-            continue
-        bdf  = pd.DataFrame(bets)
-        n    = len(bdf)
-        wp   = bdf["won"].mean() * 100
-        fp   = bdf["pnl"].sum()
-        roi  = fp / (n * 1.1) * 100
-        mark = "  ◀" if thresh == 3.0 else ""
-        print(f"  {thresh:>6.1f}pt  {n:>6,}  {wp:>5.1f}%  {fp:>+7.1f}u  {roi:>+6.1f}%{mark}")
-
-    # Bet-type breakdown at 3pt
-    print(f"\n  Bet-type breakdown at 3.0pt threshold:")
-    for bet_type, label in [("SP","Spread"),("TOT","Total")]:
-        sub = [b for _, r in df.iterrows()
-               for edge, col, bt in [
-                   (r["spread_edge"], "covered_spread", "SP"),
-                   (r.get("totals_edge", float("nan")), "went_over", "TOT"),
-               ]
-               if bt == bet_type and pd.notna(edge) and abs(edge) >= 3.0
-               for won in [(r[col]==1) if (edge>0) else (r[col]==0)]
-               for b in [{"won": won, "pnl": 1.0 if won else -1.1}]]
-        if not sub:
-            continue
-        bdf  = pd.DataFrame(sub)
-        n    = len(bdf); wp = bdf["won"].mean()*100; fp = bdf["pnl"].sum()
-        print(f"    {label:7s}: {n:4d} bets  {wp:.1f}%  {fp:+.1f}u")
-
-
-# ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     import time

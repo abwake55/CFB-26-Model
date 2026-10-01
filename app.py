@@ -858,37 +858,11 @@ def build_and_predict(games, lines, ratings, epa, elo,
     out["pred_win_p"]      = win_prob_model.predict_proba(feat_win)[:, 1]
     out["pred_away_win_p"] = 1 - out["pred_win_p"]
 
-    # ── Cross-calibration: blend spread-implied win prob with classifier ──────
-    # Ensures spread prediction and win probability are internally consistent.
-    # Parameters (sigma, alpha) are tuned on the validation season in model.py.
-    _sigma = DEFAULT_SPREAD_SIGMA
-    _calib_path = MODEL_DIR / "win_prob_calibration.json"
-    if _calib_path.exists():
-        import json as _json
-        from math import erf as _erf, sqrt as _msqrt
-        def _norm_cdf(x): return 0.5 * (1 + _erf(float(x) / _msqrt(2)))
-        _calib  = _json.load(open(_calib_path))
-        _sigma  = _calib["spread_sigma"]
-        _alpha  = _calib["blend_alpha"]
-        _s_impl = out["pred_spread"].apply(
-            lambda s: _norm_cdf(s / _sigma) if pd.notna(s) else np.nan)
-        _blend  = _alpha * _s_impl + (1 - _alpha) * out["pred_win_p"]
-        # Games without a line have no spread-implied prob — keep classifier-only
-        out["pred_win_p"]      = _blend.fillna(out["pred_win_p"]).clip(0.01, 0.99)
-        out["pred_away_win_p"] = 1 - out["pred_win_p"]
-
-    # ── Preseason shrinkage: blend early-season outputs toward market priors ──
-    # Weeks 1-3 keep 60/75/90% of the model signal so tiny samples don't swing
-    # picks; week 4+ is full model. Validated on the 2019-25 walk-forward
-    # (CORE 54.9% → 56.4%, +4.8% → +7.7% ROI). See src/preseason.py.
-    out["_vegas_margin"] = -pd.to_numeric(out["spread"], errors="coerce")
-    out = apply_preseason_shrinkage(
-        out, week_col="week", pred_spread_col="pred_spread",
-        market_margin="_vegas_margin", over_under_col="over_under",
-        pred_total_col="pred_total", pred_win_col="pred_win_p",
-        sigma=_sigma)
-    out["pred_away_win_p"] = 1 - out["pred_win_p"]
-    out = out.drop(columns=["_vegas_margin"])
+    import json
+    from inference import adjust_predictions
+    calib_path = MODEL_DIR / "win_prob_calibration.json"
+    calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
+    out = adjust_predictions(out, calibration)
 
     out["spread_edge"]     = out["pred_spread"] - (-out["spread"])
     out["totals_edge"]     = out["pred_total"]  - out["over_under"]
@@ -2534,8 +2508,6 @@ def render_backtester_tab():
     df = df.dropna(subset=["covered_spread", "went_over", "spread_edge"]).copy()
     df["spread_edge"]    = pd.to_numeric(df["spread_edge"],    errors="coerce")
     df["totals_edge"]    = pd.to_numeric(df["totals_edge"],    errors="coerce")
-    df["covered_spread"] = df["covered_spread"].astype(int)
-    df["went_over"]      = df["went_over"].astype(int)
     df["season"]         = pd.to_numeric(df["season"], errors="coerce")
     df["week"]           = pd.to_numeric(df["week"],   errors="coerce")
     df = df.sort_values(["season", "week"]).reset_index(drop=True)
@@ -2565,28 +2537,34 @@ def render_backtester_tab():
             # Spread bet
             if pd.notna(sp_e) and abs(sp_e) >= sp_min:
                 home_bet = (sp_e > 0)
-                won      = (r["covered_spread"] == 1) if home_bet else (r["covered_spread"] == 0)
+                from betting import settle
+                result, pnl, _ = settle(r["point_diff"], r["vegas_home_margin"],
+                                        1 if home_bet else -1)
+                won = np.nan if result == "push" else int(result == "win")
                 ku       = _kelly(abs(sp_e))
                 rows.append({**base,
                     "type": "Spread",
                     "direction": "Home" if home_bet else "Away",
-                    "edge": round(sp_e, 1), "won": int(won),
-                    "flat_pnl":  WIN_U if won else -LOSE_U,
-                    "kelly_pnl": ku * WIN_U if won else -ku * LOSE_U,
+                    "edge": round(sp_e, 1), "won": won, "result": result,
+                    "flat_pnl": pnl,
+                    "kelly_pnl": ku * pnl,
                     "kelly_u": ku,
                 })
 
             # Totals bet
             if pd.notna(tot_e) and abs(tot_e) >= tot_min:
                 over_bet = (tot_e > 0)
-                won      = (r["went_over"] == 1) if over_bet else (r["went_over"] == 0)
+                from betting import settle
+                result, pnl, _ = settle(r["total_points"], r["over_under"],
+                                        1 if over_bet else -1)
+                won = np.nan if result == "push" else int(result == "win")
                 ku       = _kelly(abs(tot_e))
                 rows.append({**base,
                     "type": "Over" if over_bet else "Under",
                     "direction": "Over" if over_bet else "Under",
-                    "edge": round(tot_e, 1), "won": int(won),
-                    "flat_pnl":  WIN_U if won else -LOSE_U,
-                    "kelly_pnl": ku * WIN_U if won else -ku * LOSE_U,
+                    "edge": round(tot_e, 1), "won": won, "result": result,
+                    "flat_pnl": pnl,
+                    "kelly_pnl": ku * pnl,
                     "kelly_u": ku,
                 })
         return pd.DataFrame(rows)
@@ -2627,7 +2605,7 @@ def render_backtester_tab():
     flat_tot  = bets["flat_pnl"].sum()
     flat_roi  = flat_tot / (n_bets * LOSE_U) * 100
     kelly_tot = bets["kelly_pnl"].sum()
-    max_dd    = (bets["cum_flat"] - bets["cum_flat"].cummax()).min()
+    max_dd    = (bets["cum_flat"] - bets["cum_flat"].cummax().clip(lower=0)).min()
 
     be_color = "normal" if win_pct >= 52.38 else "inverse"
     m1, m2, m3, m4, m5 = st.columns(5)

@@ -17,6 +17,8 @@ weather feed (e.g. the weekly pipeline); missing wind is treated as calm,
 which matches how the gate behaved before live weather existed.
 """
 
+import math
+
 POWER_CONFS = {"SEC", "Big Ten", "Big 12", "ACC", "Pac-12", "Pac-10",
                "Big East", "FBS Independents"}
 
@@ -69,6 +71,9 @@ def core_total(row) -> bool:
     if _isna(edge):
         return False
     edge = float(edge)
+    ou = _get(row, "over_under")
+    if _isna(ou) or not math.isfinite(float(ou)) or not math.isfinite(edge):
+        return False
     return bool(edge <= -2 and edge >= -7 and power_involved(row)
                 and not wind15(row) and not low_total(row))
 

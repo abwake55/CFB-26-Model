@@ -11,12 +11,16 @@ prediction 2019-25 and writes one row per bet with P&L at -110 to:
 The app plots this as the track-record equity curve; regenerate after each
 walk-forward rerun (walk_forward.py) so the curve always matches the model.
 """
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+import gates
+
 POWER_CONFS = {"SEC", "Big Ten", "Big 12", "ACC", "Pac-12", "Pac-10",
                "Big East", "FBS Independents"}
 
@@ -30,7 +34,13 @@ def main() -> None:
                          ROOT / "data/processed/feature_matrix.csv", nrows=0).columns
                      else ["game_id", "home_conference", "away_conference",
                            "wind_speed", "is_dome"])
-    df = wf.merge(fm, on="game_id", how="left")
+    fm = fm.drop_duplicates()
+    if fm["game_id"].duplicated().any():
+        raise ValueError("Conflicting feature rows would multiply CORE bets")
+    wf = wf.drop_duplicates()
+    if wf["game_id"].duplicated().any():
+        raise ValueError("Duplicate walk-forward predictions")
+    df = wf.merge(fm, on="game_id", how="left", validate="one_to_one")
 
     t = df.dropna(subset=["over_under", "pred_total", "total_points"]).copy()
     t["totals_edge"] = t["pred_total"] - t["over_under"]
@@ -39,9 +49,7 @@ def main() -> None:
     t["windy"] = (~t["is_dome"].fillna(0).astype(bool)
                   & (t["wind_speed"].fillna(0) >= 15))
 
-    core = t[(t["totals_edge"] <= -2) & (t["totals_edge"] >= -7)
-             & t["power"] & ~t["windy"]
-             & (t["over_under"] >= 48)].copy()
+    core = t[t.apply(gates.core_total, axis=1)].copy()
 
     push = core["total_points"] == core["over_under"]
     win = core["total_points"] < core["over_under"]
@@ -72,6 +80,9 @@ def main() -> None:
         "units": round(units, 1),
         "roi": round(roi, 4),
         "seasons": sorted(int(s) for s in out["season"].unique()),
+        "evaluation_version": str(wf["evaluation_version"].iloc[0]) if "evaluation_version" in wf else "legacy",
+        "line_basis": "historical CFBD lines; decision-time availability unverified",
+        "strategy_status": "retrospectively selected; requires prospective validation",
         "generated_by": "scripts/build_core_history.py",
     }
     (ROOT / "outputs/predictions/core_metrics.json").write_text(
