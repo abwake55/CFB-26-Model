@@ -87,6 +87,16 @@ class DecisionTests(unittest.TestCase):
             self.assertAlmostEqual(r.loc['A','off_epa_roll3'],.2)
             self.assertTrue(load_recent_epa(2027,d).empty)
 
+    def test_week_selection_ignores_stale_incomplete_games(self):
+        from unittest.mock import patch
+        from snapshot_lines import current_week
+        games = [
+            {'week': 2, 'completed': False, 'startDate': '2026-09-12T18:00:00Z'},
+            {'week': 5, 'completed': False, 'startDate': '2026-10-03T18:00:00Z'},
+            {'week': 6, 'completed': False, 'startDate': '2026-10-10T18:00:00Z'}]
+        with patch('snapshot_lines._cfb_get', return_value=games):
+            self.assertEqual(current_week('test', 2026, '2026-10-02T04:00:00Z'), 5)
+
     def test_garbage_and_conflicting_drives(self):
         drives=pd.DataFrame({'gameId':[1,1,2],'id':['a','b','c'],'offense':['A']*3,'defense':['B']*3,
             'startPeriod':[1,4,5],'startOffenseScore':[0,42,0],'startDefenseScore':[0,0,0],
