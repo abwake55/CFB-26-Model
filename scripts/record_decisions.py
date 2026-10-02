@@ -14,6 +14,8 @@ def record():
     if week is None:
         print('No upcoming regular-season week');return
     games=wp.fetch_schedule(season,week)
+    if games.empty:
+        print('No scheduled games');return
     games=games[pd.to_datetime(games.start_date,utc=True,errors='coerce')>now]
     if games.empty:
         print('No unstarted games');return

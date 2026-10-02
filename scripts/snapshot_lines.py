@@ -58,15 +58,20 @@ def _cfb_get(endpoint: str, params: dict, api_key: str) -> list:
     return resp.json()
 
 
-def current_week(cfb_key: str, season: int) -> int | None:
-    """Earliest regular-season week with any uncompleted game."""
+def current_week(cfb_key: str, season: int, now=None) -> int | None:
+    """Week of the next scheduled kickoff; stale completion flags cannot pin it."""
     try:
         games = _cfb_get("games", {"year": season, "seasonType": "regular"}, cfb_key)
     except Exception as exc:
         print(f"⚠️  games fetch failed: {exc}")
         return None
-    weeks = sorted({g["week"] for g in games if not g.get("completed")})
-    return weeks[0] if weeks else None
+    cutoff = pd.Timestamp.now(tz='UTC') if now is None else pd.Timestamp(now)
+    upcoming = []
+    for game in games:
+        start = pd.to_datetime(game.get('startDate'), utc=True, errors='coerce')
+        if pd.notna(start) and start > cutoff and not game.get('completed'):
+            upcoming.append((start, int(game['week'])))
+    return min(upcoming)[1] if upcoming else None
 
 
 def fetch_week_games(cfb_key: str, season: int, week: int) -> pd.DataFrame:
