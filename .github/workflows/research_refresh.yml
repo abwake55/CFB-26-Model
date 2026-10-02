@@ -32,7 +32,7 @@ jobs:
         env:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-        run: python scripts/prediction_ledger.py record
+        run: python scripts/record_decisions.py
       - run: python scripts/decision_report.py
       - name: Save research results
         run: |

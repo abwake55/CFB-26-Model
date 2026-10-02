@@ -50,7 +50,9 @@ jobs:
         env:
           CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-        run: python scripts/prediction_ledger.py record
+        run: |
+          python scripts/prediction_ledger.py record
+          python scripts/record_decisions.py
 
       - name: Commit and push snapshots
         run: |

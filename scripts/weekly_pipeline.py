@@ -537,7 +537,7 @@ def main():
 
     # Step 5: Predictions
     preds = build_predictions(games, lines, spread_m, totals_m,
-                               win_prob_m, feat_lists, season)
+                               win_prob_m, feat_lists, season, archive_decisions=True)
 
     # Step 6: Filter & format
     picks   = filter_picks(preds)

@@ -147,63 +147,9 @@ def load_bets() -> list:
 
 def save_bets(bets: list):
     BETS_FILE.write_text(json.dumps(bets, indent=2))
-    sync_bets_to_github()
 
 
-# ─── GITHUB PERSISTENCE ─────────────────────────────────────────────────────
-# Streamlit Cloud's filesystem is ephemeral: tracked_bets.json written at
-# runtime is wiped on every redeploy, and the weekly refresh workflow pushes
-# a commit (triggering a redeploy) every Tuesday. To keep bet + CLV history
-# durable, every save also commits tracked_bets.json back to the repo when a
-# GITHUB_TOKEN secret is configured (Streamlit Cloud -> Settings -> Secrets;
-# use a fine-grained PAT with Contents: read/write on this repo only).
-# Without the token everything still works locally; history just is not
-# backed up between deploys, and My Bets shows a reminder.
-
-GITHUB_REPO      = "abwake55/CFB-26-Model"
-GITHUB_BETS_PATH = "tracked_bets.json"
-
-
-def _github_token() -> str:
-    return get_secret("GITHUB_TOKEN", "")
-
-
-def github_backup_configured() -> bool:
-    return bool(_github_token())
-
-
-def sync_bets_to_github() -> tuple[bool, str]:
-    """Commit the current tracked_bets.json to the repo. Best-effort: any
-    failure returns (False, reason) and never breaks a local save."""
-    token = _github_token()
-    if not token:
-        return False, "no GITHUB_TOKEN secret"
-    import base64
-    api = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_BETS_PATH}"
-    headers = {"Authorization": f"Bearer {token}",
-               "Accept": "application/vnd.github+json"}
-    try:
-        content = BETS_FILE.read_text()
-        cur = requests.get(api, headers=headers, timeout=15)
-        sha = None
-        if cur.status_code == 200:
-            sha = cur.json().get("sha")
-            existing = base64.b64decode(cur.json().get("content", "")).decode()
-            if existing.strip() == content.strip():
-                return True, "already in sync"
-        payload = {
-            "message": "Update tracked bets from app",
-            "content": base64.b64encode(content.encode()).decode(),
-            "branch": "main",
-        }
-        if sha:
-            payload["sha"] = sha
-        resp = requests.put(api, headers=headers, json=payload, timeout=15)
-        if resp.status_code in (200, 201):
-            return True, "synced"
-        return False, f"github sync failed: HTTP {resp.status_code}"
-    except Exception as exc:
-        return False, f"github sync failed: {exc}"
+# Personal tracked bets remain local; never publish them to the public repository.
 
 def add_bet(game: str, bet_type: str, pick: str, line: str,
             units: int, season: int, week: int, edge: str = "", bettor: str = ""):
@@ -1677,22 +1623,16 @@ def _shop_chip(text: str, color: str) -> str:
 
 
 def _line_shop_total_html(row, is_under: bool) -> str:
-    """Chip: best available total + book for the picked side, vs consensus."""
-    cons = row.get("over_under")
-    best = row.get("best_under_total" if is_under else "best_over_total")
-    book = _book_name(row.get("best_under_book" if is_under else "best_over_book"))
-    if pd.isna(cons) or best is None or pd.isna(best) or not book:
+    """Show the paired, freshness-checked research quote rather than a bare line."""
+    from html import escape
+    decision = row.get("decision", {})
+    quote = decision.get("quote") if isinstance(decision, dict) else None
+    if not is_under or not quote:
         return ""
-    side = "U" if is_under else "O"
-    better = (float(best) > float(cons)) if is_under else (float(best) < float(cons))
-    if better:
-        gain = abs(float(best) - float(cons))
-        return _shop_chip(
-            f"🛒 Best number: {side}{float(best):.1f} at {book} "
-            f"<b style='color:var(--green)'>+{gain:.1f} pts</b> vs {float(cons):.1f} consensus",
-            "var(--ink-2)")
-    return _shop_chip(f"🛒 Best number: {side}{float(best):.1f} at {book} "
-                      f"(matches consensus)", "var(--ink-3)")
+    book = escape(_book_name(quote["book"]))
+    return _shop_chip(
+        f"Research quote: U{float(quote['line']):.1f} ({float(quote['odds']):+.0f}) at {book} · 0u",
+        "var(--ink-2)")
 
 
 def _line_shop_ml_html(row, is_home: bool) -> str:
@@ -1871,11 +1811,11 @@ def render_spread_card(row, season, week):
 def render_bets_tab():
     bets = load_bets()
 
-    if not github_backup_configured():
-        st.caption("⚠️ Bet history is only stored on this app's temporary filesystem and is "
-                   "wiped on every weekly redeploy. Add a `GITHUB_TOKEN` secret (fine-grained "
-                   "token, Contents read/write on this repo) in Streamlit Cloud → Settings → "
-                   "Secrets to back it up to GitHub on every change.")
+    st.caption("Bet history is stored on this app's temporary filesystem and may be lost "
+               "on redeploy. Download your history below to keep a personal backup.")
+    if bets:
+        st.download_button("Download my bet history", json.dumps(bets, indent=2),
+                           file_name="my-bet-history.json", mime="application/json")
 
     if not bets:
         st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)

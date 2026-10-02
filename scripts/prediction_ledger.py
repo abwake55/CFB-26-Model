@@ -77,7 +77,7 @@ def record(season: int, week: int) -> None:
     lines = wp.fetch_lines(games, season, week)
     spread_m, totals_m, win_prob_m, feat_lists = wp.load_models()
     preds = wp.build_predictions(games, lines, spread_m, totals_m,
-                                 win_prob_m, feat_lists, season)
+                                 win_prob_m, feat_lists, season, archive_decisions=True)
 
     from datetime import datetime, timezone
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")

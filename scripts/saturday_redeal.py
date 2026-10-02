@@ -100,7 +100,7 @@ def main() -> None:
     if preds is None:
         spread_m, totals_m, win_prob_m, feat_lists = wp.load_models()
         preds = wp.build_predictions(games, lines, spread_m, totals_m,
-                                     win_prob_m, feat_lists, season)
+                                     win_prob_m, feat_lists, season, archive_decisions=True)
         print(f"Built {len(preds)} live predictions")
 
     # Join current lines onto predictions
