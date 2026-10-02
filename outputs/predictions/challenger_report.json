@@ -1,0 +1,277 @@
+{
+  "policy": {
+    "version": "decision_v3",
+    "max_quote_minutes": 60,
+    "max_context_hours": 24,
+    "minimum_ev": 0.02,
+    "minimum_samples": 300,
+    "live_probability_approved": false
+  },
+  "live_approved": false,
+  "probability_folds": [
+    {
+      "season": 2020,
+      "market": "spreads",
+      "n": 534,
+      "brier": 0.528140852837989,
+      "log_loss": 0.7655976001941076
+    },
+    {
+      "season": 2020,
+      "market": "totals",
+      "n": 534,
+      "brier": 0.516537560996444,
+      "log_loss": 0.7455126436498117
+    },
+    {
+      "season": 2021,
+      "market": "spreads",
+      "n": 770,
+      "brier": 0.4953856349890534,
+      "log_loss": 0.7240981808177954
+    },
+    {
+      "season": 2021,
+      "market": "totals",
+      "n": 770,
+      "brier": 0.5134499241507061,
+      "log_loss": 0.7355833595705165
+    },
+    {
+      "season": 2022,
+      "market": "spreads",
+      "n": 766,
+      "brier": 0.5146601296603722,
+      "log_loss": 0.753648327072464
+    },
+    {
+      "season": 2022,
+      "market": "totals",
+      "n": 766,
+      "brier": 0.514661232409202,
+      "log_loss": 0.7506565316173256
+    },
+    {
+      "season": 2023,
+      "market": "spreads",
+      "n": 770,
+      "brier": 0.5088364123544793,
+      "log_loss": 0.7545227488608809
+    },
+    {
+      "season": 2023,
+      "market": "totals",
+      "n": 770,
+      "brier": 0.5155215894863503,
+      "log_loss": 0.744166048616968
+    },
+    {
+      "season": 2024,
+      "market": "spreads",
+      "n": 787,
+      "brier": 0.5147718652381871,
+      "log_loss": 0.7693024824167244
+    },
+    {
+      "season": 2024,
+      "market": "totals",
+      "n": 787,
+      "brier": 0.5182441066542144,
+      "log_loss": 0.7665616841679278
+    },
+    {
+      "season": 2025,
+      "market": "spreads",
+      "n": 784,
+      "brier": 0.5150038509076151,
+      "log_loss": 0.7677626697799402
+    },
+    {
+      "season": 2025,
+      "market": "totals",
+      "n": 784,
+      "brier": 0.5197911805321302,
+      "log_loss": 0.7537188398938663
+    }
+  ],
+  "limitations": [
+    "Retrospectively developed models; prospective evidence required.",
+    "Historical quotes lack decision-time book prices; ROI is not executable evidence."
+  ],
+  "reliability": [
+    {
+      "market": "spreads",
+      "bin": "(-0.001, 0.1]",
+      "n": 1,
+      "forecast": 0.09640397857689365,
+      "observed": 1.0
+    },
+    {
+      "market": "spreads",
+      "bin": "(0.2, 0.3]",
+      "n": 22,
+      "forecast": 0.27545193854438693,
+      "observed": 0.2727272727272727
+    },
+    {
+      "market": "spreads",
+      "bin": "(0.3, 0.4]",
+      "n": 438,
+      "forecast": 0.36807247963465994,
+      "observed": 0.4223744292237443
+    },
+    {
+      "market": "spreads",
+      "bin": "(0.4, 0.5]",
+      "n": 1773,
+      "forecast": 0.45544706883634556,
+      "observed": 0.45290468133107725
+    },
+    {
+      "market": "spreads",
+      "bin": "(0.5, 0.6]",
+      "n": 1658,
+      "forecast": 0.5457308176301188,
+      "observed": 0.5108564535585042
+    },
+    {
+      "market": "spreads",
+      "bin": "(0.6, 0.7]",
+      "n": 496,
+      "forecast": 0.6321294343366873,
+      "observed": 0.6350806451612904
+    },
+    {
+      "market": "spreads",
+      "bin": "(0.7, 0.8]",
+      "n": 23,
+      "forecast": 0.7268850131339228,
+      "observed": 0.6521739130434783
+    },
+    {
+      "market": "totals",
+      "bin": "(0.2, 0.3]",
+      "n": 8,
+      "forecast": 0.2687343504163296,
+      "observed": 0.125
+    },
+    {
+      "market": "totals",
+      "bin": "(0.3, 0.4]",
+      "n": 221,
+      "forecast": 0.3799892229863335,
+      "observed": 0.49321266968325794
+    },
+    {
+      "market": "totals",
+      "bin": "(0.4, 0.5]",
+      "n": 2267,
+      "forecast": 0.45862286559024024,
+      "observed": 0.4825760917512131
+    },
+    {
+      "market": "totals",
+      "bin": "(0.5, 0.6]",
+      "n": 1806,
+      "forecast": 0.5335476209626661,
+      "observed": 0.5121816168327796
+    },
+    {
+      "market": "totals",
+      "bin": "(0.6, 0.7]",
+      "n": 108,
+      "forecast": 0.6294455882809749,
+      "observed": 0.5370370370370371
+    },
+    {
+      "market": "totals",
+      "bin": "(0.7, 0.8]",
+      "n": 1,
+      "forecast": 0.7141009055627425,
+      "observed": 1.0
+    }
+  ],
+  "matchup_folds": [
+    {
+      "season": 2022,
+      "target": "total_points",
+      "training_through": 2019,
+      "validation_season": 2021,
+      "alpha": 1000,
+      "n": 766,
+      "mae": 12.170811409982502,
+      "market_mae": 12.099216710182768
+    },
+    {
+      "season": 2022,
+      "target": "point_diff",
+      "training_through": 2019,
+      "validation_season": 2021,
+      "alpha": 1000,
+      "n": 766,
+      "mae": 11.98993726700363,
+      "market_mae": 11.949738903394255
+    },
+    {
+      "season": 2023,
+      "target": "total_points",
+      "training_through": 2021,
+      "validation_season": 2022,
+      "alpha": 1000,
+      "n": 770,
+      "mae": 12.728346286137068,
+      "market_mae": 12.67012987012987
+    },
+    {
+      "season": 2023,
+      "target": "point_diff",
+      "training_through": 2021,
+      "validation_season": 2022,
+      "alpha": 1000,
+      "n": 770,
+      "mae": 12.12745689072524,
+      "market_mae": 12.144155844155843
+    },
+    {
+      "season": 2024,
+      "target": "total_points",
+      "training_through": 2022,
+      "validation_season": 2023,
+      "alpha": 1000,
+      "n": 787,
+      "mae": 12.730026720054735,
+      "market_mae": 12.73125794155019
+    },
+    {
+      "season": 2024,
+      "target": "point_diff",
+      "training_through": 2022,
+      "validation_season": 2023,
+      "alpha": 10,
+      "n": 787,
+      "mae": 12.18315049434071,
+      "market_mae": 12.044472681067344
+    },
+    {
+      "season": 2025,
+      "target": "total_points",
+      "training_through": 2023,
+      "validation_season": 2024,
+      "alpha": 1000,
+      "n": 784,
+      "mae": 12.343245142023315,
+      "market_mae": 12.427933673469388
+    },
+    {
+      "season": 2025,
+      "target": "point_diff",
+      "training_through": 2023,
+      "validation_season": 2024,
+      "alpha": 1000,
+      "n": 784,
+      "mae": 11.951871645423672,
+      "market_mae": 11.858418367346939
+    }
+  ],
+  "possession_status": "blocked_missing_drive_data: run scripts/refresh_drives.py with CFB_API_KEY"
+}

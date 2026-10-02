@@ -1,0 +1,12 @@
+{
+  "mode": "paper_simulation_not_placed_bets",
+  "selection": "first priced decision per game",
+  "completed_decisions": 0,
+  "analyst_records": 0,
+  "limitations": [
+    "Consensus movement is not executable CLV; exact same-market book snapshots required.",
+    "Analyst agreement comparison is observational, not a causal improvement estimate.",
+    "Prospective promotion remains manual after independent review."
+  ],
+  "analysts": []
+}

@@ -1,20 +1,7 @@
-"""
-Unified recommendation gate — the single source of truth for what is a bet.
+"""Shared historical candidate rules and fail-closed live recommendation gate.
 
-Both the Streamlit app and the weekly pipeline import from here so the rule
-can never drift between surfaces.
-
-Walk-forward 2019-25 evidence (see scripts/build_core_history.py):
-  - CORE unders: model leans UNDER, edge 2-7 pts, power-conference team
-    involved, forecast wind < 15 mph outdoors, market total >= 48.
-    The ONLY validated unit play. Flat 1u; hit rate does not rise with edge.
-  - Everything else — spreads, moneylines, overs, non-CORE totals — has no
-    validated edge and is paper/research only. Never sized.
-
-A "row" is anything dict-like with the prediction fields (pd.Series, dict).
-Weather fields (wind_speed, is_dome) may be absent in contexts without a
-weather feed (e.g. the weekly pipeline); missing wind is treated as calm,
-which matches how the gate behaved before live weather existed.
+Candidate rules were selected retrospectively; they are not proof of live edge.
+Use core_candidate for historical research and core_total for live decisions.
 """
 
 import math
@@ -63,7 +50,7 @@ def low_total(row) -> bool:
     return not _isna(ou) and float(ou) < 48
 
 
-def core_total(row) -> bool:
+def core_candidate(row) -> bool:
     """The CORE gate: under, edge 2-7 pts, power-conf involved, wind < 15,
     market total >= 48. See module docstring for the walk-forward record;
     current numbers live in outputs/predictions/core_metrics.json."""
@@ -76,6 +63,11 @@ def core_total(row) -> bool:
         return False
     return bool(edge <= -2 and edge >= -7 and power_involved(row)
                 and not wind15(row) and not low_total(row))
+
+
+def core_total(row) -> bool:
+    """A live play requires an approved price-specific decision, never missing context."""
+    return core_candidate(row) and _get(row, "decision_status") == "APPROVED"
 
 
 def is_play(kind: str, row) -> bool:

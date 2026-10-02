@@ -327,7 +327,7 @@ def load_recent_epa(pred_season: int, data_dir: Path) -> pd.DataFrame:
 
     In-season aware: once pred_season games exist in master_ppa_games.csv
     (refresh_in_season.py appends them weekly), the rolling windows use them;
-    pre-season they fall back to the tail of pred_season − 1. This mirrors the
+    pre-season they are missing, as in historical training. This mirrors the
     training features, where roll3/ytd are computed from prior games of the
     same season.
 
@@ -350,8 +350,8 @@ def load_recent_epa(pred_season: int, data_dir: Path) -> pd.DataFrame:
     if not available:
         return pd.DataFrame()
 
-    # Pool current + prior season so early-season windows can reach back
-    pool = ppa[ppa["season"].isin([pred_season - 1, pred_season])].copy()
+    # Match training: reset rolling windows at the season boundary.
+    pool = ppa[ppa["season"].eq(pred_season)].copy()
     if pool.empty:
         return pd.DataFrame()
     dates = pd.read_csv(data_dir / "master_games.csv", usecols=["game_id", "start_date"])
@@ -393,12 +393,7 @@ def load_recent_epa(pred_season: int, data_dir: Path) -> pd.DataFrame:
     ytd_cols = [c for c in ["off_epa", "def_epa"] if c in pool.columns]
     cur   = pool[pool["season"] == pred_season]
     prior = pool[pool["season"] == pred_season - 1]
-    ytd = (
-        prior.groupby("team")[ytd_cols].mean()
-        if cur.empty else
-        cur.groupby("team")[ytd_cols].mean()
-            .combine_first(prior.groupby("team")[ytd_cols].mean())
-    )
+    ytd = cur.groupby("team")[ytd_cols].mean()
     ytd.columns = [f"{c}_ytd" for c in ytd_cols]
 
     return last3.join(last5, how="outer").join(ytd, how="outer")

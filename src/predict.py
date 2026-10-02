@@ -431,7 +431,7 @@ def build_features(
     # ── Merge lines ────────────────────────────────────────────────────────
     if not lines.empty:
         line_cols = ["game_id", "spread", "over_under", "spread_open"]
-        for ml_col in ["home_moneyline", "away_moneyline"]:
+        for ml_col in ["home_moneyline", "away_moneyline", "book_quotes"]:
             if ml_col in lines.columns:
                 line_cols.append(ml_col)
         df = games.merge(lines[line_cols], on="game_id", how="left")
@@ -445,6 +445,8 @@ def build_features(
         df["away_moneyline"] = np.nan
 
     # ── Build all team features via shared feature_builder ─────────────────
+    from pregame_context import attach_context
+    df = attach_context(df)
     df = attach_team_features(
         df, ratings, epa,
         elo if (elo is not None and not elo.empty) else None,
@@ -476,7 +478,7 @@ def generate_predictions(
     feature_lists: dict | None = None,
 ) -> pd.DataFrame:
     """Run all three models and attach predictions to the games DataFrame."""
-    base_cols = ["game_id","season","week","home_team","away_team",
+    base_cols = ["book_quotes", "weather_source", "weather_observed_at", "availability_status", "availability_observed_at", "game_id","season","week","home_team","away_team",
                  "neutral_site","conference_game",
                  "home_conference","away_conference","wind_speed","is_dome",
                  "spread","over_under","spread_open",
@@ -509,6 +511,8 @@ def generate_predictions(
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
     out = adjust_predictions(out, calibration)
+    from decision_quality import attach_decisions
+    out = attach_decisions(out, MODEL_DIR, archive=False)
 
     # ── Moneyline Expected Value ───────────────────────────────────────────────
     # Step 1: implied probs from book (with vig baked in)
