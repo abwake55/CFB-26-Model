@@ -91,7 +91,8 @@ class DecisionTests(unittest.TestCase):
         drives=pd.DataFrame({'gameId':[1,1,2],'id':['a','b','c'],'offense':['A']*3,'defense':['B']*3,
             'startPeriod':[1,4,5],'startOffenseScore':[0,42,0],'startDefenseScore':[0,0,0],
             'endOffenseScore':[7,49,7],'driveResult':['TD']*3})
-        self.assertEqual(non_garbage(drives).id.tolist(),['a'])
+        drives['startTime'] = [{'minutes': 15, 'seconds': 0} for _ in range(len(drives))]
+        self.assertEqual(non_garbage(pd.concat([drives, drives.iloc[:1]])).id.tolist(),['a'])
         with self.assertRaises(ValueError):
             non_garbage(pd.concat([drives,drives.iloc[:1].assign(endOffenseScore=3)]))
 
