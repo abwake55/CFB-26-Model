@@ -209,7 +209,7 @@
       "validation_season": 2021,
       "alpha": 1000,
       "n": 766,
-      "mae": 11.98993726700363,
+      "mae": 11.989937267003626,
       "market_mae": 11.949738903394255
     },
     {
@@ -273,5 +273,123 @@
       "market_mae": 11.858418367346939
     }
   ],
-  "possession_status": "blocked_missing_drive_data: run scripts/refresh_drives.py with CFB_API_KEY"
+  "possession_folds": [
+    {
+      "season": 2019,
+      "status": "evaluated",
+      "games": 773,
+      "possession_total_mae": 14.482564228595672,
+      "market_total_mae": 12.842173350582147
+    },
+    {
+      "season": 2020,
+      "status": "evaluated",
+      "games": 534,
+      "possession_total_mae": 14.53989045121571,
+      "market_total_mae": 13.615168539325843
+    },
+    {
+      "season": 2021,
+      "status": "evaluated",
+      "games": 770,
+      "possession_total_mae": 14.020760230354483,
+      "market_total_mae": 12.57987012987013
+    },
+    {
+      "season": 2022,
+      "status": "evaluated",
+      "games": 766,
+      "possession_total_mae": 13.926276821393497,
+      "market_total_mae": 12.099216710182768
+    },
+    {
+      "season": 2023,
+      "status": "evaluated",
+      "games": 770,
+      "possession_total_mae": 13.965081218651715,
+      "market_total_mae": 12.67012987012987
+    },
+    {
+      "season": 2024,
+      "status": "evaluated",
+      "games": 787,
+      "possession_total_mae": 13.643308656869634,
+      "market_total_mae": 12.73125794155019
+    },
+    {
+      "season": 2025,
+      "status": "evaluated",
+      "games": 784,
+      "possession_total_mae": 13.79977870307532,
+      "market_total_mae": 12.427933673469388
+    }
+  ],
+  "ensemble_folds": [
+    {
+      "season": 2020,
+      "validation_season": 2019,
+      "weights": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "mae": 13.615168539325843
+    },
+    {
+      "season": 2021,
+      "validation_season": 2020,
+      "weights": [
+        0.25,
+        0.25,
+        0.5
+      ],
+      "mae": 12.607073491120678
+    },
+    {
+      "season": 2022,
+      "validation_season": 2021,
+      "weights": [
+        0.25,
+        0.0,
+        0.75
+      ],
+      "mae": 12.082559419133288
+    },
+    {
+      "season": 2023,
+      "validation_season": 2022,
+      "weights": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "mae": 12.67707546937035
+    },
+    {
+      "season": 2024,
+      "validation_season": 2023,
+      "weights": [
+        0.25,
+        0.0,
+        0.75
+      ],
+      "mae": 12.705366984370695
+    },
+    {
+      "season": 2025,
+      "validation_season": 2024,
+      "weights": [
+        0.5,
+        0.25,
+        0.25
+      ],
+      "mae": 12.526087337759881
+    }
+  ],
+  "live_ensemble_weights": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "live_ensemble_validation_season": 2025
 }
