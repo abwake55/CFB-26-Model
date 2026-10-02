@@ -1,0 +1,1 @@
+{"game_id": 401858247, "kind": "weather", "observed_at": "2026-10-02T04:36:07.240046+00:00", "payload": {"is_dome": 1, "precipitation": 0, "temp_avg": 68, "wind_speed": 0}, "published_at": "2026-10-02T04:36:07.240046+00:00", "source_url": "https://github.com/abwake55/CFB-26-Model/blob/main/src/weather.py"}
