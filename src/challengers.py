@@ -1,8 +1,21 @@
 """Opponent-adjusted possession challenger. Always shadow; never sizes bets."""
+import json
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import Ridge
+
+
+def unique_drives(drives):
+    # CFBD clock fields are nested JSON objects; pandas cannot hash them.
+    keys = drives.copy()
+    for column in keys.select_dtypes(include=['object']).columns:
+        keys[column] = keys[column].map(
+            lambda value: json.dumps(value, sort_keys=True) if isinstance(value, (dict, list)) else value)
+    unique = drives.loc[~keys.duplicated()].copy()
+    if unique.duplicated(['gameId', 'id']).any():
+        raise ValueError('Conflicting drive IDs')
+    return unique
 
 
 def non_garbage(drives):
@@ -11,7 +24,7 @@ def non_garbage(drives):
     missing = set(required) - set(drives)
     if missing:
         raise ValueError(f'Missing drive fields: {sorted(missing)}')
-    d = drives.drop_duplicates().copy()
+    d = unique_drives(drives)
     if d.duplicated(['gameId', 'id']).any():
         raise ValueError('Conflicting drive IDs')
     margin = (d.startOffenseScore - d.startDefenseScore).abs()
@@ -35,6 +48,7 @@ class PossessionModel:
         # No same-day or in-progress scores, including staggered kickoffs.
         dates = dates[dates.start_date + pd.Timedelta(hours=12) < cutoff]
         raw = drives.merge(dates, left_on='gameId', right_on='game_id', validate='many_to_one')
+        raw = unique_drives(raw)
         d = non_garbage(raw)
         if len(d) < 100:
             raise ValueError('At least 100 eligible prior drives required')
