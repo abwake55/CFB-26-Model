@@ -1,0 +1,19 @@
+{
+  "run_at": "2026-10-03T18:34:36+00:00",
+  "season": 2026,
+  "week": 5,
+  "decisions": [
+    {
+      "source": "model-flag",
+      "game": "California @ UNLV",
+      "bet_type": "Total",
+      "pick": "UNDER 53.5",
+      "recorded_line": 53.5,
+      "current_line": 52.5,
+      "decision": "drop",
+      "reason": "edge shrunk to -1.3"
+    }
+  ],
+  "new_qualifiers": [],
+  "summary": "0 keep / 1 drop / 0 new"
+}
