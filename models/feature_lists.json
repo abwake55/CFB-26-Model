@@ -165,7 +165,7 @@
   "spread_target": "margin_residual",
   "totals_target": "ou_deviation",
   "trained_through": 2026,
-  "training_games": 6371,
+  "training_games": 6426,
   "calibration_method": "season_forward_sigmoid",
   "gbm_params": {
     "spread": {
