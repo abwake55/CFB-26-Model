@@ -13,12 +13,12 @@
         "away_ml": -168.0
       },
       "current": {
-        "spread": 3.5,
-        "over_under": 50.0,
-        "home_ml": 138.0,
-        "away_ml": -168.0
+        "spread": 3.0,
+        "over_under": 49.5,
+        "home_ml": 124.0,
+        "away_ml": -145.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401871066": {
       "home": "Florida International",
@@ -31,12 +31,12 @@
         "away_ml": 158.0
       },
       "current": {
-        "spread": -5.0,
-        "over_under": 47.5,
-        "home_ml": -195.0,
-        "away_ml": 158.0
+        "spread": -6.5,
+        "over_under": 46.5,
+        "home_ml": -240.0,
+        "away_ml": 195.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401871052": {
       "home": "Western Kentucky",
@@ -49,12 +49,12 @@
         "away_ml": 102.0
       },
       "current": {
-        "spread": -2.0,
-        "over_under": 55.5,
-        "home_ml": -125.0,
-        "away_ml": 102.0
+        "spread": -2.5,
+        "over_under": 56.5,
+        "home_ml": -130.0,
+        "away_ml": 110.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401870766": {
       "home": "Liberty",
@@ -69,10 +69,10 @@
       "current": {
         "spread": -13.5,
         "over_under": 52.5,
-        "home_ml": -615.0,
-        "away_ml": 450.0
+        "home_ml": -599.0,
+        "away_ml": 431.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401869933": {
       "home": "Arkansas State",
@@ -85,12 +85,12 @@
         "away_ml": -108.0
       },
       "current": {
-        "spread": -1.0,
-        "over_under": 57.0,
-        "home_ml": -112.0,
-        "away_ml": -108.0
+        "spread": -1.5,
+        "over_under": 58.5,
+        "home_ml": -116.0,
+        "away_ml": -105.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401862794": {
       "home": "UTSA",
@@ -104,11 +104,11 @@
       },
       "current": {
         "spread": -7.0,
-        "over_under": 53.5,
-        "home_ml": -280.0,
-        "away_ml": 222.0
+        "over_under": 50.0,
+        "home_ml": -285.0,
+        "away_ml": 230.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858254": {
       "home": "Louisville",
@@ -121,12 +121,12 @@
         "away_ml": 166.0
       },
       "current": {
-        "spread": -5.0,
-        "over_under": 57.5,
-        "home_ml": -212.0,
-        "away_ml": 166.0
+        "spread": -3.5,
+        "over_under": 59.0,
+        "home_ml": -185.0,
+        "away_ml": 150.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401864519": {
       "home": "San Jos\u00e9 State",
@@ -140,11 +140,11 @@
       },
       "current": {
         "spread": -6.5,
-        "over_under": 44.0,
-        "home_ml": -225.0,
-        "away_ml": 185.0
+        "over_under": 43.5,
+        "home_ml": -235.0,
+        "away_ml": 190.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401860922": {
       "home": "Utah State",
@@ -157,12 +157,12 @@
         "away_ml": 132.0
       },
       "current": {
-        "spread": -4.0,
-        "over_under": 43.5,
-        "home_ml": -158.0,
-        "away_ml": 132.0
+        "spread": -5.5,
+        "over_under": 44.0,
+        "home_ml": -200.0,
+        "away_ml": 170.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858487": {
       "home": "Washington",
@@ -175,12 +175,12 @@
         "away_ml": 109.0
       },
       "current": {
-        "spread": -2.5,
+        "spread": -3.0,
         "over_under": 41.5,
-        "home_ml": -130.0,
-        "away_ml": 109.0
+        "home_ml": -160.0,
+        "away_ml": 131.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856826": {
       "home": "BYU",
@@ -193,12 +193,12 @@
         "away_ml": 334.0
       },
       "current": {
-        "spread": -10.0,
-        "over_under": 47.5,
-        "home_ml": -440.0,
-        "away_ml": 334.0
+        "spread": -10.5,
+        "over_under": 47.0,
+        "home_ml": -420.0,
+        "away_ml": 320.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856716": {
       "home": "Missouri",
@@ -212,11 +212,11 @@
       },
       "current": {
         "spread": -3.5,
-        "over_under": 49.5,
-        "home_ml": -156.0,
-        "away_ml": 130.0
+        "over_under": 48.5,
+        "home_ml": -175.0,
+        "away_ml": 150.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856824": {
       "home": "Oklahoma State",
@@ -229,12 +229,12 @@
         "away_ml": 310.0
       },
       "current": {
-        "spread": -10.5,
+        "spread": -8.5,
         "over_under": 52.5,
-        "home_ml": -400.0,
-        "away_ml": 310.0
+        "home_ml": -370.0,
+        "away_ml": 290.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858481": {
       "home": "Nebraska",
@@ -247,12 +247,12 @@
         "away_ml": -342.0
       },
       "current": {
-        "spread": 9.0,
+        "spread": 7.0,
         "over_under": 51.5,
-        "home_ml": 270.0,
-        "away_ml": -342.0
+        "home_ml": 250.0,
+        "away_ml": -305.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856823": {
       "home": "West Virginia",
@@ -265,12 +265,12 @@
         "away_ml": -141.0
       },
       "current": {
-        "spread": 2.5,
-        "over_under": 60.0,
-        "home_ml": 115.0,
-        "away_ml": -141.0
+        "spread": 3.5,
+        "over_under": 61.5,
+        "home_ml": 138.0,
+        "away_ml": -162.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858256": {
       "home": "Pittsburgh",
@@ -284,11 +284,11 @@
       },
       "current": {
         "spread": -3.5,
-        "over_under": 46.5,
-        "home_ml": -159.0,
-        "away_ml": 130.0
+        "over_under": 47.0,
+        "home_ml": -185.0,
+        "away_ml": 154.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401866436": {
       "home": "Bowling Green",
@@ -301,12 +301,12 @@
         "away_ml": 220.0
       },
       "current": {
-        "spread": -6.5,
-        "over_under": 46.0,
-        "home_ml": -278.0,
-        "away_ml": 220.0
+        "spread": -7.5,
+        "over_under": 44.5,
+        "home_ml": -295.0,
+        "away_ml": 240.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858260": {
       "home": "NC State",
@@ -319,12 +319,12 @@
         "away_ml": -150.0
       },
       "current": {
-        "spread": 3.0,
-        "over_under": 60.5,
-        "home_ml": 126.0,
-        "away_ml": -150.0
+        "spread": 4.0,
+        "over_under": 60.0,
+        "home_ml": 154.0,
+        "away_ml": -185.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401862795": {
       "home": "Army",
@@ -337,12 +337,12 @@
         "away_ml": 142.0
       },
       "current": {
-        "spread": -3.5,
-        "over_under": 45.5,
-        "home_ml": -172.0,
-        "away_ml": 142.0
+        "spread": -3.0,
+        "over_under": 48.0,
+        "home_ml": -160.0,
+        "away_ml": 135.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858482": {
       "home": "Northwestern",
@@ -355,12 +355,12 @@
         "away_ml": 5250.0
       },
       "current": {
-        "spread": -34.5,
-        "over_under": 52.0,
-        "home_ml": -100000.0,
-        "away_ml": 5250.0
+        "spread": -37.0,
+        "over_under": 52.5,
+        "home_ml": null,
+        "away_ml": null
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856714": {
       "home": "Florida",
@@ -373,12 +373,12 @@
         "away_ml": 450.0
       },
       "current": {
-        "spread": -14.0,
-        "over_under": 60.5,
-        "home_ml": -600.0,
-        "away_ml": 450.0
+        "spread": -12.5,
+        "over_under": 61.5,
+        "home_ml": -500.0,
+        "away_ml": 383.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401866435": {
       "home": "Akron",
@@ -391,12 +391,12 @@
         "away_ml": -230.0
       },
       "current": {
-        "spread": 5.5,
-        "over_under": 50.5,
-        "home_ml": 180.0,
-        "away_ml": -230.0
+        "spread": 7.0,
+        "over_under": 52.0,
+        "home_ml": 224.0,
+        "away_ml": -275.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856718": {
       "home": "Vanderbilt",
@@ -409,12 +409,12 @@
         "away_ml": -438.0
       },
       "current": {
-        "spread": 10.5,
-        "over_under": 57.5,
-        "home_ml": 335.0,
-        "away_ml": -438.0
+        "spread": 10.0,
+        "over_under": 59.5,
+        "home_ml": 288.0,
+        "away_ml": -372.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401862796": {
       "home": "North Texas",
@@ -427,12 +427,12 @@
         "away_ml": 1700.0
       },
       "current": {
-        "spread": -25.5,
-        "over_under": 61.5,
-        "home_ml": -4750.0,
-        "away_ml": 1700.0
+        "spread": -28.5,
+        "over_under": 57.5,
+        "home_ml": -5866.0,
+        "away_ml": 1950.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856825": {
       "home": "Kansas State",
@@ -447,10 +447,10 @@
       "current": {
         "spread": -2.5,
         "over_under": 55.5,
-        "home_ml": -136.0,
-        "away_ml": 112.0
+        "home_ml": -137.0,
+        "away_ml": 115.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858259": {
       "home": "California",
@@ -463,12 +463,12 @@
         "away_ml": -398.0
       },
       "current": {
-        "spread": 10.5,
-        "over_under": 52.5,
-        "home_ml": 310.0,
-        "away_ml": -398.0
+        "spread": 9.0,
+        "over_under": 53.5,
+        "home_ml": 280.0,
+        "away_ml": -360.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858255": {
       "home": "Georgia Tech",
@@ -482,11 +482,11 @@
       },
       "current": {
         "spread": 7.0,
-        "over_under": 50.5,
-        "home_ml": 218.0,
-        "away_ml": -276.0
+        "over_under": 48.5,
+        "home_ml": 220.0,
+        "away_ml": -275.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858257": {
       "home": "Notre Dame",
@@ -499,12 +499,12 @@
         "away_ml": null
       },
       "current": {
-        "spread": -37.0,
-        "over_under": 55.5,
+        "spread": -38.5,
+        "over_under": 54.0,
         "home_ml": null,
         "away_ml": null
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858484": {
       "home": "Oregon",
@@ -518,11 +518,11 @@
       },
       "current": {
         "spread": -11.5,
-        "over_under": 61.5,
-        "home_ml": -445.0,
-        "away_ml": 345.0
+        "over_under": 58.0,
+        "home_ml": -460.0,
+        "away_ml": 358.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401862799": {
       "home": "Navy",
@@ -536,11 +536,11 @@
       },
       "current": {
         "spread": -2.5,
-        "over_under": 52.5,
-        "home_ml": -143.0,
-        "away_ml": 118.0
+        "over_under": 48.5,
+        "home_ml": -135.0,
+        "away_ml": 115.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858480": {
       "home": "Michigan State",
@@ -553,12 +553,12 @@
         "away_ml": -158.0
       },
       "current": {
-        "spread": 3.5,
-        "over_under": 50.0,
-        "home_ml": 133.0,
-        "away_ml": -158.0
+        "spread": 2.5,
+        "over_under": 48.0,
+        "home_ml": 113.0,
+        "away_ml": -135.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856717": {
       "home": "Oklahoma",
@@ -571,12 +571,12 @@
         "away_ml": -355.0
       },
       "current": {
-        "spread": 9.0,
-        "over_under": 40.5,
-        "home_ml": 278.0,
-        "away_ml": -355.0
+        "spread": 8.5,
+        "over_under": 39.5,
+        "home_ml": 280.0,
+        "away_ml": -350.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401866437": {
       "home": "Toledo",
@@ -589,12 +589,12 @@
         "away_ml": 810.0
       },
       "current": {
-        "spread": -18.0,
-        "over_under": 55.0,
-        "home_ml": -1450.0,
-        "away_ml": 810.0
+        "spread": -20.5,
+        "over_under": 54.5,
+        "home_ml": -1600.0,
+        "away_ml": 900.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401866438": {
       "home": "Ohio",
@@ -607,12 +607,12 @@
         "away_ml": 143.0
       },
       "current": {
-        "spread": -3.5,
-        "over_under": 47.0,
-        "home_ml": -175.0,
-        "away_ml": 143.0
+        "spread": -3.0,
+        "over_under": 46.5,
+        "home_ml": -148.0,
+        "away_ml": 125.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401866439": {
       "home": "Western Michigan",
@@ -625,12 +625,12 @@
         "away_ml": 450.0
       },
       "current": {
-        "spread": -14.0,
-        "over_under": 46.0,
-        "home_ml": -630.0,
-        "away_ml": 450.0
+        "spread": -13.5,
+        "over_under": 43.5,
+        "home_ml": -600.0,
+        "away_ml": 430.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401861964": {
       "home": "Temple",
@@ -643,12 +643,12 @@
         "away_ml": 127.0
       },
       "current": {
-        "spread": -3.0,
-        "over_under": 52.5,
-        "home_ml": -152.0,
-        "away_ml": 127.0
+        "spread": -3.5,
+        "over_under": 54.5,
+        "home_ml": -185.0,
+        "away_ml": 153.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401862797": {
       "home": "East Carolina",
@@ -661,12 +661,12 @@
         "away_ml": 300.0
       },
       "current": {
-        "spread": -9.5,
-        "over_under": 50.5,
-        "home_ml": -385.0,
+        "spread": -10.0,
+        "over_under": 47.5,
+        "home_ml": -380.0,
         "away_ml": 300.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856713": {
       "home": "Arkansas",
@@ -680,11 +680,11 @@
       },
       "current": {
         "spread": 13.5,
-        "over_under": 49.5,
-        "home_ml": 435.0,
-        "away_ml": -602.0
+        "over_under": 51.0,
+        "home_ml": 410.0,
+        "away_ml": -570.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858483": {
       "home": "Ohio State",
@@ -698,11 +698,11 @@
       },
       "current": {
         "spread": -34.5,
-        "over_under": 55.5,
+        "over_under": 56.5,
         "home_ml": null,
         "away_ml": null
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401860902": {
       "home": "Oregon State",
@@ -716,11 +716,11 @@
       },
       "current": {
         "spread": -14.5,
-        "over_under": 57.5,
-        "home_ml": -685.0,
+        "over_under": 53.5,
+        "home_ml": -675.0,
         "away_ml": 488.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401869943": {
       "home": "Marshall",
@@ -733,12 +733,12 @@
         "away_ml": 116.0
       },
       "current": {
-        "spread": -2.5,
-        "over_under": 55.5,
-        "home_ml": -142.0,
-        "away_ml": 116.0
+        "spread": -3.0,
+        "over_under": 58.5,
+        "home_ml": -150.0,
+        "away_ml": 129.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401864517": {
       "home": "UTEP",
@@ -752,11 +752,11 @@
       },
       "current": {
         "spread": 9.5,
-        "over_under": 52.5,
-        "home_ml": 275.0,
-        "away_ml": -348.0
+        "over_under": 49.5,
+        "home_ml": 280.0,
+        "away_ml": -350.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401864518": {
       "home": "UNLV",
@@ -769,12 +769,12 @@
         "away_ml": -166.0
       },
       "current": {
-        "spread": 3.5,
-        "over_under": 49.5,
-        "home_ml": 138.0,
-        "away_ml": -166.0
+        "spread": 3.0,
+        "over_under": 48.0,
+        "home_ml": 134.0,
+        "away_ml": -156.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401862798": {
       "home": "Memphis",
@@ -787,12 +787,12 @@
         "away_ml": 600.0
       },
       "current": {
-        "spread": -14.5,
-        "over_under": 58.5,
-        "home_ml": -900.0,
-        "away_ml": 600.0
+        "spread": -14.0,
+        "over_under": 57.5,
+        "home_ml": -600.0,
+        "away_ml": 450.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856715": {
       "home": "Kentucky",
@@ -805,12 +805,12 @@
         "away_ml": -388.0
       },
       "current": {
-        "spread": 10.0,
-        "over_under": 55.0,
-        "home_ml": 295.0,
-        "away_ml": -388.0
+        "spread": 8.5,
+        "over_under": 52.5,
+        "home_ml": 274.0,
+        "away_ml": -340.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856712": {
       "home": "Alabama",
@@ -823,12 +823,12 @@
         "away_ml": -120.0
       },
       "current": {
-        "spread": 1.5,
-        "over_under": 57.0,
-        "home_ml": -1.0,
-        "away_ml": -120.0
+        "spread": -1.5,
+        "over_under": 53.0,
+        "home_ml": -122.0,
+        "away_ml": 101.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401864516": {
       "home": "Northern Illinois",
@@ -841,12 +841,12 @@
         "away_ml": -535.0
       },
       "current": {
-        "spread": 12.5,
-        "over_under": 47.0,
-        "home_ml": 395.0,
-        "away_ml": -535.0
+        "spread": 7.5,
+        "over_under": 46.5,
+        "home_ml": 260.0,
+        "away_ml": -325.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401869965": {
       "home": "Louisiana Tech",
@@ -859,12 +859,12 @@
         "away_ml": -8.0
       },
       "current": {
-        "spread": 1.0,
-        "over_under": 50.5,
-        "home_ml": -112.0,
-        "away_ml": -8.0
+        "spread": -3.0,
+        "over_under": 48.0,
+        "home_ml": -148.0,
+        "away_ml": 125.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858485": {
       "home": "Penn State",
@@ -877,12 +877,12 @@
         "away_ml": -116.0
       },
       "current": {
-        "spread": 1.0,
-        "over_under": 55.0,
-        "home_ml": -2.0,
-        "away_ml": -116.0
+        "spread": -1.5,
+        "over_under": 54.5,
+        "home_ml": -121.0,
+        "away_ml": 100.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858258": {
       "home": "Virginia",
@@ -895,12 +895,12 @@
         "away_ml": 272.0
       },
       "current": {
-        "spread": -8.5,
-        "over_under": 50.5,
-        "home_ml": -348.0,
-        "away_ml": 272.0
+        "spread": -9.5,
+        "over_under": 50.0,
+        "home_ml": -360.0,
+        "away_ml": 285.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401869949": {
       "home": "Georgia Southern",
@@ -913,12 +913,12 @@
         "away_ml": -348.0
       },
       "current": {
-        "spread": 9.0,
-        "over_under": 54.5,
-        "home_ml": 275.0,
-        "away_ml": -348.0
+        "spread": 7.5,
+        "over_under": 53.5,
+        "home_ml": 267.0,
+        "away_ml": -330.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401858486": {
       "home": "Purdue",
@@ -931,12 +931,12 @@
         "away_ml": -150.0
       },
       "current": {
-        "spread": 3.0,
+        "spread": 2.5,
         "over_under": 50.5,
-        "home_ml": 125.0,
-        "away_ml": -150.0
+        "home_ml": 110.0,
+        "away_ml": -135.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401856827": {
       "home": "Utah",
@@ -949,12 +949,12 @@
         "away_ml": 475.0
       },
       "current": {
-        "spread": -14.5,
-        "over_under": 52.0,
-        "home_ml": -660.0,
-        "away_ml": 475.0
+        "spread": -15.5,
+        "over_under": 51.5,
+        "home_ml": -725.0,
+        "away_ml": 500.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     },
     "401860901": {
       "home": "Fresno State",
@@ -967,12 +967,12 @@
         "away_ml": -335.0
       },
       "current": {
-        "spread": 7.5,
+        "spread": 6.5,
         "over_under": 48.5,
-        "home_ml": 265.0,
-        "away_ml": -335.0
+        "home_ml": 206.0,
+        "away_ml": -250.0
       },
-      "updated": "2026-10-04T17:59:36+00:00"
+      "updated": "2026-10-06T19:19:05+00:00"
     }
   }
 }
