@@ -1,0 +1,1 @@
+{"game_id": 401856716, "kind": "weather", "observed_at": "2026-10-07T19:45:26.422619+00:00", "payload": {"is_dome": 0, "precipitation": 0.0, "temp_avg": 73.9, "wind_speed": 9.8}, "published_at": "2026-10-07T19:45:26.422619+00:00", "source_url": "https://api.open-meteo.com/v1/forecast"}
