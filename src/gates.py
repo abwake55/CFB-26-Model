@@ -13,6 +13,20 @@ POWER_CONFS = {"SEC", "Big Ten", "Big 12", "ACC", "Pac-12", "Pac-10",
 # edge-scaled sizing just adds variance; 1u (=1% of bankroll) is conservative.
 CORE_UNITS = 1
 
+# Shared spread flag policy: a spread lean is only *shown* when the absolute
+# model-vs-Vegas spread edge is between 4 and 7 points. This is a display
+# range, not a sizing rule — spreads are paper-only everywhere (see
+# is_play), so nothing here can put units on a spread. Import these in
+# app.py, src/predict.py, and scripts/prediction_ledger.py; never redefine
+# them locally.
+SPREAD_EDGE_MIN = 4.0
+SPREAD_EDGE_MAX = 7.0
+
+
+def spread_in_range(edge) -> bool:
+    """True when an absolute spread edge clears the shared 4–7 flag range."""
+    return not _isna(edge) and SPREAD_EDGE_MIN <= abs(float(edge)) <= SPREAD_EDGE_MAX
+
 
 def _get(row, key, default=None):
     try:

@@ -6,8 +6,8 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 import pandas as pd
-ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT/'scripts'))
-from decision_quality import probabilities,ev,total_decision,append_record
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT/'scripts'))
+from decision_quality import probabilities,ev,total_decision,append_record,spread_decision
 from pregame_context import ingest,asof
 from challengers import non_garbage,PossessionModel,select_blend
 import gates
@@ -152,3 +152,158 @@ class DecisionTests(unittest.TestCase):
         game={'home_team':'A','away_team':'B','home_points':30,'away_points':27}
         self.assertEqual(grade('spreads','B',3,-110,game),('push',0))
         self.assertEqual(grade('spreads','B',3.5,-110,game)[0],'win')
+
+
+class SpreadPolicyTests(unittest.TestCase):
+    """Unified 4-7 point spread policy + price-specific spread review."""
+
+    def _spread_history(self, n=400, point_diff=3.0, pred=3.0):
+        return pd.DataFrame({
+            "season": [2025] * n,
+            "point_diff": [point_diff] * n,
+            "pred_spread": [pred] * n,
+            "evaluation_version": ["season_holdout_v2"] * n})
+
+    def _spread_row(self, now, pred_spread=3.2, quotes=None):
+        return {"season": 2026, "home_team": "Ohio State", "away_team": "Penn State",
+                "start_date": "2026-10-10T19:00:00Z", "pred_spread": pred_spread,
+                "book_quotes": quotes if quotes is not None else []}
+
+    def test_shared_spread_policy_across_surfaces(self):
+        # The single source of truth is gates: 4-7 points.
+        self.assertEqual((gates.SPREAD_EDGE_MIN, gates.SPREAD_EDGE_MAX), (4.0, 7.0))
+        self.assertTrue(gates.spread_in_range(4.0) and gates.spread_in_range(7.0))
+        self.assertFalse(gates.spread_in_range(3.9) or gates.spread_in_range(7.1)
+                         or gates.spread_in_range(None))
+        # Every surface imports the same constants — never redefines them.
+        import app as cfb_app
+        self.assertEqual(cfb_app.SPREAD_EDGE_MIN, gates.SPREAD_EDGE_MIN)
+        self.assertEqual(cfb_app.SPREAD_EDGE_MAX, gates.SPREAD_EDGE_MAX)
+        import predict as predictor
+        self.assertEqual(predictor.SPREAD_EDGE_MIN, gates.SPREAD_EDGE_MIN)
+        self.assertEqual(predictor.SPREAD_EDGE_MAX, gates.SPREAD_EDGE_MAX)
+
+    def test_ledger_spread_flag_uses_shared_range(self):
+        # The prediction ledger flags spread edges inside 4-7 only:
+        # 5.0 flags, 3.0 (below) / 9.0 (above) / NaN do not.
+        import prediction_ledger as pl
+        import weekly_pipeline as wp
+        rows = []
+        for gid, edge in [(1, 5.0), (2, 3.0), (3, 9.0), (4, float("nan"))]:
+            rows.append({"game_id": gid, "home_team": "A", "away_team": "B",
+                         "home_conference": "SEC", "away_conference": "SEC",
+                         "neutral_site": False, "start_date": "2026-10-10T19:00:00Z",
+                         "pred_spread": 1.0, "pred_total": 50.0, "pred_win_p": 0.6,
+                         "spread": -3.0, "over_under": 55.0, "spread_open": None,
+                         "home_moneyline": -150, "away_moneyline": 130,
+                         "spread_edge": edge, "totals_edge": -3.0})
+        preds = pd.DataFrame(rows)
+        games = pd.DataFrame([{"start_date": "2026-10-10T19:00:00Z"}])
+        with tempfile.TemporaryDirectory() as directory:
+            ledger_path = Path(directory) / "ledger.csv"
+            with patch.object(wp, "fetch_schedule", return_value=games), \
+                 patch.object(wp, "fetch_lines", return_value=pd.DataFrame()), \
+                 patch.object(wp, "load_models", return_value=(None, None, None, {})), \
+                 patch.object(wp, "build_predictions", return_value=preds), \
+                 patch.object(pl, "LEDGER", ledger_path):
+                pl.record(2026, 6)
+            out = pd.read_csv(ledger_path)
+        flags = {int(g): bool(f) for g, f in
+                 zip(out["game_id"], out["flag_spread"])}
+        self.assertEqual(flags, {1: True, 2: False, 3: False, 4: False})
+
+    def test_spread_decision_price_specific_paper(self):
+        # Model projects home by 3.2; residuals are exactly zero, so the
+        # projected margin rounds to 3. Away +6.5 at -110 is the better price
+        # than home -6.5 at -200: both quotes are evaluated, the cheaper
+        # away quote wins, cover probability is 1.0, and the decision is
+        # PAPER with zero units — never APPROVED.
+        now = "2026-10-09T18:00:00Z"
+        quotes = [
+            {"book": "draftkings", "market": "spreads", "side": "Ohio State Buckeyes",
+             "line": -6.5, "odds": -200, "updated_at": now, "observed_at": now},
+            {"book": "draftkings", "market": "spreads", "side": "Penn State Nittany Lions",
+             "line": 6.5, "odds": -110, "updated_at": now, "observed_at": now},
+        ]
+        d = spread_decision(self._spread_row(now, quotes=quotes),
+                            self._spread_history(), now)
+        self.assertEqual(d["decision_status"], "PAPER")
+        self.assertNotEqual(d["decision_status"], "APPROVED")
+        self.assertEqual(d["units"], 0)
+        self.assertEqual(d["side"], "away")
+        self.assertEqual(d["quote"]["line"], 6.5)
+        probs = d["probabilities"]
+        self.assertAlmostEqual(probs["win"], 1.0)
+        self.assertAlmostEqual(probs["loss"], 0.0)
+        self.assertAlmostEqual(probs["push"], 0.0)
+        self.assertEqual(probs["samples"], 400)
+        self.assertAlmostEqual(d["ev"], 100 / 110, places=6)
+        # Both quotes were evaluated and matched to the right team.
+        sides = {c["side"] for c in d["quote_candidates"]}
+        self.assertEqual(sides, {"home", "away"})
+        self.assertEqual(len(d["quote_candidates"]), 2)
+
+    def test_spread_decision_integer_line_push_mass(self):
+        # Integer line at exactly the projected margin: all push mass,
+        # zero EV → REVIEW, still zero units.
+        now = "2026-10-09T18:00:00Z"
+        quotes = [{"book": "draftkings", "market": "spreads",
+                   "side": "Ohio State Buckeyes",
+                   "line": -3, "odds": -110, "updated_at": now, "observed_at": now}]
+        d = spread_decision(self._spread_row(now, pred_spread=-3.0, quotes=quotes),
+                            self._spread_history(point_diff=-3.0, pred=-3.0), now)
+        self.assertAlmostEqual(d["probabilities"]["push"], 1.0)
+        self.assertAlmostEqual(d["probabilities"]["win"], 0.0)
+        self.assertEqual(d["ev"], 0.0)
+        self.assertEqual(d["decision_status"], "REVIEW")
+        self.assertIn("insufficient_price_specific_ev", d["decision_reasons"])
+        self.assertEqual(d["units"], 0)
+
+    def test_spread_decision_stale_or_unmatched_quotes_pass(self):
+        now = "2026-10-09T18:00:00Z"
+        stale = [{"book": "draftkings", "market": "spreads",
+                  "side": "Ohio State Buckeyes", "line": -6.5, "odds": -110,
+                  "updated_at": "2026-10-08T18:00:00Z", "observed_at": now}]
+        d = spread_decision(self._spread_row(now, quotes=stale),
+                            self._spread_history(), now)
+        self.assertEqual(d["decision_status"], "PASS")
+        self.assertIn("no_fresh_priced_spread_quote", d["decision_reasons"])
+        self.assertEqual(d["units"], 0)
+        # A quote for a team that is not in the game is not matched.
+        wrong = [{"book": "draftkings", "market": "spreads",
+                  "side": "Alabama Crimson Tide", "line": -6.5, "odds": -110,
+                  "updated_at": now, "observed_at": now}]
+        d = spread_decision(self._spread_row(now, quotes=wrong),
+                            self._spread_history(), now)
+        self.assertEqual(d["decision_status"], "PASS")
+        self.assertEqual(d["units"], 0)
+
+    def test_spread_and_moneyline_picks_get_zero_units(self):
+        # Policy: spreads and moneylines are paper-only on every surface —
+        # gates.is_play is False for both, so no units can ever attach.
+        self.assertFalse(gates.is_play("spread", {"spread_edge": 5.0}))
+        self.assertFalse(gates.is_play("moneyline", {"ml_ev": 0.07}))
+        # Even a strongly positive spread EV stays PAPER with zero units.
+        now = "2026-10-09T18:00:00Z"
+        quotes = [{"book": "draftkings", "market": "spreads",
+                   "side": "Penn State Nittany Lions",
+                   "line": 9.5, "odds": 100, "updated_at": now, "observed_at": now}]
+        d = spread_decision(self._spread_row(now, quotes=quotes),
+                            self._spread_history(), now)
+        self.assertGreater(d["ev"], 0.5)
+        self.assertNotEqual(d["decision_status"], "APPROVED")
+        self.assertEqual(d["units"], 0)
+
+    def test_started_games_excluded(self):
+        import app as cfb_app
+        preds = pd.DataFrame({
+            "game_id": [1, 2, 3, 4],
+            "start_date": ["2026-10-01T00:00:00Z",   # already kicked off
+                           "2026-10-10T19:00:00Z",   # upcoming
+                           None,                      # unknown kickoff — kept
+                           "not-a-date"]})           # unparseable — kept
+        out = cfb_app._exclude_started_games(preds, now="2026-10-09T12:00:00Z")
+        self.assertEqual(set(out["game_id"]), {2, 3, 4})
+        # A kickoff exactly at "now" counts as started.
+        out = cfb_app._exclude_started_games(preds, now="2026-10-10T19:00:00Z")
+        self.assertEqual(set(out["game_id"]), {3, 4})
