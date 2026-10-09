@@ -89,8 +89,9 @@ ODDS_TO_CFBD = {
 
 # ─── BETTING THRESHOLDS (from backtesting) ───────────────────────────────────
 
-SPREAD_EDGE_MIN = 2.0   # minimum model-vs-Vegas disagreement to flag
-SPREAD_EDGE_MAX = 5.0   # above this, Vegas probably has info you don't
+# Shared spread flag range (4–7 pts) — single source of truth in src/gates.py.
+# Never redefine these locally; every surface must flag the same range.
+from gates import SPREAD_EDGE_MIN, SPREAD_EDGE_MAX
 TOTALS_EDGE_MIN = 3.0
 TOTALS_EDGE_MAX = 6.0
 MONEYLINE_EV_MIN = 0.04  # minimum expected value per $1 bet (4%)
@@ -565,7 +566,9 @@ def print_recommendations(preds: pd.DataFrame, show_all: bool = False):
     for _, row in preds.iterrows():
         matchup = f"{row['away_team']} @ {row['home_team']}"
         edge = row.get("spread_edge")
-        if pd.notna(edge) and abs(edge) >= 3:
+        # Shared 4–7 spread flag range from gates — same policy as the app
+        # and the prediction ledger. Spreads are paper-only everywhere.
+        if pd.notna(edge) and SPREAD_EDGE_MIN <= abs(edge) <= SPREAD_EDGE_MAX:
             home = edge > 0
             team = row['home_team'] if home else row['away_team']
             line = row['spread'] if home else -row['spread']
