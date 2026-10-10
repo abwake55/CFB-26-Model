@@ -434,9 +434,10 @@ def filter_picks(predictions: pd.DataFrame) -> dict:
                     "why_paper": "fails CORE gate (overs / G5 / wind / total<48 / edge>7)",
                 })
 
-        # Spreads: no validated edge at any week — paper record only
+        # Spreads: no validated edge at any week — paper record only.
+        # Flag range is the shared 4–7 policy from src/gates.py.
         s_edge = r.get("spread_edge")
-        if pd.notna(s_edge) and pd.notna(spread_val) and abs(float(s_edge)) >= 3:
+        if pd.notna(s_edge) and pd.notna(spread_val) and gates.spread_in_range(s_edge):
             team = r["home_team"] if float(s_edge) > 0 else r["away_team"]
             vegas_line = float(spread_val) if float(s_edge) > 0 else -float(spread_val)
             picks["paper"].append({
