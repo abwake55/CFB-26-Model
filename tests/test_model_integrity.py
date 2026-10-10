@@ -179,10 +179,12 @@ class IntegrityTests(unittest.TestCase):
 
     def test_weekly_paper_spread_uses_selected_teams_line(self):
         import weekly_pipeline as wp
+        # Edges sit inside the unified 4-7 flag range (src/gates.py); the test's
+        # intent is line selection per picked team, not the threshold itself.
         d = pd.DataFrame({"home_team": ["A", "A"], "away_team": ["B", "B"],
                           "spread": [-7., -7.], "over_under": [50., 50.],
-                          "pred_spread": [10., 3.], "pred_total": [50., 50.],
-                          "pred_win_p": [.7, .6], "spread_edge": [3., -4.],
+                          "pred_spread": [12., 1.], "pred_total": [50., 50.],
+                          "pred_win_p": [.7, .6], "spread_edge": [5., -6.],
                           "totals_edge": [0., 0.]})
         picks = wp.filter_picks(d)
         self.assertEqual([r["pick"] for r in picks["paper"]], ["A -7.0", "B +7.0"])
