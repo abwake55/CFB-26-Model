@@ -311,9 +311,20 @@ def load_data() -> pd.DataFrame:
 #   WEPA     : kept diffs only; individual team values are collinear with diffs
 #   Portal   : kept net_rating_diff + QB flags; dropped raw counts (noisy, low N)
 #   HFA/rest : kept diffs only
-#   Market   : REMOVED — line_movement, sharp_move_*, spread_open_val, total_movement
-#              These features encode the closing/opening line and create a model
-#              that partially predicts the market rather than the game.
+#   Market   : REMOVED — line_movement, sharp_move_*, spread_open_val,
+#              total_movement. These encode the line / its movement, inviting
+#              "predict the market" circularity.
+#              EXPERIMENT 2026-10 (reverted): reinstated line_movement and
+#              total_movement — open→current movement IS publicly known
+#              pre-kickoff, so not lookahead leakage. Walk-forward result:
+#              NULL. Full-history run degraded overall MAE (spread +0.78,
+#              totals +0.95) via a coverage-shift pathology (2023 fold trained
+#              on ~1% movement coverage, tested on ~59%); a fair restricted
+#              test (train 2023 / val 2024 / test 2025, ~99% coverage
+#              throughout, n=784) showed pure noise: spread Δ +0.011,
+#              totals Δ −0.020. Lesson: movement adds no signal here, and
+#              features that exist only for recent seasons break
+#              expanding-window validation.
 #   Derived  : dropped epa_off_diff_roll3 etc. (= home - away, redundant)
 
 SPREAD_FEATURES = [
