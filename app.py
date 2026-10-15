@@ -74,7 +74,10 @@ def _theodds_api_key()  -> str: return get_secret("ODDS_API_KEY",  "")   # the-o
 
 CFB_BASE_URL  = "https://api.collegefootballdata.com"
 
-SPREAD_EDGE_MIN, SPREAD_EDGE_MAX = 4.0, 7.0
+# Shared spread flag range (4–7 pts) — single source of truth in src/gates.py.
+# Never redefine these locally; every surface must flag the same range.
+SPREAD_EDGE_MIN = gates.SPREAD_EDGE_MIN
+SPREAD_EDGE_MAX = gates.SPREAD_EDGE_MAX
 # Totals flag range must span the validated CORE gate (under, edge 2-7): a
 # 3.0 floor silently dropped CORE unders at edge 2-3 before they could render.
 TOTALS_EDGE_MIN, TOTALS_EDGE_MAX = 2.0, 7.0
@@ -435,6 +438,18 @@ def attach_line_snapshot(preds: pd.DataFrame, snap: dict) -> pd.DataFrame:
     preds["snap_first_total"]  = preds["game_id"].map(lambda g: _first(g, "over_under"))
     preds["snap_seen_label"]   = preds["game_id"].map(_seen_label)
     return preds
+
+
+def _exclude_started_games(preds: pd.DataFrame, now=None) -> pd.DataFrame:
+    """Drop games whose start_date has already passed, so completed games can
+    never appear as current picks. Games with a missing/unparseable kickoff
+    are kept — an unknown kickoff is not evidence the game started."""
+    if preds.empty or "start_date" not in preds.columns:
+        return preds
+    now = (pd.Timestamp.now(tz="UTC") if now is None
+           else pd.Timestamp(now, tz="UTC"))
+    kickoff = pd.to_datetime(preds["start_date"], utc=True, errors="coerce")
+    return preds[(kickoff.isna()) | (kickoff > now)].copy()
 
 
 def find_stale_picks(preds: pd.DataFrame) -> list[str]:
@@ -1743,7 +1758,8 @@ def render_totals_card(row, season, week):
             ("Model", f"{row['pred_total']:.1f}" if pd.notna(row["pred_total"]) else "—", "var(--ink)"),
             ("Edge", "n/a" if (force_under and not _play) else f"{edge_str} pts", edge_color),
             ("Kelly", unit_dollar_label(units) if _play
-             else ("0u · paper" if force_under else "0u · pass"),
+             else ("0u · review" if str(row.get("decision_status")) == "REVIEW"
+                   else "0u · paper" if force_under else "0u · pass"),
              "var(--ink)" if _play else "var(--ink-3)"),
         ]),
         metric_html=metric,
@@ -1771,8 +1787,9 @@ def render_spread_card(row, season, week):
 
     edge_color = "var(--green)" if abs(edge) >= 5.5 else "var(--ink-2)"
     accent     = "var(--violet)"
-    _play      = _is_play("spread", row)
-    _units     = 1 if _play else 0
+    # Paper-only everywhere: gates.is_play("spread", row) is always False,
+    # so spreads display 0 units on every surface.
+    _units     = 0
 
     metric = (f'<div style="display:flex;align-items:center;gap:8px">'
               f'<span class="num" style="color:{edge_color};font-size:0.85em;font-weight:800">'
@@ -1798,7 +1815,7 @@ def render_spread_card(row, season, week):
             ("Vegas", vl_bet, "var(--ink)"),
             ("Model", mdl_str, "var(--ink)"),
             ("Edge", f"{edge_str} pts", edge_color),
-            ("Kelly", unit_dollar_label(_units) if _play else "0u · pass", "var(--ink)" if _play else "var(--ink-3)"),
+            ("Kelly", "0u · paper", "var(--ink-3)"),
         ]),
         metric_html=metric,
     ))
@@ -3635,12 +3652,14 @@ def _render_right_panel(plays: list, n_strong: int, week: int):
         return
 
     def _play_units(p):
+        # Units policy (single source of truth in src/gates.py): only an
+        # explicitly APPROVED total carries units (flat 1u). Spreads and
+        # moneylines are paper-only everywhere → 0u. Review/non-approved
+        # totals → 0u.
         r = p["row"]
         if p["kind"] == "total":
-            return kelly_units_spread(abs(r["totals_edge"]))
-        if p["kind"] == "ml":
-            return kelly_units_ml(r["ml_ev"])
-        return 1
+            return 1 if _is_play("total", r) else 0
+        return 0
 
     top8      = plays[:8]
     t_units   = sum(_play_units(p) for p in top8)
@@ -4092,6 +4111,9 @@ def main():
                         unsafe_allow_html=True,
                     )
 
+        # ── Exclude started games: completed games can't be current picks ─
+        preds = _exclude_started_games(preds)
+
         # ── Filter picks ──────────────────────────────────────────────────
         ml_bets = preds[
             preds["ml_ev"].notna() &
@@ -4353,22 +4375,25 @@ def main():
                     r = play["row"]
                     if play["kind"] == "total":
                         is_under = r["totals_edge"] < 0
-                        edge_abs = abs(r["totals_edge"])
-                        u = kelly_units_spread(edge_abs)
+                        # Only an explicitly APPROVED total receives units;
+                        # review totals display 0u.
+                        u = 1 if _is_play("total", r) else 0
                         side = "UNDER" if is_under else "OVER"
                         line_str = f"{r['over_under']:.1f}" if pd.notna(r.get("over_under")) else "TBD"
                         pick_str = f"{side} {line_str}"
                         bet_type = "Total"
                         edge_str = f"{r['totals_edge']:+.1f} pts"
                     elif play["kind"] == "ml":
-                        u = kelly_units_ml(r["ml_ev"])
+                        # Moneylines are paper-only everywhere → 0u.
+                        u = 0
                         ml_odds = r["ml_book_odds"]
                         label   = f"+{int(ml_odds)}" if ml_odds > 0 else str(int(ml_odds))
                         pick_str = f"{r['ml_team']} ML {label}"
                         bet_type = "ML"
                         edge_str = f"EV {r['ml_ev']:+.1%}"
                     else:
-                        u = 1
+                        # Spreads are paper-only everywhere → 0u.
+                        u = 0
                         is_home = r["spread_edge"] > 0
                         team    = r["home_team"] if is_home else r["away_team"]
                         sp      = r["spread"]

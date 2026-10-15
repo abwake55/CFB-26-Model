@@ -104,8 +104,11 @@ def record(season: int, week: int) -> None:
             "spread_edge": row.get("spread_edge"),
             "totals_edge": row.get("totals_edge"),
             "flag_core": bool(gates.core_total(row)),
+            # Shared 4–7 spread flag range from gates — same policy as the
+            # app and src/predict.py. Spreads are paper-only everywhere.
             "flag_spread": bool(pd.notna(row.get("spread_edge"))
-                                and abs(float(row["spread_edge"])) >= 3),
+                                and gates.SPREAD_EDGE_MIN <= abs(float(row["spread_edge"]))
+                                <= gates.SPREAD_EDGE_MAX),
             "flag_ml": bool((pd.notna(row.get("home_ml_ev")) and row["home_ml_ev"] >= 0.04)
                             or (pd.notna(row.get("away_ml_ev")) and row["away_ml_ev"] >= 0.04)),
         })
