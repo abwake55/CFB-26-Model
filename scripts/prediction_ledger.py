@@ -3,8 +3,9 @@
 2026 live prediction ledger
 ===========================
 tracked_bets.json stores only the bets Alex selected. This ledger stores
-EVERY weekly prediction — probability, market lines at record time, closing
-lines, and the final result — so the 2026 season can be graded honestly:
+EVERY weekly prediction — probability, market lines at record time, weather
+at record time (wind_speed, is_dome), closing lines (spread, total, and both
+moneylines), and the final result — so the 2026 season can be graded honestly:
 live Brier score, CLV, and per-bucket performance (CORE vs everything else).
 
     python3 scripts/prediction_ledger.py record   # snapshot this week's predictions
@@ -41,6 +42,8 @@ LEDGER_COLS = [
     "game_id", "season", "week", "home_team", "away_team",
     "home_conference", "away_conference", "neutral_site", "start_date",
     "recorded_at",
+    # weather at record time (from pregame_context)
+    "wind_speed", "is_dome",
     # model outputs
     "pred_spread", "pred_total", "pred_win_p",
     # market at record time (home-perspective spread, O/U, MLs)
@@ -50,6 +53,7 @@ LEDGER_COLS = [
     "flag_core", "flag_spread", "flag_ml",
     # filled by grade
     "closing_spread", "closing_over_under",
+    "closing_home_moneyline", "closing_away_moneyline",
     "home_score", "away_score", "completed",
     "home_win", "actual_margin", "actual_total",
 ]
@@ -93,6 +97,8 @@ def record(season: int, week: int) -> None:
             "neutral_site": row.get("neutral_site"),
             "start_date": row.get("start_date"),
             "recorded_at": now,
+            "wind_speed": row.get("wind_speed"),
+            "is_dome": row.get("is_dome"),
             "pred_spread": row.get("pred_spread"),
             "pred_total": row.get("pred_total"),
             "pred_win_p": row.get("pred_win_p"),
@@ -104,8 +110,11 @@ def record(season: int, week: int) -> None:
             "spread_edge": row.get("spread_edge"),
             "totals_edge": row.get("totals_edge"),
             "flag_core": bool(gates.core_total(row)),
+            # Shared 4–7 spread flag range from gates — same policy as the
+            # app and src/predict.py. Spreads are paper-only everywhere.
             "flag_spread": bool(pd.notna(row.get("spread_edge"))
-                                and abs(float(row["spread_edge"])) >= 3),
+                                and gates.SPREAD_EDGE_MIN <= abs(float(row["spread_edge"]))
+                                <= gates.SPREAD_EDGE_MAX),
             "flag_ml": bool((pd.notna(row.get("home_ml_ev")) and row["home_ml_ev"] >= 0.04)
                             or (pd.notna(row.get("away_ml_ev")) and row["away_ml_ev"] >= 0.04)),
         })
@@ -157,8 +166,8 @@ def _fetch_week_results(season: int, week: int, key: str) -> dict:
 
 
 def _fetch_week_closing(season: int, week: int, key: str) -> dict:
-    """{game_id: (spread, over_under)} — CFBD lines freeze at kickoff, so a
-    post-game fetch returns the closing line."""
+    """{game_id: (spread, over_under, home_ml, away_ml)} — CFBD lines freeze
+    at kickoff, so a post-game fetch returns the closing line."""
     import requests
     out = {}
     try:
@@ -180,7 +189,9 @@ def _fetch_week_closing(season: int, week: int, key: str) -> dict:
             if not best and game.get("lines"):
                 best = game["lines"][0]
             if best:
-                out[game["id"]] = (best.get("spread"), best.get("overUnder"))
+                out[game["id"]] = (best.get("spread"), best.get("overUnder"),
+                                   best.get("homeMoneyline"),
+                                   best.get("awayMoneyline"))
     except Exception as e:
         print(f"[grade] CFBD lines {season} wk{week} failed: {e}")
     return out
@@ -198,6 +209,12 @@ def grade(season: int) -> None:
     c = df["completed"]
     df["completed"] = c.notna() & c.astype(str).str.strip().str.lower().isin(
         ["true", "1", "1.0"])
+    # Backfill columns added after the ledger's first weeks: old CSVs grade
+    # fine, the new fields just stay NaN until re-recorded / re-graded.
+    for col in ("wind_speed", "is_dome",
+                "closing_home_moneyline", "closing_away_moneyline"):
+        if col not in df.columns:
+            df[col] = np.nan
 
     key = ""
     sec = ROOT_DIR / ".streamlit" / "secrets.toml"
@@ -219,7 +236,7 @@ def grade(season: int) -> None:
             df.loc[m, "home_score"] = hs
             df.loc[m, "away_score"] = as_
             df.loc[m, "completed"] = True
-        for gid, (sp, ou) in closing.items():
+        for gid, (sp, ou, hml, aml) in closing.items():
             m = (df["game_id"] == gid) & (df["completed"] == True)
             if not m.any():
                 continue
@@ -227,6 +244,10 @@ def grade(season: int) -> None:
                 df.loc[m, "closing_spread"] = sp
             if pd.notna(ou):
                 df.loc[m, "closing_over_under"] = ou
+            if pd.notna(hml):
+                df.loc[m, "closing_home_moneyline"] = hml
+            if pd.notna(aml):
+                df.loc[m, "closing_away_moneyline"] = aml
 
     done = df["completed"] == True  # noqa: E712
     df.loc[done, "home_win"] = (df.loc[done, "home_score"]
