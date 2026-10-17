@@ -1,0 +1,29 @@
+{
+  "run_at": "2026-10-17T17:49:33+00:00",
+  "season": 2026,
+  "week": 7,
+  "decisions": [
+    {
+      "source": "model-flag",
+      "game": "Arkansas State @ Southern Miss",
+      "bet_type": "Total",
+      "pick": "UNDER 62.0",
+      "recorded_line": 62.0,
+      "current_line": 62.0,
+      "decision": "drop",
+      "reason": "no power-conference team"
+    },
+    {
+      "source": "model-flag",
+      "game": "TCU @ Baylor",
+      "bet_type": "Total",
+      "pick": "UNDER 50.0",
+      "recorded_line": 50.0,
+      "current_line": 50.0,
+      "decision": "drop",
+      "reason": "outside CORE gate"
+    }
+  ],
+  "new_qualifiers": [],
+  "summary": "0 keep / 2 drop / 0 new"
+}
