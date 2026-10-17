@@ -209,7 +209,7 @@
       "validation_season": 2021,
       "alpha": 1000,
       "n": 766,
-      "mae": 11.989937267003626,
+      "mae": 11.98993726700363,
       "market_mae": 11.949738903394255
     },
     {
@@ -285,42 +285,42 @@
       "season": 2020,
       "status": "evaluated",
       "games": 534,
-      "possession_total_mae": 14.53989045121571,
+      "possession_total_mae": 14.539890451215712,
       "market_total_mae": 13.615168539325843
     },
     {
       "season": 2021,
       "status": "evaluated",
       "games": 770,
-      "possession_total_mae": 14.020760230354483,
+      "possession_total_mae": 14.020760230354492,
       "market_total_mae": 12.57987012987013
     },
     {
       "season": 2022,
       "status": "evaluated",
       "games": 766,
-      "possession_total_mae": 13.926276821393497,
+      "possession_total_mae": 13.926276821393502,
       "market_total_mae": 12.099216710182768
     },
     {
       "season": 2023,
       "status": "evaluated",
       "games": 770,
-      "possession_total_mae": 13.965081218651715,
+      "possession_total_mae": 13.965081218651719,
       "market_total_mae": 12.67012987012987
     },
     {
       "season": 2024,
       "status": "evaluated",
       "games": 787,
-      "possession_total_mae": 13.643308656869634,
+      "possession_total_mae": 13.64330865686964,
       "market_total_mae": 12.73125794155019
     },
     {
       "season": 2025,
       "status": "evaluated",
       "games": 784,
-      "possession_total_mae": 13.79977870307532,
+      "possession_total_mae": 13.799778703075297,
       "market_total_mae": 12.427933673469388
     }
   ],
@@ -343,7 +343,7 @@
         0.25,
         0.5
       ],
-      "mae": 12.607073491120678
+      "mae": 12.60707349112068
     },
     {
       "season": 2022,
@@ -383,7 +383,7 @@
         0.25,
         0.25
       ],
-      "mae": 12.526087337759881
+      "mae": 12.526087337759876
     }
   ],
   "live_ensemble_weights": [
