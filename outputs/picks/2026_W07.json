@@ -17,7 +17,10 @@
     "start_date": "2026-10-17T20:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+4.5",
+    "clv": -0.5,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -37,7 +40,10 @@
     "start_date": "2026-10-17T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+6.0",
+    "clv": 0.5,
+    "clv_beat": true
   },
   {
     "type": "SPREAD",
@@ -57,7 +63,10 @@
     "start_date": "2026-10-17T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+2.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -77,7 +86,10 @@
     "start_date": "2026-10-17T16:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+6.0",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "SPREAD",
@@ -97,7 +109,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+6.5",
+    "clv": -0.5,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -118,7 +133,10 @@
     "start_date": "2026-10-18T02:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+265",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -139,7 +157,10 @@
     "start_date": "2026-10-18T01:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+280",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -160,7 +181,10 @@
     "start_date": "2026-10-18T02:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+275",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -181,7 +205,10 @@
     "start_date": "2026-10-16T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+220",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -202,7 +229,10 @@
     "start_date": "2026-10-17T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+225",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -223,7 +253,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+275",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -244,7 +277,10 @@
     "start_date": "2026-10-17T20:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+160",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -265,7 +301,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+185",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -286,7 +325,10 @@
     "start_date": "2026-10-15T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+165",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -307,7 +349,10 @@
     "start_date": "2026-10-17T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+195",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -328,7 +373,10 @@
     "start_date": "2026-10-17T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+145",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -349,7 +397,10 @@
     "start_date": "2026-10-14T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+140",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -370,7 +421,10 @@
     "start_date": "2026-10-17T17:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+225",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -391,7 +445,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+160",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -412,7 +469,10 @@
     "start_date": "2026-10-17T16:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+170",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -433,7 +493,10 @@
     "start_date": "2026-10-17T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+175",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -454,7 +517,10 @@
     "start_date": "2026-10-17T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+285",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -475,7 +541,10 @@
     "start_date": "2026-10-17T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+230",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -496,7 +565,10 @@
     "start_date": "2026-10-17T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+215",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -517,7 +589,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-120",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -538,7 +613,10 @@
     "start_date": "2026-10-13T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+115",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -559,7 +637,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+205",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -580,7 +661,10 @@
     "start_date": "2026-10-17T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-105",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -601,7 +685,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+225",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -622,7 +709,10 @@
     "start_date": "2026-10-17T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+215",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -643,7 +733,10 @@
     "start_date": "2026-10-17T19:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "-220",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "MONEYLINE",
@@ -664,7 +757,10 @@
     "start_date": "2026-10-18T03:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "+210",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "TOTAL_HT",
@@ -684,7 +780,10 @@
     "start_date": "2026-10-17T16:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "63.5",
+    "clv": 0.0,
+    "clv_beat": false
   },
   {
     "type": "TOTAL_HT",
@@ -704,7 +803,10 @@
     "start_date": "2026-10-16T00:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "70.0",
+    "clv": 0.5,
+    "clv_beat": true
   },
   {
     "type": "TOTAL_HT",
@@ -724,7 +826,10 @@
     "start_date": "2026-10-17T23:00:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "62.0",
+    "clv": 0.5,
+    "clv_beat": true
   },
   {
     "type": "TOTAL_HT",
@@ -744,6 +849,9 @@
     "start_date": "2026-10-17T23:30:00.000Z",
     "wind_speed": null,
     "is_dome": 0,
-    "neutral": false
+    "neutral": false,
+    "closing_line": "62.0",
+    "clv": -0.5,
+    "clv_beat": false
   }
 ]

@@ -1,7 +1,7 @@
 {
   "mode": "paper_simulation_not_placed_bets",
   "selection": "first priced decision per game",
-  "completed_decisions": 2,
+  "completed_decisions": 3,
   "analyst_records": 0,
   "limitations": [
     "Consensus movement is not executable CLV; exact same-market book snapshots required.",
@@ -14,8 +14,8 @@
   "agreement_groups": [
     {
       "group": "no_coverage",
-      "n": 2,
-      "paper_roi": 0.9531590413943355
+      "n": 3,
+      "paper_roi": 0.93846966395986
     },
     {
       "group": "agree",
