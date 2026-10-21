@@ -206,7 +206,7 @@
       "validation_season": 2021,
       "alpha": 1000,
       "n": 766,
-      "mae": 12.172966664598597,
+      "mae": 12.172966664598594,
       "market_mae": 12.099216710182768
     },
     {
@@ -246,7 +246,7 @@
       "validation_season": 2023,
       "alpha": 1000,
       "n": 787,
-      "mae": 12.731153845864123,
+      "mae": 12.731153845864126,
       "market_mae": 12.73125794155019
     },
     {
@@ -285,49 +285,49 @@
       "season": 2019,
       "status": "evaluated",
       "games": 773,
-      "possession_total_mae": 14.482564228595677,
+      "possession_total_mae": 14.482564228595672,
       "market_total_mae": 12.842173350582147
     },
     {
       "season": 2020,
       "status": "evaluated",
       "games": 534,
-      "possession_total_mae": 14.539890451215712,
+      "possession_total_mae": 14.53989045121571,
       "market_total_mae": 13.615168539325843
     },
     {
       "season": 2021,
       "status": "evaluated",
       "games": 770,
-      "possession_total_mae": 14.020760230354488,
+      "possession_total_mae": 14.020760230354483,
       "market_total_mae": 12.57987012987013
     },
     {
       "season": 2022,
       "status": "evaluated",
       "games": 766,
-      "possession_total_mae": 13.926276821393499,
+      "possession_total_mae": 13.926276821393497,
       "market_total_mae": 12.099216710182768
     },
     {
       "season": 2023,
       "status": "evaluated",
       "games": 770,
-      "possession_total_mae": 13.965081218651719,
+      "possession_total_mae": 13.965081218651715,
       "market_total_mae": 12.67012987012987
     },
     {
       "season": 2024,
       "status": "evaluated",
       "games": 787,
-      "possession_total_mae": 13.643308656869646,
+      "possession_total_mae": 13.643308656869634,
       "market_total_mae": 12.73125794155019
     },
     {
       "season": 2025,
       "status": "evaluated",
       "games": 784,
-      "possession_total_mae": 13.799778703075305,
+      "possession_total_mae": 13.79977870307532,
       "market_total_mae": 12.427933673469388
     }
   ],
