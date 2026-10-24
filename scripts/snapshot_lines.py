@@ -166,10 +166,10 @@ def main() -> None:
         if gid not in by_id.index:
             continue
         ln = by_id.loc[gid]
-        cur = {"spread":       ln.get("spread") if pd.notna(ln.get("spread")) else None,
-               "over_under":   ln.get("over_under") if pd.notna(ln.get("over_under")) else None,
-               "home_ml":      ln.get("home_moneyline") if pd.notna(ln.get("home_moneyline")) else None,
-               "away_ml":      ln.get("away_moneyline") if pd.notna(ln.get("away_moneyline")) else None}
+        cur = {"spread":       float(ln.get("spread")) if pd.notna(ln.get("spread")) else None,
+               "over_under":   float(ln.get("over_under")) if pd.notna(ln.get("over_under")) else None,
+               "home_ml":      float(ln.get("home_moneyline")) if pd.notna(ln.get("home_moneyline")) else None,
+               "away_ml":      float(ln.get("away_moneyline")) if pd.notna(ln.get("away_moneyline")) else None}
         if cur["spread"] is None and cur["over_under"] is None:
             continue
         rec = snap["games"].get(str(gid))
