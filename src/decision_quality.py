@@ -1,9 +1,11 @@
 """Price-specific research decisions. New probability estimates stay paper-only."""
 from datetime import datetime, timezone
+from difflib import SequenceMatcher
 from pathlib import Path
 import hashlib
 import json
 import math
+import re
 import numpy as np
 import pandas as pd
 
@@ -55,6 +57,109 @@ def probabilities(actual, predicted, projection, line, side):
         delta = -delta
     return {"win": float(np.mean(delta > 0)), "loss": float(np.mean(delta < 0)),
             "push": float(np.mean(delta == 0)), "samples": int(valid.sum())}
+
+
+def _tokens(name):
+    return re.sub(r"[^a-z0-9 ]", "", str(name or "").lower()).split()
+
+
+def match_quote_side(side_name, home_team, away_team):
+    """Map a sportsbook spread quote's side (a team name like
+    "Ohio State Buckeyes") to "home" or "away". CFBD names are normally a
+    token prefix of the book's name; spelling variants fall back to a fuzzy
+    ratio. Returns None when neither team matches."""
+    quote_tokens = _tokens(side_name)
+    if not quote_tokens:
+        return None
+    best_label, best_score = None, 0.0
+    for label, team in (("home", home_team), ("away", away_team)):
+        team_tokens = _tokens(team)
+        if not team_tokens:
+            continue
+        if len(team_tokens) <= len(quote_tokens) and quote_tokens[:len(team_tokens)] == team_tokens:
+            score = 1.0 + 0.1 * len(team_tokens)
+        else:
+            ratio = SequenceMatcher(None, " ".join(team_tokens), " ".join(quote_tokens)).ratio()
+            score = ratio if ratio >= 0.72 else 0.0
+        if score > best_score:
+            best_label, best_score = label, score
+    return best_label
+
+
+def spread_decision(row, history, now=None):
+    """Price-specific spread review. Spreads are PAPER-only on every surface
+    (gates.is_play("spread") is False), so this never approves a live play and
+    always assigns zero units.
+
+    Evaluates fresh sportsbook spread quotes: each quote is matched to the
+    home or away team, cover/push/loss probabilities come from the empirical
+    out-of-sample point_diff vs pred_spread residuals on football's integer
+    score lattice, and EV is computed at the quote's actual American odds.
+    """
+    now = utc(now) if now is not None else pd.Timestamp.now(tz="UTC")
+    reasons = []
+    result = {"decision_status": "PASS", "units": 0, "market": "spreads",
+              "policy_version": POLICY["version"],
+              "decision_at": now.isoformat(), "decision_reasons": reasons}
+    home_team, away_team = row.get("home_team"), row.get("away_team")
+    kickoff = utc(row.get("start_date"))
+    if kickoff is None or kickoff <= now:
+        reasons.append("missing_or_started_kickoff")
+    if history.empty:
+        reasons.append("no_prior_oos_calibration")
+        return result
+    season = row.get("season", now.year)
+    hist = history[pd.to_numeric(history.season, errors="coerce") < int(season)]
+    if "evaluation_version" not in hist or not hist.evaluation_version.eq("season_holdout_v2").all():
+        reasons.append("unverified_calibration_provenance")
+        return result
+    if not finite(row.get("pred_spread")):
+        reasons.append("missing_model_spread")
+        return result
+    quotes = row.get("book_quotes", [])
+    if not isinstance(quotes, list):
+        quotes = []
+    evaluated = []
+    for q in quotes:
+        if q.get("market") != "spreads":
+            continue
+        side = match_quote_side(q.get("side"), home_team, away_team)
+        if side is None:
+            continue
+        if not q.get("book") or not fresh(q.get("updated_at"), now, POLICY["max_quote_minutes"] / 60):
+            continue
+        if not fresh(q.get("observed_at"), now, POLICY["max_quote_minutes"] / 60):
+            continue
+        if not finite(q.get("line")):
+            continue
+        try:
+            probs = probabilities(hist.point_diff, hist.pred_spread,
+                                  row["pred_spread"], q["line"], side)
+        except (ValueError, TypeError, KeyError):
+            continue
+        if probs["samples"] < POLICY["minimum_samples"]:
+            continue
+        try:
+            expected = ev(probs, q["odds"])
+        except (ValueError, TypeError):
+            continue
+        evaluated.append({"quote": q, "side": side, "probabilities": probs,
+                          "ev": expected})
+    if not evaluated:
+        reasons.append("no_fresh_priced_spread_quote")
+        return result
+    best = max(evaluated, key=lambda x: x["ev"])
+    result.update(best)
+    result["quote_candidates"] = evaluated
+    if best["ev"] < POLICY["minimum_ev"]:
+        reasons.append("insufficient_price_specific_ev")
+    if not POLICY["live_probability_approved"]:
+        reasons.append("probability_model_pending_prospective_validation")
+    # Paper-only: a spread can never be APPROVED, and units stay 0.
+    result["decision_status"] = ("PAPER"
+                                 if reasons == ["probability_model_pending_prospective_validation"]
+                                 else "REVIEW")
+    return result
 
 
 def append_record(directory, record):
@@ -168,6 +273,9 @@ def attach_decisions(frame, model_dir=None, history=None, now=None, archive=Fals
     for _, row in frame.iterrows():
         result = total_decision(row, history, now)
         result["model_fingerprint"] = fingerprint
+        # Price-specific spread review rides along with every attached
+        # decision: paper-only, zero units, never APPROVED.
+        result["spread_decision"] = spread_decision(row, history, now)
         records.append(result)
         if archive:
             clean_row = json.loads(row.to_json())
