@@ -1,9 +1,9 @@
 {
   "season": 2026,
-  "games_tracked": 1426,
-  "games_completed": 1121,
-  "live_brier": 0.2098,
-  "live_brier_n": 1121,
+  "games_tracked": 1740,
+  "games_completed": 1422,
+  "live_brier": 0.2187,
+  "live_brier_n": 1422,
   "core_unders": {
     "n": 11,
     "wins": 6,
@@ -14,21 +14,21 @@
     "avg_clv_pts": 0.55
   },
   "spread_flags": {
-    "n": 63,
-    "wins": 36,
+    "n": 64,
+    "wins": 37,
     "losses": 27,
     "pushes": 0,
-    "units": 6.3,
-    "hit_rate": 0.5714,
-    "avg_clv_pts": 0.37
+    "units": 7.3,
+    "hit_rate": 0.5781,
+    "avg_clv_pts": 0.36
   },
   "all_under_leans": {
-    "n": 19,
-    "wins": 10,
+    "n": 20,
+    "wins": 11,
     "losses": 9,
     "pushes": 0,
-    "units": 0.1,
-    "hit_rate": 0.5263,
-    "avg_clv_pts": 0.26
+    "units": 1.1,
+    "hit_rate": 0.55,
+    "avg_clv_pts": 0.23
   }
 }

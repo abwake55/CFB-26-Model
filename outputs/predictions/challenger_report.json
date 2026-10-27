@@ -13,85 +13,85 @@
       "season": 2020,
       "market": "spreads",
       "n": 534,
-      "brier": 0.5278705072550254,
-      "log_loss": 0.7656115533397931
+      "brier": 0.5270662148859834,
+      "log_loss": 0.764639424596509
     },
     {
       "season": 2020,
       "market": "totals",
       "n": 534,
-      "brier": 0.517056326659851,
-      "log_loss": 0.7436811193882825
+      "brier": 0.518940685078435,
+      "log_loss": 0.7483635774931291
     },
     {
       "season": 2021,
       "market": "spreads",
       "n": 770,
-      "brier": 0.4952533144879811,
-      "log_loss": 0.7231993518153418
+      "brier": 0.49423894854344397,
+      "log_loss": 0.7218859192175551
     },
     {
       "season": 2021,
       "market": "totals",
       "n": 770,
-      "brier": 0.514327512991525,
-      "log_loss": 0.7368212208474305
+      "brier": 0.5137733220604044,
+      "log_loss": 0.7366118005597193
     },
     {
       "season": 2022,
       "market": "spreads",
       "n": 766,
-      "brier": 0.5154379694653171,
-      "log_loss": 0.7533169613196321
+      "brier": 0.5142183286543001,
+      "log_loss": 0.7517033189556156
     },
     {
       "season": 2022,
       "market": "totals",
       "n": 766,
-      "brier": 0.5152220376870441,
-      "log_loss": 0.7514105138184659
+      "brier": 0.5151853534338476,
+      "log_loss": 0.7518839185020817
     },
     {
       "season": 2023,
       "market": "spreads",
       "n": 770,
-      "brier": 0.5082700514864154,
-      "log_loss": 0.7527913636821886
+      "brier": 0.5091583172344071,
+      "log_loss": 0.754287328525545
     },
     {
       "season": 2023,
       "market": "totals",
       "n": 770,
-      "brier": 0.5144389940450489,
-      "log_loss": 0.7429864538713498
+      "brier": 0.5138879849653508,
+      "log_loss": 0.74240263322752
     },
     {
       "season": 2024,
       "market": "spreads",
       "n": 787,
-      "brier": 0.514877893708301,
-      "log_loss": 0.7685697270558938
+      "brier": 0.5147135269189768,
+      "log_loss": 0.7690623420631489
     },
     {
       "season": 2024,
       "market": "totals",
       "n": 787,
-      "brier": 0.519861387352257,
-      "log_loss": 0.7681442084555221
+      "brier": 0.5190861776884411,
+      "log_loss": 0.7679106050076464
     },
     {
       "season": 2025,
       "market": "spreads",
       "n": 784,
-      "brier": 0.5135382405338168,
-      "log_loss": 0.7664526274739623
+      "brier": 0.5135238802390791,
+      "log_loss": 0.7664540927910931
     },
     {
       "season": 2025,
       "market": "totals",
       "n": 784,
-      "brier": 0.5214802320954208,
-      "log_loss": 0.7551850700109402
+      "brier": 0.5201924025446956,
+      "log_loss": 0.753474391617126
     }
   ],
   "limitations": [
@@ -103,99 +103,99 @@
       "market": "spreads",
       "bin": "(-0.001, 0.1]",
       "n": 1,
-      "forecast": 0.09640397857689365,
+      "forecast": 0.09334353481254781,
       "observed": 1.0
     },
     {
       "market": "spreads",
       "bin": "(0.1, 0.2]",
       "n": 1,
-      "forecast": 0.1981637337413925,
+      "forecast": 0.18439173680183626,
       "observed": 0.0
     },
     {
       "market": "spreads",
       "bin": "(0.2, 0.3]",
-      "n": 18,
-      "forecast": 0.2725400501225848,
-      "observed": 0.3888888888888889
+      "n": 21,
+      "forecast": 0.27685647148414605,
+      "observed": 0.42857142857142855
     },
     {
       "market": "spreads",
       "bin": "(0.3, 0.4]",
-      "n": 470,
-      "forecast": 0.36898312765232794,
-      "observed": 0.4297872340425532
+      "n": 459,
+      "forecast": 0.3699721728636112,
+      "observed": 0.4226579520697168
     },
     {
       "market": "spreads",
       "bin": "(0.4, 0.5]",
-      "n": 1729,
-      "forecast": 0.4555674651726273,
-      "observed": 0.44707923655292076
+      "n": 1758,
+      "forecast": 0.45644360762236696,
+      "observed": 0.4465301478953356
     },
     {
       "market": "spreads",
       "bin": "(0.5, 0.6]",
-      "n": 1667,
-      "forecast": 0.5447959180926789,
-      "observed": 0.5170965806838632
+      "n": 1640,
+      "forecast": 0.5452614342965785,
+      "observed": 0.5152439024390244
     },
     {
       "market": "spreads",
       "bin": "(0.6, 0.7]",
-      "n": 501,
-      "forecast": 0.6315494037159582,
-      "observed": 0.624750499001996
+      "n": 509,
+      "forecast": 0.6309327334906897,
+      "observed": 0.6345776031434185
     },
     {
       "market": "spreads",
       "bin": "(0.7, 0.8]",
-      "n": 24,
-      "forecast": 0.7288754874231295,
-      "observed": 0.5833333333333334
+      "n": 22,
+      "forecast": 0.7311433319100527,
+      "observed": 0.6818181818181818
     },
     {
       "market": "totals",
       "bin": "(0.2, 0.3]",
-      "n": 7,
-      "forecast": 0.26920536234964537,
-      "observed": 0.0
+      "n": 8,
+      "forecast": 0.27582662749956477,
+      "observed": 0.125
     },
     {
       "market": "totals",
       "bin": "(0.3, 0.4]",
-      "n": 200,
-      "forecast": 0.3776926552188465,
-      "observed": 0.54
+      "n": 193,
+      "forecast": 0.37848738111271596,
+      "observed": 0.48704663212435234
     },
     {
       "market": "totals",
       "bin": "(0.4, 0.5]",
-      "n": 2379,
-      "forecast": 0.4599539717841797,
-      "observed": 0.48633879781420764
+      "n": 2355,
+      "forecast": 0.4593851357129927,
+      "observed": 0.48747346072186837
     },
     {
       "market": "totals",
       "bin": "(0.5, 0.6]",
-      "n": 1726,
-      "forecast": 0.5349487491326793,
-      "observed": 0.5046349942062572
+      "n": 1752,
+      "forecast": 0.533214016198876,
+      "observed": 0.5102739726027398
     },
     {
       "market": "totals",
       "bin": "(0.6, 0.7]",
-      "n": 98,
-      "forecast": 0.6303255314991688,
-      "observed": 0.5204081632653061
+      "n": 101,
+      "forecast": 0.6291837465013246,
+      "observed": 0.49504950495049505
     },
     {
       "market": "totals",
       "bin": "(0.7, 0.8]",
-      "n": 1,
-      "forecast": 0.7141009055627425,
-      "observed": 1.0
+      "n": 2,
+      "forecast": 0.7082794307891332,
+      "observed": 0.5
     }
   ],
   "matchup_folds": [
@@ -206,7 +206,7 @@
       "validation_season": 2021,
       "alpha": 1000,
       "n": 766,
-      "mae": 12.172966664598594,
+      "mae": 12.172966664598597,
       "market_mae": 12.099216710182768
     },
     {
@@ -246,7 +246,7 @@
       "validation_season": 2023,
       "alpha": 1000,
       "n": 787,
-      "mae": 12.731153845864126,
+      "mae": 12.731153845864123,
       "market_mae": 12.73125794155019
     },
     {
@@ -256,7 +256,7 @@
       "validation_season": 2023,
       "alpha": 10,
       "n": 787,
-      "mae": 12.18523315049679,
+      "mae": 12.185233150496792,
       "market_mae": 12.044472681067344
     },
     {
@@ -292,42 +292,42 @@
       "season": 2020,
       "status": "evaluated",
       "games": 534,
-      "possession_total_mae": 14.53989045121571,
+      "possession_total_mae": 14.539890451215712,
       "market_total_mae": 13.615168539325843
     },
     {
       "season": 2021,
       "status": "evaluated",
       "games": 770,
-      "possession_total_mae": 14.020760230354483,
+      "possession_total_mae": 14.020760230354492,
       "market_total_mae": 12.57987012987013
     },
     {
       "season": 2022,
       "status": "evaluated",
       "games": 766,
-      "possession_total_mae": 13.926276821393497,
+      "possession_total_mae": 13.926276821393502,
       "market_total_mae": 12.099216710182768
     },
     {
       "season": 2023,
       "status": "evaluated",
       "games": 770,
-      "possession_total_mae": 13.965081218651715,
+      "possession_total_mae": 13.965081218651719,
       "market_total_mae": 12.67012987012987
     },
     {
       "season": 2024,
       "status": "evaluated",
       "games": 787,
-      "possession_total_mae": 13.643308656869634,
+      "possession_total_mae": 13.64330865686964,
       "market_total_mae": 12.73125794155019
     },
     {
       "season": 2025,
       "status": "evaluated",
       "games": 784,
-      "possession_total_mae": 13.79977870307532,
+      "possession_total_mae": 13.799778703075297,
       "market_total_mae": 12.427933673469388
     }
   ],
@@ -350,7 +350,7 @@
         0.25,
         0.5
       ],
-      "mae": 12.612801055129554
+      "mae": 12.611322794357582
     },
     {
       "season": 2022,
@@ -360,17 +360,17 @@
         0.0,
         0.75
       ],
-      "mae": 12.086089461799075
+      "mae": 12.086706603098202
     },
     {
       "season": 2023,
       "validation_season": 2022,
       "weights": [
-        0.25,
+        0.5,
         0.0,
-        0.75
+        0.5
       ],
-      "mae": 12.663320875676677
+      "mae": 12.66216193037619
     },
     {
       "season": 2024,
@@ -380,17 +380,17 @@
         0.0,
         0.75
       ],
-      "mae": 12.710180561218703
+      "mae": 12.704613886766662
     },
     {
       "season": 2025,
       "validation_season": 2024,
       "weights": [
+        0.5,
         0.25,
-        0.25,
-        0.5
+        0.25
       ],
-      "mae": 12.505452424914
+      "mae": 12.529384253727352
     }
   ],
   "live_ensemble_weights": [
