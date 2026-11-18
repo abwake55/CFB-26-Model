@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Record future games independently, even when an earlier game has kicked off."""
+import json
+from pathlib import Path
 import pandas as pd
 import weekly_pipeline as wp
 from snapshot_lines import current_week
@@ -23,7 +25,12 @@ def record():
     lines=wp.fetch_lines(games,season,week)
     sp,tot,win,features=wp.load_models()
     predictions=wp.build_predictions(games,lines,sp,tot,win,features,season,archive_decisions=True)
-    print('Archived:',len(predictions),'games;',predictions.decision_status.value_counts().to_dict())
+    from market_edges import board_rows
+    board = {"generated_at": now.isoformat(), "season": season, "week": week,
+             "mode": "research_not_validated_bets", "candidates": board_rows(predictions)}
+    output = Path(__file__).resolve().parents[1]/'outputs/predictions/current_market_board.json'
+    output.write_text(json.dumps(board, indent=2, allow_nan=False)+'\n')
+    print('Archived:' ,len(predictions),'games;',predictions.decision_status.value_counts().to_dict())
 
 
 if __name__=='__main__':record()

@@ -77,6 +77,9 @@ def events_to_consensus(events: list) -> pd.DataFrame:
                 for outcome in outs:
                     quotes.append({"event_id": e.get("id"), "book": bkey,
                                    "market": k, "side": outcome.get("name"),
+                                   "selection": ("home" if outcome.get("name") == home else
+                                                 "away" if outcome.get("name") == away else
+                                                 str(outcome.get("name", "")).lower()),
                                    "line": outcome.get("point"), "odds": outcome.get("price"),
                                    "updated_at": m.get("last_update", bk.get("last_update")),
                                    "observed_at": observed_at, "kickoff": e.get("commence_time")})

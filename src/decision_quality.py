@@ -164,15 +164,26 @@ def attach_decisions(frame, model_dir=None, history=None, now=None, archive=Fals
         path = ROOT / "outputs/predictions/walk_forward_results.csv"
         history = pd.read_csv(path) if path.exists() else pd.DataFrame()
     fingerprint = model_fingerprint(model_dir or ROOT / "models")
-    records = []
+    from market_edges import evaluate_markets
+    metadata_path = Path(model_dir or ROOT / "models") / "feature_lists.json"
+    metadata = json.loads(metadata_path.read_text()) if metadata_path.exists() else {}
+    records, market_records = [], []
     for _, row in frame.iterrows():
+        row = row.copy()
+        row["model_data_asof"] = metadata.get("model_data_asof")
+        markets = evaluate_markets(row, history, now)
+        markets["model_fingerprint"] = fingerprint
+        market_records.append(markets)
         result = total_decision(row, history, now)
         result["model_fingerprint"] = fingerprint
         records.append(result)
         if archive:
             clean_row = json.loads(row.to_json())
             append_record(ROOT / "outputs/predictions/decisions", {"prediction": clean_row, "decision": result})
+            append_record(ROOT / "outputs/predictions/market_decisions",
+                          {"prediction": clean_row, "decision": markets})
     out = frame.copy()
+    out["market_decisions"] = market_records
     out["decision"] = records
     out["decision_status"] = [r["decision_status"] for r in records]
     out["recommended_units"] = 0

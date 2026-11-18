@@ -4008,26 +4008,6 @@ def main():
                                       spread_model, totals_model, win_prob_model,
                                       feature_lists, weather=weather_df)
 
-        with st.expander("Price and data review", expanded=False):
-            st.caption("New price-specific probabilities are being tested. Review and paper signals carry zero units.")
-            review_rows = []
-            for _, prediction in preds.iterrows():
-                decision = prediction.get("decision", {})
-                if decision.get("decision_status") == "PASS":
-                    continue
-                quote = decision.get("quote", {})
-                review_rows.append({
-                    "Game": f"{prediction['away_team']} at {prediction['home_team']}",
-                    "Status": decision.get("decision_status"),
-                    "Book": quote.get("book"), "Total": quote.get("line"), "Odds": quote.get("odds"),
-                    "Estimated EV": decision.get("ev"),
-                    "Minimum total at these odds": decision.get("minimum_total_at_quoted_odds"),
-                    "Needs attention": ", ".join(decision.get("decision_reasons", [])).replace("_", " ")})
-            if review_rows:
-                st.dataframe(pd.DataFrame(review_rows), hide_index=True)
-            else:
-                st.caption("No totals qualify for review at the current consensus lines.")
-
         # ── QB / availability adjustments ─────────────────────────────────
         # The model can't see injury news — its biggest info gap vs the
         # market. Mark teams whose starting QB is out and every dependent
@@ -4051,6 +4031,30 @@ def main():
                                      "Star QB on a P4 team ≈ 6–7; game-manager ≈ 3–4.")
         if qb_out:
             preds = apply_qb_adjustments(preds, qb_out, qb_pts)
+
+        with st.expander("All-market edge board · spreads, moneylines, overs & unders", expanded=True):
+            from market_edges import board_rows
+            st.caption("Research A: positive estimated EV after a sampling-uncertainty deduction. "
+                       "Research B: positive estimated EV with weaker statistical support. "
+                       "Neither tier is CORE or validated profit; all carry zero recommended units. "
+                       "Sampling bounds do not cover model error. Missing context stays visible.")
+            market_rows = board_rows(preds)
+            if market_rows:
+                market_filter = st.multiselect("Markets", ["spreads", "h2h", "totals"],
+                                               default=["spreads", "h2h", "totals"])
+                st.dataframe(pd.DataFrame([r for r in market_rows if r["Market"] in market_filter]),
+                             hide_index=True)
+                st.caption("Multiple markets on one game are correlated. These rankings are not parlay recommendations.")
+            else:
+                st.info("No priced candidates clear the research threshold with sufficient calibration data.")
+            blocked = []
+            for _, prediction in preds.iterrows():
+                details = prediction.get("market_decisions", {})
+                for reason in details.get("reasons", []):
+                    blocked.append({"Game": f"{prediction['away_team']} at {prediction['home_team']}",
+                                    "Reason": reason.replace("_", " ")})
+            if blocked:
+                st.dataframe(pd.DataFrame(blocked), hide_index=True)
 
         # ── Early-season mode banner (preseason shrinkage active wks 1-3) ────
         _f = shrinkage_factor(week)

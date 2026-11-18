@@ -17,7 +17,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: pip
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - name: Collect historical and current possessions
@@ -33,6 +32,8 @@ jobs:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python scripts/record_decisions.py
+      - run: python scripts/audit_markets.py
+      - run: python scripts/grade_market_edges.py
       - run: python scripts/decision_report.py
       - name: Save research results
         run: |

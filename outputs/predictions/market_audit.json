@@ -1,0 +1,438 @@
+{
+  "version": "all_markets_v1",
+  "live_approved": false,
+  "assumptions": [
+    "Spreads and totals priced at assumed -110; historical moneylines only where recorded.",
+    "Prior-season holdout errors only; no same-season calibration or threshold optimization.",
+    "One highest-EV side per game/market; no cross-market independence assumption.",
+    "Research A sampling bounds do not measure model misspecification or selection bias.",
+    "These are historical screening diagnostics, not executable betting returns."
+  ],
+  "seasons": [
+    {
+      "season": 2020,
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 287,
+      "wins": 143,
+      "losses": 138,
+      "pushes": 6,
+      "hit_rate": 0.5088967971530249,
+      "assumed_price_roi": -0.027874564459930307
+    },
+    {
+      "season": 2020,
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 108,
+      "wins": 60,
+      "losses": 47,
+      "pushes": 1,
+      "hit_rate": 0.5607476635514018,
+      "assumed_price_roi": 0.06986531986531987
+    },
+    {
+      "season": 2020,
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 169,
+      "wins": 83,
+      "losses": 83,
+      "pushes": 3,
+      "hit_rate": 0.5,
+      "assumed_price_roi": -0.0446476600322754
+    },
+    {
+      "season": 2020,
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 108,
+      "wins": 52,
+      "losses": 55,
+      "pushes": 1,
+      "hit_rate": 0.48598130841121495,
+      "assumed_price_roi": -0.07154882154882156
+    },
+    {
+      "season": 2021,
+      "market": "h2h",
+      "tier": "RESEARCH_B",
+      "n": 1,
+      "wins": 0,
+      "losses": 1,
+      "pushes": 0,
+      "hit_rate": 0.0,
+      "assumed_price_roi": -1.0
+    },
+    {
+      "season": 2021,
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 441,
+      "wins": 269,
+      "losses": 168,
+      "pushes": 4,
+      "hit_rate": 0.6155606407322655,
+      "assumed_price_roi": 0.173572459286745
+    },
+    {
+      "season": 2021,
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 85,
+      "wins": 49,
+      "losses": 33,
+      "pushes": 3,
+      "hit_rate": 0.5975609756097561,
+      "assumed_price_roi": 0.13582887700534757
+    },
+    {
+      "season": 2021,
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 277,
+      "wins": 142,
+      "losses": 134,
+      "pushes": 1,
+      "hit_rate": 0.5144927536231884,
+      "assumed_price_roi": -0.01772234985231376
+    },
+    {
+      "season": 2021,
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 123,
+      "wins": 62,
+      "losses": 60,
+      "pushes": 1,
+      "hit_rate": 0.5081967213114754,
+      "assumed_price_roi": -0.029563932002956383
+    },
+    {
+      "season": 2022,
+      "market": "h2h",
+      "tier": "RESEARCH_A",
+      "n": 8,
+      "wins": 2,
+      "losses": 6,
+      "pushes": 0,
+      "hit_rate": 0.25,
+      "assumed_price_roi": -0.6071428571428572
+    },
+    {
+      "season": 2022,
+      "market": "h2h",
+      "tier": "RESEARCH_B",
+      "n": 1,
+      "wins": 0,
+      "losses": 1,
+      "pushes": 0,
+      "hit_rate": 0.0,
+      "assumed_price_roi": -1.0
+    },
+    {
+      "season": 2022,
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 453,
+      "wins": 246,
+      "losses": 202,
+      "pushes": 5,
+      "hit_rate": 0.5491071428571429,
+      "assumed_price_roi": 0.04776239213325306
+    },
+    {
+      "season": 2022,
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 66,
+      "wins": 35,
+      "losses": 28,
+      "pushes": 3,
+      "hit_rate": 0.5555555555555556,
+      "assumed_price_roi": 0.05785123966942149
+    },
+    {
+      "season": 2022,
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 222,
+      "wins": 117,
+      "losses": 102,
+      "pushes": 3,
+      "hit_rate": 0.5342465753424658,
+      "assumed_price_roi": 0.019656019656019687
+    },
+    {
+      "season": 2022,
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 119,
+      "wins": 61,
+      "losses": 56,
+      "pushes": 2,
+      "hit_rate": 0.5213675213675214,
+      "assumed_price_roi": -0.0045836516424751644
+    },
+    {
+      "season": 2023,
+      "market": "h2h",
+      "tier": "RESEARCH_A",
+      "n": 299,
+      "wins": 154,
+      "losses": 145,
+      "pushes": 0,
+      "hit_rate": 0.5150501672240803,
+      "assumed_price_roi": 0.11737728091698439
+    },
+    {
+      "season": 2023,
+      "market": "h2h",
+      "tier": "RESEARCH_B",
+      "n": 145,
+      "wins": 50,
+      "losses": 95,
+      "pushes": 0,
+      "hit_rate": 0.3448275862068966,
+      "assumed_price_roi": -0.003440594717996677
+    },
+    {
+      "season": 2023,
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 462,
+      "wins": 266,
+      "losses": 187,
+      "pushes": 9,
+      "hit_rate": 0.58719646799117,
+      "assumed_price_roi": 0.11865407319952774
+    },
+    {
+      "season": 2023,
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 68,
+      "wins": 36,
+      "losses": 32,
+      "pushes": 0,
+      "hit_rate": 0.5294117647058824,
+      "assumed_price_roi": 0.010695187165775414
+    },
+    {
+      "season": 2023,
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 358,
+      "wins": 184,
+      "losses": 170,
+      "pushes": 4,
+      "hit_rate": 0.519774011299435,
+      "assumed_price_roi": -0.007618080243778578
+    },
+    {
+      "season": 2023,
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 65,
+      "wins": 29,
+      "losses": 36,
+      "pushes": 0,
+      "hit_rate": 0.4461538461538462,
+      "assumed_price_roi": -0.14825174825174822
+    },
+    {
+      "season": 2024,
+      "market": "h2h",
+      "tier": "RESEARCH_A",
+      "n": 311,
+      "wins": 152,
+      "losses": 159,
+      "pushes": 0,
+      "hit_rate": 0.4887459807073955,
+      "assumed_price_roi": 0.11762934435420457
+    },
+    {
+      "season": 2024,
+      "market": "h2h",
+      "tier": "RESEARCH_B",
+      "n": 154,
+      "wins": 62,
+      "losses": 92,
+      "pushes": 0,
+      "hit_rate": 0.4025974025974026,
+      "assumed_price_roi": 0.0258433037575747
+    },
+    {
+      "season": 2024,
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 465,
+      "wins": 260,
+      "losses": 196,
+      "pushes": 9,
+      "hit_rate": 0.5701754385964912,
+      "assumed_price_roi": 0.08680351906158357
+    },
+    {
+      "season": 2024,
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 28,
+      "wins": 18,
+      "losses": 10,
+      "pushes": 0,
+      "hit_rate": 0.6428571428571429,
+      "assumed_price_roi": 0.22727272727272727
+    },
+    {
+      "season": 2024,
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 342,
+      "wins": 188,
+      "losses": 149,
+      "pushes": 5,
+      "hit_rate": 0.5578635014836796,
+      "assumed_price_roi": 0.06406166932482722
+    },
+    {
+      "season": 2024,
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 64,
+      "wins": 36,
+      "losses": 28,
+      "pushes": 0,
+      "hit_rate": 0.5625,
+      "assumed_price_roi": 0.07386363636363635
+    },
+    {
+      "season": 2025,
+      "market": "h2h",
+      "tier": "RESEARCH_A",
+      "n": 331,
+      "wins": 156,
+      "losses": 175,
+      "pushes": 0,
+      "hit_rate": 0.47129909365558914,
+      "assumed_price_roi": 0.11294974775145993
+    },
+    {
+      "season": 2025,
+      "market": "h2h",
+      "tier": "RESEARCH_B",
+      "n": 115,
+      "wins": 50,
+      "losses": 65,
+      "pushes": 0,
+      "hit_rate": 0.43478260869565216,
+      "assumed_price_roi": -0.03517658641320839
+    },
+    {
+      "season": 2025,
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 499,
+      "wins": 279,
+      "losses": 210,
+      "pushes": 10,
+      "hit_rate": 0.5705521472392638,
+      "assumed_price_roi": 0.0874476225177628
+    },
+    {
+      "season": 2025,
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 38,
+      "wins": 23,
+      "losses": 15,
+      "pushes": 0,
+      "hit_rate": 0.6052631578947368,
+      "assumed_price_roi": 0.1555023923444976
+    },
+    {
+      "season": 2025,
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 386,
+      "wins": 194,
+      "losses": 189,
+      "pushes": 3,
+      "hit_rate": 0.5065274151436031,
+      "assumed_price_roi": -0.032736693358455006
+    },
+    {
+      "season": 2025,
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 51,
+      "wins": 22,
+      "losses": 28,
+      "pushes": 1,
+      "hit_rate": 0.44,
+      "assumed_price_roi": -0.15686274509803919
+    }
+  ],
+  "overall": [
+    {
+      "market": "h2h",
+      "tier": "RESEARCH_A",
+      "n": 949,
+      "wins": 464,
+      "losses": 485,
+      "pushes": 0,
+      "hit_rate": 0.48893572181243417,
+      "assumed_price_roi": 0.10980796284186126
+    },
+    {
+      "market": "h2h",
+      "tier": "RESEARCH_B",
+      "n": 416,
+      "wins": 162,
+      "losses": 254,
+      "pushes": 0,
+      "hit_rate": 0.3894230769230769,
+      "assumed_price_roi": -0.0061642425311585905
+    },
+    {
+      "market": "spreads",
+      "tier": "RESEARCH_A",
+      "n": 2607,
+      "wins": 1463,
+      "losses": 1101,
+      "pushes": 43,
+      "hit_rate": 0.5705928237129485,
+      "assumed_price_roi": 0.08784042961258151
+    },
+    {
+      "market": "spreads",
+      "tier": "RESEARCH_B",
+      "n": 393,
+      "wins": 221,
+      "losses": 165,
+      "pushes": 7,
+      "hit_rate": 0.572538860103627,
+      "assumed_price_roi": 0.09137173259310663
+    },
+    {
+      "market": "totals",
+      "tier": "RESEARCH_A",
+      "n": 1754,
+      "wins": 908,
+      "losses": 827,
+      "pushes": 19,
+      "hit_rate": 0.523342939481268,
+      "assumed_price_roi": -0.0008811029335544655
+    },
+    {
+      "market": "totals",
+      "tier": "RESEARCH_B",
+      "n": 530,
+      "wins": 262,
+      "losses": 263,
+      "pushes": 5,
+      "hit_rate": 0.4990476190476191,
+      "assumed_price_roi": -0.046826758147512866
+    }
+  ]
+}

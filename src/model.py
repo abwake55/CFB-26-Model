@@ -1071,6 +1071,9 @@ def train_and_evaluate():
             "totals_target": "ou_deviation",      # pred_total  = over_under + model output
             "trained_through": trained_through,
             "training_games": len(prod),
+            "model_data_asof": (pd.to_datetime(prod["start_date"], utc=True, errors="coerce").max().isoformat()
+                                if "start_date" in prod and pd.to_datetime(prod["start_date"], utc=True, errors="coerce").notna().any()
+                                else None),
             "calibration_method": "season_forward_sigmoid",
             "gbm_params": {"spread": sp_params, "totals": tot_params, "win_prob": win_params},
         }, f, indent=2)
