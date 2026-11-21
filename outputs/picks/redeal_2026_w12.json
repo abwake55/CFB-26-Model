@@ -1,0 +1,29 @@
+{
+  "run_at": "2026-11-21T20:50:46+00:00",
+  "season": 2026,
+  "week": 12,
+  "decisions": [
+    {
+      "source": "model-flag",
+      "game": "Rutgers @ Penn State",
+      "bet_type": "Total",
+      "pick": "UNDER 47.0",
+      "recorded_line": 47.0,
+      "current_line": 47.0,
+      "decision": "drop",
+      "reason": "total < 48"
+    },
+    {
+      "source": "model-flag",
+      "game": "Texas Tech @ Baylor",
+      "bet_type": "Total",
+      "pick": "UNDER 55.5",
+      "recorded_line": 55.5,
+      "current_line": 55.5,
+      "decision": "drop",
+      "reason": "outside CORE gate"
+    }
+  ],
+  "new_qualifiers": [],
+  "summary": "0 keep / 2 drop / 0 new"
+}
