@@ -52,6 +52,8 @@ LEDGER_COLS = [
     "closing_spread", "closing_over_under",
     "home_score", "away_score", "completed",
     "home_win", "actual_margin", "actual_total",
+    # opener-gap signal (src/opener_gap.py), graded at opener_gap_line
+    "pred_indep_margin", "opener_gap_line", "opener_gap_edge", "flag_opener_gap",
     # live = recorded before kickoff by the scheduled job; replay_not_live =
     # weeks 1-3 reseeded after the fact; backfill_not_live = weeks missed by
     # the Oct 29 - Nov 17 CI outage, re-predicted later with a date cutoff.
@@ -122,6 +124,11 @@ def record(season: int, week: int) -> None:
                                 and abs(float(row["spread_edge"])) >= 3),
             "flag_ml": bool((pd.notna(row.get("home_ml_ev")) and row["home_ml_ev"] >= 0.04)
                             or (pd.notna(row.get("away_ml_ev")) and row["away_ml_ev"] >= 0.04)),
+            "pred_indep_margin": row.get("pred_indep_margin"),
+            "opener_gap_line": row.get("opener_gap_line"),
+            "opener_gap_edge": row.get("opener_gap_edge"),
+            "flag_opener_gap": bool(row.get("flag_opener_gap") is True
+                                    or row.get("flag_opener_gap") == 1),
             "provenance": "live",
         })
     new = pd.DataFrame(rows, columns=LEDGER_COLS)
@@ -256,7 +263,8 @@ def grade(season: int) -> None:
     _build_summary(df)
 
 
-def _bucket_stats(g: pd.DataFrame, kind: str) -> dict:
+def _bucket_stats(g: pd.DataFrame, kind: str, line_col: str = "spread",
+                  edge_col: str = "spread_edge") -> dict:
     """Grade one bucket of flagged bets at -110 against the recorded line."""
     g = g[g["completed"] == True]  # noqa: E712
     n = wins = losses = pushes = 0
@@ -276,10 +284,10 @@ def _bucket_stats(g: pd.DataFrame, kind: str) -> dict:
             if pd.notna(r.get("closing_over_under")):
                 clvs.append(r["over_under"] - r["closing_over_under"])
         elif kind == "spread":
-            if pd.isna(r.get("spread")) or pd.isna(r.get("actual_margin")):
+            if pd.isna(r.get(line_col)) or pd.isna(r.get("actual_margin")):
                 continue
-            bet_home = r["spread_edge"] > 0          # model likes home vs line
-            line = r["spread"]                       # home perspective
+            bet_home = r[edge_col] > 0               # model likes home vs line
+            line = r[line_col]                       # home perspective
             cover_margin = r["actual_margin"] + line  # home covers if > 0
             if not bet_home:
                 cover_margin = -cover_margin
@@ -321,6 +329,10 @@ def _bucket_block(df: pd.DataFrame) -> dict:
     out["core_unders"] = _bucket_stats(df[df["flag_core"] == True], "under")  # noqa: E712
     out["spread_flags"] = _bucket_stats(df[df["flag_spread"] == True], "spread")  # noqa: E712
     out["all_under_leans"] = _bucket_stats(done[done["totals_edge"] <= -2], "under")
+    if "flag_opener_gap" in df.columns:
+        fl = df["flag_opener_gap"].astype(str).str.lower().isin(["true", "1", "1.0"])
+        out["opener_gap_flags"] = _bucket_stats(df[fl], "spread", "opener_gap_line",
+                                                "opener_gap_edge")
     return out
 
 
@@ -339,6 +351,7 @@ def _build_summary(df: pd.DataFrame) -> None:
                "live_brier_lined_n": blk.get("brier_lined_n"),
                "core_unders": blk["core_unders"],
                "spread_flags": blk["spread_flags"],
+               "opener_gap_flags": blk.get("opener_gap_flags"),
                "all_under_leans": blk["all_under_leans"],
                "weeks_live": sorted(int(w) for w in live["week"].unique()),
                "not_live": {}}

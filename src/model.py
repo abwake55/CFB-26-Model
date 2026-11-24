@@ -493,6 +493,23 @@ def make_sample_weights(seasons: pd.Series, decay: float = 0.3) -> np.ndarray:
     return (raw / raw.mean()).values
 
 
+def gbm_defaults() -> dict:
+    """Low-capacity LightGBM defaults (see tune_gbm_params)."""
+    return dict(
+        n_estimators=300,
+        learning_rate=0.03,
+        num_leaves=7,
+        min_child_samples=60,
+        subsample=0.8,
+        subsample_freq=1,
+        colsample_bytree=0.7,
+        reg_lambda=5.0,
+        random_state=42,
+        n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
+        verbose=-1,
+    )
+
+
 def tune_gbm_params(X_train, y_train, X_val, y_val,
                     sample_weight=None, n_trials: int = 50,
                     task: str = "regression") -> dict:
@@ -509,19 +526,7 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
     # closing line with very little signal; walk-forward 2019-25 (leak-fixed)
     # MAE spread/totals/Brier: num_leaves 63 -> 12.357/12.750/0.1774,
     # 15 -> 12.349/12.720/0.1774, 7 -> 12.343/12.713/0.1772 (chosen).
-    defaults = dict(
-        n_estimators=300,
-        learning_rate=0.03,
-        num_leaves=7,
-        min_child_samples=60,
-        subsample=0.8,
-        subsample_freq=1,
-        colsample_bytree=0.7,
-        reg_lambda=5.0,
-        random_state=42,
-        n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
-        verbose=-1,
-    )
+    defaults = gbm_defaults()
 
     if not OPTUNA_AVAILABLE:
         print("  [Optuna not installed — using default GBM params]")
@@ -1115,9 +1120,20 @@ def show_sample_predictions(results_df: pd.DataFrame, n: int = 15):
 
 # ─── MAIN ────────────────────────────────────────────────────────────────────
 
+def train_opener_gap():
+    """Opener-gap signal (src/opener_gap.py); never blocks the main models."""
+    try:
+        import opener_gap
+        opener_gap.train(load_data(), SPREAD_FEATURES, make_sample_weights,
+                         make_linear, gbm_defaults())
+    except Exception as exc:  # pragma: no cover
+        print(f"[WARN] opener-gap model not trained: {exc}")
+
+
 if __name__ == "__main__":
     results = train_and_evaluate()
     show_sample_predictions(results)
+    train_opener_gap()
 
 
 # ─── SKLEARN VERSION COMPATIBILITY ───────────────────────────────────────────
