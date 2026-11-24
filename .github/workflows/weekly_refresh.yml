@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      ODDS_API_CACHE: ${{ runner.temp }}/odds_cache.json
+      ODDS_API_CACHE: /tmp/odds_cache.json
       ODDS_API_CACHE_MAX_AGE: '2700'
 
     steps:
