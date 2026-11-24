@@ -74,6 +74,9 @@ for _sig in BET_LINE_SIGNALS:
 # filled by grade from data/lines_snapshots: the first captured line (true
 # opener when the early-week snapshot saw it) and the sharp book's last
 # pre-kickoff line (LowVig/BetOnline; Pinnacle only if the eu region is on)
+# key-number pricing at record time (src/margin_pricing.py)
+for _sig in ("pt", "opener_gap"):
+    LEDGER_COLS += [f"{_sig}_p_cover", f"{_sig}_p_push", f"{_sig}_ev", f"{_sig}_buy_half"]
 LEDGER_COLS += ["snap_open_spread", "snap_open_ts", "closing_sharp_spread",
                 "closing_sharp_book", "closing_sharp_ts"]
 SNAP_DIR = ROOT_DIR / "data" / "lines_snapshots"
@@ -248,6 +251,8 @@ def record(season: int, week: int) -> None:
             "pt_opener": row.get("pt_opener"),
             "pt_edge": row.get("pt_edge"),
             "flag_pt": bool(row.get("flag_pt") is True or row.get("flag_pt") == 1),
+            **{f"{sg}_{k}": row.get(f"{sg}_{k}") for sg in ("pt", "opener_gap")
+               for k in ("p_cover", "p_push", "ev", "buy_half")},
             "provenance": "live",
         })
     new = pd.DataFrame(rows, columns=LEDGER_COLS)

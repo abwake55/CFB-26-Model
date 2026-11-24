@@ -386,6 +386,14 @@ def build_predictions(games, lines, spread_model, totals_model,
         except Exception as exc:
             print(f"[WARN] Prediction Tracker signal unavailable: {exc}")
 
+    # Key-number pricing (src/margin_pricing.py): cover/push/EV at the current
+    # line for each flagged spread signal, plus whether +0.5 at -120 is worth it.
+    try:
+        import margin_pricing
+        out = margin_pricing.attach(out)
+    except Exception as exc:
+        print(f"[WARN] key-number pricing unavailable: {exc}")
+
     from inference import adjust_predictions
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
@@ -513,6 +521,12 @@ def spread_signals(predictions: pd.DataFrame) -> list:
                     "edge_pts": round(float(e), 1)}
             if key == "pt":
                 item["rule"] = r.get("pt_rule")
+            pc = pd.to_numeric(r.get(f"{key}_p_cover"), errors="coerce")
+            if pd.notna(pc):
+                item["p_cover"] = round(float(pc), 3)
+                item["p_push"] = round(float(r.get(f"{key}_p_push")), 3)
+                item["ev_pct"] = round(100 * float(r.get(f"{key}_ev")), 1)
+                item["buy_half_point"] = bool(r.get(f"{key}_buy_half"))
             out.append(item)
     out.sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
     return out
@@ -530,7 +544,11 @@ def format_imessage(picks: dict, season: int, week: int) -> str:
     if picks.get("signals"):
         lines.append(f"📈 SPREAD SIGNALS — small stake / tracking ({len(picks['signals'])})")
         for sp in picks["signals"][:8]:
-            lines.append(f"  [{sp['signal']}] {sp['pick']} ({sp['game']})  |  edge {sp['edge_pts']:+.1f}")
+            px = ""
+            if "p_cover" in sp:
+                px = (f"  |  cover {100 * sp['p_cover']:.0f}% push {100 * sp['p_push']:.0f}%"
+                      + ("  |  buy +0.5 if ≤-120" if sp.get("buy_half_point") else ""))
+            lines.append(f"  [{sp['signal']}] {sp['pick']} ({sp['game']})  |  edge {sp['edge_pts']:+.1f}{px}")
         lines.append("")
 
     if not picks["core"] and not picks["paper"]:

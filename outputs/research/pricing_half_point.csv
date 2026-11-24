@@ -1,0 +1,7 @@
+signal,period,n_buy_flags,units_no_buy_-110,units_buy_half_-120,units_buy_half_-125,units_buy_half_-130,pushes_avoided,losses_turned_push
+opener_gap,dev,230,12.09,16.83,12.4,8.31,13,3
+opener_gap,holdout,92,10.55,15.33,13.4,11.62,9,1
+fpi,dev,240,-7.73,-7.83,-12.0,-15.85,7,3
+fpi,holdout,107,10.64,12.33,10.2,8.23,5,2
+main,dev,159,14.09,13.33,10.2,7.31,7,0
+main,holdout,93,-14.18,-6.83,-8.4,-9.85,12,0
