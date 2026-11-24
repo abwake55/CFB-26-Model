@@ -15,7 +15,10 @@
     "pushes": 0,
     "units": -1.1,
     "hit_rate": 0.0,
-    "avg_clv_pts": 0.5
+    "avg_clv_pts": 0.5,
+    "clv_n": 1,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
   },
   "spread_flags": {
     "n": 25,
@@ -24,7 +27,10 @@
     "pushes": 0,
     "units": 4.0,
     "hit_rate": 0.6,
-    "avg_clv_pts": 0.26
+    "avg_clv_pts": 0.26,
+    "clv_n": 25,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
   },
   "opener_gap_flags": {
     "n": 0,
@@ -33,10 +39,59 @@
     "pushes": 0,
     "units": 0.0,
     "hit_rate": null,
-    "avg_clv_pts": null
+    "avg_clv_pts": null,
+    "clv_n": 0,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
   },
-  "pt_bets": null,
-  "pt_bets_at_opener": null,
+  "pt_bets": {
+    "n": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "units": 0.0,
+    "hit_rate": null,
+    "avg_clv_pts": null,
+    "clv_n": 0,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
+  },
+  "opener_gap_bets": {
+    "n": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "units": 0.0,
+    "hit_rate": null,
+    "avg_clv_pts": null,
+    "clv_n": 0,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
+  },
+  "spread_bets": {
+    "n": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "units": 0.0,
+    "hit_rate": null,
+    "avg_clv_pts": null,
+    "clv_n": 0,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
+  },
+  "pt_bets_at_opener": {
+    "n": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "units": 0.0,
+    "hit_rate": null,
+    "avg_clv_pts": null,
+    "clv_n": 0,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
+  },
   "all_under_leans": {
     "n": 6,
     "wins": 4,
@@ -44,7 +99,10 @@
     "pushes": 0,
     "units": 1.8,
     "hit_rate": 0.6667,
-    "avg_clv_pts": -0.17
+    "avg_clv_pts": -0.17,
+    "clv_n": 6,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
   },
   "weeks_live": [
     4,
@@ -76,7 +134,10 @@
         "pushes": 0,
         "units": -1.1,
         "hit_rate": 0.0,
-        "avg_clv_pts": null
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       },
       "spread_flags": {
         "n": 9,
@@ -85,7 +146,10 @@
         "pushes": 0,
         "units": 0.6,
         "hit_rate": 0.5556,
-        "avg_clv_pts": null
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": -0.33,
+        "clv_sharp_n": 3
       },
       "all_under_leans": {
         "n": 2,
@@ -94,7 +158,10 @@
         "pushes": 0,
         "units": -0.1,
         "hit_rate": 0.5,
-        "avg_clv_pts": null
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       },
       "opener_gap_flags": {
         "n": 0,
@@ -103,7 +170,58 @@
         "pushes": 0,
         "units": 0.0,
         "hit_rate": null,
-        "avg_clv_pts": null
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "pt_bets": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "opener_gap_bets": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "spread_bets": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "pt_bets_at_opener": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       }
     },
     "replay_not_live": {
@@ -126,7 +244,10 @@
         "pushes": 0,
         "units": 1.6,
         "hit_rate": 0.6,
-        "avg_clv_pts": 0.55
+        "avg_clv_pts": 0.55,
+        "clv_n": 10,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       },
       "spread_flags": {
         "n": 43,
@@ -135,7 +256,10 @@
         "pushes": 0,
         "units": 5.2,
         "hit_rate": 0.5814,
-        "avg_clv_pts": 0.38
+        "avg_clv_pts": 0.38,
+        "clv_n": 43,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       },
       "all_under_leans": {
         "n": 14,
@@ -144,7 +268,10 @@
         "pushes": 0,
         "units": -0.7,
         "hit_rate": 0.5,
-        "avg_clv_pts": 0.39
+        "avg_clv_pts": 0.39,
+        "clv_n": 14,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       },
       "opener_gap_flags": {
         "n": 0,
@@ -153,7 +280,58 @@
         "pushes": 0,
         "units": 0.0,
         "hit_rate": null,
-        "avg_clv_pts": null
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "pt_bets": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "opener_gap_bets": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "spread_bets": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "pt_bets_at_opener": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
       }
     }
   }
