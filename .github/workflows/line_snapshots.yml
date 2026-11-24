@@ -80,6 +80,7 @@ jobs:
 
       - name: Log Odds API quota (free endpoint)
         if: always()
+        continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python scripts/odds_usage.py
