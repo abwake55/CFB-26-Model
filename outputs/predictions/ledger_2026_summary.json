@@ -51,13 +51,13 @@
         11,
         12
       ],
-      "games_tracked": 186,
-      "games_completed": 186,
-      "brier": 0.2078,
-      "brier_n": 186,
-      "brier_lined": 0.2078,
-      "market_brier_lined": 0.2067,
-      "brier_lined_n": 186,
+      "games_tracked": 248,
+      "games_completed": 248,
+      "brier": 0.2006,
+      "brier_n": 248,
+      "brier_lined": 0.2006,
+      "market_brier_lined": 0.2012,
+      "brier_lined_n": 248,
       "core_unders": {
         "n": 1,
         "wins": 0,
@@ -68,21 +68,21 @@
         "avg_clv_pts": null
       },
       "spread_flags": {
-        "n": 6,
-        "wins": 4,
-        "losses": 2,
+        "n": 9,
+        "wins": 5,
+        "losses": 4,
         "pushes": 0,
-        "units": 1.8,
-        "hit_rate": 0.6667,
+        "units": 0.6,
+        "hit_rate": 0.5556,
         "avg_clv_pts": null
       },
       "all_under_leans": {
-        "n": 1,
-        "wins": 0,
+        "n": 2,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "units": -1.1,
-        "hit_rate": 0.0,
+        "units": -0.1,
+        "hit_rate": 0.5,
         "avg_clv_pts": null
       }
     },
