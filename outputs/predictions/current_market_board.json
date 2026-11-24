@@ -1,26 +1,9 @@
 {
-  "generated_at": "2026-11-24T17:33:23.624001+00:00",
+  "generated_at": "2026-11-24T18:33:05.183243+00:00",
   "season": 2026,
   "week": 13,
   "mode": "research_not_validated_bets",
   "candidates": [
-    {
-      "Game": "Georgia Tech at Georgia",
-      "Market": "h2h",
-      "Pick": "Georgia Tech",
-      "Line": null,
-      "Odds": 5500,
-      "Book": "betmgm",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 231.96,
-      "Sampling lower EV %": 150.51,
-      "Win %": 5.9,
-      "Push %": 0.0,
-      "Calibration games": 776,
-      "Quote updated": "2026-11-24T17:33:37Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
     {
       "Game": "Notre Dame at Syracuse",
       "Market": "h2h",
@@ -35,7 +18,7 @@
       "Win %": 11.9,
       "Push %": 0.0,
       "Calibration games": 537,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -52,7 +35,7 @@
       "Win %": 13.9,
       "Push %": 0.0,
       "Calibration games": 582,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -69,7 +52,7 @@
       "Win %": 39.1,
       "Push %": 0.0,
       "Calibration games": 1119,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -86,7 +69,7 @@
       "Win %": 25.2,
       "Push %": 0.0,
       "Calibration games": 795,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -103,7 +86,7 @@
       "Win %": 30.3,
       "Push %": 0.0,
       "Calibration games": 915,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -120,7 +103,7 @@
       "Win %": 20.5,
       "Push %": 0.0,
       "Calibration games": 667,
-      "Quote updated": "2026-11-24T17:33:40Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -137,7 +120,24 @@
       "Win %": 38.1,
       "Push %": 0.0,
       "Calibration games": 1117,
-      "Quote updated": "2026-11-24T17:33:40Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Georgia Tech at Georgia",
+      "Market": "h2h",
+      "Pick": "Georgia Tech",
+      "Line": null,
+      "Odds": 2200,
+      "Book": "draftkings",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 36.34,
+      "Sampling lower EV %": 2.89,
+      "Win %": 5.9,
+      "Push %": 0.0,
+      "Calibration games": 776,
+      "Quote updated": "2026-11-24T18:32:26Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -154,7 +154,7 @@
       "Win %": 53.8,
       "Push %": 0.0,
       "Calibration games": 1290,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -171,7 +171,7 @@
       "Win %": 19.3,
       "Push %": 0.0,
       "Calibration games": 647,
-      "Quote updated": "2026-11-24T17:33:37Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -188,7 +188,7 @@
       "Win %": 37.7,
       "Push %": 0.0,
       "Calibration games": 1103,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -205,7 +205,7 @@
       "Win %": 9.8,
       "Push %": 0.0,
       "Calibration games": 1227,
-      "Quote updated": "2026-11-24T17:33:37Z",
+      "Quote updated": "2026-11-24T18:32:54Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -222,7 +222,7 @@
       "Win %": 37.7,
       "Push %": 0.0,
       "Calibration games": 1104,
-      "Quote updated": "2026-11-24T17:33:10Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -239,7 +239,7 @@
       "Win %": 35.4,
       "Push %": 0.0,
       "Calibration games": 1041,
-      "Quote updated": "2026-11-24T17:33:10Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -256,7 +256,7 @@
       "Win %": 60.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -273,7 +273,7 @@
       "Win %": 58.2,
       "Push %": 2.7,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -290,7 +290,7 @@
       "Win %": 39.8,
       "Push %": 0.0,
       "Calibration games": 1343,
-      "Quote updated": "2026-11-24T17:33:10Z",
+      "Quote updated": "2026-11-24T18:32:03Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -307,7 +307,7 @@
       "Win %": 39.5,
       "Push %": 0.0,
       "Calibration games": 1101,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -324,7 +324,7 @@
       "Win %": 36.0,
       "Push %": 0.0,
       "Calibration games": 1052,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -341,24 +341,7 @@
       "Win %": 29.5,
       "Push %": 0.0,
       "Calibration games": 897,
-      "Quote updated": "2026-11-24T17:33:37Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Mississippi State at Ole Miss",
-      "Market": "h2h",
-      "Pick": "Mississippi State",
-      "Line": null,
-      "Odds": 800,
-      "Book": "betrivers",
-      "Tier": "RESEARCH_B",
-      "Status": "REVIEW",
-      "Estimated EV %": 14.94,
-      "Sampling lower EV %": -1.0,
-      "Win %": 12.8,
-      "Push %": 0.0,
-      "Calibration games": 1198,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:54Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -375,7 +358,7 @@
       "Win %": 9.2,
       "Push %": 0.0,
       "Calibration games": 1198,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -392,24 +375,7 @@
       "Win %": 48.6,
       "Push %": 0.0,
       "Calibration games": 1194,
-      "Quote updated": "2026-11-24T17:33:15Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Tennessee at Vanderbilt",
-      "Market": "h2h",
-      "Pick": "Vanderbilt",
-      "Line": null,
-      "Odds": 470,
-      "Book": "fanduel",
-      "Tier": "RESEARCH_B",
-      "Status": "REVIEW",
-      "Estimated EV %": 14.0,
-      "Sampling lower EV %": -2.44,
-      "Win %": 20.0,
-      "Push %": 0.0,
-      "Calibration games": 655,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -426,7 +392,7 @@
       "Win %": 58.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -443,7 +409,7 @@
       "Win %": 58.5,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -460,7 +426,7 @@
       "Win %": 59.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -477,7 +443,7 @@
       "Win %": 57.2,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -494,7 +460,7 @@
       "Win %": 55.4,
       "Push %": 2.9,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -511,7 +477,24 @@
       "Win %": 54.9,
       "Push %": 2.8,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Tennessee at Vanderbilt",
+      "Market": "h2h",
+      "Pick": "Vanderbilt",
+      "Line": null,
+      "Odds": 460,
+      "Book": "fanduel",
+      "Tier": "RESEARCH_B",
+      "Status": "REVIEW",
+      "Estimated EV %": 12.0,
+      "Sampling lower EV %": -4.15,
+      "Win %": 20.0,
+      "Push %": 0.0,
+      "Calibration games": 655,
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -528,7 +511,7 @@
       "Win %": 24.9,
       "Push %": 0.0,
       "Calibration games": 1210,
-      "Quote updated": "2026-11-24T17:33:11Z",
+      "Quote updated": "2026-11-24T18:32:26Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -545,7 +528,7 @@
       "Win %": 63.2,
       "Push %": 0.0,
       "Calibration games": 1370,
-      "Quote updated": "2026-11-24T17:33:40Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -562,41 +545,24 @@
       "Win %": 56.0,
       "Push %": 2.9,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
       "Game": "Miami (OH) at Western Michigan",
       "Market": "spreads",
       "Pick": "Western Michigan",
-      "Line": -6.5,
-      "Odds": -101,
+      "Line": -5.5,
+      "Odds": -106,
       "Book": "lowvig",
       "Tier": "RESEARCH_A",
       "Status": "REVIEW",
-      "Estimated EV %": 11.48,
-      "Sampling lower EV %": 8.79,
-      "Win %": 56.0,
+      "Estimated EV %": 11.34,
+      "Sampling lower EV %": 8.71,
+      "Win %": 57.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Louisiana at Georgia State",
-      "Market": "h2h",
-      "Pick": "Georgia State",
-      "Line": null,
-      "Odds": 188,
-      "Book": "fanduel",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 11.28,
-      "Sampling lower EV %": 3.19,
-      "Win %": 38.6,
-      "Push %": 0.0,
-      "Calibration games": 1118,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -613,24 +579,7 @@
       "Win %": 25.6,
       "Push %": 0.0,
       "Calibration games": 1221,
-      "Quote updated": "2026-11-24T17:33:37Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Kent State at Eastern Michigan",
-      "Market": "h2h",
-      "Pick": "Kent State",
-      "Line": null,
-      "Odds": 195,
-      "Book": "betrivers",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 10.9,
-      "Sampling lower EV %": 3.42,
-      "Win %": 37.6,
-      "Push %": 0.0,
-      "Calibration games": 1362,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:52Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -647,7 +596,7 @@
       "Win %": 14.6,
       "Push %": 0.0,
       "Calibration games": 1188,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -664,7 +613,24 @@
       "Win %": 58.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Buffalo at Akron",
+      "Market": "totals",
+      "Pick": "Over",
+      "Line": 49.5,
+      "Odds": 102,
+      "Book": "lowvig",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 10.43,
+      "Sampling lower EV %": 7.69,
+      "Win %": 54.7,
+      "Push %": 0.0,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -681,7 +647,24 @@
       "Win %": 57.6,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Mississippi State at Ole Miss",
+      "Market": "h2h",
+      "Pick": "Mississippi State",
+      "Line": null,
+      "Odds": 760,
+      "Book": "fanduel",
+      "Tier": "RESEARCH_B",
+      "Status": "REVIEW",
+      "Estimated EV %": 9.83,
+      "Sampling lower EV %": -5.4,
+      "Win %": 12.8,
+      "Push %": 0.0,
+      "Calibration games": 1198,
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -698,7 +681,7 @@
       "Win %": 56.4,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -715,7 +698,7 @@
       "Win %": 58.1,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:40Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -732,7 +715,7 @@
       "Win %": 34.0,
       "Push %": 0.0,
       "Calibration games": 1339,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -749,7 +732,24 @@
       "Win %": 58.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Toledo at Ohio",
+      "Market": "totals",
+      "Pick": "Over",
+      "Line": 46.5,
+      "Odds": 102,
+      "Book": "lowvig",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 9.38,
+      "Sampling lower EV %": 6.63,
+      "Win %": 54.1,
+      "Push %": 0.0,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -766,7 +766,41 @@
       "Win %": 57.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:40Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Kent State at Eastern Michigan",
+      "Market": "h2h",
+      "Pick": "Kent State",
+      "Line": null,
+      "Odds": 190,
+      "Book": "betus",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 9.02,
+      "Sampling lower EV %": 1.67,
+      "Win %": 37.6,
+      "Push %": 0.0,
+      "Calibration games": 1362,
+      "Quote updated": "2026-11-24T18:32:02Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Louisville at Kentucky",
+      "Market": "spreads",
+      "Pick": "Louisville",
+      "Line": -3.0,
+      "Odds": 100,
+      "Book": "lowvig",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 8.58,
+      "Sampling lower EV %": 5.86,
+      "Win %": 53.0,
+      "Push %": 2.6,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -783,7 +817,24 @@
       "Win %": 41.7,
       "Push %": 0.0,
       "Calibration games": 1121,
-      "Quote updated": "2026-11-24T17:33:11Z",
+      "Quote updated": "2026-11-24T18:32:26Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Louisiana at Georgia State",
+      "Market": "h2h",
+      "Pick": "Georgia State",
+      "Line": null,
+      "Odds": 180,
+      "Book": "lowvig",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 8.19,
+      "Sampling lower EV %": 0.32,
+      "Win %": 38.6,
+      "Push %": 0.0,
+      "Calibration games": 1118,
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -800,7 +851,7 @@
       "Win %": 7.2,
       "Push %": 0.0,
       "Calibration games": 985,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -817,7 +868,7 @@
       "Win %": 52.3,
       "Push %": 2.3,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -834,7 +885,7 @@
       "Win %": 53.5,
       "Push %": 2.4,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -851,7 +902,7 @@
       "Win %": 56.1,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -868,7 +919,7 @@
       "Win %": 55.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -885,7 +936,7 @@
       "Win %": 52.7,
       "Push %": 2.5,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -902,7 +953,7 @@
       "Win %": 56.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:10Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -919,7 +970,7 @@
       "Win %": 55.2,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -936,7 +987,7 @@
       "Win %": 16.3,
       "Push %": 0.0,
       "Calibration games": 1169,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -953,7 +1004,7 @@
       "Win %": 53.1,
       "Push %": 2.5,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -970,7 +1021,7 @@
       "Win %": 60.5,
       "Push %": 0.0,
       "Calibration games": 1100,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -987,7 +1038,7 @@
       "Win %": 55.1,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1004,7 +1055,7 @@
       "Win %": 56.6,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1021,41 +1072,7 @@
       "Win %": 56.0,
       "Push %": 2.2,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Buffalo at Akron",
-      "Market": "totals",
-      "Pick": "Over",
-      "Line": 49.0,
-      "Odds": -110,
-      "Book": "bovada",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 6.86,
-      "Sampling lower EV %": 4.26,
-      "Win %": 54.7,
-      "Push %": 2.5,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Kent State at Eastern Michigan",
-      "Market": "spreads",
-      "Pick": "Kent State",
-      "Line": 6.5,
-      "Odds": -109,
-      "Book": "betrivers",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 6.67,
-      "Sampling lower EV %": 4.07,
-      "Win %": 55.6,
-      "Push %": 0.0,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1072,7 +1089,7 @@
       "Win %": 53.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1089,24 +1106,7 @@
       "Win %": 52.8,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Louisville at Kentucky",
-      "Market": "spreads",
-      "Pick": "Louisville",
-      "Line": -3.0,
-      "Odds": -104,
-      "Book": "lowvig",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 6.55,
-      "Sampling lower EV %": 3.88,
-      "Win %": 53.0,
-      "Push %": 2.6,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1123,7 +1123,7 @@
       "Win %": 37.1,
       "Push %": 0.0,
       "Calibration games": 1095,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1140,7 +1140,7 @@
       "Win %": 55.2,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1157,7 +1157,7 @@
       "Win %": 53.8,
       "Push %": 2.5,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1174,7 +1174,7 @@
       "Win %": 52.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1191,7 +1191,7 @@
       "Win %": 54.6,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1208,7 +1208,7 @@
       "Win %": 55.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1225,7 +1225,7 @@
       "Win %": 52.5,
       "Push %": 0.0,
       "Calibration games": 1189,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1242,7 +1242,7 @@
       "Win %": 55.5,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1259,7 +1259,7 @@
       "Win %": 54.5,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1276,7 +1276,7 @@
       "Win %": 55.5,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1293,7 +1293,7 @@
       "Win %": 55.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1310,7 +1310,24 @@
       "Win %": 55.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Kent State at Eastern Michigan",
+      "Market": "spreads",
+      "Pick": "Kent State",
+      "Line": 5.5,
+      "Odds": -101,
+      "Book": "lowvig",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 5.76,
+      "Sampling lower EV %": 3.06,
+      "Win %": 53.1,
+      "Push %": 0.0,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1327,7 +1344,7 @@
       "Win %": 51.7,
       "Push %": 2.7,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1344,7 +1361,7 @@
       "Win %": 62.4,
       "Push %": 0.0,
       "Calibration games": 1360,
-      "Quote updated": "2026-11-24T17:33:10Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1361,24 +1378,7 @@
       "Win %": 55.2,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "UConn at Wyoming",
-      "Market": "totals",
-      "Pick": "Over",
-      "Line": 45.5,
-      "Odds": -110,
-      "Book": "fanduel",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 5.18,
-      "Sampling lower EV %": 2.59,
-      "Win %": 55.1,
-      "Push %": 0.0,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1395,7 +1395,7 @@
       "Win %": 55.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1412,7 +1412,7 @@
       "Win %": 52.3,
       "Push %": 2.3,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1429,7 +1429,7 @@
       "Win %": 52.1,
       "Push %": 2.1,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1446,7 +1446,7 @@
       "Win %": 53.2,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1463,7 +1463,7 @@
       "Win %": 52.9,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:12Z",
+      "Quote updated": "2026-11-24T18:32:26Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1480,7 +1480,7 @@
       "Win %": 50.9,
       "Push %": 2.9,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1497,7 +1497,7 @@
       "Win %": 54.4,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1514,7 +1514,7 @@
       "Win %": 53.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1531,7 +1531,7 @@
       "Win %": 53.8,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1548,41 +1548,7 @@
       "Win %": 52.9,
       "Push %": 2.4,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Toledo at Ohio",
-      "Market": "totals",
-      "Pick": "Over",
-      "Line": 47.5,
-      "Odds": -108,
-      "Book": "bovada",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 4.28,
-      "Sampling lower EV %": 1.67,
-      "Win %": 54.1,
-      "Push %": 0.0,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Arizona State at Arizona",
-      "Market": "h2h",
-      "Pick": "Arizona State",
-      "Line": null,
-      "Odds": 275,
-      "Book": "fanduel",
-      "Tier": "RESEARCH_B",
-      "Status": "REVIEW",
-      "Estimated EV %": 4.25,
-      "Sampling lower EV %": -4.96,
-      "Win %": 27.8,
-      "Push %": 0.0,
-      "Calibration games": 1205,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1599,24 +1565,24 @@
       "Win %": 49.6,
       "Push %": 2.9,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
-      "Game": "Michigan State at Rutgers",
-      "Market": "spreads",
-      "Pick": "Michigan State",
-      "Line": -3.5,
-      "Odds": -101,
-      "Book": "lowvig",
+      "Game": "Miami (OH) at Western Michigan",
+      "Market": "h2h",
+      "Pick": "Western Michigan",
+      "Line": null,
+      "Odds": -220,
+      "Book": "fanduel",
       "Tier": "RESEARCH_A",
       "Status": "REVIEW",
-      "Estimated EV %": 4.0,
-      "Sampling lower EV %": 1.29,
-      "Win %": 52.3,
+      "Estimated EV %": 3.98,
+      "Sampling lower EV %": 0.21,
+      "Win %": 71.5,
       "Push %": 0.0,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Calibration games": 1224,
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1633,24 +1599,7 @@
       "Win %": 54.0,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Louisiana at Georgia State",
-      "Market": "spreads",
-      "Pick": "Georgia State",
-      "Line": 5.5,
-      "Odds": 100,
-      "Book": "fanduel",
-      "Tier": "RESEARCH_A",
-      "Status": "REVIEW",
-      "Estimated EV %": 3.86,
-      "Sampling lower EV %": 1.14,
-      "Win %": 51.9,
-      "Push %": 0.0,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1667,7 +1616,7 @@
       "Win %": 52.4,
       "Push %": 0.0,
       "Calibration games": 1188,
-      "Quote updated": "2026-11-24T17:33:11Z",
+      "Quote updated": "2026-11-24T18:32:26Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1684,7 +1633,7 @@
       "Win %": 52.6,
       "Push %": 2.4,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:11Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1701,7 +1650,7 @@
       "Win %": 49.5,
       "Push %": 2.9,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1718,7 +1667,7 @@
       "Win %": 52.1,
       "Push %": 2.1,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1735,7 +1684,7 @@
       "Win %": 52.5,
       "Push %": 2.4,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1752,7 +1701,24 @@
       "Win %": 53.3,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Michigan State at Rutgers",
+      "Market": "spreads",
+      "Pick": "Michigan State",
+      "Line": -3.5,
+      "Odds": -102,
+      "Book": "betmgm",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 3.49,
+      "Sampling lower EV %": 0.79,
+      "Win %": 52.3,
+      "Push %": 0.0,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:54Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1769,7 +1735,7 @@
       "Win %": 50.5,
       "Push %": 3.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1786,24 +1752,24 @@
       "Win %": 53.7,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
-      "Game": "Miami (OH) at Western Michigan",
+      "Game": "Arizona State at Arizona",
       "Market": "h2h",
-      "Pick": "Western Michigan",
+      "Pick": "Arizona State",
       "Line": null,
-      "Odds": -225,
-      "Book": "fanduel",
+      "Odds": 272,
+      "Book": "betus",
       "Tier": "RESEARCH_B",
       "Status": "REVIEW",
-      "Estimated EV %": 3.4,
-      "Sampling lower EV %": -0.37,
-      "Win %": 71.6,
+      "Estimated EV %": 3.42,
+      "Sampling lower EV %": -5.72,
+      "Win %": 27.8,
       "Push %": 0.0,
-      "Calibration games": 1207,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Calibration games": 1205,
+      "Quote updated": "2026-11-24T18:32:03Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1820,7 +1786,7 @@
       "Win %": 53.4,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:39Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1837,7 +1803,7 @@
       "Win %": 53.6,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1854,7 +1820,7 @@
       "Win %": 54.1,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1871,7 +1837,7 @@
       "Win %": 51.8,
       "Push %": 2.6,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1888,7 +1854,7 @@
       "Win %": 52.3,
       "Push %": 2.4,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:12Z",
+      "Quote updated": "2026-11-24T18:32:27Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1905,7 +1871,7 @@
       "Win %": 52.8,
       "Push %": 2.4,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1922,7 +1888,7 @@
       "Win %": 52.8,
       "Push %": 2.3,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:36Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1939,7 +1905,24 @@
       "Win %": 52.8,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:12Z",
+      "Quote updated": "2026-11-24T18:32:27Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "Kent State at Eastern Michigan",
+      "Market": "totals",
+      "Pick": "Over",
+      "Line": 45.5,
+      "Odds": -115,
+      "Book": "betrivers",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 2.96,
+      "Sampling lower EV %": 0.43,
+      "Win %": 55.1,
+      "Push %": 0.0,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1956,7 +1939,7 @@
       "Win %": 49.1,
       "Push %": 2.7,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1973,7 +1956,24 @@
       "Win %": 53.4,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
+      "Needs attention": "availability review required, prospective validation required"
+    },
+    {
+      "Game": "UConn at Wyoming",
+      "Market": "totals",
+      "Pick": "Over",
+      "Line": 45.5,
+      "Odds": -110,
+      "Book": "fanduel",
+      "Tier": "RESEARCH_A",
+      "Status": "REVIEW",
+      "Estimated EV %": 2.78,
+      "Sampling lower EV %": 0.19,
+      "Win %": 53.8,
+      "Push %": 0.0,
+      "Calibration games": 5184,
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -1990,7 +1990,7 @@
       "Win %": 39.8,
       "Push %": 0.0,
       "Calibration games": 1343,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:31:12Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -2007,7 +2007,7 @@
       "Win %": 54.9,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:40Z",
+      "Quote updated": "2026-11-24T18:32:53Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -2024,24 +2024,7 @@
       "Win %": 52.8,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
-      "Needs attention": "availability review required, prospective validation required"
-    },
-    {
-      "Game": "Duke at Wake Forest",
-      "Market": "spreads",
-      "Pick": "Wake Forest",
-      "Line": -14.5,
-      "Odds": -103,
-      "Book": "bovada",
-      "Tier": "RESEARCH_B",
-      "Status": "REVIEW",
-      "Estimated EV %": 2.57,
-      "Sampling lower EV %": -0.11,
-      "Win %": 52.0,
-      "Push %": 0.0,
-      "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:32:52Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, prospective validation required"
     },
     {
@@ -2058,7 +2041,7 @@
       "Win %": 53.7,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:58Z",
+      "Quote updated": "2026-11-24T18:32:51Z",
       "Needs attention": "availability review required, weather review required, prospective validation required"
     },
     {
@@ -2075,7 +2058,7 @@
       "Win %": 52.7,
       "Push %": 0.0,
       "Calibration games": 5184,
-      "Quote updated": "2026-11-24T17:33:15Z",
+      "Quote updated": "2026-11-24T18:32:02Z",
       "Needs attention": "availability review required, prospective validation required"
     }
   ]
