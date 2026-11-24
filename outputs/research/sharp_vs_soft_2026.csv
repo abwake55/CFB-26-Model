@@ -1,0 +1,9 @@
+snapshot,rule,n,w,l,p,win%,roi%,p_vs_breakeven,games
+first,sharp direction |dev|>=0.5,108,58,48,2,54.72,4.46,0.351,335
+first,sharp direction & model agrees,36,23,13,0,63.89,21.97,0.112,335
+first,model side (edge>=3 vs soft) & sharp agrees,10,6,4,0,60.0,14.55,0.437,335
+first,"model side (edge>=3 vs soft), all",23,13,10,0,56.52,7.91,0.427,335
+last,sharp direction |dev|>=0.5,94,53,40,1,56.99,8.8,0.216,335
+last,sharp direction & model agrees,28,15,13,0,53.57,2.27,0.526,335
+last,model side (edge>=3 vs soft) & sharp agrees,9,5,4,0,55.56,6.06,0.558,335
+last,"model side (edge>=3 vs soft), all",27,14,13,0,51.85,-1.01,0.599,335
