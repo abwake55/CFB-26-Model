@@ -1,0 +1,11 @@
+rule,period,thr,bet_at,n,w,l,p,win%,roi%,clv,clv+%,close_win%,close_roi%
+main@close,dev,2,close,1763,891,845,27,51.32,-2.02,0.0,0.0,51.32,-2.02
+main@close,holdout,2,close,473,237,228,8,50.97,-2.7,0.0,0.0,50.97,-2.7
+main@open,dev,4,open,321,173,143,5,54.75,4.52,0.045,49.2,54.55,4.13
+main@open,holdout,4,open,59,26,33,0,44.07,-15.87,-0.076,39.0,50.0,-4.55
+opener-anchored@open,dev,2,open,518,260,249,9,51.08,-2.48,0.125,49.6,50.0,-4.55
+opener-anchored@open,holdout,2,open,717,347,355,15,49.43,-5.63,0.13,46.3,49.29,-5.91
+indep-gap@open,dev,11,open,115,63,47,5,57.27,9.34,2.083,67.0,53.57,2.27
+indep-gap@open,holdout,11,open,35,19,14,2,57.58,9.92,0.543,51.4,54.55,4.13
+blend(main+opener)@open,dev,3,open,253,133,115,5,53.63,2.38,0.192,50.2,52.63,0.48
+blend(main+opener)@open,holdout,3,open,253,124,124,5,50.0,-4.55,0.15,45.8,50.61,-3.39

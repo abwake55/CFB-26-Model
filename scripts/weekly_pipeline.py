@@ -368,6 +368,13 @@ def build_predictions(games, lines, spread_model, totals_model,
     out["pred_total"]  = ou_vals + totals_model.predict(make_feat(feature_lists["totals"]))
     out["pred_win_p"]  = win_prob_model.predict_proba(make_feat(feature_lists["win_prob"]))[:, 1]
 
+    # Opener-gap signal (src/opener_gap.py): market-free margin vs the opener.
+    try:
+        import opener_gap
+        out = opener_gap.attach(out, df)
+    except Exception as exc:
+        print(f"[WARN] opener-gap signal unavailable: {exc}")
+
     from inference import adjust_predictions
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None

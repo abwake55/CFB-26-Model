@@ -29,11 +29,25 @@ LAMBDA_MARGIN = 3.0
 VERSION = "inseason_v1"
 
 
-def _ridge_offset(X, y, lam):
-    """Solve min ||y - Xb||^2 + lam ||b||^2 (dense normal equations)."""
+def _ridge_offset(X, y, lam, w=None):
+    """Solve min sum w (y - Xb)^2 + lam ||b||^2 (dense normal equations)."""
+    if w is not None:
+        W = sparse.diags(w)
+        XtW = X.T @ W
+        XtX = XtW @ X
+        XtX = XtX.toarray() if sparse.issparse(XtX) else XtX
+        XtX[np.diag_indices_from(XtX)] += lam
+        return np.linalg.solve(XtX, XtW @ y)
     XtX = (X.T @ X).toarray() if sparse.issparse(X) else X.T @ X
     XtX[np.diag_indices_from(XtX)] += lam
     return np.linalg.solve(XtX, X.T @ y)
+
+
+def _recency(days_ago, half_life):
+    """Weights 0.5**(age/half_life); None -> unweighted."""
+    if not half_life:
+        return None
+    return np.power(0.5, np.asarray(days_ago, dtype=float) / float(half_life))
 
 
 def _eastern_day(ts: pd.Series) -> pd.Series:
@@ -41,7 +55,8 @@ def _eastern_day(ts: pd.Series) -> pd.Series:
     return t.dt.tz_convert("America/New_York").dt.normalize()
 
 
-def _fit_ppa(rows: pd.DataFrame, teams: list, prior_o: dict, prior_d: dict, lam: float):
+def _fit_ppa(rows: pd.DataFrame, teams: list, prior_o: dict, prior_d: dict, lam: float,
+             w=None):
     """rows: team, opponent, off_epa, is_home(+1/0/-1). Returns (O, D, mu, h)."""
     idx = {t: i for i, t in enumerate(teams)}
     n, k = len(rows), len(teams)
@@ -60,13 +75,13 @@ def _fit_ppa(rows: pd.DataFrame, teams: list, prior_o: dict, prior_d: dict, lam:
     X = sparse.csr_matrix((data, (r, c)), shape=(n, 2 * k))
     hcol = sparse.csr_matrix(rows["is_home"].to_numpy(dtype=float).reshape(-1, 1))
     X = sparse.hstack([X, hcol]).tocsr()
-    b = _ridge_offset(X, y, lam)
+    b = _ridge_offset(X, y, lam, w)
     O = {t: po[i] + b[i] for t, i in idx.items()}
     D = {t: pd_[i] + b[k + i] for t, i in idx.items()}
     return O, D, mu, float(b[-1])
 
 
-def _fit_margin(g: pd.DataFrame, teams: list, prior: dict, lam: float):
+def _fit_margin(g: pd.DataFrame, teams: list, prior: dict, lam: float, w=None):
     idx = {t: i for i, t in enumerate(teams)}
     n, k = len(g), len(teams)
     if n == 0:
@@ -80,19 +95,21 @@ def _fit_margin(g: pd.DataFrame, teams: list, prior: dict, lam: float):
     X = sparse.csr_matrix((data, (np.r_[np.arange(n), np.arange(n)], np.r_[hi, ai])),
                           shape=(n, k))
     X = sparse.hstack([X, sparse.csr_matrix(home.reshape(-1, 1))]).tocsr()
-    b = _ridge_offset(X, y, lam)
+    b = _ridge_offset(X, y, lam, w)
     return {t: pr[i] + b[i] for t, i in idx.items()}
 
 
 def build_inseason_ratings(games: pd.DataFrame, ppa: pd.DataFrame,
                            lam_ppa: float = LAMBDA_PPA,
                            lam_margin: float = LAMBDA_MARGIN,
-                           prior_regress: float = PRIOR_REGRESS) -> pd.DataFrame:
+                           prior_regress: float = PRIOR_REGRESS,
+                           half_life_days: float | None = None) -> pd.DataFrame:
     """Return one row per game_id in `games` with point-in-time rating features.
 
     games: game_id, season, start_date, home_team, away_team, neutral_site,
            point_diff (NaN allowed for unplayed games).
     ppa:   game_id, team, opponent, off_epa (one row per team per game).
+    half_life_days: optional recency weighting of earlier games (research).
     """
     g = games.copy()
     g["day"] = _eastern_day(g["start_date"])
@@ -118,8 +135,10 @@ def build_inseason_ratings(games: pd.DataFrame, ppa: pd.DataFrame,
         prr = {t: prior_regress * v for t, v in prior_r.items()}
         for day, todays in gs.groupby("day"):
             prev_p, prev_g = ps[ps["day"] < day], pl[pl["day"] < day]
-            O, D, _, _ = _fit_ppa(prev_p, teams, po, pdd, lam_ppa)
-            R = _fit_margin(prev_g, teams, prr, lam_margin)
+            wp = _recency((day - prev_p["day"]).dt.days, half_life_days)
+            wg = _recency((day - prev_g["day"]).dt.days, half_life_days)
+            O, D, _, _ = _fit_ppa(prev_p, teams, po, pdd, lam_ppa, wp)
+            R = _fit_margin(prev_g, teams, prr, lam_margin, wg)
             cnt = pd.concat([prev_g["home_team"], prev_g["away_team"]]).value_counts()
             for r in todays.itertuples():
                 h, a = r.home_team, r.away_team

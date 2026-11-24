@@ -40,3 +40,7 @@ env/
 
 # Local dev tooling
 .claude/
+
+# research scratch (rebuildable)
+outputs/research/is_cache/
+outputs/research/lab_*.csv
