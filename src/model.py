@@ -386,7 +386,8 @@ SPREAD_FEATURES = [
     "is_postseason",          # bowl/playoff: stale form, long layoff
     "rest_diff",              # days since last game (short week = fatigue/prep hit)
     "hfa_diff",               # team-specific home field advantage differential
-    "spread_magnitude",       # absolute size of expected margin (blowout indicator)
+    # spread_magnitude (|closing spread|) REMOVED 2026-11-24: it is a market
+    # input built from the closing line, unavailable at decision time.
 
     # ── Travel ────────────────────────────────────────────────────────────────
     "travel_disadvantage",    # away_travel_miles − home_travel_miles
@@ -425,9 +426,10 @@ TOTALS_FEATURES = [
     "home_wepa_explosiveness", "away_wepa_explosiveness",
 
     # ── Weather (outdoor games only — largest effect on totals) ───────────────
-    "wind_speed",             # >15 mph significantly suppresses passing/scoring
-    "temp_avg",               # extreme cold reduces scoring
-    "precipitation",          # rain/snow → more runs, fewer passes
+    # wind_speed / temp_avg / precipitation REMOVED 2026-11-24: historical
+    # values are OBSERVED game-day weather (Open-Meteo archive), not the
+    # forecast available at bet time. Forecast wind still drives the CORE
+    # wind gate at decision time; re-add once archived forecasts exist.
     "is_dome",                # dome = weather-neutral baseline
 
     # ── Pace & tempo ──────────────────────────────────────────────────────────
@@ -454,7 +456,7 @@ TOTALS_FEATURES = [
     "conference_game",
     "week_num", "late_season", "is_postseason",
     "rest_diff",
-    "spread_magnitude",
+    # spread_magnitude removed 2026-11-24 (closing-line derived)
 
     # ── Travel ────────────────────────────────────────────────────────────────
     "travel_disadvantage",
