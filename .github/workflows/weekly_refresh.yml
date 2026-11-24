@@ -8,7 +8,8 @@ on:
     branches: [main]
     paths: ["src/market_edges.py", ".github/workflows/weekly_refresh.yml"]
   schedule:
-    - cron: '0 8 * * 2'
+    - cron: '0 15 * * 0'   # Sun 7 AM PT: Saturday finals are in CFBD -> retrain
+    - cron: '0 8 * * 2'    # Tue 12 AM PT: Monday stragglers + newsletter
   workflow_dispatch:
     inputs:
       force_retrain:
@@ -27,6 +28,11 @@ on:
 # ── Permissions ────────────────────────────────────────────────────────────────
 permissions:
   contents: write   # needed to push updated CSVs and model files back
+  issues: write     # open an issue when the job fails
+
+concurrency:
+  group: ${{ github.workflow }}   # never overlap with itself; pushes rebase+retry
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -37,13 +43,13 @@ jobs:
     steps:
       # ── 1. Checkout ──────────────────────────────────────────────────────────
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # ── 2. Python setup ──────────────────────────────────────────────────────
       - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -177,7 +183,7 @@ jobs:
       # Fetches this week's schedule, runs predictions, compares last week's picks
       # to actual results, and emails a formatted HTML newsletter.
       - name: Generate and send weekly newsletter
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && github.event.schedule != '0 15 * * 0'
         env:
           CFB_API_KEY:          ${{ secrets.CFB_API_KEY }}
           SENDER_EMAIL:         ${{ secrets.SENDER_EMAIL }}
@@ -188,17 +194,13 @@ jobs:
       # ── 11. Commit & push results back to repo ────────────────────────────────
       # Streamlit Cloud auto-redeploys when main branch is updated.
       - name: Commit and push updated data & models
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          # Only commit if something actually changed
-          if git diff --staged --quiet; then
-            echo "✅ No changes to commit — data already up to date"
-          else
-            STAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
-            MODE="${{ steps.season.outputs.mode }}"
-            git commit -m "Auto-refresh [$MODE] $STAMP"
-            git push
-            echo "✅ Pushed updated data — Streamlit Cloud will redeploy automatically"
-          fi
+        run: >-
+          bash .github/scripts/commit_and_push.sh
+          "Auto-refresh [${{ steps.season.outputs.mode }}] $(date -u +'%Y-%m-%d %H:%M UTC')"
+          .
+
+      - name: Report failure
+        if: failure() && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/report_failure.sh
