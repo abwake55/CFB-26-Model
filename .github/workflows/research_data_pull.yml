@@ -1,0 +1,43 @@
+name: Research data pull (CFBD)
+# Manual only. Pulls research datasets into data/research/ and commits them.
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: 'Season range, e.g. 2017-2026'
+        default: '2017-2026'
+      what:
+        description: 'lines,passing'
+        default: 'lines,passing'
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Pull
+        env:
+          CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
+          SEASONS: ${{ inputs.seasons }}
+          WHAT: ${{ inputs.what }}
+        run: python scripts/research/pull_cfbd_research.py --seasons "$SEASONS" --what "$WHAT"
+      - name: Commit and push
+        run: >-
+          bash .github/scripts/commit_and_push.sh
+          "Research data pull (CFBD) ${{ inputs.seasons }} ${{ inputs.what }}"
+          data/research
+      - name: Report failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/report_failure.sh
