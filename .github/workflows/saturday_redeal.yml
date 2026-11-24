@@ -18,6 +18,8 @@ jobs:
     name: Re-deal flagged bets at current lines
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      ODDS_API_CACHE: ${{ runner.temp }}/odds_cache.json
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -29,11 +31,17 @@ jobs:
           CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python scripts/saturday_redeal.py
+      - name: Log Odds API quota (free endpoint)
+        if: always()
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/odds_usage.py
       - name: Commit re-deal verdicts
         run: >-
           bash .github/scripts/commit_and_push.sh
           "Saturday re-deal $(date -u +'%Y-%m-%d %H:%M UTC')"
-          outputs/picks
+          outputs/picks data/odds_api_usage
 
       - name: Report failure
         if: failure() && github.event_name != 'pull_request'

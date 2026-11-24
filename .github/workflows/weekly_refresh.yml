@@ -43,6 +43,9 @@ jobs:
     name: Refresh data & retrain
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      ODDS_API_CACHE: ${{ runner.temp }}/odds_cache.json
+      ODDS_API_CACHE_MAX_AGE: '2700'
 
     steps:
       # ── 1. Checkout ──────────────────────────────────────────────────────────
@@ -200,6 +203,13 @@ jobs:
           SENDER_APP_PASSWORD:  ${{ secrets.SENDER_APP_PASSWORD }}
           RECIPIENT_EMAIL:      ${{ secrets.RECIPIENT_EMAIL }}
         run: python scripts/generate_newsletter.py
+
+      - name: Log Odds API quota (free endpoint)
+        if: always()
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/odds_usage.py
 
       # ── 11. Commit & push results back to repo ────────────────────────────────
       # Streamlit Cloud auto-redeploys when main branch is updated.

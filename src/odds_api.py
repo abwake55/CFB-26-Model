@@ -50,18 +50,81 @@ def _round_half(x):
     return None if x is None else round(x * 2) / 2
 
 
+USAGE_DIR = ROOT / "data" / "odds_api_usage"   # one CSV per month per workflow
+MARKETS = "h2h,spreads,totals"
+LAST_FROM_CACHE = False   # True when the last fetch_ncaaf_events hit the cache
+
+
+def log_usage(headers, endpoint: str, regions: str = "", markets: str = "") -> dict:
+    """Append The Odds API quota headers to data/odds_api_usage.csv.
+    x-requests-last = credits this call cost; used/remaining = month to date."""
+    rec = {"ts_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+           "source": os.environ.get("GITHUB_WORKFLOW", "local"),
+           "endpoint": endpoint, "regions": regions, "markets": markets,
+           "credits_last": headers.get("x-requests-last"),
+           "used": headers.get("x-requests-used"),
+           "remaining": headers.get("x-requests-remaining")}
+    try:
+        slug = re.sub(r"[^a-z0-9]+", "-", rec["source"].lower()).strip("-") or "local"
+        path = USAGE_DIR / f"{rec['ts_utc'][:7]}_{slug}.csv"
+        USAGE_DIR.mkdir(parents=True, exist_ok=True)
+        new = not path.exists()
+        with open(path, "a") as f:
+            if new:
+                f.write(",".join(rec) + "\n")
+            f.write(",".join("" if v is None else str(v) for v in rec.values()) + "\n")
+    except OSError:
+        pass
+    return rec
+
+
 def fetch_ncaaf_events(api_key: str, timeout: int = 25) -> list:
-    """Raw event list from The Odds API (empty list on any non-list body)."""
+    """Raw event list from The Odds API (empty list on any non-list body).
+
+    ODDS_API_CACHE=<path> reuses one response for ODDS_API_CACHE_MAX_AGE
+    seconds (default 1800), so the several scripts in one CI job share a
+    single 3-credit call instead of paying for one each."""
+    import json
+    global LAST_FROM_CACHE
+    regions = os.environ.get("ODDS_API_REGIONS", "us")
+    cache = os.environ.get("ODDS_API_CACHE")
+    max_age = float(os.environ.get("ODDS_API_CACHE_MAX_AGE", "1800"))
+    if cache and os.path.exists(cache):
+        try:
+            blob = json.loads(open(cache).read())
+            age = datetime.now(timezone.utc).timestamp() - float(blob["fetched_at"])
+            if age <= max_age and blob.get("regions") == regions:
+                LAST_FROM_CACHE = True
+                return blob["events"]
+        except Exception:
+            pass
     resp = requests.get(
         f"{ODDS_API_BASE}/",
-        params={"apiKey": api_key,
-                "regions": os.environ.get("ODDS_API_REGIONS", "us"),
-                "markets": "h2h,spreads,totals", "oddsFormat": "american"},
+        params={"apiKey": api_key, "regions": regions,
+                "markets": MARKETS, "oddsFormat": "american"},
         timeout=timeout,
     )
+    log_usage(resp.headers, "odds", regions, MARKETS)
     resp.raise_for_status()
     data = resp.json()
-    return data if isinstance(data, list) else []
+    data = data if isinstance(data, list) else []
+    LAST_FROM_CACHE = False
+    if cache:
+        try:
+            with open(cache, "w") as f:
+                json.dump({"fetched_at": datetime.now(timezone.utc).timestamp(),
+                           "regions": regions, "events": data}, f)
+        except OSError:
+            pass
+    return data
+
+
+def check_quota(api_key: str, timeout: int = 20) -> dict:
+    """Quota headers via /v4/sports, which does not count against the quota."""
+    resp = requests.get("https://api.the-odds-api.com/v4/sports/",
+                        params={"apiKey": api_key}, timeout=timeout)
+    resp.raise_for_status()
+    return log_usage(resp.headers, "sports(free)")
 
 
 def events_to_consensus(events: list) -> pd.DataFrame:
@@ -270,6 +333,8 @@ def fetch_lines(api_key: str, games_df: pd.DataFrame,
     events = fetch_ncaaf_events(api_key, timeout=timeout)
     consensus = events_to_consensus(events)
     matched = match_to_games(consensus, games_df)
+    if LAST_FROM_CACHE:   # these quotes were archived when first fetched
+        return matched
     for _, row in matched.iterrows():
         for quote in row.get("book_quotes", []):
             append_record(ROOT / "data/lines_snapshots/quotes", {**quote, "game_id": int(row.game_id)})

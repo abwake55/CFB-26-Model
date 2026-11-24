@@ -13,6 +13,11 @@ on:
     paths: ['.github/workflows/line_snapshots.yml']
   schedule:
     - cron: '0 14 * * *'   # 6 AM Pacific, daily
+    # Opener capture: CFB openers post Sunday afternoon/evening Pacific.
+    # Two extra Sunday runs record `first` (the opener) and the ledger's
+    # opener-time flags/bet lines before Monday's market moves.
+    - cron: '0 21 * * 0'   # Sun 1 PM Pacific
+    - cron: '0 1 * * 1'    # Sun 5 PM Pacific
   workflow_dispatch:
 
 permissions:
@@ -28,6 +33,10 @@ jobs:
     name: Snapshot current-week lines
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # one 3-credit Odds API call per run, shared by every step below
+      ODDS_API_CACHE: ${{ runner.temp }}/odds_cache.json
+      ODDS_API_CACHE_MAX_AGE: '1800'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
@@ -69,11 +78,17 @@ jobs:
           python scripts/prediction_ledger.py record
           python scripts/record_decisions.py
 
+      - name: Log Odds API quota (free endpoint)
+        if: always()
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/odds_usage.py
+
       - name: Commit and push snapshots
         run: >-
           bash .github/scripts/commit_and_push.sh
           "Line snapshot $(date -u +'%Y-%m-%d %H:%M UTC')"
-          data/lines_snapshots data/context outputs/predictions data/external/prediction_tracker
+          data/lines_snapshots data/context outputs/predictions data/external/prediction_tracker data/odds_api_usage
 
       - name: Report failure
         if: failure() && github.event_name != 'pull_request'
