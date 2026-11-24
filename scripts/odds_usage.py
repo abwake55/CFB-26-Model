@@ -28,7 +28,7 @@ def main() -> None:
     files = sorted(odds_api.USAGE_DIR.glob("*.csv"))
     if files:
         u = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
-        u["ts_utc"] = pd.to_datetime(u["ts_utc"], utc=True, errors="coerce")
+        u["ts_utc"] = pd.to_datetime(u["ts_utc"], utc=True, errors="coerce", format="ISO8601")
         m = u[(u.endpoint == "odds") & (u.ts_utc.dt.strftime("%Y-%m")
                                         == pd.Timestamp.now(tz="UTC").strftime("%Y-%m"))]
         if len(m):

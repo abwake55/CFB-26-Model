@@ -69,10 +69,12 @@ def log_usage(headers, endpoint: str, regions: str = "", markets: str = "") -> d
         path = USAGE_DIR / f"{rec['ts_utc'][:7]}_{slug}.csv"
         USAGE_DIR.mkdir(parents=True, exist_ok=True)
         new = not path.exists()
-        with open(path, "a") as f:
+        import csv
+        with open(path, "a", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(rec))
             if new:
-                f.write(",".join(rec) + "\n")
-            f.write(",".join("" if v is None else str(v) for v in rec.values()) + "\n")
+                w.writeheader()
+            w.writerow({k: ("" if v is None else v) for k, v in rec.items()})
     except OSError:
         pass
     return rec
