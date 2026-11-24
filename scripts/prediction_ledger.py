@@ -65,9 +65,87 @@ LEDGER_COLS = [
 # Per signal: the line and time a bet would have been placed = the current
 # consensus spread the FIRST time the flag appeared. Kept across re-records.
 # signal -> (flag column, edge column)
-BET_LINE_SIGNALS = {"pt": ("flag_pt", "pt_edge")}
+BET_LINE_SIGNALS = {"pt": ("flag_pt", "pt_edge"),
+                    "opener_gap": ("flag_opener_gap", "opener_gap_edge"),
+                    "spread": ("flag_spread", "spread_edge")}
 for _sig in BET_LINE_SIGNALS:
-    LEDGER_COLS += [f"{_sig}_bet_line", f"{_sig}_bet_ts", f"{_sig}_bet_edge"]
+    LEDGER_COLS += [f"{_sig}_bet_line", f"{_sig}_bet_ts", f"{_sig}_bet_edge",
+                    f"{_sig}_clv", f"{_sig}_clv_sharp"]
+# filled by grade from data/lines_snapshots: the first captured line (true
+# opener when the early-week snapshot saw it) and the sharp book's last
+# pre-kickoff line (LowVig/BetOnline; Pinnacle only if the eu region is on)
+LEDGER_COLS += ["snap_open_spread", "snap_open_ts", "closing_sharp_spread",
+                "closing_sharp_book", "closing_sharp_ts"]
+SNAP_DIR = ROOT_DIR / "data" / "lines_snapshots"
+
+
+def _week_snapshot(season: int, week: int) -> dict:
+    path = SNAP_DIR / f"lines_{season}_W{int(week):02d}.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text()).get("games", {})
+    except Exception:
+        return {}
+
+
+def _sharp_close(rec: dict):
+    """(spread, book, ts) of the last pre-kickoff snapshot carrying a sharp line."""
+    hist = rec.get("history") or []
+    for h in reversed(hist):
+        if h.get("sharp_spread") is not None:
+            return h["sharp_spread"], h.get("sharp_book"), h.get("ts")
+    cur = rec.get("current") or {}
+    if cur.get("sharp_spread") is not None:
+        return cur["sharp_spread"], cur.get("sharp_book"), rec.get("updated")
+    return None, None, None
+
+
+def _sharp_close_from_quotes(game_ids) -> dict:
+    """{game_id: (spread, book, observed_at)} — last sharp-book home spread
+    quote observed before kickoff, from the raw quote archive
+    (data/lines_snapshots/quotes/*.jsonl). Fallback when a week's snapshot
+    predates sharp fields."""
+    import glob
+    want = {int(g) for g in game_ids}
+    pref = {"pinnacle": 0, "lowvig": 1, "betonlineag": 2}
+    best: dict = {}
+    for f in sorted(glob.glob(str(SNAP_DIR / "quotes" / "*.jsonl"))):
+        with open(f) as fh:
+            for line in fh:
+                if '"spreads"' not in line or not any(b in line for b in pref):
+                    continue
+                try:
+                    q = json.loads(line)
+                except ValueError:
+                    continue
+                gid = q.get("game_id")
+                if gid not in want or q.get("book") not in pref or q.get("market") != "spreads" \
+                        or q.get("selection") != "home" or q.get("line") is None:
+                    continue
+                obs, kick = q.get("observed_at"), q.get("kickoff")
+                if not obs or not kick or pd.Timestamp(obs) >= pd.Timestamp(kick):
+                    continue
+                key = (pd.Timestamp(obs), -pref[q["book"]])
+                if gid not in best or key > best[gid][0]:
+                    best[gid] = (key, float(q["line"]), q["book"], obs)
+    return {g: v[1:] for g, v in best.items()}
+
+
+def _fill_clv(df: pd.DataFrame) -> pd.DataFrame:
+    """Per-row CLV (points, bet side) for every placed signal bet:
+    vs consensus close (CFBD) and vs the sharp book's last pre-kick line."""
+    for sig in BET_LINE_SIGNALS:
+        lc, ec = f"{sig}_bet_line", f"{sig}_bet_edge"
+        if lc not in df.columns:
+            continue
+        line = pd.to_numeric(df[lc], errors="coerce")
+        side = np.sign(pd.to_numeric(df[ec], errors="coerce"))
+        for close_col, out_col in (("closing_spread", f"{sig}_clv"),
+                                   ("closing_sharp_spread", f"{sig}_clv_sharp")):
+            close = pd.to_numeric(df.get(close_col), errors="coerce")
+            df[out_col] = (side * (line - close)).round(2)
+    return df
 
 
 def _is_true(v) -> bool:
@@ -256,6 +334,11 @@ def grade(season: int) -> None:
         print("[grade] no ledger yet — run record first")
         return
     df = pd.read_csv(LEDGER)
+    for col in LEDGER_COLS:          # ledgers written before newer columns
+        if col not in df.columns:
+            df[col] = np.nan
+    for col in ("closing_sharp_book", "closing_sharp_ts", "snap_open_ts"):
+        df[col] = df[col].astype(object)
     # An ungraded ledger round-trips `completed` as all-NaN float64, and newer
     # pandas raises TypeError ("Invalid value 'True' for dtype 'float64'")
     # instead of warning when we later set True into it. Normalize to real
@@ -293,6 +376,33 @@ def grade(season: int) -> None:
             if pd.notna(ou):
                 df.loc[m, "closing_over_under"] = ou
 
+    for (s_, w_), grp in df.groupby(["season", "week"]):
+        snap = _week_snapshot(int(s_), int(w_))
+        if not snap:
+            continue
+        for i, r in grp.iterrows():
+            rec = snap.get(str(int(r["game_id"])))
+            if not rec:
+                continue
+            if pd.isna(r.get("snap_open_spread")) and (rec.get("first") or {}).get("spread") is not None:
+                df.at[i, "snap_open_spread"] = rec["first"]["spread"]
+                df.at[i, "snap_open_ts"] = rec.get("first_seen")
+            if r.get("completed") is True or r.get("completed") == True:  # noqa: E712
+                sp, bk, ts = _sharp_close(rec)
+                if sp is not None:
+                    df.at[i, "closing_sharp_spread"] = sp
+                    df.at[i, "closing_sharp_book"] = bk
+                    df.at[i, "closing_sharp_ts"] = ts
+    need = df[(df["completed"] == True) & df["closing_sharp_spread"].isna()]  # noqa: E712
+    if len(need):
+        q = _sharp_close_from_quotes(need["game_id"])
+        for i, r in need.iterrows():
+            v = q.get(int(r["game_id"]))
+            if v:
+                df.at[i, "closing_sharp_spread"], df.at[i, "closing_sharp_book"], \
+                    df.at[i, "closing_sharp_ts"] = v
+    df = _fill_clv(df)
+
     done = df["completed"] == True  # noqa: E712
     df.loc[done, "home_win"] = (df.loc[done, "home_score"]
                                 > df.loc[done, "away_score"]).astype(float)
@@ -311,7 +421,7 @@ def _bucket_stats(g: pd.DataFrame, kind: str, line_col: str = "spread",
     g = g[g["completed"] == True]  # noqa: E712
     n = wins = losses = pushes = 0
     units = 0.0
-    clvs = []
+    clvs, sharp_clvs = [], []
     for _, r in g.iterrows():
         if kind == "under":
             if pd.isna(r.get("over_under")) or pd.isna(r.get("actual_total")):
@@ -343,10 +453,16 @@ def _bucket_stats(g: pd.DataFrame, kind: str, line_col: str = "spread",
             if pd.notna(r.get("closing_spread")):
                 clv = (line - r["closing_spread"]) * (1 if bet_home else -1)
                 clvs.append(clv)
+            sharp = pd.to_numeric(r.get("closing_sharp_spread"), errors="coerce")
+            if pd.notna(sharp):
+                sharp_clvs.append((line - sharp) * (1 if bet_home else -1))
     return {"n": n, "wins": wins, "losses": losses, "pushes": pushes,
             "units": round(units, 2),
             "hit_rate": round(wins / (wins + losses), 4) if wins + losses else None,
-            "avg_clv_pts": round(float(np.mean(clvs)), 2) if clvs else None}
+            "avg_clv_pts": round(float(np.mean(clvs)), 2) if clvs else None,
+            "clv_n": len(clvs),
+            "avg_clv_sharp_pts": round(float(np.mean(sharp_clvs)), 2) if sharp_clvs else None,
+            "clv_sharp_n": len(sharp_clvs)}
 
 
 def _bucket_block(df: pd.DataFrame) -> dict:
@@ -408,6 +524,8 @@ def _build_summary(df: pd.DataFrame) -> None:
                "spread_flags": blk["spread_flags"],
                "opener_gap_flags": blk.get("opener_gap_flags"),
                "pt_bets": blk.get("pt_bets"),
+               "opener_gap_bets": blk.get("opener_gap_bets"),
+               "spread_bets": blk.get("spread_bets"),
                "pt_bets_at_opener": blk.get("pt_bets_at_opener"),
                "all_under_leans": blk["all_under_leans"],
                "weeks_live": sorted(int(w) for w in live["week"].unique()),

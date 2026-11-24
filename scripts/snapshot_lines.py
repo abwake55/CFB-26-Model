@@ -108,6 +108,27 @@ def cfbd_lines(cfb_key: str, season: int, week: int) -> pd.DataFrame:
             .drop_duplicates("game_id", keep="first").drop(columns=["_rank"]))
 
 
+def _num(v):
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return None
+    return None if pd.isna(v) else v
+
+
+def snapshot_record(ln) -> dict:
+    """Consensus spread/total/MLs plus the sharp book's spread/total when the
+    Odds API returned one (LowVig/BetOnline in the "us" region)."""
+    rec = {"spread": _num(ln.get("spread")), "over_under": _num(ln.get("over_under")),
+           "home_ml": _num(ln.get("home_moneyline")), "away_ml": _num(ln.get("away_moneyline"))}
+    sharp = _num(ln.get("sharp_spread"))
+    if sharp is not None:
+        rec["sharp_spread"] = sharp
+        rec["sharp_total"] = _num(ln.get("sharp_total"))
+        rec["sharp_book"] = ln.get("sharp_book")
+    return rec
+
+
 def snap_path(season: int, week: int) -> Path:
     return SNAP_DIR / f"lines_{season}_W{week:02d}.json"
 
@@ -159,36 +180,43 @@ def main() -> None:
             pass
 
     ts = now.isoformat(timespec="seconds")
-    n_new, n_moved = 0, 0
+    n_new, n_moved, n_started = 0, 0, 0
     by_id = lines.set_index("game_id")
     for _, g in games.iterrows():
         gid = g["game_id"]
         if gid not in by_id.index:
             continue
-        ln = by_id.loc[gid]
-        cur = {"spread":       float(ln.get("spread")) if pd.notna(ln.get("spread")) else None,
-               "over_under":   float(ln.get("over_under")) if pd.notna(ln.get("over_under")) else None,
-               "home_ml":      float(ln.get("home_moneyline")) if pd.notna(ln.get("home_moneyline")) else None,
-               "away_ml":      float(ln.get("away_moneyline")) if pd.notna(ln.get("away_moneyline")) else None}
+        # Never overwrite a game's lines after kickoff: `current` must stay
+        # the last PRE-kickoff number (the close CLV is measured against);
+        # The Odds API returns in-play lines for games under way.
+        kick = pd.to_datetime(g.get("start_date"), utc=True, errors="coerce")
+        if pd.notna(kick) and kick <= pd.Timestamp(now):
+            n_started += 1
+            continue
+        cur = snapshot_record(by_id.loc[gid])
         if cur["spread"] is None and cur["over_under"] is None:
             continue
         rec = snap["games"].get(str(gid))
         if rec is None:
             snap["games"][str(gid)] = {
                 "home": g["home_team"], "away": g["away_team"],
+                "kickoff": str(g.get("start_date")),
                 "first_seen": ts, "first": cur, "current": cur, "updated": ts,
+                "history": [{"ts": ts, **cur}],
             }
             n_new += 1
         else:
             prev = rec.get("current") or {}
             if prev != cur:
                 n_moved += 1
+                rec.setdefault("history", []).append({"ts": ts, **cur})
             rec["current"] = cur
             rec["updated"] = ts
 
     path.write_text(json.dumps(snap, indent=2))
     print(f"✅ {season} W{week}: {len(snap['games'])} games snapshotted "
-          f"({n_new} new, {n_moved} moved) → {path.relative_to(ROOT_DIR)}")
+          f"({n_new} new, {n_moved} moved, {n_started} already kicked off) "
+          f"→ {path.relative_to(ROOT_DIR)}")
 
 
 if __name__ == "__main__":
