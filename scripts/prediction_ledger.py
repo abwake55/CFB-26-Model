@@ -74,6 +74,9 @@ for _sig in BET_LINE_SIGNALS:
 # filled by grade from data/lines_snapshots: the first captured line (true
 # opener when the early-week snapshot saw it) and the sharp book's last
 # pre-kickoff line (LowVig/BetOnline; Pinnacle only if the eu region is on)
+# key-number pricing at record time (src/margin_pricing.py)
+for _sig in ("pt", "opener_gap"):
+    LEDGER_COLS += [f"{_sig}_p_cover", f"{_sig}_p_push", f"{_sig}_ev", f"{_sig}_buy_half"]
 LEDGER_COLS += ["snap_open_spread", "snap_open_ts", "closing_sharp_spread",
                 "closing_sharp_book", "closing_sharp_ts"]
 SNAP_DIR = ROOT_DIR / "data" / "lines_snapshots"
@@ -194,13 +197,15 @@ def record(season: int, week: int) -> None:
         print(f"[record] no games for {season} wk{week} — nothing to do")
         return
 
-    # Once a week has kicked off, keep the existing snapshot: the recorded
-    # lines are the dealt lines CLV is measured against — re-recording with
-    # post-kickoff (frozen/closing) lines would zero out the CLV signal.
-    first_kick = pd.to_datetime(games["start_date"], errors="coerce", utc=True).min()
-    if LEDGER.exists() and pd.notna(first_kick) \
-            and pd.Timestamp.now(tz="UTC") > first_kick:
-        print(f"[record] {season} wk{week} has kicked off — keeping existing snapshot")
+    # Per game: once a game has kicked off its recorded row is frozen — the
+    # recorded lines are the dealt lines CLV is measured against, and a
+    # re-record with post-kickoff (in-play/closing) lines would zero out CLV.
+    # Games still to come keep being re-recorded (so a Tuesday MACtion or a
+    # D-III kickoff no longer locks Saturday's slate).
+    kick = pd.to_datetime(games["start_date"], errors="coerce", utc=True, format="mixed")
+    started = set(games.loc[kick.notna() & (kick <= pd.Timestamp.now(tz="UTC")), "game_id"])
+    if LEDGER.exists() and started and len(started) == len(games):
+        print(f"[record] {season} wk{week}: every game has kicked off — keeping existing rows")
         return
 
     lines = wp.fetch_lines(games, season, week)
@@ -248,17 +253,24 @@ def record(season: int, week: int) -> None:
             "pt_opener": row.get("pt_opener"),
             "pt_edge": row.get("pt_edge"),
             "flag_pt": bool(row.get("flag_pt") is True or row.get("flag_pt") == 1),
+            **{f"{sg}_{k}": row.get(f"{sg}_{k}") for sg in ("pt", "opener_gap")
+               for k in ("p_cover", "p_push", "ev", "buy_half")},
             "provenance": "live",
         })
     new = pd.DataFrame(rows, columns=LEDGER_COLS)
     old = pd.read_csv(LEDGER) if LEDGER.exists() else None
+    if old is not None and started:
+        have = set(old.loc[(old["season"] == season) & (old["week"] == week), "game_id"])
+        frozen = started & have
+        new = new[~new["game_id"].isin(frozen)]
     new = _carry_bet_lines(new, old)
 
     if old is not None:
         # keep historical rows; drop stale ungraded rows for this season/week
         # only when they were never completed (re-record replaces the snapshot)
         keep = old[~((old["season"] == season) & (old["week"] == week)
-                     & (old["completed"] != True))]  # noqa: E712
+                     & (old["completed"] != True)  # noqa: E712
+                     & old["game_id"].isin(new["game_id"]))]
         merged = pd.concat([keep, new], ignore_index=True)
         # a game already graded stays graded: restore graded columns
         graded = old[(old["season"] == season) & (old["week"] == week)

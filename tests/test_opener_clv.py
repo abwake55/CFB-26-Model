@@ -74,3 +74,33 @@ class TestLedgerCLV(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestPerGameKickoffLock(unittest.TestCase):
+    def test_started_games_frozen_others_rerecorded(self):
+        import prediction_ledger as pl
+        import weekly_pipeline as wp
+        past = (pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=2)).isoformat()
+        fut = (pd.Timestamp.now(tz="UTC") + pd.Timedelta(days=3)).isoformat()
+        games = pd.DataFrame({"game_id": [1, 2], "home_team": ["A", "B"], "away_team": ["C", "D"],
+                              "start_date": [past, fut]})
+        preds = games.assign(pred_spread=[-1.0, -2.0], spread=[-9.0, -9.0], flag_pt=[False, True],
+                             pt_edge=[0.0, 8.0])
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger = Path(tmp) / "ledger.csv"
+            old = pd.DataFrame([{"game_id": 1, "season": 2026, "week": 14, "spread": -3.0,
+                                 "recorded_at": "old", "completed": False},
+                                {"game_id": 2, "season": 2026, "week": 14, "spread": -3.0,
+                                 "recorded_at": "old", "completed": False}], columns=pl.LEDGER_COLS)
+            old.to_csv(ledger, index=False)
+            with patch.object(pl, "LEDGER", ledger), \
+                    patch.object(wp, "fetch_schedule", return_value=games), \
+                    patch.object(wp, "fetch_lines", return_value=pd.DataFrame()), \
+                    patch.object(wp, "load_models", return_value=(None, None, None, {})), \
+                    patch.object(wp, "build_predictions", return_value=preds):
+                pl.record(2026, 14)
+            out = pd.read_csv(ledger).set_index("game_id")
+            self.assertEqual(len(out), 2)
+            self.assertEqual(out.loc[1, "spread"], -3.0)        # kicked off: frozen
+            self.assertEqual(out.loc[2, "spread"], -9.0)        # re-recorded
+            self.assertEqual(out.loc[2, "pt_bet_line"], -9.0)   # first flag line

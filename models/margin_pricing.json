@@ -1,0 +1,13 @@
+{
+  "family": "key_number_normal",
+  "bandwidth": null,
+  "tail_weight": null,
+  "shrink_n": 10.0,
+  "sigma": 15.607,
+  "fit": "pairs 2016-2023 (dev); shrink w by dev cover log loss",
+  "shrink": {
+    "opener_gap": 0.15,
+    "fpi": 0.25,
+    "main": 0.1
+  }
+}
