@@ -2,7 +2,7 @@
 from pathlib import Path
 import json
 import pandas as pd
-from decision_quality import ROOT, utc, append_record
+from decision_quality import ROOT, utc, append_record, read_records
 
 
 def ingest(record, directory=None, now=None):
@@ -43,8 +43,7 @@ def asof(game_id, cutoff, directory=None):
     if cutoff is None:
         raise ValueError("A decision cutoff is required")
     records = []
-    for path in Path(directory or ROOT / "data/context").glob("*.json"):
-        r = json.loads(path.read_text())
+    for r in read_records(directory or ROOT / "data/context"):
         published, observed = utc(r.get("published_at")), utc(r.get("observed_at"))
         if (str(r.get("game_id")) == str(game_id) and published is not None and observed is not None
                 and published <= cutoff and observed <= cutoff):

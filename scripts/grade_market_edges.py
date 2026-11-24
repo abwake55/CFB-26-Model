@@ -6,7 +6,7 @@ import sys
 import pandas as pd
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
-from decision_quality import utc
+from decision_quality import utc, read_records
 from decision_report import grade
 
 
@@ -35,7 +35,7 @@ def grade_records(records, games):
 
 def run():
     games=pd.read_csv(ROOT/'data/processed/master_games.csv').drop_duplicates('game_id').set_index('game_id')
-    records=[json.loads(p.read_text()) for p in (ROOT/'outputs/predictions/market_decisions').glob('*.json')]
+    records=read_records(ROOT/'outputs/predictions/market_decisions')
     rows=grade_records(records,games)
     report={'mode':'prospective_paper_not_placed_bets','selection':'first eligible candidate per game/market',
             'completed':len(rows),'by_market':[], 'records':rows}

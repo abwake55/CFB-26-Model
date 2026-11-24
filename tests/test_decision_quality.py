@@ -7,7 +7,7 @@ from unittest.mock import patch
 import numpy as np
 import pandas as pd
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT/'scripts'))
-from decision_quality import probabilities,ev,total_decision,append_record
+from decision_quality import probabilities,ev,total_decision,append_record,read_records
 from pregame_context import ingest,asof
 from challengers import non_garbage,PossessionModel,select_blend
 import gates
@@ -54,7 +54,7 @@ class DecisionTests(unittest.TestCase):
             a=append_record(directory,{'line':50});b=append_record(directory,{'line':51})
             self.assertNotEqual(a,b)
             self.assertEqual(a,append_record(directory,{'line':50}))
-            self.assertEqual(len(list(Path(directory).glob('*.json'))),2)
+            self.assertEqual(len(read_records(directory)),2)
 
     def test_collected_later_news_unavailable_in_backtest(self):
         with tempfile.TemporaryDirectory() as directory:

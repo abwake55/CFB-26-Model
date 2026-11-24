@@ -57,20 +57,69 @@ def probabilities(actual, predicted, projection, line, side):
             "push": float(np.mean(delta == 0)), "samples": int(valid.sum())}
 
 
+_INDEX = {}
+
+
+def _archive_index(directory: Path) -> set:
+    """Digests already archived in `directory` (legacy *.json + *.jsonl shards)."""
+    key = str(directory.resolve())
+    if key not in _INDEX:
+        seen = {p.stem for p in directory.glob("*.json")}
+        for shard in directory.glob("*.jsonl"):
+            with shard.open() as f:
+                for line in f:
+                    if line.strip():
+                        seen.add(json.loads(line)["_id"])
+        _INDEX[key] = seen
+    return _INDEX[key]
+
+
 def append_record(directory, record):
-    """Content-addressed, write-once JSON; repeated snapshots never overwrite."""
+    """Content-addressed, write-once archive; repeated snapshots never duplicate.
+
+    Records are appended to one JSON-lines shard per UTC day
+    (``YYYY-MM-DD.jsonl``) with their SHA-256 digest in ``_id``. This replaced
+    one-file-per-record storage (170k+ files broke GitHub Actions). Legacy
+    ``<digest>.json`` files are still honoured by read_records()."""
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
     data = json.dumps(record, sort_keys=True, allow_nan=False, default=str)
     digest = hashlib.sha256(data.encode()).hexdigest()
-    path = directory / (digest + ".json")
-    try:
-        with path.open("x") as f:
-            f.write(data + "\n")
-    except FileExistsError:
-        if path.read_text().strip() != data:
+    seen = _archive_index(directory)
+    legacy = directory / (digest + ".json")
+    if digest in seen:
+        if legacy.exists() and legacy.read_text().strip() != data:
             raise ValueError("Snapshot collision")
+        return digest
+    shard = directory / (datetime.now(timezone.utc).strftime("%Y-%m-%d") + ".jsonl")
+    line = json.dumps({"_id": digest, **json.loads(data)}, sort_keys=True, allow_nan=False)
+    with shard.open("a") as f:
+        f.write(line + "\n")
+    seen.add(digest)
     return digest
+
+
+def read_records(directory):
+    """All archived records in `directory`, legacy files first, de-duplicated."""
+    directory = Path(directory)
+    if not directory.exists():
+        return []
+    out, seen = [], set()
+    for path in sorted(directory.glob("*.json")):
+        if path.stem not in seen:
+            seen.add(path.stem)
+            out.append(json.loads(path.read_text()))
+    for shard in sorted(directory.glob("*.jsonl")):
+        with shard.open() as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                r = json.loads(line)
+                digest = r.pop("_id")
+                if digest not in seen:
+                    seen.add(digest)
+                    out.append(r)
+    return out
 
 
 def model_fingerprint(directory):
