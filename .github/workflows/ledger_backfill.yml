@@ -1,0 +1,49 @@
+name: Ledger backfill (not-live)
+# Manual: rebuild retrospective ledger rows for weeks the live pipeline missed.
+# Uses only checked-in data (no API keys); run after a Weekly Data Refresh.
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: 'Season'
+        default: '2026'
+      weeks:
+        description: 'Space-separated weeks, e.g. "12" or "7 10 11 12"'
+        required: true
+      replace:
+        description: 'Rebuild weeks that only hold backfill_not_live rows'
+        type: boolean
+        default: true
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Backfill
+        env:
+          SEASON: ${{ inputs.season }}
+          WEEKS: ${{ inputs.weeks }}
+          REPLACE: ${{ inputs.replace }}
+        run: |
+          flag=""; [ "$REPLACE" = "true" ] && flag="--replace"
+          python scripts/backfill_ledger.py --season "$SEASON" --weeks $WEEKS $flag
+      - name: Commit and push
+        run: >-
+          bash .github/scripts/commit_and_push.sh
+          "Ledger backfill (not-live) season ${{ inputs.season }} weeks ${{ inputs.weeks }}"
+          outputs/predictions/ledger_2026.csv outputs/predictions/ledger_2026_summary.json
+      - name: Report failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/report_failure.sh

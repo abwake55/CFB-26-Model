@@ -53,6 +53,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--season", type=int, default=2026)
     ap.add_argument("--weeks", type=int, nargs="+", required=True)
+    ap.add_argument("--replace", action="store_true",
+                    help="Rebuild weeks that hold only backfill_not_live rows "
+                         "(e.g. a partial week). Live rows are never replaced.")
     args = ap.parse_args()
 
     df = model.load_data()
@@ -61,10 +64,16 @@ def main():
                               "start_date", "spread_open", "wind_speed", "is_dome"]
                      ).drop_duplicates("game_id")
     ledger = pd.read_csv(pl.LEDGER)
+    ledger["provenance"] = pl._provenance(ledger)
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     new_rows = []
     for week in args.weeks:
-        have = ledger[(ledger["season"] == args.season) & (ledger["week"] == week)]
+        wk = (ledger["season"] == args.season) & (ledger["week"] == week)
+        have = ledger[wk]
+        if len(have) and args.replace and (have["provenance"] == "backfill_not_live").all():
+            print(f"week {week}: replacing {len(have)} backfill_not_live rows")
+            ledger = ledger[~wk]
+            have = ledger.iloc[0:0]
         if len(have):
             print(f"week {week}: already in ledger ({len(have)} rows) - skipping")
             continue
@@ -107,7 +116,6 @@ def main():
               f"(train cutoff {preds['training_cutoff_utc'].iloc[0]})")
     if not new_rows:
         return
-    ledger["provenance"] = pl._provenance(ledger)
     out = pd.concat([ledger, pd.DataFrame(new_rows)], ignore_index=True)
     out = out.sort_values(["season", "week", "game_id"])
     out.to_csv(pl.LEDGER, index=False)
