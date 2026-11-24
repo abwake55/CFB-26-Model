@@ -2,6 +2,9 @@
 # Usage: commit_and_push.sh "<commit message>" <path>...
 # Commits the given paths (if changed) and pushes, rebasing on top of any
 # concurrent push. Retries a few times; exits non-zero if it cannot push.
+# Archive shards merge by union (.gitattributes). Any other conflicting hunk
+# (ledger, market board) keeps this run's freshly generated version
+# (-X theirs: during a rebase "theirs" is the commit being replayed).
 set -euo pipefail
 msg="$1"; shift
 git config user.name "github-actions[bot]"
@@ -13,7 +16,7 @@ if git diff --staged --quiet; then
 fi
 git commit -m "$msg"
 for attempt in 1 2 3 4 5; do
-  if git pull --rebase origin "${GITHUB_REF_NAME:-main}" && git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+  if git pull --rebase -X theirs origin "${GITHUB_REF_NAME:-main}" && git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
     echo "Pushed on attempt $attempt"
     exit 0
   fi
