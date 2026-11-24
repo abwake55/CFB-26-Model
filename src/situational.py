@@ -15,16 +15,20 @@ Spread markets price team quality well but are slower on spot dynamics:
   (Wyoming 7,220 ft, Air Force 6,621 ft, etc.) historically underperform;
   the market prices HFA but not the altitude component separately.
 
-Walk-forward validation (2019-25, ~5,200 OOS games, spread ATS at edge >= 3):
-    baseline 50.8% (-3.0% ROI) -> +features 54.5% (+4.1% ROI)
-    edge >= 3.5: 51.1% -> 56.1% (+7.1% ROI); lift holds in weeks 1-3 and 4+.
-CORE totals-under edge and Brier calibration unchanged (spread-only features).
+LEAKAGE NOTE (2026-11-24): earlier versions looked up SAME-SEASON, season-final
+SP+ for the current, previous and next opponents. A season-final rating already
+contains the result of the game being predicted, so the walk-forward lift once
+quoted here (50.8% -> 54.5% ATS) was leakage, and live serving used a different
+(in-progress) SP+ vintage than training. Ratings are now the PRIOR season's final
+SP+ (season N-1 final -> season N), identical in training and serving and
+consistent with every other rating in features.py. With the fix these features
+add no demonstrated out-of-sample spread value; see docs/leak_fix_2026-11-24.md.
 
 Data sources: data/processed/master_games.csv + master_sp_ratings.csv.
 For the live app (current season not yet in master_games), the season
 schedule is fetched once from the CFBD API and cached under
-data/processed/schedule_cache_<season>.csv. Ratings use the same
-season-level SP+ vintage as the rest of the feature matrix.
+data/processed/schedule_cache_<season>.csv. Ratings are prior-season final
+SP+ (shifted +1 year), the same vintage as the rest of the feature matrix.
 """
 
 from pathlib import Path
@@ -115,9 +119,10 @@ def _fetch_season_schedule(season: int) -> pd.DataFrame | None:
 
 
 def _load_ratings() -> dict:
+    """(season, team) -> PRIOR season's final SP+ (no same-season leakage)."""
     sp = pd.read_csv(DATA / "master_sp_ratings.csv",
                      usecols=["year", "team", "rating"])
-    return {(int(r.year), r.team): float(r.rating) for r in sp.itertuples()}
+    return {(int(r.year) + 1, r.team): float(r.rating) for r in sp.itertuples()}
 
 
 def add_situational_features(df: pd.DataFrame) -> pd.DataFrame:
