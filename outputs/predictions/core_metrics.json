@@ -1,9 +1,9 @@
 {
-  "bets": 404,
-  "graded": 401,
-  "hit_rate": 0.5387,
-  "units": 12.5,
-  "roi": 0.0281,
+  "bets": 371,
+  "graded": 368,
+  "hit_rate": 0.538,
+  "units": 11.0,
+  "roi": 0.027,
   "seasons": [
     2019,
     2020,
