@@ -35,6 +35,8 @@
     "hit_rate": null,
     "avg_clv_pts": null
   },
+  "pt_bets": null,
+  "pt_bets_at_opener": null,
   "all_under_leans": {
     "n": 6,
     "wins": 4,
