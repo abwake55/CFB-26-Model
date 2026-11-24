@@ -54,11 +54,46 @@ LEDGER_COLS = [
     "home_win", "actual_margin", "actual_total",
     # opener-gap signal (src/opener_gap.py), graded at opener_gap_line
     "pred_indep_margin", "opener_gap_line", "opener_gap_edge", "flag_opener_gap",
+    # Prediction Tracker signal (src/prediction_tracker.py, models/pt_rule.json)
+    "pt_fpi", "pt_sys_median", "pt_sys_std", "pt_opener", "pt_edge", "flag_pt",
     # live = recorded before kickoff by the scheduled job; replay_not_live =
     # weeks 1-3 reseeded after the fact; backfill_not_live = weeks missed by
     # the Oct 29 - Nov 17 CI outage, re-predicted later with a date cutoff.
     "provenance",
 ]
+
+# Per signal: the line and time a bet would have been placed = the current
+# consensus spread the FIRST time the flag appeared. Kept across re-records.
+# signal -> (flag column, edge column)
+BET_LINE_SIGNALS = {"pt": ("flag_pt", "pt_edge")}
+for _sig in BET_LINE_SIGNALS:
+    LEDGER_COLS += [f"{_sig}_bet_line", f"{_sig}_bet_ts", f"{_sig}_bet_edge"]
+
+
+def _is_true(v) -> bool:
+    return str(v).strip().lower() in ("true", "1", "1.0")
+
+
+def _carry_bet_lines(new: pd.DataFrame, old: pd.DataFrame | None) -> pd.DataFrame:
+    """Set <sig>_bet_line/_bet_ts for newly flagged games; keep the first
+    flagged line/time from earlier records of the same game."""
+    new = new.copy()
+    prev = (old.drop_duplicates("game_id", keep="last").set_index("game_id")
+            if old is not None and len(old) else pd.DataFrame())
+    for sig, (flag, edge) in BET_LINE_SIGNALS.items():
+        cols = [f"{sig}_bet_line", f"{sig}_bet_ts", f"{sig}_bet_edge"]
+        for c in cols:
+            new[c] = new[c].astype(object)
+        for i, r in new.iterrows():
+            gid = r["game_id"]
+            if gid in prev.index and cols[0] in prev.columns and pd.notna(prev.at[gid, cols[0]]):
+                for c in cols:
+                    new.at[i, c] = prev.at[gid, c]
+            elif _is_true(r.get(flag)) and pd.notna(r.get("spread")):
+                new.at[i, cols[0]] = r["spread"]
+                new.at[i, cols[1]] = r["recorded_at"]
+                new.at[i, cols[2]] = r[edge]
+    return new
 
 
 def _provenance(df: pd.DataFrame) -> pd.Series:
@@ -129,12 +164,19 @@ def record(season: int, week: int) -> None:
             "opener_gap_edge": row.get("opener_gap_edge"),
             "flag_opener_gap": bool(row.get("flag_opener_gap") is True
                                     or row.get("flag_opener_gap") == 1),
+            "pt_fpi": row.get("pt_fpi"),
+            "pt_sys_median": row.get("pt_sys_median"),
+            "pt_sys_std": row.get("pt_sys_std"),
+            "pt_opener": row.get("pt_opener"),
+            "pt_edge": row.get("pt_edge"),
+            "flag_pt": bool(row.get("flag_pt") is True or row.get("flag_pt") == 1),
             "provenance": "live",
         })
     new = pd.DataFrame(rows, columns=LEDGER_COLS)
+    old = pd.read_csv(LEDGER) if LEDGER.exists() else None
+    new = _carry_bet_lines(new, old)
 
-    if LEDGER.exists():
-        old = pd.read_csv(LEDGER)
+    if old is not None:
         # keep historical rows; drop stale ungraded rows for this season/week
         # only when they were never completed (re-record replaces the snapshot)
         keep = old[~((old["season"] == season) & (old["week"] == week)
@@ -333,6 +375,19 @@ def _bucket_block(df: pd.DataFrame) -> dict:
         fl = df["flag_opener_gap"].astype(str).str.lower().isin(["true", "1", "1.0"])
         out["opener_gap_flags"] = _bucket_stats(df[fl], "spread", "opener_gap_line",
                                                 "opener_gap_edge")
+    for sig in BET_LINE_SIGNALS:
+        lc = f"{sig}_bet_line"
+        if lc not in df.columns:
+            continue
+        placed = df[pd.to_numeric(df[lc], errors="coerce").notna()].copy()
+        placed[lc] = pd.to_numeric(placed[lc], errors="coerce")
+        placed[f"{sig}_bet_edge"] = pd.to_numeric(placed[f"{sig}_bet_edge"], errors="coerce")
+        # graded at the line the bet would have been placed at (first flag)
+        out[f"{sig}_bets"] = _bucket_stats(placed, "spread", lc, f"{sig}_bet_edge")
+    if "pt_opener" in df.columns and "pt_bet_line" in df.columns:
+        placed = df[pd.to_numeric(df["pt_bet_line"], errors="coerce").notna()].copy()
+        placed["pt_bet_edge"] = pd.to_numeric(placed["pt_bet_edge"], errors="coerce")
+        out["pt_bets_at_opener"] = _bucket_stats(placed, "spread", "pt_opener", "pt_bet_edge")
     return out
 
 
@@ -352,6 +407,8 @@ def _build_summary(df: pd.DataFrame) -> None:
                "core_unders": blk["core_unders"],
                "spread_flags": blk["spread_flags"],
                "opener_gap_flags": blk.get("opener_gap_flags"),
+               "pt_bets": blk.get("pt_bets"),
+               "pt_bets_at_opener": blk.get("pt_bets_at_opener"),
                "all_under_leans": blk["all_under_leans"],
                "weeks_live": sorted(int(w) for w in live["week"].unique()),
                "not_live": {}}

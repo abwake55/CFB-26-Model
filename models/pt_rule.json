@@ -1,0 +1,49 @@
+{
+  "rule": "fpi_gap",
+  "thr": 7.0,
+  "bet_at": "opener",
+  "selection": "max dev ROI with dev n>=150 and dev CLV>0",
+  "dev_seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "holdout_seasons": [
+    2024,
+    2025
+  ],
+  "dev": {
+    "n": 225.0,
+    "w": 133.0,
+    "l": 88.0,
+    "p": 4.0,
+    "win%": 60.18,
+    "roi%": 14.89,
+    "clv": 2.712
+  },
+  "holdout": {
+    "n": 91.0,
+    "w": 50.0,
+    "l": 39.0,
+    "p": 2.0,
+    "win%": 56.18,
+    "roi%": 7.25,
+    "clv": 0.797,
+    "midweek_roi%": 3.94,
+    "close_roi%": 3.94
+  },
+  "oos_2026_to_date": {
+    "weeks": "1-11",
+    "n": 25.0,
+    "w": 9.0,
+    "l": 16.0,
+    "p": 0.0,
+    "win%": 36.0,
+    "units": -8.6,
+    "roi%": -31.27,
+    "clv": 0.72,
+    "clv+%": 60.0
+  }
+}
