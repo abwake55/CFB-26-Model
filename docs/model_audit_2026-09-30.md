@@ -1,5 +1,9 @@
 # Model audit and corrections — September 30, 2026
 
+> **Superseded (2026-11-24):** these metrics still contained a same-season SP+
+> leak and closing-line/observed-weather inputs. See docs/leak_fix_2026-11-24.md
+> for the corrected numbers (CORE 198-170-3, +2.7% ROI; spread MAE 12.343).
+
 The largest defect was future-result leakage into rolling EPA. Historical bowl
 and playoff rows use week 1; sorting by week put December/January results before
 September games in the same season. The corrected pipeline sorts by kickoff

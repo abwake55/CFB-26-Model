@@ -28,11 +28,13 @@ or model-data freshness remains a REVIEW blocker. No candidate carries units.
 Run `python scripts/audit_markets.py`. The checked-in market_audit.json records
 season-forward results by market and tier. Spreads/totals assume -110; moneylines
 use historical odds where present. There is no historical decision-time quote
-verification, so these results cannot establish executable ROI. Research A
-spreads: 1,463 wins / 1,101 losses / 43 pushes (57.06% excluding pushes). Research
-A totals: 908 / 827 / 19 (52.33%, approximately break-even at -110). The latest
-2025 fold for Research A spreads is 279 / 210 / 10; totals are 194 / 189 / 3.
-These findings support further spread testing, not broad total promotion.
+verification, so these results cannot establish executable ROI.
+
+Re-run on 2026-11-24 after the SP+ leak fix (docs/leak_fix_2026-11-24.md):
+Research A spreads 981 / 951 / 29 (50.78% excluding pushes); Research A totals
+827 / 744 / 15 (52.64%). The 2025 fold for Research A spreads is 162 / 181 / 6;
+totals are 176 / 166 / 2. The earlier 57.06% spread figure came from the leak
+and is withdrawn. Neither market shows a validated edge at -110.
 
 ## Operations
 
