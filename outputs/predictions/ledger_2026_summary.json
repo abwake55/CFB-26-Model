@@ -26,6 +26,15 @@
     "hit_rate": 0.6,
     "avg_clv_pts": 0.26
   },
+  "opener_gap_flags": {
+    "n": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "units": 0.0,
+    "hit_rate": null,
+    "avg_clv_pts": null
+  },
   "all_under_leans": {
     "n": 6,
     "wins": 4,
@@ -84,6 +93,15 @@
         "units": -0.1,
         "hit_rate": 0.5,
         "avg_clv_pts": null
+      },
+      "opener_gap_flags": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null
       }
     },
     "replay_not_live": {
@@ -125,6 +143,15 @@
         "units": -0.7,
         "hit_rate": 0.5,
         "avg_clv_pts": 0.39
+      },
+      "opener_gap_flags": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null
       }
     }
   }
