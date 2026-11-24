@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 15
     env:
       # one 3-credit Odds API call per run, shared by every step below
-      ODDS_API_CACHE: ${{ runner.temp }}/odds_cache.json
+      ODDS_API_CACHE: /tmp/odds_cache.json
       ODDS_API_CACHE_MAX_AGE: '1800'
     steps:
       - name: Checkout repo

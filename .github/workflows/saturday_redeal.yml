@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      ODDS_API_CACHE: ${{ runner.temp }}/odds_cache.json
+      ODDS_API_CACHE: /tmp/odds_cache.json
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
