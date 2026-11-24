@@ -1,0 +1,6 @@
+# Write-once archives are append-only JSON lines (deduplicated by _id on
+# read), so concurrent workflow appends can always be merged by union.
+data/lines_snapshots/quotes/*.jsonl merge=union
+outputs/predictions/decisions/*.jsonl merge=union
+outputs/predictions/market_decisions/*.jsonl merge=union
+data/context/*.jsonl merge=union
