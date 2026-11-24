@@ -24,6 +24,10 @@ on:
           - auto        # detect season/offseason automatically
           - preseason   # portal, talent, SP+ only (no games)
           - full        # games + lines + EPA + all stats + retrain
+      send_newsletter:
+        description: 'Email the newsletter (manual runs only)'
+        type: boolean
+        default: false
 
 # ── Permissions ────────────────────────────────────────────────────────────────
 permissions:
@@ -183,7 +187,7 @@ jobs:
       # Fetches this week's schedule, runs predictions, compares last week's picks
       # to actual results, and emails a formatted HTML newsletter.
       - name: Generate and send weekly newsletter
-        if: github.event_name != 'push' && github.event.schedule != '0 15 * * 0'
+        if: (github.event_name == 'schedule' && github.event.schedule != '0 15 * * 0') || (github.event_name == 'workflow_dispatch' && inputs.send_newsletter)
         env:
           CFB_API_KEY:          ${{ secrets.CFB_API_KEY }}
           SENDER_EMAIL:         ${{ secrets.SENDER_EMAIL }}
