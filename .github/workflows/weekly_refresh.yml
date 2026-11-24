@@ -112,6 +112,12 @@ jobs:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
         run: python scripts/refresh_in_season.py
 
+      # Prediction Tracker per-system lines (free CSVs): current season
+      # results + the live week's predictions -> data/processed/pt_lines.csv
+      - name: Fetch Prediction Tracker system lines
+        if: steps.season.outputs.mode == 'full'
+        run: python scripts/fetch_prediction_tracker.py
+
       # ── 6. Havoc / tempo / turnover stats ─────────────────────────────────────
       - name: Refresh havoc, tempo, and turnover stats
         env:

@@ -49,6 +49,11 @@ jobs:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python scripts/snapshot_lines.py
 
+      # PT posts the week's system lines early in the week (Tue); pick them
+      # up daily so the ledger's PT flag appears as soon as they exist.
+      - name: Fetch Prediction Tracker live week
+        run: python scripts/fetch_prediction_tracker.py --live
+
       - name: Archive pregame weather forecasts
         run: python scripts/collect_context.py --weather
 
@@ -68,7 +73,7 @@ jobs:
         run: >-
           bash .github/scripts/commit_and_push.sh
           "Line snapshot $(date -u +'%Y-%m-%d %H:%M UTC')"
-          data/lines_snapshots data/context outputs/predictions
+          data/lines_snapshots data/context outputs/predictions data/external/prediction_tracker
 
       - name: Report failure
         if: failure() && github.event_name != 'pull_request'

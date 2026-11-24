@@ -375,6 +375,17 @@ def build_predictions(games, lines, spread_model, totals_model,
     except Exception as exc:
         print(f"[WARN] opener-gap signal unavailable: {exc}")
 
+    # Prediction Tracker signal (src/prediction_tracker.py): frozen dev rule
+    # (models/pt_rule.json), FPI line vs the opener. Free public CSV.
+    if os.environ.get("PT_OFFLINE") != "1":
+        try:
+            import prediction_tracker
+            out = prediction_tracker.attach(out)
+            print(f"   PT signal: {int(out['flag_pt'].fillna(False).sum())} flags "
+                  f"({int(out['pt_fpi'].notna().sum())} games with PT lines)")
+        except Exception as exc:
+            print(f"[WARN] Prediction Tracker signal unavailable: {exc}")
+
     from inference import adjust_predictions
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
@@ -401,7 +412,7 @@ def filter_picks(predictions: pd.DataFrame) -> dict:
     Only CORE unders are real plays (flat 1u). Spread / totals / moneyline
     flags that fail the gate are kept under "paper" for research, with no
     units — the weekly text must never present them as bets."""
-    picks: dict = {"core": [], "paper": [], "all_games": []}
+    picks: dict = {"core": [], "paper": [], "signals": [], "all_games": []}
 
     for _, r in predictions.iterrows():
         game_label = f"{r['away_team']} @ {r['home_team']}"
@@ -472,7 +483,39 @@ def filter_picks(predictions: pd.DataFrame) -> dict:
                 })
 
     picks["core"].sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
+    picks["signals"] = spread_signals(predictions)
     return picks
+
+
+def spread_signals(predictions: pd.DataFrame) -> list:
+    """Spread signals tracked live in the ledger (small stake / paper):
+    pt  = Prediction Tracker FPI-vs-opener rule (models/pt_rule.json)
+    og  = opener-gap model (src/opener_gap.py)
+    The listed line is the line the bet is placed at NOW (current consensus)."""
+    out = []
+    for _, r in predictions.iterrows():
+        game_label = f"{r['away_team']} @ {r['home_team']}"
+        cur = pd.to_numeric(r.get("spread"), errors="coerce")
+        for key, flag, edge in (("pt", "flag_pt", "pt_edge"),
+                                ("opener_gap", "flag_opener_gap", "opener_gap_edge")):
+            if not bool(r.get(flag) is True or r.get(flag) == 1):
+                continue
+            e = pd.to_numeric(r.get(edge), errors="coerce")
+            if pd.isna(e):
+                continue
+            home = e > 0
+            team = r["home_team"] if home else r["away_team"]
+            line = cur if pd.notna(cur) else pd.to_numeric(r.get("spread_open"), errors="coerce")
+            if pd.isna(line):
+                continue
+            item = {"signal": key, "game": game_label,
+                    "pick": f"{team} {(line if home else -line):+.1f}",
+                    "edge_pts": round(float(e), 1)}
+            if key == "pt":
+                item["rule"] = r.get("pt_rule")
+            out.append(item)
+    out.sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
+    return out
 
 
 def format_imessage(picks: dict, season: int, week: int) -> str:
@@ -483,6 +526,12 @@ def format_imessage(picks: dict, season: int, week: int) -> str:
         f"Generated {datetime.now().strftime('%a %b %-d @ %-I:%M %p')}",
         "",
     ]
+
+    if picks.get("signals"):
+        lines.append(f"📈 SPREAD SIGNALS — small stake / tracking ({len(picks['signals'])})")
+        for sp in picks["signals"][:8]:
+            lines.append(f"  [{sp['signal']}] {sp['pick']} ({sp['game']})  |  edge {sp['edge_pts']:+.1f}")
+        lines.append("")
 
     if not picks["core"] and not picks["paper"]:
         lines.append("No picks above threshold this week.")

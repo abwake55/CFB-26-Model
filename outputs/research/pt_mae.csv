@@ -1,0 +1,21 @@
+period,predictor,n,mae
+dev,opener,3511,12.474
+dev,PT midweek,3507,12.307
+dev,close,3518,12.267
+dev,system median,3518,12.586
+dev,FPI,3509,12.589
+dev,Sagarin,3518,12.772
+dev,Massey,3512,12.919
+dev,FEI,3516,13.143
+dev,PT computer-adjusted,3513,12.308
+dev,CFB-26 market-free (pred_indep),3518,12.846
+holdout,opener,1539,12.046
+holdout,PT midweek,1537,11.999
+holdout,close,1539,11.92
+holdout,system median,1539,12.257
+holdout,FPI,1497,12.312
+holdout,Sagarin,1539,12.236
+holdout,Massey,1537,12.684
+holdout,FEI,1536,12.569
+holdout,PT computer-adjusted,1539,11.956
+holdout,CFB-26 market-free (pred_indep),1539,12.436
