@@ -505,15 +505,19 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
     Returns a dict of kwargs ready to pass to lgb.LGBMRegressor / LGBMClassifier.
     Falls back to hand-tuned defaults if Optuna isn't installed.
     """
+    # Low-capacity defaults (2026-11-24). The targets are residuals vs the
+    # closing line with very little signal; walk-forward 2019-25 (leak-fixed)
+    # MAE spread/totals/Brier: num_leaves 63 -> 12.357/12.750/0.1774,
+    # 15 -> 12.349/12.720/0.1774, 7 -> 12.343/12.713/0.1772 (chosen).
     defaults = dict(
-        n_estimators=500,
+        n_estimators=300,
         learning_rate=0.03,
-        num_leaves=63,
-        min_child_samples=20,
+        num_leaves=7,
+        min_child_samples=60,
         subsample=0.8,
         subsample_freq=1,
         colsample_bytree=0.7,
-        reg_lambda=1.0,
+        reg_lambda=5.0,
         random_state=42,
         n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
         verbose=-1,
@@ -527,8 +531,8 @@ def tune_gbm_params(X_train, y_train, X_val, y_val,
         params = dict(
             n_estimators=trial.suggest_int("n_estimators", 200, 800),
             learning_rate=trial.suggest_float("learning_rate", 0.01, 0.10, log=True),
-            num_leaves=trial.suggest_int("num_leaves", 15, 127),
-            min_child_samples=trial.suggest_int("min_child_samples", 10, 50),
+            num_leaves=trial.suggest_int("num_leaves", 4, 31),
+            min_child_samples=trial.suggest_int("min_child_samples", 30, 120),
             subsample=trial.suggest_float("subsample", 0.6, 1.0),
             colsample_bytree=trial.suggest_float("colsample_bytree", 0.5, 1.0),
             reg_lambda=trial.suggest_float("reg_lambda", 0.1, 10.0, log=True),
@@ -571,14 +575,14 @@ def make_gbm_regressor():
     # - subsample + colsample_bytree add stochastic regularisation
     # - reg_lambda mirrors the previous l2_regularization value
     return lgb.LGBMRegressor(
-        n_estimators=500,
+        n_estimators=300,
         learning_rate=0.03,
-        num_leaves=63,
-        min_child_samples=20,
+        num_leaves=7,
+        min_child_samples=60,
         subsample=0.8,
         subsample_freq=1,
-        colsample_bytree=0.8,
-        reg_lambda=2.0,
+        colsample_bytree=0.7,
+        reg_lambda=5.0,
         random_state=42,
         n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
         verbose=-1,
@@ -587,14 +591,14 @@ def make_gbm_regressor():
 
 def make_gbm_classifier():
     return lgb.LGBMClassifier(
-        n_estimators=500,
+        n_estimators=300,
         learning_rate=0.03,
-        num_leaves=63,
-        min_child_samples=20,
+        num_leaves=7,
+        min_child_samples=60,
         subsample=0.8,
         subsample_freq=1,
-        colsample_bytree=0.8,
-        reg_lambda=2.0,
+        colsample_bytree=0.7,
+        reg_lambda=5.0,
         random_state=42,
         n_jobs=int(os.getenv("CFB_MODEL_JOBS", "4")),
         verbose=-1,
