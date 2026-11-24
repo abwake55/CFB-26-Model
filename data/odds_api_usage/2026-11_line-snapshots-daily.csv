@@ -3,3 +3,5 @@ ts_utc,source,endpoint,regions,markets,credits_last,used,remaining
 2026-11-24T18:45:48+00:00,Line Snapshots (daily),sports(free),,,0,108,392
 2026-11-24T18:50:12+00:00,Line Snapshots (daily),odds,us,"h2h,spreads,totals",3,114,386
 2026-11-24T18:56:26+00:00,Line Snapshots (daily),sports(free),,,0,114,386
+2026-11-24T19:00:57+00:00,Line Snapshots (daily),odds,us,"h2h,spreads,totals",3,117,383
+2026-11-24T19:09:21+00:00,Line Snapshots (daily),sports(free),,,0,117,383
