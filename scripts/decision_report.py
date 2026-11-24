@@ -6,7 +6,7 @@ import sys
 import numpy as np
 import pandas as pd
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
-from decision_quality import utc,payout
+from decision_quality import utc,payout,read_records
 from pregame_context import asof
 
 
@@ -43,10 +43,10 @@ def evaluate():
     games=pd.read_csv(ROOT/'data/processed/master_games.csv').drop_duplicates('game_id').set_index('game_id')
     records=[]
     quotes={}
-    for path in (ROOT/'data/lines_snapshots/quotes').glob('*.json'):
-        q=json.loads(path.read_text());quotes.setdefault(q['game_id'],[]).append(q)
-    for f in (ROOT/'outputs/predictions/decisions').glob('*.json'):
-        r=json.loads(f.read_text());p=r['prediction'];d=r['decision'];gid=p['game_id']
+    for q in read_records(ROOT/'data/lines_snapshots/quotes'):
+        quotes.setdefault(q['game_id'],[]).append(q)
+    for r in read_records(ROOT/'outputs/predictions/decisions'):
+        p=r['prediction'];d=r['decision'];gid=p['game_id']
         if gid not in games.index or 'quote' not in d:continue
         g=games.loc[gid];cutoff=utc(d['decision_at']);kickoff=utc(g.start_date)
         if kickoff is None or cutoff>=kickoff or pd.isna(g.home_points) or pd.isna(g.away_points):continue
@@ -89,8 +89,7 @@ def evaluate():
     # Grade each analyst's first reported pick, only if collected before kickoff.
     analyst=[];seen=set()
     reports=[]
-    for f in (ROOT/'data/context').glob('*.json'):
-        r=json.loads(f.read_text())
+    for r in read_records(ROOT/'data/context'):
         if r['kind']=='analyst':reports.append(r)
     for r in sorted(reports,key=lambda x:x['observed_at']):
         gid=r['game_id'];p=r['payload'];key=(gid,p['analyst'],p['market'])

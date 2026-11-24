@@ -8,8 +8,14 @@ moneyline per side — giving a stable market reference that isn't tied to one
 book's number. Spread/total are rounded to the nearest 0.5 to match the
 0.5-increment lines the model was trained on.
 
-Quota: a request costs 1 per market (3 markets = 3 credits). The free tier is
-20k/month, so a weekly pull is negligible.
+Quota: a request costs 1 per market per region (3 markets x "us" = 3 credits).
+The free Starter plan is 500 credits/month; paid plans start at 20k.
+
+Sharp reference: ``sharp_spread`` / ``sharp_total`` come from the first sharp
+book present (Pinnacle, then LowVig, then BetOnline). LowVig and BetOnline are
+in the "us" region at no extra cost. Pinnacle needs ODDS_API_REGIONS="us,eu",
+which doubles credits per call. Consensus medians always use US-region books
+only, so adding "eu" does not change the model's market reference.
 
 Shared by app.py and scripts/weekly_pipeline.py.
 """
@@ -21,8 +27,19 @@ from decision_quality import append_record, ROOT
 import statistics
 from difflib import SequenceMatcher
 
+import os
+
 import pandas as pd
 import requests
+
+# Order = preference when several sharp books quote the same game.
+SHARP_BOOKS = ("pinnacle", "lowvig", "betonlineag")
+# Books that only arrive via non-US regions; excluded from the consensus.
+NON_US_BOOKS = {"pinnacle", "onexbet", "sport888", "betclic_fr", "betfair_ex_eu",
+                "betsson", "betvictor", "coolbet", "everygame", "gtbets",
+                "leovegas_se", "marathonbet", "matchbook", "nordicbet", "pmu_fr",
+                "tipico_de", "unibet_fr", "unibet_nl", "unibet_se", "williamhill",
+                "winamax_de", "winamax_fr"}
 
 ODDS_API_BASE = ("https://api.the-odds-api.com/v4/sports/"
                  "americanfootball_ncaaf/odds")
@@ -37,7 +54,8 @@ def fetch_ncaaf_events(api_key: str, timeout: int = 25) -> list:
     """Raw event list from The Odds API (empty list on any non-list body)."""
     resp = requests.get(
         f"{ODDS_API_BASE}/",
-        params={"apiKey": api_key, "regions": "us",
+        params={"apiKey": api_key,
+                "regions": os.environ.get("ODDS_API_REGIONS", "us"),
                 "markets": "h2h,spreads,totals", "oddsFormat": "american"},
         timeout=timeout,
     )
@@ -70,8 +88,18 @@ def events_to_consensus(events: list) -> pd.DataFrame:
         # per-book records for best-number capture
         tot_by_book = []       # (book, point, over_price, under_price)
         h_ml_by_book, a_ml_by_book = [], []   # (book, price)
+        sharp = {}             # book -> {"spread": x, "total": y}
         for bk in e.get("bookmakers", []):
             bkey = bk.get("key", "")
+            if bkey in SHARP_BOOKS:
+                for m in bk.get("markets", []):
+                    for o in m.get("outcomes", []):
+                        if o.get("point") is None:
+                            continue
+                        if m.get("key") == "spreads" and o.get("name") == home:
+                            sharp.setdefault(bkey, {})["spread"] = float(o["point"])
+                        elif m.get("key") == "totals" and o.get("name") == "Over":
+                            sharp.setdefault(bkey, {})["total"] = float(o["point"])
             for m in bk.get("markets", []):
                 k, outs = m.get("key"), m.get("outcomes", [])
                 for outcome in outs:
@@ -83,6 +111,8 @@ def events_to_consensus(events: list) -> pd.DataFrame:
                                    "line": outcome.get("point"), "odds": outcome.get("price"),
                                    "updated_at": m.get("last_update", bk.get("last_update")),
                                    "observed_at": observed_at, "kickoff": e.get("commence_time")})
+                if bkey in NON_US_BOOKS:
+                    continue
                 if k == "spreads":
                     for o in outs:
                         if o.get("name") == home and o.get("point") is not None:
@@ -120,7 +150,15 @@ def events_to_consensus(events: list) -> pd.DataFrame:
         best_h = max(h_ml_by_book, key=lambda t: t[1], default=None)
         best_a = max(a_ml_by_book, key=lambda t: t[1], default=None)
 
+        sharp_spread = sharp_total = sharp_book = None
+        for b in SHARP_BOOKS:
+            if b in sharp and sharp[b].get("spread") is not None:
+                sharp_book, sharp_spread = b, sharp[b]["spread"]
+                sharp_total = sharp[b].get("total")
+                break
         rows.append({
+            "sharp_spread": sharp_spread, "sharp_total": sharp_total,
+            "sharp_book": sharp_book,
             "odds_home": home, "odds_away": away, "book_quotes": quotes,
             "spread": _round_half(statistics.median(spreads)) if spreads else None,
             "over_under": _round_half(statistics.median(totals)) if totals else None,
@@ -143,7 +181,8 @@ def events_to_consensus(events: list) -> pd.DataFrame:
 # Columns carried from consensus rows through to matched CFBD lines.
 _BEST_COLS = ["book_quotes", "best_under_total", "best_under_book", "best_over_total",
               "best_over_book", "best_home_ml", "best_home_ml_book",
-              "best_away_ml", "best_away_ml_book", "n_books"]
+              "best_away_ml", "best_away_ml_book", "n_books",
+              "sharp_spread", "sharp_total", "sharp_book"]
 
 
 def _tokens(s) -> list:

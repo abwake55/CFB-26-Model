@@ -52,7 +52,21 @@ LEDGER_COLS = [
     "closing_spread", "closing_over_under",
     "home_score", "away_score", "completed",
     "home_win", "actual_margin", "actual_total",
+    # live = recorded before kickoff by the scheduled job; replay_not_live =
+    # weeks 1-3 reseeded after the fact; backfill_not_live = weeks missed by
+    # the Oct 29 - Nov 17 CI outage, re-predicted later with a date cutoff.
+    "provenance",
 ]
+
+
+def _provenance(df: pd.DataFrame) -> pd.Series:
+    """Existing rows without a provenance: recorded_at present -> live."""
+    prov = df.get("provenance")
+    if prov is None:
+        prov = pd.Series(np.nan, index=df.index, dtype=object)
+    rec = pd.to_datetime(df.get("recorded_at"), errors="coerce", utc=True, format="mixed")
+    default = np.where(rec.notna(), "live", "replay_not_live")
+    return prov.where(prov.notna(), pd.Series(default, index=df.index))
 
 
 # ─── record ──────────────────────────────────────────────────────────────────
@@ -108,6 +122,7 @@ def record(season: int, week: int) -> None:
                                 and abs(float(row["spread_edge"])) >= 3),
             "flag_ml": bool((pd.notna(row.get("home_ml_ev")) and row["home_ml_ev"] >= 0.04)
                             or (pd.notna(row.get("away_ml_ev")) and row["away_ml_ev"] >= 0.04)),
+            "provenance": "live",
         })
     new = pd.DataFrame(rows, columns=LEDGER_COLS)
 
@@ -127,6 +142,7 @@ def record(season: int, week: int) -> None:
     else:
         merged = new
 
+    merged["provenance"] = _provenance(merged)
     merged = merged.sort_values(["season", "week", "game_id"])
     LEDGER.parent.mkdir(parents=True, exist_ok=True)
     merged.to_csv(LEDGER, index=False)
@@ -233,6 +249,7 @@ def grade(season: int) -> None:
                                 > df.loc[done, "away_score"]).astype(float)
     df.loc[done, "actual_margin"] = df.loc[done, "home_score"] - df.loc[done, "away_score"]
     df.loc[done, "actual_total"] = df.loc[done, "home_score"] + df.loc[done, "away_score"]
+    df["provenance"] = _provenance(df)
     df.to_csv(LEDGER, index=False)
     print(f"[grade] {int(done.sum())}/{len(df)} ledger rows completed")
 
@@ -282,26 +299,52 @@ def _bucket_stats(g: pd.DataFrame, kind: str) -> dict:
             "avg_clv_pts": round(float(np.mean(clvs)), 2) if clvs else None}
 
 
-def _build_summary(df: pd.DataFrame) -> None:
+def _bucket_block(df: pd.DataFrame) -> dict:
     done = df[df["completed"] == True]  # noqa: E712
-    summary = {"season": int(df["season"].max()) if len(df) else None,
-               "games_tracked": int(len(df)),
-               "games_completed": int(len(done))}
-
-    # Live Brier on win probabilities (honest, every game — not just bets)
+    out = {"games_tracked": int(len(df)), "games_completed": int(len(done))}
     b = done.dropna(subset=["pred_win_p", "home_win"])
-    summary["live_brier"] = (round(float(((b["pred_win_p"] - b["home_win"]) ** 2).mean()), 4)
-                             if len(b) else None)
-    summary["live_brier_n"] = int(len(b))
+    out["brier"] = round(float(((b["pred_win_p"] - b["home_win"]) ** 2).mean()), 4) if len(b) else None
+    out["brier_n"] = int(len(b))
+    # Lined games only, against the market's spread-implied probability:
+    # unlined (mostly FCS) games inflate the all-games Brier.
+    bl = b.dropna(subset=["spread"])
+    if len(bl):
+        from math import erf, sqrt
+        sigma = 15.29
+        cal = ROOT_DIR / "models" / "win_prob_calibration.json"
+        if cal.exists():
+            sigma = float(json.loads(cal.read_text()).get("spread_sigma", sigma))
+        mkt = (-bl["spread"] / sigma).map(lambda z: 0.5 * (1 + erf(z / sqrt(2))))
+        out["brier_lined"] = round(float(((bl["pred_win_p"] - bl["home_win"]) ** 2).mean()), 4)
+        out["market_brier_lined"] = round(float(((mkt - bl["home_win"]) ** 2).mean()), 4)
+        out["brier_lined_n"] = int(len(bl))
+    out["core_unders"] = _bucket_stats(df[df["flag_core"] == True], "under")  # noqa: E712
+    out["spread_flags"] = _bucket_stats(df[df["flag_spread"] == True], "spread")  # noqa: E712
+    out["all_under_leans"] = _bucket_stats(done[done["totals_edge"] <= -2], "under")
+    return out
 
-    core = df[df["flag_core"] == True]   # noqa: E712
-    spreads = df[(df["flag_spread"] == True)]  # noqa: E712
-    summary["core_unders"] = _bucket_stats(core, "under")
-    summary["spread_flags"] = _bucket_stats(spreads, "spread")
-    # every-game context: how all totals leans did vs the gate
-    all_under = done[done["totals_edge"] <= -2]
-    summary["all_under_leans"] = _bucket_stats(all_under, "under")
 
+def _build_summary(df: pd.DataFrame) -> None:
+    df = df.copy()
+    df["provenance"] = _provenance(df)
+    live = df[df["provenance"] == "live"]
+    blk = _bucket_block(live)
+    summary = {"season": int(df["season"].max()) if len(df) else None,
+               "basis": "live rows only (recorded before kickoff)",
+               "games_tracked": blk["games_tracked"],
+               "games_completed": blk["games_completed"],
+               "live_brier": blk["brier"], "live_brier_n": blk["brier_n"],
+               "live_brier_lined": blk.get("brier_lined"),
+               "market_brier_lined": blk.get("market_brier_lined"),
+               "live_brier_lined_n": blk.get("brier_lined_n"),
+               "core_unders": blk["core_unders"],
+               "spread_flags": blk["spread_flags"],
+               "all_under_leans": blk["all_under_leans"],
+               "weeks_live": sorted(int(w) for w in live["week"].unique()),
+               "not_live": {}}
+    for prov, g in df[df["provenance"] != "live"].groupby("provenance"):
+        summary["not_live"][prov] = {"weeks": sorted(int(w) for w in g["week"].unique()),
+                                     **_bucket_block(g)}
     SUMMARY.write_text(json.dumps(summary, indent=2))
     print(f"[grade] summary -> {SUMMARY.name}: brier={summary['live_brier']} "
           f"core={summary['core_unders']}")
@@ -309,19 +352,25 @@ def _build_summary(df: pd.DataFrame) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["record", "grade"])
+    ap.add_argument("mode", choices=["record", "grade", "summary"])
     ap.add_argument("--season", type=int, default=None)
     ap.add_argument("--week", type=int, default=None)
     args = ap.parse_args()
 
-    if args.season and args.week:
-        season, week = args.season, args.week
-    else:
-        import weekly_pipeline as wp
-        season, week = wp.current_cfb_week()
+    if args.mode != "summary":
+        if args.season and args.week:
+            season, week = args.season, args.week
+        else:
+            import weekly_pipeline as wp
+            season, week = wp.current_cfb_week()
 
     if args.mode == "record":
         record(season, week)
+    elif args.mode == "summary":   # rebuild summary offline (no API calls)
+        df = pd.read_csv(LEDGER)
+        c = df["completed"]
+        df["completed"] = c.notna() & c.astype(str).str.strip().str.lower().isin(["true", "1", "1.0"])
+        _build_summary(df)
     else:
         grade(season)
 
