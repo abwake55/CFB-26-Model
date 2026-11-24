@@ -44,6 +44,48 @@
     13
   ],
   "not_live": {
+    "backfill_not_live": {
+      "weeks": [
+        7,
+        10,
+        11,
+        12
+      ],
+      "games_tracked": 186,
+      "games_completed": 186,
+      "brier": 0.2078,
+      "brier_n": 186,
+      "brier_lined": 0.2078,
+      "market_brier_lined": 0.2067,
+      "brier_lined_n": 186,
+      "core_unders": {
+        "n": 1,
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "units": -1.1,
+        "hit_rate": 0.0,
+        "avg_clv_pts": null
+      },
+      "spread_flags": {
+        "n": 6,
+        "wins": 4,
+        "losses": 2,
+        "pushes": 0,
+        "units": 1.8,
+        "hit_rate": 0.6667,
+        "avg_clv_pts": null
+      },
+      "all_under_leans": {
+        "n": 1,
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "units": -1.1,
+        "hit_rate": 0.0,
+        "avg_clv_pts": null
+      }
+    },
     "replay_not_live": {
       "weeks": [
         1,
@@ -55,7 +97,7 @@
       "brier": 0.1197,
       "brier_n": 260,
       "brier_lined": 0.0979,
-      "market_brier_lined": 0.0946,
+      "market_brier_lined": 0.0947,
       "brier_lined_n": 162,
       "core_unders": {
         "n": 10,
