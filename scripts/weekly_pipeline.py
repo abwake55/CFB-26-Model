@@ -273,6 +273,7 @@ def _fetch_cfbd_lines(season: int, week: int) -> pd.DataFrame:
                 "spread": line.get("spread"),
                 "over_under": line.get("overUnder"),
                 "spread_open": line.get("spreadOpen"),
+                "over_under_open": line.get("overUnderOpen"),
                 "home_moneyline": line.get("homeMoneyline"),
                 "away_moneyline": line.get("awayMoneyline"),
                 "provider": line.get("provider"),
@@ -301,6 +302,19 @@ def fetch_lines(games_df: pd.DataFrame, season: int, week: int) -> pd.DataFrame:
 
     cfbd_df = _fetch_cfbd_lines(season, week)
     merged = odds_api.merge_lines(odds_df, cfbd_df)
+    # Overlay CFBD openers onto Odds API rows that lack them. This uses the
+    # CFBD payload already fetched above — no new Odds API calls.
+    if not cfbd_df.empty and not merged.empty:
+        for col in ("spread_open", "over_under_open"):
+            if col not in cfbd_df.columns:
+                continue
+            if col not in merged.columns:
+                merged[col] = pd.NA
+            fill = (cfbd_df.dropna(subset=[col])
+                    .drop_duplicates("game_id")
+                    .set_index("game_id")[col])
+            missing = merged[col].isna()
+            merged.loc[missing, col] = merged.loc[missing, "game_id"].map(fill)
     n_fill = len(merged) - len(odds_df)
     print(f"→ {len(merged)} games with lines "
           f"({len(odds_df)} consensus + {n_fill} CFBD fill)")
@@ -317,14 +331,15 @@ def build_predictions(games, lines, spread_model, totals_model,
     # Merge lines
     if not lines.empty:
         ml_cols  = [c for c in ["home_moneyline", "away_moneyline"] if c in lines.columns]
-        keep     = ["book_quotes", "game_id", "spread", "over_under", "spread_open"] + ml_cols
+        keep     = ["book_quotes", "game_id", "spread", "over_under", "spread_open",
+                    "over_under_open"] + ml_cols
         if "provider" in lines.columns:
             keep.append("provider")
         df = games.merge(lines[[c for c in keep if c in lines.columns]],
                          on="game_id", how="left")
     else:
         df = games.copy()
-        df["spread"] = df["over_under"] = df["spread_open"] = np.nan
+        df["spread"] = df["over_under"] = df["spread_open"] = df["over_under_open"] = np.nan
 
     for col in ["home_moneyline", "away_moneyline"]:
         if col not in df.columns:
@@ -348,7 +363,8 @@ def build_predictions(games, lines, spread_model, totals_model,
     out_cols = ["book_quotes", "weather_source", "weather_observed_at", "availability_status", "availability_observed_at", "game_id", "season", "week", "home_team", "away_team",
                 "home_conference", "away_conference", "start_date",
                 "neutral_site", "conference_game", "spread", "over_under",
-                "spread_open", "home_moneyline", "away_moneyline", "wind_speed", "is_dome"]
+                "spread_open", "over_under_open", "home_moneyline", "away_moneyline",
+                "wind_speed", "is_dome"]
     out = df[[c for c in out_cols if c in df.columns]].copy()
     if "provider" in df.columns:
         out["provider"] = df["provider"]
@@ -374,6 +390,17 @@ def build_predictions(games, lines, spread_model, totals_model,
         out = opener_gap.attach(out, df)
     except Exception as exc:
         print(f"[WARN] opener-gap signal unavailable: {exc}")
+
+    # High-total under (src/high_total_under.py): under when the first total
+    # we see is >= 60. Uses snapshot/CFBD openers already on hand — no new
+    # Odds API calls.
+    try:
+        import high_total_under
+        out = high_total_under.attach(out)
+        n_ht = int(out["flag_high_total_under"].fillna(False).sum())
+        print(f"   High-total under: {n_ht} flags (total >= 60 at first number)")
+    except Exception as exc:
+        print(f"[WARN] high-total under signal unavailable: {exc}")
 
     # Prediction Tracker signal (src/prediction_tracker.py): frozen dev rule
     # (models/pt_rule.json), FPI line vs the opener. Free public CSV.
@@ -492,6 +519,7 @@ def filter_picks(predictions: pd.DataFrame) -> dict:
 
     picks["core"].sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
     picks["signals"] = spread_signals(predictions)
+    picks["total_signals"] = total_signals(predictions)
     return picks
 
 
@@ -532,6 +560,22 @@ def spread_signals(predictions: pd.DataFrame) -> list:
     return out
 
 
+def total_signals(predictions: pd.DataFrame) -> list:
+    """Totals signals tracked live in the ledger at 0.25u: high-total under."""
+    out = []
+    for _, r in predictions.iterrows():
+        if not bool(r.get("flag_high_total_under") is True or r.get("flag_high_total_under") == 1):
+            continue
+        line = pd.to_numeric(r.get("high_total_under_line"), errors="coerce")
+        if pd.isna(line):
+            continue
+        game_label = f"{r['away_team']} @ {r['home_team']}"
+        out.append({"signal": "high_total_under", "game": game_label,
+                    "pick": f"UNDER {line:.1f}", "line": float(line)})
+    out.sort(key=lambda x: -x["line"])
+    return out
+
+
 def format_imessage(picks: dict, season: int, week: int) -> str:
     """Compact iMessage text. Only CORE plays are presented as bets (1u).
     Paper flags are listed separately for research — never with units."""
@@ -551,7 +595,13 @@ def format_imessage(picks: dict, season: int, week: int) -> str:
             lines.append(f"  [{sp['signal']}] {sp['pick']} ({sp['game']})  |  edge {sp['edge_pts']:+.1f}{px}")
         lines.append("")
 
-    if not picks["core"] and not picks["paper"]:
+    if picks.get("total_signals"):
+        lines.append(f"📉 HIGH-TOTAL UNDERS — 0.25u / tracking ({len(picks['total_signals'])})")
+        for ts in picks["total_signals"]:
+            lines.append(f"  [htu] {ts['pick']} ({ts['game']})")
+        lines.append("")
+
+    if not picks["core"] and not picks["paper"] and not picks.get("signals") and not picks.get("total_signals"):
         lines.append("No picks above threshold this week.")
         return "\n".join(lines)
 

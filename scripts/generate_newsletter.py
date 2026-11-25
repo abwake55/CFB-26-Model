@@ -190,13 +190,12 @@ def predict_games(season: int, week: int) -> list:
                 "neutral":    bool(row.get("neutral_site", 0)),
             })
 
-        # High-total fade — PAPER only. Bet UNDER whenever the market total is
-        # >= 60, independent of the model: walk-forward 2019-25 (excluding CORE)
-        # 54.3% over 978 bets, +3.6% ROI, z=2.69, 4/7 seasons. Edge is uniform
-        # whether the model leans under (53.5%) or over (54.0%), so this is
-        # market over-inflation on shootout games, not model skill. Thin, so 0u
-        # until a live season corroborates it.
-        elif pd.notna(_ou) and _ou >= 60:
+        # High-total under — 0.25u, live-tracked. Bet UNDER when the first
+        # total we see is >= 60 (captured opener if we have it, else current).
+        elif (bool(row.get("flag_high_total_under") is True or row.get("flag_high_total_under") == 1)
+              or (pd.notna(_ou) and _ou >= 60)):
+            ht_line = pd.to_numeric(row.get("high_total_under_line"), errors="coerce")
+            ht_str = f"{ht_line:.1f}" if pd.notna(ht_line) else ou_str
             picks.append({
                 "type":      "TOTAL_HT",
                 "tier":      "PAPER",
@@ -206,12 +205,12 @@ def predict_games(season: int, week: int) -> list:
                 "home_team": row["home_team"],
                 "away_team": row["away_team"],
                 "bet_on":    "UNDER",
-                "line":      ou_str,
+                "line":      ht_str,
                 "edge":      round(float(tot_edge), 1) if pd.notna(tot_edge) else 0.0,
                 "pred":      round(float(row["pred_total"]), 1) if pd.notna(row["pred_total"]) else 0.0,
                 "kickoff":   kickoff,
                 "stars":     "",
-                "kelly":     0,   # paper — graded at nominal 1u for the record
+                "kelly":     0.25,
                 "start_date": str(start),
                 "wind_speed": row.get("wind_speed"),
                 "is_dome":    row.get("is_dome", 0),
@@ -657,7 +656,7 @@ def build_html(season: int, this_week: int, picks: list,
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
                      text-align:center;color:#eab308">{p['stars']}</td>
           <td style="padding:10px 8px;border-bottom:1px solid #e2e8f0;
-                     text-align:center;font-weight:700">{'paper / review' if p.get('tier') != 'CORE' else f"{p['kelly']}u"}</td>
+                     text-align:center;font-weight:700">{'paper / review' if p.get('tier') != 'CORE' and p.get('type') != 'TOTAL_HT' else f"{p['kelly']}u"}</td>
         </tr>"""
 
     picks_rows = "".join(pick_row(p) for p in picks[:12]) if has_picks else \
@@ -732,7 +731,7 @@ def build_html(season: int, this_week: int, picks: list,
     if sr.get("bets", 0) > 0:
         market_rows = []
         for key, label in [("TOTAL", "Over/Under (CORE)"), ("SPREAD", "Spread"),
-                           ("TOTAL_HT", "High-total unders (paper)"),
+                           ("TOTAL_HT", "High-total unders (0.25u)"),
                            ("MONEYLINE", "Moneyline (paper)")]:
             m = sr.get(key, {})
             if m.get("bets", 0) == 0:
@@ -809,7 +808,7 @@ def build_html(season: int, this_week: int, picks: list,
     </h2>
     <p style="color:#64748b;margin:0 0 12px 0;font-size:0.85em">
       O/U CORE: unders, {EDGE_MIN_TOT:.0f}–7 pt edge, power-conf, total ≥ 48
-      (54.9% in '19–'25 walk-forward) · High-total unders ≥ 60: paper only (54.3%) ·
+      (54.9% in '19–'25 walk-forward) · High-total unders ≥ 60: 0.25u, live-tracked ·
       Spread: {EDGE_MIN_SP:.0f}+ pts, weeks 1–{SPREAD_MAX_WEEK} only ·
       ML: {ML_EV_MIN:.0%}+ EV, paper record only · -110 juice unless noted
     </p>
