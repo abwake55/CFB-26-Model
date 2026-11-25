@@ -180,6 +180,18 @@ jobs:
           CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
         run: python scripts/prediction_ledger.py grade
 
+      # ── 9d. Win-probability calibration report ──────────────────────────────
+      # Do 60% calls win ~60%? Rebuilds outputs/research/calibration_*.{csv,json,png}
+      # from the walk-forward results + settled 2026 ledger rows + closing moneylines.
+      # Report only: the correction is fit on dev (2019-23) and was scored on the
+      # 2024-25 holdout; nothing here changes predictions. Pushed by the commit step below.
+      - name: Refresh win-probability calibration report
+        if: steps.season.outputs.mode == 'full'
+        continue-on-error: true
+        run: |
+          pip install "matplotlib>=3.7"
+          python scripts/calibration_report.py
+
       - name: Audit and archive all-market candidates
         env:
           CFB_API_KEY: ${{ secrets.CFB_API_KEY }}
