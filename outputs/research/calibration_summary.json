@@ -1,0 +1,148 @@
+{
+  "generated_from": {
+    "walk_forward_games": 5184,
+    "live_2026_priced_settled": 301,
+    "all_2026_priced_settled": 711,
+    "excluded_2026_unpriced_fallback": 1270
+  },
+  "raw": {
+    "dev 2019-23": {
+      "ece_noise_floor": 0.01675461006182164,
+      "label": "dev 2019-23",
+      "n": 3613,
+      "mean_pred_home": 0.5727080011369023,
+      "home_win_rate": 0.5781898699141987,
+      "brier": 0.17626617080959417,
+      "log_loss": 0.524753681036795,
+      "ece": 0.010175700669135316
+    },
+    "holdout 2024-25": {
+      "ece_noise_floor": 0.025251225873751816,
+      "label": "holdout 2024-25",
+      "n": 1571,
+      "mean_pred_home": 0.575010530433468,
+      "home_win_rate": 0.5881604073838319,
+      "brier": 0.17921488459438023,
+      "log_loss": 0.5279350848042076,
+      "ece": 0.029508750560080864
+    },
+    "live 2026": {
+      "ece_noise_floor": 0.06123491914952098,
+      "label": "live 2026",
+      "n": 301,
+      "mean_pred_home": 0.5950437017577551,
+      "home_win_rate": 0.6112956810631229,
+      "brier": 0.18103190388877916,
+      "log_loss": 0.5362054436940678,
+      "ece": 0.06975139318229169
+    },
+    "2026 all (incl. replay/backfill)": {
+      "ece_noise_floor": 0.03728376675239551,
+      "label": "2026 all (incl. replay/backfill)",
+      "n": 711,
+      "mean_pred_home": 0.6290497526991742,
+      "home_win_rate": 0.630098452883263,
+      "brier": 0.168914733165644,
+      "log_loss": 0.5048858983722374,
+      "ece": 0.03326777555116652
+    }
+  },
+  "corrections": {
+    "platt": {
+      "ece_noise_floor": 0.025500486666146013,
+      "label": "holdout 2024-25",
+      "n": 1571,
+      "mean_pred_home": 0.5807174802984474,
+      "home_win_rate": 0.5881604073838319,
+      "brier": 0.17913864486947398,
+      "log_loss": 0.5277238825307717,
+      "ece": 0.02457191968206324,
+      "correction": "platt",
+      "brier_gain": 7.623972490625186e-05,
+      "ll_gain": 0.00021120227343585096,
+      "brier_gain_ci95": [
+        -0.00022825861978538174,
+        0.00038994184946209375
+      ],
+      "meets_ship_rule": false
+    },
+    "iso": {
+      "ece_noise_floor": 0.0246719716505345,
+      "label": "holdout 2024-25",
+      "n": 1571,
+      "mean_pred_home": 0.5819858157984229,
+      "home_win_rate": 0.5881604073838319,
+      "brier": 0.17928053983147776,
+      "log_loss": 0.5284930506801837,
+      "ece": 0.028273894446922253,
+      "correction": "iso",
+      "brier_gain": -6.565523709753385e-05,
+      "ll_gain": -0.0005579658759761186,
+      "brier_gain_ci95": [
+        -0.0010613904781181396,
+        0.000923706292631707
+      ],
+      "meets_ship_rule": false
+    }
+  },
+  "platt_params": {
+    "a": 0.9897390877631194,
+    "b": 0.03298313865543646
+  },
+  "ship_rule": {
+    "min_brier_gain": 0.0005,
+    "min_logloss_gain": 0.001,
+    "bootstrap_ci_excludes_zero": true
+  },
+  "ship": null,
+  "market": [
+    {
+      "split": "dev 2019-23",
+      "n": 2169,
+      "coverage": 0.6003321339606975,
+      "model_brier": 0.1860488437004825,
+      "market_brier": 0.18895182856802673,
+      "model_logloss": 0.5512616980029181,
+      "market_logloss": 0.5599225346904347,
+      "model_ece": 0.017063546612414004,
+      "market_ece": 0.02399012340815818,
+      "mean_abs_model_minus_market": 0.05472557771532229
+    },
+    {
+      "split": "holdout 2024-25",
+      "n": 1536,
+      "coverage": 0.9777211966900063,
+      "model_brier": 0.18329420926220416,
+      "market_brier": 0.18355723257314524,
+      "model_logloss": 0.5396696499594554,
+      "market_logloss": 0.5429021087615759,
+      "model_ece": 0.029888144410152355,
+      "market_ece": 0.01564900324231318,
+      "mean_abs_model_minus_market": 0.03649480926077042
+    },
+    {
+      "split": "live 2026",
+      "n": 289,
+      "coverage": 0.9601328903654485,
+      "model_brier": 0.18845402876939618,
+      "market_brier": 0.18354453445139032,
+      "model_logloss": 0.5565061197532929,
+      "market_logloss": 0.5484097581838737,
+      "model_ece": 0.07073285737723549,
+      "market_ece": 0.09376166345228543,
+      "mean_abs_model_minus_market": 0.07821015133626966
+    },
+    {
+      "split": "2026 all (incl. replay/backfill)",
+      "n": 666,
+      "coverage": 0.9367088607594937,
+      "model_brier": 0.18025313476450056,
+      "market_brier": 0.1802069579454567,
+      "model_logloss": 0.5368969056886327,
+      "market_logloss": 0.5398541927316562,
+      "model_ece": 0.034499762300401006,
+      "market_ece": 0.030241840258587425,
+      "mean_abs_model_minus_market": 0.06500443379685915
+    }
+  ]
+}
