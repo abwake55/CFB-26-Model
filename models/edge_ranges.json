@@ -38,6 +38,7 @@
         2024,
         2025
       ],
+      "cluster": "season",
       "flag_threshold": 3.0,
       "dev_only_fit": {
         "a": 0.8525668927186959,
@@ -85,6 +86,7 @@
         2024,
         2025
       ],
+      "cluster": "season",
       "flag_threshold": 5.0,
       "dev_only_fit": {
         "a": -0.34105047184138876,
@@ -132,6 +134,7 @@
         2024,
         2025
       ],
+      "cluster": "season",
       "flag_threshold": 7.0,
       "dev_only_fit": {
         "a": -1.5577810307801994,

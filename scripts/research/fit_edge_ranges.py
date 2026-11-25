@@ -75,11 +75,13 @@ def frames() -> dict[str, tuple[pd.DataFrame, float]]:
     return out
 
 
-def fit(f: pd.DataFrame, n_boot: int = 2000) -> dict:
+def fit(f: pd.DataFrame, n_boot: int = 2000, cluster: str = "season") -> dict:
+    """cluster="season" resamples whole seasons (use with 5+ seasons);
+    cluster="game" resamples games (for short histories such as bowls)."""
     X = np.column_stack([np.ones(len(f)), f.e.values])
     y = f.c.values
     beta = np.linalg.lstsq(X, y, rcond=None)[0]
-    seasons = f.season.values
+    seasons = f.season.values if cluster == "season" else np.arange(len(f))
     groups = {s: np.flatnonzero(seasons == s) for s in np.unique(seasons)}
     keys = list(groups)
     boots = np.empty((n_boot, 2))
@@ -91,7 +93,7 @@ def fit(f: pd.DataFrame, n_boot: int = 2000) -> dict:
     return {"a": float(beta[0]), "b": float(beta[1]), "cov": cov.round(8).tolist(),
             "resid_q10": float(np.quantile(f.resid, 0.10)),
             "resid_q90": float(np.quantile(f.resid, 0.90)),
-            "n": int(len(f)), "seasons": sorted(int(x) for x in keys)}
+            "n": int(len(f)), "seasons": sorted(int(x) for x in np.unique(f.season)), "cluster": cluster}
 
 
 def interval(p: dict, e) -> tuple:

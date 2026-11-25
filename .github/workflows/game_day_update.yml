@@ -1,0 +1,65 @@
+name: Game-day update (QB check + bowls)
+# Saturday mornings: re-check likely/confirmed starting QBs, re-project the
+# week's remaining games, flag picks whose edge changed (no Odds API calls;
+# uses the 6 AM line snapshot). December and January 1-20: runs daily; once
+# CFBD publishes the postseason schedule it rebuilds the bowl board (paper),
+# spending at most one 3-credit Odds API call per run, and only when a bowl
+# kicks off within 48h and >= 150 credits are left. Never sends the newsletter.
+on:
+  schedule:
+    - cron: '0 17 * 8-11 6'   # Sat 9 AM Pacific, Aug-Nov (after the 6 AM snapshot and 8 AM re-deal)
+    - cron: '30 16 * 12 *'    # Dec daily 8:30 AM Pacific (Saturday QB check + bowl board)
+    - cron: '30 16 1-20 1 *'  # Jan 1-20 daily 8:30 AM Pacific
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'auto | regular | bowls'
+        default: 'auto'
+      odds:
+        description: 'bowls: allow one guarded Odds API call (3 credits)'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ODDS_API_CACHE: /tmp/odds_cache.json
+      ODDS_API_CACHE_MAX_AGE: '1800'
+      BOWL_ODDS_MIN: '150'
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Game-day update
+        env:
+          CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'auto' }}
+          # scheduled bowl days may spend one call; manual runs only when ticked
+          ODDS_FLAG: ${{ (github.event_name == 'schedule' || inputs.odds) && '--odds' || '' }}
+        run: python scripts/game_day_update.py --mode "$MODE" $ODDS_FLAG
+      - name: Log Odds API quota (free endpoint)
+        if: always()
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/odds_usage.py
+      - name: Commit and push
+        run: >-
+          bash .github/scripts/commit_and_push.sh
+          "Game-day update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          outputs/predictions outputs/picks data/context data/odds_api_usage
+      - name: Report failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/report_failure.sh

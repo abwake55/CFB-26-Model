@@ -6,6 +6,24 @@
 | PT FPI-vs-opener | `opener − FPI line ≥ 7` (`models/pt_rule.json`) | 0.25–0.5u | small stake, live-tracked |
 | Opener-gap | `|market-free margin + opener| ≥ 5` | paper or 0.25u | live-tracked |
 | Main-model spreads, ML EV | — | none | paper only |
+| Bowl adjustment (bowls only) | `|bowl_adj| ≥ 2` (`models/bowl_adjust.json`) | none | paper, bowl ledger |
+| PT / opener-gap **in bowls** | same rules | none | paper only in bowls |
+
+Bowls (added Nov 24, see `docs/bowl_module_2026-11-24.md`): the
+regular-season signals didn't carry over to bowls. Opener-gap went 13-22 on
+the 2023–24 holdout bowls and PT FPI went 1-5. They stay on the bowl board
+as paper. The bowl adjustment (QB change, coaching change, portal) went
+29-18-1 on the holdout (+17.4%) and 12-9 in 2025 (+9.1%). That isn't
+significant once you allow for the 27 variants tried, so it's paper too.
+
+Uncertainty: each signal now carries `expected cover (80% range)` from
+`models/edge_ranges.json`. Use it to keep stakes small, not to pick bets.
+On the 2024–25 holdout the PT and opener-gap ranges ran optimistic: PT
+flagged bets realized +1.6 ± 1.7 points against a dev-fit range of 2.8–6.2.
+
+Game day: before betting a flagged pick, check `outputs/picks/gameday_2026_wWW.json`
+(Saturday 9 AM PT). If a team in the game has a new starting QB or the edge
+fell below the threshold at the current line, pass or keep it at the minimum stake.
 
 Execution:
 - Bet a spread signal at the line when it first appears (Sunday opener

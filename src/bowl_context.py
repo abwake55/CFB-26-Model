@@ -45,6 +45,8 @@ def bowl_games(fbs_only: bool = True) -> pd.DataFrame:
 
 def starters(passing: pd.DataFrame) -> pd.DataFrame:
     """One row per team-game: the starter = most pass attempts."""
+    passing = passing[passing["player"].astype(str).str.strip().str.lower() != "team"] \
+        if "player" in passing.columns else passing
     return (passing.sort_values("attempts", ascending=False)
             .drop_duplicates(["game_id", "team"]))
 

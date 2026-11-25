@@ -200,6 +200,17 @@ def main() -> None:
             "holdout_2023_24": hold.drop(["rule", "period", "set", "lam", "thr"]).to_dict(),
             "extra_2025": sel[sel.period == "extra 2025"].iloc[0].drop(["rule", "period", "set", "lam", "thr"]).to_dict(),
             "status": "paper"}
+    # expected-cover range for the live flag (same method as src/edge_ranges.py:
+    # season-cluster bootstrap of cover margin on |adjustment|; only seasons
+    # the adjustment was NOT fitted on, 2023-2025, so the range is not in-sample)
+    sys.path.insert(0, str(ROOT / "scripts" / "research"))
+    from fit_edge_ranges import fit as fit_range
+    a = apply_adjust(f, adj)
+    rf = pd.DataFrame({"season": f.season, "e": a.abs(),
+                       "c": np.sign(a) * (f.actual + f.close_line),
+                       "resid": f.actual - (-f.close_line + a)})[(a.abs() >= 0.5) & (f.season >= 2023)]
+    meta["range"] = fit_range(rf, cluster="game")   # 3 seasons: too few to cluster
+    meta["range"]["e_max"] = round(float(rf.e.quantile(0.95)), 2)
     (ROOT / "models" / "bowl_adjust.json").write_text(json.dumps(meta, indent=2, default=float))
     print(json.dumps(meta, indent=1, default=float))
     f.to_csv(OUT / "bowl_lab_frame.csv", index=False)

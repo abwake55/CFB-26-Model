@@ -1,5 +1,5 @@
 feature,period,n,nonzero,slope_y_close,n_y_close,slope_y_open,n_y_open,slope_move,n_move
-qb_change_diff,dev 2017-22,225,49,-2.08,225,-4.04,117,-2.17,117
+qb_change_diff,dev 2017-22,225,52,-1.96,225,-4.11,117,-2.1,117
 qb_change_diff,holdout 2023-24,88,41,-4.04,88,-6.43,88,-2.39,88
 qb_change_diff,extra 2025,46,16,-3.55,46,-5.67,46,-2.12,46
 qb_starter_share_diff,dev 2017-22,225,223,4.19,225,8.6,117,3.25,117
