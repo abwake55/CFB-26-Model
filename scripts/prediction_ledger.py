@@ -56,6 +56,8 @@ LEDGER_COLS = [
     "pred_indep_margin", "opener_gap_line", "opener_gap_edge", "flag_opener_gap",
     # Prediction Tracker signal (src/prediction_tracker.py, models/pt_rule.json)
     "pt_fpi", "pt_sys_median", "pt_sys_std", "pt_opener", "pt_edge", "flag_pt",
+    # High-total under (src/high_total_under.py): under when first total >= 60
+    "over_under_open", "snap_open_total", "high_total_under_line", "flag_high_total_under",
     # live = recorded before kickoff by the scheduled job; replay_not_live =
     # weeks 1-3 reseeded after the fact; backfill_not_live = weeks missed by
     # the Oct 29 - Nov 17 CI outage, re-predicted later with a date cutoff.
@@ -71,6 +73,14 @@ BET_LINE_SIGNALS = {"pt": ("flag_pt", "pt_edge"),
 for _sig in BET_LINE_SIGNALS:
     LEDGER_COLS += [f"{_sig}_bet_line", f"{_sig}_bet_ts", f"{_sig}_bet_edge",
                     f"{_sig}_clv", f"{_sig}_clv_sharp"]
+# Totals signals: bet line is the first captured total, CLV vs closing total.
+# signal -> (flag column, source line column)
+TOTAL_BET_LINE_SIGNALS = {
+    "high_total_under": ("flag_high_total_under", "high_total_under_line"),
+}
+for _sig in TOTAL_BET_LINE_SIGNALS:
+    LEDGER_COLS += [f"{_sig}_bet_line", f"{_sig}_bet_ts",
+                    f"{_sig}_clv", f"{_sig}_clv_sharp"]
 # filled by grade from data/lines_snapshots: the first captured line (true
 # opener when the early-week snapshot saw it) and the sharp book's last
 # pre-kickoff line (LowVig/BetOnline; Pinnacle only if the eu region is on)
@@ -78,7 +88,8 @@ for _sig in BET_LINE_SIGNALS:
 for _sig in ("pt", "opener_gap"):
     LEDGER_COLS += [f"{_sig}_p_cover", f"{_sig}_p_push", f"{_sig}_ev", f"{_sig}_buy_half"]
 LEDGER_COLS += ["snap_open_spread", "snap_open_ts", "closing_sharp_spread",
-                "closing_sharp_book", "closing_sharp_ts"]
+                "closing_sharp_book", "closing_sharp_ts",
+                "closing_sharp_total"]
 # uncertainty at record time (src/edge_ranges.py): expected cover margin of
 # the bet side and its 80% range, per signal; projected-margin 80% range
 for _sig in ("spread", "opener_gap", "pt"):
@@ -106,6 +117,18 @@ def _sharp_close(rec: dict):
     cur = rec.get("current") or {}
     if cur.get("sharp_spread") is not None:
         return cur["sharp_spread"], cur.get("sharp_book"), rec.get("updated")
+    return None, None, None
+
+
+def _sharp_close_total(rec: dict):
+    """Last pre-kickoff sharp total from the same snapshot (no new odds calls)."""
+    hist = rec.get("history") or []
+    for h in reversed(hist):
+        if h.get("sharp_total") is not None:
+            return h["sharp_total"], h.get("sharp_book"), h.get("ts")
+    cur = rec.get("current") or {}
+    if cur.get("sharp_total") is not None:
+        return cur["sharp_total"], cur.get("sharp_book"), rec.get("updated")
     return None, None, None
 
 
@@ -153,6 +176,16 @@ def _fill_clv(df: pd.DataFrame) -> pd.DataFrame:
                                    ("closing_sharp_spread", f"{sig}_clv_sharp")):
             close = pd.to_numeric(df.get(close_col), errors="coerce")
             df[out_col] = (side * (line - close)).round(2)
+    # Unders: a higher number than the close is positive CLV.
+    for sig in TOTAL_BET_LINE_SIGNALS:
+        lc = f"{sig}_bet_line"
+        if lc not in df.columns:
+            continue
+        line = pd.to_numeric(df[lc], errors="coerce")
+        close = pd.to_numeric(df.get("closing_over_under"), errors="coerce")
+        df[f"{sig}_clv"] = (line - close).round(2)
+        sharp = pd.to_numeric(df.get("closing_sharp_total"), errors="coerce")
+        df[f"{sig}_clv_sharp"] = (line - sharp).round(2)
     return df
 
 
@@ -179,6 +212,20 @@ def _carry_bet_lines(new: pd.DataFrame, old: pd.DataFrame | None) -> pd.DataFram
                 new.at[i, cols[0]] = r["spread"]
                 new.at[i, cols[1]] = r["recorded_at"]
                 new.at[i, cols[2]] = r[edge]
+    for sig, (flag, line_col) in TOTAL_BET_LINE_SIGNALS.items():
+        cols = [f"{sig}_bet_line", f"{sig}_bet_ts"]
+        for c in cols:
+            if c not in new.columns:
+                new[c] = np.nan
+            new[c] = new[c].astype(object)
+        for i, r in new.iterrows():
+            gid = r["game_id"]
+            if gid in prev.index and cols[0] in prev.columns and pd.notna(prev.at[gid, cols[0]]):
+                for c in cols:
+                    new.at[i, c] = prev.at[gid, c]
+            elif _is_true(r.get(flag)) and pd.notna(r.get(line_col)):
+                new.at[i, cols[0]] = r[line_col]
+                new.at[i, cols[1]] = r["recorded_at"]
     return new
 
 
@@ -238,6 +285,11 @@ def record(season: int, week: int) -> None:
             "spread": row.get("spread"),
             "over_under": row.get("over_under"),
             "spread_open": row.get("spread_open"),
+            "over_under_open": row.get("over_under_open"),
+            "snap_open_total": row.get("snap_open_total"),
+            "high_total_under_line": row.get("high_total_under_line"),
+            "flag_high_total_under": bool(row.get("flag_high_total_under") is True
+                                          or row.get("flag_high_total_under") == 1),
             "home_moneyline": row.get("home_moneyline"),
             "away_moneyline": row.get("away_moneyline"),
             "spread_edge": row.get("spread_edge"),
@@ -408,12 +460,23 @@ def grade(season: int) -> None:
             if pd.isna(r.get("snap_open_spread")) and (rec.get("first") or {}).get("spread") is not None:
                 df.at[i, "snap_open_spread"] = rec["first"]["spread"]
                 df.at[i, "snap_open_ts"] = rec.get("first_seen")
+            if pd.isna(r.get("snap_open_total")) and (rec.get("first") or {}).get("over_under") is not None:
+                df.at[i, "snap_open_total"] = rec["first"]["over_under"]
+                if pd.isna(r.get("snap_open_ts")):
+                    df.at[i, "snap_open_ts"] = rec.get("first_seen")
             if r.get("completed") is True or r.get("completed") == True:  # noqa: E712
                 sp, bk, ts = _sharp_close(rec)
                 if sp is not None:
                     df.at[i, "closing_sharp_spread"] = sp
                     df.at[i, "closing_sharp_book"] = bk
                     df.at[i, "closing_sharp_ts"] = ts
+                tot, tbk, tts = _sharp_close_total(rec)
+                if tot is not None:
+                    df.at[i, "closing_sharp_total"] = tot
+                    if bk is None:
+                        df.at[i, "closing_sharp_book"] = tbk
+                    if ts is None:
+                        df.at[i, "closing_sharp_ts"] = tts
     need = df[(df["completed"] == True) & df["closing_sharp_spread"].isna()]  # noqa: E712
     if len(need):
         q = _sharp_close_from_quotes(need["game_id"])
@@ -445,17 +508,21 @@ def _bucket_stats(g: pd.DataFrame, kind: str, line_col: str = "spread",
     clvs, sharp_clvs = [], []
     for _, r in g.iterrows():
         if kind == "under":
-            if pd.isna(r.get("over_under")) or pd.isna(r.get("actual_total")):
+            line = r[line_col] if line_col != "spread" and line_col in r else r.get("over_under")
+            if pd.isna(line) or pd.isna(r.get("actual_total")):
                 continue
             n += 1
-            if r["actual_total"] == r["over_under"]:
+            if r["actual_total"] == line:
                 pushes += 1
-            elif r["actual_total"] < r["over_under"]:
+            elif r["actual_total"] < line:
                 wins += 1; units += 1.0
             else:
                 losses += 1; units -= 1.1
             if pd.notna(r.get("closing_over_under")):
-                clvs.append(r["over_under"] - r["closing_over_under"])
+                clvs.append(line - r["closing_over_under"])
+            sharp_t = pd.to_numeric(r.get("closing_sharp_total"), errors="coerce")
+            if pd.notna(sharp_t):
+                sharp_clvs.append(line - sharp_t)
         elif kind == "spread":
             if pd.isna(r.get(line_col)) or pd.isna(r.get("actual_margin")):
                 continue
@@ -512,6 +579,15 @@ def _bucket_block(df: pd.DataFrame) -> dict:
         fl = df["flag_opener_gap"].astype(str).str.lower().isin(["true", "1", "1.0"])
         out["opener_gap_flags"] = _bucket_stats(df[fl], "spread", "opener_gap_line",
                                                 "opener_gap_edge")
+    if "flag_high_total_under" in df.columns:
+        fl = df["flag_high_total_under"].astype(str).str.lower().isin(["true", "1", "1.0"])
+        line = "high_total_under_bet_line" if "high_total_under_bet_line" in df.columns \
+            else "high_total_under_line"
+        placed = df[fl].copy()
+        if "high_total_under_bet_line" in placed.columns:
+            has = pd.to_numeric(placed["high_total_under_bet_line"], errors="coerce").notna()
+            placed = placed[has]
+        out["high_total_under_bets"] = _bucket_stats(placed, "under", line)
     for sig in BET_LINE_SIGNALS:
         lc = f"{sig}_bet_line"
         if lc not in df.columns:
@@ -548,6 +624,7 @@ def _build_summary(df: pd.DataFrame) -> None:
                "opener_gap_bets": blk.get("opener_gap_bets"),
                "spread_bets": blk.get("spread_bets"),
                "pt_bets_at_opener": blk.get("pt_bets_at_opener"),
+               "high_total_under_bets": blk.get("high_total_under_bets"),
                "all_under_leans": blk["all_under_leans"],
                "weeks_live": sorted(int(w) for w in live["week"].unique()),
                "not_live": {}}

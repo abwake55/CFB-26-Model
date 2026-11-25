@@ -1313,16 +1313,23 @@ def _core_premium(row) -> bool:
     return False
 
 
+def _high_total_under_flag(row) -> bool:
+    """Under when the first total we see is >= 60 (src/high_total_under.py)."""
+    v = row.get("flag_high_total_under") if hasattr(row, "get") else None
+    if v is not None and not (isinstance(v, float) and pd.isna(v)):
+        return bool(v is True or v == 1 or str(v).strip().lower() in ("true", "1", "1.0"))
+    try:
+        import high_total_under as htu
+        return bool(htu.attach(pd.DataFrame([dict(row)]))["flag_high_total_under"].iloc[0])
+    except Exception:
+        ou = row.get("over_under")
+        return bool(pd.notna(ou) and float(ou) >= 60)
+
+
 def _high_total_paper(row) -> bool:
-    """Pure market-bias play, PAPER only: bet UNDER whenever the market total
-    is >= 60, independent of the model. Walk-forward 2019-25 (excluding games
-    already in CORE): 53.8% over 974 bets, +2.7% ROI, p=0.019, profitable 5/7
-    seasons. The edge is uniform whether the model leans under (53.5%) or over
-    (54.0%), confirming it is book/public over-inflation on shootout-hyped
-    games, not model skill. Thin (~1.4 pts above breakeven) and it failed two
-    seasons, so it is tracked at 0u until a live season corroborates it."""
-    ou = row.get("over_under")
-    return bool(pd.notna(ou) and float(ou) >= 60 and not _core_total(row))
+    """Watchlist card: high-total under that is not already a CORE play
+    (CORE is shown at 1u; this signal is 0.25u on the same under)."""
+    return _high_total_under_flag(row) and not _core_total(row)
 
 
 
@@ -1699,10 +1706,8 @@ def render_totals_card(row, season, week):
     side_str = "UNDER" if is_under else "OVER"
     edge_abs = abs(row["totals_edge"])
     _play    = _is_play("total", row)
-    # Flat 1u on CORE: hit rate does NOT rise with edge size, so edge-scaled
-    # Kelly is backwards. At the measured 54.9% quarter-Kelly is ~1.3% of
-    # bankroll, so 1u (=1%) is the conservative size. Non-CORE = research only.
-    units    = 1 if _play else 0
+    # Flat 1u on CORE. High-total unders that are not CORE are 0.25u.
+    units    = 1 if _play else (0.25 if force_under else 0)
     matchup  = f"{row['away_team']} @ {row['home_team']}"
     ou_str   = f"{row['over_under']:.1f}" if pd.notna(row["over_under"]) else "TBD"
     edge_str = f"{row['totals_edge']:+.1f}"
@@ -2909,6 +2914,14 @@ def render_live_scorecard():
     c4.metric("Games tracked",
               f"{s.get('games_completed', 0)} / {s.get('games_tracked', 0)}",
               "finals / predictions recorded", delta_color="off")
+    ht = s.get("high_total_under_bets") or {}
+    if ht.get("n"):
+        st.caption(
+            f"High-total unders (0.25u): {ht.get('wins', 0)}-{ht.get('losses', 0)}"
+            + (f" ({ht['pushes']}p)" if ht.get("pushes") else "")
+            + f" · {ht.get('units', 0):+.1f}u · CLV {ht.get('avg_clv_pts')} pts"
+            + (f" / sharp {ht.get('avg_clv_sharp_pts')}" if ht.get("avg_clv_sharp_pts") is not None else "")
+        )
     st.caption("Source: prediction ledger (every weekly prediction persisted "
                "with market lines at record time, graded against CFBD finals "
                "and closing lines each Tuesday).")
@@ -4109,13 +4122,18 @@ def main():
             (preds["totals_edge"].abs() <= TOTALS_EDGE_MAX)
         ].sort_values("totals_edge", key=abs, ascending=False)
 
-        # High-total paper fades (total >= 60, under, not already CORE). These
-        # need no model edge, so they are collected separately from tot_bets —
-        # the edge filter above would drop most of them. _force_under tells the
-        # card renderer to show UNDER regardless of the model's direction.
-        ht_bets = preds[
-            preds["over_under"].notna() & (preds["over_under"] >= 60)
-        ].copy()
+        # High-total unders (first total >= 60, 0.25u). Collected separately
+        # from tot_bets because they need no model edge. CORE games stay on
+        # the 1u board; this list is the incremental 0.25u flags.
+        if "flag_high_total_under" in preds.columns:
+            ht_mask = preds["flag_high_total_under"].fillna(False).astype(bool)
+        else:
+            try:
+                import high_total_under as htu
+                ht_mask = htu.attach(preds)["flag_high_total_under"].fillna(False).astype(bool)
+            except Exception:
+                ht_mask = preds["over_under"].notna() & (preds["over_under"] >= 60)
+        ht_bets = preds[ht_mask].copy()
         if not ht_bets.empty:
             ht_bets = ht_bets[~ht_bets.apply(_core_total, axis=1)]
         if not ht_bets.empty:
@@ -4233,15 +4251,15 @@ def main():
                     # is auditable week to week.
                     if not ht_bets.empty:
                         with st.expander(
-                            f"🧪 Paper watchlist — {len(ht_bets)} high-total fade"
-                            f"{'s' if len(ht_bets) != 1 else ''} (0u, tracking only)",
+                            f"📉 High-total unders — {len(ht_bets)} flag"
+                            f"{'s' if len(ht_bets) != 1 else ''} (0.25u, live-tracked)",
                             expanded=False,
                         ):
                             st.caption(
-                                "Bet UNDER whenever the market total is ≥ 60, independent "
-                                "of the model: 54.3% over 978 walk-forward bets (+3.6% ROI, "
-                                "z=2.69), profitable 4 of 7 seasons. Thin and unproven live, "
-                                "so it carries no units until a season corroborates it."
+                                "Bet UNDER at the first total we see when that number is ≥ 60. "
+                                "Holdout 2024–25: 118-96-2 at the close (+5.27% ROI); 118-90-1 "
+                                "at the opener (+8.30%, CLV +0.70). Sized at 0.25u until the "
+                                "live ledger meets the promotion rule."
                             )
                             for _, row in ht_bets.iterrows():
                                 render_totals_card(row, season, week)
