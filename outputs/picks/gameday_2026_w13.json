@@ -1,0 +1,437 @@
+{
+  "season": 2026,
+  "week": 13,
+  "generated_at": "2026-11-25T01:14:49+00:00",
+  "games_checked": 101,
+  "qb_effect_pts": -0.68,
+  "changed": [
+    {
+      "game": "West Virginia @ Utah",
+      "kickoff": "2026-11-28T02:00:00.000Z",
+      "line_recorded": -25.0,
+      "line_now": -22.5,
+      "reasons": [
+        "opener_gap edge below 5 at the current line"
+      ]
+    },
+    {
+      "game": "Purdue @ Indiana",
+      "kickoff": "2026-11-29T00:00:00.000Z",
+      "line_recorded": -22.5,
+      "line_now": -22.5,
+      "reasons": [
+        "Indiana new QB: Grant Wilson (2 starts; most-started Josh Hoover; started last game, likely)"
+      ]
+    },
+    {
+      "game": "Michigan @ Ohio State",
+      "kickoff": "2026-11-28T17:00:00.000Z",
+      "line_recorded": -10.0,
+      "line_now": -10.0,
+      "reasons": [
+        "opener_gap edge below 5 at the current line"
+      ]
+    },
+    {
+      "game": "San Diego State @ Washington State",
+      "kickoff": "2026-11-28T23:30:00.000Z",
+      "line_recorded": -2.5,
+      "line_now": -2.5,
+      "reasons": [
+        "pt edge below 7 at the current line"
+      ]
+    },
+    {
+      "game": "UAB @ North Texas",
+      "kickoff": "2026-11-28T21:00:00.000Z",
+      "line_recorded": -3.5,
+      "line_now": -3.5,
+      "reasons": [
+        "North Texas new QB: Chris Jimerson Jr. (1 starts; most-started Tayven Jackson; started last game, likely)"
+      ]
+    },
+    {
+      "game": "Sacramento State @ Hawai'i",
+      "kickoff": "2026-11-29T04:00:00.000Z",
+      "line_recorded": -13.5,
+      "line_now": -13.5,
+      "reasons": [
+        "Sacramento State new QB: Brian Salazar (2 starts; most-started Jackson Sharman; started last game, likely)"
+      ]
+    },
+    {
+      "game": "Idaho State @ North Dakota",
+      "kickoff": "2026-11-28T18:00:00.000Z",
+      "line_recorded": -10.0,
+      "line_now": -10.0,
+      "reasons": [
+        "opener_gap edge below 5 at the current line",
+        "Idaho State new QB: Davis Harsin (2 starts; most-started Jordan Cooke; started last game, likely)"
+      ]
+    }
+  ],
+  "qb_changes": [
+    {
+      "team": "Air Force",
+      "primary_qb": "Liam Szarka",
+      "likely_starter": "Evan Medders",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Akron",
+      "primary_qb": "Brayden Roggow",
+      "likely_starter": "Cibastian Broughton",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Alabama",
+      "primary_qb": "Keelon Russell",
+      "likely_starter": "Austin Mack",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Arizona State",
+      "primary_qb": "Cutter Boley",
+      "likely_starter": "Jake Fette",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Auburn",
+      "primary_qb": "Byrum Brown",
+      "likely_starter": "Tristan Ti'a",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Bowling Green",
+      "primary_qb": "Jay Kastantin",
+      "likely_starter": "Austin Novosad",
+      "likely_starts": 2,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Clemson",
+      "primary_qb": "Tait Reynolds",
+      "likely_starter": "Trent Pearman",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Georgia State",
+      "primary_qb": "Cameran Brown",
+      "likely_starter": "Ayden Pereira",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Georgia Tech",
+      "primary_qb": "Alberto Mendoza",
+      "likely_starter": "Grady Adamson",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Houston",
+      "primary_qb": "Conner Weigman",
+      "likely_starter": "Keisean Henderson",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Idaho State",
+      "primary_qb": "Jordan Cooke",
+      "likely_starter": "Davis Harsin",
+      "likely_starts": 2,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Indiana",
+      "primary_qb": "Josh Hoover",
+      "likely_starter": "Grant Wilson",
+      "likely_starts": 2,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "James Madison",
+      "primary_qb": "Camden Coleman",
+      "likely_starter": "JC Evans",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Kansas State",
+      "primary_qb": "Avery Johnson",
+      "likely_starter": "Dillon Duff",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Kennesaw State",
+      "primary_qb": "Rickie Collins",
+      "likely_starter": "Landon Varnes",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Lehigh",
+      "primary_qb": "Derek Morgan",
+      "likely_starter": "Patrick Coan",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Massachusetts",
+      "primary_qb": "William Watson III",
+      "likely_starter": "Logan Inagawa",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Michigan State",
+      "primary_qb": "Alessio Milivojevic",
+      "likely_starter": "Kayd Coffman",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Mississippi State",
+      "primary_qb": "Kamario Taylor",
+      "likely_starter": "Parker Puckett",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "New Mexico",
+      "primary_qb": "Toa Faavae",
+      "likely_starter": "Luke Moga",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "North Carolina",
+      "primary_qb": "Billy Edwards",
+      "likely_starter": "Travis Burgess",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "North Texas",
+      "primary_qb": "Tayven Jackson",
+      "likely_starter": "Chris Jimerson Jr.",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Northwestern",
+      "primary_qb": "Aidan Chiles",
+      "likely_starter": "Nicco Marchiol",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Ohio State",
+      "primary_qb": "Julian Sayin",
+      "likely_starter": "Luke Fahey",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Old Dominion",
+      "primary_qb": "Quinn Henicle",
+      "likely_starter": "Jaxon Potter",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Oregon State",
+      "primary_qb": "Braden Atkinson",
+      "likely_starter": "Maalik Murphy",
+      "likely_starts": 2,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Pittsburgh",
+      "primary_qb": "Mason Heintschel",
+      "likely_starter": "Holden Geriner",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Rice",
+      "primary_qb": "Jacurri Brown",
+      "likely_starter": "Gael Ochoa",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Sacramento State",
+      "primary_qb": "Jackson Sharman",
+      "likely_starter": "Brian Salazar",
+      "likely_starts": 2,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Sam Houston",
+      "primary_qb": "Landyn Locke",
+      "likely_starter": "Mason Holtzclaw",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "San Diego State",
+      "primary_qb": "Jayden Denegal",
+      "likely_starter": "Stone Saunders",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "South Alabama",
+      "primary_qb": "Jared Hollins",
+      "likely_starter": "Bishop Davenport",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "South Florida",
+      "primary_qb": "Michael Van Buren Jr.",
+      "likely_starter": "Luke Kromenhoek",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Southern Miss",
+      "primary_qb": "Landy Lyddy",
+      "likely_starter": "John White",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Syracuse",
+      "primary_qb": "Steven Angeli",
+      "likely_starter": "Malachi Nelson",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "TCU",
+      "primary_qb": "Jaden Craig",
+      "likely_starter": "Adam Schobel",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Temple",
+      "primary_qb": "Ajani Sheppard",
+      "likely_starter": "Jaxon Smolik",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Texas A&M",
+      "primary_qb": "Marcel Reed",
+      "likely_starter": "Brady Hart",
+      "likely_starts": 1,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Texas Tech",
+      "primary_qb": "Will Hammond",
+      "likely_starter": "Thomas Castellanos",
+      "likely_starts": 4,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "UCF",
+      "primary_qb": "Keyone Jenkins",
+      "likely_starter": "Alonza Barnett",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "UL Monroe",
+      "primary_qb": "Aidan Armenta",
+      "likely_starter": "Austin Carlisle",
+      "likely_starts": 3,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "UTEP",
+      "primary_qb": "EJ Colson",
+      "likely_starter": "Raymond Moore III",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Utah State",
+      "primary_qb": "Grady Brosterhous",
+      "likely_starter": "McCae Hillstead",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Washington State",
+      "primary_qb": "Caden Pinnick",
+      "likely_starter": "Owen Eshelman",
+      "likely_starts": 5,
+      "source": "started last game",
+      "status": "likely"
+    },
+    {
+      "team": "Wyoming",
+      "primary_qb": "Tyler Hughes",
+      "likely_starter": "Landon Sims",
+      "likely_starts": 2,
+      "source": "started last game",
+      "status": "likely"
+    }
+  ],
+  "note": "Likely starters come from last game's box score unless data/context/qb_overrides.csv has confirmed news.",
+  "cfbd_calls": 12
+}
