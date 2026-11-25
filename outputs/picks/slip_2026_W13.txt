@@ -1,0 +1,14 @@
+Week 13 CFB — ready-to-place slip
+Paper bankroll $1,000. 1u = $20 (flat).
+
+Temple/Memphis under 64.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 64.5 at -110
+West Virginia/Utah under 68.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 68.5 at -110
+Miami -25.5 vs Boston College    $5 at -110 (sportsbook fallback)    worst acceptable: Miami -25.5 at -110
+Ohio State -10 vs Michigan    $5 at -110 (sportsbook fallback)    worst acceptable: Ohio State -11 at -110
+SMU/Stanford under 61    $5 at -110 (sportsbook fallback)    worst acceptable: under 61 at -110
+North Texas -3.5 vs UAB    $10 at -110 (sportsbook fallback)    worst acceptable: North Texas -7.5 at -110
+Boise State/Colorado State under 75.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 75.5 at -110
+Kansas/Oklahoma State under 67.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 67.5 at -110
+Hawai'i -13.5 vs Sacramento State    $5 at -110 (sportsbook fallback)    worst acceptable: Hawai'i -16 at -110
+
+Prices: sportsbook snapshot at -110. DraftKings Predictions contract prices were not publicly reachable from this environment (see docs/paper_bankroll.md).

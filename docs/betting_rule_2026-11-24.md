@@ -50,3 +50,5 @@ Evidence and graduation:
 - Track in `outputs/predictions/ledger_2026_summary.json`: `pt_bets`,
   `opener_gap_bets`, `high_total_under_bets` (graded at the line placed,
   with `avg_clv_pts` and `avg_clv_sharp_pts`).
+
+Paper bankroll (from week 13, 2026): $1,000 starting, 1u = $20 flat. Ledger, summary and weekly slip paths are in `docs/paper_bankroll.md`.

@@ -180,6 +180,13 @@ jobs:
           CFB_API_KEY:  ${{ secrets.CFB_API_KEY }}
         run: python scripts/prediction_ledger.py grade
 
+      # Paper $1,000 bankroll: sync new flags, grade settled bets, write the slip.
+      # No Odds API calls, never sends the newsletter.
+      - name: Update paper bankroll and weekly slip
+        if: steps.season.outputs.mode == 'full'
+        continue-on-error: true
+        run: python scripts/paper_bankroll.py update
+
       # ── 9d. Win-probability calibration report ──────────────────────────────
       # Do 60% calls win ~60%? Rebuilds outputs/research/calibration_*.{csv,json,png}
       # from the walk-forward results + settled 2026 ledger rows + closing moneylines.
