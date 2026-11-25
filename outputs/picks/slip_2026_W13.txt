@@ -1,14 +1,33 @@
 Week 13 CFB — ready-to-place slip
 Paper bankroll $1,000. 1u = $20 (flat).
 
+Mississippi State +19 vs Ole Miss    $5 at -110 (sportsbook fallback)    worst acceptable: Mississippi State +19 at -110
 Temple/Memphis under 64.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 64.5 at -110
+San José State +9 vs North Dakota State    $5 at -110 (sportsbook fallback)    worst acceptable: San José State +9 at -110
 West Virginia/Utah under 68.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 68.5 at -110
 Miami -25.5 vs Boston College    $5 at -110 (sportsbook fallback)    worst acceptable: Miami -25.5 at -110
 Ohio State -10 vs Michigan    $5 at -110 (sportsbook fallback)    worst acceptable: Ohio State -11 at -110
+Syracuse +25 vs Notre Dame    $5 at -110 (sportsbook fallback)    worst acceptable: Syracuse +25 at -110
+Charlotte +16.5 vs Navy    $5 at -110 (sportsbook fallback)    worst acceptable: Charlotte +16.5 at -110
+Northwestern -3 vs Illinois    $5 at -110 (sportsbook fallback)    worst acceptable: Northwestern -3 at -110
+Western Kentucky +3.5 vs Kennesaw State    $5 at -110 (sportsbook fallback)    worst acceptable: Western Kentucky +3.5 at -110
+Southern Miss +6 vs Old Dominion    $5 at -110 (sportsbook fallback)    worst acceptable: Southern Miss +6 at -110
+Idaho State +10 vs North Dakota    $5 at -110 (sportsbook fallback)    worst acceptable: Idaho State +10 at -110
+Grambling/Southern under 60.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 60.5 at -110
+Dayton +21.5 vs Tennessee Tech    $5 at -110 (sportsbook fallback)    worst acceptable: Dayton +21.5 at -110
+Western Illinois/Weber State under 64.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 64.5 at -110
 SMU/Stanford under 61    $5 at -110 (sportsbook fallback)    worst acceptable: under 61 at -110
+Stanford +7.5 vs SMU    $5 at -110 (sportsbook fallback)    worst acceptable: Stanford +7.5 at -110
+UCLA +7 vs USC    $5 at -110 (sportsbook fallback)    worst acceptable: UCLA +7 at -110
 North Texas -3.5 vs UAB    $10 at -110 (sportsbook fallback)    worst acceptable: North Texas -7.5 at -110
+Long Island University +24.5 vs Northern Arizona    $5 at -110 (sportsbook fallback)    worst acceptable: Long Island University +24.5 at -110
 Boise State/Colorado State under 75.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 75.5 at -110
+Colorado State +21 vs Boise State    $5 at -110 (sportsbook fallback)    worst acceptable: Colorado State +21 at -110
 Kansas/Oklahoma State under 67.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 67.5 at -110
+Purdue +22.5 vs Indiana    $5 at -110 (sportsbook fallback)    worst acceptable: Purdue +22.5 at -110
+Incarnate Word/Montana under 65.5    $5 at -110 (sportsbook fallback)    worst acceptable: under 65.5 at -110
 Hawai'i -13.5 vs Sacramento State    $5 at -110 (sportsbook fallback)    worst acceptable: Hawai'i -16 at -110
+
+4 additional flag(s) are paper only ($0) and are not on this ticket.
 
 Prices: sportsbook snapshot at -110. DraftKings Predictions contract prices were not publicly reachable from this environment (see docs/paper_bankroll.md).

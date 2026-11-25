@@ -4,7 +4,7 @@
   "unit_usd": 20.0,
   "unit_rule": "flat $20 (2% of the $1,000 starting bankroll), held constant through 2026 bowls and the playoff",
   "current_balance": 1000.0,
-  "open_risk_usd": 50.0,
+  "open_risk_usd": 135.0,
   "profit_usd": 0.0,
   "staked_usd": 0.0,
   "record": {
@@ -19,13 +19,25 @@
   "clv_n": 0,
   "avg_clv_sharp_pts": null,
   "clv_sharp_n": 0,
-  "n_bets": 9,
+  "n_bets": 30,
   "n_settled": 0,
-  "n_open": 9,
+  "n_open": 30,
   "by_signal": {
     "high_total_under": {
       "n_settled": 0,
-      "n_open": 5,
+      "n_open": 8,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "profit_usd": 0.0,
+      "staked_usd": 0.0,
+      "roi": null,
+      "avg_clv_pts": null,
+      "clv_n": 0
+    },
+    "opener_gap": {
+      "n_settled": 0,
+      "n_open": 14,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
@@ -37,7 +49,19 @@
     },
     "pt_fpi": {
       "n_settled": 0,
-      "n_open": 4,
+      "n_open": 5,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "profit_usd": 0.0,
+      "staked_usd": 0.0,
+      "roi": null,
+      "avg_clv_pts": null,
+      "clv_n": 0
+    },
+    "spread_model": {
+      "n_settled": 0,
+      "n_open": 3,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
@@ -54,5 +78,5 @@
     "slip_pattern": "outputs/picks/slip_2026_WNN.txt"
   },
   "pricing_note": "Prefer DraftKings Predictions public contract prices (fee-inclusive). When those are not reachable, use the sportsbook snapshot line at -110 and mark the row price_source=sportsbook_fallback.",
-  "last_updated": "2026-11-25T01:46:19+00:00"
+  "last_updated": "2026-11-25T01:59:26+00:00"
 }

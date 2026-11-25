@@ -33946,13 +33946,13 @@ game_id,season,week,home_team,away_team,provider,spread,formatted_spread,spread_
 401858485,2026,6,Penn State,USC,DraftKings,1.5,USC -1.5,-1.5,54.5,56.5,-105.0,-115.0
 401858485,2026,6,Penn State,USC,Bovada,-1.0,Penn State -1.0,1.0,54.5,56.0,-105.0,-115.0
 401868189,2026,7,UT Martin,Gardner-Webb,DraftKings,1.5,Gardner-Webb -1.5,1.5,51.5,48.5,-102.0,-121.0
+401858540,2026,13,Ohio State,Michigan,DraftKings,-10.5,Ohio State -10.5,-13.5,37.5,46.5,-425.0,330.0
+401858540,2026,13,Ohio State,Michigan,Bovada,-10.5,Ohio State -10.5,-11.0,38.0,38.5,-430.0,330.0
 401856885,2026,11,LSU,Texas,DraftKings,-5.5,LSU -5.5,2.5,47.5,54.5,-205.0,170.0
 401856885,2026,11,LSU,Texas,Bovada,-5.0,LSU -5.0,-3.5,47.5,46.0,-170.0,145.0
 401858518,2026,11,Indiana,USC,DraftKings,-9.5,Indiana -9.5,-10.0,51.5,58.5,-325.0,260.0
 401858518,2026,11,Indiana,USC,Bovada,-9.0,Indiana -9.0,-7.5,51.5,49.5,-295.0,245.0
 401868310,2026,7,Nicholls,Stephen F. Austin,DraftKings,22.5,Stephen F. Austin -22.5,21.5,50.5,49.5,1040.0,-2800.0
-401858540,2026,13,Ohio State,Michigan,DraftKings,-10.5,Ohio State -10.5,-13.5,37.5,46.5,-395.0,310.0
-401858540,2026,13,Ohio State,Michigan,Bovada,-10.0,Ohio State -10.0,-11.0,38.0,38.5,-430.0,330.0
 401856764,2026,13,Clemson,South Carolina,DraftKings,6.0,South Carolina -6,-3.0,41.5,53.5,190.0,-230.0
 401856764,2026,13,Clemson,South Carolina,Bovada,6.5,South Carolina -6.5,4.5,42.0,41.0,170.0,-200.0
 401856873,2026,13,Arizona,Arizona State,DraftKings,-8.5,Arizona -8.5,-4.5,53.5,52.5,-325.0,260.0
@@ -33986,8 +33986,6 @@ game_id,season,week,home_team,away_team,provider,spread,formatted_spread,spread_
 401856752,2026,12,Oklahoma,Texas A&M,Bovada,-7.0,Oklahoma -7.0,-7.0,37.0,38.5,-290.0,240.0
 401858296,2026,11,Miami,Duke,DraftKings,-14.0,Miami -14,-21.0,55.5,55.5,-600.0,440.0
 401858296,2026,11,Miami,Duke,Bovada,-14.0,Miami -14.0,-13.5,55.0,54.0,-550.0,410.0
-401856762,2026,13,Ole Miss,Mississippi State,DraftKings,-18.5,Ole Miss -18.5,-14.5,56.5,56.5,-1050.0,675.0
-401856762,2026,13,Ole Miss,Mississippi State,Bovada,-18.5,Ole Miss -18.5,-19.0,56.5,56.5,-1100.0,700.0
 401856888,2026,11,Texas A&M,Tennessee,DraftKings,1.5,Tennessee -1.5,-8.5,44.5,55.5,-105.0,-115.0
 401856888,2026,11,Texas A&M,Tennessee,Bovada,1.0,Tennessee -1.0,2.5,44.5,42.5,115.0,-135.0
 401858302,2026,12,Miami,Virginia Tech,DraftKings,-21.5,Miami -21.5,-16.5,62.5,56.5,-1800.0,1000.0
@@ -34057,6 +34055,8 @@ game_id,season,week,home_team,away_team,provider,spread,formatted_spread,spread_
 401856765,2026,13,Vanderbilt,Tennessee,Bovada,13.5,Tennessee -13.5,11.5,43.5,43.0,355.0,-460.0
 401871069,2026,8,Delaware,Missouri State,DraftKings,-3.0,Delaware -3,-3.0,54.5,52.5,-166.0,140.0
 401871069,2026,8,Delaware,Missouri State,Bovada,-3.0,Delaware -3.0,-3.0,54.0,52.0,-150.0,130.0
+401856762,2026,13,Ole Miss,Mississippi State,DraftKings,-19.5,Ole Miss -19.5,-14.5,56.5,56.5,-1200.0,750.0
+401856762,2026,13,Ole Miss,Mississippi State,Bovada,-19.5,Ole Miss -19.5,-19.0,56.0,56.5,-1100.0,700.0
 401856754,2026,12,Tennessee,LSU,DraftKings,2.5,LSU -2.5,1.5,45.5,57.5,102.0,-122.0
 401856754,2026,12,Tennessee,LSU,Bovada,1.5,LSU -1.5,1.0,46.5,46.0,-108.0,-112.0
 401864525,2026,8,Wyoming,Air Force,DraftKings,7.0,Air Force -7,6.5,46.5,42.5,210.0,-258.0

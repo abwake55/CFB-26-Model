@@ -92,6 +92,18 @@
     "avg_clv_sharp_pts": null,
     "clv_sharp_n": 0
   },
+  "high_total_under_bets": {
+    "n": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "units": 0.0,
+    "hit_rate": null,
+    "avg_clv_pts": null,
+    "clv_n": 0,
+    "avg_clv_sharp_pts": null,
+    "clv_sharp_n": 0
+  },
   "all_under_leans": {
     "n": 6,
     "wins": 4,
@@ -164,6 +176,18 @@
         "clv_sharp_n": 0
       },
       "opener_gap_flags": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "high_total_under_bets": {
         "n": 0,
         "wins": 0,
         "losses": 0,
@@ -274,6 +298,18 @@
         "clv_sharp_n": 0
       },
       "opener_gap_flags": {
+        "n": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "units": 0.0,
+        "hit_rate": null,
+        "avg_clv_pts": null,
+        "clv_n": 0,
+        "avg_clv_sharp_pts": null,
+        "clv_sharp_n": 0
+      },
+      "high_total_under_bets": {
         "n": 0,
         "wins": 0,
         "losses": 0,
