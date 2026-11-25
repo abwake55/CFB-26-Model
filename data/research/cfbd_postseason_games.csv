@@ -1,0 +1,541 @@
+game_id,season,week,start_date,neutral_site,home_team,away_team,home_conference,away_conference,home_classification,away_classification,home_points,away_points,notes,venue
+401003806,2017,1,2017-12-16T00:00:00.000Z,True,Mary Hardin Baylor,Mount Union,American Southwest,Ohio,iii,iii,0,12,,Salem Stadium
+401003810,2017,1,2017-12-16T01:00:00.000Z,False,North Dakota State,Sam Houston,MVFC,Southland,fcs,fcs,55,13,,Fargodome
+400953321,2017,1,2017-12-16T17:00:00.000Z,True,North Carolina A&T,Grambling,MEAC,SWAC,fcs,fcs,21,14,,Mercedes-Benz Stadium
+400953322,2017,1,2017-12-16T18:00:00.000Z,True,North Texas,Troy,Conference USA,Sun Belt,fbs,fbs,30,50,R+L CARRIERS NEW ORLEANS BOWL,Caesars Superdome
+400953409,2017,1,2017-12-16T19:30:00.000Z,True,Georgia State,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,27,17,AUTONATION CURE BOWL,Camping World Stadium
+400953323,2017,1,2017-12-16T20:30:00.000Z,True,Oregon,Boise State,Pac-12,Mountain West,fbs,fbs,28,38,LAS VEGAS BOWL,Sam Boyd Stadium
+401003826,2017,1,2017-12-16T21:30:00.000Z,False,James Madison,South Dakota State,CAA,MVFC,fcs,fcs,51,16,,Bridgeforth Stadium
+400953324,2017,1,2017-12-16T21:30:00.000Z,True,Colorado State,Marshall,Mountain West,Conference USA,fbs,fbs,28,31,GILDAN NEW MEXICO BOWL,University Stadium (NM)
+401003807,2017,1,2017-12-16T23:00:00.000Z,True,East Texas A&M,West Florida,Lone Star,Gulf South,ii,ii,37,27,,Children's Mercy Park
+400953325,2017,1,2017-12-17T01:00:00.000Z,True,Arkansas State,Middle Tennessee,Sun Belt,Conference USA,fbs,fbs,30,35,RAYCOM MEDIA CAMELLIA BOWL,Cramton Bowl
+400953386,2017,1,2017-12-20T00:00:00.000Z,False,Florida Atlantic,Akron,Conference USA,Mid-American,fbs,fbs,50,3,CHERIBUNDI TART CHERRY BOCA RATON BOWL,FAU Stadium
+400954523,2017,1,2017-12-21T01:00:00.000Z,True,SMU,Louisiana Tech,American Athletic,Conference USA,fbs,fbs,10,51,DXL FRISCO BOWL,Toyota Stadium
+400953387,2017,1,2017-12-22T01:00:00.000Z,True,Florida International,Temple,Conference USA,American Athletic,fbs,fbs,3,28,BAD BOY MOWERS GASPARILLA BOWL,Tropicana Field
+400953388,2017,1,2017-12-22T17:30:00.000Z,True,Ohio,UAB,Mid-American,Conference USA,fbs,fbs,41,6,BAHAMAS BOWL,Thomas A. Robinson National Stadium
+400953389,2017,1,2017-12-22T21:00:00.000Z,True,Wyoming,Central Michigan,Mountain West,Mid-American,fbs,fbs,37,14,FAMOUS IDAHO POTATO BOWL,Albertsons Stadium
+400953390,2017,1,2017-12-23T17:00:00.000Z,True,South Florida,Texas Tech,American Athletic,Big 12,fbs,fbs,38,34,BIRMINGHAM BOWL,Legion Field
+400953391,2017,1,2017-12-23T20:30:00.000Z,True,Army,San Diego State,FBS Independents,Mountain West,fbs,fbs,42,35,LOCKHEED MARTIN ARMED FORCES BOWL,Amon G. Carter Stadium
+400953392,2017,1,2017-12-24T00:00:00.000Z,True,Toledo,App State,Mid-American,Sun Belt,fbs,fbs,0,34,DOLLAR GENERAL BOWL,Ladd Peebles Stadium
+400953393,2017,1,2017-12-25T01:30:00.000Z,True,Houston,Fresno State,American Athletic,Mountain West,fbs,fbs,27,33,HAWAI'I BOWL,Aloha Stadium
+400953395,2017,1,2017-12-26T18:30:00.000Z,True,West Virginia,Utah,Big 12,Pac-12,fbs,fbs,14,30,ZAXBY'S HEART OF DALLAS BOWL,Cotton Bowl
+400953394,2017,1,2017-12-26T22:15:00.000Z,True,Northern Illinois,Duke,Mid-American,ACC,fbs,fbs,14,36,QUICK LANE BOWL,Ford Field
+400953396,2017,1,2017-12-27T02:00:00.000Z,True,UCLA,Kansas State,Pac-12,Big 12,fbs,fbs,17,35,CACTUS BOWL,Chase Field
+400953397,2017,1,2017-12-27T18:30:00.000Z,True,Florida State,Southern Miss,ACC,Conference USA,fbs,fbs,42,13,WALK-ON'S INDEPENDENCE BOWL,Independence Stadium
+400953398,2017,1,2017-12-27T22:15:00.000Z,True,Boston College,Iowa,ACC,Big Ten,fbs,fbs,20,27,NEW ERA PINSTRIPE BOWL,Yankee Stadium
+400959398,2017,1,2017-12-28T01:30:00.000Z,True,Purdue,Arizona,Big Ten,Pac-12,fbs,fbs,38,35,FOSTER FARMS BOWL,Levi's Stadium
+400953399,2017,1,2017-12-28T02:00:00.000Z,True,Missouri,Texas,SEC,Big 12,fbs,fbs,16,33,ACADEMY SPORTS + OUTDOORS TEXAS BOWL,NRG Stadium
+400953400,2017,1,2017-12-28T18:30:00.000Z,False,Navy,Virginia,American Athletic,ACC,fbs,fbs,49,7,MILITARY BOWL PRESENTED BY NORTHROP GRUMMAN,Navy-Marine Corps Memorial Stadium
+400953416,2017,1,2017-12-28T22:15:00.000Z,True,Oklahoma State,Virginia Tech,Big 12,ACC,fbs,fbs,30,21,CAMPING WORLD BOWL,Camping World Stadium
+400959397,2017,1,2017-12-29T02:00:00.000Z,True,Michigan State,Washington State,Big Ten,Pac-12,fbs,fbs,42,17,SAN DIEGO COUNTY CREDIT UNION HOLIDAY BOWL,Qualcomm Stadium
+400953401,2017,1,2017-12-29T02:00:00.000Z,True,TCU,Stanford,Big 12,Pac-12,fbs,fbs,39,37,VALERO ALAMO BOWL,Alamodome
+400953402,2017,1,2017-12-29T18:00:00.000Z,True,Texas A&M,Wake Forest,SEC,ACC,fbs,fbs,52,55,,Bank of America Stadium
+400953417,2017,1,2017-12-29T20:25:00.000Z,True,Arizona State,NC State,Pac-12,ACC,fbs,fbs,31,52,,Sun Bowl
+400953403,2017,1,2017-12-29T21:30:00.000Z,True,Northwestern,Kentucky,Big Ten,SEC,fbs,fbs,24,23,,Nissan Stadium
+400966332,2017,1,2017-12-29T22:30:00.000Z,True,Utah State,New Mexico State,Mountain West,Sun Belt,fbs,fbs,20,26,,Arizona Stadium
+400953404,2017,1,2017-12-30T01:30:00.000Z,True,Ohio State,USC,Big Ten,Pac-12,fbs,fbs,24,7,,AT&T Stadium
+400953405,2017,1,2017-12-30T17:00:00.000Z,True,Mississippi State,Louisville,SEC,ACC,fbs,fbs,31,27,,EverBank Stadium
+400953406,2017,1,2017-12-30T17:30:00.000Z,False,Memphis,Iowa State,American Athletic,Big 12,fbs,fbs,20,21,,Simmons Bank Liberty Stadium
+400953407,2017,1,2017-12-30T21:00:00.000Z,True,Penn State,Washington,Big Ten,Pac-12,fbs,fbs,35,28,,State Farm Stadium
+400953408,2017,1,2017-12-31T01:00:00.000Z,False,Miami,Wisconsin,ACC,Big Ten,fbs,fbs,24,34,,Hard Rock Stadium
+400953410,2017,1,2018-01-01T17:00:00.000Z,True,South Carolina,Michigan,SEC,Big Ten,fbs,fbs,26,19,OUTBACK BOWL,Raymond James Stadium
+400953411,2017,1,2018-01-01T17:30:00.000Z,True,Auburn,UCF,SEC,American Athletic,fbs,fbs,27,34,CHICK-FIL-A PEACH BOWL,Mercedes-Benz Stadium
+400953414,2017,1,2018-01-01T18:00:00.000Z,True,LSU,Notre Dame,SEC,FBS Independents,fbs,fbs,17,21,CITRUS BOWL PRESENTED BY OVERTON'S,Camping World Stadium
+400953412,2017,1,2018-01-01T22:00:00.000Z,True,Oklahoma,Georgia,Big 12,SEC,fbs,fbs,48,54,ROSE BOWL GAME PRESENTED BY NORTHWESTERN MUTUAL - CFP SEMIFINAL,Rose Bowl
+400953413,2017,1,2018-01-02T02:00:00.000Z,True,Clemson,Alabama,ACC,SEC,fbs,fbs,6,24,ALLSTATE SUGAR BOWL - CFP SEMIFINAL,Caesars Superdome
+401004846,2017,1,2018-01-06T17:00:00.000Z,True,James Madison,North Dakota State,CAA,MVFC,fcs,fcs,13,17,,Toyota Stadium
+400953415,2017,1,2018-01-09T01:00:00.000Z,True,Georgia,Alabama,SEC,SEC,fbs,fbs,23,26,CFP NATIONAL CHAMPIONSHIP PRESENTED BY AT&T,Mercedes-Benz Stadium
+401099013,2018,1,2018-12-15T00:00:00.000Z,True,Mary Hardin Baylor,Mount Union,American Southwest,Ohio,iii,iii,24,16,,Woodforest Bank Stadium
+401102913,2018,1,2018-12-15T01:00:00.000Z,False,North Dakota State,South Dakota State,MVFC,MVFC,fcs,fcs,44,21,,Fargodome
+401032053,2018,1,2018-12-15T17:00:00.000Z,True,Alcorn State,North Carolina A&T,SWAC,MEAC,fcs,fcs,22,24,,Mercedes-Benz Stadium
+401035253,2018,1,2018-12-15T18:30:00.000Z,True,Louisiana,Tulane,Sun Belt,American Athletic,fbs,fbs,24,41,AUTONATION CURE BOWL,Camping World Stadium
+401032054,2018,1,2018-12-15T19:00:00.000Z,True,North Texas,Utah State,Conference USA,Mountain West,fbs,fbs,13,52,NEW MEXICO BOWL PRESENTED BY PROGRESSIVE,University Stadium (NM)
+401102914,2018,1,2018-12-15T19:00:00.000Z,False,Eastern Washington,Maine,Big Sky,CAA,fcs,fcs,50,19,,Roos Field
+401032055,2018,1,2018-12-15T20:30:00.000Z,True,Fresno State,Arizona State,Mountain West,Pac-12,fbs,fbs,31,20,MITSUBISHI MOTORS LAS VEGAS BOWL,Sam Boyd Stadium
+401069495,2018,1,2018-12-15T21:00:00.000Z,True,Valdosta State,Ferris State,Gulf South,GLIAC,ii,ii,49,47,,Children's Mercy Park
+401032056,2018,1,2018-12-15T22:30:00.000Z,True,Eastern Michigan,Georgia Southern,Mid-American,Sun Belt,fbs,fbs,21,23,RAYCOM MEDIA CAMELLIA BOWL,Cramton Bowl
+401032057,2018,1,2018-12-16T02:00:00.000Z,True,App State,Middle Tennessee,Sun Belt,Conference USA,fbs,fbs,45,13,R+L CARRIERS NEW ORLEANS BOWL,Caesars Superdome
+401032058,2018,1,2018-12-19T00:00:00.000Z,True,Northern Illinois,UAB,Mid-American,Conference USA,fbs,fbs,13,37,CHERIBUNDI BOCA RATON BOWL,FAU Stadium
+401032059,2018,1,2018-12-20T01:00:00.000Z,True,Ohio,San Diego State,Mid-American,Mountain West,fbs,fbs,27,0,DXL FRISCO BOWL,Toyota Stadium
+401032060,2018,1,2018-12-21T01:00:00.000Z,False,South Florida,Marshall,American Athletic,Conference USA,fbs,fbs,20,38,BAD BOY MOWERS GASPARILLA BOWL,Raymond James Stadium
+401032061,2018,1,2018-12-21T17:30:00.000Z,True,Toledo,Florida International,Mid-American,Conference USA,fbs,fbs,32,35,MAKERS WANTED BAHAMAS BOWL,Thomas A. Robinson National Stadium
+401032062,2018,1,2018-12-21T21:00:00.000Z,True,BYU,Western Michigan,FBS Independents,Mid-American,fbs,fbs,49,18,FAMOUS IDAHO POTATO BOWL,Albertsons Stadium
+401032063,2018,1,2018-12-22T17:00:00.000Z,True,Wake Forest,Memphis,ACC,American Athletic,fbs,fbs,37,34,JARED BIRMINGHAM BOWL,Legion Field
+401032064,2018,1,2018-12-22T20:30:00.000Z,True,Army,Houston,FBS Independents,American Athletic,fbs,fbs,70,14,LOCKHEED MARTIN ARMED FORCES BOWL,Amon G. Carter Stadium
+401032065,2018,1,2018-12-23T00:00:00.000Z,True,Troy,Buffalo,Sun Belt,Mid-American,fbs,fbs,42,32,DOLLAR GENERAL BOWL,Ladd Peebles Stadium
+401032066,2018,1,2018-12-23T03:30:00.000Z,True,Louisiana Tech,Hawai'i,Conference USA,Mountain West,fbs,fbs,31,14,SOFI HAWAI'I BOWL,Aloha Stadium
+401032068,2018,1,2018-12-26T22:15:00.000Z,True,Georgia Tech,Minnesota,ACC,Big Ten,fbs,fbs,10,34,QUICK LANE BOWL,Ford Field
+401032069,2018,1,2018-12-27T02:00:00.000Z,True,TCU,California,Big 12,Pac-12,fbs,fbs,10,7,CHEEZ-IT BOWL,Chase Field
+401032070,2018,1,2018-12-27T18:30:00.000Z,True,Duke,Temple,ACC,American Athletic,fbs,fbs,56,27,WALK-ON'S INDEPENDENCE BOWL,Independence Stadium
+401032071,2018,1,2018-12-27T22:15:00.000Z,True,Wisconsin,Miami,Big Ten,ACC,fbs,fbs,35,3,NEW ERA PINSTRIPE BOWL,Yankee Stadium
+401032072,2018,1,2018-12-28T02:00:00.000Z,True,Vanderbilt,Baylor,SEC,Big 12,fbs,fbs,38,45,ACADEMY SPORTS + OUTDOORS TEXAS BOWL,NRG Stadium
+401032073,2018,1,2018-12-28T18:30:00.000Z,True,Auburn,Purdue,SEC,Big Ten,fbs,fbs,63,14,FRANKLIN AMERICAN MORTGAGE MUSIC CITY BOWL,Nissan Stadium
+401032074,2018,1,2018-12-28T22:15:00.000Z,True,Syracuse,West Virginia,ACC,Big 12,fbs,fbs,34,18,CAMPING WORLD BOWL,Camping World Stadium
+401032075,2018,1,2018-12-29T02:00:00.000Z,True,Washington State,Iowa State,Pac-12,Big 12,fbs,fbs,28,26,VALERO ALAMO BOWL,Alamodome
+401032077,2018,1,2018-12-29T17:00:00.000Z,True,Virginia,South Carolina,ACC,SEC,fbs,fbs,28,0,,Bank of America Stadium
+401032076,2018,1,2018-12-29T17:00:00.000Z,True,Michigan,Florida,Big Ten,SEC,fbs,fbs,15,41,CHICK-FIL-A PEACH BOWL,Mercedes-Benz Stadium
+401035252,2018,1,2018-12-29T18:15:00.000Z,True,Nevada,Arkansas State,Mountain West,Sun Belt,fbs,fbs,16,13,,Arizona Stadium
+401032079,2018,1,2018-12-29T21:00:00.000Z,True,Clemson,Notre Dame,ACC,FBS Independents,fbs,fbs,30,3,GOODYEAR COTTON BOWL CLASSIC - CFP SEMIFINAL,AT&T Stadium
+401032078,2018,1,2018-12-30T01:00:00.000Z,True,Alabama,Oklahoma,SEC,Big 12,fbs,fbs,45,34,CAPITAL ONE ORANGE BOWL - CFP SEMIFINAL,Hard Rock Stadium
+401032080,2018,1,2018-12-31T17:00:00.000Z,True,Virginia Tech,Cincinnati,ACC,American Athletic,fbs,fbs,31,35,,Navy-Marine Corps Memorial Stadium
+401035251,2018,1,2018-12-31T19:00:00.000Z,True,Pittsburgh,Stanford,ACC,Pac-12,fbs,fbs,13,14,,Sun Bowl
+401035254,2018,1,2018-12-31T20:00:00.000Z,True,Oregon,Michigan State,Pac-12,Big Ten,fbs,fbs,7,6,,Levi's Stadium
+401032081,2018,1,2018-12-31T20:45:00.000Z,True,Oklahoma State,Missouri,Big 12,SEC,fbs,fbs,38,33,,Simmons Bank Liberty Stadium
+401035250,2018,1,2019-01-01T00:00:00.000Z,True,Utah,Northwestern,Pac-12,Big Ten,fbs,fbs,20,31,,Qualcomm Stadium
+401032082,2018,1,2019-01-01T00:30:00.000Z,True,Texas A&M,NC State,SEC,ACC,fbs,fbs,52,13,,EverBank Stadium
+401032083,2018,1,2019-01-01T17:00:00.000Z,True,Iowa,Mississippi State,Big Ten,SEC,fbs,fbs,27,22,OUTBACK BOWL,Raymond James Stadium
+401032088,2018,1,2019-01-01T18:00:00.000Z,True,Penn State,Kentucky,Big Ten,SEC,fbs,fbs,24,27,VRBO CITRUS BOWL,Camping World Stadium
+401032084,2018,1,2019-01-01T18:00:00.000Z,True,UCF,LSU,American Athletic,SEC,fbs,fbs,32,40,PLAYSTATION FIESTA BOWL,State Farm Stadium
+401032085,2018,1,2019-01-01T22:00:00.000Z,True,Ohio State,Washington,Big Ten,Pac-12,fbs,fbs,28,23,ROSE BOWL GAME PRESENTED BY NORTHWESTERN MUTUAL,Rose Bowl
+401032086,2018,1,2019-01-02T01:45:00.000Z,True,Georgia,Texas,SEC,Big 12,fbs,fbs,21,28,ALLSTATE SUGAR BOWL,Caesars Superdome
+401104373,2018,1,2019-01-05T17:00:00.000Z,True,North Dakota State,Eastern Washington,MVFC,Big Sky,fcs,fcs,38,24,,Toyota Stadium
+401032087,2018,1,2019-01-08T01:00:00.000Z,True,Alabama,Clemson,SEC,ACC,fbs,fbs,16,44,CFP NATIONAL CHAMPIONSHIP PRESENTED BY AT&T,Levi's Stadium
+401135260,2019,1,2019-12-20T19:00:00.000Z,True,Charlotte,Buffalo,Conference USA,Mid-American,fbs,fbs,9,31,MAKERS WANTED BAHAMAS BOWL,Thomas A. Robinson National Stadium
+401135261,2019,1,2019-12-21T00:30:00.000Z,True,Kent State,Utah State,Mid-American,Mountain West,fbs,fbs,51,41,TROPICAL SMOOTHIE CAFE FRISCO BOWL,Toyota Stadium
+401189333,2019,1,2019-12-21T01:00:00.000Z,True,North Central College,Wisconsin Whitewater,CCIW,Wisconsin,iii,iii,41,14,,Woodforest Bank Stadium
+401188315,2019,1,2019-12-21T17:00:00.000Z,True,North Carolina A&T,Alcorn State,MEAC,SWAC,fcs,fcs,64,44,,Mercedes-Benz Stadium
+401135263,2019,1,2019-12-21T19:00:00.000Z,True,San Diego State,Central Michigan,Mountain West,Mid-American,fbs,fbs,48,11,NEW MEXICO BOWL,University Stadium (NM)
+401189293,2019,1,2019-12-21T19:00:00.000Z,False,North Dakota State,Montana State,MVFC,Big Sky,fcs,fcs,42,14,,Fargodome
+401147693,2019,1,2019-12-21T19:30:00.000Z,True,Georgia Southern,Liberty,Sun Belt,FBS Independents,fbs,fbs,16,23,FBC MORTGAGE CURE BOWL,Orlando City Stadium
+401189334,2019,1,2019-12-21T20:00:00.000Z,True,Minnesota State,West Florida,Northern Sun,Gulf South,ii,ii,40,48,,McKinney ISD Stadium
+401135264,2019,1,2019-12-21T20:30:00.000Z,False,Florida Atlantic,SMU,Conference USA,American Athletic,fbs,fbs,52,28,CHERIBUNDI BOCA RATON BOWL,FAU Stadium
+401135265,2019,1,2019-12-21T22:30:00.000Z,True,Arkansas State,Florida International,Sun Belt,Conference USA,fbs,fbs,34,26,CAMELLIA BOWL,Cramton Bowl
+401189294,2019,1,2019-12-21T23:30:00.000Z,False,James Madison,Weber State,CAA,Big Sky,fcs,fcs,30,14,,Bridgeforth Stadium
+401135266,2019,1,2019-12-22T00:30:00.000Z,True,Washington,Boise State,Pac-12,Mountain West,fbs,fbs,38,7,MITSUBISHI MOTORS LAS VEGAS BOWL,Sam Boyd Stadium
+401135267,2019,1,2019-12-22T02:00:00.000Z,True,UAB,App State,Conference USA,Sun Belt,fbs,fbs,17,31,R+L CARRIERS NEW ORLEANS BOWL,Caesars Superdome
+401135268,2019,1,2019-12-23T19:30:00.000Z,True,Marshall,UCF,Conference USA,American Athletic,fbs,fbs,25,48,BAD BOY MOWERS GASPARILLA BOWL,Raymond James Stadium
+401135269,2019,1,2019-12-25T01:00:00.000Z,True,BYU,Hawai'i,FBS Independents,Mountain West,fbs,fbs,34,38,SOFI HAWAI'I BOWL,Aloha Stadium
+401135270,2019,1,2019-12-26T21:00:00.000Z,True,Miami,Louisiana Tech,ACC,Conference USA,fbs,fbs,0,14,WALK-ON'S INDEPENDENCE BOWL,Independence Stadium
+401135271,2019,1,2019-12-27T01:00:00.000Z,True,Eastern Michigan,Pittsburgh,Mid-American,ACC,fbs,fbs,30,34,QUICK LANE BOWL,Ford Field
+401135272,2019,1,2019-12-27T17:00:00.000Z,True,Temple,North Carolina,American Athletic,ACC,fbs,fbs,13,55,MILITARY BOWL PRESENTED BY NORTHROP GRUMMAN,Navy-Marine Corps Memorial Stadium
+401135273,2019,1,2019-12-27T20:20:00.000Z,True,Wake Forest,Michigan State,ACC,Big Ten,fbs,fbs,21,27,NEW ERA PINSTRIPE BOWL,Yankee Stadium
+401135274,2019,1,2019-12-27T23:45:00.000Z,True,Texas A&M,Oklahoma State,SEC,Big 12,fbs,fbs,24,21,ACADEMY SPORTS + OUTDOORS TEXAS BOWL,NRG Stadium
+401136253,2019,1,2019-12-28T01:00:00.000Z,True,Iowa,USC,Big Ten,Pac-12,fbs,fbs,49,24,SAN DIEGO COUNTY CREDIT UNION HOLIDAY BOWL,Qualcomm Stadium
+401135275,2019,1,2019-12-28T03:15:00.000Z,True,Washington State,Air Force,Pac-12,Mountain West,fbs,fbs,21,31,CHEEZ-IT BOWL,Chase Field
+401135277,2019,1,2019-12-28T17:00:00.000Z,True,Penn State,Memphis,Big Ten,American Athletic,fbs,fbs,53,39,GOODYEAR COTTON BOWL CLASSIC,AT&T Stadium
+401135276,2019,1,2019-12-28T17:00:00.000Z,True,Iowa State,Notre Dame,Big 12,FBS Independents,fbs,fbs,9,33,CAMPING WORLD BOWL,Camping World Stadium
+401135278,2019,1,2019-12-28T21:20:00.000Z,True,LSU,Oklahoma,SEC,Big 12,fbs,fbs,63,28,CHICK-FIL-A PEACH BOWL - CFP SEMIFINAL,Mercedes-Benz Stadium
+401135279,2019,1,2019-12-29T01:20:00.000Z,True,Ohio State,Clemson,Big Ten,ACC,fbs,fbs,23,29,PLAYSTATION FIESTA BOWL - CFP SEMIFINAL,State Farm Stadium
+401135280,2019,1,2019-12-30T17:30:00.000Z,True,Western Michigan,Western Kentucky,Mid-American,Conference USA,fbs,fbs,20,23,SERVPRO FIRST RESPONDER BOWL,Gerald J. Ford Stadium
+401136254,2019,1,2019-12-30T21:00:00.000Z,True,Illinois,California,Big Ten,Pac-12,fbs,fbs,20,35,REDBOX BOWL,Levi's Stadium
+401135281,2019,1,2019-12-30T21:00:00.000Z,True,Louisville,Mississippi State,ACC,SEC,fbs,fbs,38,28,FRANKLIN AMERICAN MORTGAGE MUSIC CITY BOWL,Nissan Stadium
+401135282,2019,1,2019-12-31T01:00:00.000Z,True,Virginia,Florida,ACC,SEC,fbs,fbs,28,36,CAPITAL ONE ORANGE BOWL,Hard Rock Stadium
+401135283,2019,1,2019-12-31T17:00:00.000Z,True,Kentucky,Virginia Tech,SEC,ACC,fbs,fbs,37,30,,Bank of America Stadium
+401136255,2019,1,2019-12-31T19:00:00.000Z,True,Arizona State,Florida State,Pac-12,ACC,fbs,fbs,20,14,,Sun Bowl
+401135284,2019,1,2019-12-31T20:45:00.000Z,True,Kansas State,Navy,Big 12,American Athletic,fbs,fbs,17,20,,Simmons Bank Liberty Stadium
+401147695,2019,1,2019-12-31T21:30:00.000Z,True,Georgia State,Wyoming,Sun Belt,Mountain West,fbs,fbs,17,38,,Arizona Stadium
+401135285,2019,1,2020-01-01T00:30:00.000Z,True,Texas,Utah,Big 12,Pac-12,fbs,fbs,38,10,,Alamodome
+401135286,2019,1,2020-01-01T18:00:00.000Z,True,Alabama,Michigan,SEC,Big Ten,fbs,fbs,35,16,VRBO CITRUS BOWL,Camping World Stadium
+401135287,2019,1,2020-01-01T18:00:00.000Z,True,Auburn,Minnesota,SEC,Big Ten,fbs,fbs,24,31,OUTBACK BOWL,Raymond James Stadium
+401135288,2019,1,2020-01-01T22:10:00.000Z,True,Wisconsin,Oregon,Big Ten,Pac-12,fbs,fbs,27,28,ROSE BOWL GAME PRESENTED BY NORTHWESTERN MUTUAL,Rose Bowl
+401135289,2019,1,2020-01-02T01:45:00.000Z,True,Baylor,Georgia,Big 12,SEC,fbs,fbs,14,26,ALLSTATE SUGAR BOWL,Caesars Superdome
+401135290,2019,1,2020-01-02T20:00:00.000Z,True,Cincinnati,Boston College,American Athletic,ACC,fbs,fbs,38,6,TICKETSMARTER BIRMINGHAM BOWL,Legion Field
+401135291,2019,1,2020-01-03T00:00:00.000Z,True,Tennessee,Indiana,SEC,Big Ten,fbs,fbs,23,22,TAXSLAYER GATOR BOWL,EverBank Stadium
+401135292,2019,1,2020-01-03T20:30:00.000Z,True,Nevada,Ohio,Mountain West,Mid-American,fbs,fbs,21,30,FAMOUS IDAHO POTATO BOWL,Albertsons Stadium
+401135293,2019,1,2020-01-04T16:30:00.000Z,True,Tulane,Southern Miss,American Athletic,Conference USA,fbs,fbs,30,13,LOCKHEED MARTIN ARMED FORCES BOWL,Amon G. Carter Stadium
+401135294,2019,1,2020-01-07T00:30:00.000Z,True,Miami (OH),Louisiana,Mid-American,Sun Belt,fbs,fbs,17,27,LENDINGTREE BOWL,Ladd Peebles Stadium
+401198013,2019,1,2020-01-11T17:00:00.000Z,True,North Dakota State,James Madison,MVFC,CAA,fcs,fcs,28,20,,Toyota Stadium
+401135295,2019,1,2020-01-14T01:00:00.000Z,True,LSU,Clemson,SEC,ACC,fbs,fbs,42,25,CFP NATIONAL CHAMPIONSHIP PRES. BY AT&T,Caesars Superdome
+401256135,2020,1,2020-12-21T19:30:00.000Z,True,North Texas,App State,Conference USA,Sun Belt,fbs,fbs,28,56,Myrtle Beach Bowl,Brooks Stadium (SC)
+401256136,2020,1,2020-12-22T20:30:00.000Z,True,Nevada,Tulane,Mountain West,American Athletic,fbs,fbs,38,27,Famous Idaho Potato Bowl,Albertsons Stadium
+401256137,2020,1,2020-12-23T00:00:00.000Z,True,BYU,UCF,FBS Independents,American Athletic,fbs,fbs,49,23,RoofClaim.com Boca Raton Bowl,FAU Stadium
+401256138,2020,1,2020-12-23T20:00:00.000Z,True,Georgia Southern,Louisiana Tech,Sun Belt,Conference USA,fbs,fbs,38,3,R+L Carriers New Orleans Bowl,Caesars Superdome
+401256139,2020,1,2020-12-24T00:00:00.000Z,True,Florida Atlantic,Memphis,Conference USA,American Athletic,fbs,fbs,10,25,Montgomery Bowl,Cramton Bowl
+401256140,2020,1,2020-12-24T20:30:00.000Z,True,Houston,Hawai'i,American Athletic,Mountain West,fbs,fbs,14,28,New Mexico Bowl,Toyota Stadium
+401256141,2020,1,2020-12-25T19:30:00.000Z,True,Buffalo,Marshall,Mid-American,Conference USA,fbs,fbs,17,10,Camellia Bowl,Cramton Bowl
+401256145,2020,1,2020-12-26T20:30:00.000Z,True,Georgia State,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,39,21,LendingTree Bowl,Ladd Peebles Stadium
+401256144,2020,1,2020-12-26T20:30:00.000Z,True,UTSA,Louisiana,Conference USA,Sun Belt,fbs,fbs,24,31,SERVPRO First Responder Bowl,Gerald J. Ford Stadium
+401256143,2020,1,2020-12-27T00:30:00.000Z,True,Coastal Carolina,Liberty,Sun Belt,FBS Independents,fbs,fbs,34,37,FBC Mortgage Cure Bowl,Camping World Stadium
+401256150,2020,1,2020-12-29T22:30:00.000Z,True,Miami,Oklahoma State,ACC,Big 12,fbs,fbs,34,37,Cheez-It Bowl,Camping World Stadium
+401256151,2020,1,2020-12-30T02:00:00.000Z,True,Colorado,Texas,Pac-12,Big 12,fbs,fbs,23,55,Valero Alamo Bowl,Alamodome
+401256152,2020,1,2020-12-30T17:00:00.000Z,True,Wisconsin,Wake Forest,Big Ten,ACC,fbs,fbs,42,28,Duke's Mayo Bowl,Bank of America Stadium
+401256194,2020,1,2020-12-31T01:00:00.000Z,True,Oklahoma,Florida,Big 12,SEC,fbs,fbs,55,20,Goodyear Cotton Bowl Classic,AT&T Stadium
+401256196,2020,1,2020-12-31T17:00:00.000Z,True,Mississippi State,Tulsa,SEC,American Athletic,fbs,fbs,28,26,Lockheed Martin Armed Forces Bowl,Amon G. Carter Stadium
+401268773,2020,1,2020-12-31T19:00:00.000Z,True,San José State,Ball State,Mountain West,Mid-American,fbs,fbs,13,34,Offerpad Arizona Bowl,Arizona Stadium
+401256197,2020,1,2020-12-31T21:00:00.000Z,True,Army,West Virginia,FBS Independents,Big 12,fbs,fbs,21,24,AutoZone Liberty Bowl,Simmons Bank Liberty Stadium
+401256108,2020,1,2021-01-01T17:00:00.000Z,True,Georgia,Cincinnati,SEC,American Athletic,fbs,fbs,24,21,Chick-fil-A Peach Bowl,Mercedes-Benz Stadium
+401256199,2020,1,2021-01-01T18:00:00.000Z,True,Northwestern,Auburn,Big Ten,SEC,fbs,fbs,35,19,Vrbo Citrus Bowl,Camping World Stadium
+401240152,2020,1,2021-01-01T21:00:00.000Z,True,Alabama,Notre Dame,SEC,ACC,fbs,fbs,31,14,Rose Bowl Game Presented by Capital One - CFP Semifinal,AT&T Stadium
+401240173,2020,1,2021-01-02T01:00:00.000Z,True,Clemson,Ohio State,ACC,Big Ten,fbs,fbs,28,49,Allstate Sugar Bowl - CFP Semifinal,Caesars Superdome
+401256109,2020,1,2021-01-02T17:00:00.000Z,True,Kentucky,NC State,SEC,ACC,fbs,fbs,23,21,TaxSlayer Gator Bowl,EverBank Stadium
+401256110,2020,1,2021-01-02T17:30:00.000Z,True,Indiana,Ole Miss,Big Ten,SEC,fbs,fbs,20,26,Outback Bowl,Raymond James Stadium
+401256111,2020,1,2021-01-02T21:00:00.000Z,True,Iowa State,Oregon,Big 12,Pac-12,fbs,fbs,34,17,PlayStation Fiesta Bowl,State Farm Stadium
+401256112,2020,1,2021-01-03T01:00:00.000Z,True,North Carolina,Texas A&M,ACC,SEC,fbs,fbs,27,41,Capital One Orange Bowl,Hard Rock Stadium
+401240174,2020,1,2021-01-12T01:00:00.000Z,True,Alabama,Ohio State,SEC,Big Ten,fbs,fbs,52,24,CFP National Championship pres. by AT&T,Hard Rock Stadium
+401321794,2020,20,2021-04-24T18:00:00.000Z,False,James Madison,VMI,CAA,Southern,fcs,fcs,31,24,FCS Championship - First Round,Bridgeforth Stadium
+401322680,2020,20,2021-05-02T22:00:00.000Z,False,James Madison,North Dakota,CAA,MVFC,fcs,fcs,34,21,FCS Championship - Quarterfinals,Bridgeforth Stadium
+401324093,2020,20,2021-05-08T18:30:00.000Z,False,Sam Houston,James Madison,Southland,CAA,fcs,fcs,38,35,FCS Championship - Semifinals,Elliott T. Bowers Stadium
+401325471,2020,20,2021-05-16T18:00:00.000Z,True,South Dakota State,Sam Houston,MVFC,Southland,fcs,fcs,21,23,,Toyota Stadium
+401389870,2021,1,2021-12-04T19:00:00.000Z,False,James Madison,SE Louisiana,CAA,Southland,fcs,fcs,59,20,FCS Championship - Second Round,Bridgeforth Stadium
+401391130,2021,1,2021-12-11T00:00:00.000Z,False,James Madison,Montana,CAA,Big Sky,fcs,fcs,28,6,FCS Championship - Quarterfinals,Bridgeforth Stadium
+401331164,2021,1,2021-12-17T17:00:00.000Z,True,Toledo,Middle Tennessee,Mid-American,Conference USA,fbs,fbs,24,31,Bahamas Bowl,Thomas A. Robinson National Stadium
+401331165,2021,1,2021-12-17T23:00:00.000Z,True,Coastal Carolina,Northern Illinois,Sun Belt,Mid-American,fbs,fbs,47,41,Tailgreeter Cure Bowl,Orlando City Stadium
+401392090,2021,1,2021-12-18T00:00:00.000Z,True,North Central College,Mary Hardin Baylor,CCIW,American Southwest,iii,iii,24,57,,Tom Benson Hall of Fame Stadium
+401391353,2021,1,2021-12-18T02:15:00.000Z,False,North Dakota State,James Madison,MVFC,CAA,fcs,fcs,20,14,,Fargodome
+401331166,2021,1,2021-12-18T16:00:00.000Z,True,App State,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,38,59,RoofClaim.com Boca Raton Bowl,FAU Stadium
+401391091,2021,1,2021-12-18T17:00:00.000Z,True,Jackson State,South Carolina State,SWAC,MEAC,fcs,fcs,10,31,,Mercedes-Benz Stadium
+401391354,2021,1,2021-12-18T19:00:00.000Z,False,Montana State,South Dakota State,Big Sky,MVFC,fcs,fcs,31,17,,Bobcat Stadium
+401331167,2021,1,2021-12-18T19:15:00.000Z,True,Fresno State,UTEP,Mountain West,Conference USA,fbs,fbs,31,24,PUBG Mobile New Mexico Bowl,University Stadium (NM)
+401331168,2021,1,2021-12-18T20:30:00.000Z,True,BYU,UAB,FBS Independents,Conference USA,fbs,fbs,28,31,Radiance Technologies Independence Bowl,Independence Stadium
+401331169,2021,1,2021-12-18T22:45:00.000Z,True,Liberty,Eastern Michigan,FBS Independents,Mid-American,fbs,fbs,56,20,LendingTree Bowl,Hancock Whitney Stadium
+401331170,2021,1,2021-12-19T00:30:00.000Z,True,Oregon State,Utah State,Pac-12,Mountain West,fbs,fbs,13,24,Jimmy Kimmel LA Bowl Presented by Stifel,SoFi Stadium
+401392130,2021,1,2021-12-19T02:00:00.000Z,True,Ferris State,Valdosta State,GLIAC,Gulf South,ii,ii,58,17,,McKinney ISD Stadium
+401331171,2021,1,2021-12-19T02:15:00.000Z,True,Marshall,Louisiana,Conference USA,Sun Belt,fbs,fbs,21,36,R+L Carriers New Orleans Bowl,Caesars Superdome
+401331172,2021,1,2021-12-20T19:30:00.000Z,True,Tulsa,Old Dominion,American Athletic,Conference USA,fbs,fbs,30,17,Myrtle Beach Bowl Pres. by TaxAct,Brooks Stadium (SC)
+401331213,2021,1,2021-12-21T20:30:00.000Z,True,Wyoming,Kent State,Mountain West,Mid-American,fbs,fbs,52,38,Famous Idaho Potato Bowl,Albertsons Stadium
+401331214,2021,1,2021-12-22T00:30:00.000Z,True,San Diego State,UTSA,Mountain West,Conference USA,fbs,fbs,38,24,Tropical Smoothie Cafe Frisco Bowl,Toyota Stadium
+401331215,2021,1,2021-12-23T01:00:00.000Z,True,Army,Missouri,FBS Independents,SEC,fbs,fbs,24,22,Lockheed Martin Armed Forces Bowl,Amon G. Carter Stadium
+401391158,2021,1,2021-12-23T20:30:00.000Z,True,Miami (OH),North Texas,Mid-American,Conference USA,fbs,fbs,27,14,Frisco Football Classic,Toyota Stadium
+401331216,2021,1,2021-12-24T00:00:00.000Z,True,Florida,UCF,SEC,American Athletic,fbs,fbs,17,29,Union Home Mortgage Gasparilla Bowl,Raymond James Stadium
+401331218,2021,1,2021-12-25T19:30:00.000Z,True,Ball State,Georgia State,Mid-American,Sun Belt,fbs,fbs,20,51,TaxAct Camellia Bowl,Cramton Bowl
+401331219,2021,1,2021-12-27T16:00:00.000Z,True,Nevada,Western Michigan,Mountain West,Mid-American,fbs,fbs,24,52,Quick Lane Bowl,Ford Field
+401331221,2021,1,2021-12-28T17:00:00.000Z,True,Auburn,Houston,SEC,American Athletic,fbs,fbs,13,17,TicketSmarter Birmingham Bowl,Protective Stadium
+401331222,2021,1,2021-12-28T20:15:00.000Z,True,Louisville,Air Force,ACC,Mountain West,fbs,fbs,28,31,SERVPRO First Responder Bowl,Gerald J. Ford Stadium
+401331223,2021,1,2021-12-28T23:45:00.000Z,True,Texas Tech,Mississippi State,Big 12,SEC,fbs,fbs,34,7,AutoZone Liberty Bowl,Simmons Bank Liberty Stadium
+401331224,2021,1,2021-12-29T03:15:00.000Z,True,Minnesota,West Virginia,Big Ten,Big 12,fbs,fbs,18,6,Guaranteed Rate Bowl,Chase Field
+401331226,2021,1,2021-12-29T19:15:00.000Z,True,Virginia Tech,Maryland,ACC,Big Ten,fbs,fbs,10,54,New Era Pinstripe Bowl,Yankee Stadium
+401331227,2021,1,2021-12-29T22:45:00.000Z,True,Iowa State,Clemson,Big 12,ACC,fbs,fbs,13,20,Cheez-It Bowl,Camping World Stadium
+401331228,2021,1,2021-12-30T02:15:00.000Z,True,Oklahoma,Oregon,Big 12,Pac-12,fbs,fbs,47,32,Valero Alamo Bowl,Alamodome
+401331229,2021,1,2021-12-30T16:30:00.000Z,True,South Carolina,North Carolina,SEC,ACC,fbs,fbs,38,21,Duke's Mayo Bowl,Bank of America Stadium
+401331230,2021,1,2021-12-30T20:00:00.000Z,True,Purdue,Tennessee,Big Ten,SEC,fbs,fbs,48,45,TransPerfect Music City Bowl,Nissan Stadium
+401331231,2021,1,2021-12-31T00:00:00.000Z,True,Michigan State,Pittsburgh,Big Ten,ACC,fbs,fbs,31,21,Chick-fil-A Peach Bowl,Mercedes-Benz Stadium
+401331232,2021,1,2021-12-31T03:30:00.000Z,True,Arizona State,Wisconsin,Pac-12,Big Ten,fbs,fbs,13,20,SRS Distribution Las Vegas Bowl,Allegiant Stadium
+401331233,2021,1,2021-12-31T16:00:00.000Z,True,Rutgers,Wake Forest,Big Ten,ACC,fbs,fbs,10,38,TaxSlayer Gator Bowl,EverBank Stadium
+401331654,2021,1,2021-12-31T17:00:00.000Z,True,Central Michigan,Washington State,Mid-American,Pac-12,fbs,fbs,24,21,Tony the Tiger Sun Bowl,Sun Bowl
+401331235,2021,1,2021-12-31T20:30:00.000Z,True,Alabama,Cincinnati,SEC,American Athletic,fbs,fbs,27,6,CFP Semifinal at the Goodyear Cotton Bowl Classic,AT&T Stadium
+401331234,2021,1,2022-01-01T00:30:00.000Z,True,Michigan,Georgia,Big Ten,SEC,fbs,fbs,11,34,CFP Semifinal at the Capital One Orange Bowl,Hard Rock Stadium
+401331236,2021,1,2022-01-01T17:00:00.000Z,True,Arkansas,Penn State,SEC,Big Ten,fbs,fbs,24,10,Outback Bowl,Raymond James Stadium
+401331238,2021,1,2022-01-01T18:00:00.000Z,True,Notre Dame,Oklahoma State,FBS Independents,Big 12,fbs,fbs,35,37,PlayStation Fiesta Bowl,State Farm Stadium
+401331237,2021,1,2022-01-01T18:00:00.000Z,True,Kentucky,Iowa,SEC,Big Ten,fbs,fbs,20,17,Vrbo Citrus Bowl,Camping World Stadium
+401331239,2021,1,2022-01-01T22:00:00.000Z,True,Ohio State,Utah,Big Ten,Pac-12,fbs,fbs,48,45,Rose Bowl Game Pres. by Capital One Venture X,Rose Bowl
+401331240,2021,1,2022-01-02T01:45:00.000Z,True,Ole Miss,Baylor,SEC,Big 12,fbs,fbs,7,21,Allstate Sugar Bowl,Caesars Superdome
+401331241,2021,1,2022-01-05T02:00:00.000Z,True,Kansas State,LSU,Big 12,SEC,fbs,fbs,42,20,TaxAct Texas Bowl,NRG Stadium
+401391352,2021,1,2022-01-08T17:00:00.000Z,True,North Dakota State,Montana State,MVFC,Big Sky,fcs,fcs,38,10,,Toyota Stadium
+401331242,2021,1,2022-01-11T01:00:00.000Z,True,Alabama,Georgia,SEC,SEC,fbs,fbs,18,33,CFP National Championship pres. by AT&T,Lucas Oil Stadium
+401441993,2022,1,2022-12-16T16:30:00.000Z,True,UAB,Miami (OH),Conference USA,Mid-American,fbs,fbs,24,20,HomeTown Lenders Bahamas Bowl,Thomas A. Robinson National Stadium
+401441994,2022,1,2022-12-16T20:00:00.000Z,True,Troy,UTSA,Sun Belt,Conference USA,fbs,fbs,18,12,Duluth Trading Cure Bowl,Orlando City Stadium
+401508850,2022,1,2022-12-17T00:00:00.000Z,False,North Dakota State,Incarnate Word,MVFC,Southland,fcs,fcs,35,32,FCS Championship - Semifinals,Fargodome
+401508871,2022,1,2022-12-17T00:00:00.000Z,True,North Central College,Mount Union,CCIW,Ohio,iii,iii,28,21,Division III Championship,Navy-Marine Corps Memorial Stadium
+401441995,2022,1,2022-12-17T16:00:00.000Z,True,Louisville,Cincinnati,ACC,American Athletic,fbs,fbs,24,7,Wasabi Fenway Bowl,Fenway Park
+401441996,2022,1,2022-12-17T17:00:00.000Z,True,North Carolina Central,Jackson State,MEAC,SWAC,fcs,fcs,41,34,Cricket Celebration Bowl,Mercedes-Benz Stadium
+401508870,2022,1,2022-12-17T18:00:00.000Z,True,Ferris State,Colorado School of Mines,GLIAC,Rocky Mountain,ii,ii,34,14,Division II Championship,McKinney ISD Stadium
+401441999,2022,1,2022-12-17T19:30:00.000Z,True,Oregon State,Florida,Pac-12,SEC,fbs,fbs,30,3,SRS Distribution Las Vegas Bowl,Allegiant Stadium
+401442038,2022,1,2022-12-17T20:30:00.000Z,True,Fresno State,Washington State,Mountain West,Pac-12,fbs,fbs,29,6,Jimmy Kimmel LA Bowl Presented by Stifel,SoFi Stadium
+401508851,2022,1,2022-12-17T21:00:00.000Z,False,South Dakota State,Montana State,MVFC,Big Sky,fcs,fcs,39,18,FCS Championship - Semifinals,Dana J. Dykhouse Stadium
+401442041,2022,1,2022-12-17T22:45:00.000Z,True,Southern Miss,Rice,Sun Belt,Conference USA,fbs,fbs,38,24,LendingTree Bowl,Hancock Whitney Stadium
+401441997,2022,1,2022-12-18T00:30:00.000Z,True,BYU,SMU,FBS Independents,American Athletic,fbs,fbs,24,23,New Mexico Bowl,University Stadium (NM)
+401442001,2022,1,2022-12-18T02:15:00.000Z,True,Boise State,North Texas,Mountain West,Conference USA,fbs,fbs,35,32,Frisco Bowl Presented by SERVPRO,Toyota Stadium
+401442003,2022,1,2022-12-19T19:30:00.000Z,True,UConn,Marshall,FBS Independents,Sun Belt,fbs,fbs,14,28,Myrtle Beach Bowl,Brooks Stadium (SC)
+401442004,2022,1,2022-12-20T20:30:00.000Z,True,San José State,Eastern Michigan,Mountain West,Mid-American,fbs,fbs,27,41,Famous Idaho Potato Bowl,Albertsons Stadium
+401442006,2022,1,2022-12-21T00:30:00.000Z,True,Toledo,Liberty,Mid-American,FBS Independents,fbs,fbs,21,19,RoofClaim.com Boca Raton Bowl,FAU Stadium
+401442039,2022,1,2022-12-22T02:00:00.000Z,True,South Alabama,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,23,44,R+L Carriers New Orleans Bowl,Caesars Superdome
+401442040,2022,1,2022-12-23T00:30:00.000Z,True,Air Force,Baylor,Mountain West,Big 12,fbs,fbs,30,15,Lockheed Martin Armed Forces Bowl,Amon G. Carter Stadium
+401442042,2022,1,2022-12-23T20:00:00.000Z,True,Houston,Louisiana,American Athletic,Sun Belt,fbs,fbs,23,16,Radiance Technologies Independence Bowl,Independence Stadium
+401442007,2022,1,2022-12-23T23:30:00.000Z,True,Missouri,Wake Forest,SEC,ACC,fbs,fbs,17,27,Union Home Mortgage Gasparilla Bowl,Raymond James Stadium
+401442009,2022,1,2022-12-25T01:00:00.000Z,True,San Diego State,Middle Tennessee,Mountain West,Conference USA,fbs,fbs,23,25,EasyPost Hawai'i Bowl,Clarence T.C. Ching Athletics Complex
+401442037,2022,1,2022-12-26T19:30:00.000Z,True,Bowling Green,New Mexico State,Mid-American,FBS Independents,fbs,fbs,19,24,Quick Lane Bowl,Ford Field
+401441998,2022,1,2022-12-27T17:00:00.000Z,True,Buffalo,Georgia Southern,Mid-American,Sun Belt,fbs,fbs,23,21,Camellia Bowl,Cramton Bowl
+401442000,2022,1,2022-12-27T20:15:00.000Z,True,Utah State,Memphis,Mountain West,American Athletic,fbs,fbs,10,38,SERVPRO First Responder Bowl,Gerald J. Ford Stadium
+401442002,2022,1,2022-12-27T23:45:00.000Z,True,East Carolina,Coastal Carolina,American Athletic,Sun Belt,fbs,fbs,53,29,TicketSmarter Birmingham Bowl,Protective Stadium
+401442005,2022,1,2022-12-28T03:15:00.000Z,True,Oklahoma State,Wisconsin,Big 12,Big Ten,fbs,fbs,17,24,Guaranteed Rate Bowl,Chase Field
+401442008,2022,1,2022-12-28T19:00:00.000Z,True,Duke,UCF,ACC,American Athletic,fbs,fbs,30,13,Military Bowl Presented by Peraton,Navy-Marine Corps Memorial Stadium
+401442030,2022,1,2022-12-28T22:30:00.000Z,True,Arkansas,Kansas,SEC,Big 12,fbs,fbs,55,53,AutoZone Liberty Bowl,Simmons Bank Liberty Stadium
+401470891,2022,1,2022-12-29T01:00:00.000Z,True,North Carolina,Oregon,ACC,Pac-12,fbs,fbs,27,28,San Diego County Credit Union Holiday Bowl,Petco Park
+401442031,2022,1,2022-12-29T02:00:00.000Z,True,Ole Miss,Texas Tech,SEC,Big 12,fbs,fbs,25,42,TaxAct Texas Bowl,NRG Stadium
+401442032,2022,1,2022-12-29T19:00:00.000Z,True,Minnesota,Syracuse,Big Ten,ACC,fbs,fbs,28,20,Bad Boy Mowers Pinstripe Bowl,Yankee Stadium
+401442033,2022,1,2022-12-29T22:30:00.000Z,True,Florida State,Oklahoma,ACC,Big 12,fbs,fbs,35,32,Cheez-It Bowl,Camping World Stadium
+401442034,2022,1,2022-12-30T02:00:00.000Z,True,Washington,Texas,Pac-12,Big 12,fbs,fbs,27,20,Valero Alamo Bowl,Alamodome
+401442035,2022,1,2022-12-30T17:00:00.000Z,True,NC State,Maryland,ACC,Big Ten,fbs,fbs,12,16,Duke's Mayo Bowl,Bank of America Stadium
+401443542,2022,1,2022-12-30T19:00:00.000Z,True,UCLA,Pittsburgh,Pac-12,ACC,fbs,fbs,35,37,Tony the Tiger Sun Bowl,Sun Bowl
+401442036,2022,1,2022-12-30T20:30:00.000Z,True,South Carolina,Notre Dame,SEC,FBS Independents,fbs,fbs,38,45,TaxSlayer Gator Bowl,EverBank Stadium
+401443543,2022,1,2022-12-30T21:30:00.000Z,True,Wyoming,Ohio,Mountain West,Mid-American,fbs,fbs,27,30,Barstool Sports Arizona Bowl,Arizona Stadium
+401442019,2022,1,2022-12-31T01:00:00.000Z,True,Clemson,Tennessee,ACC,SEC,fbs,fbs,14,31,Capital One Orange Bowl,Hard Rock Stadium
+401442017,2022,1,2022-12-31T17:00:00.000Z,True,Kentucky,Iowa,SEC,Big Ten,fbs,fbs,0,21,TransPerfect Music City Bowl,Nissan Stadium
+401442018,2022,1,2022-12-31T17:00:00.000Z,True,Kansas State,Alabama,Big 12,SEC,fbs,fbs,20,45,Allstate Sugar Bowl,Caesars Superdome
+401442016,2022,1,2022-12-31T21:00:00.000Z,True,Michigan,TCU,Big Ten,Big 12,fbs,fbs,45,51,CFP Semifinal at the Vrbo Fiesta Bowl,State Farm Stadium
+401442015,2022,1,2023-01-01T01:00:00.000Z,True,Georgia,Ohio State,SEC,Big Ten,fbs,fbs,42,41,CFP Semifinal at the Chick-fil-A Peach Bowl,Mercedes-Benz Stadium
+401442011,2022,1,2023-01-02T17:00:00.000Z,True,Illinois,Mississippi State,Big Ten,SEC,fbs,fbs,10,19,ReliaQuest Bowl,Raymond James Stadium
+401442013,2022,1,2023-01-02T18:00:00.000Z,True,USC,Tulane,Pac-12,American Athletic,fbs,fbs,45,46,Goodyear Cotton Bowl Classic,AT&T Stadium
+401442012,2022,1,2023-01-02T18:00:00.000Z,True,Purdue,LSU,Big Ten,SEC,fbs,fbs,7,63,Cheez-It Citrus Bowl,Camping World Stadium
+401442014,2022,1,2023-01-02T22:00:00.000Z,True,Utah,Penn State,Pac-12,Big Ten,fbs,fbs,21,35,Rose Bowl Game Presented by Prudential,Rose Bowl
+401445817,2022,1,2023-01-08T19:00:00.000Z,True,South Dakota State,North Dakota State,MVFC,MVFC,fcs,fcs,45,21,FCS Championship,Toyota Stadium
+401442010,2022,1,2023-01-10T00:30:00.000Z,True,Georgia,TCU,SEC,Big 12,fbs,fbs,65,7,CFP National Championship pres. by AT&T,SoFi Stadium
+401618101,2023,1,2023-12-16T00:00:00.000Z,False,North Central College,SUNY Cortland,CCIW,Empire 8,iii,iii,37,38,Division III Championship,Benedetti-Wehrli Stadium
+401618179,2023,1,2023-12-16T00:00:00.000Z,False,South Dakota State,UAlbany,MVFC,Coastal Athletic,fcs,fcs,59,0,FCS Championship - Semifinals,Dana J. Dykhouse Stadium
+401551733,2023,1,2023-12-16T16:00:00.000Z,True,Ohio,Georgia Southern,Mid-American,Sun Belt,fbs,fbs,41,21,Myrtle Beach Bowl,Brooks Stadium (SC)
+401551470,2023,1,2023-12-16T17:00:00.000Z,True,Florida A&M,Howard,SWAC,MEAC,fcs,fcs,30,26,Cricket Celebration Bowl,Mercedes-Benz Stadium
+401618100,2023,1,2023-12-16T18:00:00.000Z,True,Colorado School of Mines,Harding,Rocky Mountain,Great American,ii,ii,7,38,Division II Championship,McKinney ISD Stadium
+401551751,2023,1,2023-12-16T19:15:00.000Z,True,Louisiana,Jacksonville State,Sun Belt,Conference USA,fbs,fbs,31,34,R+L Carriers New Orleans Bowl,Caesars Superdome
+401551731,2023,1,2023-12-16T20:30:00.000Z,True,App State,Miami (OH),Sun Belt,Mid-American,fbs,fbs,13,9,Avocados From Mexico Cure Bowl,FBC Mortgage Stadium
+401618099,2023,1,2023-12-16T21:30:00.000Z,False,Montana,North Dakota State,Big Sky,MVFC,fcs,fcs,31,29,FCS Championship - Semifinals,Washington-Grizzly Stadium
+401551732,2023,1,2023-12-16T22:45:00.000Z,True,Fresno State,New Mexico State,Mountain West,Conference USA,fbs,fbs,37,10,Isleta New Mexico Bowl,University Stadium (NM)
+401551752,2023,1,2023-12-17T00:30:00.000Z,True,Boise State,UCLA,Mountain West,Pac-12,fbs,fbs,22,35,Starco Brands LA Bowl,SoFi Stadium
+401551753,2023,1,2023-12-17T02:15:00.000Z,True,Texas Tech,California,Big 12,Pac-12,fbs,fbs,34,14,Radiance Technologies Independence Bowl,Independence Stadium
+401551469,2023,1,2023-12-18T19:30:00.000Z,True,Old Dominion,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,35,38,Famous Toastery Bowl,Jerry Richardson Stadium
+401551735,2023,1,2023-12-20T02:00:00.000Z,True,Marshall,UTSA,Sun Belt,American Athletic,fbs,fbs,17,35,Scooter's Coffee Frisco Bowl,Toyota Stadium
+401551737,2023,1,2023-12-22T01:00:00.000Z,True,Syracuse,South Florida,ACC,American Athletic,fbs,fbs,0,45,RoofClaim.com Boca Raton Bowl,FAU Stadium
+401551754,2023,1,2023-12-22T23:30:00.000Z,True,UCF,Georgia Tech,Big 12,ACC,fbs,fbs,17,30,Union Home Mortgage Gasparilla Bowl,Raymond James Stadium
+401551739,2023,1,2023-12-23T17:00:00.000Z,True,Duke,Troy,ACC,Sun Belt,fbs,fbs,17,10,76 Birmingham Bowl,Protective Stadium
+401551741,2023,1,2023-12-23T17:00:00.000Z,True,Northern Illinois,Arkansas State,Mid-American,Sun Belt,fbs,fbs,21,19,Camellia Bowl,Cramton Bowl
+401551743,2023,1,2023-12-23T20:30:00.000Z,True,Utah State,Georgia State,Mountain West,Sun Belt,fbs,fbs,22,45,Famous Idaho Potato Bowl,Albertsons Stadium
+401551742,2023,1,2023-12-23T20:30:00.000Z,True,Air Force,James Madison,Mountain West,Sun Belt,fbs,fbs,31,21,Lockheed Martin Armed Forces Bowl,Amon G. Carter Stadium
+401551755,2023,1,2023-12-24T00:00:00.000Z,False,Eastern Michigan,South Alabama,Mid-American,Sun Belt,fbs,fbs,10,59,68 Ventures Bowl,Hancock Whitney Stadium
+401551744,2023,1,2023-12-24T00:30:00.000Z,True,Northwestern,Utah,Big Ten,Pac-12,fbs,fbs,14,7,SRS Distribution Las Vegas Bowl,Allegiant Stadium
+401551746,2023,1,2023-12-24T03:30:00.000Z,True,San José State,Coastal Carolina,Mountain West,Sun Belt,fbs,fbs,14,24,EasyPost Hawaiʻi Bowl,Clarence T.C. Ching Athletics Complex
+401551756,2023,1,2023-12-26T19:00:00.000Z,True,Minnesota,Bowling Green,Big Ten,Mid-American,fbs,fbs,30,24,Quick Lane Bowl,Ford Field
+401551748,2023,1,2023-12-26T22:30:00.000Z,True,Rice,Texas State,American Athletic,Sun Belt,fbs,fbs,21,45,SERVPRO First Responder Bowl,Gerald J. Ford Stadium
+401551757,2023,1,2023-12-27T02:00:00.000Z,True,UNLV,Kansas,Mountain West,Big 12,fbs,fbs,36,49,Guaranteed Rate Bowl,Chase Field
+401551758,2023,1,2023-12-27T19:00:00.000Z,True,Tulane,Virginia Tech,American Athletic,ACC,fbs,fbs,20,41,Military Bowl Presented by GoBowling.com,Navy-Marine Corps Memorial Stadium
+401551761,2023,1,2023-12-27T22:30:00.000Z,True,West Virginia,North Carolina,Big 12,ACC,fbs,fbs,30,10,Duke's Mayo Bowl,Bank of America Stadium
+401581109,2023,1,2023-12-28T01:00:00.000Z,True,USC,Louisville,Pac-12,ACC,fbs,fbs,42,28,DIRECTV Holiday Bowl,Petco Park
+401551749,2023,1,2023-12-28T02:00:00.000Z,True,Oklahoma State,Texas A&M,Big 12,SEC,fbs,fbs,31,23,TaxAct Texas Bowl,NRG Stadium
+401551750,2023,1,2023-12-28T16:00:00.000Z,True,Boston College,SMU,ACC,American Athletic,fbs,fbs,23,14,Wasabi Fenway Bowl,Fenway Park
+401551762,2023,1,2023-12-28T19:15:00.000Z,True,Miami,Rutgers,ACC,Big Ten,fbs,fbs,24,31,Bad Boy Mowers Pinstripe Bowl,Yankee Stadium
+401551764,2023,1,2023-12-28T22:45:00.000Z,True,Kansas State,NC State,Big 12,ACC,fbs,fbs,28,19,Pop-Tarts Bowl,Camping World Stadium
+401551765,2023,1,2023-12-29T02:15:00.000Z,True,Oklahoma,Arizona,Big 12,Pac-12,fbs,fbs,24,38,Valero Alamo Bowl,Alamodome
+401551766,2023,1,2023-12-29T17:00:00.000Z,True,Kentucky,Clemson,SEC,ACC,fbs,fbs,35,38,TaxSlayer Gator Bowl,EverBank Stadium
+401551798,2023,1,2023-12-29T19:00:00.000Z,True,Notre Dame,Oregon State,FBS Independents,Pac-12,fbs,fbs,40,8,Tony the Tiger Sun Bowl,Sun Bowl
+401551767,2023,1,2023-12-29T20:30:00.000Z,False,Iowa State,Memphis,Big 12,American Athletic,fbs,fbs,26,36,AutoZone Liberty Bowl,Simmons Bank Liberty Stadium
+401551768,2023,1,2023-12-30T01:00:00.000Z,True,Ohio State,Missouri,Big Ten,SEC,fbs,fbs,3,14,Goodyear Cotton Bowl Classic,AT&T Stadium
+401551769,2023,1,2023-12-30T17:00:00.000Z,True,Penn State,Ole Miss,Big Ten,SEC,fbs,fbs,25,38,Chick-fil-A Peach Bowl,Mercedes-Benz Stadium
+401551770,2023,1,2023-12-30T19:00:00.000Z,True,Maryland,Auburn,Big Ten,SEC,fbs,fbs,31,13,TransPerfect Music City Bowl,Nissan Stadium
+401551773,2023,1,2023-12-30T21:00:00.000Z,True,Florida State,Georgia,ACC,SEC,fbs,fbs,3,63,Capital One Orange Bowl,Hard Rock Stadium
+401554566,2023,1,2023-12-30T21:30:00.000Z,True,Wyoming,Toledo,Mountain West,Mid-American,fbs,fbs,16,15,Barstool Sports Arizona Bowl,Arizona Stadium
+401551778,2023,1,2024-01-01T17:00:00.000Z,True,LSU,Wisconsin,SEC,Big Ten,fbs,fbs,35,31,ReliaQuest Bowl,Raymond James Stadium
+401551780,2023,1,2024-01-01T18:00:00.000Z,True,Tennessee,Iowa,SEC,Big Ten,fbs,fbs,35,0,Cheez-It Citrus Bowl,Camping World Stadium
+401551782,2023,1,2024-01-01T18:00:00.000Z,True,Oregon,Liberty,Pac-12,Conference USA,fbs,fbs,45,6,Vrbo Fiesta Bowl,State Farm Stadium
+401551786,2023,1,2024-01-01T22:00:00.000Z,True,Michigan,Alabama,Big Ten,SEC,fbs,fbs,27,20,CFP Semifinal at the Rose Bowl Game Pres. by Prudential,Rose Bowl
+401551788,2023,1,2024-01-02T01:45:00.000Z,True,Washington,Texas,Pac-12,Big 12,fbs,fbs,37,31,CFP Semifinal at the Allstate Sugar Bowl,Caesars Superdome
+401555031,2023,1,2024-01-07T19:00:00.000Z,True,South Dakota State,Montana,MVFC,Big Sky,fcs,fcs,23,3,FCS Championship,Toyota Stadium
+401551789,2023,1,2024-01-09T00:30:00.000Z,True,Michigan,Washington,Big Ten,Pac-12,fbs,fbs,34,13,CFP National Championship Pres. by AT&T,NRG Stadium
+401612659,2023,11,2023-11-11T17:00:00.000Z,False,Worcester State,Framingham State,MSCAC,MSCAC,iii,iii,6,41,,John Coughlin Memorial Field
+401612693,2023,11,2023-11-11T18:00:00.000Z,False,Benedict,Albany State,SIAC,SIAC,ii,ii,47,10,SIAC Championship Game,Charlie W. Johnson Stadium
+401612660,2023,11,2023-11-11T19:00:00.000Z,False,Augsburg,Carleton,Minnesota,Minnesota,iii,iii,25,41,,Edor Nelson Field
+401612661,2023,11,2023-11-11T19:00:00.000Z,False,Bethel (MN),Gustavus Adolphus,Minnesota,Minnesota,iii,iii,31,7,,Royal Stadium
+401612662,2023,11,2023-11-11T19:00:00.000Z,False,Concordia (MN),Saint John's (MN),Minnesota,Minnesota,iii,iii,21,48,,Jake Christiansen Stadium
+401612664,2023,11,2023-11-11T19:00:00.000Z,False,Macalester,St. Scholastica,Minnesota,Minnesota,iii,iii,40,20,,Macalester Stadium
+401612663,2023,11,2023-11-11T19:00:00.000Z,False,Hamline,St. Olaf,Minnesota,Minnesota,iii,iii,7,28,,Klas Field
+401612665,2023,11,2023-11-11T20:00:00.000Z,False,Fayetteville State,Virginia Union,CIAA,CIAA,ii,ii,10,21,,"Luther ""Nick"" Jeralds Stadium"
+401612976,2023,11,2023-11-11T21:00:00.000Z,False,Redlands,Claremont Mudd Scripps,So. Cal.,So. Cal.,iii,iii,6,21,,Ted Runner Stadium
+401612978,2023,11,2023-11-11T21:00:00.000Z,False,La Verne,Cal Lutheran,So. Cal.,So. Cal.,iii,iii,31,24,,Ortmayer Stadium
+401612977,2023,11,2023-11-11T21:00:00.000Z,False,Chapman,Pomona Pitzer,So. Cal.,So. Cal.,iii,iii,41,20,,Ernie Chapman Stadium
+401613472,2023,12,2023-11-18T17:00:00.000Z,False,Delaware Valley,Union,Mid Atlantic,Liberty League,iii,iii,16,24,Division III Championship - First Round,Robert A. Lipinski Field at James Work Memorial Stadium
+401613473,2023,12,2023-11-18T17:00:00.000Z,False,Randolph Macon,Christopher Newport,Old Dominion,New Jersey,iii,iii,28,20,Division III Championship - First Round,Day Field
+401613469,2023,12,2023-11-18T17:00:00.000Z,False,Endicott,SUNY Cortland,Commonwealth Coast,Empire 8,iii,iii,17,23,Division III Championship - First Round,Hempstead Stadium
+401613471,2023,12,2023-11-18T17:00:00.000Z,False,Johns Hopkins,Western Connecticut State,Centennial,MSCAC,iii,iii,62,20,Division III Championship - First Round,Homewood Field
+401613470,2023,12,2023-11-18T17:00:00.000Z,False,Susquehanna,Grove City,Landmark Conference,Presidents',iii,iii,20,21,Division III Championship - First Round,Amos Alonzo Stagg Field (PA)
+401613468,2023,12,2023-11-18T17:00:00.000Z,False,Alma,DePauw,Michigan,North Coast,iii,iii,32,17,Division III Championship - First Round,Bahlke Field
+401613474,2023,12,2023-11-18T17:00:00.000Z,False,Springfield,Ithaca,NEWMAC,Liberty League,iii,iii,7,21,Division III Championship - First Round,Stagg Field
+401613467,2023,12,2023-11-18T17:00:00.000Z,False,Mount Union,Alfred State,Ohio,ECFC,iii,iii,56,14,Division III Championship - First Round,Mount Union Stadium
+401613478,2023,12,2023-11-18T18:00:00.000Z,False,Lenoir Rhyne,Shepherd,South Atlantic,Pennsylvania State Athletic,ii,ii,63,17,Division II Championship - First Round,Helen and Leonard Moretz Stadium
+401613460,2023,12,2023-11-18T18:00:00.000Z,False,Aurora,Coe,NACC,American Rivers,iii,iii,20,7,Division III Championship - First Round,Vago Field
+401613462,2023,12,2023-11-18T18:00:00.000Z,False,North Central College,Belhaven,CCIW,USA South,iii,iii,65,0,Division III Championship - First Round,Benedetti-Wehrli Stadium
+401613463,2023,12,2023-11-18T18:00:00.000Z,False,Wartburg,Illinois College,American Rivers,Midwest,iii,iii,49,14,Division III Championship - First Round,Walston-Hoover Stadium
+401611307,2023,12,2023-11-18T18:00:00.000Z,False,Bowdoin,Trinity (CT),NESCAC,NESCAC,iii,iii,21,58,,Whittier Field
+401613459,2023,12,2023-11-18T18:00:00.000Z,False,Wisconsin La Crosse,Minnesota Morris,Wisconsin,Upper Midwest,iii,iii,62,7,Division III Championship - First Round,Veterans Memorial Stadium (WI)
+401611308,2023,12,2023-11-18T18:00:00.000Z,False,Bates,Williams,NESCAC,NESCAC,iii,iii,0,43,,Garcelon Field
+401613476,2023,12,2023-11-18T18:00:00.000Z,False,Charleston (WV),New Haven,Mountain East,Northeast 10,ii,ii,52,44,Division II Championship - First Round,University of Charleston Stadium
+401613475,2023,12,2023-11-18T18:00:00.000Z,False,Slippery Rock,East Stroudsburg,Pennsylvania State Athletic,Pennsylvania State Athletic,ii,ii,45,14,Division II Championship - First Round,Mihalik-Thompson Stadium
+401613477,2023,12,2023-11-18T18:00:00.000Z,False,Kutztown,Virginia Union,Pennsylvania State Athletic,CIAA,ii,ii,38,14,Division II Championship - First Round,Andre Reed Stadium
+401613466,2023,12,2023-11-18T18:00:00.000Z,False,Wisconsin Whitewater,Bethel (MN),Wisconsin,Minnesota,iii,iii,42,14,Division III Championship - First Round,Perkins Stadium
+401613500,2023,12,2023-11-18T18:00:00.000Z,False,Valdosta State,Limestone,Gulf South,South Atlantic,ii,ii,62,41,Division II Championship - First Round,Bazemore-Hyder Stadium
+401613502,2023,12,2023-11-18T18:00:00.000Z,False,Grand Valley State,Ferris State,GLIAC,GLIAC,ii,ii,21,14,Division II Championship - First Round,Lubbers Stadium
+401611306,2023,12,2023-11-18T18:00:00.000Z,False,Colby,Middlebury,NESCAC,NESCAC,iii,iii,28,35,,Seaverns Field At Harold Alfond Stadium
+401613461,2023,12,2023-11-18T18:00:00.000Z,False,Trinity (TX),Hardin Simmons,Southern Athletic,American Southwest,iii,iii,20,6,Division III Championship - First Round,Trinity University Stadium
+401613465,2023,12,2023-11-18T18:00:00.000Z,False,Wheaton (IL),Mount St Joseph,CCIW,Heartland,iii,iii,41,34,Division III Championship - First Round,McCully Stadium
+401613499,2023,12,2023-11-18T19:00:00.000Z,False,Delta State,West Florida,Gulf South,Gulf South,ii,ii,49,14,Division II Championship - First Round,Parker Field at McCool Stadium
+401613503,2023,12,2023-11-18T19:00:00.000Z,False,Pittsburg State,Indianapolis,Mid America,Great Lakes,ii,ii,35,14,Division II Championship - First Round,Carnie Smith Stadium
+401613501,2023,12,2023-11-18T19:00:00.000Z,False,Central Missouri,Henderson State,Mid America,Great American,ii,ii,56,14,Division II Championship - First Round,Audrey J. Walton Stadium at Vernon Kennedy Field
+401613506,2023,12,2023-11-18T19:00:00.000Z,False,UT Permian Basin,Bemidji State,Lone Star,Northern Sun,ii,ii,3,10,Division II Championship - First Round,Ratliff Stadium
+401613504,2023,12,2023-11-18T19:00:00.000Z,False,Augustana (SD),Minnesota State,Northern Sun,Northern Sun,ii,ii,51,24,Division II Championship - First Round,Kirkeby-Over Stadium
+401613464,2023,12,2023-11-18T20:00:00.000Z,False,Whitworth,Chapman,Northwest,So. Cal.,iii,iii,42,28,Division III Championship - First Round,The Pine Bowl
+401613505,2023,12,2023-11-18T20:00:00.000Z,False,Western Colorado,Central Washington,Rocky Mountain,Lone Star,ii,ii,13,16,Division II Championship - First Round,Mountaineer Bowl
+401614622,2023,13,2023-11-25T17:00:00.000Z,False,SUNY Cortland,Grove City,Empire 8,Presidents',iii,iii,25,24,Division III Championship - Second Round,Stadium Red Field
+401614559,2023,13,2023-11-25T17:00:00.000Z,False,Tiffin,Slippery Rock,Great Midwest Athletic,Pennsylvania State Athletic,ii,ii,35,45,Division II Championship - Second Round,Frost-Kalnow Stadium
+401614621,2023,13,2023-11-25T17:00:00.000Z,False,Mount Union,Alma,Ohio,Michigan,iii,iii,20,24,Division III Championship - Second Round,Mount Union Stadium
+401614624,2023,13,2023-11-25T17:00:00.000Z,False,Randolph Macon,Ithaca,Old Dominion,Liberty League,iii,iii,46,0,Division III Championship - Second Round,Day Field
+401614623,2023,13,2023-11-25T17:00:00.000Z,False,Johns Hopkins,Union,Centennial,Liberty League,iii,iii,39,17,Division III Championship - Second Round,Homewood Field
+401614619,2023,13,2023-11-25T18:00:00.000Z,False,Wartburg,Whitworth,American Rivers,Northwest,iii,iii,42,20,Division III Championship - Second Round,Walston-Hoover Stadium
+401614563,2023,13,2023-11-25T18:00:00.000Z,False,Benedict,Lenoir Rhyne,SIAC,South Atlantic,ii,ii,25,35,Division II Championship - Second Round,Charlie W. Johnson Stadium
+401614617,2023,13,2023-11-25T18:00:00.000Z,False,Wisconsin La Crosse,Aurora,Wisconsin,NACC,iii,iii,56,35,Division III Championship - Second Round,Veterans Memorial Stadium (WI)
+401614560,2023,13,2023-11-25T18:00:00.000Z,False,Charleston (WV),Kutztown,Mountain East,Pennsylvania State Athletic,ii,ii,31,32,Division II Championship - Second Round,University of Charleston Stadium
+401614618,2023,13,2023-11-25T18:00:00.000Z,False,North Central College,Trinity (TX),CCIW,Southern Athletic,iii,iii,71,28,Division III Championship - Second Round,Benedetti-Wehrli Stadium
+401614620,2023,13,2023-11-25T18:00:00.000Z,False,Wisconsin Whitewater,Wheaton (IL),Wisconsin,CCIW,iii,iii,49,42,Division III Championship - Second Round,Perkins Stadium
+401614603,2023,13,2023-11-25T18:00:00.000Z,False,North Dakota,Sacramento State,MVFC,Big Sky,fcs,fcs,35,42,FCS Championship - First Round,Alerus Center
+401614562,2023,13,2023-11-25T18:00:00.000Z,False,Grand Valley State,Pittsburg State,GLIAC,Mid America,ii,ii,24,21,Division II Championship - Second Round,Lubbers Stadium
+401614566,2023,13,2023-11-25T19:00:00.000Z,False,Colorado School of Mines,Augustana (SD),Rocky Mountain,Northern Sun,ii,ii,56,10,Division II Championship - Second Round,Marv Kay Stadium at Campbell Field
+401614561,2023,13,2023-11-25T19:00:00.000Z,False,Harding,Central Missouri,Great American,Mid America,ii,ii,35,34,Division II Championship - Second Round,First Security Stadium
+401614616,2023,13,2023-11-25T19:00:00.000Z,False,Delaware,Lafayette,CAA,Patriot,fcs,fcs,36,34,FCS Championship - First Round,Delaware Stadium
+401614565,2023,13,2023-11-25T19:00:00.000Z,False,Bemidji State,Central Washington,Northern Sun,Lone Star,ii,ii,17,21,Division II Championship - Second Round,Chet Anderson Stadium
+401614601,2023,13,2023-11-25T19:00:00.000Z,False,Richmond,North Carolina Central,Coastal Athletic,MEAC,fcs,fcs,49,27,FCS Championship - First Round,E. Claiborne Robins Stadium
+401614564,2023,13,2023-11-25T19:00:00.000Z,False,Delta State,Valdosta State,Gulf South,Gulf South,ii,ii,31,38,Division II Championship - Second Round,Parker Field at McCool Stadium
+401614599,2023,13,2023-11-25T20:00:00.000Z,False,Mercer,Gardner-Webb,Southern,Big South-OVC,fcs,fcs,17,7,FCS Championship - First Round,Five Star Stadium at the Moye Complex
+401614615,2023,13,2023-11-25T20:00:00.000Z,False,Austin Peay,Chattanooga,UAC,Southern,fcs,fcs,21,24,FCS Championship - First Round,Governors Stadium
+401614602,2023,13,2023-11-25T20:00:00.000Z,False,Southern Illinois,Nicholls,MVFC,Southland,fcs,fcs,35,0,FCS Championship - First Round,Saluki Stadium
+401614604,2023,13,2023-11-25T20:30:00.000Z,False,North Dakota State,Drake,MVFC,Pioneer,fcs,fcs,66,3,FCS Championship - First Round,Fargodome
+401614600,2023,13,2023-11-25T22:00:00.000Z,False,Youngstown State,Duquesne,MVFC,NEC,fcs,fcs,40,7,FCS Championship - First Round,Stambaugh Stadium
+401615860,2023,14,2023-12-02T17:00:00.000Z,False,UAlbany,Richmond,Coastal Athletic,Coastal Athletic,fcs,fcs,41,13,FCS Championship - Second Round,Bob Ford Field
+401615822,2023,14,2023-12-02T17:00:00.000Z,False,Alma,SUNY Cortland,Michigan,Empire 8,iii,iii,41,58,Division III Championship - Quarterfinal,Bahlke Field
+401615939,2023,14,2023-12-02T17:00:00.000Z,False,Villanova,Youngstown State,Coastal Athletic,MVFC,fcs,fcs,45,28,FCS Championship - Second Round,Villanova Stadium
+401615820,2023,14,2023-12-02T17:00:00.000Z,False,Slippery Rock,Kutztown,Pennsylvania State Athletic,Pennsylvania State Athletic,ii,ii,16,28,Division II Championship - Quarterfinal,Mihalik-Thompson Stadium
+401615824,2023,14,2023-12-02T17:00:00.000Z,False,Johns Hopkins,Randolph Macon,Centennial,Old Dominion,iii,iii,36,39,Division III Championship - Quarterfinal,Homewood Field
+401615848,2023,14,2023-12-02T18:00:00.000Z,False,Lenoir Rhyne,Valdosta State,South Atlantic,Gulf South,ii,ii,35,7,Division II Championship - Quarterfinal,Helen and Leonard Moretz Stadium
+401615821,2023,14,2023-12-02T18:00:00.000Z,False,Wisconsin La Crosse,North Central College,Wisconsin,CCIW,iii,iii,42,55,Division III Championship - Quarterfinal,Veterans Memorial Stadium (WI)
+401615901,2023,14,2023-12-02T18:00:00.000Z,False,Furman,Chattanooga,Southern,Southern,fcs,fcs,26,7,FCS Championship - Second Round,Paladin Stadium
+401615823,2023,14,2023-12-02T18:00:00.000Z,False,Wartburg,Wisconsin Whitewater,American Rivers,Wisconsin,iii,iii,31,28,Division III Championship - Quarterfinal,Walston-Hoover Stadium
+401615899,2023,14,2023-12-02T19:00:00.000Z,False,South Dakota State,Mercer,MVFC,Southern,fcs,fcs,41,0,FCS Championship - Second Round,Dana J. Dykhouse Stadium
+401615849,2023,14,2023-12-02T19:00:00.000Z,False,Colorado School of Mines,Central Washington,Rocky Mountain,Lone Star,ii,ii,38,14,Division II Championship - Quarterfinal,Marv Kay Stadium at Campbell Field
+401615819,2023,14,2023-12-02T19:00:00.000Z,False,South Dakota,Sacramento State,MVFC,Big Sky,fcs,fcs,34,24,FCS Championship - Second Round,DakotaDome
+401615847,2023,14,2023-12-02T19:00:00.000Z,False,Harding,Grand Valley State,Great American,GLIAC,ii,ii,7,6,Division II Championship - Quarterfinal,First Security Stadium
+401615900,2023,14,2023-12-02T20:00:00.000Z,False,Montana State,North Dakota State,Big Sky,MVFC,fcs,fcs,34,35,FCS Championship - Second Round,Bobcat Stadium
+401539485,2023,14,2023-12-02T21:00:00.000Z,False,Florida A&M,Prairie View A&M,SWAC,SWAC,fcs,fcs,35,14,SWAC Championship,Bragg Memorial Stadium
+401615859,2023,14,2023-12-03T02:00:00.000Z,False,Montana,Delaware,Big Sky,CAA,fcs,fcs,49,19,FCS Championship - Second Round,Washington-Grizzly Stadium
+401615879,2023,14,2023-12-03T03:00:00.000Z,False,Idaho,Southern Illinois,Big Sky,MVFC,fcs,fcs,20,17,FCS Championship - Second Round,Kibbie Dome
+401617310,2023,15,2023-12-09T02:00:00.000Z,False,Montana,Furman,Big Sky,Southern,fcs,fcs,35,28,FCS Championship - Quarterfinals,Washington-Grizzly Stadium
+401617204,2023,15,2023-12-09T17:00:00.000Z,False,Harding,Lenoir Rhyne,Great American,South Atlantic,ii,ii,55,14,Division II Championship - Semifinal,First Security Stadium
+401617307,2023,15,2023-12-09T17:00:00.000Z,False,South Dakota State,Villanova,MVFC,Coastal Athletic,fcs,fcs,23,12,FCS Championship - Quarterfinals,Dana J. Dykhouse Stadium
+401617199,2023,15,2023-12-09T17:00:00.000Z,False,SUNY Cortland,Randolph Macon,Empire 8,Old Dominion,iii,iii,49,14,Division III Championship - Semifinal,Day Field
+401617308,2023,15,2023-12-09T19:30:00.000Z,False,South Dakota,North Dakota State,MVFC,MVFC,fcs,fcs,17,45,FCS Championship - Quarterfinals,DakotaDome
+401617205,2023,15,2023-12-09T20:30:00.000Z,False,Colorado School of Mines,Kutztown,Rocky Mountain,Pennsylvania State Athletic,ii,ii,35,7,Division II Championship - Semifinal,Marv Kay Stadium at Campbell Field
+401617200,2023,15,2023-12-09T20:30:00.000Z,False,North Central College,Wartburg,CCIW,American Rivers,iii,iii,34,27,Division III Championship - Semifinal,Walston-Hoover Stadium
+401617309,2023,15,2023-12-10T03:00:00.000Z,False,Idaho,UAlbany,Big Sky,Coastal Athletic,fcs,fcs,22,30,FCS Championship - Quarterfinals,Kibbie Dome
+401677076,2024,1,2024-12-14T17:00:00.000Z,True,South Carolina State,Jackson State,MEAC,SWAC,fcs,fcs,7,28,Cricket Celebration Bowl,Mercedes-Benz Stadium
+401677077,2024,1,2024-12-15T02:00:00.000Z,True,Western Michigan,South Alabama,Mid-American,Sun Belt,fbs,fbs,23,30,IS4S Salute to Veterans Bowl,Cramton Bowl
+401677080,2024,1,2024-12-18T02:00:00.000Z,True,West Virginia,Memphis,Big 12,American Athletic,fbs,fbs,37,42,Scooter's Coffee Frisco Bowl,Toyota Stadium
+401677079,2024,1,2024-12-18T22:30:00.000Z,True,James Madison,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,27,17,Boca Raton Bowl,FAU Stadium
+401677081,2024,1,2024-12-19T02:00:00.000Z,True,UNLV,California,Mountain West,ACC,fbs,fbs,24,13,Art of Sport LA Bowl,SoFi Stadium
+401677082,2024,1,2024-12-20T00:00:00.000Z,True,Sam Houston,Georgia Southern,Conference USA,Sun Belt,fbs,fbs,31,26,R+L Carriers New Orleans Bowl,Caesars Superdome
+401677083,2024,1,2024-12-20T17:00:00.000Z,True,Jacksonville State,Ohio,Conference USA,Mid-American,fbs,fbs,27,30,StaffDNA Cure Bowl,Camping World Stadium
+401677084,2024,1,2024-12-20T20:30:00.000Z,True,Florida,Tulane,SEC,American Athletic,fbs,fbs,33,8,Union Home Mortgage Gasparilla Bowl,Raymond James Stadium
+401677179,2024,1,2024-12-21T01:00:00.000Z,False,Notre Dame,Indiana,FBS Independents,Big Ten,fbs,fbs,27,17,College Football Playoff First Round Game Presented by Allstate,Notre Dame Stadium
+401729786,2024,1,2024-12-21T17:00:00.000Z,False,North Dakota State,South Dakota State,MVFC,MVFC,fcs,fcs,28,21,FCS Championship - Semifinals,Fargodome
+401677178,2024,1,2024-12-21T17:00:00.000Z,False,Penn State,SMU,Big Ten,ACC,fbs,fbs,38,10,College Football Playoff First Round Game Presented by Allstate,Beaver Stadium
+401738295,2024,1,2024-12-21T17:00:00.000Z,False,Mount Union,Johns Hopkins,Ohio,Centennial,iii,iii,45,37,Division III Championship - Semifinal,Mount Union Stadium
+401738327,2024,1,2024-12-21T19:00:00.000Z,True,Valdosta State,Ferris State,Gulf South,GLIAC,ii,ii,14,49,Division II Championship,McKinney ISD Stadium
+401729787,2024,1,2024-12-21T20:30:00.000Z,False,Montana State,South Dakota,Big Sky,MVFC,fcs,fcs,31,17,FCS Championship - Semifinals,Bobcat Stadium
+401738307,2024,1,2024-12-21T20:30:00.000Z,False,North Central College,Susquehanna,CCIW,Landmark Conference,iii,iii,66,0,Division III Championship - Semifinal,Benedetti-Wehrli Stadium
+401677176,2024,1,2024-12-21T21:00:00.000Z,False,Texas,Clemson,SEC,ACC,fbs,fbs,38,24,College Football Playoff First Round Game Presented by Allstate,DKR-Texas Memorial Stadium
+401677177,2024,1,2024-12-22T01:00:00.000Z,False,Ohio State,Tennessee,Big Ten,SEC,fbs,fbs,42,17,College Football Playoff First Round Game Presented by Allstate,Ohio Stadium
+401677085,2024,1,2024-12-23T16:00:00.000Z,False,UTSA,Coastal Carolina,American Athletic,Sun Belt,fbs,fbs,44,15,Myrtle Beach Bowl,Brooks Stadium (SC)
+401677086,2024,1,2024-12-23T19:30:00.000Z,True,Fresno State,Northern Illinois,Mountain West,Mid-American,fbs,fbs,20,28,Famous Idaho Potato Bowl,Albertsons Stadium
+401677087,2024,1,2024-12-25T01:00:00.000Z,True,San José State,South Florida,Mountain West,American Athletic,fbs,fbs,39,41,Hawaiʻi Bowl,Clarence T.C. Ching Athletics Complex
+401677180,2024,1,2024-12-26T19:00:00.000Z,True,Toledo,Pittsburgh,Mid-American,ACC,fbs,fbs,48,46,GameAbove Sports Bowl,Ford Field
+401677088,2024,1,2024-12-26T22:30:00.000Z,True,Kansas State,Rutgers,Big 12,Big Ten,fbs,fbs,44,41,Rate Bowl,Chase Field
+401677089,2024,1,2024-12-27T02:00:00.000Z,True,Bowling Green,Arkansas State,Mid-American,Sun Belt,fbs,fbs,31,38,68 Ventures Bowl,Hancock Whitney Stadium
+401677090,2024,1,2024-12-27T17:00:00.000Z,True,Navy,Oklahoma,American Athletic,SEC,fbs,fbs,21,20,Lockheed Martin Armed Forces Bowl,Amon G. Carter Stadium
+401677091,2024,1,2024-12-27T20:30:00.000Z,True,Vanderbilt,Georgia Tech,SEC,ACC,fbs,fbs,35,27,Birmingham Bowl,Protective Stadium
+401677092,2024,1,2024-12-28T00:00:00.000Z,True,Arkansas,Texas Tech,SEC,Big 12,fbs,fbs,39,26,AutoZone Liberty Bowl,Simmons Bank Liberty Stadium
+401729867,2024,1,2024-12-28T01:00:00.000Z,True,Washington State,Syracuse,Pac-12,ACC,fbs,fbs,35,52,DirecTV Holiday Bowl,Snapdragon Stadium
+401677093,2024,1,2024-12-28T03:30:00.000Z,True,USC,Texas A&M,Big Ten,SEC,fbs,fbs,35,31,SRS Distribution Las Vegas Bowl,Allegiant Stadium
+401677094,2024,1,2024-12-28T16:00:00.000Z,True,North Carolina,UConn,ACC,FBS Independents,fbs,fbs,14,27,Wasabi Fenway Bowl,Fenway Park
+401677095,2024,1,2024-12-28T17:00:00.000Z,True,Nebraska,Boston College,Big Ten,ACC,fbs,fbs,20,15,Bad Boy Mowers Pinstripe Bowl,Yankee Stadium
+401677096,2024,1,2024-12-28T19:15:00.000Z,True,TCU,Louisiana,Big 12,Sun Belt,fbs,fbs,34,3,Isleta New Mexico Bowl,University Stadium (NM)
+401677097,2024,1,2024-12-28T20:30:00.000Z,True,Miami,Iowa State,ACC,Big 12,fbs,fbs,41,42,Pop-Tarts Bowl,Camping World Stadium
+401677188,2024,1,2024-12-28T21:30:00.000Z,True,Colorado State,Miami (OH),Mountain West,Mid-American,fbs,fbs,17,43,Snoop Dogg Arizona Bowl,Arizona Stadium
+401677098,2024,1,2024-12-28T22:45:00.000Z,True,NC State,East Carolina,ACC,American Athletic,fbs,fbs,21,26,Go Bowling Military Bowl,Navy-Marine Corps Memorial Stadium
+401677099,2024,1,2024-12-29T00:30:00.000Z,True,Colorado,BYU,Big 12,Big 12,fbs,fbs,14,36,Valero Alamo Bowl,Alamodome
+401677100,2024,1,2024-12-29T02:15:00.000Z,True,Army,Louisiana Tech,American Athletic,Conference USA,fbs,fbs,27,6,Radiance Technologies Independence Bowl,Independence Stadium
+401677101,2024,1,2024-12-30T19:30:00.000Z,True,Missouri,Iowa,SEC,Big Ten,fbs,fbs,27,24,TransPerfect Music City Bowl,Nissan Stadium
+401677102,2024,1,2024-12-31T17:00:00.000Z,True,Michigan,Alabama,Big Ten,SEC,fbs,fbs,19,13,ReliaQuest Bowl,Raymond James Stadium
+401677190,2024,1,2024-12-31T19:00:00.000Z,True,Washington,Louisville,Big Ten,ACC,fbs,fbs,34,35,Tony the Tiger Sun Bowl,Sun Bowl
+401677103,2024,1,2024-12-31T20:00:00.000Z,True,Illinois,South Carolina,Big Ten,SEC,fbs,fbs,21,17,Cheez-It Citrus Bowl,Camping World Stadium
+401677104,2024,1,2024-12-31T20:30:00.000Z,True,LSU,Baylor,SEC,Big 12,fbs,fbs,44,31,Kinder's Texas Bowl,NRG Stadium
+401677181,2024,1,2025-01-01T00:30:00.000Z,True,Boise State,Penn State,Mountain West,Big Ten,fbs,fbs,14,31,College Football Playoff Quarterfinal at the Vrbo Fiesta Bowl,State Farm Stadium
+401677182,2024,1,2025-01-01T18:00:00.000Z,True,Arizona State,Texas,Big 12,SEC,fbs,fbs,31,39,College Football Playoff Quarterfinal at the Chick-fil-A Peach Bowl,Mercedes-Benz Stadium
+401677183,2024,1,2025-01-01T22:00:00.000Z,True,Oregon,Ohio State,Big Ten,Big Ten,fbs,fbs,21,41,College Football Playoff Quarterfinal at the Rose Bowl Presented by Prudential,Rose Bowl
+401677184,2024,1,2025-01-02T21:00:00.000Z,True,Georgia,Notre Dame,SEC,FBS Independents,fbs,fbs,10,23,College Football Playoff Quarterfinal at the Allstate Sugar Bowl - Rescheduled from Jan 1,Caesars Superdome
+401677105,2024,1,2025-01-03T01:00:00.000Z,True,Ole Miss,Duke,SEC,ACC,fbs,fbs,52,20,TaxSlayer Gator Bowl,EverBank Stadium
+401677106,2024,1,2025-01-03T21:00:00.000Z,True,Texas State,North Texas,Sun Belt,American Athletic,fbs,fbs,30,28,SERVPRO First Responder Bowl,Gerald J. Ford Stadium
+401677107,2024,1,2025-01-04T00:30:00.000Z,True,Virginia Tech,Minnesota,ACC,Big Ten,fbs,fbs,10,24,Duke's Mayo Bowl,Bank of America Stadium
+401677108,2024,1,2025-01-04T16:00:00.000Z,True,Liberty,Buffalo,Conference USA,Mid-American,fbs,fbs,7,26,Bahamas Bowl Presented by Atlantis Resorts,Thomas A. Robinson National Stadium
+401741208,2024,1,2025-01-06T01:00:00.000Z,True,North Central College,Mount Union,CCIW,Ohio,iii,iii,41,25,Division III Championship,BBVA Compass Stadium
+401680057,2024,1,2025-01-07T00:00:00.000Z,True,Montana State,North Dakota State,Big Sky,MVFC,fcs,fcs,32,35,FCS Championship,Toyota Stadium
+401677189,2024,1,2025-01-10T00:30:00.000Z,True,Penn State,Notre Dame,Big Ten,FBS Independents,fbs,fbs,24,27,College Football Playoff Semifinal at the Capital One Orange Bowl,Hard Rock Stadium
+401677191,2024,1,2025-01-11T00:30:00.000Z,True,Texas,Ohio State,SEC,Big Ten,fbs,fbs,14,28,College Football Playoff Semifinal at the Goodyear Cotton Bowl Classic,AT&T Stadium
+401677192,2024,1,2025-01-21T00:30:00.000Z,True,Notre Dame,Ohio State,FBS Independents,Big Ten,fbs,fbs,23,34,College Football Playoff National Championship Presented by AT&T,Mercedes-Benz Stadium
+401778123,2025,1,2025-12-13T17:00:00.000Z,True,Prairie View A&M,South Carolina State,SWAC,MEAC,fcs,fcs,38,40,Cricket Celebration Bowl,Mercedes-Benz Stadium
+401778302,2025,1,2025-12-14T01:00:00.000Z,True,Washington,Boise State,Big Ten,Mountain West,fbs,fbs,38,10,Bucked Up LA Bowl,SoFi Stadium
+401778303,2025,1,2025-12-17T02:00:00.000Z,True,Jacksonville State,Troy,Conference USA,Sun Belt,fbs,fbs,17,13,IS4S Salute to Veterans Bowl,Cramton Bowl
+401778304,2025,1,2025-12-17T22:00:00.000Z,True,South Florida,Old Dominion,American Athletic,Sun Belt,fbs,fbs,10,24,StaffDNA Cure Bowl,Camping World Stadium
+401778305,2025,1,2025-12-18T01:30:00.000Z,True,Delaware,Louisiana,Conference USA,Sun Belt,fbs,fbs,20,13,68 Ventures Bowl,Hancock Whitney Stadium
+401838053,2025,1,2025-12-19T02:00:00.000Z,True,Arkansas State,Missouri State,Sun Belt,Conference USA,fbs,fbs,34,28,Xbox Bowl,Ford Center At The Star
+401778306,2025,1,2025-12-19T16:00:00.000Z,True,Western Michigan,Kennesaw State,Mid-American,Conference USA,fbs,fbs,41,6,Myrtle Beach Bowl,Brooks Stadium (SC)
+401778307,2025,1,2025-12-19T19:30:00.000Z,True,NC State,Memphis,ACC,American Athletic,fbs,fbs,31,7,Union Home Mortgage Gasparilla Bowl,Raymond James Stadium
+401779840,2025,1,2025-12-20T01:00:00.000Z,False,Oklahoma,Alabama,SEC,SEC,fbs,fbs,24,34,College Football Playoff First Round Game,"Memorial Stadium (Norman, OK)"
+401779841,2025,1,2025-12-20T17:00:00.000Z,False,Texas A&M,Miami,SEC,ACC,fbs,fbs,3,10,College Football Playoff First Round Game,Kyle Field
+401840097,2025,1,2025-12-20T18:00:00.000Z,False,Wisconsin River Falls,Johns Hopkins,Wisconsin,Centennial,iii,iii,48,41,Division III Championship - Semifinal,David Smith Stadium at Ramer Field
+401779842,2025,1,2025-12-20T20:30:00.000Z,False,Ole Miss,Tulane,SEC,American Athletic,fbs,fbs,41,10,College Football Playoff First Round Game,Vaught-Hemingway Stadium
+401833989,2025,1,2025-12-20T21:00:00.000Z,False,Montana State,Montana,Big Sky,Big Sky,fcs,fcs,48,23,FCS Championship - Semifinals,Bobcat Stadium
+401840095,2025,1,2025-12-20T21:00:00.000Z,True,Ferris State,Harding,GLIAC,Great American,ii,ii,42,21,Division II Championship,McKinney ISD Stadium
+401840096,2025,1,2025-12-20T21:30:00.000Z,False,North Central College,John Carroll,CCIW,Ohio,iii,iii,41,21,Division III Championship - Semifinal,Benedetti-Wehrli Stadium
+401833990,2025,1,2025-12-21T00:30:00.000Z,False,Villanova,Illinois State,Coastal Athletic,MVFC,fcs,fcs,14,30,FCS Championship - Semifinals,Villanova Stadium
+401779843,2025,1,2025-12-21T00:30:00.000Z,False,Oregon,James Madison,Big Ten,Sun Belt,fbs,fbs,51,34,College Football Playoff First Round Game,Autzen Stadium
+401778308,2025,1,2025-12-22T19:00:00.000Z,True,Utah State,Washington State,Mountain West,Pac-12,fbs,fbs,21,34,Famous Idaho Potato Bowl,Albertsons Stadium
+401778309,2025,1,2025-12-23T19:00:00.000Z,True,Louisville,Toledo,ACC,Mid-American,fbs,fbs,27,22,Bush's Boca Raton Bowl,FAU Stadium
+401778310,2025,1,2025-12-23T22:30:00.000Z,True,Southern Miss,Western Kentucky,Sun Belt,Conference USA,fbs,fbs,16,27,New Orleans Bowl,Caesars Superdome
+401778311,2025,1,2025-12-24T02:00:00.000Z,True,Ohio,UNLV,Mid-American,Mountain West,fbs,fbs,17,10,Scooter's Coffee Frisco Bowl,Ford Center At The Star
+401778312,2025,1,2025-12-25T01:00:00.000Z,False,Hawai'i,California,Mountain West,ACC,fbs,fbs,35,31,Sheraton Hawaiʻi Bowl,Clarence T.C. Ching Athletics Complex
+401778313,2025,1,2025-12-26T18:00:00.000Z,True,Northwestern,Central Michigan,Big Ten,Mid-American,fbs,fbs,34,7,GameAbove Sports Bowl,Ford Field
+401778314,2025,1,2025-12-26T21:30:00.000Z,True,Minnesota,New Mexico,Big Ten,Mountain West,fbs,fbs,20,17,Rate Bowl,Chase Field
+401778315,2025,1,2025-12-27T01:00:00.000Z,True,UTSA,Florida International,American Athletic,Conference USA,fbs,fbs,57,20,SERVPRO First Responder Bowl,Gerald J. Ford Stadium
+401778316,2025,1,2025-12-27T16:00:00.000Z,True,East Carolina,Pittsburgh,American Athletic,ACC,fbs,fbs,23,17,Go Bowling Military Bowl,Navy-Marine Corps Memorial Stadium
+401778317,2025,1,2025-12-27T17:00:00.000Z,True,Clemson,Penn State,ACC,Big Ten,fbs,fbs,10,22,Bad Boy Mowers Pinstripe Bowl,Yankee Stadium
+401778318,2025,1,2025-12-27T19:15:00.000Z,True,Army,UConn,American Athletic,FBS Independents,fbs,fbs,41,16,Wasabi Fenway Bowl,Fenway Park
+401778319,2025,1,2025-12-27T20:30:00.000Z,True,BYU,Georgia Tech,Big 12,ACC,fbs,fbs,25,21,Pop-Tarts Bowl,Camping World Stadium
+401778320,2025,1,2025-12-27T21:30:00.000Z,True,Fresno State,Miami (OH),Mountain West,Mid-American,fbs,fbs,18,3,Snoop Dogg Arizona Bowl,Arizona Stadium
+401778321,2025,1,2025-12-27T22:45:00.000Z,True,San Diego State,North Texas,Mountain West,American Athletic,fbs,fbs,47,49,Isleta New Mexico Bowl,University Stadium (NM)
+401778322,2025,1,2025-12-28T00:30:00.000Z,True,Missouri,Virginia,SEC,ACC,fbs,fbs,7,13,TaxSlayer Gator Bowl,EverBank Stadium
+401778323,2025,1,2025-12-28T02:15:00.000Z,True,Houston,LSU,Big 12,SEC,fbs,fbs,38,35,Kinder's Texas Bowl,NRG Stadium
+401778324,2025,1,2025-12-29T19:00:00.000Z,True,App State,Georgia Southern,Sun Belt,Sun Belt,fbs,fbs,10,29,JLab Birmingham Bowl,Protective Stadium
+401778325,2025,1,2025-12-30T19:00:00.000Z,True,Louisiana Tech,Coastal Carolina,Conference USA,Sun Belt,fbs,fbs,23,14,Radiance Technologies Independence Bowl,Independence Stadium
+401778326,2025,1,2025-12-30T22:30:00.000Z,True,Illinois,Tennessee,Big Ten,SEC,fbs,fbs,30,28,Liberty Mutual Music City Bowl,Nissan Stadium
+401778327,2025,1,2025-12-31T02:00:00.000Z,True,TCU,USC,Big 12,Big Ten,fbs,fbs,30,27,Valero Alamo Bowl,Alamodome
+401778328,2025,1,2025-12-31T17:00:00.000Z,True,Vanderbilt,Iowa,SEC,Big Ten,fbs,fbs,27,34,ReliaQuest Bowl,Raymond James Stadium
+401778329,2025,1,2025-12-31T19:00:00.000Z,True,Duke,Arizona State,ACC,Big 12,fbs,fbs,42,39,Tony the Tiger Sun Bowl,Sun Bowl
+401778330,2025,1,2025-12-31T20:00:00.000Z,True,Texas,Michigan,SEC,Big Ten,fbs,fbs,41,27,Cheez-It Citrus Bowl,Camping World Stadium
+401778331,2025,1,2025-12-31T20:30:00.000Z,True,Utah,Nebraska,Big 12,Big Ten,fbs,fbs,44,22,SRS Distribution Las Vegas Bowl,Allegiant Stadium
+401769070,2025,1,2026-01-01T00:30:00.000Z,True,Ohio State,Miami,Big Ten,ACC,fbs,fbs,14,24,College Football Playoff Quarterfinal at the Goodyear Cotton Bowl Classic,AT&T Stadium
+401769071,2025,1,2026-01-01T17:00:00.000Z,True,Texas Tech,Oregon,Big 12,Big Ten,fbs,fbs,0,23,College Football Playoff Quarterfinal at the Capital One Orange Bowl,Hard Rock Stadium
+401769072,2025,1,2026-01-01T21:00:00.000Z,True,Indiana,Alabama,Big Ten,SEC,fbs,fbs,38,3,College Football Playoff Quarterfinal at the Rose Bowl Presented by Prudential,Rose Bowl
+401769073,2025,1,2026-01-02T01:00:00.000Z,True,Georgia,Ole Miss,SEC,SEC,fbs,fbs,34,39,College Football Playoff Quarterfinal at the Allstate Sugar Bowl,Caesars Superdome
+401778332,2025,1,2026-01-02T18:00:00.000Z,True,Texas State,Rice,Sun Belt,American Athletic,fbs,fbs,41,10,Lockheed Martin Armed Forces Bowl,Amon G. Carter Stadium
+401778333,2025,1,2026-01-02T21:30:00.000Z,True,Cincinnati,Navy,Big 12,American Athletic,fbs,fbs,13,35,AutoZone Liberty Bowl,Simmons Bank Liberty Stadium
+401831583,2025,1,2026-01-03T01:00:00.000Z,True,SMU,Arizona,ACC,Big 12,fbs,fbs,24,19,Trust & Will Holiday Bowl,Snapdragon Stadium
+401778334,2025,1,2026-01-03T01:00:00.000Z,True,Mississippi State,Wake Forest,SEC,ACC,fbs,fbs,29,43,Duke's Mayo Bowl,Bank of America Stadium
+401843253,2025,1,2026-01-05T01:00:00.000Z,True,North Central College,Wisconsin River Falls,CCIW,Wisconsin,iii,iii,14,24,Division III Championship,Tom Benson Hall of Fame Stadium
+401833680,2025,1,2026-01-06T00:30:00.000Z,True,Montana State,Illinois State,Big Sky,MVFC,fcs,fcs,35,34,FCS Championship,FirstBank Stadium
+401769075,2025,1,2026-01-09T00:30:00.000Z,True,Ole Miss,Miami,SEC,ACC,fbs,fbs,27,31,College Football Playoff Semifinal at the Vrbo Fiesta Bowl,State Farm Stadium
+401769074,2025,1,2026-01-10T00:30:00.000Z,True,Indiana,Oregon,Big Ten,Big Ten,fbs,fbs,56,22,College Football Playoff Semifinal at the Chick-fil-A Peach Bowl,Mercedes-Benz Stadium
+401769076,2025,1,2026-01-20T00:30:00.000Z,True,Indiana,Miami,Big Ten,ACC,fbs,fbs,27,21,College Football Playoff National Championship Presented by AT&T,Hard Rock Stadium
+401834615,2025,13,2025-11-22T17:00:00.000Z,False,Muhlenberg,Union,Centennial,Liberty League,iii,iii,34,26,Division III Championship - First Round,Scotty Wood Stadium
+401834635,2025,13,2025-11-22T17:00:00.000Z,False,Kutztown,Bentley,Pennsylvania State Athletic,Northeast 10,ii,ii,52,0,Division II Championship - First Round,Andre Reed Stadium
+401834618,2025,13,2025-11-22T17:00:00.000Z,False,Framingham State,LaGrange,MSCAC,USA South,iii,iii,21,24,Division III Championship - First Round,Bowditch Field
+401834624,2025,13,2025-11-22T17:00:00.000Z,False,Springfield,SUNY Cortland,NEWMAC,Empire 8,iii,iii,21,7,Division III Championship - First Round,Stagg Field
+401834619,2025,13,2025-11-22T17:00:00.000Z,False,Hanover,Grove City,Heartland,Presidents',iii,iii,23,15,Division III Championship - First Round,Alumni Stadium (IN)
+401834623,2025,13,2025-11-22T17:00:00.000Z,False,Susquehanna,Washington & Jefferson,Landmark Conference,Presidents',iii,iii,38,32,Division III Championship - First Round,Amos Alonzo Stagg Field (PA)
+401834636,2025,13,2025-11-22T18:00:00.000Z,False,IU Pennsylvania,Assumption,Pennsylvania State Athletic,Northeast 10,ii,ii,20,23,Division II Championship - First Round,George P. Miller Stadium
+401834620,2025,13,2025-11-22T18:00:00.000Z,False,Concordia (WI),Coe,NACC,American Rivers,iii,iii,7,44,Division III Championship - First Round,Tomasini Stadium
+401834695,2025,13,2025-11-22T18:00:00.000Z,False,Ashland,Minnesota Duluth,Great Midwest Athletic,Northern Sun,ii,ii,32,7,Division II Championship - First Round,Jack Miller Stadium
+401834696,2025,13,2025-11-22T18:00:00.000Z,False,Findlay,Minnesota State,Great Midwest Athletic,Northern Sun,ii,ii,14,37,Division II Championship - First Round,Donnell Stadium
+401834637,2025,13,2025-11-22T18:00:00.000Z,False,Johnson C. Smith,Frostburg State,CIAA,Mountain East,ii,ii,7,21,Division II Championship - First Round,Irwin Belk Complex
+401834675,2025,13,2025-11-22T18:00:00.000Z,False,Ferris State,Northwood,GLIAC,Great Midwest Athletic,ii,ii,65,14,Division II Championship - First Round,Top Taggart Field
+401834621,2025,13,2025-11-22T18:00:00.000Z,False,Wheaton (IL),Crown,CCIW,Upper Midwest,iii,iii,76,14,Division III Championship - First Round,McCully Stadium
+401834642,2025,13,2025-11-22T18:00:00.000Z,False,Newberry,Kentucky State,South Atlantic,SIAC,ii,ii,45,24,Division II Championship - First Round,Setzler Field
+401834639,2025,13,2025-11-22T18:00:00.000Z,False,Albany State,Valdosta State,SIAC,Gulf South,ii,ii,35,30,Division II Championship - First Round,Albany State University Coliseum
+401834638,2025,13,2025-11-22T18:00:00.000Z,False,Virginia Union,California (PA),CIAA,Pennsylvania State Athletic,ii,ii,24,27,Division II Championship - First Round,Hovey Field
+401834716,2025,13,2025-11-22T19:00:00.000Z,False,Pittsburg State,Chadron State,Mid America,Rocky Mountain,ii,ii,21,17,Division II Championship - First Round,Carnie Smith Stadium
+401834641,2025,13,2025-11-22T19:00:00.000Z,False,West Florida,North Greenville,Gulf South,Carolinas,ii,ii,43,19,Division II Championship - First Round,Pen-Air Field
+401834640,2025,13,2025-11-22T19:00:00.000Z,False,Wingate,Benedict,South Atlantic,SIAC,ii,ii,24,25,Division II Championship - First Round,Irwin Belk Stadium
+401834715,2025,13,2025-11-22T19:00:00.000Z,False,Harding,Northwest Missouri State,Great American,Mid America,ii,ii,38,16,Division II Championship - First Round,First Security Stadium
+401834655,2025,13,2025-11-22T19:00:00.000Z,False,Indianapolis,Truman State,Great Lakes,Great Lakes,ii,ii,57,14,Division II Championship - First Round,Key Stadium
+401834622,2025,13,2025-11-22T20:00:00.000Z,False,Whitworth,Chapman,Northwest,So. Cal.,iii,iii,16,18,Division III Championship - First Round,The Pine Bowl
+401834718,2025,13,2025-11-22T20:00:00.000Z,False,CSU Pueblo,UT Permian Basin,Rocky Mountain,Lone Star,ii,ii,24,37,Division II Championship - First Round,Neta and Eddie DeRose ThunderBowl
+401834717,2025,13,2025-11-22T21:00:00.000Z,False,Central Washington,Western Colorado,Lone Star,Rocky Mountain,ii,ii,20,27,Division II Championship - First Round,Tomlinson Stadium
+401834630,2025,14,2025-11-29T17:00:00.000Z,False,Salisbury,Endicott,New Jersey,Commonwealth Coast,iii,iii,35,28,Division III Championship - Second Round,Sea Gull Stadium
+401834629,2025,14,2025-11-29T17:00:00.000Z,False,Franklin & Marshall,Eastern,Centennial,Mid Atlantic,iii,iii,24,28,Division III Championship - Second Round,Shadek Stadium
+401834616,2025,14,2025-11-29T17:00:00.000Z,False,John Carroll,Randolph Macon,Ohio,Old Dominion,iii,iii,35,6,Division III Championship - Second Round,Don Shula Stadium at Wasmer Field
+401834625,2025,14,2025-11-29T17:00:00.000Z,False,Hope,Wisconsin La Crosse,Michigan,Wisconsin,iii,iii,7,9,Division III Championship - Second Round,Ray and Sue Smith Stadium
+401834627,2025,14,2025-11-29T18:00:00.000Z,False,Wisconsin Whitewater,DePauw,Wisconsin,North Coast,iii,iii,23,26,Division III Championship - Second Round,Perkins Stadium
+401834617,2025,14,2025-11-29T18:00:00.000Z,False,Trinity (TX),Hardin Simmons,Southern Athletic,American Southwest,iii,iii,34,24,Division III Championship - Second Round,Trinity University Stadium
+401834626,2025,14,2025-11-29T18:00:00.000Z,False,Wisconsin Platteville,Alma,Wisconsin,Michigan,iii,iii,24,7,Division III Championship - Second Round,Ralph E. Davis Pioneer Stadium
+401834628,2025,14,2025-11-29T18:00:00.000Z,False,Saint John's (MN),Monmouth (IL),Minnesota,Midwest,iii,iii,49,15,Division III Championship - Second Round,Clemens Stadium
