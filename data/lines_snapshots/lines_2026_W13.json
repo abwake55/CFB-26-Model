@@ -89,15 +89,15 @@
         "away_ml": 350.0
       },
       "current": {
-        "spread": -14.5,
-        "over_under": 47.0,
-        "home_ml": -645.0,
-        "away_ml": 475.0,
-        "sharp_spread": -14.5,
+        "spread": -15.5,
+        "over_under": 46.5,
+        "home_ml": -715.0,
+        "away_ml": 515.0,
+        "sharp_spread": -15.5,
         "sharp_total": 46.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -106,6 +106,16 @@
           "home_ml": -645.0,
           "away_ml": 475.0,
           "sharp_spread": -14.5,
+          "sharp_total": 46.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -15.5,
+          "over_under": 46.5,
+          "home_ml": -715.0,
+          "away_ml": 515.0,
+          "sharp_spread": -15.5,
           "sharp_total": 46.5,
           "sharp_book": "lowvig"
         }
@@ -124,13 +134,13 @@
       "current": {
         "spread": -1.0,
         "over_under": 58.0,
-        "home_ml": -115.0,
-        "away_ml": -105.0,
+        "home_ml": -112.0,
+        "away_ml": -106.0,
         "sharp_spread": -1.0,
         "sharp_total": 58.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -151,6 +161,16 @@
           "sharp_spread": -1.0,
           "sharp_total": 58.0,
           "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -1.0,
+          "over_under": 58.0,
+          "home_ml": -112.0,
+          "away_ml": -106.0,
+          "sharp_spread": -1.0,
+          "sharp_total": 58.0,
+          "sharp_book": "lowvig"
         }
       ]
     },
@@ -166,14 +186,14 @@
       },
       "current": {
         "spread": 3.0,
-        "over_under": 46.5,
-        "home_ml": 128.0,
+        "over_under": 45.0,
+        "home_ml": 130.0,
         "away_ml": -155.0,
         "sharp_spread": 3.0,
-        "sharp_total": 46.5,
+        "sharp_total": 45.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -183,6 +203,16 @@
           "away_ml": -155.0,
           "sharp_spread": 3.0,
           "sharp_total": 46.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 3.0,
+          "over_under": 45.0,
+          "home_ml": 130.0,
+          "away_ml": -155.0,
+          "sharp_spread": 3.0,
+          "sharp_total": 45.0,
           "sharp_book": "lowvig"
         }
       ]
@@ -199,14 +229,14 @@
       },
       "current": {
         "spread": 7.5,
-        "over_under": 49.5,
+        "over_under": 48.5,
         "home_ml": 245.0,
         "away_ml": -300.0,
         "sharp_spread": 7.5,
-        "sharp_total": 49.5,
+        "sharp_total": 48.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -216,6 +246,16 @@
           "away_ml": -300.0,
           "sharp_spread": 7.5,
           "sharp_total": 49.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 7.5,
+          "over_under": 48.5,
+          "home_ml": 245.0,
+          "away_ml": -300.0,
+          "sharp_spread": 7.5,
+          "sharp_total": 48.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -235,11 +275,11 @@
         "over_under": 40.5,
         "home_ml": -205.0,
         "away_ml": 170.0,
-        "sharp_spread": -5.0,
+        "sharp_spread": -4.5,
         "sharp_total": 40.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -270,6 +310,16 @@
           "sharp_spread": -5.0,
           "sharp_total": 40.5,
           "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -4.5,
+          "over_under": 40.5,
+          "home_ml": -205.0,
+          "away_ml": 170.0,
+          "sharp_spread": -4.5,
+          "sharp_total": 40.5,
+          "sharp_book": "lowvig"
         }
       ]
     },
@@ -286,13 +336,13 @@
       "current": {
         "spread": -19.0,
         "over_under": 56.5,
-        "home_ml": -1100.0,
-        "away_ml": 700.0,
-        "sharp_spread": -19.0,
+        "home_ml": -1075.0,
+        "away_ml": 691.0,
+        "sharp_spread": -18.5,
         "sharp_total": 56.5,
         "sharp_book": "betonlineag"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -301,6 +351,16 @@
           "home_ml": -1100.0,
           "away_ml": 700.0,
           "sharp_spread": -19.0,
+          "sharp_total": 56.5,
+          "sharp_book": "betonlineag"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -19.0,
+          "over_under": 56.5,
+          "home_ml": -1075.0,
+          "away_ml": 691.0,
+          "sharp_spread": -18.5,
           "sharp_total": 56.5,
           "sharp_book": "betonlineag"
         }
@@ -317,15 +377,15 @@
         "away_ml": -500.0
       },
       "current": {
-        "spread": 9.0,
+        "spread": 8.5,
         "over_under": 40.0,
-        "home_ml": 290.0,
-        "away_ml": -365.0,
+        "home_ml": 280.0,
+        "away_ml": -355.0,
         "sharp_spread": 9.0,
         "sharp_total": 40.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -333,6 +393,16 @@
           "over_under": 40.0,
           "home_ml": 290.0,
           "away_ml": -365.0,
+          "sharp_spread": 9.0,
+          "sharp_total": 40.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 8.5,
+          "over_under": 40.0,
+          "home_ml": 280.0,
+          "away_ml": -355.0,
           "sharp_spread": 9.0,
           "sharp_total": 40.0,
           "sharp_book": "lowvig"
@@ -355,10 +425,10 @@
         "home_ml": 190.0,
         "away_ml": -230.0,
         "sharp_spread": 6.0,
-        "sharp_total": 54.0,
+        "sharp_total": 53.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -368,6 +438,16 @@
           "away_ml": -230.0,
           "sharp_spread": 6.0,
           "sharp_total": 54.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 6.0,
+          "over_under": 53.5,
+          "home_ml": 190.0,
+          "away_ml": -230.0,
+          "sharp_spread": 6.0,
+          "sharp_total": 53.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -388,10 +468,10 @@
         "home_ml": -925.0,
         "away_ml": 624.0,
         "sharp_spread": -17.0,
-        "sharp_total": 67.5,
+        "sharp_total": 66.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -401,6 +481,16 @@
           "away_ml": 624.0,
           "sharp_spread": -17.0,
           "sharp_total": 67.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -17.5,
+          "over_under": 66.5,
+          "home_ml": -925.0,
+          "away_ml": 624.0,
+          "sharp_spread": -17.0,
+          "sharp_total": 66.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -418,13 +508,13 @@
       "current": {
         "spread": -6.5,
         "over_under": 42.0,
-        "home_ml": -250.0,
-        "away_ml": 210.0,
+        "home_ml": -255.0,
+        "away_ml": 211.0,
         "sharp_spread": -6.5,
         "sharp_total": 42.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -432,6 +522,16 @@
           "over_under": 42.0,
           "home_ml": -250.0,
           "away_ml": 210.0,
+          "sharp_spread": -6.5,
+          "sharp_total": 42.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -6.5,
+          "over_under": 42.0,
+          "home_ml": -255.0,
+          "away_ml": 211.0,
           "sharp_spread": -6.5,
           "sharp_total": 42.0,
           "sharp_book": "lowvig"
@@ -451,13 +551,13 @@
       "current": {
         "spread": 11.0,
         "over_under": 40.5,
-        "home_ml": 355.0,
-        "away_ml": -455.0,
+        "home_ml": 360.0,
+        "away_ml": -462.0,
         "sharp_spread": 11.0,
         "sharp_total": 40.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -465,6 +565,16 @@
           "over_under": 40.5,
           "home_ml": 355.0,
           "away_ml": -455.0,
+          "sharp_spread": 11.0,
+          "sharp_total": 40.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 11.0,
+          "over_under": 40.5,
+          "home_ml": 360.0,
+          "away_ml": -462.0,
           "sharp_spread": 11.0,
           "sharp_total": 40.5,
           "sharp_book": "lowvig"
@@ -484,13 +594,13 @@
       "current": {
         "spread": -7.5,
         "over_under": 37.5,
-        "home_ml": -290.0,
-        "away_ml": 240.0,
+        "home_ml": -310.0,
+        "away_ml": 252.0,
         "sharp_spread": -7.0,
         "sharp_total": 37.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -498,6 +608,16 @@
           "over_under": 37.5,
           "home_ml": -290.0,
           "away_ml": 240.0,
+          "sharp_spread": -7.0,
+          "sharp_total": 37.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -7.5,
+          "over_under": 37.5,
+          "home_ml": -310.0,
+          "away_ml": 252.0,
           "sharp_spread": -7.0,
           "sharp_total": 37.0,
           "sharp_book": "lowvig"
@@ -515,15 +635,15 @@
         "away_ml": 860.0
       },
       "current": {
-        "spread": -22.5,
-        "over_under": 68.0,
-        "home_ml": -1900.0,
-        "away_ml": 1021.0,
-        "sharp_spread": -21.5,
-        "sharp_total": 67.5,
+        "spread": -26.0,
+        "over_under": 66.5,
+        "home_ml": -3000.0,
+        "away_ml": 1355.0,
+        "sharp_spread": -26.0,
+        "sharp_total": 66.5,
         "sharp_book": "betonlineag"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -533,6 +653,16 @@
           "away_ml": 1021.0,
           "sharp_spread": -21.5,
           "sharp_total": 67.5,
+          "sharp_book": "betonlineag"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -26.0,
+          "over_under": 66.5,
+          "home_ml": -3000.0,
+          "away_ml": 1355.0,
+          "sharp_spread": -26.0,
+          "sharp_total": 66.5,
           "sharp_book": "betonlineag"
         }
       ]
@@ -551,12 +681,12 @@
         "spread": -25.5,
         "over_under": 53.5,
         "home_ml": -3000.0,
-        "away_ml": 1300.0,
+        "away_ml": 1256.0,
         "sharp_spread": -25.5,
         "sharp_total": 53.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -564,6 +694,16 @@
           "over_under": 53.5,
           "home_ml": -3000.0,
           "away_ml": 1300.0,
+          "sharp_spread": -25.5,
+          "sharp_total": 53.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -25.5,
+          "over_under": 53.5,
+          "home_ml": -3000.0,
+          "away_ml": 1256.0,
           "sharp_spread": -25.5,
           "sharp_total": 53.5,
           "sharp_book": "lowvig"
@@ -589,7 +729,7 @@
         "sharp_total": 54.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -615,14 +755,14 @@
       },
       "current": {
         "spread": 4.0,
-        "over_under": 48.5,
-        "home_ml": 157.0,
-        "away_ml": -190.0,
+        "over_under": 50.5,
+        "home_ml": 153.0,
+        "away_ml": -176.0,
         "sharp_spread": 4.0,
-        "sharp_total": 48.5,
+        "sharp_total": 51.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -632,6 +772,16 @@
           "away_ml": -190.0,
           "sharp_spread": 4.0,
           "sharp_total": 48.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 4.0,
+          "over_under": 50.5,
+          "home_ml": 153.0,
+          "away_ml": -176.0,
+          "sharp_spread": 4.0,
+          "sharp_total": 51.0,
           "sharp_book": "lowvig"
         }
       ]
@@ -648,14 +798,14 @@
       },
       "current": {
         "spread": 3.0,
-        "over_under": 46.5,
+        "over_under": 45.0,
         "home_ml": 132.0,
         "away_ml": -155.0,
         "sharp_spread": 3.0,
-        "sharp_total": 46.0,
+        "sharp_total": 45.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -665,6 +815,16 @@
           "away_ml": -155.0,
           "sharp_spread": 3.0,
           "sharp_total": 46.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 3.0,
+          "over_under": 45.0,
+          "home_ml": 132.0,
+          "away_ml": -155.0,
+          "sharp_spread": 3.0,
+          "sharp_total": 45.0,
           "sharp_book": "lowvig"
         }
       ]
@@ -680,21 +840,31 @@
         "away_ml": -3030.0
       },
       "current": {
-        "spread": 25.0,
-        "over_under": 52.5,
-        "home_ml": 1216.0,
+        "spread": 25.5,
+        "over_under": 53.0,
+        "home_ml": 1250.0,
         "away_ml": -2800.0,
         "sharp_spread": 25.5,
         "sharp_total": 53.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": 25.0,
           "over_under": 52.5,
           "home_ml": 1216.0,
+          "away_ml": -2800.0,
+          "sharp_spread": 25.5,
+          "sharp_total": 53.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 25.5,
+          "over_under": 53.0,
+          "home_ml": 1250.0,
           "away_ml": -2800.0,
           "sharp_spread": 25.5,
           "sharp_total": 53.0,
@@ -715,19 +885,29 @@
       "current": {
         "spread": -2.5,
         "over_under": 54.5,
-        "home_ml": -135.0,
+        "home_ml": -130.0,
         "away_ml": 110.0,
         "sharp_spread": -2.0,
         "sharp_total": 54.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": -2.5,
           "over_under": 54.5,
           "home_ml": -135.0,
+          "away_ml": 110.0,
+          "sharp_spread": -2.0,
+          "sharp_total": 54.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -2.5,
+          "over_under": 54.5,
+          "home_ml": -130.0,
           "away_ml": 110.0,
           "sharp_spread": -2.0,
           "sharp_total": 54.5,
@@ -746,21 +926,31 @@
         "away_ml": -800.0
       },
       "current": {
-        "spread": 16.5,
+        "spread": 17.0,
         "over_under": 55.0,
-        "home_ml": 575.0,
+        "home_ml": 581.0,
         "away_ml": -840.0,
         "sharp_spread": 17.0,
         "sharp_total": 55.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": 16.5,
           "over_under": 55.0,
           "home_ml": 575.0,
+          "away_ml": -840.0,
+          "sharp_spread": 17.0,
+          "sharp_total": 55.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 17.0,
+          "over_under": 55.0,
+          "home_ml": 581.0,
           "away_ml": -840.0,
           "sharp_spread": 17.0,
           "sharp_total": 55.0,
@@ -781,13 +971,13 @@
       "current": {
         "spread": 3.0,
         "over_under": 54.5,
-        "home_ml": 120.0,
-        "away_ml": -140.0,
+        "home_ml": 117.0,
+        "away_ml": -138.0,
         "sharp_spread": 3.0,
         "sharp_total": 54.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -795,6 +985,16 @@
           "over_under": 54.5,
           "home_ml": 120.0,
           "away_ml": -140.0,
+          "sharp_spread": 3.0,
+          "sharp_total": 54.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 3.0,
+          "over_under": 54.5,
+          "home_ml": 117.0,
+          "away_ml": -138.0,
           "sharp_spread": 3.0,
           "sharp_total": 54.5,
           "sharp_book": "lowvig"
@@ -812,15 +1012,15 @@
         "away_ml": 340.0
       },
       "current": {
-        "spread": -10.0,
-        "over_under": 38.5,
-        "home_ml": -415.0,
-        "away_ml": 320.0,
+        "spread": -10.5,
+        "over_under": 37.5,
+        "home_ml": -425.0,
+        "away_ml": 325.0,
         "sharp_spread": -10.0,
-        "sharp_total": 38.5,
+        "sharp_total": 37.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -830,6 +1030,16 @@
           "away_ml": 320.0,
           "sharp_spread": -10.0,
           "sharp_total": 38.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -10.5,
+          "over_under": 37.5,
+          "home_ml": -425.0,
+          "away_ml": 325.0,
+          "sharp_spread": -10.0,
+          "sharp_total": 37.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -846,14 +1056,14 @@
       },
       "current": {
         "spread": -3.0,
-        "over_under": 49.5,
-        "home_ml": -147.0,
-        "away_ml": 125.0,
-        "sharp_spread": -2.5,
-        "sharp_total": 49.5,
+        "over_under": 50.5,
+        "home_ml": -152.0,
+        "away_ml": 130.0,
+        "sharp_spread": -3.0,
+        "sharp_total": 50.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -863,6 +1073,16 @@
           "away_ml": 125.0,
           "sharp_spread": -2.5,
           "sharp_total": 49.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -3.0,
+          "over_under": 50.5,
+          "home_ml": -152.0,
+          "away_ml": 130.0,
+          "sharp_spread": -3.0,
+          "sharp_total": 50.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -880,13 +1100,13 @@
       "current": {
         "spread": 14.5,
         "over_under": 49.5,
-        "home_ml": 463.0,
-        "away_ml": -650.0,
+        "home_ml": 475.0,
+        "away_ml": -670.0,
         "sharp_spread": 14.0,
         "sharp_total": 49.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -894,6 +1114,16 @@
           "over_under": 49.5,
           "home_ml": 463.0,
           "away_ml": -650.0,
+          "sharp_spread": 14.0,
+          "sharp_total": 49.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 14.5,
+          "over_under": 49.5,
+          "home_ml": 475.0,
+          "away_ml": -670.0,
           "sharp_spread": 14.0,
           "sharp_total": 49.5,
           "sharp_book": "lowvig"
@@ -912,14 +1142,14 @@
       },
       "current": {
         "spread": -1.0,
-        "over_under": 56.5,
+        "over_under": 58.0,
         "home_ml": -118.0,
         "away_ml": -102.0,
         "sharp_spread": -1.0,
-        "sharp_total": 56.5,
+        "sharp_total": 58.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -929,6 +1159,16 @@
           "away_ml": -102.0,
           "sharp_spread": -1.0,
           "sharp_total": 56.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -1.0,
+          "over_under": 58.0,
+          "home_ml": -118.0,
+          "away_ml": -102.0,
+          "sharp_spread": -1.0,
+          "sharp_total": 58.0,
           "sharp_book": "lowvig"
         }
       ]
@@ -945,14 +1185,14 @@
       },
       "current": {
         "spread": 3.5,
-        "over_under": 53.5,
+        "over_under": 54.0,
         "home_ml": 142.0,
         "away_ml": -165.0,
         "sharp_spread": 3.5,
-        "sharp_total": 53.5,
+        "sharp_total": 54.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -962,6 +1202,16 @@
           "away_ml": -165.0,
           "sharp_spread": 3.5,
           "sharp_total": 53.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 3.5,
+          "over_under": 54.0,
+          "home_ml": 142.0,
+          "away_ml": -165.0,
+          "sharp_spread": 3.5,
+          "sharp_total": 54.0,
           "sharp_book": "lowvig"
         }
       ]
@@ -979,19 +1229,29 @@
       "current": {
         "spread": 5.0,
         "over_under": 51.0,
-        "home_ml": 174.0,
+        "home_ml": 175.0,
         "away_ml": -205.0,
         "sharp_spread": 5.0,
         "sharp_total": 50.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": 5.0,
           "over_under": 51.0,
           "home_ml": 174.0,
+          "away_ml": -205.0,
+          "sharp_spread": 5.0,
+          "sharp_total": 50.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 5.0,
+          "over_under": 51.0,
+          "home_ml": 175.0,
           "away_ml": -205.0,
           "sharp_spread": 5.0,
           "sharp_total": 50.5,
@@ -1010,15 +1270,15 @@
         "away_ml": -275.0
       },
       "current": {
-        "spread": 6.0,
-        "over_under": 48.5,
-        "home_ml": 185.0,
-        "away_ml": -220.0,
-        "sharp_spread": 6.0,
-        "sharp_total": 48.5,
+        "spread": 5.5,
+        "over_under": 47.5,
+        "home_ml": 180.0,
+        "away_ml": -210.0,
+        "sharp_spread": 5.5,
+        "sharp_total": 47.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1028,6 +1288,16 @@
           "away_ml": -220.0,
           "sharp_spread": 6.0,
           "sharp_total": 48.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 5.5,
+          "over_under": 47.5,
+          "home_ml": 180.0,
+          "away_ml": -210.0,
+          "sharp_spread": 5.5,
+          "sharp_total": 47.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1045,13 +1315,13 @@
       "current": {
         "spread": -3.0,
         "over_under": 51.5,
-        "home_ml": -156.0,
-        "away_ml": 130.0,
+        "home_ml": -160.0,
+        "away_ml": 135.0,
         "sharp_spread": -3.0,
-        "sharp_total": 51.5,
+        "sharp_total": 51.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1061,6 +1331,16 @@
           "away_ml": 130.0,
           "sharp_spread": -3.0,
           "sharp_total": 51.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -3.0,
+          "over_under": 51.5,
+          "home_ml": -160.0,
+          "away_ml": 135.0,
+          "sharp_spread": -3.0,
+          "sharp_total": 51.0,
           "sharp_book": "lowvig"
         }
       ]
@@ -1076,15 +1356,15 @@
         "away_ml": 340.0
       },
       "current": {
-        "spread": -11.0,
-        "over_under": 41.5,
+        "spread": -11.5,
+        "over_under": 41.0,
         "home_ml": -450.0,
-        "away_ml": 344.0,
+        "away_ml": 350.0,
         "sharp_spread": -11.0,
-        "sharp_total": 41.0,
+        "sharp_total": 40.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1094,6 +1374,16 @@
           "away_ml": 344.0,
           "sharp_spread": -11.0,
           "sharp_total": 41.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -11.5,
+          "over_under": 41.0,
+          "home_ml": -450.0,
+          "away_ml": 350.0,
+          "sharp_spread": -11.0,
+          "sharp_total": 40.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1111,13 +1401,13 @@
       "current": {
         "spread": -3.5,
         "over_under": 53.5,
-        "home_ml": -175.0,
-        "away_ml": 150.0,
+        "home_ml": -182.0,
+        "away_ml": 151.0,
         "sharp_spread": -3.5,
         "sharp_total": 54.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1125,6 +1415,16 @@
           "over_under": 53.5,
           "home_ml": -175.0,
           "away_ml": 150.0,
+          "sharp_spread": -3.5,
+          "sharp_total": 54.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -3.5,
+          "over_under": 53.5,
+          "home_ml": -182.0,
+          "away_ml": 151.0,
           "sharp_spread": -3.5,
           "sharp_total": 54.0,
           "sharp_book": "lowvig"
@@ -1142,15 +1442,15 @@
         "away_ml": -670.0
       },
       "current": {
-        "spread": 16.5,
+        "spread": 17.5,
         "over_under": 53.0,
-        "home_ml": 550.0,
-        "away_ml": -800.0,
-        "sharp_spread": 16.0,
+        "home_ml": 600.0,
+        "away_ml": -900.0,
+        "sharp_spread": 17.0,
         "sharp_total": 53.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1159,6 +1459,16 @@
           "home_ml": 550.0,
           "away_ml": -800.0,
           "sharp_spread": 16.0,
+          "sharp_total": 53.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 17.5,
+          "over_under": 53.0,
+          "home_ml": 600.0,
+          "away_ml": -900.0,
+          "sharp_spread": 17.0,
           "sharp_total": 53.0,
           "sharp_book": "lowvig"
         }
@@ -1176,19 +1486,29 @@
       },
       "current": {
         "spread": -2.0,
-        "over_under": 50.5,
+        "over_under": 49.5,
         "home_ml": -127.0,
         "away_ml": 105.0,
         "sharp_spread": -2.0,
         "sharp_total": 49.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": -2.0,
           "over_under": 50.5,
+          "home_ml": -127.0,
+          "away_ml": 105.0,
+          "sharp_spread": -2.0,
+          "sharp_total": 49.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -2.0,
+          "over_under": 49.5,
           "home_ml": -127.0,
           "away_ml": 105.0,
           "sharp_spread": -2.0,
@@ -1210,13 +1530,13 @@
       "current": {
         "spread": 5.5,
         "over_under": 56.0,
-        "home_ml": 175.0,
-        "away_ml": -210.0,
+        "home_ml": 170.0,
+        "away_ml": -200.0,
         "sharp_spread": 5.5,
         "sharp_total": 56.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1224,6 +1544,16 @@
           "over_under": 56.0,
           "home_ml": 175.0,
           "away_ml": -210.0,
+          "sharp_spread": 5.5,
+          "sharp_total": 56.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 5.5,
+          "over_under": 56.0,
+          "home_ml": 170.0,
+          "away_ml": -200.0,
           "sharp_spread": 5.5,
           "sharp_total": 56.0,
           "sharp_book": "lowvig"
@@ -1241,15 +1571,15 @@
         "away_ml": 525.0
       },
       "current": {
-        "spread": -16.5,
+        "spread": -17.0,
         "over_under": 54.5,
         "home_ml": -850.0,
-        "away_ml": 574.0,
+        "away_ml": 575.0,
         "sharp_spread": -16.5,
         "sharp_total": 54.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1257,6 +1587,16 @@
           "over_under": 54.5,
           "home_ml": -850.0,
           "away_ml": 574.0,
+          "sharp_spread": -16.5,
+          "sharp_total": 54.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -17.0,
+          "over_under": 54.5,
+          "home_ml": -850.0,
+          "away_ml": 575.0,
           "sharp_spread": -16.5,
           "sharp_total": 54.5,
           "sharp_book": "lowvig"
@@ -1282,7 +1622,7 @@
         "sharp_total": 46.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1307,15 +1647,15 @@
         "away_ml": -175.0
       },
       "current": {
-        "spread": 5.5,
-        "over_under": 41.5,
-        "home_ml": 180.0,
-        "away_ml": -218.0,
-        "sharp_spread": 5.5,
+        "spread": 6.0,
+        "over_under": 42.0,
+        "home_ml": 189.0,
+        "away_ml": -225.0,
+        "sharp_spread": 6.0,
         "sharp_total": 42.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1324,6 +1664,16 @@
           "home_ml": 180.0,
           "away_ml": -218.0,
           "sharp_spread": 5.5,
+          "sharp_total": 42.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 6.0,
+          "over_under": 42.0,
+          "home_ml": 189.0,
+          "away_ml": -225.0,
+          "sharp_spread": 6.0,
           "sharp_total": 42.0,
           "sharp_book": "lowvig"
         }
@@ -1341,14 +1691,14 @@
       },
       "current": {
         "spread": -3.0,
-        "over_under": 51.5,
+        "over_under": 50.5,
         "home_ml": -155.0,
-        "away_ml": 130.0,
+        "away_ml": 128.0,
         "sharp_spread": -2.5,
         "sharp_total": 50.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1356,6 +1706,16 @@
           "over_under": 51.5,
           "home_ml": -155.0,
           "away_ml": 130.0,
+          "sharp_spread": -2.5,
+          "sharp_total": 50.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -3.0,
+          "over_under": 50.5,
+          "home_ml": -155.0,
+          "away_ml": 128.0,
           "sharp_spread": -2.5,
           "sharp_total": 50.5,
           "sharp_book": "lowvig"
@@ -1378,10 +1738,10 @@
         "home_ml": -240.0,
         "away_ml": 200.0,
         "sharp_spread": -6.5,
-        "sharp_total": 43.0,
+        "sharp_total": 43.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1391,6 +1751,16 @@
           "away_ml": 200.0,
           "sharp_spread": -6.5,
           "sharp_total": 43.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -6.5,
+          "over_under": 43.5,
+          "home_ml": -240.0,
+          "away_ml": 200.0,
+          "sharp_spread": -6.5,
+          "sharp_total": 43.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1414,7 +1784,7 @@
         "sharp_total": 55.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1441,19 +1811,29 @@
       "current": {
         "spread": -15.5,
         "over_under": 56.0,
-        "home_ml": -700.0,
+        "home_ml": -685.0,
         "away_ml": 497.0,
         "sharp_spread": -15.5,
         "sharp_total": 56.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": -15.5,
           "over_under": 56.0,
           "home_ml": -700.0,
+          "away_ml": 497.0,
+          "sharp_spread": -15.5,
+          "sharp_total": 56.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -15.5,
+          "over_under": 56.0,
+          "home_ml": -685.0,
           "away_ml": 497.0,
           "sharp_spread": -15.5,
           "sharp_total": 56.0,
@@ -1472,15 +1852,15 @@
         "away_ml": -275.0
       },
       "current": {
-        "spread": 7.0,
+        "spread": 6.5,
         "over_under": 45.5,
-        "home_ml": 215.0,
-        "away_ml": -260.0,
-        "sharp_spread": 7.0,
+        "home_ml": 203.0,
+        "away_ml": -245.0,
+        "sharp_spread": 6.5,
         "sharp_total": 45.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1489,6 +1869,16 @@
           "home_ml": 215.0,
           "away_ml": -260.0,
           "sharp_spread": 7.0,
+          "sharp_total": 45.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 6.5,
+          "over_under": 45.5,
+          "home_ml": 203.0,
+          "away_ml": -245.0,
+          "sharp_spread": 6.5,
           "sharp_total": 45.5,
           "sharp_book": "lowvig"
         }
@@ -1505,15 +1895,15 @@
         "away_ml": 4500.0
       },
       "current": {
-        "spread": -36.0,
+        "spread": -35.5,
         "over_under": 55.5,
-        "home_ml": -8000.0,
-        "away_ml": 2200.0,
-        "sharp_spread": -36.0,
+        "home_ml": -54000.0,
+        "away_ml": 3850.0,
+        "sharp_spread": -35.5,
         "sharp_total": 55.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1522,6 +1912,16 @@
           "home_ml": -8000.0,
           "away_ml": 2200.0,
           "sharp_spread": -36.0,
+          "sharp_total": 55.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -35.5,
+          "over_under": 55.5,
+          "home_ml": -54000.0,
+          "away_ml": 3850.0,
+          "sharp_spread": -35.5,
           "sharp_total": 55.5,
           "sharp_book": "lowvig"
         }
@@ -1539,14 +1939,14 @@
       },
       "current": {
         "spread": 7.0,
-        "over_under": 50.0,
-        "home_ml": 225.0,
-        "away_ml": -280.0,
+        "over_under": 48.5,
+        "home_ml": 220.0,
+        "away_ml": -275.0,
         "sharp_spread": 7.0,
-        "sharp_total": 50.0,
+        "sharp_total": 48.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1556,6 +1956,16 @@
           "away_ml": -280.0,
           "sharp_spread": 7.0,
           "sharp_total": 50.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 7.0,
+          "over_under": 48.5,
+          "home_ml": 220.0,
+          "away_ml": -275.0,
+          "sharp_spread": 7.0,
+          "sharp_total": 48.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1572,14 +1982,14 @@
       },
       "current": {
         "spread": -4.0,
-        "over_under": 50.0,
-        "home_ml": -190.0,
-        "away_ml": 155.0,
+        "over_under": 50.5,
+        "home_ml": -188.0,
+        "away_ml": 160.0,
         "sharp_spread": -4.0,
-        "sharp_total": 49.5,
+        "sharp_total": 50.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1589,6 +1999,16 @@
           "away_ml": 155.0,
           "sharp_spread": -4.0,
           "sharp_total": 49.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -4.0,
+          "over_under": 50.5,
+          "home_ml": -188.0,
+          "away_ml": 160.0,
+          "sharp_spread": -4.0,
+          "sharp_total": 50.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1612,7 +2032,7 @@
         "sharp_total": 61.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1639,19 +2059,29 @@
       "current": {
         "spread": -2.5,
         "over_under": 58.0,
-        "home_ml": -135.0,
+        "home_ml": -137.0,
         "away_ml": 115.0,
         "sharp_spread": -2.5,
         "sharp_total": 58.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": -2.5,
           "over_under": 58.0,
           "home_ml": -135.0,
+          "away_ml": 115.0,
+          "sharp_spread": -2.5,
+          "sharp_total": 58.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -2.5,
+          "over_under": 58.0,
+          "home_ml": -137.0,
           "away_ml": 115.0,
           "sharp_spread": -2.5,
           "sharp_total": 58.0,
@@ -1670,15 +2100,15 @@
         "away_ml": 145.0
       },
       "current": {
-        "spread": -3.5,
-        "over_under": 46.5,
-        "home_ml": -175.0,
-        "away_ml": 150.0,
-        "sharp_spread": -3.5,
-        "sharp_total": 46.5,
+        "spread": -3.0,
+        "over_under": 45.5,
+        "home_ml": -150.0,
+        "away_ml": 130.0,
+        "sharp_spread": -3.0,
+        "sharp_total": 45.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1688,6 +2118,16 @@
           "away_ml": 150.0,
           "sharp_spread": -3.5,
           "sharp_total": 46.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -3.0,
+          "over_under": 45.5,
+          "home_ml": -150.0,
+          "away_ml": 130.0,
+          "sharp_spread": -3.0,
+          "sharp_total": 45.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1704,14 +2144,14 @@
       },
       "current": {
         "spread": 3.5,
-        "over_under": 47.5,
+        "over_under": 46.5,
         "home_ml": 140.0,
         "away_ml": -165.0,
         "sharp_spread": 3.0,
-        "sharp_total": 48.0,
+        "sharp_total": 46.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1721,6 +2161,16 @@
           "away_ml": -165.0,
           "sharp_spread": 3.0,
           "sharp_total": 48.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 3.5,
+          "over_under": 46.5,
+          "home_ml": 140.0,
+          "away_ml": -165.0,
+          "sharp_spread": 3.0,
+          "sharp_total": 46.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -1738,13 +2188,13 @@
       "current": {
         "spread": -2.0,
         "over_under": 41.5,
-        "home_ml": -125.0,
-        "away_ml": 105.0,
+        "home_ml": -127.0,
+        "away_ml": 107.0,
         "sharp_spread": -2.0,
         "sharp_total": 41.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1752,6 +2202,16 @@
           "over_under": 41.5,
           "home_ml": -125.0,
           "away_ml": 105.0,
+          "sharp_spread": -2.0,
+          "sharp_total": 41.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -2.0,
+          "over_under": 41.5,
+          "home_ml": -127.0,
+          "away_ml": 107.0,
           "sharp_spread": -2.0,
           "sharp_total": 41.0,
           "sharp_book": "lowvig"
@@ -1771,13 +2231,13 @@
       "current": {
         "spread": 21.0,
         "over_under": 76.5,
-        "home_ml": 955.0,
-        "away_ml": -1700.0,
+        "home_ml": 1000.0,
+        "away_ml": -1600.0,
         "sharp_spread": 21.0,
         "sharp_total": 76.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1785,6 +2245,16 @@
           "over_under": 76.5,
           "home_ml": 955.0,
           "away_ml": -1700.0,
+          "sharp_spread": 21.0,
+          "sharp_total": 76.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 21.0,
+          "over_under": 76.5,
+          "home_ml": 1000.0,
+          "away_ml": -1600.0,
           "sharp_spread": 21.0,
           "sharp_total": 76.5,
           "sharp_book": "lowvig"
@@ -1803,14 +2273,14 @@
       },
       "current": {
         "spread": -6.5,
-        "over_under": 65.5,
-        "home_ml": -235.0,
-        "away_ml": 190.0,
-        "sharp_spread": -7.0,
-        "sharp_total": 66.0,
+        "over_under": 65.0,
+        "home_ml": -225.0,
+        "away_ml": 186.0,
+        "sharp_spread": -6.5,
+        "sharp_total": 65.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1831,6 +2301,16 @@
           "sharp_spread": -7.0,
           "sharp_total": 66.0,
           "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -6.5,
+          "over_under": 65.0,
+          "home_ml": -225.0,
+          "away_ml": 186.0,
+          "sharp_spread": -6.5,
+          "sharp_total": 65.0,
+          "sharp_book": "lowvig"
         }
       ]
     },
@@ -1848,12 +2328,12 @@
         "spread": -2.5,
         "over_under": 46.5,
         "home_ml": -145.0,
-        "away_ml": 125.0,
+        "away_ml": 122.0,
         "sharp_spread": -2.5,
         "sharp_total": 46.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1861,6 +2341,16 @@
           "over_under": 46.5,
           "home_ml": -145.0,
           "away_ml": 125.0,
+          "sharp_spread": -2.5,
+          "sharp_total": 46.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -2.5,
+          "over_under": 46.5,
+          "home_ml": -145.0,
+          "away_ml": 122.0,
           "sharp_spread": -2.5,
           "sharp_total": 46.5,
           "sharp_book": "lowvig"
@@ -1879,20 +2369,30 @@
       },
       "current": {
         "spread": 13.5,
-        "over_under": 43.5,
-        "home_ml": 425.0,
+        "over_under": 43.0,
+        "home_ml": 415.0,
         "away_ml": -550.0,
         "sharp_spread": 13.5,
         "sharp_total": 43.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": 13.5,
           "over_under": 43.5,
           "home_ml": 425.0,
+          "away_ml": -550.0,
+          "sharp_spread": 13.5,
+          "sharp_total": 43.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 13.5,
+          "over_under": 43.0,
+          "home_ml": 415.0,
           "away_ml": -550.0,
           "sharp_spread": 13.5,
           "sharp_total": 43.0,
@@ -1911,15 +2411,15 @@
         "away_ml": 1050.0
       },
       "current": {
-        "spread": -22.5,
+        "spread": -23.0,
         "over_under": 52.5,
-        "home_ml": -2000.0,
-        "away_ml": 1029.0,
+        "home_ml": -2400.0,
+        "away_ml": 1100.0,
         "sharp_spread": -23.0,
         "sharp_total": 52.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1927,6 +2427,16 @@
           "over_under": 52.5,
           "home_ml": -2000.0,
           "away_ml": 1029.0,
+          "sharp_spread": -23.0,
+          "sharp_total": 52.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -23.0,
+          "over_under": 52.5,
+          "home_ml": -2400.0,
+          "away_ml": 1100.0,
           "sharp_spread": -23.0,
           "sharp_total": 52.0,
           "sharp_book": "lowvig"
@@ -1947,12 +2457,12 @@
         "spread": -14.0,
         "over_under": 50.5,
         "home_ml": -600.0,
-        "away_ml": 449.0,
+        "away_ml": 450.0,
         "sharp_spread": -14.0,
         "sharp_total": 50.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -1960,6 +2470,16 @@
           "over_under": 50.5,
           "home_ml": -600.0,
           "away_ml": 449.0,
+          "sharp_spread": -14.0,
+          "sharp_total": 50.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -14.0,
+          "over_under": 50.5,
+          "home_ml": -600.0,
+          "away_ml": 450.0,
           "sharp_spread": -14.0,
           "sharp_total": 50.5,
           "sharp_book": "lowvig"
@@ -1979,19 +2499,29 @@
       "current": {
         "spread": 9.5,
         "over_under": 47.5,
-        "home_ml": 289.0,
+        "home_ml": 280.0,
         "away_ml": -360.0,
         "sharp_spread": 9.5,
         "sharp_total": 47.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": 9.5,
           "over_under": 47.5,
           "home_ml": 289.0,
+          "away_ml": -360.0,
+          "sharp_spread": 9.5,
+          "sharp_total": 47.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 9.5,
+          "over_under": 47.5,
+          "home_ml": 280.0,
           "away_ml": -360.0,
           "sharp_spread": 9.5,
           "sharp_total": 47.5,
@@ -2010,15 +2540,15 @@
         "away_ml": 480.0
       },
       "current": {
-        "spread": -16.0,
-        "over_under": 49.0,
-        "home_ml": -750.0,
-        "away_ml": 530.0,
-        "sharp_spread": -16.0,
-        "sharp_total": 49.0,
+        "spread": -15.0,
+        "over_under": 49.5,
+        "home_ml": -700.0,
+        "away_ml": 500.0,
+        "sharp_spread": -15.0,
+        "sharp_total": 49.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -2028,6 +2558,16 @@
           "away_ml": 530.0,
           "sharp_spread": -16.0,
           "sharp_total": 49.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -15.0,
+          "over_under": 49.5,
+          "home_ml": -700.0,
+          "away_ml": 500.0,
+          "sharp_spread": -15.0,
+          "sharp_total": 49.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -2051,7 +2591,7 @@
         "sharp_total": 44.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -2078,13 +2618,13 @@
       "current": {
         "spread": -8.5,
         "over_under": 54.0,
-        "home_ml": -335.0,
-        "away_ml": 270.0,
+        "home_ml": -320.0,
+        "away_ml": 260.0,
         "sharp_spread": -8.5,
         "sharp_total": 54.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -2092,6 +2632,16 @@
           "over_under": 54.0,
           "home_ml": -335.0,
           "away_ml": 270.0,
+          "sharp_spread": -8.5,
+          "sharp_total": 54.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -8.5,
+          "over_under": 54.0,
+          "home_ml": -320.0,
+          "away_ml": 260.0,
           "sharp_spread": -8.5,
           "sharp_total": 54.0,
           "sharp_book": "lowvig"
@@ -2114,10 +2664,10 @@
         "home_ml": 222.0,
         "away_ml": -270.0,
         "sharp_spread": 7.0,
-        "sharp_total": 52.0,
+        "sharp_total": 52.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -2127,6 +2677,16 @@
           "away_ml": -270.0,
           "sharp_spread": 7.0,
           "sharp_total": 52.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": 7.0,
+          "over_under": 52.5,
+          "home_ml": 222.0,
+          "away_ml": -270.0,
+          "sharp_spread": 7.0,
+          "sharp_total": 52.5,
           "sharp_book": "lowvig"
         }
       ]
@@ -2144,19 +2704,29 @@
       "current": {
         "spread": -4.5,
         "over_under": 55.5,
-        "home_ml": -198.0,
+        "home_ml": -190.0,
         "away_ml": 161.0,
         "sharp_spread": -4.5,
         "sharp_total": 56.5,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
           "spread": -4.5,
           "over_under": 55.5,
           "home_ml": -198.0,
+          "away_ml": 161.0,
+          "sharp_spread": -4.5,
+          "sharp_total": 56.5,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -4.5,
+          "over_under": 55.5,
+          "home_ml": -190.0,
           "away_ml": 161.0,
           "sharp_spread": -4.5,
           "sharp_total": 56.5,
@@ -2176,14 +2746,14 @@
       },
       "current": {
         "spread": -3.0,
-        "over_under": 57.0,
+        "over_under": 58.0,
         "home_ml": -155.0,
-        "away_ml": 130.0,
+        "away_ml": 134.0,
         "sharp_spread": -3.0,
-        "sharp_total": 57.0,
+        "sharp_total": 58.0,
         "sharp_book": "lowvig"
       },
-      "updated": "2026-11-24T19:00:40+00:00",
+      "updated": "2026-11-25T22:56:36+00:00",
       "history": [
         {
           "ts": "2026-11-24T18:41:50+00:00",
@@ -2193,6 +2763,16 @@
           "away_ml": 130.0,
           "sharp_spread": -3.0,
           "sharp_total": 57.0,
+          "sharp_book": "lowvig"
+        },
+        {
+          "ts": "2026-11-25T22:56:36+00:00",
+          "spread": -3.0,
+          "over_under": 58.0,
+          "home_ml": -155.0,
+          "away_ml": 134.0,
+          "sharp_spread": -3.0,
+          "sharp_total": 58.0,
           "sharp_book": "lowvig"
         }
       ]
