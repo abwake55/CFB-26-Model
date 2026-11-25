@@ -50,8 +50,16 @@ def starters(passing: pd.DataFrame) -> pd.DataFrame:
 
 
 def qb_features(team_games: pd.DataFrame, passing: pd.DataFrame | None = None) -> pd.DataFrame:
-    """team_games: game_id, season, team, starter_id (optional: the confirmed /
-    likely starter; else taken from the game's box score)."""
+    """team_games: game_id, season, team, optional starter_id (the confirmed /
+    likely starter, used live). Without starter_id the bowl box score is used,
+    but only to ask "did the regular-season primary QB throw a pass?" A QB
+    benched mid-game still threw passes, so in-game benchings (which follow
+    bad play and would leak the result) never count as a change.
+
+      qb_change        1 if the primary starter is out (live: the named
+                       starter is not the primary)
+      qb_starter_share regular-season attempt share of the QB expected to
+                       play (the primary when he plays)"""
     p = passing if passing is not None else pd.read_csv(RES / "cfbd_passing_by_game.csv")
     reg = p[p.season_type == "regular"]
     st = starters(reg)
@@ -59,21 +67,33 @@ def qb_features(team_games: pd.DataFrame, passing: pd.DataFrame | None = None) -
     prim = starts.sort_values("starts", ascending=False).drop_duplicates(["season", "team"])
     att = reg.groupby(["season", "team", "player_id"]).attempts.sum()
     tot = reg.groupby(["season", "team"]).attempts.sum()
+    names = reg.drop_duplicates("player_id").set_index("player_id").player
     tg = team_games.copy()
-    if "starter_id" not in tg.columns:
-        bs = starters(p[p.season_type == "postseason"])[["game_id", "team", "player_id"]]
-        tg = tg.merge(bs.rename(columns={"player_id": "starter_id"}), on=["game_id", "team"], how="left")
     tg = tg.merge(prim[["season", "team", "player_id"]].rename(columns={"player_id": "primary_id"}),
                   on=["season", "team"], how="left")
+    tg["primary_qb"] = tg.primary_id.map(names)
+    if "starter_id" not in tg.columns:
+        post = p[p.season_type == "postseason"]
+        played = post.groupby(["game_id", "team"]).player_id.apply(lambda x: set(x.astype(str)))
+        top = starters(post).set_index(["game_id", "team"]).player_id
+        sid = []
+        for r in tg.itertuples():
+            k = (r.game_id, r.team)
+            if k not in played.index:
+                sid.append(np.nan)
+            elif pd.notna(r.primary_id) and str(r.primary_id) in played[k]:
+                sid.append(r.primary_id)          # primary played: no change
+            else:
+                sid.append(top.get(k, np.nan))    # primary absent: who took over
+        tg["starter_id"] = sid
     known = tg.starter_id.notna() & tg.primary_id.notna()
     tg["qb_change"] = np.where(known, (tg.starter_id.astype(str) != tg.primary_id.astype(str)).astype(float), np.nan)
     share = []
     for r in tg.itertuples():
-        try:
-            share.append(att.get((r.season, r.team, r.starter_id), 0) / tot.get((r.season, r.team)))
-        except (TypeError, ZeroDivisionError):
-            share.append(np.nan)
-    tg["qb_starter_share"] = np.where(tg.starter_id.notna(), share, np.nan)
+        a = att.get((r.season, r.team, r.starter_id), 0) if pd.notna(r.starter_id) else np.nan
+        t = tot.get((r.season, r.team), np.nan)
+        share.append(a / t if t and pd.notna(a) else np.nan)
+    tg["qb_starter_share"] = share
     return tg
 
 

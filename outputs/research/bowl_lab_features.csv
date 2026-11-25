@@ -1,10 +1,10 @@
 feature,period,n,nonzero,slope_y_close,n_y_close,slope_y_open,n_y_open,slope_move,n_move
-qb_change_diff,dev 2017-22,225,60,-3.37,225,-4.64,117,-1.96,117
+qb_change_diff,dev 2017-22,225,49,-2.08,225,-4.04,117,-2.17,117
 qb_change_diff,holdout 2023-24,88,41,-4.04,88,-6.43,88,-2.39,88
-qb_change_diff,extra 2025,46,20,-5.59,46,-7.64,46,-2.05,46
-qb_starter_share_diff,dev 2017-22,225,223,5.23,225,9.06,117,3.06,117
-qb_starter_share_diff,holdout 2023-24,88,88,6.3,88,9.45,88,3.15,88
-qb_starter_share_diff,extra 2025,46,46,9.72,46,12.83,46,3.11,46
+qb_change_diff,extra 2025,46,16,-3.55,46,-5.67,46,-2.12,46
+qb_starter_share_diff,dev 2017-22,225,223,4.19,225,8.6,117,3.25,117
+qb_starter_share_diff,holdout 2023-24,88,88,5.81,88,8.86,88,3.06,88
+qb_starter_share_diff,extra 2025,46,46,7.31,46,10.78,46,3.47,46
 portal_out_diff,dev 2017-22,106,95,-0.05,106,-0.1,97,-0.08,97
 portal_out_diff,holdout 2023-24,88,81,0.09,88,-0.1,88,-0.19,88
 portal_out_diff,extra 2025,46,27,-0.89,46,-1.03,46,-0.14,46

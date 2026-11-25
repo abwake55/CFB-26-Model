@@ -150,8 +150,11 @@ def main() -> None:
 
     # 3. bowl adjustment fitted on dev bowls (target: cover margin at the close)
     dev = f[f.season.isin(DEV)]
-    candidates = {"live": live, "live+draft": allf,
-                  "qb only": ["qb_change_diff"], "qb+coach": ["qb_change_diff", "interim_coach_diff"]}
+    # draft picks are a post-hoc opt-out proxy: reported, never selectable
+    candidates = {"live": live, "qb": ["qb_change_diff", "qb_starter_share_diff"],
+                  "qb+coach": ["qb_change_diff", "qb_starter_share_diff",
+                               "interim_coach_diff", "coach_change_diff"],
+                  "RESEARCH live+draft": allf}
     adj_out = {}
     for name, feats in candidates.items():
         feats = [x for x in feats if x in f]
@@ -169,7 +172,8 @@ def main() -> None:
     res.to_csv(OUT / "bowl_lab_results.csv", index=False)
 
     # 4. select on dev only: max dev ROI with dev n >= 30 among the adjustments
-    adjrows = res[res.rule.str.startswith("bowl adj")]
+    adjrows = res[res.rule.str.startswith("bowl adj") & ~res.rule.str.contains("RESEARCH")]
+    print(f"\n{adjrows.rule.nunique()} selectable adjustment variants tried (dev picks one)")
     devr = adjrows[(adjrows.period == "dev 2017-22") & (adjrows.n >= 30)]
     best = devr.sort_values("roi%", ascending=False).iloc[0]
     sel = adjrows[adjrows.rule == best.rule]
@@ -178,6 +182,17 @@ def main() -> None:
     print("\n== dev-selected bowl adjustment ==")
     print(sel.drop(columns=["set", "lam", "thr"]).to_string(index=False))
     adj = adj_out[(best.set, best.lam)]
+    a = apply_adjust(f, adj)
+    e = a.where(a.abs() >= best.thr)
+    op = pd.DataFrame(by_part(f, e, "open_line", "close_line",
+                              label="same adjustment, bet at OPENER (upper bound: lineup not known then)"))
+    knowable = [x for x in adj["features"] if "qb_" not in x]
+    if knowable:
+        a2 = sum(f[k].fillna(0) * adj["beta"][k] for k in knowable)
+        op = pd.concat([op, pd.DataFrame(by_part(f, a2.where(a2.abs() >= best.thr), "open_line", "close_line",
+                        label="non-QB part only (coach/portal), bet at opener"))])
+    print(op.to_string(index=False))
+    op.to_csv(OUT / "bowl_lab_opener.csv", index=False)
     hold = sel[sel.period == "holdout 2023-24"].iloc[0]
     meta = {"selected": best.rule, "threshold": float(best.thr), **adj,
             "fit_target": "home cover margin at the closing line, bowls 2017-2022",
