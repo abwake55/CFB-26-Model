@@ -1,0 +1,15 @@
+{
+  "source": "scripts/research/qb_out_effect.py",
+  "dev_seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "per_qb_out_vs_model_pts": -0.68,
+  "per_qb_out_vs_close_pts": 0.28,
+  "per_qb_out_last_vs_close_pts": 0.38,
+  "per_qb_out_last_vs_model_pts": -0.25,
+  "note": "slopes are home-margin points per unit of (home - away) QB-out; dev-fitted, holdout in outputs/research/qb_out_effect.csv"
+}

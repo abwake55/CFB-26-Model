@@ -90,6 +90,11 @@ for _sig in ("pt", "opener_gap"):
 LEDGER_COLS += ["snap_open_spread", "snap_open_ts", "closing_sharp_spread",
                 "closing_sharp_book", "closing_sharp_ts",
                 "closing_sharp_total"]
+# uncertainty at record time (src/edge_ranges.py): expected cover margin of
+# the bet side and its 80% range, per signal; projected-margin 80% range
+for _sig in ("spread", "opener_gap", "pt"):
+    LEDGER_COLS += [f"{_sig}_edge_exp", f"{_sig}_edge_lo80", f"{_sig}_edge_hi80"]
+LEDGER_COLS += ["pred_margin_lo80", "pred_margin_hi80"]
 SNAP_DIR = ROOT_DIR / "data" / "lines_snapshots"
 
 
@@ -307,6 +312,10 @@ def record(season: int, week: int) -> None:
             "flag_pt": bool(row.get("flag_pt") is True or row.get("flag_pt") == 1),
             **{f"{sg}_{k}": row.get(f"{sg}_{k}") for sg in ("pt", "opener_gap")
                for k in ("p_cover", "p_push", "ev", "buy_half")},
+            **{f"{sg}_edge_{k}": row.get(f"{sg}_edge_{k}") for sg in ("spread", "opener_gap", "pt")
+               for k in ("exp", "lo80", "hi80")},
+            "pred_margin_lo80": row.get("pred_margin_lo80"),
+            "pred_margin_hi80": row.get("pred_margin_hi80"),
             "provenance": "live",
         })
     new = pd.DataFrame(rows, columns=LEDGER_COLS)

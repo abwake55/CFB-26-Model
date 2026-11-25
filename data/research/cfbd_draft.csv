@@ -1,0 +1,2317 @@
+season,draft_year,college_team,name,position,round,overall,pre_draft_ranking
+2017,2018,Oklahoma,Baker Mayfield,Quarterback,1,1,11.0
+2017,2018,Penn State,Saquon Barkley,Running Back,1,2,1.0
+2017,2018,USC,Sam Darnold,Quarterback,1,3,4.0
+2017,2018,Ohio State,Denzel Ward,Cornerback,1,4,6.0
+2017,2018,NC State,Bradley Chubb,Defensive End,1,5,2.0
+2017,2018,Notre Dame,Quenton Nelson,Offensive Guard,1,6,3.0
+2017,2018,Wyoming,Josh Allen,Quarterback,1,7,10.0
+2017,2018,Georgia,Roquan Smith,Outside Linebacker,1,8,5.0
+2017,2018,Notre Dame,Mike McGlinchey,Offensive Tackle,1,9,13.0
+2017,2018,UCLA,Josh Rosen,Quarterback,1,10,9.0
+2017,2018,Alabama,Minkah Fitzpatrick,Safety,1,11,8.0
+2017,2018,Washington,Vita Vea,Defensive Tackle,1,12,14.0
+2017,2018,Alabama,Da'Ron Payne,Defensive Tackle,1,13,15.0
+2017,2018,UTSA,Marcus Davenport,Defensive End,1,14,16.0
+2017,2018,UCLA,Kolton Miller,Offensive Tackle,1,15,30.0
+2017,2018,Virginia Tech,Tremaine Edmunds,Outside Linebacker,1,16,12.0
+2017,2018,Florida State,Derwin James,Safety,1,17,7.0
+2017,2018,Louisville,Jaire Alexander,Cornerback,1,18,17.0
+2017,2018,Boise State,Leighton Vander Esch,Inside Linebacker,1,19,32.0
+2017,2018,Arkansas,Frank Ragnow,Center,1,20,24.0
+2017,2018,Ohio State,Billy Price,Center,1,21,33.0
+2017,2018,Alabama,Rashaan Evans,Inside Linebacker,1,22,19.0
+2017,2018,Georgia,Isaiah Wynn,Offensive Guard,1,23,38.0
+2017,2018,Maryland,D.J. Moore,Wide Receiver,1,24,22.0
+2017,2018,South Carolina,Hayden Hurst,Tight End,1,25,28.0
+2017,2018,Alabama,Calvin Ridley,Wide Receiver,1,26,20.0
+2017,2018,San Diego State,Rashaad Penny,Running Back,1,27,47.0
+2017,2018,Virginia Tech,Terrell Edmunds,Safety,1,28,81.0
+2017,2018,Florida,Taven Bryan,Defensive Tackle,1,29,21.0
+2017,2018,UCF,Mike Hughes,Cornerback,1,30,23.0
+2017,2018,Georgia,Sony Michel,Running Back,1,31,31.0
+2017,2018,Louisville,Lamar Jackson,Quarterback,1,32,29.0
+2017,2018,Nevada,Austin Corbett,Offensive Guard,2,33,40.0
+2017,2018,UTEP,Will Hernandez,Offensive Guard,2,34,25.0
+2017,2018,Georgia,Nick Chubb,Running Back,2,35,34.0
+2017,2018,South Carolina State,Darius Leonard,Outside Linebacker,2,36,67.0
+2017,2018,Auburn,Braden Smith,Offensive Guard,2,37,57.0
+2017,2018,USC,Ronald Jones II,Running Back,2,38,56.0
+2017,2018,Iowa,James Daniels,Center,2,39,18.0
+2017,2018,SMU,Courtland Sutton,Wide Receiver,2,40,44.0
+2017,2018,Boston College,Harold Landry,Outside Linebacker,2,41,26.0
+2017,2018,Penn State,Mike Gesicki,Tight End,2,42,51.0
+2017,2018,Auburn,Kerryon Johnson,Running Back,2,43,79.0
+2017,2018,Washington,Dante Pettis,Wide Receiver,2,44,71.0
+2017,2018,Iowa,Josh Jackson,Cornerback,2,45,27.0
+2017,2018,Ole Miss,Breeland Speaks,Defensive End,2,46,75.0
+2017,2018,Texas A&M,Christian Kirk,Wide Receiver,2,47,42.0
+2017,2018,USC,Uchenna Nwosu,Outside Linebacker,2,48,49.0
+2017,2018,South Dakota State,Dallas Goedert,Tight End,2,49,36.0
+2017,2018,Texas,Connor Williams,Offensive Guard,2,50,37.0
+2017,2018,Memphis,Anthony Miller,Wide Receiver,2,51,46.0
+2017,2018,Rutgers,Kemoko Turay,Defensive End,2,52,73.0
+2017,2018,North Carolina,M.J. Stewart,Cornerback,2,53,92.0
+2017,2018,Wake Forest,Jessie Bates III,Safety,2,54,53.0
+2017,2018,LSU,Donte Jackson,Cornerback,2,55,45.0
+2017,2018,Florida,Duke Dawson,Cornerback,2,56,70.0
+2017,2018,Sam Houston,P.J. Hall,Defensive Tackle,2,57,157.0
+2017,2018,Colorado,Isaiah Oliver,Cornerback,2,58,54.0
+2017,2018,LSU,Derrius Guice,Running Back,2,59,35.0
+2017,2018,Oklahoma State,James Washington,Wide Receiver,2,60,50.0
+2017,2018,LSU,D.J. Chark,Wide Receiver,2,61,48.0
+2017,2018,Pittsburgh,Brian O'Neill,Offensive Tackle,2,62,69.0
+2017,2018,Auburn,Carlton Davis,Cornerback,2,63,83.0
+2017,2018,Ohio State,Tyquan Lewis,Defensive End,2,64,99.0
+2017,2018,North Carolina A&T,Brandon Parker,Offensive Tackle,3,65,138.0
+2017,2018,Georgia,Lorenzo Carter,Outside Linebacker,3,66,52.0
+2017,2018,Miami,Chad Thomas,Defensive End,3,67,162.0
+2017,2018,Stanford,Justin Reid,Safety,3,68,39.0
+2017,2018,NC State,B.J. Hill,Defensive Tackle,3,69,58.0
+2017,2018,BYU,Fred Warner,Inside Linebacker,3,70,98.0
+2017,2018,Oregon,Royce Freeman,Running Back,3,71,90.0
+2017,2018,Fort Hays,Nathan Shepherd,Defensive Tackle,3,72,59.0
+2017,2018,Ohio State,Jerome Baker,Outside Linebacker,3,73,68.0
+2017,2018,Louisville,Geron Christian,Offensive Tackle,3,74,64.0
+2017,2018,Florida State,Derrick Nnadi,Defensive Tackle,3,75,60.0
+2017,2018,Oklahoma State,Mason Rudolph,Quarterback,3,76,62.0
+2017,2018,Ohio State,Sam Hubbard,Defensive End,3,77,65.0
+2017,2018,Texas,Malik Jefferson,Outside Linebacker,3,78,78.0
+2017,2018,USC,Rasheem Green,Defensive End,3,79,63.0
+2017,2018,Mississippi State,Martinas Rankin,Center,3,80,88.0
+2017,2018,Colorado State,Michael Gallup,Wide Receiver,3,81,110.0
+2017,2018,Louisiana,Tracy Walker,Safety,3,82,146.0
+2017,2018,Oklahoma,Orlando Brown,Offensive Tackle,3,83,76.0
+2017,2018,NC State,Justin Jones,Defensive Tackle,3,84,150.0
+2017,2018,Tennessee,Rashaan Gaulden,Cornerback,3,85,111.0
+2017,2018,Oklahoma,Mark Andrews,Tight End,3,86,80.0
+2017,2018,LSU,Arden Key,Defensive End,3,87,123.0
+2017,2018,Vanderbilt,Oren Burks,Outside Linebacker,3,88,87.0
+2017,2018,TCU,Joe Noteboom,Offensive Tackle,3,89,100.0
+2017,2018,South Florida,Deadrin Senat,Defensive Tackle,3,90,77.0
+2017,2018,UCF,Tre'Quan Smith,Wide Receiver,3,91,86.0
+2017,2018,Western Michigan,Chukwuma Okorafor,Offensive Tackle,3,92,114.0
+2017,2018,Alabama,Ronnie Harrison,Safety,3,93,41.0
+2017,2018,Humboldt State,Alex Cappa,Offensive Tackle,3,94,164.0
+2017,2018,Southern Miss,Tarvarius Moore,Safety,3,95,126.0
+2017,2018,Stanford,Harrison Phillips,Defensive Tackle,3,96,43.0
+2017,2018,Michigan,Mason Cole,Center,3,97,94.0
+2017,2018,UCF,Jordan Akins,Tight End,3,98,152.0
+2017,2018,Boston College,Isaac Yiadom,Cornerback,3,99,122.0
+2017,2018,Clemson,Dorian O'Daniel,Outside Linebacker,3,100,149.0
+2017,2018,Indiana,Ian Thomas,Tight End,4,101,101.0
+2017,2018,Ohio State,Jalyn Holmes,Defensive End,4,102,89.0
+2017,2018,Texas Tech,Keke Coutee,Wide Receiver,4,103,129.0
+2017,2018,NC State,Nyheim Hines,Running Back,4,104,112.0
+2017,2018,Florida,Antonio Callaway,Wide Receiver,4,105,119.0
+2017,2018,Iowa,Josey Jewell,Inside Linebacker,4,106,91.0
+2017,2018,Miami,Chris Herndon,Tight End,4,107,93.0
+2017,2018,Richmond,Kyle Lauletta,Quarterback,4,108,66.0
+2017,2018,Penn State,Troy Apke,Safety,4,109,118.0
+2017,2018,Wisconsin,Nick Nelson,Cornerback,4,110,85.0
+2017,2018,Michigan State,Brian Allen,Center,4,111,197.0
+2017,2018,Miami,Mark Walton,Running Back,4,112,97.0
+2017,2018,Penn State,DaeSean Hamilton,Wide Receiver,4,113,82.0
+2017,2018,Alabama,Da'Shawn Hand,Defensive End,4,114,132.0
+2017,2018,Western Kentucky,Joel Iyiegbuniwe,Outside Linebacker,4,115,
+2017,2018,Kansas,Dorance Armstrong Jr.,Defensive End,4,116,161.0
+2017,2018,Pittsburgh,Jordan Whitehead,Safety,4,117,227.0
+2017,2018,Alabama,Anthony Averett,Cornerback,4,118,84.0
+2017,2018,West Virginia,Kyzir White,Safety,4,119,116.0
+2017,2018,Washington,Will Dissly,Tight End,4,120,160.0
+2017,2018,Weber State,Taron Johnson,Cornerback,4,121,143.0
+2017,2018,UCLA,Kenny Young,Inside Linebacker,4,122,334.0
+2017,2018,Notre Dame,Durham Smythe,Tight End,4,123,186.0
+2017,2018,Texas A&M,Armani Watts,Safety,4,124,154.0
+2017,2018,Pittsburgh,Avonte Maddox,Cornerback,4,125,131.0
+2017,2018,Southern Miss,Ito Smith,Running Back,4,126,292.0
+2017,2018,Florida State,Rick Leonard,Offensive Tackle,4,127,285.0
+2017,2018,NC State,Kentavius Street,Defensive End,4,128,195.0
+2017,2018,NC State,Will Richardson,Offensive Tackle,4,129,124.0
+2017,2018,Florida State,Josh Sweat,Defensive End,4,130,72.0
+2017,2018,Arizona State,Kalen Ballage,Running Back,4,131,121.0
+2017,2018,New Mexico State,Jaleel Scott,Wide Receiver,4,132,231.0
+2017,2018,Missouri,J'Mon Moore,Wide Receiver,4,133,217.0
+2017,2018,Fordham,Chase Edmonds,Running Back,4,134,
+2017,2018,Stephen F. Austin,John Franklin-Meyers,Defensive End,4,135,300.0
+2017,2018,Ole Miss,Marquis Haynes,Outside Linebacker,4,136,244.0
+2017,2018,Stanford,Dalton Schultz,Tight End,4,137,181.0
+2017,2018,Washington State,Cole Madison,Offensive Tackle,5,138,102.0
+2017,2018,Miami,RJ McIntosh,Defensive Tackle,5,139,115.0
+2017,2018,Michigan,Mo Hurst,Defensive Tackle,5,140,61.0
+2017,2018,UCF,Shaquem Griffin,Outside Linebacker,5,141,174.0
+2017,2018,Kansas State,D.J. Reed,Cornerback,5,142,155.0
+2017,2018,Purdue,Ja'Whaun Bentley,Inside Linebacker,5,143,319.0
+2017,2018,Pennsylvania,Justin Watson,Wide Receiver,5,144,
+2017,2018,Delaware,Bilal Nichols,Defensive Tackle,5,145,163.0
+2017,2018,Oklahoma State,Tre Flowers,Safety,5,146,221.0
+2017,2018,Virginia,Micah Kiser,Inside Linebacker,5,147,133.0
+2017,2018,Penn State,Marcus Allen,Safety,5,148,113.0
+2017,2018,Texas,Michael Dickson,Punter,5,149,105.0
+2017,2018,Memphis,Genard Avery,Inside Linebacker,5,150,142.0
+2017,2018,Illinois State,Davontae Harris,Cornerback,5,151,
+2017,2018,Arizona,Dane Cruikshank,Cornerback,5,152,246.0
+2017,2018,Oregon,Tyrell Crosby,Offensive Tackle,5,153,55.0
+2017,2018,Jacksonville State,Siran Neal,Cornerback,5,154,182.0
+2017,2018,UCLA,Scott Quessenberry,Center,5,155,151.0
+2017,2018,Wisconsin,Troy Fumagalli,Tight End,5,156,168.0
+2017,2018,Central Michigan,Tyler Conklin,Tight End,5,157,147.0
+2017,2018,Virginia,Andrew Brown,Defensive End,5,158,127.0
+2017,2018,Northern Iowa,Daurice Fountain,Wide Receiver,5,159,104.0
+2017,2018,Oklahoma,Obo Okoronkwo,Outside Linebacker,5,160,95.0
+2017,2018,Maryland,Jermaine Carter,Cornerback,5,161,
+2017,2018,UCLA,Jordan Lasley,Wide Receiver,5,162,125.0
+2017,2018,Virginia Tech,Tim Settle,Defensive Tackle,5,163,106.0
+2017,2018,Wisconsin,Natrell Jamerson,Safety,5,164,167.0
+2017,2018,NC State,Jaylen Samuels,Fullback,5,165,171.0
+2017,2018,Virginia Tech,Wyatt Teller,Offensive Guard,5,166,137.0
+2017,2018,Auburn,Daniel Carlson,Place Kicker,5,167,158.0
+2017,2018,Ohio State,Jamarco Jones,Offensive Tackle,5,168,108.0
+2017,2018,Ole Miss,Jordan Wilkins,Running Back,5,169,301.0
+2017,2018,Western Michigan,Darius Phillips,Cornerback,5,170,166.0
+2017,2018,Western Kentucky,Mike White,Quarterback,5,171,120.0
+2017,2018,Alabama,JK Scott,Punter,5,172,211.0
+2017,2018,Florida,Johnny Townsend,Punter,5,173,234.0
+2017,2018,South Florida,Marquez Valdes-Scantling,Wide Receiver,5,174,243.0
+2017,2018,Texas A&M,Damion Ratley,Wide Receiver,6,175,
+2017,2018,Tennessee,John Kelly,Running Back,6,176,159.0
+2017,2018,Wake Forest,Duke Ejiofor,Defensive End,6,177,170.0
+2017,2018,Arizona State,Christian Sam,Outside Linebacker,6,178,179.0
+2017,2018,Tulane,Parry Nickerson,Cornerback,6,179,117.0
+2017,2018,UConn,Folorunso Fatukasi,Defensive Tackle,6,180,128.0
+2017,2018,Utah,Kylie Fitts,Defensive End,6,181,202.0
+2017,2018,Penn State,Chris Campbell,Cornerback,6,182,187.0
+2017,2018,Arizona State,Sam Jones,Offensive Guard,6,183,180.0
+2017,2018,Florida,Marcell Harris,Safety,6,184,330.0
+2017,2018,Clemson,Deon Cain,Wide Receiver,6,185,107.0
+2017,2018,Temple,Jake Martin,Outside Linebacker,6,186,
+2017,2018,Clemson,Ray-Ray McCloud,Wide Receiver,6,187,291.0
+2017,2018,Louisiana,Simeon Thomas,Cornerback,6,188,
+2017,2018,Boston College,Kamrin Moore,Cornerback,6,189,207.0
+2017,2018,Texas,DeShon Elliott,Safety,6,190,130.0
+2017,2018,Texas Tech,Dylan Cantrell,Wide Receiver,6,191,248.0
+2017,2018,Maine,Jamil Demby,Offensive Tackle,6,192,255.0
+2017,2018,Indiana,Chris Covington,Outside Linebacker,6,193,
+2017,2018,LSU,Russell Gage,Wide Receiver,6,194,303.0
+2017,2018,Rutgers,Sebastian Joseph,Defensive Tackle,6,195,
+2017,2018,Central Arkansas,Tremon Smith,Cornerback,6,196,148.0
+2017,2018,Alabama,Shaun Dion Hamilton,Inside Linebacker,6,197,215.0
+2017,2018,Tennessee,Kahlil McKenzie,Defensive Tackle,6,198,304.0
+2017,2018,Washington State,Luke Falk,Quarterback,6,199,96.0
+2017,2018,Yale,Foyesade Oluokun,Safety,6,200,
+2017,2018,Louisiana Tech,Boston Scott,Running Back,6,201,
+2017,2018,Wisconsin,Jack Cichy,Inside Linebacker,6,202,209.0
+2017,2018,Nebraska,Tanner Lee,Quarterback,6,203,235.0
+2017,2018,Virginia State,Trenton Cannon,Running Back,6,204,
+2017,2018,Louisville,Trevon Young,Defensive End,6,205,214.0
+2017,2018,TCU,Matt Pryor,Offensive Tackle,6,206,136.0
+2017,2018,Notre Dame,Equanimeous St. Brown,Wide Receiver,6,207,139.0
+2017,2018,Boise State,Cedrick Wilson,Wide Receiver,6,208,134.0
+2017,2018,Southern Miss,Cornell Armstrong,Cornerback,6,209,
+2017,2018,Miami,Braxton Berrios,Wide Receiver,6,210,220.0
+2017,2018,Mississippi State,Jordan Thomas,Tight End,6,211,314.0
+2017,2018,Wagner,Greg Senat,Offensive Tackle,6,212,239.0
+2017,2018,App State,Colby Gossett,Offensive Guard,6,213,172.0
+2017,2018,Stanford,Peter Kalambayi,Outside Linebacker,6,214,273.0
+2017,2018,Alabama,Bradley Bozeman,Center,6,215,289.0
+2017,2018,Washington,Azeem Victor,Inside Linebacker,6,216,326.0
+2017,2018,Washington,Keishawn Bierria,Outside Linebacker,6,217,237.0
+2017,2018,Tulane,Ade Aruna,Defensive End,6,218,200.0
+2017,2018,LSU,Danny Etling,Quarterback,7,219,
+2017,2018,Florida International,Alex Mcgough,Quarterback,7,220,
+2017,2018,Houston,Matthew Adams,Inside Linebacker,7,221,
+2017,2018,San José State,Jermaine Kelly,Cornerback,7,222,
+2017,2018,Temple,Jullian Taylor,Defensive Tackle,7,223,
+2017,2018,Georgia,Javon Wims,Wide Receiver,7,224,258.0
+2017,2018,California,Devante Downs,Cornerback,7,225,
+2017,2018,Arkansas,David Williams,Running Back,7,226,
+2017,2018,Ohio,Quentin Poling,Inside Linebacker,7,227,
+2017,2018,Oklahoma State,Marcell Ateman,Wide Receiver,7,228,185.0
+2017,2018,New Mexico,Jason Sanders,Place Kicker,7,229,
+2017,2018,Wisconsin,Leon Jacobs,Outside Linebacker,7,230,183.0
+2017,2018,TCU,Travin Howard,Outside Linebacker,7,231,
+2017,2018,California,James Looney,Defensive Tackle,7,232,325.0
+2017,2018,Australia,Jordan Mailata,Offensive Tackle,7,233,
+2017,2018,North Carolina,Andre Smith,Inside Linebacker,7,234,259.0
+2017,2018,Syracuse,Zaire Franklin,Inside Linebacker,7,235,
+2017,2018,Alabama,Bo Scarbrough,Running Back,7,236,165.0
+2017,2018,San Diego State,Nick Bawden,Fullback,7,237,
+2017,2018,Ferris State,Zach Sieler,Defensive End,7,238,
+2017,2018,Mississippi State,Hunter Bradley,Long Snapper,7,239,
+2017,2018,Middle Tennessee,Richie James,Wide Receiver,7,240,
+2017,2018,Virginia Tech,Greg Stroman,Cornerback,7,241,
+2017,2018,Miami,Kendrick Norton,Defensive Tackle,7,242,242.0
+2017,2018,Western Carolina,Keion Crossen,Cornerback,7,243,
+2017,2018,SMU,Justin Lawler,Defensive End,7,244,238.0
+2017,2018,LSU,Will Clapp,Offensive Guard,7,245,212.0
+2017,2018,Alabama,Joshua Frazier,Defensive Tackle,7,246,
+2017,2018,Mississippi State,Logan Cooke,Punter,7,247,
+2017,2018,Southeast Missouri State,Kendall Donnerson,Outside Linebacker,7,248,
+2017,2018,Toledo,Logan Woodside,Quarterback,7,249,210.0
+2017,2018,Florida State,Ryan Izzo,Tight End,7,250,178.0
+2017,2018,Northwestern,Justin Jackson,Running Back,7,251,184.0
+2017,2018,Ole Miss,Rod Taylor,Offensive Guard,7,252,
+2017,2018,Florida State,Auden Tate,Wide Receiver,7,253,192.0
+2017,2018,Cincinnati,Korey Cunningham,Offensive Tackle,7,254,
+2017,2018,North Carolina,Austin Proehl,Wide Receiver,7,255,
+2017,2018,SMU,Trey Quinn,Wide Receiver,7,256,153.0
+2018,2019,Oklahoma,Kyler Murray,Quarterback,1,1,9.0
+2018,2019,Ohio State,Nick Bosa,Defensive End,1,2,1.0
+2018,2019,Alabama,Quinnen Williams,Defensive Tackle,1,3,2.0
+2018,2019,Clemson,Clelin Ferrell,Defensive End,1,4,21.0
+2018,2019,LSU,Devin White,Inside Linebacker,1,5,4.0
+2018,2019,Duke,Daniel Jones,Quarterback,1,6,59.0
+2018,2019,Kentucky,Josh Allen,Outside Linebacker,1,7,5.0
+2018,2019,Iowa,T.J. Hockenson,Tight End,1,8,6.0
+2018,2019,Houston,Ed Oliver,Defensive Tackle,1,9,3.0
+2018,2019,Michigan,Devin Bush,Inside Linebacker,1,10,8.0
+2018,2019,Alabama,Jonah Williams,Offensive Tackle,1,11,17.0
+2018,2019,Michigan,Rashan Gary,Defensive End,1,12,13.0
+2018,2019,Clemson,Christian Wilkins,Defensive Tackle,1,13,7.0
+2018,2019,Boston College,Chris Lindstrom,Offensive Guard,1,14,41.0
+2018,2019,Ohio State,Dwayne Haskins,Quarterback,1,15,15.0
+2018,2019,Florida State,Brian Burns,Outside Linebacker,1,16,14.0
+2018,2019,Clemson,Dexter Lawrence,Defensive Tackle,1,17,26.0
+2018,2019,NC State,Garrett Bradbury,Center,1,18,18.0
+2018,2019,Mississippi State,Jeffery Simmons,Defensive Tackle,1,19,16.0
+2018,2019,Iowa,Noah Fant,Tight End,1,20,12.0
+2018,2019,Maryland,Darnell Savage Jr.,Safety,1,21,28.0
+2018,2019,Washington State,Andre Dillard,Offensive Tackle,1,22,19.0
+2018,2019,Alabama State,Tytus Howard,Offensive Tackle,1,23,47.0
+2018,2019,Alabama,Josh Jacobs,Running Back,1,24,23.0
+2018,2019,Oklahoma,Marquise Brown,Wide Receiver,1,25,11.0
+2018,2019,Mississippi State,Montez Sweat,Defensive End,1,26,22.0
+2018,2019,Mississippi State,Johnathan Abram,Safety,1,27,20.0
+2018,2019,Notre Dame,Jerry Tillery,Defensive Tackle,1,28,32.0
+2018,2019,TCU,L.J. Collier,Defensive End,1,29,38.0
+2018,2019,Georgia,Deandre Baker,Cornerback,1,30,36.0
+2018,2019,Washington,Kaleb McGary,Offensive Tackle,1,31,73.0
+2018,2019,Arizona State,N'Keal Harry,Wide Receiver,1,32,33.0
+2018,2019,Washington,Byron Murphy,Cornerback,2,33,27.0
+2018,2019,Temple,Rock Ya-Sin,Cornerback,2,34,31.0
+2018,2019,Florida,Jawaan Taylor,Offensive Tackle,2,35,10.0
+2018,2019,South Carolina,Deebo Samuel,Wide Receiver,2,36,39.0
+2018,2019,Ole Miss,Greg Little,Offensive Tackle,2,37,78.0
+2018,2019,Oklahoma,Cody Ford,Offensive Tackle,2,38,25.0
+2018,2019,Central Michigan,Sean Bunting,Cornerback,2,39,62.0
+2018,2019,Clemson,Trayvon Mullen,Cornerback,2,40,75.0
+2018,2019,Kansas State,Dalton Risner,Offensive Tackle,2,41,46.0
+2018,2019,Missouri,Drew Lock,Quarterback,2,42,24.0
+2018,2019,Hawai'i,Jahlani Tavai,Inside Linebacker,2,43,93.0
+2018,2019,Mississippi State,Elgton Jenkins,Center,2,44,51.0
+2018,2019,Vanderbilt,Joejuan Williams,Cornerback,2,45,50.0
+2018,2019,LSU,Greedy Williams,Cornerback,2,46,29.0
+2018,2019,Utah,Marquise Blair,Safety,2,47,103.0
+2018,2019,Texas A&M,Erik McCoy,Center,2,48,35.0
+2018,2019,TCU,Ben Banogu,Outside Linebacker,2,49,80.0
+2018,2019,Alabama,Irv Smith Jr.,Tight End,2,50,34.0
+2018,2019,Ole Miss,A.J. Brown,Wide Receiver,2,51,45.0
+2018,2019,Washington,Drew Sample,Tight End,2,52,72.0
+2018,2019,Penn State,Miles Sanders,Running Back,2,53,42.0
+2018,2019,Kentucky,Lonnie Johnson Jr.,Cornerback,2,54,55.0
+2018,2019,Northern Illinois,Max Scharping,Offensive Tackle,2,55,70.0
+2018,2019,Georgia,Mecole Hardman,Wide Receiver,2,56,67.0
+2018,2019,Stanford,JJ Arcega-Whiteside,Wide Receiver,2,57,48.0
+2018,2019,UCF,Trysten Hill,Defensive Tackle,2,58,87.0
+2018,2019,Ohio State,Parris Campbell,Wide Receiver,2,59,49.0
+2018,2019,Delaware,Nasir Adderley,Safety,2,60,37.0
+2018,2019,Washington,Taylor Rapp,Safety,2,61,43.0
+2018,2019,Massachusetts,Andy Isabella,Wide Receiver,2,62,110.0
+2018,2019,Virginia,Juan Thornhill,Safety,2,63,60.0
+2018,2019,Ole Miss,DK Metcalf,Wide Receiver,2,64,40.0
+2018,2019,Boston College,Zach Allen,Defensive End,3,65,69.0
+2018,2019,Toledo,Diontae Johnson,Wide Receiver,3,66,137.0
+2018,2019,Baylor,Jalen Hurd,Wide Receiver,3,67,130.0
+2018,2019,Florida,Jachai Polite,Defensive End,3,68,109.0
+2018,2019,San José State,Josh Oliver,Tight End,3,69,102.0
+2018,2019,Memphis,Darrell Henderson,Running Back,3,70,125.0
+2018,2019,Ohio State,Dre'Mont Jones,Defensive Tackle,3,71,64.0
+2018,2019,NC State,Germaine Pratt,Outside Linebacker,3,72,95.0
+2018,2019,Iowa State,David Montgomery,Running Back,3,73,79.0
+2018,2019,Florida Atlantic,Devin Singletary,Running Back,3,74,141.0
+2018,2019,Texas A&M,Jace Sternberger,Tight End,3,75,71.0
+2018,2019,Ohio State,Terry McLaurin,Wide Receiver,3,76,57.0
+2018,2019,Michigan,Chase Winovich,Defensive End,3,77,44.0
+2018,2019,Wisconsin,Michael Deiter,Offensive Guard,3,78,85.0
+2018,2019,Michigan,David Long,Cornerback,3,79,58.0
+2018,2019,BYU,Sione Takitaki,Outside Linebacker,3,80,107.0
+2018,2019,Boston College,Will Harris,Safety,3,81,96.0
+2018,2019,Charlotte,Nate Davis,Offensive Guard,3,82,81.0
+2018,2019,Michigan State,Justin Layne,Cornerback,3,83,53.0
+2018,2019,Western Illinois,Khalen Saunders,Defensive Tackle,3,84,83.0
+2018,2019,Louisiana Tech,Jaylon Ferguson,Defensive End,3,85,63.0
+2018,2019,San Diego State,Kahale Warring,Tight End,3,86,92.0
+2018,2019,Alabama,Damien Harris,Running Back,3,87,108.0
+2018,2019,Utah,Cody Barton,Outside Linebacker,3,88,97.0
+2018,2019,Stanford,Bobby Okereke,Outside Linebacker,3,89,94.0
+2018,2019,Penn State,Connor McGovern,Offensive Guard,3,90,68.0
+2018,2019,Sioux Falls,Trey Pipkins,Offensive Tackle,3,91,
+2018,2019,USC,Chuma Edoga,Offensive Tackle,3,92,123.0
+2018,2019,Notre Dame,Miles Boykin,Wide Receiver,3,93,61.0
+2018,2019,Auburn,Jamel Dean,Cornerback,3,94,126.0
+2018,2019,Old Dominion,Oshane Ximines,Defensive End,3,95,74.0
+2018,2019,Ole Miss,Dawson Knox,Tight End,3,96,118.0
+2018,2019,Oklahoma,Bobby Evans,Offensive Tackle,3,97,114.0
+2018,2019,Murray State,Quincy Williams,Safety,3,98,
+2018,2019,Kentucky,Mike Edwards,Safety,3,99,88.0
+2018,2019,West Virginia,Will Grier,Quarterback,3,100,124.0
+2018,2019,West Virginia,Yodny Cajuste,Offensive Tackle,3,101,135.0
+2018,2019,Boise State,Alexander Mattison,Running Back,3,102,116.0
+2018,2019,Iowa State,Hakeem Butler,Wide Receiver,4,103,66.0
+2018,2019,NC State,Ryan Finley,Quarterback,4,104,30.0
+2018,2019,Florida,Chauncey Gardner-Johnson,Safety,4,105,52.0
+2018,2019,Eastern Michigan,Maxx Crosby,Defensive End,4,106,106.0
+2018,2019,Iowa,Anthony Nelson,Defensive End,4,107,101.0
+2018,2019,Notre Dame,Julian Love,Cornerback,4,108,54.0
+2018,2019,Michigan State,Khari Willis,Safety,4,109,154.0
+2018,2019,Utah,Mitch Wishnowsky,Punter,4,110,265.0
+2018,2019,Ohio State,Kendall Sheffield,Cornerback,4,111,99.0
+2018,2019,Stanford,Bryce Love,Running Back,4,112,145.0
+2018,2019,Oklahoma State,Justice Hill,Running Back,4,113,98.0
+2018,2019,Oklahoma,Dru Samia,Offensive Guard,4,114,77.0
+2018,2019,Alabama,Christian Miller,Outside Linebacker,4,115,149.0
+2018,2019,Iowa,Amani Hooker,Safety,4,116,91.0
+2018,2019,Clemson,Austin Bryant,Defensive End,4,117,211.0
+2018,2019,Arkansas,Hjalte Froholdt,Offensive Guard,4,118,209.0
+2018,2019,Miami,Sheldrick Redwine,Safety,4,119,132.0
+2018,2019,West Virginia,Gary Jennings Jr.,Wide Receiver,4,120,173.0
+2018,2019,West Virginia,Trevon Wesco,Tight End,4,121,174.0
+2018,2019,Kentucky,Benny Snell Jr.,Running Back,4,122,245.0
+2018,2019,Oklahoma,Ben Powers,Offensive Guard,4,123,122.0
+2018,2019,Wake Forest,Phil Haynes,Offensive Guard,4,124,186.0
+2018,2019,Arizona State,Renell Wren,Defensive Tackle,4,125,155.0
+2018,2019,Georgia,Riley Ridley,Wide Receiver,4,126,65.0
+2018,2019,USC,Iman Marshall,Cornerback,4,127,199.0
+2018,2019,Memphis,Tony Pollard,Running Back,4,128,181.0
+2018,2019,Houston,Isaiah Johnson,Cornerback,4,129,153.0
+2018,2019,Notre Dame,Drue Tranquill,Inside Linebacker,4,130,121.0
+2018,2019,Indiana,Wes Martin,Offensive Guard,4,131,
+2018,2019,Oregon,Ugochukwu Amadi,Safety,4,132,166.0
+2018,2019,Auburn,Jarrett Stidham,Quarterback,4,133,56.0
+2018,2019,Washington,Greg Gaines,Defensive Tackle,4,134,143.0
+2018,2019,Charleston (WV),John Cominsky,Defensive End,4,135,187.0
+2018,2019,Ohio State,Michael Jordan,Offensive Guard,4,136,84.0
+2018,2019,LSU,Foster Moreau,Tight End,4,137,148.0
+2018,2019,Penn State,Shareef Miller,Defensive End,4,138,127.0
+2018,2019,Alabama,Deionte Thompson,Safety,5,139,115.0
+2018,2019,Temple,Ryquell Armstead,Running Back,5,140,158.0
+2018,2019,Michigan,Zach Gentry,Tight End,5,141,295.0
+2018,2019,Washington,Ben Burr-Kirven,Inside Linebacker,5,142,147.0
+2018,2019,Wisconsin,Ryan Connelly,Inside Linebacker,5,143,202.0
+2018,2019,USC,Marvell Tell III,Safety,5,144,120.0
+2018,2019,Utah,Matt Gay,Place Kicker,5,145,328.0
+2018,2019,Penn State,Amani Oruwariye,Cornerback,5,146,90.0
+2018,2019,Florida,Vosean Joseph,Outside Linebacker,5,147,196.0
+2018,2019,Arkansas,Dre Greenlaw,Outside Linebacker,5,148,213.0
+2018,2019,Clemson,Hunter Renfrow,Wide Receiver,5,149,306.0
+2018,2019,Texas A&M,Kingsley Keke,Defensive Tackle,5,150,169.0
+2018,2019,Wisconsin,Andrew Van Ginkel,Outside Linebacker,5,151,291.0
+2018,2019,Pittsburgh,Qadree Ollison,Running Back,5,152,250.0
+2018,2019,Alabama,Ross Pierschbacher,Offensive Guard,5,153,172.0
+2018,2019,Florida,Jordan Scarlett,Running Back,5,154,268.0
+2018,2019,Alabama,Mack Wilson,Inside Linebacker,5,155,129.0
+2018,2019,Oregon,Justin Hollins,Outside Linebacker,5,156,111.0
+2018,2019,Minnesota,Blake Cashman,Inside Linebacker,5,157,271.0
+2018,2019,Miami,Michael Jackson,Cornerback,5,158,239.0
+2018,2019,Maryland,Byron Cowart,Defensive Tackle,5,159,161.0
+2018,2019,Texas A&M,Daylon Mack,Defensive Tackle,5,160,184.0
+2018,2019,Texas,Charles Omenihu,Defensive End,5,161,131.0
+2018,2019,USC,Cameron Smith,Inside Linebacker,5,162,156.0
+2018,2019,Stanford,Jake Bailey,Punter,5,163,329.0
+2018,2019,Tarleton State,E.J. Speed,Inside Linebacker,5,164,
+2018,2019,Miami,Joe Jackson,Defensive End,5,165,119.0
+2018,2019,North Dakota State,Easton Stick,Quarterback,5,166,330.0
+2018,2019,Northwestern,Clayton Thorson,Quarterback,5,167,138.0
+2018,2019,Georgia,D'Andre Walker,Outside Linebacker,5,168,82.0
+2018,2019,Wisconsin,David Edwards,Offensive Tackle,5,169,157.0
+2018,2019,Oklahoma,Austin Seibert,Place Kicker,5,170,
+2018,2019,Auburn,Darius Slayton,Wide Receiver,5,171,112.0
+2018,2019,Washington,Jordan Miller,Cornerback,5,172,160.0
+2018,2019,North Carolina,Cole Holcomb,Outside Linebacker,5,173,
+2018,2019,Fresno State,Keesean Johnson,Wide Receiver,6,174,159.0
+2018,2019,Northern Illinois,Sutton Smith,Outside Linebacker,6,175,321.0
+2018,2019,Stanford,Kaden Smith,Tight End,6,176,165.0
+2018,2019,Rutgers,Saquan Hampton,Safety,6,177,241.0
+2018,2019,Washington State,Gardner Minshew,Quarterback,6,178,240.0
+2018,2019,Georgia,Lamont Gaillard,Center,6,179,185.0
+2018,2019,Washburn,Corey Ballentine,Cornerback,6,180,105.0
+2018,2019,Miami,Jaquan Johnson,Safety,6,181,128.0
+2018,2019,Texas A&M,Trayveon Williams,Running Back,6,182,76.0
+2018,2019,Vanderbilt,Justin Skule,Offensive Tackle,6,183,
+2018,2019,Old Dominion,Travis Fulgham,Wide Receiver,6,184,89.0
+2018,2019,Toledo,Ka'dar Hollman,Cornerback,6,185,
+2018,2019,Maryland,Ty Johnson,Running Back,6,186,293.0
+2018,2019,Colorado,Juwann Winfree,Wide Receiver,6,187,
+2018,2019,West Virginia,David Long Jr.,Outside Linebacker,6,188,170.0
+2018,2019,Southeast Missouri State,Drew Forbes,Offensive Tackle,6,189,
+2018,2019,Arkansas,Armon Watts,Defensive Tackle,6,190,242.0
+2018,2019,Wyoming,Marcus Epps,Safety,6,191,
+2018,2019,Alabama,Isaiah Buggs,Defensive Tackle,6,192,246.0
+2018,2019,Elon,Olisaemeka Udoh,Offensive Tackle,6,193,193.0
+2018,2019,Notre Dame,Dexter Williams,Running Back,6,194,212.0
+2018,2019,Central Michigan,Xavier Crawford,Cornerback,6,195,282.0
+2018,2019,Rutgers,Blessuan Austin,Cornerback,6,196,183.0
+2018,2019,Penn State,Trace McSorley,Quarterback,6,197,259.0
+2018,2019,Virginia,Tim  Harris,Cornerback,6,198,
+2018,2019,Mississippi State,Gerri Green,Outside Linebacker,6,199,336.0
+2018,2019,Houston,Emeke Egbule,Outside Linebacker,6,200,232.0
+2018,2019,South Carolina,Rashad Fenton,Cornerback,6,201,252.0
+2018,2019,Ohio State,Isaiah Prince,Offensive Tackle,6,202,164.0
+2018,2019,UL Monroe,Marcus Green,Wide Receiver,6,203,
+2018,2019,Miami,Travis Homer,Running Back,6,204,255.0
+2018,2019,Kansas State,Duke Shelley,Cornerback,6,205,
+2018,2019,NC State,Kelvin Harmon,Wide Receiver,6,206,100.0
+2018,2019,Akron,Ulysees Gilbert III,Inside Linebacker,6,207,358.0
+2018,2019,Bowling Green,Scott Miller,Wide Receiver,6,208,
+2018,2019,Florida State,Demarcus Christmas,Defensive Tackle,6,209,222.0
+2018,2019,Auburn,Deshaun Davis,Inside Linebacker,6,210,225.0
+2018,2019,Oklahoma,Rodney Anderson,Running Back,6,211,197.0
+2018,2019,South Carolina,Dennis Daley,Offensive Tackle,6,212,167.0
+2018,2019,Texas A&M,Donovan Wilson,Safety,6,213,234.0
+2018,2019,Utah State,Darwin Thompson,Running Back,6,214,305.0
+2018,2019,Missouri,Terry Beckner Jr.,Defensive Tackle,7,215,195.0
+2018,2019,Illinois,Nick Allegretti,Center,7,216,
+2018,2019,Texas,Kris Boyd,Cornerback,7,217,86.0
+2018,2019,Ohio State,Mike Weber,Running Back,7,218,190.0
+2018,2019,Maryland,Derwin Gray,Offensive Guard,7,219,267.0
+2018,2019,Texas A&M,Cullen Gillaspia,Running Back,7,220,
+2018,2019,Tulane,Donnie Lewis Jr.,Cornerback,7,221,366.0
+2018,2019,Florida Atlantic,Kerrith Whyte Jr.,Running Back,7,222,262.0
+2018,2019,South Dakota State,Jordan Brown,Cornerback,7,223,194.0
+2018,2019,Georgia,Isaac Nauta,Tight End,7,224,191.0
+2018,2019,North Carolina A&T,Darryl Johnson Jr.,Outside Linebacker,7,225,279.0
+2018,2019,TCU,Ty Summers,Inside Linebacker,7,226,284.0
+2018,2019,James Madison,Jimmy Moreland,Cornerback,7,227,290.0
+2018,2019,Boston College,Tommy Sweeney,Tight End,7,228,151.0
+2018,2019,Arizona,PJ Johnson,Defensive Tackle,7,229,
+2018,2019,Prairie View A&M,Quinton Bell,Defensive End,7,230,
+2018,2019,Notre Dame,Alize Mack,Tight End,7,231,204.0
+2018,2019,Kentucky,George Asafo-Adjei,Offensive Guard,7,232,
+2018,2019,Auburn,Chandler Cox,Fullback,7,233,
+2018,2019,Washington,Myles Gaskin,Running Back,7,234,236.0
+2018,2019,Auburn,Dontavius Russell,Defensive Tackle,7,235,133.0
+2018,2019,Hawai'i,John Ursua,Wide Receiver,7,236,335.0
+2018,2019,Georgia,Terry Godwin,Wide Receiver,7,237,274.0
+2018,2019,Valdosta State,Stephen Denmark,Cornerback,7,238,
+2018,2019,Oregon,Dillon Mitchell,Wide Receiver,7,239,188.0
+2018,2019,Utah,Jackson Barton,Offensive Tackle,7,240,233.0
+2018,2019,Oregon,Jalen Jelks,Defensive End,7,241,113.0
+2018,2019,Cincinnati,Cortez Broughton,Defensive Tackle,7,242,
+2018,2019,Penn State,Nick Scott,Safety,7,243,
+2018,2019,Idaho,Kaden Elliss,Outside Linebacker,7,244,
+2018,2019,Syracuse,Chris Slayton,Defensive Tackle,7,245,254.0
+2018,2019,Ole Miss,Javon Patterson,Center,7,246,238.0
+2018,2019,Colorado State,Olabisi Johnson,Wide Receiver,7,247,224.0
+2018,2019,Morgan State,Joshua Miles,Offensive Tackle,7,248,
+2018,2019,Temple,Michael Dogbe,Defensive End,7,249,370.0
+2018,2019,Air Force,Austin Cutting,Long Snapper,7,250,
+2018,2019,Texas Tech,Dakota Allen,Inside Linebacker,7,251,207.0
+2018,2019,Ole Miss,Ken Webster,Cornerback,7,252,322.0
+2018,2019,Oklahoma State,Jordan Brailford,Defensive End,7,253,244.0
+2018,2019,UCLA,Caleb Wilson,Tight End,7,254,182.0
+2019,2020,LSU,Joe Burrow,Quarterback,1,1,2.0
+2019,2020,Ohio State,Chase Young,Defensive End,1,2,1.0
+2019,2020,Ohio State,Jeff Okudah,Cornerback,1,3,5.0
+2019,2020,Georgia,Andrew Thomas,Offensive Tackle,1,4,16.0
+2019,2020,Alabama,Tua Tagovailoa,Quarterback,1,5,7.0
+2019,2020,Oregon,Justin Herbert,Quarterback,1,6,24.0
+2019,2020,Auburn,Derrick Brown,Defensive Tackle,1,7,3.0
+2019,2020,Clemson,Isaiah Simmons,Outside Linebacker,1,8,4.0
+2019,2020,Florida,CJ Henderson,Cornerback,1,9,13.0
+2019,2020,Alabama,Jedrick Wills Jr.,Offensive Tackle,1,10,8.0
+2019,2020,Louisville,Mekhi Becton,Offensive Tackle,1,11,12.0
+2019,2020,Alabama,Henry Ruggs III,Wide Receiver,1,12,11.0
+2019,2020,Iowa,Tristan Wirfs,Offensive Tackle,1,13,15.0
+2019,2020,South Carolina,Javon Kinlaw,Defensive Tackle,1,14,9.0
+2019,2020,Alabama,Jerry Jeudy,Wide Receiver,1,15,6.0
+2019,2020,Clemson,A.J. Terrell,Cornerback,1,16,51.0
+2019,2020,Oklahoma,CeeDee Lamb,Wide Receiver,1,17,10.0
+2019,2020,USC,Austin Jackson,Offensive Tackle,1,18,48.0
+2019,2020,Ohio State,Damon Arnette,Cornerback,1,19,58.0
+2019,2020,LSU,K'Lavon Chaisson,Outside Linebacker,1,20,19.0
+2019,2020,TCU,Jalen Reagor,Wide Receiver,1,21,53.0
+2019,2020,LSU,Justin Jefferson,Wide Receiver,1,22,14.0
+2019,2020,Oklahoma,Kenneth Murray,Inside Linebacker,1,23,26.0
+2019,2020,Michigan,Cesar Ruiz,Center,1,24,37.0
+2019,2020,Arizona State,Brandon Aiyuk,Wide Receiver,1,25,23.0
+2019,2020,Utah State,Jordan Love,Quarterback,1,26,20.0
+2019,2020,Texas Tech,Jordyn Brooks,Outside Linebacker,1,27,92.0
+2019,2020,LSU,Patrick Queen,Inside Linebacker,1,28,21.0
+2019,2020,Georgia,Isaiah Wilson,Offensive Tackle,1,29,31.0
+2019,2020,Auburn,Noah Igbinoghene,Cornerback,1,30,60.0
+2019,2020,TCU,Jeff Gladney,Cornerback,1,31,43.0
+2019,2020,LSU,Clyde Edwards-Helaire,Running Back,1,32,28.0
+2019,2020,Clemson,Tee Higgins,Wide Receiver,2,33,30.0
+2019,2020,USC,Michael Pittman Jr.,Wide Receiver,2,34,42.0
+2019,2020,Georgia,D'Andre Swift,Running Back,2,35,18.0
+2019,2020,Alabama,Xavier McKinney,Safety,2,36,17.0
+2019,2020,Lenoir Rhyne,Kyle Dugger,Safety,2,37,65.0
+2019,2020,Penn State,Yetur Gross-Matos,Defensive End,2,38,33.0
+2019,2020,Louisiana,Robert Hunt,Offensive Guard,2,39,59.0
+2019,2020,TCU,Ross Blacklock,Defensive Tackle,2,40,25.0
+2019,2020,Wisconsin,Jonathan Taylor,Running Back,2,41,34.0
+2019,2020,Colorado,Laviska Shenault Jr.,Wide Receiver,2,42,61.0
+2019,2020,Notre Dame,Cole Kmet,Tight End,2,43,45.0
+2019,2020,LSU,Grant Delpit,Safety,2,44,35.0
+2019,2020,Minnesota,Antoine Winfield Jr.,Safety,2,45,29.0
+2019,2020,Penn State,KJ Hamler,Wide Receiver,2,46,74.0
+2019,2020,Auburn,Marlon Davidson,Defensive Tackle,2,47,52.0
+2019,2020,Tennessee,Darrell Taylor,Defensive End,2,48,70.0
+2019,2020,Notre Dame,Chase Claypool,Wide Receiver,2,49,62.0
+2019,2020,Utah,Jaylon Johnson,Cornerback,2,50,44.0
+2019,2020,Alabama,Trevon Diggs,Cornerback,2,51,39.0
+2019,2020,Florida State,Cam Akers,Running Back,2,52,55.0
+2019,2020,Oklahoma,Jalen Hurts,Quarterback,2,53,94.0
+2019,2020,Iowa,AJ Epenesa,Defensive End,2,54,32.0
+2019,2020,Ohio State,J.K. Dobbins,Running Back,2,55,27.0
+2019,2020,Alabama,Raekwon Davis,Defensive Tackle,2,56,105.0
+2019,2020,Florida,Van Jefferson,Wide Receiver,2,57,113.0
+2019,2020,Boise State,Ezra Cleveland,Offensive Tackle,2,58,22.0
+2019,2020,Baylor,Denzel Mims,Wide Receiver,2,59,46.0
+2019,2020,Michigan,Josh Uche,Defensive End,2,60,95.0
+2019,2020,LSU,Kristian Fulton,Cornerback,2,61,80.0
+2019,2020,Boston College,AJ Dillon,Running Back,2,62,90.0
+2019,2020,Mississippi State,Willie Gay Jr.,Inside Linebacker,2,63,163.0
+2019,2020,Southern Illinois,Jeremy Chinn,Safety,2,64,50.0
+2019,2020,Wyoming,Logan Wilson,Inside Linebacker,3,65,47.0
+2019,2020,Memphis,Antonio Gibson,Wide Receiver,3,66,119.0
+2019,2020,Notre Dame,Julian Okwara,Outside Linebacker,3,67,64.0
+2019,2020,California,Ashtyn Davis,Safety,3,68,71.0
+2019,2020,LSU,Damien Lewis,Offensive Guard,3,69,79.0
+2019,2020,Texas,Brandon Jones,Safety,3,70,111.0
+2019,2020,Texas A&M,Justin Madubuike,Defensive Tackle,3,71,40.0
+2019,2020,Houston,Josh Jones,Offensive Tackle,3,72,38.0
+2019,2020,Ohio State,Davon Hamilton,Defensive Tackle,3,73,138.0
+2019,2020,Wisconsin,Zack Baun,Outside Linebacker,3,74,36.0
+2019,2020,Ohio State,Jonah Jackson,Offensive Guard,3,75,109.0
+2019,2020,Vanderbilt,Ke'Shawn Vaughn,Running Back,3,76,99.0
+2019,2020,Iowa,Michael Ojemudia,Cornerback,3,77,199.0
+2019,2020,Temple,Matt Hennessy,Center,3,78,93.0
+2019,2020,Florida,Jabari Zuniga,Defensive End,3,79,76.0
+2019,2020,Kentucky,Lynn Bowden Jr.,Wide Receiver,3,80,144.0
+2019,2020,South Carolina,Bryan Edwards,Wide Receiver,3,81,100.0
+2019,2020,Oklahoma,Neville Gallimore,Defensive Tackle,3,82,49.0
+2019,2020,LSU,Lloyd Cushenberry III,Center,3,83,66.0
+2019,2020,Alabama,Terrell Lewis,Outside Linebacker,3,84,67.0
+2019,2020,Utah,Julian Blackmon,Safety,3,85,193.0
+2019,2020,Utah,Zack Moss,Running Back,3,86,57.0
+2019,2020,Alabama,Anfernee Jennings,Outside Linebacker,3,87,101.0
+2019,2020,Missouri,Jordan Elliott,Defensive Tackle,3,88,41.0
+2019,2020,Mississippi State,Cameron Dantzler,Cornerback,3,89,96.0
+2019,2020,Florida,Jonathan Greenard,Outside Linebacker,3,90,122.0
+2019,2020,UCLA,Devin Asiasi,Tight End,3,91,69.0
+2019,2020,Texas,Devin Duvernay,Wide Receiver,3,92,81.0
+2019,2020,App State,Darrynton Evans,Running Back,3,93,137.0
+2019,2020,Cincinnati,Josiah Deguara,Tight End,3,94,
+2019,2020,Arkansas,McTelvin Agim,Defensive Tackle,3,95,
+2019,2020,TCU,Lucas Niang,Offensive Tackle,3,96,82.0
+2019,2020,LSU,Jacob Phillips,Inside Linebacker,3,97,121.0
+2019,2020,Ohio State,Malik Harrison,Inside Linebacker,3,98,139.0
+2019,2020,UConn,Matt Peart,Offensive Tackle,3,99,130.0
+2019,2020,Clemson,Tanner Muse,Safety,3,100,134.0
+2019,2020,Virginia Tech,Dalton Keene,Tight End,3,101,197.0
+2019,2020,Charlotte,Alex Highsmith,Outside Linebacker,3,102,265.0
+2019,2020,Colorado,Davion Taylor,Outside Linebacker,3,103,165.0
+2019,2020,Utah,Terrell Burgess,Safety,3,104,75.0
+2019,2020,Dayton,Adam Trautman,Tight End,3,105,63.0
+2019,2020,Mississippi State,Tyre Phillips,Offensive Tackle,3,106,235.0
+2019,2020,App State,Akeem Davis-Gaither,Outside Linebacker,4,107,85.0
+2019,2020,LSU,Saahdiq Charles,Offensive Tackle,4,108,84.0
+2019,2020,Clemson,John Simpson,Offensive Guard,4,109,188.0
+2019,2020,UCLA,Darnay Holmes,Cornerback,4,110,123.0
+2019,2020,Georgia,Solomon Kindley,Offensive Guard,4,111,161.0
+2019,2020,UCLA,Joshua Kelley,Running Back,4,112,166.0
+2019,2020,Notre Dame,Troy Pride Jr.,Cornerback,4,113,103.0
+2019,2020,Utah,Leki Fotu,Defensive Tackle,4,114,151.0
+2019,2020,Florida Atlantic,Harrison Bryant,Tight End,4,115,77.0
+2019,2020,Saint John's (MN),Ben Bartch,Offensive Tackle,4,116,120.0
+2019,2020,South Carolina,D.J. Wonnum,Defensive End,4,117,114.0
+2019,2020,Missouri,Albert Okwuegbunam,Tight End,4,118,97.0
+2019,2020,Fresno State,Mykal Walker,Inside Linebacker,4,119,230.0
+2019,2020,Florida,La'Mical Perine,Running Back,4,120,72.0
+2019,2020,Kentucky,Logan Stenberg,Offensive Guard,4,121,143.0
+2019,2020,Washington,Jacob Eason,Quarterback,4,122,56.0
+2019,2020,Tulsa,Reggie Robinson II,Cornerback,4,123,
+2019,2020,Maryland,Anthony McFarland Jr.,Running Back,4,124,182.0
+2019,2020,Florida International,James Morgan,Quarterback,4,125,171.0
+2019,2020,North Carolina,Charlie Heck,Offensive Tackle,4,126,125.0
+2019,2020,Clemson,K'Von Wallace,Safety,4,127,252.0
+2019,2020,UCF,Gabriel Davis,Wide Receiver,4,128,156.0
+2019,2020,Charlotte,Cameron Clark,Offensive Tackle,4,129,253.0
+2019,2020,Baylor,James Lynch,Defensive Tackle,4,130,102.0
+2019,2020,LSU,Rashard Lawrence,Defensive Tackle,4,131,135.0
+2019,2020,Oregon,Troy Dye,Inside Linebacker,4,132,78.0
+2019,2020,Stanford,Colby Parkinson,Tight End,4,133,117.0
+2019,2020,California,Jaylinn Hawkins,Safety,4,134,
+2019,2020,Louisiana,Kevin Dotson,Offensive Guard,4,135,205.0
+2019,2020,Purdue,Brycen Hopkins,Tight End,4,136,160.0
+2019,2020,Michigan State,Josiah Scott,Cornerback,4,137,147.0
+2019,2020,Louisiana Tech,L'Jarius Sneed,Safety,4,138,245.0
+2019,2020,Louisiana Tech,Amik Robertson,Cornerback,4,139,68.0
+2019,2020,Miami,Shaquille Quarterman,Inside Linebacker,4,140,218.0
+2019,2020,Penn State,John Reid,Cornerback,4,141,214.0
+2019,2020,Liberty,Antonio Gandy-Golden,Wide Receiver,4,142,83.0
+2019,2020,Michigan,Ben Bredeson,Offensive Guard,4,143,158.0
+2019,2020,Miami,DeeJay Dallas,Running Back,4,144,154.0
+2019,2020,Auburn,Jack Driscoll,Offensive Guard,4,145,133.0
+2019,2020,Wisconsin,Tyler Biadasz,Center,4,146,89.0
+2019,2020,Notre Dame,Khalid Kareem,Defensive End,5,147,148.0
+2019,2020,Syracuse,Alton Robinson,Defensive End,5,148,141.0
+2019,2020,Ball State,Danny Pinter,Offensive Guard,5,149,244.0
+2019,2020,Oregon,Shane Lemieux,Offensive Guard,5,150,240.0
+2019,2020,Virginia,Joe Reed,Wide Receiver,5,151,118.0
+2019,2020,West Virginia,Kenny Robinson,Safety,5,152,223.0
+2019,2020,West Virginia,Colton McKivitz,Offensive Tackle,5,153,110.0
+2019,2020,North Carolina,Jason Strowbridge,Defensive End,5,154,104.0
+2019,2020,Tulsa,Trevis Gipson,Outside Linebacker,5,155,
+2019,2020,San Diego State,Keith Ismael,Center,5,156,112.0
+2019,2020,Auburn,Daniel Thomas,Safety,5,157,
+2019,2020,Virginia,Bryce Hall,Cornerback,5,158,87.0
+2019,2020,Marshall,Justin Rohrwasser,Place Kicker,5,159,
+2019,2020,Washington,Nick Harris,Center,5,160,146.0
+2019,2020,Minnesota,Tyler Johnson,Wide Receiver,5,161,173.0
+2019,2020,Michigan,Khaleke Hudson,Outside Linebacker,5,162,152.0
+2019,2020,Georgia Southern,Kindle Vildor,Cornerback,5,163,140.0
+2019,2020,Boise State,Curtis Weaver,Defensive End,5,164,88.0
+2019,2020,Texas,Collin Johnson,Wide Receiver,5,165,107.0
+2019,2020,Wisconsin,Quintez Cephus,Wide Receiver,5,166,248.0
+2019,2020,Georgia,Jake Fromm,Quarterback,5,167,54.0
+2019,2020,Boise State,John Hightower,Wide Receiver,5,168,231.0
+2019,2020,Temple,Harrison Hand,Cornerback,5,169,175.0
+2019,2020,Texas Tech,Broderick Washington Jr,Defensive Tackle,5,170,
+2019,2020,Rhode Island,Isaiah Coulter,Wide Receiver,5,171,178.0
+2019,2020,New Mexico State,Jason Huntley,Running Back,5,172,
+2019,2020,Tulane,Darnell Mooney,Wide Receiver,5,173,
+2019,2020,NC State,Larrell Murchison,Defensive Tackle,5,174,181.0
+2019,2020,Minnesota,Kamal Martin,Inside Linebacker,5,175,157.0
+2019,2020,Miami,K.J. Osborn,Wide Receiver,5,176,293.0
+2019,2020,Michigan,Mike Danna,Defensive End,5,177,292.0
+2019,2020,Wake Forest,Justin Strnad,Outside Linebacker,5,178,174.0
+2019,2020,Utah,Bradlee Anae,Defensive End,5,179,106.0
+2019,2020,Kansas,Hakeem Adeniji,Offensive Tackle,6,180,207.0
+2019,2020,Fresno State,Netane Muti,Offensive Guard,6,181,128.0
+2019,2020,Michigan,Michael Onwenu,Offensive Guard,6,182,
+2019,2020,Penn State,Cam Brown,Outside Linebacker,6,183,260.0
+2019,2020,Baylor,Bravvion Roy,Defensive Tackle,6,184,
+2019,2020,LSU,Blake Ferguson,Long Snapper,6,185,276.0
+2019,2020,Notre Dame,Alohi Gilman,Safety,6,186,142.0
+2019,2020,Michigan,Donovan Peoples-Jones,Wide Receiver,6,187,126.0
+2019,2020,Georgia Southern,Tyler Bass,Place Kicker,6,188,275.0
+2019,2020,Oregon State,Jake Luton,Quarterback,6,189,204.0
+2019,2020,Georgia,Charlie Woerner,Tight End,6,190,
+2019,2020,Texas A&M,Braden Mann,Punter,6,191,170.0
+2019,2020,Michigan,Jon Runyan,Offensive Guard,6,192,201.0
+2019,2020,Penn State,Robert Windsor,Defensive Tackle,6,193,176.0
+2019,2020,Nebraska,Khalil Davis,Defensive Tackle,6,194,246.0
+2019,2020,Wake Forest,Justin Herron,Offensive Tackle,6,195,288.0
+2019,2020,Temple,Shaun Bradley,Inside Linebacker,6,196,189.0
+2019,2020,Utah,John Penisini,Defensive Tackle,6,197,215.0
+2019,2020,Maryland,Antoine Brooks Jr.,Safety,6,198,208.0
+2019,2020,Ohio State,Jordan Fuller,Safety,6,199,268.0
+2019,2020,Southern Miss,Quez Watkins,Wide Receiver,6,200,136.0
+2019,2020,SMU,James Proche,Wide Receiver,6,201,164.0
+2019,2020,California,Evan Weaver,Inside Linebacker,6,202,247.0
+2019,2020,Oregon State,Blake Brandel,Offensive Tackle,6,203,
+2019,2020,Wyoming,Cassh Maluia,Inside Linebacker,6,204,
+2019,2020,Michigan,Josh Metellus,Safety,6,205,233.0
+2019,2020,Georgia Tech,Tyler Davis,Tight End,6,206,
+2019,2020,Oregon State,Isaiah Hodgins,Wide Receiver,6,207,187.0
+2019,2020,Oregon,Jake Hanson,Center,6,208,
+2019,2020,Indiana,Simon Stepaniak,Offensive Tackle,6,209,304.0
+2019,2020,Auburn,Prince Tega Wanogho,Offensive Tackle,6,210,91.0
+2019,2020,Massachusetts,Isaiah Rodgers,Cornerback,6,211,
+2019,2020,Washington State,Dezmon Patmon,Wide Receiver,6,212,200.0
+2019,2020,Michigan,Jordan Glasgow,Inside Linebacker,6,213,
+2019,2020,Florida,Freddie Swain,Wide Receiver,6,214,
+2019,2020,Purdue,Markus Bailey,Inside Linebacker,7,215,131.0
+2019,2020,Arkansas,Kamren Curl,Safety,7,216,
+2019,2020,Tennessee,Jauan Jennings,Wide Receiver,7,217,278.0
+2019,2020,Minnesota,Carter Coughlin,Outside Linebacker,7,218,190.0
+2019,2020,Iowa,Geno Stone,Safety,7,219,116.0
+2019,2020,Ohio State,K.J. Hill,Wide Receiver,7,220,98.0
+2019,2020,Florida International,Stantley Thomas-Oliver III,Cornerback,7,221,
+2019,2020,Arizona State,Eno Benjamin,Running Back,7,222,180.0
+2019,2020,Memphis,Chris Claybrooks,Cornerback,7,223,
+2019,2020,Hawai'i,Cole McDonald,Quarterback,7,224,213.0
+2019,2020,Michigan State,Kenny Willekes,Defensive End,7,225,115.0
+2019,2020,Colorado,Arlington Hambright,Offensive Tackle,7,226,
+2019,2020,Tennessee State,Lachavious Simmons,Offensive Guard,7,227,
+2019,2020,Syracuse,Sterling Hofrichter,Punter,7,228,
+2019,2020,NC State,James Smith-Williams,Defensive End,7,229,229.0
+2019,2020,Memphis,Dustin Woodard,Center,7,230,
+2019,2020,James Madison,Ben DiNucci,Quarterback,7,231,
+2019,2020,Nebraska,Carlos Davis,Defensive Tackle,7,232,206.0
+2019,2020,Stanford,Casey Toohill,Defensive End,7,233,283.0
+2019,2020,Baylor,Clay Johnston,Inside Linebacker,7,234,
+2019,2020,Ohio State,Jashon Cornell,Defensive End,7,235,
+2019,2020,TCU,Vernon Scott,Safety,7,236,
+2019,2020,Tulane,Thakarius Keyes,Cornerback,7,237,
+2019,2020,South Carolina,TJ Brunson,Inside Linebacker,7,238,
+2019,2020,Pittsburgh,Dane Jackson,Cornerback,7,239,195.0
+2019,2020,Mississippi State,Tommy Stevens,Quarterback,7,240,
+2019,2020,Temple,Chapelle Russell,Outside Linebacker,7,241,211.0
+2019,2020,Miami,Jonathan Garvin,Defensive End,7,242,177.0
+2019,2020,Marshall,Chris Jackson,Safety,7,243,
+2019,2020,Iowa,Nate Stanley,Quarterback,7,244,159.0
+2019,2020,Louisiana,Raymond Calais,Running Back,7,245,254.0
+2019,2020,Navy,Malcolm Perry,Wide Receiver,7,246,
+2019,2020,Minnesota,Chris Williamson,Cornerback,7,247,
+2019,2020,Miami (OH),Sam Sloman,Place Kicker,7,248,
+2019,2020,Mississippi State,Brian Cole II,Safety,7,249,239.0
+2019,2020,Clemson,Tremayne Anchrum,Offensive Guard,7,250,196.0
+2019,2020,LSU,Stephen Sullivan,Tight End,7,251,192.0
+2019,2020,Florida,Tyrie Cleveland,Wide Receiver,7,252,256.0
+2019,2020,Washburn,Kyle Hinton,Offensive Guard,7,253,
+2019,2020,North Dakota State,Derrek Tuszka,Outside Linebacker,7,254,
+2019,2020,Georgia,Tae Crowder,Inside Linebacker,7,255,
+2020,2021,Clemson,Trevor Lawrence,Quarterback,1,1,1.0
+2020,2021,BYU,Zach Wilson,Quarterback,1,2,4.0
+2020,2021,North Dakota State,Trey Lance,Quarterback,1,3,9.0
+2020,2021,Florida,Kyle Pitts,Tight End,1,4,2.0
+2020,2021,LSU,Ja'Marr Chase,Wide Receiver,1,5,3.0
+2020,2021,Alabama,Jaylen Waddle,Wide Receiver,1,6,7.0
+2020,2021,Oregon,Penei Sewell,Offensive Tackle,1,7,5.0
+2020,2021,South Carolina,Jaycee Horn,Cornerback,1,8,14.0
+2020,2021,Alabama,Pat Surtain II,Cornerback,1,9,10.0
+2020,2021,Alabama,DeVonta Smith,Wide Receiver,1,10,6.0
+2020,2021,Ohio State,Justin Fields,Quarterback,1,11,11.0
+2020,2021,Penn State,Micah Parsons,Inside Linebacker,1,12,16.0
+2020,2021,Northwestern,Rashawn Slater,Offensive Tackle,1,13,8.0
+2020,2021,USC,Alijah Vera-Tucker,Offensive Guard,1,14,13.0
+2020,2021,Alabama,Mac Jones,Quarterback,1,15,15.0
+2020,2021,Tulsa,Zaven Collins,Outside Linebacker,1,16,27.0
+2020,2021,Alabama,Alex Leatherwood,Offensive Tackle,1,17,60.0
+2020,2021,Miami,Jaelan Phillips,Defensive End,1,18,21.0
+2020,2021,Kentucky,Jamin Davis,Inside Linebacker,1,19,25.0
+2020,2021,Florida,Kadarius Toney,Wide Receiver,1,20,32.0
+2020,2021,Michigan,Kwity Paye,Defensive End,1,21,18.0
+2020,2021,Virginia Tech,Caleb Farley,Cornerback,1,22,19.0
+2020,2021,Virginia Tech,Christian Darrisaw,Offensive Tackle,1,23,20.0
+2020,2021,Alabama,Najee Harris,Running Back,1,24,28.0
+2020,2021,Clemson,Travis Etienne,Running Back,1,25,22.0
+2020,2021,Northwestern,Greg Newsome II,Cornerback,1,26,24.0
+2020,2021,Minnesota,Rashod Bateman,Wide Receiver,1,27,29.0
+2020,2021,Houston,Payton Turner,Defensive End,1,28,73.0
+2020,2021,Georgia,Eric Stokes,Cornerback,1,29,71.0
+2020,2021,Miami,Gregory Rousseau,Defensive End,1,30,48.0
+2020,2021,Penn State,Odafe Oweh,Outside Linebacker,1,31,38.0
+2020,2021,Washington,Joe Tryon,Outside Linebacker,1,32,37.0
+2020,2021,Georgia,Tyson Campbell,Cornerback,2,33,41.0
+2020,2021,Ole Miss,Elijah Moore,Wide Receiver,2,34,23.0
+2020,2021,North Carolina,Javonte Williams,Running Back,2,35,35.0
+2020,2021,Oregon,Jevon Holland,Safety,2,36,56.0
+2020,2021,Alabama,Landon Dickerson,Center,2,37,45.0
+2020,2021,Alabama,Christian Barmore,Defensive Tackle,2,38,30.0
+2020,2021,Oklahoma State,Teven Jenkins,Offensive Tackle,2,39,26.0
+2020,2021,UCF,Richie Grant,Safety,2,40,53.0
+2020,2021,Washington,Levi Onwuzurike,Defensive Tackle,2,41,42.0
+2020,2021,Notre Dame,Liam Eichenberg,Offensive Tackle,2,42,33.0
+2020,2021,TCU,Trevon Moehrig,Safety,2,43,17.0
+2020,2021,Kentucky,Kelvin Joseph,Cornerback,2,44,64.0
+2020,2021,Stanford,Walker Little,Offensive Tackle,2,45,62.0
+2020,2021,Clemson,Jackson Carman,Offensive Tackle,2,46,78.0
+2020,2021,Florida State,Asante Samuel Jr.,Cornerback,2,47,34.0
+2020,2021,Notre Dame,Aaron Banks,Offensive Guard,2,48,92.0
+2020,2021,Purdue,Rondale Moore,Wide Receiver,2,49,54.0
+2020,2021,Georgia,Azeez Ojulari,Outside Linebacker,2,50,31.0
+2020,2021,Texas,Samuel Cosmi,Offensive Tackle,2,51,66.0
+2020,2021,Notre Dame,Jeremiah Owusu-Koramoah,Inside Linebacker,2,52,12.0
+2020,2021,North Dakota State,Dillon Radunz,Offensive Tackle,2,53,39.0
+2020,2021,Vanderbilt,Dayo Odeyingbo,Defensive End,2,54,109.0
+2020,2021,Penn State,Pat Freiermuth,Tight End,2,55,58.0
+2020,2021,Western Michigan,D'Wayne Eskridge,Wide Receiver,2,56,57.0
+2020,2021,Louisville,Tutu Atwell,Wide Receiver,2,57,44.0
+2020,2021,Missouri,Nick Bolton,Inside Linebacker,2,58,40.0
+2020,2021,LSU,Terrace Marshall Jr.,Wide Receiver,2,59,46.0
+2020,2021,Ohio State,Pete Werner,Inside Linebacker,2,60,99.0
+2020,2021,Wake Forest,Carlos Basham Jr.,Defensive End,2,61,43.0
+2020,2021,Ohio State,Josh Myers,Center,2,62,106.0
+2020,2021,Oklahoma,Creed Humphrey,Center,2,63,55.0
+2020,2021,Florida,Kyle Trask,Quarterback,2,64,65.0
+2020,2021,Syracuse,Andre Cisco,Safety,3,65,50.0
+2020,2021,Texas A&M,Kellen Mond,Quarterback,3,66,67.0
+2020,2021,Stanford,Davis Mills,Quarterback,3,67,63.0
+2020,2021,Michigan,Jalen Mayfield,Offensive Tackle,3,68,112.0
+2020,2021,Texas,Joseph Ossai,Defensive End,3,69,84.0
+2020,2021,BYU,Brady Christensen,Offensive Tackle,3,70,238.0
+2020,2021,UCF,Aaron Robinson,Cornerback,3,71,74.0
+2020,2021,NC State,Alim McNeill,Defensive Tackle,3,72,70.0
+2020,2021,Louisiana Tech,Milton Williams,Defensive Tackle,3,73,80.0
+2020,2021,Minnesota,Benjamin St-Juste,Cornerback,3,74,81.0
+2020,2021,UCLA,Osa Odighizuwa,Defensive Tackle,3,75,87.0
+2020,2021,Stanford,Paulson Adebo,Cornerback,3,76,95.0
+2020,2021,Tennessee,Josh Palmer,Wide Receiver,3,77,183.0
+2020,2021,North Carolina,Chazz Surratt,Inside Linebacker,3,78,51.0
+2020,2021,Buffalo,Malcolm Koonce,Outside Linebacker,3,79,191.0
+2020,2021,Virginia Tech,Divine Deablo,Safety,3,80,202.0
+2020,2021,Boston College,Hunter Long,Tight End,3,81,52.0
+2020,2021,North Carolina,Dyami Brown,Wide Receiver,3,82,98.0
+2020,2021,Notre Dame,Tommy Tremble,Tight End,3,83,93.0
+2020,2021,Iowa,Chauncey Golston,Defensive End,3,84,177.0
+2020,2021,Clemson,Amari Rodgers,Wide Receiver,3,85,86.0
+2020,2021,Ohio State,Wyatt Davis,Offensive Guard,3,86,82.0
+2020,2021,Illinois,Kendrick Green,Center,3,87,168.0
+2020,2021,Ohio State,Trey Sermon,Running Back,3,88,79.0
+2020,2021,Michigan,Nico Collins,Wide Receiver,3,89,76.0
+2020,2021,Pittsburgh,Patrick Jones II,Defensive End,3,90,68.0
+2020,2021,Auburn,Anthony Schwartz,Wide Receiver,3,91,72.0
+2020,2021,Georgia,Monty Rice,Inside Linebacker,3,92,119.0
+2020,2021,Northern Iowa,Spencer Brown,Offensive Tackle,3,93,77.0
+2020,2021,Georgia,Ben Cleveland,Offensive Guard,3,94,132.0
+2020,2021,Notre Dame,Robert Hainsey,Offensive Tackle,3,95,175.0
+2020,2021,Oklahoma,Ronnie Perkins,Defensive End,3,96,36.0
+2020,2021,Georgia,Tre' McKitty,Tight End,3,97,121.0
+2020,2021,Wisconsin-Whitewater,Quinn Meinerz,Offensive Guard,3,98,61.0
+2020,2021,Oregon State,Nahshon Wright,Cornerback,3,99,272.0
+2020,2021,Washington,Elijah Molden,Cornerback,3,100,49.0
+2020,2021,Syracuse,Ifeatu Melifonwu,Cornerback,3,101,59.0
+2020,2021,Michigan,Ambry Thomas,Cornerback,3,102,166.0
+2020,2021,South Carolina,Ernest Jones,Inside Linebacker,3,103,127.0
+2020,2021,SMU,Brandon Stephens,Cornerback,3,104,236.0
+2020,2021,Ohio State,Baron Browning,Outside Linebacker,3,105,107.0
+2020,2021,USC,Jay Tufele,Defensive Tackle,4,106,97.0
+2020,2021,North Carolina,Michael Carter,Running Back,4,107,83.0
+2020,2021,San Diego State,Darren Hall,Cornerback,4,108,262.0
+2020,2021,Louisville,Dez Fitzpatrick,Wide Receiver,4,109,176.0
+2020,2021,Cincinnati,James Hudson,Offensive Tackle,4,110,88.0
+2020,2021,Tulane,Cameron Sample,Defensive End,4,111,281.0
+2020,2021,USC,Amon-Ra St. Brown,Wide Receiver,4,112,133.0
+2020,2021,Purdue,Derrick Barnes,Inside Linebacker,4,113,252.0
+2020,2021,Stanford,Drew Dalman,Center,4,114,152.0
+2020,2021,LSU,Jabril Cox,Inside Linebacker,4,115,47.0
+2020,2021,Northern Iowa,Elerson Smith,Outside Linebacker,4,116,136.0
+2020,2021,Texas A&M,Bobby Brown III,Defensive Tackle,4,117,126.0
+2020,2021,Duke,Chris Rumph II,Outside Linebacker,4,118,69.0
+2020,2021,Iowa State,Kene Nwangwu,Running Back,4,119,
+2020,2021,Oklahoma,Rhamondre Stevenson,Running Back,4,120,110.0
+2020,2021,UAB,Jordan Smith,Defensive End,4,121,161.0
+2020,2021,LSU,Tyler Shelvin,Defensive Tackle,4,122,116.0
+2020,2021,Texas Tech,Zech McPhearson,Cornerback,4,123,317.0
+2020,2021,Boise State,John Bates,Tight End,4,124,189.0
+2020,2021,California,Camryn Bynum,Cornerback,4,125,130.0
+2020,2021,Oklahoma State,Chuba Hubbard,Running Back,4,126,150.0
+2020,2021,SMU,Kylen Granson,Tight End,4,127,235.0
+2020,2021,Texas A&M,Dan Moore Jr.,Offensive Tackle,4,128,120.0
+2020,2021,North Texas,Jaelon Darden,Wide Receiver,4,129,314.0
+2020,2021,Central Arkansas,Robert Rochell,Cornerback,4,130,113.0
+2020,2021,Oklahoma State,Tylan Wallace,Wide Receiver,4,131,75.0
+2020,2021,Ohio State,Tommy Togiai,Defensive Tackle,4,132,135.0
+2020,2021,Notre Dame,Ian Book,Quarterback,4,133,221.0
+2020,2021,Florida State,Janarius Robinson,Defensive End,4,134,201.0
+2020,2021,Pittsburgh,Rashad Weaver,Defensive End,4,135,114.0
+2020,2021,Florida,Marco Wilson,Cornerback,4,136,108.0
+2020,2021,Oklahoma,Tre Brown,Cornerback,4,137,138.0
+2020,2021,Marshall,Josh Ball,Offensive Tackle,4,138,218.0
+2020,2021,East Carolina,D'Ante Smith,Offensive Tackle,4,139,162.0
+2020,2021,Texas A&M,Buddy Johnson,Inside Linebacker,4,140,293.0
+2020,2021,UCF,Jacob Harris,Wide Receiver,4,141,
+2020,2021,Ole Miss,Royce Newman,Offensive Guard,4,142,245.0
+2020,2021,Missouri,Tyree Gillespie,Safety,4,143,157.0
+2020,2021,Florida State,Joshua Kaindoh,Defensive End,4,144,167.0
+2020,2021,Ohio State,Luke Farrell,Tight End,5,145,313.0
+2020,2021,Auburn,Jamien Sherwood,Safety,5,146,187.0
+2020,2021,Miami,Brevin Jordan,Tight End,5,147,104.0
+2020,2021,Texas,Ta'Quon Graham,Defensive Tackle,5,148,263.0
+2020,2021,Florida,Evan McPherson,Place Kicker,5,149,309.0
+2020,2021,Memphis,Kenneth Gainwell,Running Back,5,150,142.0
+2020,2021,Missouri,Larry Borom,Offensive Tackle,5,151,259.0
+2020,2021,Texas,Caden Sterns,Safety,5,152,139.0
+2020,2021,West Virginia,Tony Fields II,Inside Linebacker,5,153,193.0
+2020,2021,Duke,Michael Carter II,Safety,5,154,320.0
+2020,2021,Western Michigan,Jaylon Moore,Offensive Guard,5,155,147.0
+2020,2021,Wisconsin,Isaiahh Loudermilk,Defensive Tackle,5,156,
+2020,2021,Iowa,Ihmir Smith-Marsette,Wide Receiver,5,157,170.0
+2020,2021,Iowa,Daviyon Nixon,Defensive Tackle,5,158,103.0
+2020,2021,Nebraska,Brenden Jaimes,Offensive Tackle,5,159,270.0
+2020,2021,Ohio State,Shaun Wade,Cornerback,5,160,101.0
+2020,2021,Miami (OH),Tommy Doyle,Offensive Tackle,5,161,153.0
+2020,2021,Duke,Noah Gray,Tight End,5,162,164.0
+2020,2021,Cincinnati,Darrick Forrest,Safety,5,163,291.0
+2020,2021,Indiana,Jamar Johnson,Safety,5,164,91.0
+2020,2021,Florida,Shawn Davis,Safety,5,165,192.0
+2020,2021,Washington,Keith Taylor,Cornerback,5,166,256.0
+2020,2021,Illinois,Nate Hobbs,Cornerback,5,167,
+2020,2021,Central Missouri,Zach Davidson,Tight End,5,168,179.0
+2020,2021,Georgia,Richard LeCounte,Safety,5,169,96.0
+2020,2021,TCU,Garret Wallow,Inside Linebacker,5,170,186.0
+2020,2021,Notre Dame,Daelin Hayes,Defensive End,5,171,134.0
+2020,2021,Oregon,Deommodore Lenoir,Cornerback,5,172,319.0
+2020,2021,Florida,Tedarrell Slaton,Defensive Tackle,5,173,335.0
+2020,2021,Northwestern,Earnest Brown IV,Defensive End,5,174,318.0
+2020,2021,Pittsburgh,Jason Pinnock,Cornerback,5,175,
+2020,2021,Auburn,K.J. Britt,Inside Linebacker,5,176,131.0
+2020,2021,Michigan,Cameron McGrone,Inside Linebacker,5,177,159.0
+2020,2021,App State,Shemar Jean-Charles,Cornerback,5,178,
+2020,2021,Stanford,Simi Fehoko,Wide Receiver,5,179,180.0
+2020,2021,USC,Talanoa Hufanga,Safety,5,180,212.0
+2020,2021,Clemson,Cornell Powell,Wide Receiver,5,181,230.0
+2020,2021,Notre Dame,Adetokunbo Ogundeji,Defensive End,5,182,181.0
+2020,2021,Boise State,Avery Williams,Cornerback,5,183,
+2020,2021,Michigan,Ben Mason,Fullback,5,184,265.0
+2020,2021,Iowa,Nick Niemann,Inside Linebacker,6,185,347.0
+2020,2021,Florida State,Hamsah Nasirildeen,Safety,6,186,102.0
+2020,2021,Arizona State,Frank Darby,Wide Receiver,6,187,137.0
+2020,2021,Missouri,Joshuah Bledsoe,Safety,6,188,174.0
+2020,2021,USC,Marlon Tuipulotu,Defensive Tackle,6,189,123.0
+2020,2021,Georgia,Trey Hill,Center,6,190,146.0
+2020,2021,Coastal Carolina,Tarron Jackson,Defensive End,6,191,185.0
+2020,2021,Kentucky,Quinton Bohanna,Defensive Tackle,6,192,197.0
+2020,2021,Alabama,Deonte Brown,Offensive Guard,6,193,128.0
+2020,2021,Louisiana,Elijah Mitchell,Running Back,6,194,211.0
+2020,2021,Arizona,Roy Lopez,Defensive Tackle,6,195,350.0
+2020,2021,Arizona,Gary Brightwell,Running Back,6,196,312.0
+2020,2021,Colorado,William Sherman,Offensive Tackle,6,197,294.0
+2020,2021,Missouri,Larry Rountree III,Running Back,6,198,182.0
+2020,2021,Pittsburgh,Jaylen Twyman,Defensive Tackle,6,199,158.0
+2020,2021,Kentucky,Brandin Echols,Cornerback,6,200,200.0
+2020,2021,Oklahoma State,Rodarius Williams,Cornerback,6,201,242.0
+2020,2021,Michigan,Chris Evans,Running Back,6,202,178.0
+2020,2021,Houston,Marquez Stevenson,Wide Receiver,6,203,143.0
+2020,2021,South Carolina,Shi Smith,Wide Receiver,6,204,89.0
+2020,2021,LSU,Racey McMath,Wide Receiver,6,205,241.0
+2020,2021,Kentucky,Landon Young,Offensive Tackle,6,206,287.0
+2020,2021,Arkansas,Jonathan Marshall,Defensive Tackle,6,207,243.0
+2020,2021,Florida,Stone Forsythe,Offensive Tackle,6,208,326.0
+2020,2021,Georgia Tech,Jalen Camp,Wide Receiver,6,209,
+2020,2021,Duke,Victor Dimukeje,Defensive End,6,210,331.0
+2020,2021,UCLA,Demetric Felton,Wide Receiver,6,211,140.0
+2020,2021,Pittsburgh,Damar Hamlin,Safety,6,212,118.0
+2020,2021,Wisconsin,Rachad Wildgoose,Cornerback,6,213,124.0
+2020,2021,Wisconsin,Cole Van Lanen,Offensive Tackle,6,214,286.0
+2020,2021,Oregon,Brady Breeze,Safety,6,215,264.0
+2020,2021,Miami,Quincy Roche,Outside Linebacker,6,216,173.0
+2020,2021,Virginia Tech,Khalil Herbert,Running Back,6,217,213.0
+2020,2021,Texas,Sam Ehlinger,Quarterback,6,218,247.0
+2020,2021,Auburn,Seth Williams,Wide Receiver,6,219,165.0
+2020,2021,Boston College,Isaiah McDuffie,Inside Linebacker,6,220,257.0
+2020,2021,North Carolina,Dazz Newsome,Wide Receiver,6,221,255.0
+2020,2021,Alabama,Thomas Fletcher,Long Snapper,6,222,285.0
+2020,2021,UCF,Tay Gowan,Cornerback,6,223,85.0
+2020,2021,LSU,JaCoby Stevens,Safety,6,224,205.0
+2020,2021,Michigan,Camaron Cheeseman,Long Snapper,6,225,
+2020,2021,Tennessee,Trey Smith,Offensive Guard,6,226,100.0
+2020,2021,South Carolina,Israel Mukuamu,Cornerback,6,227,171.0
+2020,2021,Oregon,Thomas Graham Jr.,Cornerback,6,228,250.0
+2020,2021,Charleston (WV),Mike Strachan,Wide Receiver,7,229,223.0
+2020,2021,Pittsburgh,Jimmy Morrissey,Center,7,230,267.0
+2020,2021,Massachusetts,Larnel Coleman,Offensive Tackle,7,231,
+2020,2021,Kentucky,Phil Hoskins,Defensive Tackle,7,232,
+2020,2021,Maryland,Jake Funk,Running Back,7,233,
+2020,2021,Tulane,Patrick Johnson,Outside Linebacker,7,234,253.0
+2020,2021,Kansas State,Wyatt Hubert,Defensive End,7,235,290.0
+2020,2021,Texas Tech,Jack Anderson,Offensive Guard,7,236,194.0
+2020,2021,LSU,Kary Vincent Jr.,Cornerback,7,237,155.0
+2020,2021,Nebraska,Matt Farniok,Offensive Guard,7,238,
+2020,2021,Ohio State,Jonathon Cooper,Defensive End,7,239,300.0
+2020,2021,Baylor,William Bradley-King,Outside Linebacker,7,240,172.0
+2020,2021,Georgia,Mark Webb,Safety,7,241,208.0
+2020,2021,UCF,Tre Nixon,Wide Receiver,7,242,315.0
+2020,2021,Cincinnati,James Wiggins,Safety,7,243,224.0
+2020,2021,Cincinnati,Gerrid Doaks,Running Back,7,244,
+2020,2021,Oklahoma,Tre Norwood,Cornerback,7,245,273.0
+2020,2021,Penn State,Shaka Toney,Defensive End,7,246,156.0
+2020,2021,Penn State,Michal Menet,Center,7,247,198.0
+2020,2021,Penn State,Will Fries,Offensive Tackle,7,248,327.0
+2020,2021,Notre Dame,Ben Skowronek,Wide Receiver,7,249,210.0
+2020,2021,BYU,Khyiris Tonga,Defensive Tackle,7,250,283.0
+2020,2021,BYU,Chris Wilcox,Cornerback,7,251,333.0
+2020,2021,Concordia St. Paul,Chris Garrett,Outside Linebacker,7,252,
+2020,2021,Mississippi State,Marquiss Spencer,Defensive End,7,253,316.0
+2020,2021,Georgia Tech,Pressley Harvin III,Punter,7,254,337.0
+2020,2021,South Alabama,Kawaan Baker,Wide Receiver,7,255,
+2020,2021,Mississippi State,Kylin Hill,Running Back,7,256,219.0
+2020,2021,Oregon State,Jermar Jefferson,Running Back,7,257,163.0
+2020,2021,BYU,Dax Milne,Wide Receiver,7,258,279.0
+2020,2021,Houston,Grant Stuard,Outside Linebacker,7,259,216.0
+2021,2022,Georgia,Travon Walker,Defensive End,1,1,2.0
+2021,2022,Michigan,Aidan Hutchinson,Defensive End,1,2,1.0
+2021,2022,LSU,Derek Stingley Jr.,Cornerback,1,3,8.0
+2021,2022,Cincinnati,Ahmad Gardner,Cornerback,1,4,5.0
+2021,2022,Oregon,Kayvon Thibodeaux,Defensive End,1,5,7.0
+2021,2022,NC State,Ikem Ekwonu,Offensive Tackle,1,6,3.0
+2021,2022,Alabama,Evan Neal,Offensive Tackle,1,7,4.0
+2021,2022,USC,Drake London,Wide Receiver,1,8,11.0
+2021,2022,Mississippi State,Charles Cross,Offensive Tackle,1,9,10.0
+2021,2022,Ohio State,Garrett Wilson,Wide Receiver,1,10,6.0
+2021,2022,Ohio State,Chris Olave,Wide Receiver,1,11,15.0
+2021,2022,Alabama,Jameson Williams,Wide Receiver,1,12,13.0
+2021,2022,Georgia,Jordan Davis,Defensive Tackle,1,13,12.0
+2021,2022,Notre Dame,Kyle Hamilton,Safety,1,14,9.0
+2021,2022,Texas A&M,Kenyon Green,Offensive Guard,1,15,26.0
+2021,2022,Penn State,Jahan Dotson,Wide Receiver,1,16,25.0
+2021,2022,Boston College,Zion Johnson,Offensive Guard,1,17,28.0
+2021,2022,Arkansas,Treylon Burks,Wide Receiver,1,18,24.0
+2021,2022,Northern Iowa,Trevor Penning,Offensive Tackle,1,19,17.0
+2021,2022,Pittsburgh,Kenny Pickett,Quarterback,1,20,22.0
+2021,2022,Washington,Trent McDuffie,Cornerback,1,21,16.0
+2021,2022,Georgia,Quay Walker,Inside Linebacker,1,22,31.0
+2021,2022,Florida,Kaiir Elam,Cornerback,1,23,32.0
+2021,2022,Tulsa,Tyler Smith,Offensive Tackle,1,24,33.0
+2021,2022,Iowa,Tyler Linderbaum,Center,1,25,29.0
+2021,2022,Florida State,Jermaine Johnson II,Defensive End,1,26,14.0
+2021,2022,Utah,Devin Lloyd,Inside Linebacker,1,27,20.0
+2021,2022,Georgia,Devonte Wyatt,Defensive Tackle,1,28,23.0
+2021,2022,Chattanooga,Cole Strange,Offensive Guard,1,29,77.0
+2021,2022,Purdue,George Karlaftis,Defensive End,1,30,37.0
+2021,2022,Michigan,Daxton Hill,Safety,1,31,18.0
+2021,2022,Georgia,Lewis Cine,Safety,1,32,41.0
+2021,2022,Houston,Logan Hall,Defensive End,2,33,45.0
+2021,2022,North Dakota State,Christian Watson,Wide Receiver,2,34,39.0
+2021,2022,Auburn,Roger McCreary,Cornerback,2,35,48.0
+2021,2022,Iowa State,Breece Hall,Running Back,2,36,30.0
+2021,2022,Baylor,Jalen Pitre,Safety,2,37,49.0
+2021,2022,Penn State,Arnold Ebiketie,Defensive End,2,38,34.0
+2021,2022,Washington,Kyler Gordon,Cornerback,2,39,36.0
+2021,2022,Minnesota,Boye Mafe,Outside Linebacker,2,40,38.0
+2021,2022,Michigan State,Ken Walker III,Running Back,2,41,44.0
+2021,2022,Clemson,Andrew Booth Jr.,Cornerback,2,42,27.0
+2021,2022,Kentucky,Wan'Dale Robinson,Wide Receiver,2,43,80.0
+2021,2022,Alabama,John Metchie III,Wide Receiver,2,44,55.0
+2021,2022,Michigan,David Ojabo,Outside Linebacker,2,45,35.0
+2021,2022,Kentucky,Josh Paschal,Defensive End,2,46,52.0
+2021,2022,Alabama,Phidarian Mathis,Defensive Tackle,2,47,57.0
+2021,2022,Penn State,Jaquan Brisker,Safety,2,48,65.0
+2021,2022,Tennessee,Alontae Taylor,Cornerback,2,49,109.0
+2021,2022,Baylor,Tyquan Thornton,Wide Receiver,2,50,117.0
+2021,2022,Nebraska,Cameron Jurgens,Center,2,51,62.0
+2021,2022,Georgia,George Pickens,Wide Receiver,2,52,58.0
+2021,2022,Cincinnati,Alec Pierce,Wide Receiver,2,53,61.0
+2021,2022,Western Michigan,Skyy Moore,Wide Receiver,2,54,40.0
+2021,2022,Colorado State,Trey McBride,Tight End,2,55,46.0
+2021,2022,Ole Miss,Sam Williams,Outside Linebacker,2,56,99.0
+2021,2022,Central Michigan,Luke Goedeke,Offensive Tackle,2,57,72.0
+2021,2022,Montana State,Troy Andersen,Inside Linebacker,2,58,92.0
+2021,2022,LSU,Ed Ingram,Offensive Guard,2,59,133.0
+2021,2022,Nebraska,Cam Taylor-Britt,Safety,2,60,71.0
+2021,2022,USC,Drake Jackson,Outside Linebacker,2,61,53.0
+2021,2022,Cincinnati,Bryan Cook,Safety,2,62,105.0
+2021,2022,Georgia,James Cook,Running Back,2,63,86.0
+2021,2022,Oklahoma,Nik Bonitto,Outside Linebacker,2,64,64.0
+2021,2022,Kentucky,Luke Fortner,Center,3,65,127.0
+2021,2022,Oklahoma,Brian Asamoah,Inside Linebacker,3,66,107.0
+2021,2022,North Carolina,Joshua Ezeudu,Offensive Guard,3,67,151.0
+2021,2022,Mississippi State,Martin Emerson,Cornerback,3,68,112.0
+2021,2022,Ohio State,Nicholas Petit-Frere,Offensive Tackle,3,69,63.0
+2021,2022,Wyoming,Chad Muma,Inside Linebacker,3,70,68.0
+2021,2022,Tennessee,Velus Jones Jr.,Wide Receiver,3,71,106.0
+2021,2022,Washington State,Abraham Lucas,Offensive Tackle,3,72,60.0
+2021,2022,Virginia,Jelani Woods,Tight End,3,73,87.0
+2021,2022,Cincinnati,Desmond Ridder,Quarterback,3,74,43.0
+2021,2022,Alabama,Christian Harris,Inside Linebacker,3,75,56.0
+2021,2022,UConn,Travis Jones,Defensive Tackle,3,76,42.0
+2021,2022,Central Michigan,Bernhard Raimann,Offensive Tackle,3,77,51.0
+2021,2022,UAB,Alex Wright,Defensive End,3,78,100.0
+2021,2022,Baylor,JT Woods,Safety,3,79,82.0
+2021,2022,UCLA,Greg Dulcich,Tight End,3,80,69.0
+2021,2022,LSU,Cordale Flott,Cornerback,3,81,85.0
+2021,2022,Western Kentucky,DeAngelo Malone,Outside Linebacker,3,82,70.0
+2021,2022,Georgia,Nakobe Dean,Inside Linebacker,3,83,19.0
+2021,2022,Texas A&M,DeMarvin Leal,Defensive End,3,84,59.0
+2021,2022,Houston,Marcus Jones,Cornerback,3,85,91.0
+2021,2022,Liberty,Malik Willis,Quarterback,3,86,21.0
+2021,2022,San Diego State,Cameron Thomas,Defensive End,3,87,66.0
+2021,2022,South Alabama,Jalen Tolbert,Wide Receiver,3,88,74.0
+2021,2022,Baylor,Terrel Bernard,Inside Linebacker,3,89,145.0
+2021,2022,Memphis,Dylan Parham,Offensive Guard,3,90,95.0
+2021,2022,Arizona State,Rachaad White,Running Back,3,91,135.0
+2021,2022,UCLA,Sean Rhyan,Offensive Guard,3,92,83.0
+2021,2022,LSU,Tyrion Davis-Price,Running Back,3,93,175.0
+2021,2022,Ole Miss,Matt Corral,Quarterback,3,94,47.0
+2021,2022,Florida,Zachary Carter,Defensive Tackle,3,95,115.0
+2021,2022,Maryland,Nick Cross,Safety,3,96,75.0
+2021,2022,Illinois,Kerby Joseph,Safety,3,97,73.0
+2021,2022,Alabama,Brian Robinson Jr.,Running Back,3,98,93.0
+2021,2022,Purdue,David Bell,Wide Receiver,3,99,94.0
+2021,2022,Cincinnati,Myjai Sanders,Defensive End,3,100,114.0
+2021,2022,Ohio State,Jeremy Ruckert,Tight End,3,101,78.0
+2021,2022,Georgia,Channing Tindall,Inside Linebacker,3,102,79.0
+2021,2022,Wisconsin,Leo Chenal,Inside Linebacker,3,103,67.0
+2021,2022,Wisconsin,Logan Bruss,Offensive Guard,3,104,170.0
+2021,2022,SMU,Danny Gray,Wide Receiver,3,105,177.0
+2021,2022,Washington,Cade Otton,Tight End,4,106,146.0
+2021,2022,Florida,Dameon Pierce,Running Back,4,107,96.0
+2021,2022,Oklahoma,Perrion Winfrey,Defensive Tackle,4,108,54.0
+2021,2022,Cincinnati,Coby Bryant,Cornerback,4,109,108.0
+2021,2022,Minnesota,Daniel Faalele,Offensive Tackle,4,110,84.0
+2021,2022,Louisiana,Max Mitchell,Offensive Tackle,4,111,142.0
+2021,2022,San Diego State,Daniel Bellinger,Tight End,4,112,98.0
+2021,2022,Louisiana,Percy Butler,Safety,4,113,221.0
+2021,2022,Iowa,Dane Belton,Safety,4,114,181.0
+2021,2022,Pittsburgh,Damarri Mathis,Cornerback,4,115,149.0
+2021,2022,Iowa State,Eyioma Uwazurike,Defensive End,4,116,90.0
+2021,2022,Texas A&M,Micheal Clemons,Defensive End,4,117,141.0
+2021,2022,Missouri,Akayleb Evans,Cornerback,4,118,199.0
+2021,2022,Alabama,Jalyn Armour-Davis,Cornerback,4,119,101.0
+2021,2022,Penn State,Brandon Smith,Inside Linebacker,4,120,124.0
+2021,2022,Arizona State,Jack Jones,Cornerback,4,121,192.0
+2021,2022,Georgia,Zamir White,Running Back,4,122,97.0
+2021,2022,Texas A&M,Isaiah Spiller,Running Back,4,123,89.0
+2021,2022,LSU,Cade York,Place Kicker,4,124,140.0
+2021,2022,Texas Tech,Erik Ezukanma,Wide Receiver,4,125,165.0
+2021,2022,LSU,Neil Farrell Jr.,Defensive Tackle,4,126,118.0
+2021,2022,South Dakota State,Pierre Strong Jr.,Running Back,4,127,143.0
+2021,2022,Iowa State,Charlie Kolar,Tight End,4,128,113.0
+2021,2022,Wisconsin,Jake Ferguson,Tight End,4,129,176.0
+2021,2022,Penn State,Jordan Stout,Punter,4,130,182.0
+2021,2022,Michigan,Hassan Haskins,Running Back,4,131,156.0
+2021,2022,Nevada,Romeo Doubs,Wide Receiver,4,132,157.0
+2021,2022,Georgia,Jake Camarda,Punter,4,133,263.0
+2021,2022,UTSA,Spencer Burford,Offensive Tackle,4,134,212.0
+2021,2022,Fayetteville State,Joshua Williams,Cornerback,4,135,174.0
+2021,2022,North Dakota State,Cordell Volson,Offensive Tackle,4,136,227.0
+2021,2022,Western Kentucky,Bailey Zappe,Quarterback,4,137,161.0
+2021,2022,Memphis,Calvin Austin III,Wide Receiver,4,138,76.0
+2021,2022,Coastal Carolina,Isaiah Likely,Tight End,4,139,104.0
+2021,2022,Wake Forest,Zach Tom,Offensive Guard,4,140,128.0
+2021,2022,Houston,Damarion Williams,Cornerback,4,141,276.0
+2021,2022,South Carolina State,Decobie Durant,Cornerback,4,142,251.0
+2021,2022,Maryland,Chigoziem Okonkwo,Tight End,4,143,164.0
+2021,2022,North Carolina,Sam Howell,Quarterback,5,144,50.0
+2021,2022,Kentucky,Darian Kinnard,Offensive Guard,5,145,111.0
+2021,2022,Indiana,Micah McFadden,Inside Linebacker,5,146,210.0
+2021,2022,Arizona State,D.J. Davidson,Defensive Tackle,5,147,278.0
+2021,2022,Boise State,Khalil Shakir,Wide Receiver,5,148,102.0
+2021,2022,Nevada,Cole Turner,Tight End,5,149,202.0
+2021,2022,Stanford,Thomas Booker,Defensive Tackle,5,150,215.0
+2021,2022,BYU,Tyler Allgeier,Running Back,5,151,290.0
+2021,2022,Oklahoma,Delarrin Turner-Yell,Safety,5,152,253.0
+2021,2022,UTSA,Tariq Woolen,Cornerback,5,153,81.0
+2021,2022,Ole Miss,Snoop Conner,Running Back,5,154,228.0
+2021,2022,North Dakota,Matt Waletzko,Offensive Tackle,5,155,131.0
+2021,2022,Cincinnati,Jerome Ford,Running Back,5,156,134.0
+2021,2022,Sam Houston,Zyon McCollum,Cornerback,5,157,88.0
+2021,2022,Ohio State,Tyreke Smith,Defensive End,5,158,166.0
+2021,2022,Missouri State,Eric Johnson,Defensive Tackle,5,159,147.0
+2021,2022,UCLA,Otito Ogbonnia,Defensive Tackle,5,160,158.0
+2021,2022,App State,D'Marco Jackson,Inside Linebacker,5,161,136.0
+2021,2022,Samford,Montrell Washington,Wide Receiver,5,162,
+2021,2022,UCLA,Kyle Philips,Wide Receiver,5,163,126.0
+2021,2022,Notre Dame,Kyren Williams,Running Back,5,164,163.0
+2021,2022,Minnesota,Esezi Otomewo,Defensive End,5,165,178.0
+2021,2022,Toledo,Tycen Anderson,Safety,5,166,154.0
+2021,2022,Fresno State,DaRon Bland,Cornerback,5,167,169.0
+2021,2022,Southern Utah,Braxton Jones,Offensive Tackle,5,168,129.0
+2021,2022,North Carolina,Ty Chandler,Running Back,5,169,132.0
+2021,2022,Oregon State,Teagan Quitoriano,Tight End,5,170,313.0
+2021,2022,Washington,Luke Wattenberg,Center,5,171,279.0
+2021,2022,Toledo,Samuel Womack,Cornerback,5,172,
+2021,2022,North Carolina,Marcus McKethan,Offensive Guard,5,173,327.0
+2021,2022,Miami (OH),Dominique Robinson,Outside Linebacker,5,174,179.0
+2021,2022,Tennessee,Matthew Butler,Defensive Tackle,5,175,144.0
+2021,2022,LSU,Damone Clark,Inside Linebacker,5,176,173.0
+2021,2022,Virginia Tech,James Mitchell,Tight End,5,177,197.0
+2021,2022,Arkansas,John Ridgeway,Defensive Tackle,5,178,138.0
+2021,2022,South Carolina,Kingsley Enagbare,Outside Linebacker,5,179,110.0
+2021,2022,San Diego State,Matt Araiza,Punter,6,180,155.0
+2021,2022,Kansas,Kyron Johnson,Inside Linebacker,6,181,186.0
+2021,2022,Cincinnati,Darrian Beavers,Inside Linebacker,6,182,130.0
+2021,2022,South Carolina,Kevin Harris,Running Back,6,183,236.0
+2021,2022,Illinois,Vederian Lowe,Offensive Tackle,6,184,180.0
+2021,2022,Villanova,Christian Benford,Cornerback,6,185,220.0
+2021,2022,San Diego State,Zachary Thomas,Offensive Tackle,6,186,224.0
+2021,2022,Fordham,Nick Zakelj,Offensive Tackle,6,187,207.0
+2021,2022,Oklahoma State,Malcolm Rodriguez,Inside Linebacker,6,188,162.0
+2021,2022,Virginia Tech,Amare Barno,Outside Linebacker,6,189,123.0
+2021,2022,Georgia,Justin Shaffer,Offensive Guard,6,190,183.0
+2021,2022,Michigan State,Jalen Nailor,Wide Receiver,6,191,237.0
+2021,2022,Youngstown State,Andrew Ogletree,Tight End,6,192,
+2021,2022,Oklahoma State,Devin Harper,Inside Linebacker,6,193,326.0
+2021,2022,Air Force,Jordan Jackson,Defensive Tackle,6,194,344.0
+2021,2022,Georgia,Jamaree Salyer,Offensive Guard,6,195,122.0
+2021,2022,Missouri,Tyler Badie,Running Back,6,196,218.0
+2021,2022,Ouachita Baptist,Gregory Junior,Cornerback,6,197,366.0
+2021,2022,SMU,Grant Calcaterra,Tight End,6,198,282.0
+2021,2022,Tennessee,Cade Mays,Offensive Guard,6,199,211.0
+2021,2022,Northwest Missouri State,Sam Roberts,Defensive Tackle,6,200,
+2021,2022,USC,Keaontay Ingram,Running Back,6,201,242.0
+2021,2022,Oklahoma,Michael Woods II,Wide Receiver,6,202,
+2021,2022,Baylor,Trestan Ebner,Running Back,6,203,334.0
+2021,2022,Tennessee,Theo Jackson,Safety,6,204,
+2021,2022,LSU,Austin Deculus,Offensive Tackle,6,205,289.0
+2021,2022,Wisconsin,Matt Henningsen,Defensive Tackle,6,206,269.0
+2021,2022,Illinois,Doug Kramer,Center,6,207,275.0
+2021,2022,Michigan State,Connor Heyward,Fullback,6,208,247.0
+2021,2022,Virginia Tech,Luke Tenuta,Offensive Tackle,6,209,307.0
+2021,2022,LSU,Chasen Hines,Offensive Guard,6,210,280.0
+2021,2022,UCLA,Quentin Lake,Safety,6,211,277.0
+2021,2022,Georgia,Derion Kendrick,Cornerback,6,212,246.0
+2021,2022,Georgia,John FitzPatrick,Tight End,6,213,305.0
+2021,2022,Wake Forest,Ja'Sir Taylor,Cornerback,6,214,
+2021,2022,Virginia Tech,Lecitus Smith,Offensive Guard,6,215,171.0
+2021,2022,Cincinnati,Curtis Brooks,Defensive Tackle,6,216,328.0
+2021,2022,Jackson State,James Houston,Outside Linebacker,6,217,284.0
+2021,2022,Minnesota,Ko Kieft,Tight End,6,218,
+2021,2022,Ole Miss,Chance Campbell,Inside Linebacker,6,219,303.0
+2021,2022,UCF,Kalia Davis,Defensive Tackle,6,220,244.0
+2021,2022,Penn State,Tariq Castro-Fields,Cornerback,6,221,153.0
+2021,2022,Arkansas,Montaric Brown,Cornerback,7,222,315.0
+2021,2022,Oklahoma,Isaiah Thomas,Defensive End,7,223,191.0
+2021,2022,California,Cameron Goode,Outside Linebacker,7,224,
+2021,2022,Ole Miss,Mark Robinson,Outside Linebacker,7,225,
+2021,2022,Southern,Ja'Tyre Carter,Offensive Guard,7,226,245.0
+2021,2022,South Carolina,Nick Muse,Tight End,7,227,
+2021,2022,Georgia Tech,Tariq Carpenter,Inside Linebacker,7,228,226.0
+2021,2022,Rutgers,Bo Melton,Wide Receiver,7,229,137.0
+2021,2022,Tulsa,Chris Paul,Offensive Guard,7,230,188.0
+2021,2022,Clemson,Baylon Spector,Inside Linebacker,7,231,355.0
+2021,2022,Wisconsin,Faion Hicks,Cornerback,7,232,
+2021,2022,Lenoir Rhyne,Dareke Young,Wide Receiver,7,233,335.0
+2021,2022,Miami,Jonathan Ford,Defensive Tackle,7,234,330.0
+2021,2022,Montana State,Daniel Hardy,Outside Linebacker,7,235,
+2021,2022,Ole Miss,Deane Leonard,Cornerback,7,236,
+2021,2022,Arizona State,Chase Lucas,Cornerback,7,237,239.0
+2021,2022,Ohio State,Thayer Munford,Offensive Tackle,7,238,152.0
+2021,2022,Yale,Rodney Thomas II,Safety,7,239,
+2021,2022,Oklahoma State,Christian Holmes,Cornerback,7,240,
+2021,2022,South Dakota State,Chris Oladokun,Quarterback,7,241,
+2021,2022,Baylor,Kalon Barnes,Cornerback,7,242,172.0
+2021,2022,Washington State,Jaylen Watson,Cornerback,7,243,231.0
+2021,2022,Valdosta State,Christian Matthew,Cornerback,7,244,
+2021,2022,Michigan,Andrew Stueber,Offensive Guard,7,245,196.0
+2021,2022,Texas Tech,Dawson Deaton,Center,7,246,248.0
+2021,2022,Kansas State,Skylar Thompson,Quarterback,7,247,235.0
+2021,2022,LSU,Andre Anthony,Defensive End,7,248,
+2021,2022,Penn State,Rasheed Walker,Offensive Tackle,7,249,119.0
+2021,2022,UCLA,Brittain Brown,Running Back,7,250,
+2021,2022,Rutgers,Isaih Pacheco,Running Back,7,251,299.0
+2021,2022,Coastal Carolina,Jeffrey Gunter,Defensive End,7,252,198.0
+2021,2022,Kansas State,Russ Yeast,Safety,7,253,
+2021,2022,California,Elijah Hicks,Safety,7,254,
+2021,2022,NC State,Trenton Gill,Punter,7,255,
+2021,2022,Penn State,Jesse Luketa,Outside Linebacker,7,256,167.0
+2021,2022,Oklahoma,Marquis Hayes,Offensive Guard,7,257,139.0
+2021,2022,Nebraska,Samori Toure,Wide Receiver,7,258,
+2021,2022,Marshall,Nazeeh Johnson,Safety,7,259,
+2021,2022,Purdue,Zander Horvath,Fullback,7,260,
+2021,2022,Michigan State,AJ Arcuri,Offensive Tackle,7,261,
+2021,2022,Iowa State,Brock Purdy,Quarterback,7,262,361.0
+2022,2023,Alabama,Bryce Young,Quarterback,1,1,1.0
+2022,2023,Ohio State,C.J. Stroud,Quarterback,1,2,5.0
+2022,2023,Alabama,Will Anderson Jr.,Outside Linebacker,1,3,3.0
+2022,2023,Florida,Anthony Richardson,Quarterback,1,4,10.0
+2022,2023,Illinois,Devon Witherspoon,Cornerback,1,5,7.0
+2022,2023,Ohio State,Paris Johnson Jr.,Offensive Tackle,1,6,12.0
+2022,2023,Texas Tech,Tyree Wilson,Defensive End,1,7,4.0
+2022,2023,Texas,Bijan Robinson,Running Back,1,8,2.0
+2022,2023,Georgia,Jalen Carter,Defensive Tackle,1,9,6.0
+2022,2023,Tennessee,Darnell Wright,Offensive Tackle,1,10,18.0
+2022,2023,Northwestern,Peter Skoronski,Offensive Tackle,1,11,9.0
+2022,2023,Alabama,Jahmyr Gibbs,Running Back,1,12,28.0
+2022,2023,Iowa,Lukas Van Ness,Defensive End,1,13,15.0
+2022,2023,Georgia,Broderick Jones,Offensive Tackle,1,14,13.0
+2022,2023,Iowa State,Will McDonald IV,Outside Linebacker,1,15,25.0
+2022,2023,Mississippi State,Emmanuel Forbes,Cornerback,1,16,21.0
+2022,2023,Oregon,Christian Gonzalez,Cornerback,1,17,8.0
+2022,2023,Iowa,Jack Campbell,Inside Linebacker,1,18,58.0
+2022,2023,Pittsburgh,Calijah Kancey,Defensive Tackle,1,19,20.0
+2022,2023,Ohio State,Jaxon Smith-Njigba,Wide Receiver,1,20,17.0
+2022,2023,TCU,Quentin Johnston,Wide Receiver,1,21,29.0
+2022,2023,Boston College,Zay Flowers,Wide Receiver,1,22,22.0
+2022,2023,USC,Jordan Addison,Wide Receiver,1,23,26.0
+2022,2023,Maryland,Deonte Banks,Cornerback,1,24,27.0
+2022,2023,Utah,Dalton Kincaid,Tight End,1,25,14.0
+2022,2023,Michigan,Mazi Smith,Defensive Tackle,1,26,38.0
+2022,2023,Oklahoma,Anton Harrison,Offensive Tackle,1,27,55.0
+2022,2023,Clemson,Myles Murphy,Defensive End,1,28,24.0
+2022,2023,Clemson,Bryan Bresee,Defensive Tackle,1,29,36.0
+2022,2023,Georgia,Nolan Smith,Outside Linebacker,1,30,16.0
+2022,2023,Kansas State,Felix Anudike-Uzomah,Defensive End,1,31,32.0
+2022,2023,Penn State,Joey Porter Jr.,Cornerback,2,32,23.0
+2022,2023,Kentucky,Will Levis,Quarterback,2,33,11.0
+2022,2023,Iowa,Sam LaPorta,Tight End,2,34,43.0
+2022,2023,Notre Dame,Michael Mayer,Tight End,2,35,19.0
+2022,2023,TCU,Steve Avila,Offensive Guard,2,36,34.0
+2022,2023,Auburn,Derick Hall,Outside Linebacker,2,37,66.0
+2022,2023,Syracuse,Matthew Bergeron,Offensive Guard,2,38,52.0
+2022,2023,Ole Miss,Jonathan Mingo,Wide Receiver,2,39,37.0
+2022,2023,Notre Dame,Isaiah Foskey,Defensive End,2,40,77.0
+2022,2023,LSU,BJ Ojulari,Outside Linebacker,2,41,46.0
+2022,2023,Oregon State,Luke Musgrave,Tight End,2,42,31.0
+2022,2023,Wisconsin,Joe Tippmann,Center,2,43,40.0
+2022,2023,Kansas State,Julius Brents,Cornerback,2,44,44.0
+2022,2023,Alabama,Brian Branch,Safety,2,45,30.0
+2022,2023,Georgia Tech,Keion White,Defensive End,2,46,45.0
+2022,2023,Illinois,Jartavius Martin,Safety,2,47,72.0
+2022,2023,North Dakota State,Cody Mauch,Offensive Tackle,2,48,53.0
+2022,2023,Wisconsin,Keeanu Benton,Defensive Tackle,2,49,35.0
+2022,2023,Michigan State,Jayden Reed,Wide Receiver,2,50,47.0
+2022,2023,South Carolina,Cam Smith,Cornerback,2,51,80.0
+2022,2023,UCLA,Zach Charbonnet,Running Back,2,52,64.0
+2022,2023,Florida,Gervon Dexter,Defensive Tackle,2,53,74.0
+2022,2023,USC,Tuli Tuipulotu,Outside Linebacker,2,54,81.0
+2022,2023,SMU,Rashee Rice,Wide Receiver,2,55,124.0
+2022,2023,Miami,Tyrique Stevenson,Cornerback,2,56,41.0
+2022,2023,Minnesota,John Michael Schmitz,Center,2,57,48.0
+2022,2023,Michigan,Luke Schoonmaker,Tight End,2,58,71.0
+2022,2023,Florida,O'Cyrus Torrence,Offensive Guard,2,59,42.0
+2022,2023,Michigan,DJ Turner,Cornerback,2,60,56.0
+2022,2023,Penn State,Brenton Strange,Tight End,2,61,68.0
+2022,2023,Penn State,Juice Scruggs,Center,2,62,90.0
+2022,2023,Oklahoma,Marvin Mims,Wide Receiver,2,63,60.0
+2022,2023,South Carolina,Zacch Pickens,Defensive Tackle,3,64,65.0
+2022,2023,Alabama,Tyler Steen,Offensive Tackle,3,65,79.0
+2022,2023,Illinois,Sydney Brown,Safety,3,66,69.0
+2022,2023,Arkansas,Drew Sanders,Inside Linebacker,3,67,70.0
+2022,2023,Tennessee,Hendon Hooker,Quarterback,3,68,33.0
+2022,2023,Houston,Nathaniel Dell,Wide Receiver,3,69,88.0
+2022,2023,Alabama,Byron Young,Defensive Tackle,3,70,114.0
+2022,2023,TCU,Kendre Miller,Running Back,3,71,73.0
+2022,2023,Syracuse,Garrett Williams,Cornerback,3,72,145.0
+2022,2023,Tennessee,Jalin Hyatt,Wide Receiver,3,73,49.0
+2022,2023,Tennessee,Cedric Tillman,Wide Receiver,3,74,59.0
+2022,2023,Ohio State,Zach Harrison,Defensive End,3,75,99.0
+2022,2023,Sacramento State,Marte Mapu,Inside Linebacker,3,76,98.0
+2022,2023,Tennessee,Byron Young,Defensive End,3,77,76.0
+2022,2023,South Dakota State,Tucker Kraft,Tight End,3,78,61.0
+2022,2023,North Carolina,Josh Downs,Wide Receiver,3,79,63.0
+2022,2023,Oregon,DJ Johnson,Outside Linebacker,3,80,133.0
+2022,2023,Tulane,Tyjae Spears,Running Back,3,81,104.0
+2022,2023,Louisville,YaYa Diaby,Defensive End,3,82,102.0
+2022,2023,Iowa,Riley Moss,Cornerback,3,83,62.0
+2022,2023,Texas A&M,Devon Achane,Running Back,3,84,78.0
+2022,2023,Washington State,Daiyan Henley,Inside Linebacker,3,85,75.0
+2022,2023,Clemson,Trenton Simpson,Inside Linebacker,3,86,54.0
+2022,2023,Penn State,Ji'Ayir Brown,Safety,3,87,67.0
+2022,2023,Auburn,Tank Bigsby,Running Back,3,88,91.0
+2022,2023,Wake Forest,Kobie Turner,Defensive Tackle,3,89,168.0
+2022,2023,Texas,DeMarvion Overshown,Inside Linebacker,3,90,89.0
+2022,2023,Tulane,Dorian Williams,Inside Linebacker,3,91,139.0
+2022,2023,Oklahoma,Wanya Morris,Offensive Tackle,3,92,94.0
+2022,2023,Georgia,Darnell Washington,Tight End,3,93,39.0
+2022,2023,Stanford,Michael Wilson,Wide Receiver,3,94,126.0
+2022,2023,Alabama,Jordan Battle,Safety,3,95,87.0
+2022,2023,Western Kentucky,Brodric Martin,Defensive Tackle,3,96,164.0
+2022,2023,Arkansas,Ricky Stromberg,Center,3,97,125.0
+2022,2023,Baylor,Siaki Ika,Defensive Tackle,3,98,105.0
+2022,2023,Michigan,Jake Moody,Place Kicker,3,99,198.0
+2022,2023,Cincinnati,Tre Tucker,Wide Receiver,3,100,222.0
+2022,2023,Alabama,Cameron Latu,Tight End,3,101,181.0
+2022,2023,USC,Mekhi Blackmon,Cornerback,3,102,223.0
+2022,2023,Old Dominion,Nick Saldiveri,Offensive Tackle,4,103,116.0
+2022,2023,Maryland,Jakorian Bennett,Cornerback,4,104,113.0
+2022,2023,Georgia,Kelee Ringo,Cornerback,4,105,50.0
+2022,2023,BYU,Blake Freeland,Offensive Tackle,4,106,93.0
+2022,2023,Troy,Jake Andrews,Center,4,107,242.0
+2022,2023,LSU,Anthony Bradford,Offensive Guard,4,108,172.0
+2022,2023,TCU,Dylan Horton,Defensive End,4,109,175.0
+2022,2023,Northwestern,Adetomiwa Adebawore,Defensive End,4,110,51.0
+2022,2023,Ohio State,Dawand Jones,Offensive Tackle,4,111,57.0
+2022,2023,Maryland,Chad Ryland,Place Kicker,4,112,301.0
+2022,2023,Utah,Clark Phillips III,Cornerback,4,113,83.0
+2022,2023,NC State,Chandler Zavala,Offensive Guard,4,114,86.0
+2022,2023,Texas,Roschon Johnson,Running Back,4,115,84.0
+2022,2023,Auburn,Colby Wooden,Defensive Tackle,4,116,149.0
+2022,2023,Eastern Michigan,Sidy Sow,Offensive Guard,4,117,122.0
+2022,2023,Utah,Braeden Daniels,Offensive Guard,4,118,103.0
+2022,2023,Virginia Tech,Chamarri Conner,Safety,4,119,162.0
+2022,2023,Pittsburgh,Carter Warren,Offensive Tackle,4,120,109.0
+2022,2023,Florida,Ventrell Miller,Inside Linebacker,4,121,200.0
+2022,2023,UCLA,Jon Gaines II,Offensive Guard,4,122,254.0
+2022,2023,Mississippi State,Cameron Young,Defensive Tackle,4,123,136.0
+2022,2023,Ole Miss,Tavius Robinson,Outside Linebacker,4,124,130.0
+2022,2023,TCU,Derius Davis,Wide Receiver,4,125,268.0
+2022,2023,Missouri,Isaiah McGuire,Defensive End,4,126,174.0
+2022,2023,Fresno State,Jake Haener,Quarterback,4,127,92.0
+2022,2023,Georgia,Stetson Bennett,Quarterback,4,128,237.0
+2022,2023,San José State,Viliami Fehoko,Defensive End,4,129,207.0
+2022,2023,Oklahoma State,Tyler Lacy,Defensive End,4,130,196.0
+2022,2023,Purdue,Charlie Jones,Wide Receiver,4,131,101.0
+2022,2023,Wisconsin,Nick Herbig,Outside Linebacker,4,132,97.0
+2022,2023,Cincinnati,Tyler Scott,Wide Receiver,4,133,95.0
+2022,2023,LSU,Jay Ward,Safety,4,134,151.0
+2022,2023,Purdue,Aidan O'Connell,Quarterback,4,135,192.0
+2022,2023,Louisville,Yasir Abdullah,Outside Linebacker,5,136,140.0
+2022,2023,Clemson,K.J. Henry,Defensive End,5,137,137.0
+2022,2023,South Carolina,Darius Rush,Cornerback,5,138,85.0
+2022,2023,Houston,Clayton Tune,Quarterback,5,139,188.0
+2022,2023,UCLA,Dorian Thompson-Robinson,Quarterback,5,140,143.0
+2022,2023,LSU,Jaquelin Roy,Defensive Tackle,5,141,131.0
+2022,2023,Northwestern,Cameron Mitchell,Cornerback,5,142,163.0
+2022,2023,Pittsburgh,Israel Abanikanda,Running Back,5,143,108.0
+2022,2023,UCLA,Atonio Mafi,Offensive Guard,5,144,213.0
+2022,2023,Florida State,Jammie Robinson,Safety,5,145,158.0
+2022,2023,Minnesota,Jordan Howden,Safety,5,146,176.0
+2022,2023,Cincinnati,Josh Whyle,Tight End,5,147,117.0
+2022,2023,Oregon,Noah Sewell,Inside Linebacker,5,148,157.0
+2022,2023,Penn State,Sean Clifford,Quarterback,5,149,
+2022,2023,Florida,Justin Shorter,Wide Receiver,5,150,263.0
+2022,2023,Michigan,Mike Morris,Defensive End,5,151,190.0
+2022,2023,William & Mary,Colby Sorsdal,Offensive Tackle,5,152,
+2022,2023,Pittsburgh,SirVocea Dennis,Inside Linebacker,5,153,165.0
+2022,2023,Michigan,Olusegun Oluwatimi,Center,5,154,173.0
+2022,2023,South Alabama,Darrell Luter Jr.,Cornerback,5,155,153.0
+2022,2023,Clemson,Jordan McFadden,Offensive Guard,5,156,239.0
+2022,2023,Stanford,Kyu Blu Kelly,Cornerback,5,157,177.0
+2022,2023,California,Daniel Scott,Safety,5,158,110.0
+2022,2023,Virginia,Dontayvion Wicks,Wide Receiver,5,159,167.0
+2022,2023,Texas A&M,Antonio Johnson,Safety,5,160,100.0
+2022,2023,App State,Nick Hampton,Outside Linebacker,5,161,148.0
+2022,2023,Miami,Will Mallory,Tight End,5,162,111.0
+2022,2023,Illinois,Chase Brown,Running Back,5,163,156.0
+2022,2023,BYU,Jaren Hall,Quarterback,5,164,123.0
+2022,2023,Minnesota,Terell Smith,Cornerback,5,165,96.0
+2022,2023,Stephen F. Austin,BJ Thompson,Outside Linebacker,5,166,
+2022,2023,Alabama,Henry To'oTo'o,Inside Linebacker,5,167,82.0
+2022,2023,Auburn,Owen Pappoe,Inside Linebacker,5,168,154.0
+2022,2023,North Carolina,Asim Richards,Offensive Tackle,5,169,150.0
+2022,2023,Georgia,Christopher Smith,Safety,5,170,146.0
+2022,2023,Purdue,Payne Durham,Tight End,5,171,166.0
+2022,2023,Oklahoma,Eric Gray,Running Back,5,172,132.0
+2022,2023,Georgia,Robert Beal Jr.,Defensive End,5,173,214.0
+2022,2023,Georgia,Warren McClendon,Offensive Tackle,5,174,161.0
+2022,2023,Clemson,Davis Allen,Tight End,5,175,155.0
+2022,2023,Northwestern,Evan Hull,Running Back,5,176,279.0
+2022,2023,BYU,Puka Nacua,Wide Receiver,5,177,280.0
+2022,2023,Southern Miss,Eric Scott Jr,Cornerback,6,178,
+2022,2023,Bowling Green,Karl Brooks,Defensive End,6,179,186.0
+2022,2023,Louisville,Kei'Trel Clark,Cornerback,6,180,170.0
+2022,2023,Kansas State,Josh Hayes,Cornerback,6,181,
+2022,2023,TCU,Tre'Vius Hodges-Tomlinson,Cornerback,6,182,120.0
+2022,2023,Boise State,JL Skinner,Safety,6,183,128.0
+2022,2023,Western Michigan,Zaire Barnes,Outside Linebacker,6,184,
+2022,2023,Penn State,Parker Washington,Wide Receiver,6,185,129.0
+2022,2023,Maryland,Jaelyn Duncan,Offensive Tackle,6,186,115.0
+2022,2023,LSU,Kayshon Boutte,Wide Receiver,6,187,183.0
+2022,2023,Stanford,Tanner McKee,Quarterback,6,188,219.0
+2022,2023,Nebraska,Ochaun Mathis,Defensive End,6,189,262.0
+2022,2023,Ohio State,Luke Wypler,Center,6,190,112.0
+2022,2023,Nebraska,Trey Palmer,Wide Receiver,6,191,152.0
+2022,2023,Michigan State,Bryce Baringer,Punter,6,192,285.0
+2022,2023,Kentucky,Chris Rodriguez Jr.,Running Back,6,193,202.0
+2022,2023,Texas,Keondre Coburn,Defensive Tackle,6,194,244.0
+2022,2023,Wake Forest,A.T. Perry,Wide Receiver,6,195,107.0
+2022,2023,Eastern Michigan,Jose Ramirez,Outside Linebacker,6,196,134.0
+2022,2023,Stanford,Elijah Higgins,Wide Receiver,6,197,144.0
+2022,2023,New Mexico,Jerrick Reed II,Safety,6,198,
+2022,2023,Oregon,Malaesala Aumavae-Laulu,Offensive Tackle,6,199,253.0
+2022,2023,Boise State,Scott Matlock,Defensive Tackle,6,200,121.0
+2022,2023,Notre Dame,Jarrett Patterson,Center,6,201,235.0
+2022,2023,Rutgers,Christian Braswell,Cornerback,6,202,
+2022,2023,Florida,Amari Burney,Outside Linebacker,6,203,243.0
+2022,2023,LSU,Jarrick Bernard-Converse,Cornerback,6,204,325.0
+2022,2023,Iowa State,Xavier Hutchinson,Wide Receiver,6,205,127.0
+2022,2023,Princeton,Andrei Iosivas,Wide Receiver,6,206,216.0
+2022,2023,Auburn,Anders Carlson,Place Kicker,6,207,
+2022,2023,Pittsburgh,Erick Hallett II,Safety,6,208,
+2022,2023,Old Dominion,Tre Hawkins III,Cornerback,6,209,
+2022,2023,Liberty,Demario Douglas,Wide Receiver,6,210,197.0
+2022,2023,Wagner,Titus Leo,Inside Linebacker,6,211,
+2022,2023,Kansas State,Deuce Vaughn,Running Back,6,212,191.0
+2022,2023,West Virginia,Dante Stills,Defensive Tackle,6,213,307.0
+2022,2023,Michigan State,Ameer Speed,Cornerback,6,214,
+2022,2023,Ole Miss,Zach Evans,Running Back,6,215,160.0
+2022,2023,TCU,Dee Winters,Inside Linebacker,6,216,180.0
+2022,2023,Michigan,Brad Robbins,Punter,6,217,345.0
+2022,2023,Kennesaw State,Travis Bell,Defensive Tackle,7,218,
+2022,2023,North Carolina,Antoine Green,Wide Receiver,7,219,118.0
+2022,2023,Old Dominion,Zack Kuntz,Tight End,7,220,138.0
+2022,2023,Texas A&M,Jaylon Jones,Cornerback,7,221,211.0
+2022,2023,UAB,DeWayne McBride,Running Back,7,222,141.0
+2022,2023,Wingate,Ethan Evans,Punter,7,223,
+2022,2023,Alabama,DeMarcco Hellams,Safety,7,224,194.0
+2022,2023,South Carolina,Jovaughn Gwyn,Offensive Guard,7,225,348.0
+2022,2023,App State,Cooper Hodges,Offensive Guard,7,226,
+2022,2023,North Carolina,Raymond Vohasek,Defensive Tackle,7,227,
+2022,2023,UT Martin,Colton Dowell,Wide Receiver,7,228,
+2022,2023,USC,Andrew Vorhees,Offensive Guard,7,229,229.0
+2022,2023,Ole Miss,Nick Broeker,Offensive Guard,7,230,185.0
+2022,2023,Arizona State,Nesta Jade Silvera,Defensive Tackle,7,231,289.0
+2022,2023,Kentucky,Carrington Valentine,Cornerback,7,232,159.0
+2022,2023,Louisiana,Andre Jones,Outside Linebacker,7,233,266.0
+2022,2023,Oklahoma State,Jason Taylor II,Safety,7,234,189.0
+2022,2023,Central Michigan,Lew Nichols III,Running Back,7,235,287.0
+2022,2023,Northern Michigan,Jake Witt,Offensive Tackle,7,236,240.0
+2022,2023,Georgia,Kenny McIntosh,Running Back,7,237,209.0
+2022,2023,Michigan,Ryan Hayes,Offensive Tackle,7,238,201.0
+2022,2023,TCU,Max Duggan,Quarterback,7,239,286.0
+2022,2023,Houston,Derek Parish,Fullback,7,240,
+2022,2023,Purdue,Cory Trice,Cornerback,7,241,106.0
+2022,2023,Iowa State,Anthony Johnson Jr.,Safety,7,242,171.0
+2022,2023,Oregon,Jordon Riley,Defensive Tackle,7,243,
+2022,2023,South Carolina,Jalen Brooks,Wide Receiver,7,244,
+2022,2023,Jackson State,Isaiah Bolden,Cornerback,7,245,
+2022,2023,Miami,DJ Ivey,Cornerback,7,246,
+2022,2023,Oklahoma,Brayden Willis,Tight End,7,247,277.0
+2022,2023,Pittsburgh,Brandon Hill,Safety,7,248,179.0
+2022,2023,Texas,Moro Ojomo,Defensive End,7,249,119.0
+2022,2023,Ball State,Nic Jones,Cornerback,7,250,322.0
+2022,2023,Maryland,Spencer Anderson,Offensive Guard,7,251,320.0
+2022,2023,Oregon State,Alex Austin,Cornerback,7,252,264.0
+2022,2023,Michigan,Ronnie Bell,Wide Receiver,7,253,187.0
+2022,2023,Houston,Gervarrius Owens,Safety,7,254,258.0
+2022,2023,Purdue,Jalen Graham,Outside Linebacker,7,255,273.0
+2022,2023,Charlotte,Grant DuBose,Wide Receiver,7,256,276.0
+2022,2023,Oregon,Alex Forsyth,Center,7,257,182.0
+2022,2023,Stanford,Kendall Williamson,Cornerback,7,258,
+2022,2023,Toledo,Desjuan Johnson,Defensive End,7,259,
+2023,2024,USC,Caleb Williams,Quarterback,1,1,1.0
+2023,2024,LSU,Jayden Daniels,Quarterback,1,2,5.0
+2023,2024,North Carolina,Drake Maye,Quarterback,1,3,6.0
+2023,2024,Ohio State,Marvin Harrison Jr.,Wide Receiver,1,4,2.0
+2023,2024,Notre Dame,Joe Alt,Offensive Tackle,1,5,4.0
+2023,2024,LSU,Malik Nabers,Wide Receiver,1,6,3.0
+2023,2024,Alabama,JC Latham,Offensive Tackle,1,7,23.0
+2023,2024,Washington,Michael Penix Jr.,Quarterback,1,8,43.0
+2023,2024,Washington,Rome Odunze,Wide Receiver,1,9,8.0
+2023,2024,Michigan,J.J. McCarthy,Quarterback,1,10,9.0
+2023,2024,Penn State,Olu Fashanu,Offensive Tackle,1,11,17.0
+2023,2024,Oregon,Bo Nix,Quarterback,1,12,32.0
+2023,2024,Georgia,Brock Bowers,Tight End,1,13,13.0
+2023,2024,Oregon State,Taliese Fuaga,Offensive Tackle,1,14,26.0
+2023,2024,UCLA,Laiatu Latu,Defensive Edge,1,15,12.0
+2023,2024,Texas,Byron Murphy II,Defensive Tackle,1,16,14.0
+2023,2024,Alabama,Dallas Turner,Defensive Edge,1,17,7.0
+2023,2024,Georgia,Amarius Mims,Offensive Tackle,1,18,22.0
+2023,2024,Florida State,Jared Verse,Defensive Edge,1,19,16.0
+2023,2024,Washington,Troy Fautanu,Offensive Guard,1,20,15.0
+2023,2024,Penn State,Chop Robinson,Defensive Edge,1,21,20.0
+2023,2024,Toledo,Quinyon Mitchell,Cornerback,1,22,10.0
+2023,2024,LSU,Brian Thomas Jr.,Wide Receiver,1,23,24.0
+2023,2024,Alabama,Terrion Arnold,Cornerback,1,24,11.0
+2023,2024,Arizona,Jordan Morgan,Offensive Tackle,1,25,40.0
+2023,2024,Duke,Graham Barton,Center,1,26,18.0
+2023,2024,Missouri,Darius Robinson,Defensive Edge,1,27,30.0
+2023,2024,Texas,Xavier Worthy,Wide Receiver,1,28,34.0
+2023,2024,Oklahoma,Tyler Guyton,Offensive Tackle,1,29,33.0
+2023,2024,Clemson,Nate Wiggins,Cornerback,1,30,25.0
+2023,2024,Florida,Ricky Pearsall,Wide Receiver,1,31,35.0
+2023,2024,South Carolina,Xavier Legette,Wide Receiver,1,32,28.0
+2023,2024,Florida State,Keon Coleman,Wide Receiver,2,33,37.0
+2023,2024,Georgia,Ladd McConkey,Wide Receiver,2,34,31.0
+2023,2024,Clemson,Ruke Orhorhoro,Defensive Tackle,2,35,68.0
+2023,2024,Illinois,Jer'Zhan Newton,Defensive Tackle,2,36,21.0
+2023,2024,Washington,Ja'Lynn Polk,Wide Receiver,2,37,60.0
+2023,2024,Texas,T'Vondre Sweat,Defensive Tackle,2,38,61.0
+2023,2024,Florida State,Braden Fiske,Defensive Tackle,2,39,38.0
+2023,2024,Iowa,Cooper DeJean,Cornerback,2,40,19.0
+2023,2024,Alabama,Kool-Aid McKinstry,Cornerback,2,41,27.0
+2023,2024,Georgia,Kamari Lassiter,Cornerback,2,42,45.0
+2023,2024,Rutgers,Max Melton,Cornerback,2,43,53.0
+2023,2024,Oregon,Jackson Powers-Johnson,Center,2,44,55.0
+2023,2024,Texas A&M,Edgerrin Cooper,Linebacker,2,45,41.0
+2023,2024,Texas,Jonathon Brooks,Running Back,2,46,42.0
+2023,2024,Minnesota,Tyler Nubin,Safety,2,47,52.0
+2023,2024,LSU,Maason Smith,Defensive Tackle,2,48,49.0
+2023,2024,Michigan,Kris Jenkins,Defensive Tackle,2,49,47.0
+2023,2024,Michigan,Mike Sainristil,Cornerback,2,50,75.0
+2023,2024,West Virginia,Zach Frazier,Center,2,51,63.0
+2023,2024,Texas,Adonai Mitchell,Wide Receiver,2,52,29.0
+2023,2024,Kansas State,Ben Sinnott,Tight End,2,53,93.0
+2023,2024,Ohio State,Michael Hall Jr.,Defensive Tackle,2,54,65.0
+2023,2024,Houston,Patrick Paul,Offensive Tackle,2,55,132.0
+2023,2024,Western Michigan,Marshawn Kneeland,Defensive Edge,2,56,39.0
+2023,2024,Alabama,Chris Braswell,Defensive Edge,2,57,57.0
+2023,2024,Georgia,Javon Bullard,Safety,2,58,50.0
+2023,2024,Notre Dame,Blake Fisher,Offensive Tackle,2,59,56.0
+2023,2024,Utah,Cole Bishop,Safety,2,60,54.0
+2023,2024,Missouri,Ennis Rakestraw Jr.,Cornerback,2,61,36.0
+2023,2024,Washington,Roger Rosengarten,Offensive Tackle,2,62,62.0
+2023,2024,BYU,Kingsley Suamataia,Offensive Tackle,2,63,74.0
+2023,2024,Florida State,Renardo Green,Cornerback,2,64,106.0
+2023,2024,Western Kentucky,Malachi Corley,Wide Receiver,3,65,96.0
+2023,2024,Florida State,Trey Benson,Running Back,3,66,58.0
+2023,2024,TCU,Brandon Coleman,Offensive Guard,3,67,90.0
+2023,2024,Penn State,Caedan Wallace,Offensive Tackle,3,68,124.0
+2023,2024,Michigan,Junior Colson,Linebacker,3,69,44.0
+2023,2024,Kentucky,Andru Phillips,Cornerback,3,70,86.0
+2023,2024,Illinois,Isaiah Adams,Offensive Tackle,3,71,156.0
+2023,2024,Kentucky,Trevin Wallace,Linebacker,3,72,95.0
+2023,2024,Kansas State,Cooper Beebe,Offensive Guard,3,73,78.0
+2023,2024,Washington,Bralen Trice,Defensive Edge,3,74,89.0
+2023,2024,Yale,Kiran Amegadjie,Offensive Tackle,3,75,114.0
+2023,2024,Utah,Jonah Elliss,Defensive Edge,3,76,80.0
+2023,2024,Maryland,Delmar Glaze,Offensive Tackle,3,77,226.0
+2023,2024,USC,Calen Bullock,Safety,3,78,104.0
+2023,2024,Pittsburgh,Matt Goncalves,Offensive Tackle,3,79,76.0
+2023,2024,Alabama,Jermaine Burton,Wide Receiver,3,80,150.0
+2023,2024,UConn,Christian Haynes,Offensive Guard,3,81,70.0
+2023,2024,Illinois,Tip Reiman,Tight End,3,82,113.0
+2023,2024,Michigan,Blake Corum,Running Back,3,83,67.0
+2023,2024,Michigan,Roman Wilson,Wide Receiver,3,84,85.0
+2023,2024,Michigan,Zak Zinter,Offensive Guard,3,85,122.0
+2023,2024,Kansas,Dominick Puni,Offensive Tackle,3,86,101.0
+2023,2024,Notre Dame,Marist Liufau,Linebacker,3,87,133.0
+2023,2024,USC,MarShawn Lloyd,Running Back,3,88,71.0
+2023,2024,Georgia,Tykee Smith,Safety,3,89,110.0
+2023,2024,Boston College,Elijah Jones,Cornerback,3,90,128.0
+2023,2024,Missouri,Ty'Ron Hopper,Linebacker,3,91,191.0
+2023,2024,Washington,Jalen McMillan,Wide Receiver,3,92,66.0
+2023,2024,Penn State,Adisa Isaac,Linebacker,3,93,77.0
+2023,2024,Houston Christian,Jalyx Hunt,Defensive Edge,3,94,69.0
+2023,2024,Duke,DeWayne Carter,Defensive Tackle,3,95,94.0
+2023,2024,Florida State,Jarrian Jones,Cornerback,3,96,235.0
+2023,2024,Texas A&M,McKinnley Jackson,Defensive Tackle,3,97,195.0
+2023,2024,NC State,Payton Wilson,Linebacker,3,98,48.0
+2023,2024,Miami,Kamren Kinchens,Safety,3,99,112.0
+2023,2024,Rice,Luke McCaffrey,Wide Receiver,3,100,148.0
+2023,2024,Texas,Ja'Tavion Sanders,Tight End,4,101,64.0
+2023,2024,Oregon,Troy Franklin,Wide Receiver,4,102,73.0
+2023,2024,Texas A&M,Layden Robinson,Offensive Guard,4,103,194.0
+2023,2024,Texas Tech,Dadrion Taylor-Demerson,Safety,4,104,119.0
+2023,2024,Alabama,Justin Eboigbe,Defensive Tackle,4,105,161.0
+2023,2024,North Carolina,Cedric Gray,Linebacker,4,106,51.0
+2023,2024,Penn State,Theo Johnson,Tight End,4,107,125.0
+2023,2024,Oregon,Khyree Jackson,Cornerback,4,108,102.0
+2023,2024,Oregon,Brandon Dorlus,Defensive Tackle,4,109,79.0
+2023,2024,UCF,Javon Baker,Wide Receiver,4,110,87.0
+2023,2024,Oregon,Evan Williams,Safety,4,111,192.0
+2023,2024,Mississippi State,Decamerion Richardson,Cornerback,4,112,123.0
+2023,2024,North Carolina,Devontez Walker,Wide Receiver,4,113,91.0
+2023,2024,Missouri,Javon Foster,Offensive Tackle,4,114,107.0
+2023,2024,Iowa,Erick All,Tight End,4,115,174.0
+2023,2024,LSU,Jordan Jefferson,Defensive Tackle,4,116,179.0
+2023,2024,Wisconsin,Tanor Bortolini,Center,4,117,117.0
+2023,2024,UTEP,Tyrice Knight,Linebacker,4,118,198.0
+2023,2024,South Dakota State,Mason McCormick,Offensive Guard,4,119,160.0
+2023,2024,Tennessee,Jaylen Wright,Running Back,4,120,97.0
+2023,2024,Michigan,AJ Barner,Tight End,4,121,139.0
+2023,2024,Iowa,Tory Taylor,Punter,4,122,281.0
+2023,2024,Ohio State,Cade Stover,Tight End,4,123,72.0
+2023,2024,Wake Forest,Malik Mustapha,Safety,4,124,149.0
+2023,2024,Oregon,Bucky Irving,Running Back,4,125,152.0
+2023,2024,British Columbia,Giovanni Manu,Offensive Tackle,4,126,282.0
+2023,2024,Clemson,Will Shipley,Running Back,4,127,169.0
+2023,2024,Kentucky,Ray Davis,Running Back,4,128,129.0
+2023,2024,Louisville,Isaac Guerendo,Running Back,4,129,146.0
+2023,2024,Iowa State,T.J. Tampa,Cornerback,4,130,46.0
+2023,2024,TCU,Jared Wiley,Tight End,4,131,118.0
+2023,2024,Utah,Sione Vaki,Safety,4,132,247.0
+2023,2024,Washington State,Jaden Hicks,Safety,4,133,59.0
+2023,2024,Wisconsin,Braelon Allen,Running Back,4,134,142.0
+2023,2024,Arizona,Jacob Cowing,Wide Receiver,4,135,201.0
+2023,2024,Auburn,Nehemiah Pritchett,Cornerback,5,136,153.0
+2023,2024,Maryland,Tarheeb Still,Cornerback,5,137,186.0
+2023,2024,Clemson,Xavier Thomas,Defensive Edge,5,138,173.0
+2023,2024,Temple,Jordan Magee,Linebacker,5,139,163.0
+2023,2024,Notre Dame,Cam Hart,Cornerback,5,140,82.0
+2023,2024,Georgia,Sedrick Van Pran-Granger,Center,5,141,105.0
+2023,2024,Oregon State,Anthony Gould,Wide Receiver,5,142,189.0
+2023,2024,Notre Dame,JD Bertrand,Linebacker,5,143,270.0
+2023,2024,Kansas,Austin Booker,Defensive Edge,5,144,83.0
+2023,2024,Missouri,Kris Abrams-Draine,Cornerback,5,145,92.0
+2023,2024,Louisville,Jarvis Brownlee Jr.,Cornerback,5,146,143.0
+2023,2024,Notre Dame,Audric Estime,Running Back,5,147,157.0
+2023,2024,Ohio State,Tommy Eichenberg,Linebacker,5,148,222.0
+2023,2024,TCU,Josh Newton,Cornerback,5,149,182.0
+2023,2024,South Carolina,Spencer Rattler,Quarterback,5,150,98.0
+2023,2024,Missouri,Jaylon Carlies,Safety,5,151,203.0
+2023,2024,Texas A&M,Ainias Smith,Wide Receiver,5,152,230.0
+2023,2024,Ole Miss,Deantre Prince,Cornerback,5,153,231.0
+2023,2024,Washington State,Brennan Jackson,Defensive Edge,5,154,115.0
+2023,2024,Clemson,Jeremiah Trotter Jr.,Linebacker,5,155,103.0
+2023,2024,Louisville,Jamari Thrash,Wide Receiver,5,156,140.0
+2023,2024,Washington State,Chau Smith-Wade,Cornerback,5,157,227.0
+2023,2024,Colorado State,Mohamed Kamara,Defensive Edge,5,158,126.0
+2023,2024,Penn State,Hunter Nourzad,Center,5,159,130.0
+2023,2024,Washington,Edefuan Ulofoshio,Linebacker,5,160,116.0
+2023,2024,Washington,Dominique Hampton,Safety,5,161,178.0
+2023,2024,Texas,Christian Jones,Offensive Tackle,5,162,84.0
+2023,2024,Duke,Jacob Monk,Center,5,163,154.0
+2023,2024,Auburn,Jaylin Simpson,Safety,5,164,137.0
+2023,2024,Marshall,Rasheen Ali,Running Back,5,165,188.0
+2023,2024,Purdue,Tyrone Tracy Jr.,Running Back,5,166,183.0
+2023,2024,Texas,Keilan Robinson,Running Back,5,167,287.0
+2023,2024,Troy,Javon Solomon,Defensive Edge,5,168,158.0
+2023,2024,Oregon State,Kitan Oladapo,Safety,5,169,131.0
+2023,2024,Pittsburgh,Bub Means,Wide Receiver,5,170,134.0
+2023,2024,Florida State,Jordan Travis,Quarterback,5,171,258.0
+2023,2024,Michigan,Trevor Keegan,Offensive Guard,5,172,242.0
+2023,2024,South Dakota State,Isaiah Davis,Running Back,5,173,172.0
+2023,2024,Wake Forest,Caelen Carson,Cornerback,5,174,127.0
+2023,2024,Texas,Jaylan Ford,Linebacker,5,175,136.0
+2023,2024,Toronto Argonauts,Qwan'tez Stiggers,Cornerback,5,176,272.0
+2023,2024,Oklahoma,Walter Rouse,Offensive Tackle,6,177,197.0
+2023,2024,Iowa,Logan Lee,Defensive Tackle,6,178,237.0
+2023,2024,Utah,Sataoa Laumea,Offensive Guard,6,179,111.0
+2023,2024,South Carolina,Marcellas Dial,Cornerback,6,180,320.0
+2023,2024,Troy,Kimani Vidal,Running Back,6,181,202.0
+2023,2024,Tulane,Jha'Quan Jackson,Wide Receiver,6,182,293.0
+2023,2024,UCLA,Darius Muasau,Linebacker,6,183,257.0
+2023,2024,Virginia,Malik Washington,Wide Receiver,6,184,99.0
+2023,2024,Florida State,Johnny Wilson,Wide Receiver,6,185,100.0
+2023,2024,Alabama,Jase McClellan,Running Back,6,186,279.0
+2023,2024,Illinois,Casey Washington,Wide Receiver,6,187,349.0
+2023,2024,Oregon,Jamal Hill,Linebacker,6,188,
+2023,2024,LSU,Mekhi Wingo,Defensive Tackle,6,189,88.0
+2023,2024,NC State,Dylan McMahon,Offensive Guard,6,190,171.0
+2023,2024,UAB,Tejhaun Palmer,Wide Receiver,6,191,384.0
+2023,2024,Auburn,D.J. James,Cornerback,6,192,138.0
+2023,2024,Tennessee,Joe Milton III,Quarterback,6,193,277.0
+2023,2024,Arizona,Tanner McLachlan,Tight End,6,194,109.0
+2023,2024,Texas,Ryan Watts,Cornerback,6,195,215.0
+2023,2024,Clemson,Tyler Davis,Defensive Tackle,6,196,144.0
+2023,2024,Georgia,Zion Logue,Defensive Tackle,6,197,228.0
+2023,2024,California,Patrick McMorris,Safety,6,198,307.0
+2023,2024,Northern Iowa,Khristian Boyd,Defensive Tackle,6,199,155.0
+2023,2024,Mississippi State,Jaden Crumedy,Defensive Tackle,6,200,204.0
+2023,2024,Marshall,Micah Abraham,Cornerback,6,201,
+2023,2024,Georgia State,Travis Glover,Offensive Tackle,6,202,325.0
+2023,2024,Alabama,Will Reichard,Place Kicker,6,203,323.0
+2023,2024,UCF,Tylan Grable,Offensive Tackle,6,204,180.0
+2023,2024,Louisville,Jawhar Jordan,Running Back,6,205,221.0
+2023,2024,Mississippi State,Nathaniel Watson,Linebacker,6,206,121.0
+2023,2024,Findlay,Michael Jerrell,Offensive Tackle,6,207,391.0
+2023,2024,New Hampshire,Dylan Laube,Running Back,6,208,207.0
+2023,2024,Stanford,Joshua Karty,Place Kicker,6,209,314.0
+2023,2024,Boston College,Christian Mahogany,Offensive Guard,6,210,141.0
+2023,2024,Tennessee,Kamal Hadden,Cornerback,6,211,177.0
+2023,2024,Arkansas,Cam Little,Place Kicker,6,212,332.0
+2023,2024,Texas,Jordan Whittington,Wide Receiver,6,213,263.0
+2023,2024,Ole Miss,Cedric Johnson,Defensive Edge,6,214,120.0
+2023,2024,USC,Jarrett Kingston,Offensive Guard,6,215,236.0
+2023,2024,Southeast Missouri State,Ryan Flournoy,Wide Receiver,6,216,317.0
+2023,2024,Arkansas,Beaux Limmer,Center,6,217,162.0
+2023,2024,Kentucky,Devin Leary,Quarterback,6,218,266.0
+2023,2024,Penn State,Daequan Hardy,Cornerback,6,219,249.0
+2023,2024,UTEP,Elijah Klein,Offensive Guard,6,220,324.0
+2023,2024,England,Travis Clayton,Offensive Guard,7,221,
+2023,2024,Notre Dame,Javontae Jean-Baptiste,Defensive Edge,7,222,212.0
+2023,2024,Air Force,Trey Taylor,Safety,7,223,273.0
+2023,2024,Ole Miss,Daijahn Anthony,Safety,7,224,330.0
+2023,2024,USC,Brenden Rice,Wide Receiver,7,225,81.0
+2023,2024,Miami,Jaden Davis,Cornerback,7,226,
+2023,2024,South Dakota,Myles Harden,Cornerback,7,227,165.0
+2023,2024,Michigan State,Nick Samac,Center,7,228,210.0
+2023,2024,Pittsburgh,M.J. Devonshire,Cornerback,7,229,213.0
+2023,2024,Wake Forest,Michael Jurgens,Center,7,230,
+2023,2024,Florida State,Jaheim Bell,Tight End,7,231,145.0
+2023,2024,East Texas A&M,Levi Drake Rodriguez,Defensive Tackle,7,232,388.0
+2023,2024,Louisiana,Nathan Thomas,Offensive Tackle,7,233,252.0
+2023,2024,Oklahoma,Jonah Laulu,Defensive Tackle,7,234,326.0
+2023,2024,Utah,Devaughn Vele,Wide Receiver,7,235,261.0
+2023,2024,Texas Tech,Myles Cole,Defensive Edge,7,236,147.0
+2023,2024,Miami,Matt Lee,Center,7,237,185.0
+2023,2024,USC,Solomon Byrd,Defensive Edge,7,238,286.0
+2023,2024,Eastern Kentucky,Josiah Ezirim,Offensive Tackle,7,239,339.0
+2023,2024,Michigan,Michael Barrett,Linebacker,7,240,206.0
+2023,2024,USC,Tahj Washington,Wide Receiver,7,241,223.0
+2023,2024,Miami,James Williams,Safety,7,242,209.0
+2023,2024,Cincinnati,Jowon Briggs,Defensive Tackle,7,243,361.0
+2023,2024,Auburn,Justin Rogers,Defensive Tackle,7,244,299.0
+2023,2024,Tulane,Michael Pratt,Quarterback,7,245,175.0
+2023,2024,Washington,Devin Culp,Tight End,7,246,219.0
+2023,2024,Auburn,Marcus Harris,Defensive Tackle,7,247,170.0
+2023,2024,Holy Cross,C.J. Hanson,Offensive Guard,7,248,335.0
+2023,2024,Michigan,LaDarius Henderson,Offensive Tackle,7,249,285.0
+2023,2024,Purdue,Sanoussi Kane,Safety,7,250,
+2023,2024,Florida State,Tatum Bethune,Linebacker,7,251,199.0
+2023,2024,Michigan,Jaylen Harrell,Defensive Edge,7,252,200.0
+2023,2024,Michigan,Cornelius Johnson,Wide Receiver,7,253,211.0
+2023,2024,Kansas State,KT Leveston,Offensive Guard,7,254,181.0
+2023,2024,Penn State,Kalen King,Cornerback,7,255,259.0
+2023,2024,South Carolina,Nick Gargiulo,Center,7,256,225.0
+2023,2024,Alabama,Jaylen Key,Safety,7,257,292.0
+2024,2025,Miami,Cam Ward,Quarterback,1,1,8.0
+2024,2025,Colorado,Travis Hunter,Cornerback,1,2,2.0
+2024,2025,Penn State,Abdul Carter,Defensive Edge,1,3,1.0
+2024,2025,LSU,Will Campbell,Offensive Tackle,1,4,14.0
+2024,2025,Michigan,Mason Graham,Defensive Tackle,1,5,5.0
+2024,2025,Boise State,Ashton Jeanty,Running Back,1,6,3.0
+2024,2025,Missouri,Armand Membou,Offensive Tackle,1,7,9.0
+2024,2025,Arizona,Tetairoa McMillan,Wide Receiver,1,8,13.0
+2024,2025,Texas,Kelvin Banks Jr.,Offensive Tackle,1,9,26.0
+2024,2025,Michigan,Colston Loveland,Tight End,1,10,7.0
+2024,2025,Georgia,Mykel Williams,Defensive Edge,1,11,12.0
+2024,2025,Alabama,Tyler Booker,Offensive Guard,1,12,51.0
+2024,2025,Michigan,Kenneth Grant,Defensive Tackle,1,13,27.0
+2024,2025,Penn State,Tyler Warren,Tight End,1,14,6.0
+2024,2025,Georgia,Jalon Walker,Linebacker,1,15,4.0
+2024,2025,Ole Miss,Walter Nolen,Defensive Tackle,1,16,17.0
+2024,2025,Texas A&M,Shemar Stewart,Defensive Edge,1,17,22.0
+2024,2025,North Dakota State,Grey Zabel,Offensive Guard,1,18,33.0
+2024,2025,Ohio State,Emeka Egbuka,Wide Receiver,1,19,40.0
+2024,2025,Texas,Jahdae Barron,Cornerback,1,20,11.0
+2024,2025,Oregon,Derrick Harmon,Defensive Tackle,1,21,15.0
+2024,2025,North Carolina,Omarion Hampton,Running Back,1,22,21.0
+2024,2025,Texas,Matthew Golden,Wide Receiver,1,23,23.0
+2024,2025,Ohio State,Donovan Jackson,Offensive Guard,1,24,55.0
+2024,2025,Ole Miss,Jaxson Dart,Quarterback,1,25,39.0
+2024,2025,Tennessee,James Pearce Jr.,Defensive Edge,1,26,16.0
+2024,2025,Georgia,Malaki Starks,Safety,1,27,34.0
+2024,2025,Ohio State,Tyleik Williams,Defensive Tackle,1,28,59.0
+2024,2025,Oregon,Josh Conerly Jr.,Offensive Tackle,1,29,32.0
+2024,2025,Kentucky,Maxwell Hairston,Cornerback,1,30,18.0
+2024,2025,Alabama,Jihaad Campbell,Linebacker,1,31,19.0
+2024,2025,Ohio State,Josh Simmons,Offensive Tackle,1,32,24.0
+2024,2025,UCLA,Carson Schwesinger,Linebacker,2,33,53.0
+2024,2025,Iowa State,Jayden Higgins,Wide Receiver,2,34,38.0
+2024,2025,South Carolina,Nick Emmanwori,Safety,2,35,25.0
+2024,2025,Ohio State,Quinshon Judkins,Running Back,2,36,50.0
+2024,2025,Arizona,Jonah Savaiinaea,Offensive Guard,2,37,54.0
+2024,2025,Ohio State,TreVeyon Henderson,Running Back,2,38,30.0
+2024,2025,Missouri,Luther Burden III,Wide Receiver,2,39,45.0
+2024,2025,Louisville,Tyler Shough,Quarterback,2,40,58.0
+2024,2025,South Carolina,T.J. Sanders,Defensive Tackle,2,41,47.0
+2024,2025,LSU,Mason Taylor,Tight End,2,42,41.0
+2024,2025,Texas,Alfred Collins,Defensive Tackle,2,43,71.0
+2024,2025,Boston College,Donovan Ezeiruaku,Defensive Edge,2,44,28.0
+2024,2025,Ohio State,JT Tuimoloau,Defensive Edge,2,45,52.0
+2024,2025,Oregon,Terrance Ferguson,Tight End,2,46,69.0
+2024,2025,Michigan,Will Johnson,Cornerback,2,47,10.0
+2024,2025,Minnesota,Aireontae Ersery,Offensive Tackle,2,48,46.0
+2024,2025,South Carolina,Demetrius Knight Jr.,Linebacker,2,49,94.0
+2024,2025,Miami,Elijah Arroyo,Tight End,2,50,36.0
+2024,2025,Texas A&M,Nic Scourton,Defensive Edge,2,51,64.0
+2024,2025,UCLA,Oluwafemi Oladejo,Defensive Edge,2,52,60.0
+2024,2025,Notre Dame,Benjamin Morrison,Cornerback,2,53,63.0
+2024,2025,NC State,Anthony Belton,Offensive Tackle,2,54,92.0
+2024,2025,Ole Miss,Tre Harris,Wide Receiver,2,55,44.0
+2024,2025,Boston College,Ozzy Trapilo,Offensive Tackle,2,56,74.0
+2024,2025,Georgia,Tate Ratledge,Offensive Guard,2,57,72.0
+2024,2025,TCU,Jack Bech,Wide Receiver,2,58,57.0
+2024,2025,Marshall,Mike Green,Defensive Edge,2,59,20.0
+2024,2025,UCF,RJ Harvey,Running Back,2,60,119.0
+2024,2025,Ole Miss,Trey Amos,Cornerback,2,61,37.0
+2024,2025,Texas A&M,Shemar Turner,Defensive Tackle,2,62,43.0
+2024,2025,Tennessee,Omarr Norman-Lott,Defensive Tackle,2,63,66.0
+2024,2025,Texas,Andrew Mukuba,Safety,2,64,95.0
+2024,2025,Toledo,Darius Alexander,Defensive Tackle,3,65,29.0
+2024,2025,Louisville,Ashton Gillotte,Defensive Edge,3,66,103.0
+2024,2025,Bowling Green,Harold Fannin Jr.,Tight End,3,67,93.0
+2024,2025,Iowa State,Darien Porter,Cornerback,3,68,84.0
+2024,2025,Washington State,Kyle Williams,Wide Receiver,3,69,68.0
+2024,2025,Arkansas,Isaac TeSlaa,Wide Receiver,3,70,157.0
+2024,2025,Texas,Vernon Broughton,Defensive Tackle,3,71,132.0
+2024,2025,Arkansas,Landon Jackson,Defensive Edge,3,72,65.0
+2024,2025,Florida State,Azareye'h Thomas,Cornerback,3,73,67.0
+2024,2025,Illinois,Pat Bryant,Wide Receiver,3,74,163.0
+2024,2025,Oklahoma State,Nick Martin,Linebacker,3,75,185.0
+2024,2025,East Carolina,Shavon Revel Jr.,Cornerback,3,76,31.0
+2024,2025,Ole Miss,Princely Umanmielen,Defensive Edge,3,77,89.0
+2024,2025,Oregon,Jordan Burch,Defensive Edge,3,78,49.0
+2024,2025,Iowa State,Jaylin Noel,Wide Receiver,3,79,48.0
+2024,2025,Minnesota,Justin Walley,Cornerback,3,80,194.0
+2024,2025,Georgia,Dylan Fairchild,Offensive Guard,3,81,118.0
+2024,2025,Penn State,Kevin Winston Jr.,Safety,3,82,56.0
+2024,2025,Iowa,Kaleb Johnson,Running Back,3,83,61.0
+2024,2025,Kansas State,Jacob Parrish,Cornerback,3,84,98.0
+2024,2025,California,Nohl Williams,Cornerback,3,85,96.0
+2024,2025,Oregon,Jamaree Caldwell,Defensive Tackle,3,86,210.0
+2024,2025,TCU,Savion Williams,Wide Receiver,3,87,99.0
+2024,2025,Tulane,Caleb Ransaw,Cornerback,3,88,200.0
+2024,2025,West Virginia,Wyatt Milum,Offensive Guard,3,89,115.0
+2024,2025,Michigan,Josaiah Stewart,Defensive Edge,3,90,77.0
+2024,2025,LSU,Emery Jones Jr.,Offensive Tackle,3,91,143.0
+2024,2025,Alabama,Jalen Milroe,Quarterback,3,92,81.0
+2024,2025,Virginia,Jonas Sanker,Safety,3,93,83.0
+2024,2025,Oregon,Dillon Gabriel,Quarterback,3,94,217.0
+2024,2025,Georgia,Jared Wilson,Center,3,95,42.0
+2024,2025,Notre Dame,Xavier Watts,Safety,3,96,70.0
+2024,2025,USC,Jaylin Smith,Cornerback,3,97,267.0
+2024,2025,Texas Tech,Caleb Rogers,Offensive Tackle,3,98,122.0
+2024,2025,William & Mary,Charles Grant,Offensive Tackle,3,99,85.0
+2024,2025,Western Kentucky,Upton Stout,Cornerback,3,100,128.0
+2024,2025,LSU,Sai'vion Jones,Defensive Edge,3,101,100.0
+2024,2025,Maryland,Tai Felton,Wide Receiver,3,102,75.0
+2024,2025,Florida,Chimere Dike,Wide Receiver,4,103,173.0
+2024,2025,Virginia Tech,Bhayshul Tuten,Running Back,4,104,131.0
+2024,2025,Arizona State,Cam Skattebo,Running Back,4,105,78.0
+2024,2025,California,Craig Woodson,Safety,4,106,176.0
+2024,2025,Notre Dame,Jack Kiser,Linebacker,4,107,164.0
+2024,2025,Tennessee,Dont'e Thornton Jr.,Wide Receiver,4,108,237.0
+2024,2025,Kentucky,Deone Walker,Defensive Tackle,4,109,125.0
+2024,2025,Georgia,Arian Smith,Wide Receiver,4,110,257.0
+2024,2025,Nebraska,Ty Robinson,Defensive Tackle,4,111,87.0
+2024,2025,Oklahoma,Danny Stutsman,Linebacker,4,112,114.0
+2024,2025,Indiana,CJ West,Defensive Tackle,4,113,195.0
+2024,2025,Georgia,Trevor Etienne,Running Back,4,114,147.0
+2024,2025,Ohio State,Cody Simon,Linebacker,4,115,120.0
+2024,2025,USC,Woody Marks,Running Back,4,116,172.0
+2024,2025,Auburn,Jarquez Hunter,Running Back,4,117,188.0
+2024,2025,Oklahoma,Billy Bowman Jr.,Safety,4,118,102.0
+2024,2025,Clemson,Barrett Carter,Linebacker,4,119,155.0
+2024,2025,Texas,Gunnar Helm,Tight End,4,120,79.0
+2024,2025,Central Arkansas,David Walker,Defensive Edge,4,121,138.0
+2024,2025,Ohio State,Lathan Ransom,Safety,4,122,129.0
+2024,2025,Ohio State,Jack Sawyer,Defensive Edge,4,123,117.0
+2024,2025,Texas,Barryn Sorrell,Defensive Edge,4,124,127.0
+2024,2025,South Carolina,Kyle Kennard,Defensive Edge,4,125,130.0
+2024,2025,Tennessee,Dylan Sampson,Running Back,4,126,80.0
+2024,2025,Iowa State,Jalen Travis,Offensive Tackle,4,127,160.0
+2024,2025,Virginia Tech,Jaylin Lane,Wide Receiver,4,128,73.0
+2024,2025,California,Teddye Buchanan,Linebacker,4,129,269.0
+2024,2025,Alabama,Malachi Moore,Safety,4,130,197.0
+2024,2025,Louisville,Quincy Riley,Cornerback,4,131,86.0
+2024,2025,Maryland,Ruben Hyppolite II,Linebacker,4,132,
+2024,2025,Utah State,Jalen Royals,Wide Receiver,4,133,62.0
+2024,2025,Alabama,Que Robinson,Defensive Edge,4,134,133.0
+2024,2025,South Carolina,Tonka Hemingway,Defensive Tackle,4,135,144.0
+2024,2025,Stanford,Elic Ayomanor,Wide Receiver,4,136,106.0
+2024,2025,Florida State,Joshua Farmer,Defensive Tackle,4,137,76.0
+2024,2025,Ole Miss,Jordan Watkins,Wide Receiver,4,138,211.0
+2024,2025,Georgia,Tyrion Ingram-Dawkins,Defensive Edge,5,139,107.0
+2024,2025,Florida,Cam Jackson,Defensive Tackle,5,140,189.0
+2024,2025,Alabama A&M,Carson Vinson,Offensive Tackle,5,141,209.0
+2024,2025,Notre Dame,Rylie Mills,Defensive Tackle,5,142,232.0
+2024,2025,Maryland,Jordan Phillips,Defensive Tackle,5,143,222.0
+2024,2025,Colorado,Shedeur Sanders,Quarterback,5,144,35.0
+2024,2025,UCF,Mac McWilliams,Cornerback,5,145,262.0
+2024,2025,LSU,Bradyn Swinson,Defensive Edge,5,146,82.0
+2024,2025,Oregon,Jordan James,Running Back,5,147,109.0
+2024,2025,Ohio State,Ty Hamilton,Defensive Tackle,5,148,159.0
+2024,2025,Texas,Jaydon Blue,Running Back,5,149,181.0
+2024,2025,Florida,Jason Marshall Jr.,Cornerback,5,150,255.0
+2024,2025,Kansas State,DJ Giddens,Running Back,5,151,104.0
+2024,2025,Florida,Shemar James,Linebacker,5,152,208.0
+2024,2025,Miami,Jalen Rivers,Offensive Guard,5,153,154.0
+2024,2025,Purdue,Marcus Mbow,Offensive Guard,5,154,88.0
+2024,2025,Maryland,Dante Trader Jr.,Safety,5,155,270.0
+2024,2025,Oregon,Jeffrey Bassa,Linebacker,5,156,145.0
+2024,2025,SMU,Elijah Roberts,Defensive Edge,5,157,193.0
+2024,2025,Auburn,KeAndre Lambert-Smith,Wide Receiver,5,158,261.0
+2024,2025,Oklahoma State,Collin Oliver,Linebacker,5,159,244.0
+2024,2025,Kansas State,Marques Sigle,Safety,5,160,187.0
+2024,2025,Georgia,Smael Mondon Jr.,Linebacker,5,161,124.0
+2024,2025,Miami,Francisco Mauigoa,Linebacker,5,162,252.0
+2024,2025,Notre Dame,Mitchell Evans,Tight End,5,163,97.0
+2024,2025,Iowa,Yahya Black,Defensive Tackle,5,164,198.0
+2024,2025,Syracuse,Oronde Gadsden II,Tight End,5,165,215.0
+2024,2025,Colorado State,Tory Horton,Wide Receiver,5,166,91.0
+2024,2025,Sacramento State,Jackson Slater,Offensive Guard,5,167,170.0
+2024,2025,Boston College,Drew Kendall,Center,5,168,161.0
+2024,2025,UTSA,Zah Frazier,Cornerback,5,169,110.0
+2024,2025,Ohio State,Jordan Hancock,Cornerback,5,170,191.0
+2024,2025,LSU,Miles Frazier,Offensive Guard,5,171,90.0
+2024,2025,Ole Miss,Chris Paul Jr.,Linebacker,5,172,112.0
+2024,2025,Georgia Tech,Jackson Hawes,Tight End,5,173,126.0
+2024,2025,Ohio State,Denzel Burke,Cornerback,5,174,156.0
+2024,2025,Alabama,Robbie Ouzts,Tight End,5,175,305.0
+2024,2025,Miami,Tyler Baron,Defensive Edge,5,176,140.0
+2024,2025,Virginia Tech,Dorian Strong,Cornerback,6,177,134.0
+2024,2025,Western Michigan,Bilhal Kone,Cornerback,6,178,212.0
+2024,2025,Oklahoma State,Ollie Gordon II,Running Back,6,179,225.0
+2024,2025,Ole Miss,JJ Pegues,Defensive Tackle,6,180,121.0
+2024,2025,Syracuse,Kyle McCord,Quarterback,6,181,165.0
+2024,2025,Miami,Andres Borregales,Place Kicker,6,182,273.0
+2024,2025,California,Marcus Harris,Cornerback,6,183,223.0
+2024,2025,Kansas,Devin Neal,Running Back,6,184,101.0
+2024,2025,Ohio State,Will Howard,Quarterback,6,185,105.0
+2024,2025,Arizona,Tyler Loop,Place Kicker,6,186,308.0
+2024,2025,Penn State,Jaylen Reed,Safety,6,187,116.0
+2024,2025,Michigan,Kalel Mullings,Running Back,6,188,231.0
+2024,2025,Notre Dame,Riley Leonard,Quarterback,6,189,183.0
+2024,2025,Alabama,Tim Smith,Defensive Tackle,6,190,177.0
+2024,2025,Michigan,Myles Hinton,Offensive Tackle,6,191,219.0
+2024,2025,Kansas,Bryce Cabeldue,Offensive Tackle,6,192,229.0
+2024,2025,Texas Tech,Tahj Brooks,Running Back,6,193,213.0
+2024,2025,Auburn,Jalen McLeod,Linebacker,6,194,190.0
+2024,2025,Michigan State,Luke Newman,Offensive Tackle,6,195,
+2024,2025,Boise State,Ahmed Hassanein,Defensive Edge,6,196,274.0
+2024,2025,Florida,Graham Mertz,Quarterback,6,197,
+2024,2025,Georgia,Warren Brinson,Defensive Tackle,6,198,268.0
+2024,2025,Pittsburgh,Branson Taylor,Offensive Tackle,6,199,235.0
+2024,2025,Navy,Rayuan Lane III,Safety,6,200,290.0
+2024,2025,Penn State,Kobe King,Linebacker,6,201,166.0
+2024,2025,Pittsburgh,Gavin Bartholomew,Tight End,6,202,230.0
+2024,2025,Colorado,LaJohntay Wester,Wide Receiver,6,203,340.0
+2024,2025,Oregon,Ajani Cornelius,Offensive Tackle,6,204,148.0
+2024,2025,UCLA,Kain Medrano,Linebacker,6,205,199.0
+2024,2025,UConn,Chase Lundt,Offensive Tackle,6,206,152.0
+2024,2025,Texas,Cameron Williams,Offensive Tackle,6,207,113.0
+2024,2025,Colorado,Jimmy Horn Jr.,Wide Receiver,6,208,310.0
+2024,2025,Virginia Tech,Antwaun Powell-Ryland,Defensive Edge,6,209,171.0
+2024,2025,Virginia Tech,Aeneas Peebles,Defensive Tackle,6,210,151.0
+2024,2025,Texas,Hayden Conner,Offensive Guard,6,211,260.0
+2024,2025,Rutgers,Robert Longerbeam,Cornerback,6,212,178.0
+2024,2025,Montana State,Tommy Mellott,Wide Receiver,6,213,299.0
+2024,2025,Clemson,R.J. Mickens,Safety,6,214,108.0
+2024,2025,North Dakota State,Cam Miller,Quarterback,6,215,298.0
+2024,2025,Florida,Jeremy Crawshaw,Punter,6,216,282.0
+2024,2025,UCLA,Jay Toia,Defensive Tackle,7,217,168.0
+2024,2025,Wisconsin,Jack Nelson,Offensive Tackle,7,218,169.0
+2024,2025,Nebraska,Thomas Fidone II,Tight End,7,219,158.0
+2024,2025,Missouri,Marcus Bryant,Offensive Tackle,7,220,
+2024,2025,USC,Jonah Monheim,Center,7,221,243.0
+2024,2025,Minnesota,Cody Lindenberg,Linebacker,7,222,162.0
+2024,2025,Miami,Damien Martinez,Running Back,7,223,123.0
+2024,2025,Rutgers,Kyonte Hamilton,Defensive Tackle,7,224,
+2024,2025,Nevada,Kitan Crawford,Safety,7,225,146.0
+2024,2025,Washington,Carson Bruener,Linebacker,7,226,258.0
+2024,2025,Indiana,Kurtis Rourke,Quarterback,7,227,242.0
+2024,2025,SMU,Brashard Smith,Running Back,7,228,153.0
+2024,2025,Central Michigan,Donte Kent,Cornerback,7,229,
+2024,2025,Georgia,Dan Jackson,Safety,7,230,279.0
+2024,2025,Texas,Quinn Ewers,Quarterback,7,231,111.0
+2024,2025,Wisconsin,Hunter Wohler,Safety,7,232,256.0
+2024,2025,Rutgers,Kyle Monangai,Running Back,7,233,207.0
+2024,2025,Iowa,Mason Richman,Offensive Tackle,7,234,239.0
+2024,2025,Oregon,Tez Johnson,Wide Receiver,7,235,196.0
+2024,2025,Syracuse,LeQuint Allen,Running Back,7,236,201.0
+2024,2025,Tulane,Micah Robinson,Cornerback,7,237,
+2024,2025,UNLV,Ricky White III,Wide Receiver,7,238,254.0
+2024,2025,Clemson,Phil Mafah,Running Back,7,239,287.0
+2024,2025,Maryland,Kaden Prather,Wide Receiver,7,240,332.0
+2024,2025,Utah,Caleb Lohner,Tight End,7,241,
+2024,2025,Pittsburgh,Konata Mumpfield,Wide Receiver,7,242,336.0
+2024,2025,LSU,Garrett Dellinger,Offensive Guard,7,243,192.0
+2024,2025,Georgia,Dominic Lovett,Wide Receiver,7,244,266.0
+2024,2025,Arizona,Jacory Croskey-Merritt,Running Back,7,245,253.0
+2024,2025,Oklahoma State,Korie Black,Cornerback,7,246,233.0
+2024,2025,Maryland,Tommy Akingbesote,Defensive Tackle,7,247,349.0
+2024,2025,UCLA,Moliki Matavao,Tight End,7,248,167.0
+2024,2025,Iowa,Connor Colby,Offensive Guard,7,249,311.0
+2024,2025,Cincinnati,John Williams,Offensive Tackle,7,250,272.0
+2024,2025,Vanderbilt,Julian Ashby,Long Snapper,7,251,
+2024,2025,Montana,Junior Bergen,Wide Receiver,7,252,
+2024,2025,Georgia Tech,Zeek Biggers,Defensive Tackle,7,253,285.0
+2024,2025,Syracuse,Fadil Diggs,Defensive Edge,7,254,221.0
+2024,2025,Iowa,Luke Lachey,Tight End,7,255,184.0
+2024,2025,Florida,Trikweze Bridges,Safety,7,256,
+2024,2025,Memphis,Kobee Minor,Cornerback,7,257,
+2025,2026,Indiana,Fernando Mendoza,Quarterback,1,1,2.0
+2025,2026,Texas Tech,David Bailey,Defensive Edge,1,2,3.0
+2025,2026,Notre Dame,Jeremiyah Love,Running Back,1,3,4.0
+2025,2026,Ohio State,Carnell Tate,Wide Receiver,1,4,13.0
+2025,2026,Ohio State,Arvell Reese,Linebacker,1,5,1.0
+2025,2026,LSU,Mansoor Delane,Cornerback,1,6,8.0
+2025,2026,Ohio State,Sonny Styles,Linebacker,1,7,7.0
+2025,2026,Arizona State,Jordyn Tyson,Wide Receiver,1,8,12.0
+2025,2026,Utah,Spencer Fano,Offensive Tackle,1,9,19.0
+2025,2026,Miami,Francis Mauigoa,Offensive Tackle,1,10,5.0
+2025,2026,Ohio State,Caleb Downs,Safety,1,11,6.0
+2025,2026,Alabama,Kadyn Proctor,Offensive Tackle,1,12,17.0
+2025,2026,Alabama,Ty Simpson,Quarterback,1,13,37.0
+2025,2026,Penn State,Olaivavega Ioane,Offensive Guard,1,14,15.0
+2025,2026,Miami,Rueben Bain Jr.,Defensive Edge,1,15,9.0
+2025,2026,Oregon,Kenyon Sadiq,Tight End,1,16,11.0
+2025,2026,Clemson,Blake Miller,Offensive Tackle,1,17,52.0
+2025,2026,Florida,Caleb Banks,Defensive Tackle,1,18,34.0
+2025,2026,Georgia,Monroe Freeling,Offensive Tackle,1,19,14.0
+2025,2026,USC,Makai Lemon,Wide Receiver,1,20,10.0
+2025,2026,Arizona State,Max Iheanachor,Offensive Tackle,1,21,41.0
+2025,2026,Miami,Akheem Mesidor,Defensive Edge,1,22,18.0
+2025,2026,UCF,Malachi Lawrence,Defensive Edge,1,23,54.0
+2025,2026,Texas A&M,KC Concepcion,Wide Receiver,1,24,32.0
+2025,2026,Oregon,Dillon Thieneman,Safety,1,25,20.0
+2025,2026,Georgia Tech,Keylan Rutledge,Offensive Guard,1,26,58.0
+2025,2026,San Diego State,Chris Johnson,Cornerback,1,27,39.0
+2025,2026,Utah,Caleb Lomu,Offensive Tackle,1,28,28.0
+2025,2026,Clemson,Peter Woods,Defensive Tackle,1,29,27.0
+2025,2026,Indiana,Omar Cooper Jr.,Wide Receiver,1,30,24.0
+2025,2026,Auburn,Keldric Faulk,Defensive Edge,1,31,25.0
+2025,2026,Notre Dame,Jadarian Price,Running Back,1,32,50.0
+2025,2026,Ole Miss,De'Zhaun Stribling,Wide Receiver,2,33,76.0
+2025,2026,Texas A&M,Chase Bisontis,Offensive Guard,2,34,33.0
+2025,2026,Clemson,T.J. Parker,Defensive Edge,2,35,53.0
+2025,2026,Ohio State,Kayden McDonald,Defensive Tackle,2,36,26.0
+2025,2026,Tennessee,Colton Hood,Cornerback,2,37,31.0
+2025,2026,Arizona,Treydan Stukes,Safety,2,38,69.0
+2025,2026,Washington,Denzel Boston,Wide Receiver,2,39,23.0
+2025,2026,Oklahoma,R Mason Thomas,Defensive Edge,2,40,61.0
+2025,2026,Texas A&M,Cashius Howell,Defensive Edge,2,41,30.0
+2025,2026,Georgia,Christen Miller,Defensive Tackle,2,42,49.0
+2025,2026,Texas Tech,Jacob Rodriguez,Linebacker,2,43,46.0
+2025,2026,Michigan,Derrick Moore,Defensive Edge,2,44,60.0
+2025,2026,Missouri,Zion Young,Defensive Edge,2,45,29.0
+2025,2026,Missouri,Josiah Trotter,Linebacker,2,46,62.0
+2025,2026,Alabama,Germie Bernard,Wide Receiver,2,47,43.0
+2025,2026,Clemson,Avieon Terrell,Cornerback,2,48,22.0
+2025,2026,Texas Tech,Lee Hunter,Defensive Tackle,2,49,67.0
+2025,2026,Indiana,D'Angelo Ponds,Cornerback,2,50,66.0
+2025,2026,Cincinnati,Jake Golday,Linebacker,2,51,55.0
+2025,2026,South Carolina,Brandon Cisse,Cornerback,2,52,38.0
+2025,2026,Georgia,CJ Allen,Linebacker,2,53,45.0
+2025,2026,Vanderbilt,Eli Stowers,Tight End,2,54,36.0
+2025,2026,Illinois,Gabe Jacas,Defensive Edge,2,55,44.0
+2025,2026,Texas A&M,Nate Boerkircher,Tight End,2,56,159.0
+2025,2026,Iowa,Logan Jones,Center,2,57,99.0
+2025,2026,Toledo,Emmanuel McNeil-Warren,Safety,2,58,21.0
+2025,2026,Michigan,Marlin Klein,Tight End,2,59,176.0
+2025,2026,Texas,Anthony Hill Jr.,Linebacker,2,60,35.0
+2025,2026,Ohio State,Max Klare,Tight End,2,61,64.0
+2025,2026,Ohio State,Davison Igbinosun,Cornerback,2,62,91.0
+2025,2026,Florida,Jake Slaughter,Center,2,63,79.0
+2025,2026,TCU,Bud Clark,Safety,2,64,85.0
+2025,2026,Miami,Carson Beck,Quarterback,3,65,113.0
+2025,2026,Texas A&M,Tyler Onyedim,Defensive Tackle,3,66,111.0
+2025,2026,Auburn,Keyron Crawford,Defensive Edge,3,67,74.0
+2025,2026,Miami,Markel Bell,Offensive Tackle,3,68,186.0
+2025,2026,Stanford,Sam Roush,Tight End,3,69,83.0
+2025,2026,Texas Tech,Romello Height,Defensive Edge,3,70,100.0
+2025,2026,Clemson,Antonio Williams,Wide Receiver,3,71,57.0
+2025,2026,Washington,Tacario Davis,Cornerback,3,72,115.0
+2025,2026,Georgia,Oscar Delp,Tight End,3,73,110.0
+2025,2026,Notre Dame,Malachi Fields,Wide Receiver,3,74,59.0
+2025,2026,Texas Tech,Caleb Douglas,Wide Receiver,3,75,191.0
+2025,2026,Penn State,Drew Allar,Quarterback,3,76,129.0
+2025,2026,Missouri,Chris McClellan,Defensive Tackle,3,77,109.0
+2025,2026,LSU,A.J. Haulcy,Safety,3,78,56.0
+2025,2026,Georgia,Zachariah Branch,Wide Receiver,3,79,40.0
+2025,2026,USC,Ja'Kobi Lane,Wide Receiver,3,80,90.0
+2025,2026,Texas A&M,Albert Regis,Defensive Tackle,3,81,134.0
+2025,2026,Iowa State,Domonique Orange,Defensive Tackle,3,82,78.0
+2025,2026,Tennessee,Chris Brazzell II,Wide Receiver,3,83,42.0
+2025,2026,Georgia State,Ted Hurst,Wide Receiver,3,84,70.0
+2025,2026,Georgia,Daylen Everette,Cornerback,3,85,112.0
+2025,2026,Florida,Austin Barber,Offensive Tackle,3,86,120.0
+2025,2026,Ohio State,Will Kacmarek,Tight End,3,87,155.0
+2025,2026,Oregon,Emmanuel Pregnon,Offensive Guard,3,88,47.0
+2025,2026,LSU,Zavion Thomas,Wide Receiver,3,89,222.0
+2025,2026,Indiana,Kaelon Black,Running Back,3,90,213.0
+2025,2026,Texas A&M,Trey Zuhn III,Center,3,91,106.0
+2025,2026,Michigan,Jaishawn Barham,Defensive Edge,3,92,88.0
+2025,2026,Missouri,Keagen Trost,Offensive Tackle,3,93,126.0
+2025,2026,Louisville,Chris Bell,Wide Receiver,3,94,77.0
+2025,2026,Notre Dame,Eli Raridon,Tight End,3,95,118.0
+2025,2026,Iowa,Gennings Dunker,Offensive Tackle,3,96,51.0
+2025,2026,Northwestern,Caleb Tiernan,Offensive Tackle,3,97,84.0
+2025,2026,Miami,Jakobe Thomas,Safety,3,98,142.0
+2025,2026,Arkansas,Julian Neal,Cornerback,3,99,169.0
+2025,2026,Maryland,Jalen Huskey,Cornerback,3,100,228.0
+2025,2026,Tennessee,Jermod McCoy,Cornerback,4,101,16.0
+2025,2026,Boston College,Jude Bowry,Offensive Tackle,4,102,131.0
+2025,2026,Florida State,Darrell Jackson Jr.,Defensive Tackle,4,103,108.0
+2025,2026,SE Louisiana,Kaleb Proctor,Defensive Tackle,4,104,201.0
+2025,2026,Mississippi State,Brenen Thompson,Wide Receiver,4,105,144.0
+2025,2026,Oklahoma,Febechi Nwaiwu,Offensive Guard,4,106,253.0
+2025,2026,Oklahoma,Gracen Halton,Defensive Tackle,4,107,93.0
+2025,2026,Washington,Jonah Coleman,Running Back,4,108,175.0
+2025,2026,Oregon,Jadon Canady,Safety,4,109,127.0
+2025,2026,Clemson,Cade Klubnik,Quarterback,4,110,232.0
+2025,2026,Boise State,Kage Casey,Offensive Tackle,4,111,139.0
+2025,2026,Penn State,Drew Shelton,Offensive Tackle,4,112,116.0
+2025,2026,Kentucky,Jalen Farmer,Offensive Guard,4,113,123.0
+2025,2026,Florida,Devin Moore,Cornerback,4,114,119.0
+2025,2026,Indiana,Elijah Sarratt,Wide Receiver,4,115,73.0
+2025,2026,Miami,Keionte Scott,Cornerback,4,116,48.0
+2025,2026,Memphis,Travis Burke,Offensive Tackle,4,117,185.0
+2025,2026,Michigan,Jimmy Rolder,Linebacker,4,118,160.0
+2025,2026,Duke,Wesley Williams,Defensive Edge,4,119,240.0
+2025,2026,Penn State,Dani Dennis-Sutton,Defensive Edge,4,120,96.0
+2025,2026,Iowa,Kaden Wetjen,Wide Receiver,4,121,252.0
+2025,2026,Arkansas,Mike Washington Jr.,Running Back,4,122,68.0
+2025,2026,Clemson,Wade Woodaz,Linebacker,4,123,235.0
+2025,2026,Texas,Malik Muhammad,Cornerback,4,124,65.0
+2025,2026,UConn,Skyler Bell,Wide Receiver,4,125,72.0
+2025,2026,TCU,Kaleb Elarms-Orr,Linebacker,4,126,149.0
+2025,2026,Washington,Carver Willis,Offensive Tackle,4,127,206.0
+2025,2026,Auburn,Connor Lew,Center,4,128,104.0
+2025,2026,Texas A&M,Will Lee III,Cornerback,4,129,105.0
+2025,2026,Texas,Trey Moore,Defensive Edge,4,130,150.0
+2025,2026,Arizona,Genesis Smith,Safety,4,131,97.0
+2025,2026,Auburn,Jeremiah Wright,Offensive Guard,4,132,140.0
+2025,2026,SMU,Matthew Hibner,Tight End,4,133,180.0
+2025,2026,Oklahoma,Kendal Daniels,Linebacker,4,134,229.0
+2025,2026,Oregon,Bryce Boettcher,Linebacker,4,135,151.0
+2025,2026,North Dakota State,Bryce Lance,Wide Receiver,4,136,95.0
+2025,2026,Alabama,LT Overton,Defensive Edge,4,137,101.0
+2025,2026,Pittsburgh,Kyle Louis,Linebacker,4,138,89.0
+2025,2026,Washington,Ephesians Prysock,Cornerback,4,139,158.0
+2025,2026,Georgia,Colbie Young,Wide Receiver,4,140,177.0
+2025,2026,USC,Kamari Ramsey,Safety,5,141,98.0
+2025,2026,Arkansas,Fernando Carmona,Offensive Guard,5,142,188.0
+2025,2026,Texas Tech,Reggie Virgil,Wide Receiver,5,143,212.0
+2025,2026,Kansas State,Sam Hecht,Center,5,144,80.0
+2025,2026,South Carolina,Nick Barrett,Defensive Tackle,5,145,183.0
+2025,2026,Alabama,Parker Brailsford,Center,5,146,156.0
+2025,2026,Tennessee,Joshua Josephs,Defensive Edge,5,147,94.0
+2025,2026,Iowa,Beau Stephens,Offensive Guard,5,148,172.0
+2025,2026,Alabama,Justin Jefferson,Linebacker,5,149,181.0
+2025,2026,Arizona,Dalton Johnson,Safety,5,150,224.0
+2025,2026,Penn State,Zakee Wheatley,Safety,5,151,82.0
+2025,2026,NC State,Justin Joly,Tight End,5,152,92.0
+2025,2026,Kentucky,Jager Burton,Center,5,153,242.0
+2025,2026,Louisiana,Jaden Dugger,Linebacker,5,154,365.0
+2025,2026,Clemson,DeMonte Capehart,Defensive Tackle,5,155,122.0
+2025,2026,Florida,George Gumbs Jr.,Defensive Edge,5,156,166.0
+2025,2026,Arizona State,Keith Abney II,Cornerback,5,157,75.0
+2025,2026,Texas,Michael Taaffe,Safety,5,158,174.0
+2025,2026,Michigan,Max Bredeson,Tight End,5,159,281.0
+2025,2026,Notre Dame,Billy Schrauth,Offensive Guard,5,160,137.0
+2025,2026,Nebraska,Emmett Johnson,Running Back,5,161,125.0
+2025,2026,Duke,Chandler Rivers,Cornerback,5,162,128.0
+2025,2026,Stephen F. Austin,Charles Demmings,Cornerback,5,163,141.0
+2025,2026,Houston,Tanner Koziol,Tight End,5,164,211.0
+2025,2026,Penn State,Nicholas Singleton,Running Back,5,165,121.0
+2025,2026,Arizona State,Keyshaun Elliott,Linebacker,5,166,236.0
+2025,2026,South Carolina,Jalon Kilgore,Safety,5,167,71.0
+2025,2026,Kentucky,Kendrick Law,Wide Receiver,5,168,199.0
+2025,2026,Indiana,Riley Nowakowski,Tight End,5,169,173.0
+2025,2026,Cincinnati,Joe Royer,Tight End,5,170,130.0
+2025,2026,Wake Forest,Karon Prunty,Cornerback,5,171,
+2025,2026,Ohio State,Lorenzo Styles Jr.,Safety,5,172,226.0
+2025,2026,Alabama,Josh Cuevas,Tight End,5,173,154.0
+2025,2026,Clemson,Adam Randall,Running Back,5,174,135.0
+2025,2026,California,Hezekiah Masses,Cornerback,5,175,163.0
+2025,2026,Cincinnati,Cyrus Allen,Wide Receiver,5,176,200.0
+2025,2026,Missouri,Kevin Coleman Jr.,Wide Receiver,5,177,138.0
+2025,2026,North Dakota State,Cole Payton,Quarterback,5,178,153.0
+2025,2026,Kansas,Enrique Cruz Jr.,Offensive Tackle,5,179,258.0
+2025,2026,Mississippi State,Seydou Traore,Tight End,5,180,333.0
+2025,2026,Penn State,Zane Durant,Defensive Tackle,5,181,147.0
+2025,2026,Arkansas,Taylen Green,Quarterback,6,182,152.0
+2025,2026,Iowa,Karson Sharar,Linebacker,6,183,293.0
+2025,2026,Baylor,Jackie Marshall,Defensive Tackle,6,184,295.0
+2025,2026,LSU,Bauer Sharp,Tight End,6,185,270.0
+2025,2026,Auburn,Bobby Jamison-Travis,Defensive Tackle,6,186,307.0
+2025,2026,Penn State,Kaytron Allen,Running Back,6,187,146.0
+2025,2026,Miami,Anez Cooper,Offensive Guard,6,188,114.0
+2025,2026,Duke,Brian Parker II,Center,6,189,102.0
+2025,2026,LSU,Barion Brown,Wide Receiver,6,190,237.0
+2025,2026,Baylor,Josh Cameron,Wide Receiver,6,191,167.0
+2025,2026,Illinois,J.C. Davis,Offensive Tackle,6,192,299.0
+2025,2026,BYU,Jack Kelly,Linebacker,6,193,205.0
+2025,2026,Indiana,Pat Coogan,Center,6,194,192.0
+2025,2026,Oregon,Malik Benson,Wide Receiver,6,195,165.0
+2025,2026,Texas A&M,Dametrious Crownover,Offensive Tackle,6,196,86.0
+2025,2026,Miami,CJ Daniels,Wide Receiver,6,197,260.0
+2025,2026,Wake Forest,Demond Claiborne,Running Back,6,198,133.0
+2025,2026,Kansas,Emmanuel Henderson Jr.,Wide Receiver,6,199,274.0
+2025,2026,Texas,DJ Campbell,Offensive Guard,6,200,266.0
+2025,2026,Alabama,Domani Jackson,Cornerback,6,201,162.0
+2025,2026,Boston College,Logan Taylor,Offensive Guard,6,202,218.0
+2025,2026,Stanford,CJ Williams,Wide Receiver,6,203,
+2025,2026,Boston College,Lewis Bond,Wide Receiver,6,204,305.0
+2025,2026,Texas Tech,Skyler Gill-Howard,Defensive Tackle,6,205,263.0
+2025,2026,Oregon,Alex Harkey,Offensive Guard,6,206,161.0
+2025,2026,Georgia,Micah Morris,Offensive Guard,6,207,302.0
+2025,2026,Washington,Anterio Thompson,Defensive Tackle,6,208,
+2025,2026,Michigan State,Matt Gulbin,Center,6,209,157.0
+2025,2026,Notre Dame,Gabriel Rubio,Defensive Tackle,6,210,
+2025,2026,Michigan State,Ryan Eckley,Punter,6,211,330.0
+2025,2026,TCU,Namdi Obiazor,Linebacker,6,212,216.0
+2025,2026,Georgia Tech,Jordan Van den Berg,Defensive Tackle,6,213,298.0
+2025,2026,Ohio State,Caden Curry,Defensive Edge,6,214,164.0
+2025,2026,LSU,Harold Perkins Jr.,Linebacker,6,215,107.0
+2025,2026,Florida,Trey Smack,Place Kicker,6,216,261.0
+2025,2026,Ole Miss,Jayden Williams,Offensive Tackle,7,217,
+2025,2026,East Carolina,Anthony Smith,Wide Receiver,7,218,336.0
+2025,2026,Iowa,TJ Hall,Cornerback,7,219,190.0
+2025,2026,Missouri,Toriano Pride Jr.,Cornerback,7,220,189.0
+2025,2026,Texas,Jack Endries,Tight End,7,221,117.0
+2025,2026,Tennessee,Tyre West,Defensive Edge,7,222,369.0
+2025,2026,Rutgers,Athan Kaliakmanis,Quarterback,7,223,340.0
+2025,2026,Oklahoma,Robert Spears-Jennings,Safety,7,224,170.0
+2025,2026,Oklahoma,Jaren Kanak,Tight End,7,225,282.0
+2025,2026,Navy,Landon Robinson,Defensive Tackle,7,226,395.0
+2025,2026,Miami (OH),Jackson Kuwatch,Linebacker,7,227,387.0
+2025,2026,Kansas State,VJ Payne,Safety,7,228,124.0
+2025,2026,NC State,Brandon Cleveland,Defensive Tackle,7,229,202.0
+2025,2026,Navy,Eli Heidenreich,Running Back,7,230,239.0
+2025,2026,Ohio State,Ethan Onianwa,Offensive Tackle,7,231,
+2025,2026,Alabama,Tim Keenan III,Defensive Tackle,7,232,210.0
+2025,2026,Washington,Zach Durfee,Defensive Edge,7,233,
+2025,2026,Texas Tech,Behren Morton,Quarterback,7,234,219.0
+2025,2026,Cincinnati,Gavin Gerhardt,Center,7,235,
+2025,2026,Toledo,Andre Fuller,Cornerback,7,236,311.0
+2025,2026,Kentucky,Seth McGowan,Running Back,7,237,182.0
+2025,2026,Iowa,Max Llewellyn,Defensive Edge,7,238,284.0
+2025,2026,Florida,Tommy Doman,Punter,7,239,339.0
+2025,2026,Middle Tennessee,Parker Hughes,Linebacker,7,240,
+2025,2026,Texas A&M,Ar'maj Reed-Adams,Offensive Guard,7,241,207.0
+2025,2026,Minnesota,Deven Eastern,Defensive Tackle,7,242,342.0
+2025,2026,Indiana,Aiden Fisher,Linebacker,7,243,197.0
+2025,2026,Texas Tech,Cole Wisniewski,Safety,7,244,304.0
+2025,2026,Alabama,Jam Miller,Running Back,7,245,203.0
+2025,2026,Illinois,Miles Scott,Safety,7,246,
+2025,2026,Boston College,Quintayvious Hutchins,Defensive Edge,7,247,247.0
+2025,2026,BYU,Carsen Ryan,Tight End,7,248,356.0
+2025,2026,LSU,Garrett Nussmeier,Quarterback,7,249,87.0
+2025,2026,Michigan,Rayshaun Benny,Defensive Tackle,7,250,132.0
+2025,2026,Nigeria,Uar Bernard,Defensive Tackle,7,251,384.0
+2025,2026,New Mexico,Keyshawn James-Newby,Defensive Edge,7,252,359.0
+2025,2026,Northwestern,Evan Beerntsen,Offensive Guard,7,253,256.0
+2025,2026,Oklahoma,Deion Burks,Wide Receiver,7,254,81.0
+2025,2026,Arizona,Michael Dansby,Cornerback,7,255,
+2025,2026,Utah,Dallen Bentley,Tight End,7,256,234.0
+2025,2026,Buffalo,Red Murdock,Linebacker,7,257,265.0

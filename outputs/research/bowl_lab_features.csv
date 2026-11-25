@@ -1,0 +1,25 @@
+feature,period,n,nonzero,slope_y_close,n_y_close,slope_y_open,n_y_open,slope_move,n_move
+qb_change_diff,dev 2017-22,225,52,-1.96,225,-4.11,117,-2.1,117
+qb_change_diff,holdout 2023-24,88,41,-4.04,88,-6.43,88,-2.39,88
+qb_change_diff,extra 2025,46,16,-3.55,46,-5.67,46,-2.12,46
+qb_starter_share_diff,dev 2017-22,225,223,4.19,225,8.6,117,3.25,117
+qb_starter_share_diff,holdout 2023-24,88,88,5.81,88,8.86,88,3.06,88
+qb_starter_share_diff,extra 2025,46,46,7.31,46,10.78,46,3.47,46
+portal_out_diff,dev 2017-22,106,95,-0.05,106,-0.1,97,-0.08,97
+portal_out_diff,holdout 2023-24,88,81,0.09,88,-0.1,88,-0.19,88
+portal_out_diff,extra 2025,46,27,-0.89,46,-1.03,46,-0.14,46
+portal_out_q_diff,dev 2017-22,106,99,-0.18,106,-0.27,97,-0.09,97
+portal_out_q_diff,holdout 2023-24,88,79,0.07,88,-0.14,88,-0.22,88
+portal_out_q_diff,extra 2025,46,27,-2.04,46,-2.12,46,-0.08,46
+portal_qb_out_diff,dev 2017-22,106,54,-0.97,106,-0.92,97,-0.78,97
+portal_qb_out_diff,holdout 2023-24,88,49,-1.16,88,-2.24,88,-1.07,88
+portal_qb_out_diff,extra 2025,46,6,6.87,46,6.78,46,-0.09,46
+interim_coach_diff,dev 2017-22,225,19,-4.19,225,-10.71,117,-1.89,117
+interim_coach_diff,holdout 2023-24,88,7,-6.96,88,-10.29,88,-3.34,88
+interim_coach_diff,extra 2025,46,12,-2.99,46,-2.88,46,0.11,46
+coach_change_diff,dev 2017-22,225,26,-3.5,225,-9.42,117,-1.85,117
+coach_change_diff,holdout 2023-24,88,12,-6.67,88,-9.17,88,-2.5,88
+coach_change_diff,extra 2025,46,18,0.22,46,0.22,46,0.0,46
+draft_r1_3_diff,dev 2017-22,225,129,0.71,225,1.7,117,0.04,117
+draft_r1_3_diff,holdout 2023-24,88,54,1.16,88,0.99,88,-0.17,88
+draft_r1_3_diff,extra 2025,46,26,-1.0,46,-1.26,46,-0.26,46

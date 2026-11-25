@@ -106,10 +106,93 @@ def pull_passing(season, max_week):
     return rows
 
 
+def pull_bowl_context(seasons):
+    """Bowl research context (one call per season per endpoint):
+    postseason games (bowl names in `notes`), head coaches by season,
+    transfer portal entries (portal year = season + 1, with transferDate),
+    and NFL draft picks (draft year = season + 1; a post-hoc opt-out proxy)."""
+    games, coaches, portal, draft = [], [], [], []
+    for s in seasons:
+        for g in get("games", year=s, seasonType="postseason") or []:
+            games.append({
+                "game_id": g.get("id"), "season": g.get("season"), "week": g.get("week"),
+                "start_date": g.get("startDate"), "neutral_site": g.get("neutralSite"),
+                "home_team": g.get("homeTeam"), "away_team": g.get("awayTeam"),
+                "home_conference": g.get("homeConference"),
+                "away_conference": g.get("awayConference"),
+                "home_classification": g.get("homeClassification"),
+                "away_classification": g.get("awayClassification"),
+                "home_points": g.get("homePoints"), "away_points": g.get("awayPoints"),
+                "notes": g.get("notes"), "venue": g.get("venue"),
+            })
+        for c in get("coaches", year=s) or []:
+            for cs in c.get("seasons", []) or []:
+                if cs.get("year") != s:
+                    continue
+                coaches.append({
+                    "season": s, "school": cs.get("school"),
+                    "coach": f"{c.get('firstName', '')} {c.get('lastName', '')}".strip(),
+                    "hire_date": c.get("hireDate"), "games": cs.get("games"),
+                    "wins": cs.get("wins"), "losses": cs.get("losses"),
+                })
+        for p in get("player/portal", year=s + 1) or []:
+            portal.append({
+                "season": s, "portal_year": s + 1,
+                "player": f"{p.get('firstName', '')} {p.get('lastName', '')}".strip(),
+                "position": p.get("position"), "origin": p.get("origin"),
+                "destination": p.get("destination"), "transfer_date": p.get("transferDate"),
+                "rating": p.get("rating"), "stars": p.get("stars"),
+                "eligibility": p.get("eligibility"),
+            })
+        if s + 1 <= 2026:
+            for d in get("draft/picks", year=s + 1) or []:
+                draft.append({
+                    "season": s, "draft_year": s + 1, "college_team": d.get("collegeTeam"),
+                    "name": d.get("name"), "position": d.get("position"),
+                    "round": d.get("round"), "overall": d.get("overall"),
+                    "pre_draft_ranking": d.get("preDraftRanking"),
+                })
+        print(f"  bowl context {s}: games={len(games)} coaches={len(coaches)} "
+              f"portal={len(portal)} draft={len(draft)}")
+    for name, rows in (("cfbd_postseason_games", games), ("cfbd_coaches", coaches),
+                       ("cfbd_portal", portal), ("cfbd_draft", draft)):
+        pd.DataFrame(rows).to_csv(OUT / f"{name}.csv", index=False)
+        print(name, len(rows))
+
+
+def pull_bowl_first_passes(seasons, keep=6):
+    """First few pass plays per team per postseason game (play text), to
+    identify the QB who STARTED the bowl (first pass) rather than the one
+    with the most attempts (which leaks in-game benchings)."""
+    rows = []
+    passy = ("pass", "sack", "interception")
+    for s in seasons:
+        n0 = len(rows)
+        plays = get("plays", year=s, week=1, seasonType="postseason") or []
+        plays = sorted(plays, key=lambda p: (str(p.get("gameId")), p.get("driveNumber") or 0,
+                                             p.get("playNumber") or 0, -(p.get("period") or 0) * 0))
+        seen = {}
+        for p in plays:
+            pt = str(p.get("playType", "")).lower()
+            if not any(k in pt for k in passy):
+                continue
+            key = (p.get("gameId"), p.get("offense"))
+            if seen.get(key, 0) >= keep:
+                continue
+            seen[key] = seen.get(key, 0) + 1
+            rows.append({"season": s, "game_id": p.get("gameId"), "offense": p.get("offense"),
+                         "period": p.get("period"), "drive_number": p.get("driveNumber"),
+                         "play_number": p.get("playNumber"), "play_type": p.get("playType"),
+                         "play_text": p.get("playText")})
+        print(f"  bowl first passes {s}: {len(rows) - n0} rows from {len(plays)} plays")
+    pd.DataFrame(rows).to_csv(OUT / "cfbd_bowl_first_passes.csv", index=False)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--seasons", default="2017-2026")
-    ap.add_argument("--what", default="lines,passing")
+    ap.add_argument("--what", default="lines,passing",
+                    help="comma list of: lines, passing, bowl, bowlplays")
     ap.add_argument("--min-remaining", type=int, default=300)
     args = ap.parse_args()
     a, b = (int(x) for x in args.seasons.split("-"))
@@ -134,6 +217,10 @@ def main():
             rows += pull_passing(s, min(max(max_week, 1), 16))
         pd.DataFrame(rows).to_csv(OUT / "cfbd_passing_by_game.csv", index=False)
         print("passing rows", len(rows))
+    if "bowl" in what:
+        pull_bowl_context(seasons)
+    if "bowlplays" in what:
+        pull_bowl_first_passes(seasons)
     print("CFBD calls used:", CALLS)
     remaining()
 

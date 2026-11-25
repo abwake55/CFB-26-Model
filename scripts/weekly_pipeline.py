@@ -421,6 +421,14 @@ def build_predictions(games, lines, spread_model, totals_model,
     except Exception as exc:
         print(f"[WARN] key-number pricing unavailable: {exc}")
 
+    # Uncertainty (src/edge_ranges.py): 80% range of what each stated edge
+    # delivered in the 2019-25 backtest, plus the projected-margin range.
+    try:
+        import edge_ranges
+        out = edge_ranges.attach(out)
+    except Exception as exc:
+        print(f"[WARN] edge ranges unavailable: {exc}")
+
     from inference import adjust_predictions
     calib_path = MODEL_DIR / "win_prob_calibration.json"
     calibration = json.loads(calib_path.read_text()) if calib_path.exists() else None
@@ -555,6 +563,12 @@ def spread_signals(predictions: pd.DataFrame) -> list:
                 item["p_push"] = round(float(r.get(f"{key}_p_push")), 3)
                 item["ev_pct"] = round(100 * float(r.get(f"{key}_ev")), 1)
                 item["buy_half_point"] = bool(r.get(f"{key}_buy_half"))
+            lo, mu, hi = (pd.to_numeric(r.get(f"{key}_edge_{k}"), errors="coerce")
+                          for k in ("lo80", "exp", "hi80"))
+            if pd.notna(mu) and pd.notna(lo) and pd.notna(hi):
+                # what edges this size delivered in the 2019-25 backtest
+                item["expected_cover_pts"] = round(float(mu), 1)
+                item["expected_range80"] = [round(float(lo), 1), round(float(hi), 1)]
             out.append(item)
     out.sort(key=lambda x: abs(x["edge_pts"]), reverse=True)
     return out
@@ -592,6 +606,9 @@ def format_imessage(picks: dict, season: int, week: int) -> str:
             if "p_cover" in sp:
                 px = (f"  |  cover {100 * sp['p_cover']:.0f}% push {100 * sp['p_push']:.0f}%"
                       + ("  |  buy +0.5 if ≤-120" if sp.get("buy_half_point") else ""))
+            if "expected_range80" in sp:
+                lo, hi = sp["expected_range80"]
+                px += f"  |  expect {sp['expected_cover_pts']:+.1f} (80%: {lo:+.1f} to {hi:+.1f})"
             lines.append(f"  [{sp['signal']}] {sp['pick']} ({sp['game']})  |  edge {sp['edge_pts']:+.1f}{px}")
         lines.append("")
 

@@ -1,0 +1,7 @@
+rule,period,n,w,l,p,win%,roi%,clv,n_clv
+"same adjustment, bet at OPENER (upper bound: lineup not known then)",dev 2017-22,44,29,15,0,65.9,25.8,1.12,44
+"same adjustment, bet at OPENER (upper bound: lineup not known then)",holdout 2023-24,48,33,14,1,70.2,33.3,2.2,48
+"same adjustment, bet at OPENER (upper bound: lineup not known then)",extra 2025,21,12,8,1,60.0,13.9,1.39,21
+"non-QB part only (coach/portal), bet at opener",dev 2017-22,32,22,10,0,68.8,31.2,0.67,32
+"non-QB part only (coach/portal), bet at opener",holdout 2023-24,24,14,10,0,58.3,11.4,1.24,24
+"non-QB part only (coach/portal), bet at opener",extra 2025,13,8,5,0,61.5,17.5,0.54,13

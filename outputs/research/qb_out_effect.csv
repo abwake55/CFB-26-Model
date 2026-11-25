@@ -1,0 +1,5 @@
+feature,period,n,nonzero,slope_y_close,se_y_close,slope_y_open,se_y_open,slope_y_indep,se_y_indep
+qb_out_diff,dev 2019-23,2900,838,0.28,0.54,-0.12,0.66,-0.68,0.56
+qb_out_diff,holdout 2024-25,1294,332,-0.01,0.83,-0.5,0.83,-1.37,0.86
+qb_out_last_diff,dev 2019-23,2603,783,0.38,0.55,0.77,0.69,-0.25,0.57
+qb_out_last_diff,holdout 2024-25,1168,292,0.85,0.89,0.82,0.89,-0.09,0.91
