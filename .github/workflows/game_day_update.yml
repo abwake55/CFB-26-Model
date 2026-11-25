@@ -47,6 +47,9 @@ jobs:
           # scheduled bowl days may spend one call; manual runs only when ticked
           ODDS_FLAG: ${{ (github.event_name == 'schedule' || inputs.odds) && '--odds' || '' }}
         run: python scripts/game_day_update.py --mode "$MODE" $ODDS_FLAG
+      - name: Update paper bankroll and weekly slip
+        continue-on-error: true
+        run: python scripts/paper_bankroll.py update
       - name: Log Odds API quota (free endpoint)
         if: always()
         continue-on-error: true
@@ -57,7 +60,7 @@ jobs:
         run: >-
           bash .github/scripts/commit_and_push.sh
           "Game-day update $(date -u +'%Y-%m-%d %H:%M UTC')"
-          outputs/predictions outputs/picks data/context data/odds_api_usage
+          outputs/predictions outputs/picks outputs/bankroll data/context data/odds_api_usage
       - name: Report failure
         if: failure()
         env:
