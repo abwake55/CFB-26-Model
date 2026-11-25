@@ -1,0 +1,58 @@
+{
+  "selected": "bowl adj [live+draft] lam20 |adj|>=3 (at close)",
+  "threshold": 3.0,
+  "features": [
+    "qb_change_diff",
+    "qb_starter_share_diff",
+    "portal_out_diff",
+    "portal_out_q_diff",
+    "portal_qb_out_diff",
+    "interim_coach_diff",
+    "coach_change_diff",
+    "draft_r1_3_diff"
+  ],
+  "beta": {
+    "qb_change_diff": -1.129,
+    "qb_starter_share_diff": 2.497,
+    "portal_out_diff": 0.968,
+    "portal_out_q_diff": -1.184,
+    "portal_qb_out_diff": -0.984,
+    "interim_coach_diff": -1.203,
+    "coach_change_diff": -1.187,
+    "draft_r1_3_diff": 0.788
+  },
+  "lambda": 20.0,
+  "n": 225,
+  "fit_target": "home cover margin at the closing line, bowls 2017-2022",
+  "dev": {
+    "n": 49,
+    "w": 32,
+    "l": 17,
+    "p": 0,
+    "win%": 65.3,
+    "roi%": 24.7,
+    "clv": NaN,
+    "n_clv": NaN
+  },
+  "holdout_2023_24": {
+    "n": 37,
+    "w": 24,
+    "l": 13,
+    "p": 0,
+    "win%": 64.9,
+    "roi%": 23.8,
+    "clv": NaN,
+    "n_clv": NaN
+  },
+  "extra_2025": {
+    "n": 11,
+    "w": 7,
+    "l": 4,
+    "p": 0,
+    "win%": 63.6,
+    "roi%": 21.5,
+    "clv": NaN,
+    "n_clv": NaN
+  },
+  "status": "paper"
+}

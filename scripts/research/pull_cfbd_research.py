@@ -160,11 +160,39 @@ def pull_bowl_context(seasons):
         print(name, len(rows))
 
 
+def pull_bowl_first_passes(seasons, keep=6):
+    """First few pass plays per team per postseason game (play text), to
+    identify the QB who STARTED the bowl (first pass) rather than the one
+    with the most attempts (which leaks in-game benchings)."""
+    rows = []
+    passy = ("pass", "sack", "interception")
+    for s in seasons:
+        n0 = len(rows)
+        plays = get("plays", year=s, week=1, seasonType="postseason") or []
+        plays = sorted(plays, key=lambda p: (str(p.get("gameId")), p.get("driveNumber") or 0,
+                                             p.get("playNumber") or 0, -(p.get("period") or 0) * 0))
+        seen = {}
+        for p in plays:
+            pt = str(p.get("playType", "")).lower()
+            if not any(k in pt for k in passy):
+                continue
+            key = (p.get("gameId"), p.get("offense"))
+            if seen.get(key, 0) >= keep:
+                continue
+            seen[key] = seen.get(key, 0) + 1
+            rows.append({"season": s, "game_id": p.get("gameId"), "offense": p.get("offense"),
+                         "period": p.get("period"), "drive_number": p.get("driveNumber"),
+                         "play_number": p.get("playNumber"), "play_type": p.get("playType"),
+                         "play_text": p.get("playText")})
+        print(f"  bowl first passes {s}: {len(rows) - n0} rows from {len(plays)} plays")
+    pd.DataFrame(rows).to_csv(OUT / "cfbd_bowl_first_passes.csv", index=False)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--seasons", default="2017-2026")
     ap.add_argument("--what", default="lines,passing",
-                    help="comma list of: lines, passing, bowl")
+                    help="comma list of: lines, passing, bowl, bowlplays")
     ap.add_argument("--min-remaining", type=int, default=300)
     args = ap.parse_args()
     a, b = (int(x) for x in args.seasons.split("-"))
@@ -191,6 +219,8 @@ def main():
         print("passing rows", len(rows))
     if "bowl" in what:
         pull_bowl_context(seasons)
+    if "bowlplays" in what:
+        pull_bowl_first_passes(seasons)
     print("CFBD calls used:", CALLS)
     remaining()
 
